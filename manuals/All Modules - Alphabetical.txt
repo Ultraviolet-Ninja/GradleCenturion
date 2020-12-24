@@ -1,0 +1,100 @@
+3D Maze
+Adjacent Letters
+Adventure Game
+Alphabet
+Anagrams
+Astrology
+Battleship
+Binary LEDs
+BitMaps
+Bitwise Ops
+Blind Alley
+Boolean Venn Diagram
+Broken Button
+Caesar Cipher
+Cheap Checkout
+Chess
+Chord Qualities
+Color Flash
+Color Math
+Color Squares
+Color Switches (Not technically part of the bomb, but will be a fun recursion problem)
+Combination Lock
+Complex Button
+Connection Check
+Coordinates
+Crazy Talk
+Creation
+Crossover
+Crypto
+Double Oh
+Emoji Math
+English Test
+Fast Math
+Filibuster
+FizzBuzz
+Flags
+Follow the Leader
+Foreign Exchange Rates
+Forget Me Not
+Friendship
+Hexamaze
+Ice Cream
+LED Encryption
+Laundry
+Letter Keys
+Light Cycle
+Listening
+Logic Gates
+Math is Hard
+MicroController
+MineSweeper
+Modules Against Humanity
+Monsplode Fight
+Morsematics
+Mouse in the Maze
+Murder
+Mystic Square
+Neutralization
+Number Pad
+Only Connect
+Orientation
+Perspective Pegs
+Piano Keys
+Piano Keys (Cruel)
+Plumbing
+Point of Order
+Probing
+Resistors
+Rhythms
+Rock Paper Scissors Lizard Spock
+Round Keypads
+Rubik's Cube
+Safety Safe
+Seashells
+Semaphore
+Shape Shift
+Silly Slots
+Simon Screams
+Simon States
+Skewed Slots
+Souvenir
+Square Button
+Switches
+Symbolic Password
+Text Field
+The Bulb
+The Clock
+The Gamepad
+The Screw
+Third Base
+Tic-Tac-Toe
+Translated Vanilla Modules (9/15 Supported languages)
+Turn the Keys
+TwoBit
+Web Design
+Wire Placement
+Word Scramble
+Word Search
+Yahtzee
+Zoo

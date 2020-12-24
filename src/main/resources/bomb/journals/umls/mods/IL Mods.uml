@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Bomb.Widget</OriginalElement>
+  <nodes>
+    <node x="250.0" y="1064.0">Bomb.Modules.IL.Laundry</node>
+    <node x="0.0" y="1208.5">Bomb.Modules.IL.LEDEncryption</node>
+    <node x="379.25" y="418.0">Bomb.Objects.Clothing</node>
+    <node x="103.25" y="0.0">Bomb.Widget</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Bomb.Modules.IL.Laundry" target="Bomb.Widget">
+      <point x="0.0" y="-166.0" />
+      <point x="347.5" y="1039.0" />
+      <point x="316.5833333333333" y="1039.0" />
+      <point x="85.33333333333331" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.IL.LEDEncryption" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="115.0" y="1039.0" />
+      <point x="145.91666666666669" y="1039.0" />
+      <point x="-85.33333333333331" y="507.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5727401129943502" x="279.5" y="698.0" />
+  <SelectedNodes>
+    <node>Bomb.Widget</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

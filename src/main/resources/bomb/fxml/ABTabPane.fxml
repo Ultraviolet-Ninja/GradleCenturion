@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane prefHeight="770.0" prefWidth="1160.0" stylesheets="@css/ABTabs.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.ABController">
+    <Tab text="3D Maze">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="746.0" prefWidth="1192.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Adjacent">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="797.0" prefWidth="1327.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Adventure">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1212.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Alphabet">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="760.0" prefWidth="1181.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Pane prefHeight="200.0" prefWidth="200.0">
+                    <TextField fx:id="alphabetOut" layoutX="422.0" layoutY="290.0" promptText="Output">
+                        <font>
+                            <Font size="18.0" />
+                        </font>
+                    </TextField>
+                    <Button layoutX="763.0" layoutY="310.0" mnemonicParsing="false" onAction="#getAlphaField" text="Action" />
+                </Pane>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Anagrams">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="760.0" prefWidth="1174.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Astrology">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1191.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="499.0" minHeight="10.0" prefHeight="499.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="242.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="369.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="10.0" prefWidth="405.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <Pane prefHeight="200.0" prefWidth="200.0">
+                        <ImageView fx:id="fire" fitHeight="131.0" fitWidth="164.0" layoutX="28.0" layoutY="26.0" onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/elements/Fire.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="earth" fitHeight="131.0" fitWidth="164.0" layoutX="215.0" layoutY="26.0" onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/elements/Earth.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="water" fitHeight="131.0" fitWidth="164.0" layoutX="28.0" layoutY="250.0" onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/elements/Water.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="air" fitHeight="131.0" fitWidth="164.0" layoutX="215.0" layoutY="250.0" onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/elements/Air.PNG" />
+                        </ImageView>
+                        <Label layoutX="80.0" layoutY="171.0" text="Fire">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="258.0" layoutY="171.0" text="Earth">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="64.0" layoutY="397.0" text="Water">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="271.0" layoutY="397.0" text="Air">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                    </Pane>
+                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                        <ImageView fx:id="mercury" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="14.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Mercury.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="jupiter" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="106.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Jupiter.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="saturn" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="189.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Saturn.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="venus" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="14.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Venus.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="mars" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="107.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Mars.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="neptune" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="286.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Neptune.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="sun" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="381.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Sun.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="uranus" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="189.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Uranus.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="pluto" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="286.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Pluto.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="moon" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="381.0" onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/celestials/Moon.PNG" />
+                        </ImageView>
+                        <Label layoutX="14.0" layoutY="34.0" text="Mercury">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="126.0" text="Mars">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="209.0" text="Saturn">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="12.0" layoutY="305.0" text="Neptune">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="12.0" layoutY="401.0" text="Sun">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="321.0" layoutY="34.0" text="Venus">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="319.0" layoutY="126.0" text="Jupiter">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="319.0" layoutY="209.0" text="Uranus">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="319.0" layoutY="305.0" text="Pluto">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="324.0" layoutY="401.0" text="Moon">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                    </Pane>
+                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                        <ImageView fx:id="aquarius" fitHeight="78.0" fitWidth="106.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Aquarius.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="aries" fitHeight="78.0" fitWidth="106.0" layoutX="134.0" layoutY="14.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Aries.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="cancer" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="14.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Cancer.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="capricorn" fitHeight="78.0" fitWidth="106.0" layoutX="14.0" layoutY="133.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Capricorn.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="libra" fitHeight="78.0" fitWidth="106.0" layoutX="21.0" layoutY="257.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Libra.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="gemini" fitHeight="78.0" fitWidth="106.0" layoutX="132.0" layoutY="133.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Gemini.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="leo" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="133.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Leo.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="scorpio" fitHeight="78.0" fitWidth="106.0" layoutX="21.0" layoutY="377.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Scorpio.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="taurus" fitHeight="78.0" fitWidth="106.0" layoutX="140.0" layoutY="377.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Taurus.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="virgo" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="377.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Virgo.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="pisces" fitHeight="78.0" fitWidth="106.0" layoutX="132.0" layoutY="257.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Pisces.PNG" />
+                        </ImageView>
+                        <ImageView fx:id="sag" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="257.0" onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                            <Image url="@../astrology/zodiac/Sag.PNG" />
+                        </ImageView>
+                        <Label layoutX="37.0" layoutY="100.0" text="Aquarius" />
+                        <Label layoutX="164.0" layoutY="100.0" text="Aries" />
+                        <Label layoutX="280.0" layoutY="100.0" text="Cancer" />
+                        <Label layoutX="34.0" layoutY="221.0" text="Capricorn" />
+                        <Label layoutX="158.0" layoutY="221.0" text="Gemini" />
+                        <Label layoutX="289.0" layoutY="221.0" text="Leo" />
+                        <Label layoutX="48.0" layoutY="346.0" text="Libra" />
+                        <Label layoutX="166.0" layoutY="346.0" text="Pisces" />
+                        <Label layoutX="276.0" layoutY="346.0" text="Sagittarius" />
+                        <Label layoutX="164.0" layoutY="462.0" text="Taurus" />
+                        <Label layoutX="282.0" layoutY="462.0" text="Virgo" />
+                        <Label layoutX="45.0" layoutY="462.0" text="Scorpio" />
+                    </Pane>
+                </GridPane>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <TextField fx:id="omen" alignment="CENTER" promptText="Output">
+                        <font>
+                            <Font size="36.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="350.0" />
+                        </HBox.margin>
+                    </TextField>
+                    <Button fx:id="astroReset" disable="true" mnemonicParsing="false" onAction="#astroReset" text="Clear">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="250.0" top="190.0" />
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Battleship">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="845.0" prefWidth="1190.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Binary LEDs">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="770.0" prefWidth="1323.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="BitMaps">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="884.0" prefWidth="1194.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Bitwise Ops">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1240.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="340.0" minHeight="10.0" prefHeight="230.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="527.0" minHeight="10.0" prefHeight="461.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <Button fx:id="bitAnd" mnemonicParsing="false" onAction="#bitwiseSolve" text="And">
+                        <font>
+                            <Font size="40.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="190.0" top="75.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="bitOr" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#bitwiseSolve" text="Or">
+                        <font>
+                            <Font size="40.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="80.0" top="75.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="bitXor" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#bitwiseSolve" text="Xor">
+                        <font>
+                            <Font size="40.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="80.0" top="75.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="bitNot" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#bitwiseSolve" text="Not">
+                        <font>
+                            <Font size="40.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="80.0" top="75.0" />
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                    <TextField fx:id="bitOut" alignment="CENTER" editable="false" promptText="Output Binary">
+                        <font>
+                            <Font size="48.0" />
+                        </font>
+                        <VBox.margin>
+                            <Insets top="30.0" />
+                        </VBox.margin>
+                    </TextField>
+                </VBox>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab fx:id="blindAlley" onSelectionChanged="#liveUpdate" text="Blind Alley">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="746.0" prefWidth="1310.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <TextArea fx:id="bottomLeft" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="bottomMid" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="midLeft" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="trueMid" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="bottomRight" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="midRight" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="topLeft" editable="false" prefHeight="200.0" prefWidth="200.0">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <TextArea fx:id="topMid" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                    <font>
+                        <Font size="72.0" />
+                    </font>
+                </TextArea>
+                <Label fx:id="maxAlley" GridPane.columnIndex="2">
+                    <font>
+                        <Font size="58.0" />
+                    </font>
+                </Label>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Boolean Venn Diagram">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="728.0" prefWidth="1199.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <Circle fill="#1f93ff00" layoutX="523.0" layoutY="231.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+                    <Circle fill="#1f93ff00" layoutX="578.0" layoutY="134.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+                    <Circle fill="#1f93ff00" layoutX="638.0" layoutY="231.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+                    <Circle fx:id="not" fill="#1f93ff00" layoutX="746.0" layoutY="74.0" radius="42.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="3.0" />
+               <Button fx:id="booleanReset" disable="true" layoutX="1014.0" layoutY="280.0" mnemonicParsing="false" onAction="#resetBool" text="Reset">
+                  <font>
+                     <Font size="24.0" />
+                  </font>
+               </Button>
+               <Circle fx:id="bc" fill="#1f93ff00" layoutX="580.0" layoutY="264.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Circle fx:id="ac" fill="#1f93ff00" layoutX="638.0" layoutY="166.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Circle fx:id="ab" fill="#1f93ff00" layoutX="523.0" layoutY="166.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Circle fx:id="all" fill="#1f93ff00" layoutX="578.0" layoutY="198.0" radius="22.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Circle fx:id="b" fill="#1f93ff00" layoutX="484.0" layoutY="257.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Circle fx:id="c" fill="#1f93ff00" layoutX="678.0" layoutY="257.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+               <Circle fx:id="a" fill="#1f93ff00" layoutX="578.0" layoutY="90.0" radius="41.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                </Pane>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <VBox prefHeight="200.0" prefWidth="100.0">
+                        <TextField fx:id="boolOperation" alignment="CENTER" editable="false" promptText="Operation">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="300.0" right="300.0" top="25.0" />
+                            </VBox.margin>
+                        </TextField>
+                    </VBox>
+                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                        <Button fx:id="boolAB" mnemonicParsing="false" onAction="#prioritySet" text="(AB) Priority">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="50.0" top="25.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="boolAnd" disable="true" mnemonicParsing="false" onAction="#operate" text="∧ - AND">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="100.0" top="25.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="boolOr" disable="true" mnemonicParsing="false" onAction="#operate" text="∨ - OR">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="34.0" top="25.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="boolXor" disable="true" mnemonicParsing="false" onAction="#operate" text="⊻ - XOR">
+                            <HBox.margin>
+                                <Insets left="35.0" top="25.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="boolImp" disable="true" mnemonicParsing="false" onAction="#operate" text="→ - Implies">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="65.0" top="25.0" />
+                            </HBox.margin>
+                        </Button>
+                    </HBox>
+                    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                        <Button fx:id="boolBC" mnemonicParsing="false" onAction="#prioritySet" text="(BC) Priority">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="50.0" top="25.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="boolNand" disable="true" mnemonicParsing="false" onAction="#operate" text="| - NAND">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="100.0" top="25.0" />
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="boolNor" disable="true" mnemonicParsing="false" onAction="#operate" text="↓ - NOR">
+                            <HBox.margin>
+                                <Insets left="30.0" top="25.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="boolXnor" disable="true" mnemonicParsing="false" onAction="#operate" text="↔ - XNOR">
+                            <HBox.margin>
+                                <Insets left="30.0" top="25.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="boolImpB" disable="true" mnemonicParsing="false" onAction="#operate" text="← - Implied By">
+                            <HBox.margin>
+                                <Insets left="30.0" top="25.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Button>
+                    </HBox>
+                </GridPane>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Broken Button">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1183.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+</TabPane>

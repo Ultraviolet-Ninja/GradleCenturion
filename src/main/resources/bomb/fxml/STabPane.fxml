@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<TabPane prefHeight="770.0" prefWidth="1160.0" stylesheets="@css/STabs.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="bomb.sub.controllers.SController">
+    <Tab text="Safety Safe">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1206.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Seashells">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="740.0" prefWidth="1204.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Semaphore">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1208.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Shape-Shift">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="756.0" prefWidth="1160.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Silly Slots">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1211.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Simon Screams">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1209.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="914.0" minWidth="10.0" prefWidth="771.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="575.0" minWidth="10.0" prefWidth="389.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="362.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="649.0" minHeight="10.0" prefHeight="641.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                        <Polygon fx:id="north" fill="DODGERBLUE" layoutX="422.0" layoutY="167.0" points="-14.04443645477295, 26.48722267150879, 47.30170822143555, 34.58946990966797, 23.470123291015625, -20.33860206604004, -82.85867309570312, -65.05300903320312" rotate="60.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Polygon fx:id="nWest" fill="DODGERBLUE" layoutX="345.0" layoutY="200.0" points="-14.04443645477295, 26.48722267150879, 47.30170822143555, 34.58946990966797, 23.470123291015625, -20.33860206604004, -82.85867309570312, -65.05300903320312" stroke="BLACK" strokeType="INSIDE" />
+                        <Polygon fx:id="nEast" fill="DODGERBLUE" layoutX="488.0" layoutY="219.0" points="-14.04443645477295, 26.48722267150879, 47.30170822143555, 34.58946990966797, 23.470123291015625, -20.33860206604004, -82.85867309570312, -65.05300903320312" rotate="120.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Polygon fx:id="sEast" fill="DODGERBLUE" layoutX="476.0" layoutY="302.0" points="-14.04443645477295, 26.48722267150879, 47.30170822143555, 34.58946990966797, 23.470123291015625, -20.33860206604004, -82.85867309570312, -65.05300903320312" rotate="180.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Polygon fx:id="south" fill="DODGERBLUE" layoutX="399.0" layoutY="336.0" points="-14.04443645477295, 26.48722267150879, 47.30170822143555, 34.58946990966797, 23.470123291015625, -20.33860206604004, -82.85867309570312, -65.05300903320312" rotate="240.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Polygon fx:id="sWest" fill="DODGERBLUE" layoutX="333.0" layoutY="283.0" points="-14.04443645477295, 26.48722267150879, 47.30170822143555, 34.58946990966797, 23.470123291015625, -20.33860206604004, -82.85867309570312, -65.05300903320312" rotate="300.0" stroke="BLACK" strokeType="INSIDE" />
+                    </Pane>
+               <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <children>
+                     <TextArea prefHeight="433.0" prefWidth="389.0" promptText="Output">
+                        <font>
+                           <Font size="30.0" />
+                        </font>
+                     </TextArea>
+                  </children>
+               </VBox>
+                </GridPane>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Simon States">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1206.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="857.0" minWidth="10.0" prefWidth="837.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="571.0" minWidth="10.0" prefWidth="323.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <GridPane>
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints maxHeight="364.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="635.0" minHeight="10.0" prefHeight="624.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <GridPane GridPane.rowIndex="1">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <VBox prefHeight="200.0" prefWidth="100.0">
+                                <Arc fx:id="topLeft" disable="true" fill="#1f93ff00" length="90.0" onMouseClicked="#colorSet" radiusX="150.0" radiusY="150.0" startAngle="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" type="ROUND">
+                                    <VBox.margin>
+                                        <Insets left="250.0" top="150.0" />
+                                    </VBox.margin>
+                                </Arc>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                <Arc fx:id="topRight" disable="true" fill="#1f93ff00" length="90.0" onMouseClicked="#colorSet" radiusX="150.0" radiusY="150.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" type="ROUND">
+                                    <VBox.margin>
+                                        <Insets top="150.0" />
+                                    </VBox.margin>
+                                </Arc>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                <Arc fx:id="bottomLeft" disable="true" fill="#1f93ff00" length="90.0" onMouseClicked="#colorSet" radiusX="150.0" radiusY="150.0" startAngle="180.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" type="ROUND">
+                                    <VBox.margin>
+                                        <Insets left="250.0" top="10.0" />
+                                    </VBox.margin>
+                                </Arc>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Arc fx:id="bottomRight" disable="true" fill="#1f93ff00" length="90.0" onMouseClicked="#colorSet" radiusX="150.0" radiusY="150.0" startAngle="-90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="5.0" type="ROUND">
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Arc>
+                                <Button fx:id="statesEnter" disable="true" mnemonicParsing="false" onAction="#nextButtonArray" text="Confirm">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="320.0" top="100.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </VBox>
+                        </GridPane>
+                        <GridPane>
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="192.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="683.0" minWidth="10.0" prefWidth="162.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="683.0" minWidth="10.0" prefWidth="169.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="683.0" minWidth="10.0" prefWidth="168.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="683.0" minWidth="10.0" prefWidth="176.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                <Button fx:id="statesRed" mnemonicParsing="false" onAction="#setPriority" text="Red">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="35.0" top="35.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                                <Button fx:id="statesYellow" mnemonicParsing="false" onAction="#setPriority" text="Yellow">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="26.0" top="35.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                                <Button fx:id="statesGreen" mnemonicParsing="false" onAction="#setPriority" text="Green">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="27.0" top="35.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
+                                <Button fx:id="statesBlue" mnemonicParsing="false" onAction="#setPriority" text="Blue">
+                                    <font>
+                                        <Font size="26.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="45.0" top="35.0" />
+                                    </VBox.margin>
+                                </Button>
+                            </VBox>
+                            <VBox prefHeight="200.0" prefWidth="100.0">
+                                <Label text="Top-Left">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="50.0" top="20.0" />
+                                    </VBox.margin>
+                                </Label>
+                                <Label text="Button">
+                                    <font>
+                                        <Font size="24.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets left="55.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </VBox>
+                        </GridPane>
+                    </GridPane>
+                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                        <TextArea fx:id="statesOutput" prefHeight="487.0" prefWidth="323.0" promptText="Outputs">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="40.0" />
+                            </VBox.margin>
+                        </TextArea>
+                    </VBox>
+                </GridPane>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Skewed Slots">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="741.0" prefWidth="1216.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Square Button">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="755.0" prefWidth="1162.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Switches">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="757.0" prefWidth="1227.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Symbolic Password">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="757.0" prefWidth="1251.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+</TabPane>

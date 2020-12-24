@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+
+<fx:root prefHeight="100.0" prefWidth="110.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Polygon fx:id="hexagonalFill" fill="#008cff00" layoutX="29.0" layoutY="23.0" opacity="0.51" points="1.335784912109375, 77.5, 51.08580017089844, 77.5, 81.70710754394531, 27.0, 51.08580017089844, -23.207107543945312, 1.335784912109375, -23.207107543945312, -29.707107543945312, 27.707107543945312" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fx:id="peg" fill="#c6c6c6" layoutX="56.0" layoutY="51.0" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Line fx:id="northWest" endX="-16.871322631835938" endY="-50.0" layoutX="47.0" layoutY="50.0" startX="-47.0" />
+      <Line fx:id="north" endX="-74.45710754394531" endY="21.292892456054688" layoutX="154.0" layoutY="-21.0" startX="-123.16421508789062" startY="21.292892456054688" />
+      <Line fx:id="northEast" endX="-4.0000152587890625" endY="38.0" layoutX="114.0" layoutY="12.0" startX="-33.95709228515625" startY="-12.207107543945312" />
+      <Line fx:id="southEast" endX="25.0" endY="-17.292892456054688" layoutX="85.0" layoutY="68.0" startX="-4.7071075439453125" startY="32.0" />
+      <Line fx:id="south" endX="25.585784912109375" layoutX="54.0" layoutY="100.0" startX="-24.0" />
+      <Line fx:id="southWest" endX="-1.5" endY="20.5" layoutX="31.0" layoutY="79.0" startX="-31.0" startY="-28.292892456054688" />
+      <Circle fx:id="circle" fill="#1f93ff00" layoutX="56.0" layoutY="51.0" opacity="0.0" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="upTriangle" fill="#1f93ff00" layoutX="56.0" layoutY="69.0" opacity="0.0" points="-30.0, 0.0, 30.0, 0.0, 0.0, -51.9" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="rightTriangle" fill="#1f93ff00" layoutX="51.0" layoutY="69.0" opacity="0.0" points="-30.0, 0.0, 30.0, 0.0, 0.0, -51.9" rotate="-30.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="leftTriangle" fill="#1f93ff00" layoutX="61.0" layoutY="70.0" opacity="0.0" points="-30.0, 0.0, 30.0, 0.0, 0.0, -51.9" rotate="30.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="downTriangle" fill="#1f93ff00" layoutX="64.0" layoutY="72.0" opacity="0.0" points="-30.0, 0.0, 30.0, 0.0, 0.0, -51.9" rotate="60.0" stroke="BLACK" strokeType="INSIDE" />
+      <Polygon fx:id="hexagon" fill="#1f93ff00" layoutX="31.0" layoutY="26.0" opacity="0.0" points="12.5, 50.0, 37.5, 50.0, 52.5, 25.0, 37.5, 0.0, 12.5, 0.0, -2.5, 25.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</fx:root>

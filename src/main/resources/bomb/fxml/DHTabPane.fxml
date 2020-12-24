@@ -1,0 +1,464 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import bomb.components.hex.HexMazePanel?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane prefHeight="770.0" prefWidth="1160.0" stylesheets="@css/DHTabs.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.DHController">
+    <Tab text="Double Oh">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="805.0" prefWidth="1210.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Emoji Math">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="869.0" prefWidth="1327.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="364.0" minHeight="10.0" prefHeight="304.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="457.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="457.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="457.0" minHeight="10.0" prefHeight="204.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <TextField fx:id="equationBar" alignment="CENTER" editable="false" promptText="Equation">
+                        <font>
+                            <Font size="36.0" />
+                        </font>
+                        <VBox.margin>
+                            <Insets top="150.0" />
+                        </VBox.margin>
+                    </TextField>
+                </VBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <Button fx:id="first" mnemonicParsing="false" onAction="#addToEquation" text=":)">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="375.0" top="50.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="second" layoutX="310.0" layoutY="60.0" mnemonicParsing="false" onAction="#addToEquation" text="=(">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="50.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="third" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="(:">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="50.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="forth" layoutX="518.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text=")=">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="50.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="fifth" layoutX="622.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text=":(">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="50.0" />
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                    <Button fx:id="sixth" mnemonicParsing="false" onAction="#addToEquation" text="):">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="375.0" top="40.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="seventh" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="=)">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="40.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="eighth" layoutX="114.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="(=">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="40.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="ninth" layoutX="218.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text=":|">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="40.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="tenth" layoutX="322.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="|:">
+                        <font>
+                            <Font size="24.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="50.0" top="40.0" />
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                    <Button fx:id="add" disable="true" mnemonicParsing="false" onAction="#operator" text="+">
+                        <font>
+                            <Font size="36.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="375.0" top="30.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="minus" disable="true" mnemonicParsing="false" onAction="#operator" text="-">
+                        <font>
+                            <Font size="36.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="125.0" top="30.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="equal" disable="true" mnemonicParsing="false" onAction="#submitEquation" text="=">
+                        <font>
+                            <Font size="36.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="125.0" top="30.0" />
+                        </HBox.margin>
+                    </Button>
+                    <Button fx:id="clear" disable="true" mnemonicParsing="false" onAction="#clearParam" text="Clear">
+                        <font>
+                            <Font size="30.0" />
+                        </font>
+                        <HBox.margin>
+                            <Insets left="200.0" top="125.0" />
+                        </HBox.margin>
+                    </Button>
+                </HBox>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="English Test">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="813.0" prefWidth="1273.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Fast Math">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="778.0" prefWidth="1198.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Filibuster">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="788.0" prefWidth="1202.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="FizzBuzz">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="788.0" prefWidth="1291.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Flags">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="757.0" prefWidth="1190.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Follow the Leader">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="751.0" prefWidth="1202.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Foreign Exchange">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="755.0" prefWidth="1255.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Friendship">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="783.0" prefWidth="1275.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+            </GridPane>
+        </GridPane>
+    </Tab>
+    <Tab text="Hexamaze">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+            </rowConstraints>
+            <GridPane prefHeight="791.0" prefWidth="1266.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <Pane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <HexMazePanel fx:id="fourOne" layoutX="326.0" layoutY="11.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fourTwo" layoutX="326.0" layoutY="111.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fourThree" layoutX="326.0" layoutY="211.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fourFour" layoutX="326.0" layoutY="311.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fourFive" layoutX="326.0" layoutY="411.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fourSix" layoutX="326.0" layoutY="511.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fourSeven" layoutX="326.0" layoutY="611.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="threeOne" layoutX="245.0" layoutY="61.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="twoOne" layoutX="164.0" layoutY="111.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="oneOne" layoutX="83.0" layoutY="161.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fiveOne" layoutX="406.0" layoutY="61.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="threeTwo" layoutX="245.0" layoutY="161.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="twoTwo" layoutX="164.0" layoutY="211.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="threeThree" layoutX="245.0" layoutY="261.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="threeSix" layoutX="245.0" layoutY="561.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="threeFour" layoutX="245.0" layoutY="361.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="oneTwo" layoutX="83.0" layoutY="261.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="twoThree" layoutX="164.0" layoutY="311.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="oneThree" layoutX="83.0" layoutY="361.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="oneFour" layoutX="83.0" layoutY="461.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="twoFour" layoutX="164.0" layoutY="411.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="threeFive" layoutX="245.0" layoutY="461.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="twoFive" layoutX="164.0" layoutY="511.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fiveTwo" layoutX="406.0" layoutY="161.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fiveThree" layoutX="406.0" layoutY="261.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fiveFour" layoutX="406.0" layoutY="361.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fiveFive" layoutX="406.0" layoutY="461.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="fiveSix" layoutX="406.0" layoutY="561.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sixFive" layoutX="486.0" layoutY="511.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sevenFour" layoutX="566.0" layoutY="461.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sixFour" layoutX="486.0" layoutY="411.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sevenThree" layoutX="566.0" layoutY="361.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sixThree" layoutX="486.0" layoutY="311.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sixTwo" layoutX="486.0" layoutY="211.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sixOne" layoutX="486.0" layoutY="111.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sevenOne" layoutX="566.0" layoutY="161.0" onMouseClicked="#plotShape" />
+                  <HexMazePanel fx:id="sevenTwo" layoutX="566.0" layoutY="261.0" onMouseClicked="#plotShape" />
+                  <RadioButton fx:id="circleButton" layoutX="792.0" layoutY="81.0" mnemonicParsing="false" onAction="#setShape" text="Circle">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="hexButton" layoutX="792.0" layoutY="121.0" mnemonicParsing="false" onAction="#setShape" text="Hexagon">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="lTriangleButton" layoutX="919.0" layoutY="81.0" mnemonicParsing="false" onAction="#setShape" text="Left Triangle">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="rTriangleButton" layoutX="920.0" layoutY="121.0" mnemonicParsing="false" onAction="#setShape" text="Right Triangle">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="uTriangleButton" layoutX="919.0" layoutY="160.0" mnemonicParsing="false" onAction="#setShape" text="Up Triangle">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="dTriangleButton" layoutX="920.0" layoutY="194.0" mnemonicParsing="false" onAction="#setShape" text="Down Triangle">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="nullButton" layoutX="792.0" layoutY="194.0" mnemonicParsing="false" onAction="#setShape" text="Blank">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="pegButton" layoutX="792.0" layoutY="160.0" mnemonicParsing="false" onAction="#setShape" text="Peg">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <Button layoutX="867.0" layoutY="517.0" mnemonicParsing="false" onAction="#mazeCompare" text="Submit">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <RadioButton fx:id="redButton" disable="true" layoutX="792.0" layoutY="299.0" mnemonicParsing="false" onAction="#setPegFill" text="Red">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="yellowButton" disable="true" layoutX="793.0" layoutY="348.0" mnemonicParsing="false" onAction="#setPegFill" text="Yellow">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="greenButton" disable="true" layoutX="794.0" layoutY="401.0" mnemonicParsing="false" onAction="#setPegFill" text="Green">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="cyanButton" disable="true" layoutX="925.0" layoutY="299.0" mnemonicParsing="false" onAction="#setPegFill" text="Cyan">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="blueButton" disable="true" layoutX="924.0" layoutY="348.0" mnemonicParsing="false" onAction="#setPegFill" text="Blue">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="pinkButton" disable="true" layoutX="925.0" layoutY="401.0" mnemonicParsing="false" onAction="#setPegFill" text="Pink">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+               </children></Pane>
+            </GridPane>
+        </GridPane>
+    </Tab>
+</TabPane>

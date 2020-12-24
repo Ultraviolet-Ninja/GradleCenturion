@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Bomb.Widget</OriginalElement>
+  <nodes>
+    <node x="6437.5" y="1427.0">Bomb.Modules.AB.BlindAlley</node>
+    <node x="1642.0" y="3473.0">Bomb.Objects.CheckoutItems</node>
+    <node x="1182.0" y="3473.0">Bomb.Objects.BitwiseOps</node>
+    <node x="4599.5" y="1461.5">Bomb.Modules.IL.LEDEncryption</node>
+    <node x="1581.5" y="1273.0">Bomb.Modules.DH.ForgetMeNot</node>
+    <node x="6151.5" y="1416.5">Bomb.Modules.C.ColorFlash</node>
+    <node x="856.0" y="3473.0">Bomb.Tools.Hexalgorithm.Maze</node>
+    <node x="5102.0" y="2175.0">Bomb.Tools.ChainList</node>
+    <node x="3227.5" y="1317.0">Bomb.Modules.S.SimonScreams</node>
+    <node x="5412.0" y="2175.0">Bomb.Tools.Hexalgorithm.HexComparator</node>
+    <node x="5332.5" y="1306.0">Bomb.Modules.C.ChordQualities</node>
+    <node x="2297.0" y="2578.0">Bomb.Tools.Dictionary.DutchDict</node>
+    <node x="839.5" y="1427.5">Bomb.Modules.C.Caesar</node>
+    <node x="1858.0" y="2731.0">Bomb.Objects.Ports</node>
+    <node x="4169.5" y="1427.5">Bomb.Modules.R.RoundKeypads</node>
+    <node x="1058.5" y="1317.0">Bomb.Modules.T.TheBulb</node>
+    <node x="2903.5" y="1427.5">Bomb.Modules.AB.Bitwise</node>
+    <node x="6249.0" y="2175.0">Bomb.Tools.FinalList</node>
+    <node x="2797.0" y="3473.0">Bomb.Structures.Coordinate</node>
+    <node x="1308.242857142857" y="2175.0">Bomb.Structures.Flaggable</node>
+    <node x="3582.0" y="2578.0">Bomb.Tools.Dictionary.EstonianDict</node>
+    <node x="2.0" y="2175.0">Bomb.Structures.Listed</node>
+    <node x="1038.0" y="2764.0">Bomb.Objects.TriState</node>
+    <node x="1230.0" y="2302.0">Bomb.Objects.Keypads</node>
+    <node x="1803.5" y="1174.0">Bomb.Modules.S.SimonStates</node>
+    <node x="2372.0" y="3473.0">Bomb.Objects.CFlash</node>
+    <node x="533.5" y="1339.0">Bomb.Modules.T.Translated.TranslationCenter</node>
+    <node x="3325.0" y="2175.0">Bomb.Tools.Dictionary.Dictionary</node>
+    <node x="6645.5" y="1240.0">Bomb.Modules.NP.Neutralization</node>
+    <node x="1622.0" y="2511.0">Bomb.Objects.AstroSymbols</node>
+    <node x="2585.0" y="3473.0">Bomb.Objects.Simon</node>
+    <node x="0.0" y="1930.0">Bomb.Modules.T.Translated.Button</node>
+    <node x="5139.5" y="1394.0">Bomb.Modules.T.TwoBit</node>
+    <node x="1917.0" y="3473.0">Bomb.Objects.Chemical</node>
+    <node x="4405.5" y="1461.5">Bomb.Modules.S.Semaphore</node>
+    <node x="1418.0" y="3473.0">Bomb.Objects.Clothing</node>
+    <node x="4849.5" y="1461.5">Bomb.Modules.DH.FastMath</node>
+    <node x="0.0" y="3473.0">Bomb.Tools.Hexalgorithm.HexGrid</node>
+    <node x="3739.5" y="1416.5">Bomb.Modules.DH.EmojiMath</node>
+    <node x="3975.5" y="1461.5">Bomb.Modules.S.Seashells</node>
+    <node x="512.0" y="1897.5">Bomb.Modules.T.Translated.Passwords</node>
+    <node x="4096.0" y="2578.0">Bomb.Tools.Dictionary.FinnishDict</node>
+    <node x="2106.0" y="2175.0">Bomb.Structures.Ternary</node>
+    <node x="1745.360714285714" y="2175.0">Bomb.Structures.Index</node>
+    <node x="474.9999999999999" y="2478.0">Bomb.Objects.WhosOnFirstPictures</node>
+    <node x="2084.5" y="1405.0">Bomb.Modules.AB.Astrology</node>
+    <node x="3249.0" y="3473.0">Bomb.Structures.Reset</node>
+    <node x="4635.0" y="2175.0">Bomb.Tools.Hexalgorithm.Hex</node>
+    <node x="861.0" y="1941.5">Bomb.Modules.T.Translated.VentGas</node>
+    <node x="6468.0" y="2175.0">Bomb.Objects.TheButton</node>
+    <node x="1027.0" y="1930.5">Bomb.Modules.T.Translated.OnFirst</node>
+    <node x="2811.0" y="2578.0">Bomb.Tools.Dictionary.GermanDict</node>
+    <node x="1366.5" y="1317.0">Bomb.Modules.IL.Laundry</node>
+    <node x="5875.0" y="2175.0">Bomb.Tools.Star</node>
+    <node x="3325.0" y="2578.0">Bomb.Tools.Dictionary.EnglishDict</node>
+    <node x="808.9999999999999" y="2665.0">Bomb.Objects.Qualities</node>
+    <node x="2473.5" y="1461.5">Bomb.Modules.M.MonslopeFight</node>
+    <node x="5596.5" y="1461.5">Bomb.Modules.C.CheapCheckout</node>
+    <node x="0.0" y="2478.0">Bomb.Objects.WhosOnFirstWords</node>
+    <node x="2554.0" y="2578.0">Bomb.Tools.Dictionary.BrazilianDict</node>
+    <node x="4353.0" y="2578.0">Bomb.Tools.Dictionary.EsperantoDict</node>
+    <node x="3030.0" y="3473.0">Bomb.Structures.Frequency</node>
+    <node x="326.0" y="3473.0">Bomb.Objects.Bulb</node>
+    <node x="528.0" y="3473.0">Bomb.Tools.Mechanics</node>
+    <node x="3523.5" y="1416.0">Bomb.Modules.AB.Alphabet</node>
+    <node x="5846.5" y="1251.0">Bomb.Modules.AB.BooleanVenn</node>
+    <node x="5029.5" y="1461.5">Bomb.Modules.WZ.Zoo</node>
+    <node x="840.4999999999999" y="2175.0">Bomb.Structures.Labeled</node>
+    <node x="2038.0" y="2665.0">Bomb.Objects.Indicators</node>
+    <node x="1434.0" y="2676.0">Bomb.Objects.Emojis</node>
+    <node x="2723.5" y="1461.5">Bomb.Modules.DH.Hexamaze</node>
+    <node x="2145.0" y="3473.0">Bomb.Objects.HexTraits</node>
+    <node x="291.9999999999999" y="2654.0">Bomb.Objects.Roots</node>
+    <node x="3839.0" y="2578.0">Bomb.Tools.Dictionary.CzechDict</node>
+    <node x="3068.0" y="2578.0">Bomb.Tools.Dictionary.DanishDict</node>
+    <node x="3827.0" y="0.0">Bomb.Widget</node>
+    <node x="218.0" y="1842.0">Bomb.Modules.T.Translated.Morse</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Bomb.Modules.C.Caesar" target="Bomb.Widget">
+      <point x="0.0" y="-55.5" />
+      <point x="939.0" y="1044.0" />
+      <point x="3841.7692307692314" y="1044.0" />
+      <point x="-113.23076923076906" y="507.0" />
+    </edge>
+    <edge source="Bomb.Objects.Ports" target="Bomb.Structures.Index">
+      <point x="0.0" y="-134.0" />
+      <point x="1938.0" y="2282.0" />
+      <point x="1819.110714285714" y="2282.0" />
+      <point x="14.75" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.DH.FastMath" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="4929.5" y="1114.0" />
+      <point x="3999.3076923076924" y="1114.0" />
+      <point x="44.30769230769238" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.C.ColorFlash" target="Bomb.Widget">
+      <point x="0.0" y="-66.5" />
+      <point x="6284.5" y="1054.0" />
+      <point x="4058.3846153846152" y="1054.0" />
+      <point x="103.38461538461524" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.S.SimonScreams" target="Bomb.Widget">
+      <point x="0.0" y="-166.0" />
+      <point x="3365.5" y="1134.0" />
+      <point x="3930.3846153846152" y="1134.0" />
+      <point x="-24.615384615384755" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.AB.Alphabet" target="Bomb.Widget">
+      <point x="0.0" y="-67.0" />
+      <point x="3621.5" y="1144.0" />
+      <point x="3940.2307692307695" y="1144.0" />
+      <point x="-14.769230769230944" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.Translated.TranslationCenter" target="Bomb.Widget">
+      <point x="0.0" y="-144.0" />
+      <point x="676.5" y="1034.0" />
+      <point x="3831.923076923077" y="1034.0" />
+      <point x="-123.07692307692287" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.WZ.Zoo" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="5074.5" y="1104.0" />
+      <point x="4009.1538461538466" y="1104.0" />
+      <point x="54.15384615384619" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.TheBulb" target="Bomb.Widget">
+      <point x="0.0" y="-166.0" />
+      <point x="1202.5" y="1054.0" />
+      <point x="3851.6153846153848" y="1054.0" />
+      <point x="-103.38461538461524" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.S.SimonStates" target="Bomb.Widget">
+      <point x="0.0" y="-309.0" />
+      <point x="1934.0" y="1084.0" />
+      <point x="3881.1538461538466" y="1084.0" />
+      <point x="-73.84615384615381" y="507.0" />
+    </edge>
+    <edge source="Bomb.Objects.Roots" target="Bomb.Structures.Labeled">
+      <point x="0.0" y="-211.0" />
+      <point x="373.4999999999999" y="2272.0" />
+      <point x="871.7857142857142" y="2272.0" />
+      <point x="-41.714285714285666" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.S.Seashells" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="4062.5" y="1154.0" />
+      <point x="3959.923076923077" y="1154.0" />
+      <point x="4.923076923076678" y="507.0" />
+    </edge>
+    <edge source="Bomb.Objects.Keypads" target="Bomb.Structures.Flaggable">
+      <point x="46.0" y="-563.0" />
+      <point x="1368.0" y="2282.0" />
+      <point x="1395.242857142857" y="2282.0" />
+      <point x="0.0" y="33.5" />
+    </edge>
+    <edge source="Bomb.Objects.WhosOnFirstWords" target="Bomb.Structures.Listed">
+      <point x="-68.0" y="-387.0" />
+      <point x="0.0" y="33.5" />
+    </edge>
+    <edge source="Bomb.Objects.WhosOnFirstPictures" target="Bomb.Structures.Labeled">
+      <point x="0.0" y="-387.0" />
+      <point x="631.9999999999999" y="2282.0" />
+      <point x="892.642857142857" y="2282.0" />
+      <point x="-20.85714285714289" y="33.5" />
+    </edge>
+    <edge source="Bomb.Objects.WhosOnFirstWords" target="Bomb.Structures.Labeled">
+      <point x="68.0" y="-387.0" />
+      <point x="204.0" y="2262.0" />
+      <point x="850.9285714285713" y="2262.0" />
+      <point x="-62.571428571428555" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.DH.Hexamaze" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="2803.5" y="1114.0" />
+      <point x="3910.6923076923076" y="1114.0" />
+      <point x="-44.30769230769238" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.Translated.OnFirst" target="Bomb.Modules.T.Translated.TranslationCenter">
+      <point x="0.0" y="-55.5" />
+      <point x="1114.0" y="1812.0" />
+      <point x="790.9000000000001" y="1812.0" />
+      <point x="114.39999999999998" y="144.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.Translated.VentGas" target="Bomb.Modules.T.Translated.TranslationCenter">
+      <point x="0.0" y="-44.5" />
+      <point x="934.0" y="1822.0" />
+      <point x="733.6999999999998" y="1822.0" />
+      <point x="57.19999999999993" y="144.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.Translated.Morse" target="Bomb.Modules.T.Translated.TranslationCenter">
+      <point x="0.0" y="-144.0" />
+      <point x="355.0" y="1822.0" />
+      <point x="619.3000000000002" y="1822.0" />
+      <point x="-57.200000000000045" y="144.0" />
+    </edge>
+    <edge source="Bomb.Objects.Emojis" target="Bomb.Structures.Index">
+      <point x="42.0" y="-189.0" />
+      <point x="1560.0" y="2272.0" />
+      <point x="1760.110714285714" y="2272.0" />
+      <point x="-44.25" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.M.MonslopeFight" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="2588.5" y="1104.0" />
+      <point x="3900.8461538461543" y="1104.0" />
+      <point x="-54.15384615384619" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.C.ChordQualities" target="Bomb.Widget">
+      <point x="0.0" y="-177.0" />
+      <point x="5454.5" y="1084.0" />
+      <point x="4028.8461538461543" y="1084.0" />
+      <point x="73.84615384615381" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.AB.BooleanVenn" target="Bomb.Widget">
+      <point x="0.0" y="-232.0" />
+      <point x="5989.0" y="1064.0" />
+      <point x="4048.538461538462" y="1064.0" />
+      <point x="93.53846153846143" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.Translated.Button" target="Bomb.Modules.T.Translated.TranslationCenter">
+      <point x="0.0" y="-56.0" />
+      <point x="99.0" y="1812.0" />
+      <point x="562.0999999999999" y="1812.0" />
+      <point x="-114.39999999999998" y="144.0" />
+    </edge>
+    <edge source="Bomb.Modules.DH.EmojiMath" target="Bomb.Widget">
+      <point x="0.0" y="-66.5" />
+      <point x="3847.5" y="1154.0" />
+      <point x="3950.076923076923" y="1154.0" />
+      <point x="-4.923076923077133" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.S.Semaphore" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="4492.5" y="1134.0" />
+      <point x="3979.6153846153848" y="1134.0" />
+      <point x="24.615384615384755" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.IL.LEDEncryption" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="4714.5" y="1124.0" />
+      <point x="3989.461538461539" y="1124.0" />
+      <point x="34.46153846153857" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.C.CheapCheckout" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="5711.5" y="1074.0" />
+      <point x="4038.6923076923076" y="1074.0" />
+      <point x="83.69230769230762" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.T.Translated.Passwords" target="Bomb.Modules.T.Translated.TranslationCenter">
+      <point x="0.0" y="-88.5" />
+      <point x="0.0" y="144.0" />
+    </edge>
+    <edge source="Bomb.Objects.Indicators" target="Bomb.Structures.Index">
+      <point x="-47.0" y="-200.0" />
+      <point x="2085.0" y="2272.0" />
+      <point x="1848.610714285714" y="2272.0" />
+      <point x="44.25" y="33.5" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.FinnishDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="4214.5" y="2538.0" />
+      <point x="3522.5" y="2538.0" />
+      <point x="79.0" y="166.5" />
+    </edge>
+    <edge source="Bomb.Objects.AstroSymbols" target="Bomb.Structures.Index">
+      <point x="0.0" y="-354.0" />
+      <point x="1730.0" y="2282.0" />
+      <point x="1789.610714285714" y="2282.0" />
+      <point x="-14.75" y="33.5" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.GermanDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="2929.5" y="2548.0" />
+      <point x="3390.8333333333335" y="2548.0" />
+      <point x="-52.666666666666515" y="166.5" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.EstonianDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="3700.5" y="2558.0" />
+      <point x="3469.8333333333335" y="2558.0" />
+      <point x="26.333333333333485" y="166.5" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.DutchDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="2415.5" y="2528.0" />
+      <point x="3338.1666666666665" y="2528.0" />
+      <point x="-105.33333333333348" y="166.5" />
+    </edge>
+    <edge source="Bomb.Modules.AB.Bitwise" target="Bomb.Widget">
+      <point x="0.0" y="-55.5" />
+      <point x="3055.5" y="1124.0" />
+      <point x="3920.538461538462" y="1124.0" />
+      <point x="-34.46153846153857" y="507.0" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.DanishDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="3186.5" y="2558.0" />
+      <point x="3417.1666666666665" y="2558.0" />
+      <point x="-26.333333333333485" y="166.5" />
+    </edge>
+    <edge source="Bomb.Modules.AB.BlindAlley" target="Bomb.Widget">
+      <point x="0.0" y="-56.0" />
+      <point x="6531.5" y="1044.0" />
+      <point x="4068.2307692307695" y="1044.0" />
+      <point x="113.23076923076906" y="507.0" />
+    </edge>
+    <edge source="Bomb.Objects.Emojis" target="Bomb.Structures.Labeled">
+      <point x="-42.0" y="-189.0" />
+      <point x="1476.0" y="2262.0" />
+      <point x="976.0714285714284" y="2262.0" />
+      <point x="62.571428571428555" y="33.5" />
+    </edge>
+    <edge source="Bomb.Objects.Keypads" target="Bomb.Structures.Labeled">
+      <point x="-46.0" y="-563.0" />
+      <point x="1276.0" y="2272.0" />
+      <point x="955.2142857142857" y="2272.0" />
+      <point x="41.71428571428578" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.T.TwoBit" target="Bomb.Widget">
+      <point x="0.0" y="-89.0" />
+      <point x="5226.0" y="1094.0" />
+      <point x="4019.0" y="1094.0" />
+      <point x="64.0" y="507.0" />
+    </edge>
+    <edge source="Bomb.Objects.Indicators" target="Bomb.Structures.Ternary">
+      <point x="47.0" y="-200.0" />
+      <point x="0.0" y="33.5" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.EsperantoDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="4471.5" y="2528.0" />
+      <point x="3548.833333333333" y="2528.0" />
+      <point x="105.33333333333303" y="166.5" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.EnglishDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="0.0" y="166.5" />
+    </edge>
+    <edge source="Bomb.Modules.NP.Neutralization" target="Bomb.Widget">
+      <point x="0.0" y="-243.0" />
+      <point x="6767.5" y="1034.0" />
+      <point x="4078.076923076923" y="1034.0" />
+      <point x="123.07692307692287" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.DH.ForgetMeNot" target="Bomb.Widget">
+      <point x="0.0" y="-210.0" />
+      <point x="1682.5" y="1074.0" />
+      <point x="3871.3076923076924" y="1074.0" />
+      <point x="-83.69230769230762" y="507.0" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.CzechDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="3957.5" y="2548.0" />
+      <point x="3496.1666666666665" y="2548.0" />
+      <point x="52.666666666666515" y="166.5" />
+    </edge>
+    <edge source="Bomb.Modules.IL.Laundry" target="Bomb.Widget">
+      <point x="0.0" y="-166.0" />
+      <point x="1464.0" y="1064.0" />
+      <point x="3861.461538461539" y="1064.0" />
+      <point x="-93.53846153846143" y="507.0" />
+    </edge>
+    <edge source="Bomb.Objects.TriState" target="Bomb.Structures.Labeled">
+      <point x="0.0" y="-101.0" />
+      <point x="1124.0" y="2282.0" />
+      <point x="934.3571428571428" y="2282.0" />
+      <point x="20.85714285714289" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.R.RoundKeypads" target="Bomb.Widget">
+      <point x="0.0" y="-55.5" />
+      <point x="4277.5" y="1144.0" />
+      <point x="3969.7692307692305" y="1144.0" />
+      <point x="14.76923076923049" y="507.0" />
+    </edge>
+    <edge source="Bomb.Tools.Dictionary.BrazilianDict" target="Bomb.Tools.Dictionary.Dictionary">
+      <point x="0.0" y="-67.0" />
+      <point x="2672.5" y="2538.0" />
+      <point x="3364.5" y="2538.0" />
+      <point x="-79.0" y="166.5" />
+    </edge>
+    <edge source="Bomb.Objects.Qualities" target="Bomb.Structures.Labeled">
+      <point x="0.0" y="-200.0" />
+      <point x="0.0" y="33.5" />
+    </edge>
+    <edge source="Bomb.Modules.AB.Astrology" target="Bomb.Widget">
+      <point x="0.0" y="-78.0" />
+      <point x="2269.0" y="1094.0" />
+      <point x="3891.0" y="1094.0" />
+      <point x="-64.0" y="507.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.41690291521797274" x="3246.375279604984" y="1937.3327111737617" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

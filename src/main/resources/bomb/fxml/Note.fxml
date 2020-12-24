@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.NotesController"
+      stylesheets="@css/Note.css">
+    <TextArea prefHeight="400.0" prefWidth="600.0" promptText="Le Notes">
+      <font>
+         <Font size="24.0" />
+      </font></TextArea>
+</Pane>
