@@ -1,6 +1,5 @@
-package tools;
+package bomb.tools.data.structures;
 
-import bomb.tools.data.structures.MapStack;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HashStackTest {
+public class MapStackTest {
     private MapStack<Integer, String> stack;
 
     private final Integer[] integers = new Integer[]{1, 2, 4, 41, 684, 50324, 124, 8345};

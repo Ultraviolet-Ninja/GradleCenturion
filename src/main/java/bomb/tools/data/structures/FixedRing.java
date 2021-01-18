@@ -55,10 +55,11 @@ public class FixedRing<E> {
     }
 
     public int findIndex(E element){
+        Node<E> temp = head;
         for (int i = 0; i < capacity; i++){
-            if (element == head.data)
+            if (element.equals(temp.data))
                 return i;
-            head = head.next;
+            temp = temp.next;
         }
         return -1;
     }
