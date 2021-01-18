@@ -10,7 +10,7 @@ import static bomb.tools.Mechanics.ultimateFilter;
 
 /**
  * This class deals with the Laundry module. The module requires a plethora of conditions that involve the
- * widget data, the number of solved modules, and the number of needy modules to determine the clothing
+ * widget data, the number of solved modules, and the number of needy bomb.modules to determine the clothing
  * item, material, and color. These will lead to the instructions for washing, drying, ironing,
  * and dry cleaning your clothing.
  */
