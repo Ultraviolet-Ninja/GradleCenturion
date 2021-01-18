@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:8u181-stretch
+      - image: circleci/jdk8:0.1.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -23,20 +23,21 @@ jobs:
 
     steps:
       - checkout
+      - run: chmod +x gradlew
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-{{ checksum &quot;build.gradle&quot; }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: gradle dependencies
+      - run: ./gradlew dependencies
 
       - save_cache:
           paths:
-            - ~/.gradle
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+            - ~/.m2
+          key: v1-dependencies-{{ checksum &quot;build.gradle&quot; }}
 
       # run tests!
-      - run: gradle test
+      - run: ./gradlew test
