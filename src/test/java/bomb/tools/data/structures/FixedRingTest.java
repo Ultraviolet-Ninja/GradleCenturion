@@ -8,7 +8,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FixedRingTest {
     private FixedRing<Integer> ring;
@@ -29,9 +33,8 @@ public class FixedRingTest {
                 assertFalse(ring.add(intArray[i]));
         }
 
-        assertThrows(BufferOverflowException.class, () ->{
-            ring.add(1924);
-        });
+        assertThrows(BufferOverflowException.class, () ->
+                ring.add(1924));
     }
 
     @Test

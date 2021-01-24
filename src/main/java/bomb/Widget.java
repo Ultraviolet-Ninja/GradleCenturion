@@ -375,4 +375,22 @@ public class Widget {
     public static boolean portExists(Ports port){
         return ports[port.getIdx()] > 0;
     }
+
+    public static void resetProperties(){
+        numDoubleAs = 0;
+        numDBatteries = 0;
+        numHolders = 0;
+        numModules = 0;
+        numPlates = 0;
+        numStartingMin = 0;
+        serialCode = "";
+        twoFactor = "";
+        ports = new int[]{0,0,0,0,0,0};
+        setAllUnknown();
+    }
+
+    private static void setAllUnknown(){
+        for (Indicators ind : list)
+            ind.setProp(UNKNOWN);
+    }
 }
