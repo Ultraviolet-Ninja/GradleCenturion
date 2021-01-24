@@ -303,6 +303,10 @@ public class Widget {
         return numHolders;
     }
 
+    public static int getNumModules(){
+        return numModules;
+    }
+
     /**
      * Returns the number of a specified port
      *

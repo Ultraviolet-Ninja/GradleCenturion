@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 public class BitwiseTest {
     private static final int DEFAULT_START_TIME = 5;
     private static final String MIN_AND = "00000001", MIN_OR = "00000011", MIN_XOR = "00000010", MIN_NOT = "11111100",
