@@ -77,6 +77,5 @@ public class BitwiseTest {
         Widget.setIndicator(TriState.OFF, Indicators.CAR);
         Widget.setDBatteries(1);
         Widget.setNumHolders(2);
-
     }
 }
