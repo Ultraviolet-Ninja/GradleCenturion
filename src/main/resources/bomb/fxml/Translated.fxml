@@ -6,7 +6,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<TabPane prefHeight="818.0" prefWidth="1156.0" stylesheets="@css/TranslatedTabs.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.TranslatedController">
+<TabPane prefHeight="818.0" prefWidth="1156.0" stylesheets="@css/TranslatedTabs.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.TranslatedController">
     <Tab text="Language Select">
         <GridPane>
             <columnConstraints>

@@ -13,7 +13,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("manual.fxml"));
         primaryStage.setTitle("Centurion Manual");
         primaryStage.setScene(new Scene(root, 1160, 770));
-        primaryStage.getIcons().add(new Image("file:src\\KTANE logo.png"));
+        primaryStage.getIcons().add(new Image("bomb\\KTANE logo.png"));
         primaryStage.show();
     }
 

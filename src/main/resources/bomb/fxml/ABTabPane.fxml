@@ -7,7 +7,8 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<TabPane prefHeight="770.0" prefWidth="1160.0" stylesheets="@css/ABTabs.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.ABController">
+<TabPane prefHeight="770.0" prefWidth="1160.0" stylesheets="@css/ABTabs.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.sub.controllers.ABController">
     <Tab text="3D Maze">
         <GridPane>
             <columnConstraints>
