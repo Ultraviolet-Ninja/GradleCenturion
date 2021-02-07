@@ -22,9 +22,8 @@ public class Mechanics {
         StringBuilder builder = new StringBuilder();
         for (char in : input.toLowerCase().toCharArray()){
             for (String exception : exceptions){
-                if (String.valueOf(in).equals(exception)){
+                if (exception.indexOf(in) != -1)
                     builder.append(in);
-                }
             }
         }
         return builder.toString();
@@ -36,9 +35,8 @@ public class Mechanics {
         input = input.toLowerCase();
         for (char next : input.toCharArray()){
             for (String exception : combine){
-                if (String.valueOf(next).equals(exception)){
-                    builder.append(exception);
-                }
+                if (exception.indexOf(next) != -1)
+                    builder.append(input);
             }
         }
         return builder.toString();

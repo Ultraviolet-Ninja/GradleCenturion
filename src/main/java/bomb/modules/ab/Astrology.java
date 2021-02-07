@@ -15,6 +15,8 @@ import static bomb.tools.Mechanics.ultimateFilter;
  * (i.e. Bad Omen at 5 means that you need to press "Bad Omen" when the bomb timer has a 5 in it)
  */
 public class Astrology extends Widget {
+    public static final String GOOD_OMEN = "Good Omen at ", POOR_OMEN = "Poor Omen at ", NO_OMEN = "No Omen";
+
     private static final int[][] stage1 = {{0,0,1,-1,0,1,-2,2,0,-1}, {-2,0,-1,0,2,0,-2,2,0,1},
             {-1,-1,0,-1,1,2,0,2,1,-2}, {-1,2,-1,0,-2,-1,0,2,-2,2}},
 
@@ -43,9 +45,11 @@ public class Astrology extends Widget {
         int results = first + second + third;
         results = checkSerial(results, element, celestialBody, zodiac);
 
-        return results > 0 ? "Good Omen at " + results :
-                (results == 0 ? "No Omen" :
-                        "Bad Omen at " + Math.abs(results));
+        return results > 0 ?
+                GOOD_OMEN + results :
+                (results == 0 ?
+                        NO_OMEN :
+                        POOR_OMEN + Math.abs(results));
     }
 
     /**
@@ -53,26 +57,19 @@ public class Astrology extends Widget {
      * If the symbol has a letter that matches a letter in the Serial Code, it adds one to
      * the output value. If not, it'll subtract 1
      *
-     * @param in The output value
+     * @param initialVal The output value
      * @param symbols The set of AstroSymbols
      * @return The resulting output value
      * @throws IllegalArgumentException The Serial Code is empty
      */
-    private static int checkSerial(int in, AstroSymbols...symbols) throws IllegalArgumentException{
+    private static int checkSerial(int initialVal, AstroSymbols...symbols) throws IllegalArgumentException{
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is required");
 
         String letters = ultimateFilter(serialCode, lowercaseRegex);
-        boolean skip;
         for (AstroSymbols symbol : symbols){
-            skip = false;
-            for (char letter : letters.toCharArray()){
-                if (symbol.name().toLowerCase().indexOf(letter) != -1 && !skip){
-                    in++;
-                    skip = true;
-                }
-            }
-            if (!skip) in--;
+            if (ultimateFilter(symbol.name(), letters).isEmpty()) initialVal--;
+            else initialVal++;
         }
-        return in;
+        return initialVal;
     }
 }
