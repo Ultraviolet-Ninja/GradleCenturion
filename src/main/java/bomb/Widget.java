@@ -194,9 +194,7 @@ public class Widget {
         String sample = ultimateFilter(serialCode, numberRegex);
         if (!sample.isEmpty()){
             for (char num : sample.toCharArray()){
-                if ((int) num % 2 == 0){
-                    return 0;
-                }
+                if ((int) num % 2 == 0) return 0;
             }
             return 1;
         }
@@ -324,9 +322,7 @@ public class Widget {
      */
     public static int getTotalPorts(){
         int counter = 0;
-        for (int num : ports){
-            counter += num;
-        }
+        for (int num : ports) counter += num;
         return counter;
     }
 

@@ -39,4 +39,12 @@ public class EmojiMathTest {
                 assertEquals((second.getIdx() - first.getIdx()),
                         EmojiMath.calculate(second.getLabel() + "-" + first.getLabel()));
     }
+
+    @Test
+    void videoTest(){
+        assertEquals(-1, EmojiMath.calculate("=)(=-=):|"));
+        assertEquals(95, EmojiMath.calculate(":|:|+(="));
+        assertEquals(189, EmojiMath.calculate("|:=)+|:)="));
+        assertEquals(-10, EmojiMath.calculate(":(:)-)::)"));
+    }
 }
