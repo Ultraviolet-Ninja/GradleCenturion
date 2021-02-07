@@ -13,12 +13,21 @@ import static bomb.enumerations.ShiftShape.POINT;
 import static bomb.enumerations.ShiftShape.ROUND;
 
 import static bomb.enumerations.ShiftShape.TICKET;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ShapeShiftTest {
     @BeforeEach
     void setUp(){
         Widget.resetProperties();
+    }
+
+    @Test
+    void exceptionTest(){
+        assertThrows(IllegalArgumentException.class, () -> ShapeShift.solve(ROUND, ROUND));
+        Widget.setSerialCode("ti243d");
+        assertDoesNotThrow(() -> ShapeShift.solve(ROUND, ROUND));
     }
 
     @Test

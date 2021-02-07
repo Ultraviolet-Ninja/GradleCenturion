@@ -28,7 +28,7 @@ public class ShapeShift extends Widget {
                     .get(booleanIntConversion(conditionMap(left, right)));
             return solve(pair.getKey(), pair.getValue());
         }
-        zeroOutArray();
+        resetMod();
         return new ShiftShape[]{left, right};
     }
 
@@ -37,6 +37,11 @@ public class ShapeShift extends Widget {
             if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is empty");
             serialCodeCheck = true;
         }
+    }
+
+    private static void resetMod(){
+        serialCodeCheck = false;
+        zeroOutArray();
     }
 
     private static void zeroOutArray(){
