@@ -1,0 +1,111 @@
+### Finished Modules
+- Alphabet
+- Astrology
+- Bitwise Ops
+- Blind Alley
+- Boolean Venn Diagram
+- Chord Qualities
+- Emoji Math
+- Laundry
+- Neutralization
+- Round Keypads
+- The Bulb
+- TwoBit
+
+12/100
+
+### Incomplete Modules
+- Hexamaze
+- Translated Vanilla Modules (9/15 Supported languages)
+- Simon Screams
+- Simon States
+- Forget Me Not
+- Souvenir
+- Shape Shift
+
+7/100
+
+### Untouched Modules
+- 3D Maze
+- Adjacent Letters
+- Adventure Game
+- Anagrams
+- Battleship
+- Binary LEDs
+- BitMaps
+- Broken Button
+- Caesar Cipher
+- Cheap Checkout
+- Chess
+- Color Flash
+- Color Math
+- Color Squares
+- Color Switches (Not technically part of the bomb, but will be a fun recursion problem)
+- Combination Lock
+- Complex Button
+- Connection Check
+- Coordinates
+- Crazy Talk
+- Creation
+- Crossover
+- Crypto
+- Double Oh
+- English Java8_Conversion
+- Fast Math
+- Filibuster
+- FizzBuzz
+- Flags
+- Follow the Leader
+- Foreign Exchange Rates
+- Friendship
+- Ice Cream
+- LED Encryption
+- Letter Keys
+- Light Cycle
+- Listening
+- Logic Gates
+- Math is Hard
+- MicroController
+- MineSweeper
+- Modules Against Humanity
+- Monsplode Fight
+- Morsematics
+- Mouse in the Maze
+- Murder
+- Mystic Square
+- Number Pad
+- Perspective Pegs
+- Only Connect
+- Orientation
+- Piano Keys
+- Piano Keys (Cruel)
+- Plumbing
+- Point of Order
+- Probing
+- Resistors
+- Rhythms
+- Rock Paper Scissors Lizard Spock
+- Rubik's Cube
+- Safety Safe
+- Seashells
+- Semaphore
+- Silly Slots
+- Skewed Slots
+- Square Button
+- Switches
+- Symbolic Password
+- Text Field
+- The Clock
+- The Gamepad
+- The Screw
+- Third Base
+- Tic-Tac-Toe
+- Turn the Keys
+- Web Design
+- Wire Placement
+- Word Scramble
+- Word Search
+- Yahtzee
+- Zoo
+
+81/100 + Colored Switches

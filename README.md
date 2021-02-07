@@ -7,3 +7,7 @@ This is the Gradle implementation of the [Centurion Manual project](https://gith
 - Java FX
 - Gradle
 - Circle CI
+
+### Status
+Currently, in progress\
+See the running list of modules [here](Progress.md)
