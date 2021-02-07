@@ -28,6 +28,7 @@ public class ShapeShift extends Widget {
                     .get(booleanIntConversion(conditionMap(left, right)));
             return solve(pair.getKey(), pair.getValue());
         }
+        zeroOutArray();
         return new ShiftShape[]{left, right};
     }
 
