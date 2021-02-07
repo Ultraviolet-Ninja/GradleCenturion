@@ -16,13 +16,13 @@ public class ShapeShift extends Widget {
 
     static {
         zeroOutArray();
-//        initializeGraph();
+        initializeGraph();
     }
 
     public static ShiftShape[] solve(ShiftShape left, ShiftShape right){
         serialCodeChecker();
         increment(left, right);
-        if (checkIfTwo(left, right)) {
+        if (checkIfVisitedTwice(left, right)) {
             AbstractMap.SimpleEntry<ShiftShape, ShiftShape> pair = graph.get(
                     new AbstractMap.SimpleEntry<>(left, right))
                     .get(booleanIntConversion(conditionMap(left, right)));
@@ -47,7 +47,7 @@ public class ShapeShift extends Widget {
 
     private static void initializeGraph(){
         graph = new ListGraph<>(false);
-//        initializePairs();
+        initializeTriples();
     }
 
     private static ArrayList<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> createList(){
@@ -59,7 +59,28 @@ public class ShapeShift extends Widget {
         return list;
     }
 
-    private static void initializePairs(AbstractMap.SimpleEntry<ShiftShape, ShiftShape>[] trios){
+    private static void initializeTriples(){
+        ArrayList<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> list = createList();
+        initializePairs(list.get(0), list.get(8), list.get(15));
+        initializePairs(list.get(1), list.get(10), list.get(15));
+        initializePairs(list.get(2), list.get(3), list.get(0));
+        initializePairs(list.get(3), list.get(11), list.get(14));
+        initializePairs(list.get(4), list.get(2), list.get(9));
+        initializePairs(list.get(5), list.get(10), list.get(7));
+        initializePairs(list.get(6), list.get(3), list.get(12));
+        initializePairs(list.get(7), list.get(0), list.get(1));
+        initializePairs(list.get(8), list.get(13), list.get(1));
+        initializePairs(list.get(9), list.get(6), list.get(13));
+        initializePairs(list.get(10), list.get(4), list.get(6));
+        initializePairs(list.get(11), list.get(5), list.get(12));
+        initializePairs(list.get(12), list.get(2), list.get(9));
+        initializePairs(list.get(13), list.get(4), list.get(7));
+        initializePairs(list.get(14), list.get(5), list.get(8));
+        initializePairs(list.get(15), list.get(11), list.get(14));
+    }
+
+    @SafeVarargs
+    private static void initializePairs(AbstractMap.SimpleEntry<ShiftShape, ShiftShape>... trios){
         graph.addEdge(trios[0], trios[1]);
         graph.addEdge(trios[0], trios[2]);
     }
@@ -68,17 +89,17 @@ public class ShapeShift extends Widget {
         countTracker[left.getIdx()][right.getIdx()] += 1;
     }
 
-    private static boolean checkIfTwo(ShiftShape left, ShiftShape right){
-        return countTracker[left.getIdx()][right.getIdx()] > 1;
+    private static boolean checkIfVisitedTwice(ShiftShape left, ShiftShape right){
+        return countTracker[left.getIdx()][right.getIdx()] < 2;
     }
 
     private static boolean conditionMap(ShiftShape left, ShiftShape right){
         switch (left){
-            case ROUNDED:
+            case ROUND:
                 return roundedOptions(right);
-            case RECTANGULAR:
+            case FLAT:
                 return rectangularOptions(right);
-            case TRIANGULAR:
+            case POINT:
                 return triangularOptions(right);
             default:
                 return ticketOptions(right);
@@ -87,11 +108,11 @@ public class ShapeShift extends Widget {
 
     private static boolean roundedOptions(ShiftShape right){
         switch (right){
-            case ROUNDED:
+            case ROUND:
                 return hasVowel();
-            case RECTANGULAR:
+            case FLAT:
                 return hasLitIndicator(Indicators.SND);
-            case TRIANGULAR:
+            case POINT:
                 return hasLitIndicator(Indicators.SIG);
             default:
                 return numDoubleAs > 1;
@@ -100,11 +121,11 @@ public class ShapeShift extends Widget {
 
     private static boolean rectangularOptions(ShiftShape right){
         switch (right){
-            case ROUNDED:
+            case ROUND:
                 return hasMoreThan(Ports.DVI, 0);
-            case RECTANGULAR:
+            case FLAT:
                 return lastDigit() % 2 == 1;
-            case TRIANGULAR:
+            case POINT:
                 return hasLitIndicator(Indicators.MSA);
             default:
                 return hasUnlitIndicator(Indicators.BOB);
@@ -113,11 +134,11 @@ public class ShapeShift extends Widget {
 
     private static boolean triangularOptions(ShiftShape right){
         switch (right){
-            case ROUNDED:
+            case ROUND:
                 return hasMoreThan(Ports.PARALLEL, 0);
-            case RECTANGULAR:
+            case FLAT:
                 return hasUnlitIndicator(Indicators.CAR);
-            case TRIANGULAR:
+            case POINT:
                 return hasLitIndicator(Indicators.IND);
             default:
                 return hasMoreThan(Ports.RJ45, 0);
@@ -126,11 +147,11 @@ public class ShapeShift extends Widget {
 
     private static boolean ticketOptions(ShiftShape right){
         switch (right){
-            case ROUNDED:
+            case ROUND:
                 return hasMoreThan(Ports.RCA, 0);
-            case RECTANGULAR:
+            case FLAT:
                 return hasUnlitIndicator(Indicators.FRQ);
-            case TRIANGULAR:
+            case POINT:
                 return hasMoreThan(Ports.PS2, 0);
             default:
                 return getAllBatteries() >= 3;
