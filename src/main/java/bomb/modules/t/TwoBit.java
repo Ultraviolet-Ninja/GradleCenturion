@@ -33,11 +33,11 @@ public class TwoBit extends Widget {
     public static String initialCode() throws IllegalArgumentException{
         //TODO - Break down
         if (!serialCode.isEmpty()) {
-            String first = ultimateFilter(serialCode, lowercaseRegex);
+            String first = ultimateFilter(serialCode, LOWERCASE_REGEX);
             int num = !first.isEmpty() ?
                     first.charAt(0) - 96 :
                     0;
-            String numbers = ultimateFilter(serialCode, numberRegex);
+            String numbers = ultimateFilter(serialCode, NUMBER_REGEX);
             num += getAllBatteries() * Integer.parseInt(numbers.substring(numbers.length()-1));
 
             if (getPort(Ports.RCA) > 0 && getPort(Ports.RJ45) == 0) num *= 2;

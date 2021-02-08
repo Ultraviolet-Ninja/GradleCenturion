@@ -22,8 +22,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static bomb.enumerations.TriState.*;
-import static bomb.tools.Mechanics.normalCharRegex;
-import static bomb.tools.Mechanics.numberRegex;
+import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
+import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class MainController implements Reset {
@@ -309,7 +309,7 @@ public class MainController implements Reset {
     }
 
     private int info(TextField currField, Label currLab){
-        String sample = ultimateFilter(currField.getText(), numberRegex);
+        String sample = ultimateFilter(currField.getText(), NUMBER_REGEX);
         if (!sample.isEmpty()) {
             currLab.setText(sample + addNoun(currLab));
             return Integer.parseInt(sample);
@@ -335,8 +335,8 @@ public class MainController implements Reset {
 
     @FXML
     private void serialCode(){
-        Widget.setSerialCode(ultimateFilter(serialField.getText(), normalCharRegex));
-        if (ultimateFilter(serialField.getText(), normalCharRegex).length() == 6)
+        Widget.setSerialCode(ultimateFilter(serialField.getText(), NORMAL_CHAR_REGEX));
+        if (ultimateFilter(serialField.getText(), NORMAL_CHAR_REGEX).length() == 6)
             serialField.setDisable(true);
     }
 

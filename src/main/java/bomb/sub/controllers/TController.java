@@ -15,7 +15,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.shape.Rectangle;
 
 import static bomb.enumerations.Bulb.THE_BULB;
-import static bomb.tools.Mechanics.numberRegex;
+import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class TController implements Reset {
@@ -171,7 +171,7 @@ public class TController implements Reset {
     @FXML
     private void nextCode(){
         try {
-            cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), numberRegex)));
+            cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), NUMBER_REGEX)));
             numberCode.setText("");
         } catch (IllegalArgumentException illegal){
             Alert alert = new Alert(Alert.AlertType.ERROR);

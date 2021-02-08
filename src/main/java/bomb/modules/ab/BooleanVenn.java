@@ -2,6 +2,7 @@ package bomb.modules.ab;
 
 import bomb.Widget;
 
+import static bomb.tools.Mechanics.LOGIC_SYMBOL_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 /**
@@ -10,7 +11,7 @@ import static bomb.tools.Mechanics.ultimateFilter;
  * to determine the state of each section of the triple venn diagram, green being true and red for false.
  */
 public class BooleanVenn extends Widget {
-    private static final boolean[][] testCases = {
+    private static final boolean[][] TEST_CASES = {
             {false, false, false},
             {false, false, true},
             {false, true, false},
@@ -28,16 +29,45 @@ public class BooleanVenn extends Widget {
      *
      * @param operation The operation that the defuser sees on the bomb
      * @return A String code that represents the state of each Venn Diagram section
+     *          The output order is not, c, b, a, bc, ac, ab, all
      */
-    public static String resultCode(String operation){
-        return (operation.charAt(0) != 'A')?abPriority(operation):bcPriority(operation);
+    public static String resultCode(String operation) throws IllegalArgumentException{
+        if (operation.isEmpty()) throw new IllegalArgumentException("Cannot have empty String");
+        checkEquation(operation);
+        return (operation.charAt(0) != 'A') ?
+                abPriority(operation) :
+                bcPriority(operation);
+    }
+
+    private static void checkEquation(String equation){
+        String errorMessage = "Component missing from equation: ";
+        if (ultimateFilter(equation, "a", "b", "c").length() != 3)
+            throw new IllegalArgumentException(errorMessage + "ABC");
+        else if (ultimateFilter(equation, "(", ")").length() != 2)
+            throw new IllegalArgumentException(errorMessage + "()");
+        else if (ultimateFilter(equation, LOGIC_SYMBOL_REGEX).length() != 2)
+            throw new IllegalArgumentException(errorMessage + "Logic Symbol");
+        else if (!checkFormat(equation))
+            throw new IllegalArgumentException("Incorrect Format");
+    }
+
+    private static boolean checkFormat(String equation){
+        for (String firstLetter : LOGIC_SYMBOL_REGEX){
+            for (String secondLetter : LOGIC_SYMBOL_REGEX){
+                String priorityAB = "(A" + firstLetter + "B)" + secondLetter + "C";
+                String priorityBC = "A" + firstLetter + "(B" + secondLetter + "C)";
+                if (equation.equals(priorityAB) || equation.equals(priorityBC))
+                    return true;
+            }
+        }
+        return false;
     }
 
     /**
      * Performs the operation between A and B first, then adds the operation for C
      *
      * @param op The operation that the defuser sees on the bomb
-     * @return A String code that represents the state of each Venn Diagram section
+     * @return A String code that represents the state of each Venn Diagram section.
      */
     private static String abPriority(String op){
         String[] parts = op.split("\\)");
@@ -46,8 +76,8 @@ public class BooleanVenn extends Widget {
         int[] functions = new int[]{detect(parts[0]), detect(parts[1])};
         boolean[] priorityCases = priorityOutputs(functions[0], A+B);
 
-        for (int i = 0; i < testCases.length; i++)
-            builder.append(outsideOutputs(functions[1], priorityCases[i], testCases[i][C]));
+        for (int i = 0; i < TEST_CASES.length; i++)
+            builder.append(outsideOutputs(functions[1], priorityCases[i], TEST_CASES[i][C]));
         return builder.toString();
     }
 
@@ -64,8 +94,8 @@ public class BooleanVenn extends Widget {
         int[] functions = new int[]{detect(parts[1]), detect(parts[0])};
         boolean[] priorityCases = priorityOutputs(functions[0], B+C);
 
-        for (int i = 0; i < testCases.length; i++)
-            builder.append(outsideOutputs(functions[1], testCases[i][A], priorityCases[i]));
+        for (int i = 0; i < TEST_CASES.length; i++)
+            builder.append(outsideOutputs(functions[1], TEST_CASES[i][A], priorityCases[i]));
         return builder.toString();
     }
 
@@ -79,7 +109,7 @@ public class BooleanVenn extends Widget {
         part = ultimateFilter(part, "∧", "∨", "↓", "⊻", "←", "→", "↔", "|");
 
         switch (part){
-            case "∧":return 0; // And
+            case "∧": return 0; // And
             case "∨": return 1; // Or
             case "↓": return 2; // Nor
             case "⊻": return 3; // Xor
@@ -101,11 +131,11 @@ public class BooleanVenn extends Widget {
     private static boolean[] priorityOutputs(int func, int priorityNum) {
         boolean[] out = new boolean[8];
         if (priorityNum == 1){
-            for (int i = 0; i < testCases.length; i++)
-                out[i] = functionMap(func, testCases[i][A], testCases[i][B]);
+            for (int i = 0; i < TEST_CASES.length; i++)
+                out[i] = functionMap(func, TEST_CASES[i][A], TEST_CASES[i][B]);
         } else {
-            for (int i = 0; i < testCases.length; i++)
-                out[i] = functionMap(func, testCases[i][B], testCases[i][C]);
+            for (int i = 0; i < TEST_CASES.length; i++)
+                out[i] = functionMap(func, TEST_CASES[i][B], TEST_CASES[i][C]);
         }
         return out;
     }

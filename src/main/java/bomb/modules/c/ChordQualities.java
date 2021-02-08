@@ -5,7 +5,7 @@ import bomb.enumerations.Qualities;
 import bomb.enumerations.Roots;
 import bomb.Widget;
 
-import static bomb.tools.Mechanics.numberRegex;
+import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 //TODO - Probably rename some variables and make the Javadocs
 
@@ -72,7 +72,7 @@ public class ChordQualities extends Widget {
             }
         }
 
-        if (ultimateFilter(output.toString(), numberRegex).length() != 4)
+        if (ultimateFilter(output.toString(), NUMBER_REGEX).length() != 4)
             throw new IllegalArgumentException("There shouldn't be any duplicate notes");
         return output.toString();
     }

@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
-import static bomb.tools.Mechanics.numberRegex;
+import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class NPController{
@@ -70,7 +70,7 @@ public class NPController{
 
     @FXML
     private void volume() {
-        String sample = ultimateFilter(acidVolume.getText(), numberRegex);
+        String sample = ultimateFilter(acidVolume.getText(), NUMBER_REGEX);
         if (!sample.isEmpty()) {
             volume = Double.parseDouble(sample);
             testTube.setProgress(volume / 20);

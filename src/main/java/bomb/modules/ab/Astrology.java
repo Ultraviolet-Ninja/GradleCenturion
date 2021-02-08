@@ -3,7 +3,7 @@ package bomb.modules.ab;
 import bomb.Widget;
 import bomb.enumerations.AstroSymbols;
 
-import static bomb.tools.Mechanics.lowercaseRegex;
+import static bomb.tools.Mechanics.LOWERCASE_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 /**
@@ -70,7 +70,7 @@ public class Astrology extends Widget {
             throws IllegalArgumentException{
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is required");
 
-        String letters = ultimateFilter(serialCode, lowercaseRegex);
+        String letters = ultimateFilter(serialCode, LOWERCASE_REGEX);
         for (AstroSymbols symbol : symbols){
             if (ultimateFilter(symbol.name(), letters).isEmpty()) initialVal--;
             else initialVal++;

@@ -55,7 +55,7 @@ public class Widget {
      * @param serialCode The given code
      */
     public static void setSerialCode(String serialCode) {
-        Widget.serialCode = ultimateFilter(serialCode, normalCharRegex);
+        Widget.serialCode = ultimateFilter(serialCode, NORMAL_CHAR_REGEX);
         updates();
     }
 
@@ -193,7 +193,7 @@ public class Widget {
     public static int hasEven(){
         //TODO - Might need to rename, hasEven sends the wrong message,
         // probably by adding even and odd number regexes
-        String sample = ultimateFilter(serialCode, numberRegex);
+        String sample = ultimateFilter(serialCode, NUMBER_REGEX);
         if (!sample.isEmpty()){
             for (char num : sample.toCharArray())
                 if ((int) num % 2 == 0) return 0;
@@ -208,7 +208,7 @@ public class Widget {
      * @return An int of the last digit from a String
      */
     public static int lastDigit(){
-        String buffer = ultimateFilter(serialCode, numberRegex);
+        String buffer = ultimateFilter(serialCode, NUMBER_REGEX);
         return Integer.parseInt(buffer.substring(buffer.length()-1));
     }
 
@@ -261,7 +261,7 @@ public class Widget {
      * @return True if A,E,I,O, or U appear
      */
     public static boolean hasVowel(){
-        return !ultimateFilter(serialCode, vowelRegex).isEmpty();
+        return !ultimateFilter(serialCode, VOWEL_REGEX).isEmpty();
     }
 
     /**
@@ -270,7 +270,7 @@ public class Widget {
      * @return The number of letters
      */
     public static int serialCodeLetters(){
-        return ultimateFilter(serialCode, lowercaseRegex).length();
+        return ultimateFilter(serialCode, LOWERCASE_REGEX).length();
     }
 
     /**
@@ -279,7 +279,7 @@ public class Widget {
      * @return The number of numbers
      */
     public static int serialCodeNumbers(){
-        return ultimateFilter(serialCode, numberRegex).length();
+        return ultimateFilter(serialCode, NUMBER_REGEX).length();
     }
 
     /**

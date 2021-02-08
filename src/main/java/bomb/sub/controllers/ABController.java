@@ -19,7 +19,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import static bomb.tools.Mechanics.lowercaseRegex;
+import static bomb.tools.Mechanics.LOGIC_SYMBOL_REGEX;
+import static bomb.tools.Mechanics.LOWERCASE_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class ABController implements Reset {
@@ -59,7 +60,7 @@ public class ABController implements Reset {
     @FXML
     private void getAlphaField(){
         if (!alphabetOut.getText().isEmpty()){
-            String text = ultimateFilter(alphabetOut.getText(), lowercaseRegex);
+            String text = ultimateFilter(alphabetOut.getText(), LOWERCASE_REGEX);
             if (text.length() == 4){
                 alphabetOut.setText(Alphabet.order(text));
             } else {
@@ -314,8 +315,7 @@ public class ABController implements Reset {
 
     private void setCircles(){
         String press = "rgb(115,208,115)", dontPress = "rgb(255,103,103)";
-        if (ultimateFilter(currentOp.toString(),
-                "∧", "∨", "↓", "⊻", "←", "→", "↔", "|").length() == 2){
+        if (ultimateFilter(currentOp.toString(), LOGIC_SYMBOL_REGEX).length() == 2){
             String code = BooleanVenn.resultCode(currentOp.toString());
             not.setFill(Paint.valueOf(code.charAt(0)=='1'?press:dontPress));
             c.setFill(Paint.valueOf(code.charAt(1)=='1'?press:dontPress));

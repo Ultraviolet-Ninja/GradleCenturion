@@ -5,7 +5,7 @@ import bomb.enumerations.Indicators;
 import bomb.Widget;
 
 import static bomb.enumerations.Clothing.ARTICLE;
-import static bomb.tools.Mechanics.lowercaseRegex;
+import static bomb.tools.Mechanics.LOWERCASE_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 /**
@@ -207,7 +207,7 @@ public class Laundry extends Widget {
      * @return True if a letter from the Serial Code matches a letter in the clothing material
      */
     private static boolean letterMatch(){
-        String letters = ultimateFilter(serialCode, lowercaseRegex);
+        String letters = ultimateFilter(serialCode, LOWERCASE_REGEX);
         for (char instance : letters.toCharArray())
             if (ARTICLE.mat.name().toLowerCase().indexOf(instance) != -1) return true;
         return false;
