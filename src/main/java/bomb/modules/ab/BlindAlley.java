@@ -12,37 +12,64 @@ import static bomb.enumerations.Indicators.*;
  * specific sections of the module based on the indicators, LED's, ports and batteries are on the bomb.
  */
 public class BlindAlley extends Widget {
-    private static final int[][] alleyCat = new int[3][3];
+    private static int[][] alleyCat = new int[3][3];
 
     /**
      * Updates all fields every time an appropriate change is made to the edgework
      */
     public static void alleyUpdate() {
-        //TODO - Break down
-        //Top Left
-        alleyCat[0][0] = (hasUnlitIndicator(BOB) ? 1 : 0) + (hasLitIndicator(CAR) ? 1 : 0) +
-                (hasLitIndicator(IND) ? 1 : 0) + ((getNumHolders() % 2 == 0) ? 1 : 0);
-        //Top Middle
-        alleyCat[0][1] = (hasUnlitIndicator(NSA) ? 1 : 0) + (hasLitIndicator(FRK) ? 1 : 0) +
-                (hasUnlitIndicator(CAR) ? 1 : 0) + (portExists(Ports.RJ45) ? 1 : 0);
-        //Middle Left
-        alleyCat[1][0] = (hasUnlitIndicator(FRQ) ? 1 : 0) + (hasUnlitIndicator(IND) ? 1 : 0) +
-                (hasUnlitIndicator(TRN) ? 1 : 0) + (portExists(Ports.DVI) ? 1 : 0);
-        //True Center
-        alleyCat[1][1] = (hasUnlitIndicator(SIG) ? 1 : 0) + (hasUnlitIndicator(SND) ? 1 : 0) +
-                (hasLitIndicator(NSA) ? 1 : 0) + (getAllBatteries() % 2 == 0 ? 1 : 0);
-        //Middle Right
-        alleyCat[1][2] = (hasLitIndicator(BOB) ? 1 : 0) + (hasLitIndicator(CLR) ? 1 : 0) +
-                (portExists(Ports.PS2) ? 1 : 0) + (portExists(Ports.SERIAL) ? 1 : 0);
-        //Bottom Left
-        alleyCat[2][0] = (hasLitIndicator(FRQ) ? 1 : 0) + (hasLitIndicator(SIG) ? 1 : 0) +
-                (hasLitIndicator(TRN) ? 1 : 0) + (hasEven() == 0 ? 1 : 0);
-        //Bottom Middle
-        alleyCat[2][1] = (hasUnlitIndicator(FRK) ? 1 : 0) + (hasLitIndicator(MSA) ? 1 : 0) +
-                (portExists(Ports.PARALLEL) ? 1 : 0) + (hasVowel() ? 1 : 0);
-        //Bottom Right
-        alleyCat[2][2] = (hasUnlitIndicator(CLR) ? 1 : 0) + (hasUnlitIndicator(MSA) ? 1 : 0) +
-                (hasLitIndicator(SND) ? 1 : 0) + (portExists(Ports.RCA) ? 1 : 0);
+        topLeft();
+        topMid();
+        left();
+        middle();
+        right();
+        bottomLeft();
+        bottomMid();
+        bottomRight();
+    }
+
+    private static void topLeft(){
+        alleyCat[0][0] = convertBool(hasUnlitIndicator(BOB)) + convertBool(hasLitIndicator(CAR)) +
+                convertBool(hasLitIndicator(IND)) + convertBool(getNumHolders() % 2 == 0);
+    }
+
+    private static void topMid(){
+        alleyCat[0][1] = convertBool(hasUnlitIndicator(NSA)) + convertBool(hasLitIndicator(FRK)) +
+                convertBool(hasUnlitIndicator(CAR)) + convertBool(portExists(Ports.RJ45));
+    }
+
+    private static void left(){
+        alleyCat[1][0] = convertBool(hasUnlitIndicator(FRQ)) + convertBool(hasUnlitIndicator(IND)) +
+                convertBool(hasUnlitIndicator(TRN)) + convertBool(portExists(Ports.DVI));
+    }
+
+    private static void middle(){
+        alleyCat[1][1] = convertBool(hasUnlitIndicator(SIG)) + convertBool(hasUnlitIndicator(SND)) +
+                convertBool(hasLitIndicator(NSA)) + convertBool(getAllBatteries() % 2 == 0);
+    }
+
+    private static void right(){
+        alleyCat[1][2] = convertBool(hasLitIndicator(BOB)) + convertBool(hasLitIndicator(CLR)) +
+                convertBool(portExists(Ports.PS2)) + convertBool(portExists(Ports.SERIAL));
+    }
+
+    private static void bottomLeft(){
+        alleyCat[2][0] = convertBool(hasLitIndicator(FRQ)) + convertBool(hasLitIndicator(SIG)) +
+                convertBool(hasLitIndicator(TRN)) + convertBool(hasEven() == 0);
+    }
+
+    private static void bottomMid(){
+        alleyCat[2][1] = convertBool(hasUnlitIndicator(FRK)) + convertBool(hasLitIndicator(MSA)) +
+                convertBool(portExists(Ports.PARALLEL)) + convertBool(hasVowel());
+    }
+
+    private static void bottomRight(){
+        alleyCat[2][2] = convertBool(hasUnlitIndicator(CLR)) + convertBool(hasUnlitIndicator(MSA)) +
+                convertBool(hasLitIndicator(SND)) + convertBool(portExists(Ports.RCA));
+    }
+
+    private static int convertBool(boolean bool){
+        return bool ? 1 : 0;
     }
 
     /**
@@ -52,5 +79,9 @@ public class BlindAlley extends Widget {
      */
     public static int[][] getAlleyCat(){
         return alleyCat;
+    }
+
+    public static void reset(){
+        alleyCat = new int[3][3];
     }
 }

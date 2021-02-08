@@ -191,11 +191,12 @@ public class Widget {
      * @return 0 for Yes, 1 for No, 2 for No Number
      */
     public static int hasEven(){
+        //TODO - Might need to rename, hasEven sends the wrong message,
+        // probably by adding even and odd number regexes
         String sample = ultimateFilter(serialCode, numberRegex);
         if (!sample.isEmpty()){
-            for (char num : sample.toCharArray()){
+            for (char num : sample.toCharArray())
                 if ((int) num % 2 == 0) return 0;
-            }
             return 1;
         }
         return 2;
