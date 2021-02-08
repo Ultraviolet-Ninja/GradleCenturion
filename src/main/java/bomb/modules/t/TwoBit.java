@@ -11,7 +11,8 @@ import static bomb.tools.Mechanics.*;
  *
  */
 public class TwoBit extends Widget {
-    private static final String[][] codes = {
+    public static final String QUERY = "Query: ", SUBMIT = "Submit: ";
+    private static final String[][] CODES = {
             {"kb", "dk", "gv", "tk", "pv", "kp", "bv", "vt", "pz", "dt"},
             {"ee", "zk", "ke", "ck", "zp", "pp", "tp", "tg", "pd", "pt"},
             {"tz", "eb", "ec", "cc", "cz", "zv", "cv", "gc", "bt", "gt"},
@@ -45,9 +46,9 @@ public class TwoBit extends Widget {
 
             int[] bits = translate(String.valueOf(num));
             if (Souvenir.getSet())
-                Souvenir.addRelic("(TwoBit)1st Query", codes[bits[0]][bits[1]]);
-            return codes[bits[0]][bits[1]];
-        } else throw new IllegalArgumentException();
+                Souvenir.addRelic("(TwoBit)1st Query", CODES[bits[0]][bits[1]]);
+            return CODES[bits[0]][bits[1]];
+        } else throw new IllegalArgumentException("Serial Code required");
     }
 
     /**
@@ -58,18 +59,21 @@ public class TwoBit extends Widget {
      * @throws IllegalArgumentException
      */
     public static String nextCode(String code) throws IllegalArgumentException{
-        if (code.length() == 2) {
-            int[] coords = translate(code);
+        String newCode = ultimateFilter(code, NUMBER_REGEX);
+        if (newCode.length() == 2) {
+            int[] coords = translate(newCode);
             if (stage != 4) {
                 if (Souvenir.getSet())
-                    Souvenir.addRelic("(TwoBit)"+ ordinal(stage) + " Query", code + " - " +codes[coords[0]][coords[1]]);
+                    Souvenir.addRelic("(TwoBit)"+ ordinal(stage) + " Query", newCode + " - "
+                            + CODES[coords[0]][coords[1]]);
                 stage++;
-                return "Query: " + codes[coords[0]][coords[1]];
+                return QUERY + CODES[coords[0]][coords[1]];
             } else {
                 stage = 2;
-                return "Submit: " + codes[coords[0]][coords[1]];
+                return SUBMIT + CODES[coords[0]][coords[1]];
             }
-        } else throw new IllegalArgumentException();
+        } else throw new
+                IllegalArgumentException("The provided code is not 2 numbers long: " + code + "(NUMBERS ONLY)");
     }
 
     /**
