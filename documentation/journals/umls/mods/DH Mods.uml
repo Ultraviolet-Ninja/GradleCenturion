@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Bomb.Widget</OriginalElement>
+  <nodes>
+    <node x="159.00000000000003" y="0.0">Bomb.Modules.DH.ForgetMeNot</node>
+    <node x="438.0" y="788.0">Bomb.Objects.Emojis</node>
+    <node x="829.327380952381" y="139.0">Bomb.Tools.Hexalgorithm.Hex</node>
+    <node x="180.00000000000003" y="1579.0">Bomb.Modules.DH.Hexamaze</node>
+    <node x="0.0" y="1579.0">Bomb.Modules.DH.FastMath</node>
+    <node x="651.0" y="742.5">Bomb.Tools.Hexalgorithm.Maze</node>
+    <node x="952.0" y="709.0">Bomb.Tools.Hexalgorithm.HexGrid</node>
+    <node x="911.7619047619048" y="1005.0">Bomb.Tools.Hexalgorithm.HexComparator</node>
+    <node x="949.327380952381" y="0.0">Bomb.Objects.HexTraits</node>
+    <node x="360.0" y="1534.0">Bomb.Modules.DH.EmojiMath</node>
+    <node x="132.00000000000003" y="470.0">Bomb.Widget</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Bomb.Modules.DH.EmojiMath" target="Bomb.Widget">
+      <point x="-54.0" y="-66.5" />
+      <point x="414.0" y="1509.0" />
+      <point x="345.33333333333337" y="1509.0" />
+      <point x="85.33333333333331" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.DH.ForgetMeNot" target="Bomb.Widget">
+      <point x="0.0" y="210.0" />
+      <point x="0.0" y="-507.0" />
+    </edge>
+    <edge source="Bomb.Modules.DH.FastMath" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="80.0" y="1509.0" />
+      <point x="174.6666666666667" y="1509.0" />
+      <point x="-85.33333333333331" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.DH.Hexamaze" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="0.0" y="507.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.48073503260225253" x="665.0" y="833.5" />
+  <SelectedNodes>
+    <node>Bomb.Widget</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
