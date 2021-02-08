@@ -9,8 +9,24 @@ public enum Chemical {
         Hydrobromic_Acid(35, "HBr", "Br", "Bromine"),
         Hydroiodic_Acid(53, "HI", "I", "Iodine");
 
-        public final String formula, symbol, anion;
-        public final int atomicNum;
+        public String getFormula() {
+            return formula;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public String getAnion() {
+            return anion;
+        }
+
+        public int getAtomicNum() {
+            return atomicNum;
+        }
+
+        private final String formula, symbol, anion;
+        private final int atomicNum;
 
         Acid(int atomic, String formula, String symbol, String anion){
             this.formula = formula;
@@ -26,8 +42,24 @@ public enum Chemical {
         Sodium_Hydroxide(11, "NaOH", "Na", "Sodium"),
         Potassium_Hydroxide(19, "KOH", "K", "Potassium");
 
-        public final String formula, symbol, cation;
-        public final int atomicNum;
+        public String getFormula() {
+            return formula;
+        }
+
+        public String getSymbol() {
+            return symbol;
+        }
+
+        public String getCation() {
+            return cation;
+        }
+
+        public int getAtomicNum() {
+            return atomicNum;
+        }
+
+        private final String formula, symbol, cation;
+        private final int atomicNum;
 
         Base(int atomic, String formula, String symbol, String cation){
             this.formula = formula;

@@ -46,7 +46,7 @@ public class NPController{
     private void titrate(){
         //TODO - For GUI Overhaul, TextFields get cyan text with black background
         try {
-            String[] answers = Neutralization.getStats((int) volume, solColor).split("-");
+            String[] answers = Neutralization.titrate((int) volume, solColor).split("-");
             chemName.setText(answers[0]);
             chemForm.setText(answers[1]);
             dropCount.setText(answers[2]);

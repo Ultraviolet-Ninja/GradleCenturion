@@ -19,6 +19,8 @@ import static javafx.scene.paint.Color.YELLOW;
  *
  */
 public class Neutralization extends Widget {
+    public static final String NO_FILTER = "No Filter", FILTER = "Filter";
+
     private static Chemical.Acid currentAcid;
     private static Chemical.Base currentBase;
 
@@ -29,13 +31,13 @@ public class Neutralization extends Widget {
      * @param solColor
      * @return
      */
-    public static String getStats(int acidVol, Color solColor){
+    public static String titrate(int acidVol, Color solColor) throws IllegalArgumentException{
         if (Souvenir.getSet())
             Souvenir.addRelic("(Neutralization)Acid volume", String.valueOf(acidVol));
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Need to set the serial code");
         getAcid(solColor);
         getBase();
-        return currentBase.name().replace('_', ' ') + "-" + currentBase.formula
+        return currentBase.name().replace('_', ' ') + "-" + currentBase.getFormula()
                 + "-" + dropCount(acidVol, acidConcentration(acidVol), baseConcentration())
                 + "-" + solubility();
     }
@@ -44,16 +46,19 @@ public class Neutralization extends Widget {
      *
      *
      * @param color
+     * @throws IllegalArgumentException
      */
-    private static void getAcid(Color color){
+    private static void getAcid(Color color) throws IllegalArgumentException{
         if (color == RED)
             currentAcid = Chemical.Acid.Hydrobromic_Acid;
         else if (color == BLUE)
             currentAcid = Chemical.Acid.Hydroiodic_Acid;
         else if (color == Color.YELLOW)
             currentAcid = Chemical.Acid.Hydrofluoric_Acid;
-        else
+        else if (color == Color.GREEN)
             currentAcid = Chemical.Acid.Hydrochoric_Acid;
+        else
+            throw new IllegalArgumentException("Incorrect Color was inserted");
         if (Souvenir.getSet())
             Souvenir.addRelic("(Neutralization)Acid color", getColorName(color));
     }
@@ -72,7 +77,7 @@ public class Neutralization extends Widget {
             currentBase = Chemical.Base.Potassium_Hydroxide;
         else if (numDBatteries > numDoubleAs)
             currentBase = Chemical.Base.Ammonia;
-        else if (currentAcid.atomicNum < 20)
+        else if (currentAcid.getAtomicNum() < 20)
             currentBase = Chemical.Base.Sodium_Hydroxide;
         else
             currentBase = Chemical.Base.Lithium_Hydroxide;
@@ -87,7 +92,7 @@ public class Neutralization extends Widget {
         for (Indicators ind : list){
             if (ind.getProp() != UNKNOWN){
                 for (char letter : ind.name().toCharArray()){
-                    if (charMatch(currentAcid.formula.toUpperCase(), letter)){
+                    if (charMatch(currentAcid.getFormula().toUpperCase(), letter)){
                         return true;
                     }
                 }
@@ -103,14 +108,14 @@ public class Neutralization extends Widget {
      * @return
      */
     private static double acidConcentration(int acidVol){
-        double concentrate = currentAcid.atomicNum - currentBase.atomicNum;
+        double concentrate = currentAcid.getAtomicNum() - currentBase.getAtomicNum();
 
-        if (!ultimateFilter(currentAcid.symbol, VOWEL_REGEX).isEmpty() ||
-                !ultimateFilter(currentBase.symbol, VOWEL_REGEX).isEmpty())
+        if (!ultimateFilter(currentAcid.getSymbol(), VOWEL_REGEX).isEmpty() ||
+                !ultimateFilter(currentBase.getSymbol(), VOWEL_REGEX).isEmpty())
             //Either the cation or the anion contains a vowel
             concentrate -= 4;
 
-        if (currentAcid.symbol.length() == currentBase.symbol.length())
+        if (currentAcid.getSymbol().length() == currentBase.getSymbol().length())
             //Length of characters for the anion is equal to the cation symbol length
             concentrate *=3;
         concentrate = Math.abs(concentrate)%10;
@@ -156,9 +161,9 @@ public class Neutralization extends Widget {
      * @return
      */
     private static int closestNum(){
-        int holderDistance = Math.abs(currentBase.atomicNum - 5),
-                portDistance = Math.abs(currentBase.atomicNum - 10),
-                indDistance = Math.abs(currentBase.atomicNum - 20);
+        int holderDistance = Math.abs(currentBase.getAtomicNum() - 5),
+                portDistance = Math.abs(currentBase.getAtomicNum() - 10),
+                indDistance = Math.abs(currentBase.getAtomicNum() - 20);
 
         if (holderDistance < portDistance && holderDistance < indDistance)
             return 5;
@@ -185,7 +190,9 @@ public class Neutralization extends Widget {
      * @return
      */
     private static String solubility(){
-        return combinations()?"No Filter":"Filter";
+        return combinations() ?
+                NO_FILTER :
+                FILTER;
     }
 
     /**

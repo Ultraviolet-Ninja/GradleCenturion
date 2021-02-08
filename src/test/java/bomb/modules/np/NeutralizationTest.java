@@ -1,4 +1,71 @@
 package bomb.modules.np;
 
+import bomb.Widget;
+import bomb.enumerations.Indicators;
+import bomb.enumerations.Ports;
+import bomb.enumerations.TriState;
+import javafx.scene.paint.Color;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static bomb.enumerations.Chemical.Base.Ammonia;
+import static bomb.enumerations.Chemical.Base.Lithium_Hydroxide;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class NeutralizationTest {
+    @BeforeEach
+    void resetProperties(){
+        Widget.resetProperties();
+    }
+
+    @Test
+    void exceptionTest(){
+        assertThrows(IllegalArgumentException.class, () -> Neutralization.titrate(0, Color.RED));
+        setupOne();
+        assertDoesNotThrow(() -> Neutralization.titrate(20, Color.RED));
+        assertThrows(IllegalArgumentException.class, () -> Neutralization.titrate(0, Color.CYAN));
+    }
+
+    @Test
+    void videoTestOne(){ //Order: Base Name, Base Formula, Drop Count, Filter or No Filter
+        setupOne();
+        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", Neutralization.FILTER});
+    }
+
+    private void setupOne(){
+        Widget.setPlates(1);Widget.setIndicator(TriState.ON, Indicators.NSA);
+        Widget.addPort(Ports.PARALLEL);
+        Widget.addPort(Ports.PARALLEL);
+        Widget.addPort(Ports.SERIAL);
+        Widget.addPort(Ports.PS2);
+        Widget.addPort(Ports.RJ45);
+        Widget.setDBatteries(1);
+        Widget.setNumHolders(1);
+        Widget.setSerialCode("2u3mr1");
+    }
+
+    @Test
+    void videoTestTwo(){
+        setupTwo();
+        assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
+                "48", Neutralization.NO_FILTER});
+    }
+
+    private void setupTwo(){
+        Widget.setPlates(3);
+        Widget.addPort(Ports.PARALLEL);
+        Widget.addPort(Ports.PARALLEL);
+        Widget.addPort(Ports.SERIAL);
+        Widget.setSerialCode("ew7qw5");
+        Widget.setIndicator(TriState.ON, Indicators.MSA);
+        Widget.setIndicator(TriState.ON, Indicators.NSA);
+    }
+
+    private void assertEqual(int volume, Color color, String[] expected){
+        String[] actual = Neutralization.titrate(volume, color).split("-");
+        for (int i = 0; i < expected.length; i++)
+            assertEquals(actual[i], expected[i]);
+    }
 }

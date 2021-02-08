@@ -102,4 +102,6 @@ public class TwoBit extends Widget {
     private static String ordinal(int num){
         return (num == 2)?"2nd":"3rd";
     }
+
+    public static void resetStage(){stage = 2;}
 }

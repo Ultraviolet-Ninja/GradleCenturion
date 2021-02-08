@@ -15,6 +15,7 @@ public class TwoBitTest {
     @BeforeEach
     void resetProperties(){
         Widget.resetProperties();
+        TwoBit.resetStage();
     }
 
     @Test
