@@ -41,5 +41,13 @@ jobs:
 
       # run tests!
       - run: ./gradlew test
+      - run:
+          name: Save Test Results
+          command: |
+            mkdir -p ~/documentation/junit/artifacts
+            find . -type f -regex ".*/build/documentation/junit/.*xml" -exec cp {} ~/test-results/junit/artifacts/ \;
+          when: always
       - store_test_results:
-          path: ~/documentation/test_results
+          path: ~/documentation/junit
+      - store_artifacts:
+          path: ~/documentation/junit/artifacts
