@@ -11,10 +11,13 @@ import static bomb.enumerations.AstroSymbols.MARS;
 import static bomb.enumerations.AstroSymbols.MERCURY;
 import static bomb.enumerations.AstroSymbols.SAGITTARIUS;
 import static bomb.enumerations.AstroSymbols.TAURUS;
+import static bomb.enumerations.AstroSymbols.VENUS;
 import static bomb.enumerations.AstroSymbols.WATER;
 import static bomb.modules.ab.Astrology.GOOD_OMEN;
 import static bomb.modules.ab.Astrology.POOR_OMEN;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AstrologyTest {
     @BeforeEach
@@ -23,10 +26,31 @@ public class AstrologyTest {
     }
 
     @Test
+    void exceptionTest(){
+        assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(EARTH, ARIES, MARS));
+        Widget.setSerialCode("412ier");
+        assertDoesNotThrow(() -> Astrology.calculate(EARTH, ARIES, MARS));
+        assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(ARIES, ARIES, ARIES));
+        assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(ARIES, MARS, EARTH, EARTH));
+        assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(VENUS));
+    }
+
+    @Test
     void videoTest(){
         Widget.setSerialCode("jt3gu5");
         assertEquals(POOR_OMEN + 4, Astrology.calculate(EARTH, MARS, ARIES));
         assertEquals(GOOD_OMEN + 2, Astrology.calculate(WATER, MERCURY, TAURUS));
         assertEquals(GOOD_OMEN + 3, Astrology.calculate(FIRE, MERCURY, SAGITTARIUS));
+    }
+
+    @Test
+    void sortTest(){
+        String expected = POOR_OMEN + 4;
+        Widget.setSerialCode("jt3gu5");
+        assertEquals(expected, Astrology.calculate(EARTH, MARS, ARIES));
+        assertEquals(expected, Astrology.calculate(MARS, EARTH, ARIES));
+        assertEquals(expected, Astrology.calculate(MARS, ARIES, EARTH));
+        assertEquals(expected, Astrology.calculate(ARIES, MARS, EARTH));
+        assertEquals(expected, Astrology.calculate(ARIES, EARTH, MARS));
     }
 }
