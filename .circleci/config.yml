@@ -42,6 +42,4 @@ jobs:
       # run tests!
       - run: ./gradlew test
       - store_test_results:
-          path: ~/documentation/junit/jacoco/
-      - store_artifacts:
-          path: ~/documentation/junit/jacoco/
+          path: ~/build/reports/jacoco/test
