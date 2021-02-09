@@ -14,9 +14,9 @@ import static bomb.tools.Mechanics.ultimateFilter;
  */
 public class ChordQualities extends Widget {
     private static final String[]
-            allNotes = new String[]{"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"},
+            ALL_NOTES = new String[]{"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"},
 
-    distances = new String[]{"4,3,3", "3,4,3", "4,3,4", "3,4,4",
+    DISTANCES = new String[]{"4,3,3", "3,4,3", "4,3,4", "3,4,4",
             "3,1,6", "3,3,4", "2,2,3", "2,1,4", "4,4,2", "4,4,3", "5,2,3", "3,5,3"};
 
     /**
@@ -83,8 +83,8 @@ public class ChordQualities extends Widget {
      * @throws IllegalArgumentException
      */
     private static int findFirst(String given) throws IllegalArgumentException {
-        for (int i = 0; i < allNotes.length; i++) {
-            if (given.equals(allNotes[i]))
+        for (int i = 0; i < ALL_NOTES.length; i++) {
+            if (given.equals(ALL_NOTES[i]))
                 return i;
         }
         throw new IllegalArgumentException();
@@ -95,10 +95,10 @@ public class ChordQualities extends Widget {
      * @return
      */
     private static String[] newOrder(int first) {
-        String[] order = new String[allNotes.length];
+        String[] order = new String[ALL_NOTES.length];
         for (int i = 0; i < order.length; i++) {
-            order[i] = allNotes[first++];
-            if (first == allNotes.length)
+            order[i] = ALL_NOTES[first++];
+            if (first == ALL_NOTES.length)
                 first = 0;
         }
         return order;
@@ -131,9 +131,9 @@ public class ChordQualities extends Widget {
      * @throws IllegalArgumentException
      */
     private static int[] originalQuality(String[] combos) throws IllegalArgumentException {
-        for (int idx = 0; idx < distances.length; idx++) {
+        for (int idx = 0; idx < DISTANCES.length; idx++) {
             for (int jdx = 0; jdx < combos.length; jdx++)
-                if (combos[jdx].startsWith(distances[idx]))
+                if (combos[jdx].startsWith(DISTANCES[idx]))
                     return new int[]{idx, jdx};
         }
         throw new IllegalArgumentException("This shouldn't occur in originalQuality()");

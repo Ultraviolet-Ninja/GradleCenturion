@@ -1,14 +1,21 @@
 package bomb;
 
 import bomb.enumerations.Ports;
-import bomb.enumerations.ShiftShape;
-import bomb.modules.s.ShapeShift;
+import bomb.modules.il.Laundry;
 
-import static bomb.enumerations.ShiftShape.POINT;
-import static bomb.enumerations.ShiftShape.ROUND;
-import static bomb.enumerations.ShiftShape.FLAT;
+import java.util.Arrays;
 
 public class TestingArea {
     public static void main(String[] args) {
+//        Widget.setDBatteries(1);
+//        Widget.setDoubleAs(2);
+//        Widget.addPort(Ports.SERIAL);
+//        Widget.setNumHolders(2);
+//        Widget.setSerialCode("g64dv1");
+//        Widget.setNumModules(11);
+//        System.out.println(Arrays.toString(Laundry.clean("0", "0")));
+        //TODO - The result is wrong
+
+
     }
 }

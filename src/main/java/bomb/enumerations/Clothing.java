@@ -6,9 +6,33 @@ import bomb.interfaces.Listed;
 public enum Clothing {
     ARTICLE;
 
-    public Material mat;
-    public Item item;
-    public Color color;
+    private Material mat;
+    private Item item;
+    private Color color;
+
+    public Material getMat() {
+        return mat;
+    }
+
+    public void setMat(Material mat) {
+        this.mat = mat;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
 
     public enum Item implements Listed {
         CORSET("300°F", "Bleach"), SHIRT("No Steam", "No Tetrachlorethylene"),
