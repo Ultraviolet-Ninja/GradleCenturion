@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MazeRunner.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.hexalgorithm</a> &gt; <span class="el_source">MazeRunner.java</span></div><h1>MazeRunner.java</h1><pre class="source lang-java linenums">package bomb.tools.hexalgorithm;
+
+import bomb.enumerations.HexTraits;
+import bomb.tools.Coordinates;
+import bomb.tools.data.structures.FixedArrayQueue;
+import bomb.tools.data.structures.MapStack;
+import javafx.scene.paint.Color;
+
+import java.util.LinkedList;
+
+/**
+ *
+ */
+public class MazeRunner {
+    private static Color currentPegColor;
+    private static Coordinates currentLocation;
+    private static MapStack&lt;Coordinates, Integer&gt; historyStack;
+
+<span class="nc" id="L19">    private static final Coordinates MOVE_NORTH_WEST = new Coordinates(-1, -1),</span>
+<span class="nc" id="L20">            MOVE_NORTH = new Coordinates(0, -1), MOVE_NORTH_EAST = new Coordinates(1, 0),</span>
+<span class="nc" id="L21">            MOVE_SOUTH_EAST = new Coordinates(1, 1), MOVE_SOUTH = new Coordinates(0, 1),</span>
+<span class="nc" id="L22">            MOVE_SOUTH_WEST = new Coordinates(-1, 0);</span>
+
+    /**
+     * Don't let anyone instantiate this class
+     */
+    private MazeRunner(){}
+
+    public static void getPegInformation(Color pegColor, int location){
+<span class="nc" id="L30">        currentPegColor = pegColor;</span>
+<span class="nc" id="L31">        startingPointCalculator(location);</span>
+<span class="nc" id="L32">    }</span>
+
+    private static void startingPointCalculator(int location){
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (location &lt; 4)</span>
+<span class="nc" id="L36">            currentLocation = new Coordinates(0, location);</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        else if (location &lt; 9)</span>
+<span class="nc" id="L38">            currentLocation = new Coordinates(1, location - 4);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        else if (location &lt; 15)</span>
+<span class="nc" id="L40">            currentLocation = new Coordinates(2, location - 9);</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">        else if (location &lt; 22)</span>
+<span class="nc" id="L42">            currentLocation = new Coordinates(3, location - 15);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        else if (location &lt; 28)</span>
+<span class="nc" id="L44">            currentLocation = new Coordinates(4, location - 22);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        else if (location &lt; 33)</span>
+<span class="nc" id="L46">            currentLocation = new Coordinates(5, location - 28);</span>
+        else
+<span class="nc" id="L48">            currentLocation = new Coordinates(6, location - 33);</span>
+<span class="nc" id="L49">    }</span>
+
+    public static LinkedList&lt;Coordinates&gt; runMaze(HexGrid grid){
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (currentPegColor == null) return null;</span>
+<span class="nc" id="L53">        int sideToExit = grid.getRing().findIndex(currentPegColor);</span>
+<span class="nc" id="L54">        HexGrid gatedGridCopy = gateOff(new HexGrid(grid), sideToExit);</span>
+<span class="nc" id="L55">        historyStack = new MapStack&lt;&gt;();</span>
+<span class="nc" id="L56">        return decidePath(gatedGridCopy, sideToExit);</span>
+    }
+
+    private static HexGrid gateOff(HexGrid copiedGrid, int sideToExit){
+<span class="nc" id="L60">        HexTraits.HexWall[] allWalls = HexTraits.HexWall.values();</span>
+<span class="nc" id="L61">        FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction = copiedGrid.exportTo2DQueue();</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (sideToExit != 0)</span>
+<span class="nc" id="L63">            gateOffTopLeftSide(extraction, allWalls, sideToExit);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (sideToExit != 1)</span>
+<span class="nc" id="L65">            gateOffTopRightSide(extraction, allWalls, sideToExit);</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (sideToExit != 2)</span>
+<span class="nc" id="L67">            gateOffRightSide(extraction, allWalls, sideToExit);</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (sideToExit != 3)</span>
+<span class="nc" id="L69">            gateOffBottomRightSide(extraction, allWalls, sideToExit);</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (sideToExit != 4)</span>
+<span class="nc" id="L71">            gateOffBottomLeftSide(extraction, allWalls, sideToExit);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        if (sideToExit != 5)</span>
+<span class="nc" id="L73">            gateOffLeftSide(extraction, allWalls, sideToExit);</span>
+<span class="nc" id="L74">        return copiedGrid;</span>
+    }
+
+    private static void gateOffTopLeftSide(FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction,
+                                           HexTraits.HexWall[] allWalls, int sideToExit){
+        /* (0,0) (1,0) (2,0) (3,0)
+         * Walls 0 and 1
+         */
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (int i = 0; i &lt;= extraction.cap() / 2; i++) {</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">            if (i != 0 || sideToExit != 5)</span>
+<span class="nc" id="L84">                extraction.get(i).get(0).addWalls(allWalls[0]);</span>
+<span class="nc bnc" id="L85" title="All 4 branches missed.">            if (i != extraction.cap() - 1 || sideToExit != 1)</span>
+<span class="nc" id="L86">                extraction.get(i).get(0).addWalls(allWalls[1]);</span>
+        }
+<span class="nc" id="L88">    }</span>
+
+    private static void gateOffTopRightSide(FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction,
+                                            HexTraits.HexWall[] allWalls, int sideToExit){
+        /* (3,0) (4,0) (5,0) (6,0)
+         * Walls 1 and 2
+         */
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        for (int i = extraction.cap() / 2; i &lt; extraction.cap(); i++) {</span>
+<span class="nc bnc" id="L96" title="All 4 branches missed.">            if (i != extraction.cap() / 2 || sideToExit != 0)</span>
+<span class="nc" id="L97">                extraction.get(i).get(0).addWalls(allWalls[1]);</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">            if (i != extraction.cap() - 1 || sideToExit != 2)</span>
+<span class="nc" id="L99">                extraction.get(i).get(0).addWalls(allWalls[2]);</span>
+        }
+<span class="nc" id="L101">    }</span>
+
+    private static void gateOffRightSide(FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction,
+                                         HexTraits.HexWall[] allWalls, int sideToExit){
+        /* (6,0) (6,1) (6,2) (6,3)
+         * Walls 2 and 5
+         */
+<span class="nc" id="L108">        int lastIndex = extraction.cap() - 1;</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        for (int i = 0; i &lt;= extraction.cap() / 2; i++) {</span>
+<span class="nc bnc" id="L110" title="All 4 branches missed.">            if (i != 0 || sideToExit != 1)</span>
+<span class="nc" id="L111">                extraction.get(lastIndex).get(i).addWalls(allWalls[2]);</span>
+<span class="nc bnc" id="L112" title="All 4 branches missed.">            if (i != extraction.cap() / 2 - 1 || sideToExit != 3)</span>
+<span class="nc" id="L113">                extraction.get(lastIndex).get(i).addWalls(allWalls[5]);</span>
+        }
+<span class="nc" id="L115">    }</span>
+
+    private static void gateOffBottomRightSide(FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction,
+                                               HexTraits.HexWall[] allWalls, int sideToExit){
+        /* (3,6) (4,5) (5,4) (6,3)
+         * Walls 4 and 5
+         */
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        for (int i = extraction.cap() / 2; i &lt; extraction.cap(); i++) {</span>
+<span class="nc" id="L123">            int lastIndex = extraction.get(i).cap() - 1;</span>
+<span class="nc bnc" id="L124" title="All 4 branches missed.">            if (i != extraction.cap() / 2 || sideToExit != 2)</span>
+<span class="nc" id="L125">                extraction.get(i).get(lastIndex).addWalls(allWalls[4]);</span>
+<span class="nc bnc" id="L126" title="All 4 branches missed.">            if (i != extraction.cap() - 1 || sideToExit != 4)</span>
+<span class="nc" id="L127">                extraction.get(i).get(lastIndex).addWalls(allWalls[5]);</span>
+        }
+<span class="nc" id="L129">    }</span>
+
+    private static void gateOffBottomLeftSide(FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction,
+                                              HexTraits.HexWall[] allWalls, int sideToExit){
+        /* (0,3) (1,4) (2,5) (3,6)
+         * Walls 3 and 4
+         */
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        for (int i = 0; i &lt;= extraction.cap() / 2; i++){</span>
+<span class="nc" id="L137">            int lastIndex = extraction.get(i).cap() - 1;</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">            if (i != 0 || sideToExit != 5)</span>
+<span class="nc" id="L139">                extraction.get(i).get(lastIndex).addWalls(allWalls[3]);</span>
+<span class="nc bnc" id="L140" title="All 4 branches missed.">            if (i != extraction.cap() / 2 - 1 || sideToExit != 3)</span>
+<span class="nc" id="L141">                extraction.get(i).get(lastIndex).addWalls(allWalls[4]);</span>
+        }
+<span class="nc" id="L143">    }</span>
+
+    private static void gateOffLeftSide(FixedArrayQueue&lt;FixedArrayQueue&lt;Hex.HexNode&gt;&gt; extraction,
+                                        HexTraits.HexWall[] allWalls, int sideToExit){
+        /* (0,0) (0,1) (0,2) (0,3)
+         * Walls 0 and 3
+         */
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        for (int i = 0; i &lt; extraction.get(0).cap(); i++) {</span>
+<span class="nc bnc" id="L151" title="All 4 branches missed.">            if (i != 0 || sideToExit != 0)</span>
+<span class="nc" id="L152">                extraction.get(0).get(i).addWalls(allWalls[0]);</span>
+<span class="nc bnc" id="L153" title="All 4 branches missed.">            if (i != extraction.get(0).cap() - 1 || sideToExit != 5)</span>
+<span class="nc" id="L154">                extraction.get(0).get(i).addWalls(allWalls[3]);</span>
+        }
+<span class="nc" id="L156">    }</span>
+
+    private static LinkedList&lt;Coordinates&gt; decidePath(HexGrid gatedGrid, final int sideToExit){
+<span class="nc bnc" id="L159" title="All 6 branches missed.">        switch (sideToExit){</span>
+<span class="nc" id="L160">            case 0: return findExit(gatedGrid, &quot;013245&quot;);</span>
+<span class="nc" id="L161">            case 1: return findExit(gatedGrid, &quot;215403&quot;);</span>
+<span class="nc" id="L162">            case 2: return findExit(gatedGrid, &quot;&quot;);</span>
+<span class="nc" id="L163">            case 3: return findExit(gatedGrid, &quot;542310&quot;);</span>
+<span class="nc" id="L164">            case 4: return findExit(gatedGrid, &quot;340512&quot;);</span>
+<span class="nc" id="L165">            default: return findExit(gatedGrid, &quot;&quot;);</span>
+        }
+    }
+
+    /*
+     * Basic Functionality
+     * Checks walls in a specific order
+     * Moves down the first one with an opening
+     * Runs that path until a solution is found or all roads lead to dead ends
+     */
+
+    private static LinkedList&lt;Coordinates&gt; findExit(HexGrid gatedGrid, String wallOrder){
+<span class="nc" id="L177">        Hex.HexNode playerPosition = gatedGrid.retrieveNode(currentLocation);</span>
+<span class="nc" id="L178">        historyStack.push(new Coordinates(currentLocation),</span>
+<span class="nc" id="L179">                playerPosition.checkExits() + 1);</span>
+<span class="nc" id="L180">        return traverseStartingNode(gatedGrid, wallOrder);</span>
+    }
+
+    private static LinkedList&lt;Coordinates&gt; traverseStartingNode
+            (HexGrid gatedGrid, final String wallOrder){
+<span class="nc" id="L185">        Hex.HexNode playerPosition = gatedGrid.retrieveNode(currentLocation);</span>
+<span class="nc" id="L186">        LinkedList&lt;Coordinates&gt; exitOrder = null;</span>
+<span class="nc" id="L187">        String copyOrder = wallOrder;</span>
+        do{
+<span class="nc" id="L189">            boolean traversedPath = false;</span>
+<span class="nc" id="L190">            String directionCheck = copyOrder.substring(0, 1);</span>
+<span class="nc bnc" id="L191" title="All 2 branches missed.">            if (!playerPosition.checkWall(Integer.parseInt(directionCheck))) {</span>
+<span class="nc" id="L192">                documentMovement(gatedGrid, directionCheck);</span>
+<span class="nc" id="L193">                exitOrder = traverse(gatedGrid, wallOrder);</span>
+<span class="nc" id="L194">                traversedPath = true;</span>
+            }
+
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            if(exitOrder != null) copyOrder = &quot;&quot;;</span>
+            else {
+<span class="nc" id="L199">                copyOrder = copyOrder.replace(directionCheck, &quot;&quot;);</span>
+<span class="nc" id="L200">                currentLocation = resetToStartPosition();</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">                if (traversedPath) decrementExits();</span>
+            }
+<span class="nc bnc" id="L203" title="All 2 branches missed.">        } while(!copyOrder.isEmpty());</span>
+<span class="nc" id="L204">        return exitOrder;</span>
+    }
+
+    private static LinkedList&lt;Coordinates&gt; traverse
+            (HexGrid gatedGrid, final String wallOrder){
+<span class="nc" id="L209">        Hex.HexNode playerPosition = gatedGrid.retrieveNode(currentLocation);</span>
+<span class="nc" id="L210">        String copyOrder = wallOrder;</span>
+<span class="nc" id="L211">        LinkedList&lt;Coordinates&gt; exitOrder = null;</span>
+        do {
+<span class="nc" id="L213">            boolean traversedPath = false;</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">            if (historyStack.getTopValue() == 0) {</span>
+<span class="nc" id="L215">                historyStack.pop();</span>
+<span class="nc" id="L216">                return null;</span>
+            }
+
+<span class="nc" id="L219">            String directionCheck = copyOrder.substring(0, 1);</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">            if (!playerPosition.checkWall(Integer.parseInt(directionCheck))) {</span>
+                try {
+<span class="nc" id="L222">                    documentMovement(gatedGrid, directionCheck);</span>
+<span class="nc" id="L223">                } catch (ArrayIndexOutOfBoundsException e){</span>
+//                    historyStack.push(new Coordinates(currentLocation), 0);
+<span class="nc" id="L225">                    return historyStack.exportKeys();</span>
+<span class="nc" id="L226">                }</span>
+<span class="nc" id="L227">                exitOrder = traverse(gatedGrid, wallOrder);</span>
+<span class="nc" id="L228">                traversedPath = true;</span>
+            }
+<span class="nc bnc" id="L230" title="All 2 branches missed.">            if (exitOrder != null) return exitOrder;</span>
+<span class="nc" id="L231">            copyOrder = copyOrder.replace(directionCheck, &quot;&quot;);</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">            if (traversedPath) decrementExits();</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">        } while(copyOrder.length() != 1);</span>
+<span class="nc" id="L234">        return null;</span>
+    }
+
+    private static void documentMovement(HexGrid gatedGrid, String direction){
+<span class="nc" id="L238">        movePosition(direction);</span>
+<span class="nc" id="L239">        addToHistory(gatedGrid);</span>
+<span class="nc" id="L240">    }</span>
+
+    private static void addToHistory(HexGrid gatedGrid){
+<span class="nc" id="L243">        Hex.HexNode currentPosition = gatedGrid.retrieveNode(currentLocation);</span>
+<span class="nc" id="L244">        historyStack.push(new Coordinates(currentLocation),</span>
+<span class="nc" id="L245">                currentPosition.checkExits());</span>
+<span class="nc" id="L246">    }</span>
+
+    private static void movePosition(String direction){
+<span class="nc bnc" id="L249" title="All 6 branches missed.">        switch (direction){</span>
+            case &quot;0&quot;:
+<span class="nc" id="L251">                currentLocation.alterCurrentCoords(MOVE_NORTH_WEST); break;</span>
+            case &quot;1&quot;:
+<span class="nc" id="L253">                currentLocation.alterCurrentCoords(MOVE_NORTH); break;</span>
+            case &quot;2&quot;:
+<span class="nc" id="L255">                currentLocation.alterCurrentCoords(MOVE_NORTH_EAST); break;</span>
+            case &quot;3&quot;:
+<span class="nc" id="L257">                currentLocation.alterCurrentCoords(MOVE_SOUTH_WEST); break;</span>
+            case &quot;4&quot;:
+<span class="nc" id="L259">                currentLocation.alterCurrentCoords(MOVE_SOUTH); break;</span>
+            default:
+<span class="nc" id="L261">                currentLocation.alterCurrentCoords(MOVE_SOUTH_EAST);</span>
+        }
+<span class="nc" id="L263">    }</span>
+
+    private static Coordinates resetToStartPosition(){
+<span class="nc bnc" id="L266" title="All 2 branches missed.">        while (historyStack.size() != 1) historyStack.pop();</span>
+<span class="nc" id="L267">        return new Coordinates(historyStack.getBottomKey());</span>
+    }
+
+    private static void decrementExits(){
+<span class="nc" id="L271">        historyStack.setTopValue(historyStack.getTopValue() - 1);</span>
+<span class="nc" id="L272">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>WhosOnFirstWords.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.enumerations</a> &gt; <span class="el_source">WhosOnFirstWords.java</span></div><h1>WhosOnFirstWords.java</h1><pre class="source lang-java linenums">package bomb.enumerations;
+
+import bomb.interfaces.Labeled;
+import bomb.interfaces.Listed;
+
+<span class="nc" id="L6">public enum WhosOnFirstWords implements Labeled, Listed {</span>
+<span class="nc" id="L7">    READY(&quot;READY&quot;,&quot;YES&quot;, &quot;OKAY&quot;, &quot;WHAT&quot;, &quot;MIDDLE&quot;, &quot;LEFT&quot;, &quot;PRESS&quot;, &quot;RIGHT&quot;, &quot;BLANK&quot;, &quot;READY&quot;),</span>
+<span class="nc" id="L8">    FIRST(&quot;FIRST&quot;,&quot;LEFT&quot;, &quot;OKAY&quot;, &quot;YES&quot;, &quot;MIDDLE&quot;, &quot;NO&quot;, &quot;RIGHT&quot;, &quot;NOTHING&quot;, &quot;UHHH&quot;, &quot;WAIT&quot;, &quot;READY&quot;,</span>
+            &quot;BLANK&quot;, &quot;WHAT&quot;, &quot;PRESS&quot;, &quot;FIRST&quot;),
+<span class="nc" id="L10">    NO(&quot;NO&quot;,&quot;BLANK&quot;, &quot;UHHH&quot;, &quot;WAIT&quot;, &quot;FIRST&quot;, &quot;WHAT&quot;, &quot;READY&quot;, &quot;RIGHT&quot;, &quot;YES&quot;, &quot;NOTHING&quot;, &quot;LEFT&quot;,</span>
+            &quot;PRESS&quot;, &quot;OKAY&quot;, &quot;NO&quot;),
+<span class="nc" id="L12">    BLANK(&quot;BLANK&quot;,&quot;WAIT&quot;, &quot;RIGHT&quot;, &quot;OKAY&quot;, &quot;MIDDLE&quot;, &quot;BLANK&quot;),</span>
+<span class="nc" id="L13">    NOTHING(&quot;NOTHING&quot;,&quot;UHHH&quot;, &quot;RIGHT&quot;, &quot;OKAY&quot;, &quot;MIDDLE&quot;, &quot;YES&quot;, &quot;BLANK&quot;, &quot;NO&quot;, &quot;PRESS&quot;, &quot;LEFT&quot;, &quot;WHAT&quot;,</span>
+            &quot;WAIT&quot;, &quot;FIRST&quot;, &quot;NOTHING&quot;),
+<span class="nc" id="L15">    YES(&quot;YES&quot;,&quot;OKAY&quot;, &quot;RIGHT&quot;, &quot;UHHH&quot;, &quot;MIDDLE&quot;, &quot;FIRST&quot;, &quot;WHAT&quot;, &quot;PRESS&quot;, &quot;READY&quot;, &quot;NOTHING&quot;, &quot;YES&quot;),</span>
+<span class="nc" id="L16">    WHAT(&quot;WHAT&quot;,&quot;UHHH&quot;, &quot;WHAT&quot;),</span>
+<span class="nc" id="L17">    UHHH(&quot;UHHH&quot;,&quot;READY&quot;, &quot;NOTHING&quot;, &quot;LEFT&quot;, &quot;WHAT&quot;, &quot;OKAY&quot;, &quot;YES&quot;, &quot;RIGHT&quot;, &quot;NO&quot;, &quot;PRESS&quot;, &quot;BLANK&quot;, &quot;UHHH&quot;),</span>
+<span class="nc" id="L18">    LEFT(&quot;LEFT&quot;,&quot;RIGHT&quot;, &quot;LEFT&quot;),</span>
+<span class="nc" id="L19">    RIGHT(&quot;RIGHT&quot;,&quot;YES&quot;, &quot;NOTHING&quot;, &quot;READY&quot;, &quot;PRESS&quot;, &quot;NO&quot;, &quot;WAIT&quot;, &quot;WHAT&quot;, &quot;RIGHT&quot;),</span>
+<span class="nc" id="L20">    MIDDLE(&quot;MIDDLE&quot;,&quot;BLANK&quot;, &quot;READY&quot;, &quot;OKAY&quot;, &quot;WHAT&quot;, &quot;NOTHING&quot;, &quot;PRESS&quot;, &quot;NO&quot;, &quot;WAIT&quot;, &quot;LEFT&quot;, &quot;MIDDLE&quot;),</span>
+<span class="nc" id="L21">    OKAY(&quot;OKAY&quot;,&quot;MIDDLE&quot;, &quot;NO&quot;, &quot;FIRST&quot;, &quot;YES&quot;, &quot;UHHH&quot;, &quot;NOTHING&quot;, &quot;WAIT&quot;, &quot;OKAY&quot;),</span>
+<span class="nc" id="L22">    WAIT(&quot;WAIT&quot;,&quot;UHHH&quot;, &quot;NO&quot;, &quot;BLANK&quot;, &quot;OKAY&quot;, &quot;YES&quot;, &quot;LEFT&quot;, &quot;FIRST&quot;, &quot;PRESS&quot;, &quot;WHAT&quot;, &quot;WAIT&quot;),</span>
+<span class="nc" id="L23">    PRESS(&quot;PRESS&quot;,&quot;RIGHT&quot;, &quot;MIDDLE&quot;, &quot;YES&quot;, &quot;READY&quot;, &quot;PRESS&quot;),</span>
+<span class="nc" id="L24">    YOU(&quot;YOU&quot;,&quot;SURE&quot;, &quot;YOU ARE&quot;, &quot;YOUR&quot;, &quot;YOU'RE&quot;, &quot;NEXT&quot;, &quot;UH HUH&quot;, &quot;UR&quot;, &quot;HOLD&quot;, &quot;WHAT?&quot;, &quot;YOU&quot;, &quot;UH UH&quot;,</span>
+            &quot;LIKE&quot;, &quot;DONE&quot;, &quot;U&quot;),
+<span class="nc" id="L26">    YOUARE(&quot;YOU ARE&quot;,&quot;YOUR&quot;, &quot;NEXT&quot;, &quot;LIKE&quot;, &quot;UH HUH&quot;, &quot;WHAT?&quot;, &quot;DONE&quot;, &quot;UH UH&quot;, &quot;HOLD&quot;, &quot;YOU&quot;, &quot;U&quot;, &quot;YOU'RE&quot;,</span>
+            &quot;SURE&quot;, &quot;UR&quot;, &quot;YOU ARE&quot;),
+<span class="nc" id="L28">    YOUR(&quot;YOUR&quot;,&quot;UH UH&quot;, &quot;YOU ARE&quot;, &quot;UH HUH&quot;, &quot;YOUR&quot;),</span>
+<span class="nc" id="L29">    YOURE(&quot;YOU'RE&quot;,&quot;YOU&quot;, &quot;YOU'RE&quot;),</span>
+<span class="nc" id="L30">    UR(&quot;UR&quot;,&quot;DONE&quot;, &quot;U&quot;, &quot;UR&quot;),</span>
+<span class="nc" id="L31">    U(&quot;U&quot;,&quot;UH HUH&quot;, &quot;SURE&quot;, &quot;NEXT&quot;, &quot;WHAT?&quot;, &quot;YOU'RE&quot;, &quot;UR&quot;, &quot;UH UH&quot;, &quot;DONE&quot;, &quot;U&quot;),</span>
+<span class="nc" id="L32">    UHHUH(&quot;UH HUH&quot;,&quot;UH HUH&quot;),</span>
+<span class="nc" id="L33">    UHUH(&quot;UH UH&quot;,&quot;UR&quot;, &quot;U&quot;, &quot;YOU ARE&quot;, &quot;YOU'RE&quot;, &quot;NEXT&quot;, &quot;UH UH&quot;),</span>
+<span class="nc" id="L34">    WHATQ(&quot;WHAT?&quot;,&quot;YOU&quot;, &quot;HOLD&quot;, &quot;YOU'RE&quot;, &quot;YOUR&quot;, &quot;U&quot;, &quot;DONE&quot;, &quot;UH UH&quot;, &quot;LIKE&quot;, &quot;YOU ARE&quot;, &quot;UH HUH&quot;, &quot;UR&quot;,</span>
+            &quot;NEXT&quot;, &quot;WHAT?&quot;),
+<span class="nc" id="L36">    DONE(&quot;DONE&quot;,&quot;SURE&quot;, &quot;UH HUH&quot;, &quot;NEXT&quot;, &quot;WHAT?&quot;, &quot;YOUR&quot;, &quot;UR&quot;, &quot;YOU'RE&quot;, &quot;HOLD&quot;, &quot;LIKE&quot;, &quot;YOU&quot;, &quot;U&quot;,</span>
+            &quot;YOU ARE&quot;,&quot; UH UH&quot;, &quot;DONE&quot;),
+<span class="nc" id="L38">    NEXT(&quot;NEXT&quot;,&quot;WHAT?&quot;, &quot;UH HUH&quot;, &quot;UH UH&quot;, &quot;YOUR&quot;, &quot;HOLD&quot;, &quot;SURE&quot;, &quot;NEXT&quot;),</span>
+<span class="nc" id="L39">    HOLD(&quot;HOLD&quot;,&quot;YOU ARE&quot;, &quot;U&quot;, &quot;DONE&quot;, &quot;UH UH&quot;, &quot;YOU&quot;, &quot;UR&quot;, &quot;SURE&quot;, &quot;WHAT?&quot;, &quot;YOU'RE&quot;, &quot;NEXT&quot;, &quot;HOLD&quot;),</span>
+<span class="nc" id="L40">    SURE(&quot;SURE&quot;,&quot;YOU ARE&quot;, &quot;DONE&quot;, &quot;LIKE&quot;, &quot;YOU'RE&quot;, &quot;YOU&quot;, &quot;HOLD&quot;, &quot;UH HUH&quot;, &quot;UR&quot;, &quot;SURE&quot;),</span>
+<span class="nc" id="L41">    LIKE(&quot;LIKE&quot;,&quot;YOU'RE&quot;, &quot;NEXT&quot;, &quot;U&quot;, &quot;UR&quot;, &quot;HOLD&quot;, &quot;DONE&quot;, &quot;UH UH&quot;, &quot;WHAT?&quot;, &quot;UH HUH&quot;, &quot;YOU&quot;, &quot;LIKE&quot;);</span>
+
+    private final String label;
+    private final String[] stream;
+
+    @Override
+    public String getLabel() {
+<span class="nc" id="L48">        return label;</span>
+    }
+
+    @Override
+    public String[] getWords() {
+<span class="nc" id="L53">        return stream;</span>
+    }
+
+<span class="nc" id="L56">    WhosOnFirstWords(String label, String ... wordStream){</span>
+<span class="nc" id="L57">        this.label = label;</span>
+<span class="nc" id="L58">        stream = wordStream;</span>
+<span class="nc" id="L59">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

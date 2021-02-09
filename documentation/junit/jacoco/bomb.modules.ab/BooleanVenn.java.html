@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BooleanVenn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.ab</a> &gt; <span class="el_source">BooleanVenn.java</span></div><h1>BooleanVenn.java</h1><pre class="source lang-java linenums">package bomb.modules.ab;
+
+import bomb.Widget;
+
+import static bomb.tools.Mechanics.LOGIC_SYMBOL_REGEX;
+import static bomb.tools.Mechanics.ultimateFilter;
+
+/**
+ * This class deals with the Boolean Venn Diagram module.
+ * The concept is based on the basics of Discrete Mathematics and uses basic boolean operators
+ * to determine the state of each section of the triple venn diagram, green being true and red for false.
+ */
+<span class="nc" id="L13">public class BooleanVenn extends Widget {</span>
+<span class="fc" id="L14">    private static final boolean[][] TEST_CASES = {</span>
+            {false, false, false},
+            {false, false, true},
+            {false, true, false},
+            {true, false, false},
+            {false, true, true},
+            {true, false, true},
+            {true, true, false},
+            {true, true, true}};
+    private static final int A = 0, B = 1, C = 2;
+
+    /**
+     * Turns the String operation into a String code for the Venn Diagram to decode by choosing
+     * the correct method depending on which side of the operation has the priority, that being
+     * the operation between parenthesis
+     *
+     * @param operation The operation that the defuser sees on the bomb
+     * @return A String code that represents the state of each Venn Diagram section
+     *          The output order is not, c, b, a, bc, ac, ab, all
+     */
+    public static String resultCode(String operation) throws IllegalArgumentException{
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if (operation.isEmpty()) throw new IllegalArgumentException(&quot;Cannot have empty String&quot;);</span>
+<span class="fc" id="L36">        checkEquation(operation);</span>
+<span class="fc bfc" id="L37" title="All 2 branches covered.">        return (operation.charAt(0) != 'A') ?</span>
+<span class="fc" id="L38">                abPriority(operation) :</span>
+<span class="fc" id="L39">                bcPriority(operation);</span>
+    }
+
+    private static void checkEquation(String equation){
+<span class="fc" id="L43">        String errorMessage = &quot;Component missing from equation: &quot;;</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if (ultimateFilter(equation, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;).length() != 3)</span>
+<span class="nc" id="L45">            throw new IllegalArgumentException(errorMessage + &quot;ABC&quot;);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        else if (ultimateFilter(equation, &quot;(&quot;, &quot;)&quot;).length() != 2)</span>
+<span class="fc" id="L47">            throw new IllegalArgumentException(errorMessage + &quot;()&quot;);</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        else if (ultimateFilter(equation, LOGIC_SYMBOL_REGEX).length() != 2)</span>
+<span class="fc" id="L49">            throw new IllegalArgumentException(errorMessage + &quot;Logic Symbol&quot;);</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">        else if (!checkFormat(equation))</span>
+<span class="fc" id="L51">            throw new IllegalArgumentException(&quot;Incorrect Format&quot;);</span>
+<span class="fc" id="L52">    }</span>
+
+    private static boolean checkFormat(String equation){
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (String firstLetter : LOGIC_SYMBOL_REGEX){</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            for (String secondLetter : LOGIC_SYMBOL_REGEX){</span>
+<span class="fc" id="L57">                String priorityAB = &quot;(A&quot; + firstLetter + &quot;B)&quot; + secondLetter + &quot;C&quot;;</span>
+<span class="fc" id="L58">                String priorityBC = &quot;A&quot; + firstLetter + &quot;(B&quot; + secondLetter + &quot;C)&quot;;</span>
+<span class="fc bfc" id="L59" title="All 4 branches covered.">                if (equation.equals(priorityAB) || equation.equals(priorityBC))</span>
+<span class="fc" id="L60">                    return true;</span>
+            }
+        }
+<span class="fc" id="L63">        return false;</span>
+    }
+
+    /**
+     * Performs the operation between A and B first, then adds the operation for C
+     *
+     * @param op The operation that the defuser sees on the bomb
+     * @return A String code that represents the state of each Venn Diagram section.
+     */
+    private static String abPriority(String op){
+<span class="fc" id="L73">        String[] parts = op.split(&quot;\\)&quot;);</span>
+<span class="fc" id="L74">        StringBuilder builder = new StringBuilder();</span>
+
+<span class="fc" id="L76">        int[] functions = new int[]{detect(parts[0]), detect(parts[1])};</span>
+<span class="fc" id="L77">        boolean[] priorityCases = priorityOutputs(functions[0], A+B);</span>
+
+<span class="fc bfc" id="L79" title="All 2 branches covered.">        for (int i = 0; i &lt; TEST_CASES.length; i++)</span>
+<span class="fc" id="L80">            builder.append(outsideOutputs(functions[1], priorityCases[i], TEST_CASES[i][C]));</span>
+<span class="fc" id="L81">        return builder.toString();</span>
+    }
+
+    /**
+     * Performs the operation between B and C first, then adds A
+     *
+     * @param op The operation that the defuser sees on the bomb
+     * @return A String code that represents the state of each Venn Diagram section
+     */
+    private static String bcPriority(String op){
+<span class="fc" id="L91">        String[] parts = op.split(&quot;\\(&quot;);</span>
+<span class="fc" id="L92">        StringBuilder builder = new StringBuilder();</span>
+
+<span class="fc" id="L94">        int[] functions = new int[]{detect(parts[1]), detect(parts[0])};</span>
+<span class="fc" id="L95">        boolean[] priorityCases = priorityOutputs(functions[0], B+C);</span>
+
+<span class="fc bfc" id="L97" title="All 2 branches covered.">        for (int i = 0; i &lt; TEST_CASES.length; i++)</span>
+<span class="fc" id="L98">            builder.append(outsideOutputs(functions[1], TEST_CASES[i][A], priorityCases[i]));</span>
+<span class="fc" id="L99">        return builder.toString();</span>
+    }
+
+    /**
+     * Outputs the number selector based on the symbol that resembles a bitwise operator
+     *
+     * @param part The string that contains the operation
+     * @return The number selector
+     */
+    private static int detect(String part){
+<span class="fc" id="L109">        part = ultimateFilter(part, &quot;âˆ§&quot;, &quot;âˆ¨&quot;, &quot;â†“&quot;, &quot;âŠ»&quot;, &quot;â†�&quot;, &quot;â†’&quot;, &quot;â†”&quot;, &quot;|&quot;);</span>
+
+<span class="fc bfc" id="L111" title="All 8 branches covered.">        switch (part){</span>
+<span class="fc" id="L112">            case &quot;âˆ§&quot;: return 0; // And</span>
+<span class="fc" id="L113">            case &quot;âˆ¨&quot;: return 1; // Or</span>
+<span class="fc" id="L114">            case &quot;â†“&quot;: return 2; // Nor</span>
+<span class="fc" id="L115">            case &quot;âŠ»&quot;: return 3; // Xor</span>
+<span class="fc" id="L116">            case &quot;|&quot;: return 4; // Nand</span>
+<span class="fc" id="L117">            case &quot;â†”&quot;: return 5; // Xnor</span>
+<span class="fc" id="L118">            case &quot;â†’&quot;: return 6; // Implies</span>
+<span class="fc" id="L119">            default: return 7; // Implied By</span>
+        }
+    }
+
+    /**
+     * Performs the operation on the two variables inside the original equation's ()
+     * and returns the outputs from those test cases
+     *
+     * @param func The number selector
+     * @param priorityNum The determining number to reflect whether the method call came from ab or bc
+     * @return A set of booleans that reflect all test cases possible for the operation inside the ()
+     */
+    private static boolean[] priorityOutputs(int func, int priorityNum) {
+<span class="fc" id="L132">        boolean[] out = new boolean[8];</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        if (priorityNum == 1){</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">            for (int i = 0; i &lt; TEST_CASES.length; i++)</span>
+<span class="fc" id="L135">                out[i] = functionMap(func, TEST_CASES[i][A], TEST_CASES[i][B]);</span>
+        } else {
+<span class="fc bfc" id="L137" title="All 2 branches covered.">            for (int i = 0; i &lt; TEST_CASES.length; i++)</span>
+<span class="fc" id="L138">                out[i] = functionMap(func, TEST_CASES[i][B], TEST_CASES[i][C]);</span>
+        }
+<span class="fc" id="L140">        return out;</span>
+    }
+
+    /**
+     * Returns 0 or 1 based on the boolean operation that gets passed in
+     *
+     * @param func The number selector
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return 1 or 0 based on their respective booleans
+     */
+    private static String outsideOutputs(int func, boolean x, boolean y){
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        return functionMap(func, x, y)?&quot;1&quot;:&quot;0&quot;;</span>
+    }
+
+    /**
+     * Selects the bitwise operation to be executed
+     *
+     * @param func The number selector
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return The result of the operation
+     */
+    private static boolean functionMap(int func, boolean x, boolean y){
+<span class="fc bfc" id="L164" title="All 8 branches covered.">        switch (func){</span>
+<span class="fc" id="L165">            case 0: return and(x,y);</span>
+<span class="fc" id="L166">            case 1: return or(x,y);</span>
+<span class="fc" id="L167">            case 2: return nor(x,y);</span>
+<span class="fc" id="L168">            case 3: return xor(x,y);</span>
+<span class="fc" id="L169">            case 4: return nand(x,y);</span>
+<span class="fc" id="L170">            case 5: return xnor(x,y);</span>
+<span class="fc" id="L171">            case 6: return implies(x,y);</span>
+<span class="fc" id="L172">            default: return impliedBy(x,y);</span>
+        }
+    }
+
+    /**
+     * Bitwise And
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the and operation
+     */
+    private static boolean and(boolean x, boolean y){
+<span class="fc bfc" id="L184" title="All 4 branches covered.">        return x &amp;&amp; y;</span>
+    }
+
+    /**
+     * Bitwise Nand
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the nand operation
+     */
+    private static boolean nand(boolean x, boolean y){
+<span class="fc bfc" id="L195" title="All 2 branches covered.">        return !and(x, y);</span>
+    }
+
+    /**
+     * Bitwise Or
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the or operation
+     */
+    private static boolean or(boolean x, boolean y){
+<span class="fc bfc" id="L206" title="All 4 branches covered.">        return x || y;</span>
+    }
+
+    /**
+     * Bitwise Nor
+     *
+     * @param x - 1st bit
+     * @param y - 2nd bit
+     * @return - Result of the nor operation
+     */
+    private static boolean nor(boolean x, boolean y){
+<span class="fc bfc" id="L217" title="All 2 branches covered.">        return !or(x,y);</span>
+    }
+
+    /**
+     * Bitwise Xor
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the xor operation
+     */
+    private static boolean xor(boolean x, boolean y){
+<span class="fc bfc" id="L228" title="All 8 branches covered.">        return (x &amp;&amp; !y) || (!x &amp;&amp; y);</span>
+    }
+
+    /**
+     * Bitwise Xnor
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the xnor operation
+     */
+    private static boolean xnor(boolean x, boolean y){
+<span class="fc bfc" id="L239" title="All 2 branches covered.">        return !xor(x,y);</span>
+    }
+
+    /**
+     * Bitwise Implies follows this order...
+     * False -&gt; False - True
+     * False -&gt; True - True
+     * True -&gt; False - False
+     * True -&gt; True - True
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the implies operation
+     */
+    private static boolean implies(boolean x, boolean y){
+<span class="fc bfc" id="L254" title="All 4 branches covered.">        return !(x &amp;&amp; !y);</span>
+    }
+
+    /**
+     * Bitwise Implied By follows this order...
+     * False &lt;- False - True
+     * False &lt;- True - False
+     * True &lt;- False - True
+     * True &lt;- True - True
+     *
+     * @param x 1st bit
+     * @param y 2nd bit
+     * @return Result of the implied by operation
+     */
+    private static boolean impliedBy(boolean x, boolean y){
+<span class="fc bfc" id="L269" title="All 4 branches covered.">        return !(!x &amp;&amp; y);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

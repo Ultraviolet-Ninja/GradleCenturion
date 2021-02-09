@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Star.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools</a> &gt; <span class="el_source">Star.java</span></div><h1>Star.java</h1><pre class="source lang-java linenums">package bomb.tools;
+
+import bomb.enumerations.Simon.Screams;
+import java.util.Arrays;
+
+import static bomb.enumerations.Simon.Screams.*;
+
+public class Star {
+    private final Screams[] colorOrder;
+
+<span class="nc" id="L11">    public Star(Screams[] order) throws IllegalArgumentException{</span>
+<span class="nc bnc" id="L12" title="All 2 branches missed.">        if (order.length == 6) {</span>
+<span class="nc" id="L13">            this.colorOrder = order;</span>
+<span class="nc" id="L14">            setPrev();</span>
+<span class="nc" id="L15">            setNext();</span>
+<span class="nc" id="L16">        } else throw new IllegalArgumentException(&quot;Size doesn't equal 6&quot;);</span>
+<span class="nc" id="L17">    }</span>
+
+    private void setPrev(){
+<span class="nc" id="L20">        Screams prev = null;</span>
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        for (int i = 0; i &lt;= colorOrder.length; i++) {</span>
+<span class="nc bnc" id="L22" title="All 2 branches missed.">            if (i != 0) colorOrder[i% colorOrder.length].setLeft(prev);</span>
+<span class="nc" id="L23">            prev = colorOrder[i% colorOrder.length];</span>
+        }
+<span class="nc" id="L25">    }</span>
+
+    private void setNext(){
+<span class="nc" id="L28">        Screams next = null;</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        for (int i = colorOrder.length; i &gt;= 0; i--){</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">            if (i != colorOrder.length) colorOrder[i% colorOrder.length].setRight(next);</span>
+<span class="nc" id="L31">            next = colorOrder[i% colorOrder.length];</span>
+        }
+<span class="nc" id="L33">    }</span>
+
+    public boolean threeAdjacency(Screams[] flashOrder){
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        for (int i = 0; i &lt; flashOrder.length-2; i++)</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">            if (threeAdjacency(flashOrder[i], flashOrder[i+1], flashOrder[i+2])) return true;</span>
+<span class="nc" id="L38">        return false;</span>
+    }
+
+    //Three that are adjacent in clockwise order
+    public boolean threeAdjacency(Screams first, Screams second, Screams third){
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        for (Screams color : colorOrder)</span>
+<span class="nc bnc" id="L44" title="All 6 branches missed.">            if (color == first &amp;&amp; color.getRight() == second &amp;&amp; color.getRight().getRight() == third)</span>
+<span class="nc" id="L45">                return true;</span>
+<span class="nc" id="L46">        return false;</span>
+    }
+
+    //Color, Adjacent, then color again
+    public boolean oneTwoOne(Screams[] flashOrder){
+<span class="nc" id="L51">        int track = sameColor(flashOrder);</span>
+<span class="nc bnc" id="L52" title="All 4 branches missed.">        return track != -1 &amp;&amp; twoAdjacency(flashOrder[track], flashOrder[track + 1]);</span>
+    }
+
+    //Finding if the same color flashed twice with one color in between
+    private int sameColor(Screams[] flashOrder){
+<span class="nc" id="L57">        int tracker = -1;</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (int i = 0; i &lt; flashOrder.length-2; i++)</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (flashOrder[i] == flashOrder[i+2]) tracker = i;</span>
+<span class="nc" id="L60">        return tracker;</span>
+    }
+
+    //If no or one primary colors are flashing
+    public boolean primaryRule(Screams[] flashOrder){
+<span class="nc" id="L65">        Screams[] unique = Arrays.stream(flashOrder).distinct().toArray(Screams[]::new);</span>
+<span class="nc" id="L66">        int counter = 0;</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        for (Screams temp : unique){</span>
+<span class="nc bnc" id="L68" title="All 6 branches missed.">            if (temp == RED || temp == YELLOW || temp == BLUE)</span>
+<span class="nc" id="L69">                counter++;</span>
+        }
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        return counter &lt; 2;</span>
+    }
+
+    //Complementary Color Not Flashed Rule
+    public boolean complementRule(Screams[] flashOrder){
+<span class="nc" id="L76">        int counter  = 0;</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        for (int i = 0; i &lt; colorOrder.length/2; i++){</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">           for (Screams flashColor : flashOrder)</span>
+<span class="nc bnc" id="L79" title="All 4 branches missed.">               if (flashColor == colorOrder[i] || flashColor == colorOrder[i + 3]) counter++;</span>
+        }
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        return counter == 0;</span>
+    }
+
+    public boolean twoAdjacency(Screams[] flashOrder){
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        for (int i = 0; i &lt; flashOrder.length-1; i++)</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">            if (twoAdjacency(flashOrder[i], flashOrder[i+1])) return true;</span>
+<span class="nc" id="L87">        return false;</span>
+    }
+
+    //Two that are adjacent in clockwise order
+    public boolean twoAdjacency(Screams first, Screams second){
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        for (Screams color : colorOrder)</span>
+<span class="nc bnc" id="L93" title="All 4 branches missed.">            if (color == first &amp;&amp; color.getRight() == second)</span>
+<span class="nc" id="L94">                return true;</span>
+<span class="nc" id="L95">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.sub.controllers</a> &gt; <span class="el_source">SController.java</span></div><h1>SController.java</h1><pre class="source lang-java linenums">package bomb.sub.controllers;
+
+import bomb.modules.s.SimonStates;
+import bomb.enumerations.Simon;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.Polygon;
+
+<span class="nc" id="L12">public class SController {</span>
+<span class="nc" id="L13">    private boolean redSwitch = false, yellowSwitch = false, greenSwitch = false, blueSwitch = false;</span>
+<span class="nc" id="L14">    private int stageCounter = 1;</span>
+<span class="nc" id="L15">    private StringBuilder statesMemory = new StringBuilder();</span>
+<span class="nc" id="L16">    private final String red = &quot;rgba(69,1,0,1)|rgb(31,0,2)&quot;, yellow = &quot;rgba(68,67,0,1)|rgb(43,45,0)&quot;,</span>
+            green = &quot;rgba(0,61,1,1)|rgb(0,43,1)&quot;, blue = &quot;rgba(0,23,82,1)|rgb(0,18,65)&quot;;
+    private String[] colors;
+
+    @FXML
+    private Arc topLeft, topRight, bottomLeft, bottomRight;
+
+    @FXML
+    private Button statesRed, statesYellow, statesGreen, statesBlue, statesEnter;
+
+    @FXML
+    private Polygon nWest, north, nEast, sWest, south, sEast;
+
+    @FXML
+    private TextArea statesOutput;
+
+    //Simon Screams methods
+
+
+    //Simon States methods
+    @FXML
+    private void setPriority(){
+<span class="nc" id="L38">        setFalse();</span>
+<span class="nc" id="L39">        stageCounter = 1;</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (statesRed.isHover())</span>
+<span class="nc" id="L41">            setPriority(&quot;Red&quot;);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        else if (statesYellow.isHover())</span>
+<span class="nc" id="L43">            setPriority(&quot;Yellow&quot;);</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        else if (statesGreen.isHover())</span>
+<span class="nc" id="L45">            setPriority(&quot;Green&quot;);</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        else if (statesBlue.isHover())</span>
+<span class="nc" id="L47">            setPriority(&quot;Blue&quot;);</span>
+<span class="nc" id="L48">    }</span>
+
+    private void setFalse(){
+<span class="nc" id="L51">        redSwitch = false;</span>
+<span class="nc" id="L52">        yellowSwitch = false;</span>
+<span class="nc" id="L53">        greenSwitch = false;</span>
+<span class="nc" id="L54">        blueSwitch = false;</span>
+<span class="nc" id="L55">    }</span>
+
+    private void setPriority(String color){ //TL TR BL BR
+<span class="nc bnc" id="L58" title="All 4 branches missed.">        switch (color) { //Red Blue Green Yellow</span>
+            case &quot;Red&quot;: {
+<span class="nc" id="L60">                setFills(new String[]{red, blue, green, yellow});</span>
+<span class="nc" id="L61">                SimonStates.setPriority(Simon.States.RED);</span>
+            } // Yellow Green Blue Red
+            case &quot;Yellow&quot;: {
+<span class="nc" id="L64">                setFills(new String[]{yellow, green, blue, red});</span>
+<span class="nc" id="L65">                SimonStates.setPriority(Simon.States.YELLOW);</span>
+            } // Green Red Yellow Blue
+            case &quot;Green&quot;: {
+<span class="nc" id="L68">                setFills(new String[]{green, red, yellow, blue});</span>
+<span class="nc" id="L69">                SimonStates.setPriority(Simon.States.GREEN);</span>
+            } //Blue Yellow Red Green
+            default: {
+<span class="nc" id="L72">                setFills(new String[]{blue, yellow, red, green});</span>
+<span class="nc" id="L73">                SimonStates.setPriority(Simon.States.BLUE);</span>
+            }
+        }
+<span class="nc" id="L76">        toggleArcs(false);</span>
+<span class="nc" id="L77">    }</span>
+
+    private void setFills(String[] values){
+<span class="nc" id="L80">        colors = values;</span>
+<span class="nc" id="L81">        setFill(topLeft, values[0]);</span>
+<span class="nc" id="L82">        setFill(topRight, values[1]);</span>
+<span class="nc" id="L83">        setFill(bottomLeft, values[2]);</span>
+<span class="nc" id="L84">        setFill(bottomRight, values[3]);</span>
+<span class="nc" id="L85">    }</span>
+
+    private void setFill(Arc arc, String value){
+<span class="nc" id="L88">        String[] values = value.split(&quot;\\|&quot;);</span>
+<span class="nc" id="L89">        arc.setFill(Paint.valueOf(values[0]));</span>
+<span class="nc" id="L90">        arc.setStroke(Paint.valueOf(values[1]));</span>
+<span class="nc" id="L91">    }</span>
+
+    private void toggleArcs(boolean tog){
+<span class="nc" id="L94">        topLeft.setDisable(tog);</span>
+<span class="nc" id="L95">        topRight.setDisable(tog);</span>
+<span class="nc" id="L96">        bottomLeft.setDisable(tog);</span>
+<span class="nc" id="L97">        bottomRight.setDisable(tog);</span>
+<span class="nc" id="L98">    }</span>
+
+    private void toggleButtons(boolean tog){
+<span class="nc" id="L101">        statesRed.setDisable(tog);</span>
+<span class="nc" id="L102">        statesYellow.setDisable(tog);</span>
+<span class="nc" id="L103">        statesGreen.setDisable(tog);</span>
+<span class="nc" id="L104">        statesBlue.setDisable(tog);</span>
+<span class="nc" id="L105">    }</span>
+
+    @FXML
+    private void colorSet(){
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (topLeft.isHover())</span>
+<span class="nc" id="L110">            determineColor(topLeft, 0);</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">        else if (topRight.isHover())</span>
+<span class="nc" id="L112">            determineColor(topRight, 1);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        else if (bottomLeft.isHover())</span>
+<span class="nc" id="L114">            determineColor(bottomLeft, 2);</span>
+        else
+<span class="nc" id="L116">            determineColor(bottomRight, 3);</span>
+<span class="nc" id="L117">        enterButtonDisable();</span>
+<span class="nc" id="L118">    }</span>
+
+    private void determineColor(Arc arc, int idx){
+<span class="nc" id="L121">        String redLit = &quot;rgb(255,18,0)|rgb(184,69,50)&quot;, yellowLit = &quot;rgb(255,243,0)|rgb(185,158,0)&quot;,</span>
+<span class="nc" id="L122">                greenLit = &quot;rgb(0,218,0)|rgb(18,145,26)&quot;, blueLit = &quot;rgb(0,108,255)|rgb(39,86,177)&quot;;</span>
+<span class="nc bnc" id="L123" title="All 4 branches missed.">        switch (colors[idx]){</span>
+            case red: {
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                setFill(arc, redSwitch ? red : redLit);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                redSwitch = !redSwitch;</span>
+            }
+            case yellow: {
+<span class="nc bnc" id="L129" title="All 2 branches missed.">                setFill(arc, yellowSwitch ? yellow : yellowLit);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                yellowSwitch = !yellowSwitch;</span>
+            }
+            case green: {
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                setFill(arc, greenSwitch ? green : greenLit);</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">                greenSwitch = !greenSwitch;</span>
+            }
+            default: {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">                setFill(arc, blueSwitch ? blue : blueLit);</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">                blueSwitch = !blueSwitch;</span>
+            }
+        }
+<span class="nc" id="L141">    }</span>
+
+    private void enterButtonDisable(){
+<span class="nc bnc" id="L144" title="All 8 branches missed.">        statesEnter.setDisable(!redSwitch &amp;&amp; !yellowSwitch &amp;&amp; !greenSwitch &amp;&amp; !blueSwitch);</span>
+<span class="nc" id="L145">    }</span>
+
+    @FXML
+    private void nextButtonArray(){
+<span class="nc" id="L149">        Simon.States[] currentStage = deterList();</span>
+<span class="nc" id="L150">        statesMemory.append(&quot;Stage &quot;).append(stageCounter).append(&quot; &quot;)</span>
+<span class="nc" id="L151">                .append(SimonStates.add(currentStage, stageCounter++)).append(&quot;\n&quot;);</span>
+<span class="nc" id="L152">        statesOutput.setText(statesMemory.toString());</span>
+<span class="nc" id="L153">        checkEnd();</span>
+<span class="nc" id="L154">    }</span>
+
+    private Simon.States[] deterList(){
+<span class="nc" id="L157">        int counter = 0;</span>
+<span class="nc" id="L158">        Simon.States[] list = new Simon.States[deterSize()];</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">        if (redSwitch)</span>
+<span class="nc" id="L160">            list[counter++] = Simon.States.RED;</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">        if (yellowSwitch)</span>
+<span class="nc" id="L162">            list[counter++] = Simon.States.YELLOW;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (greenSwitch)</span>
+<span class="nc" id="L164">            list[counter++] = Simon.States.GREEN;</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">        if (blueSwitch)</span>
+<span class="nc" id="L166">            list[counter] = Simon.States.BLUE;</span>
+<span class="nc" id="L167">        return list;</span>
+    }
+
+    private int deterSize(){
+<span class="nc" id="L171">        int counter = 0;</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        if (redSwitch)</span>
+<span class="nc" id="L173">            counter++;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (yellowSwitch)</span>
+<span class="nc" id="L175">            counter++;</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (greenSwitch)</span>
+<span class="nc" id="L177">            counter++;</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (blueSwitch)</span>
+<span class="nc" id="L179">            counter++;</span>
+<span class="nc" id="L180">        return counter;</span>
+    }
+
+    private void checkEnd(){
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        if (stageCounter == 5) {</span>
+<span class="nc" id="L185">            toggleArcs(true);</span>
+<span class="nc" id="L186">            toggleButtons(true);</span>
+<span class="nc" id="L187">            statesEnter.setDisable(true);</span>
+        }
+<span class="nc" id="L189">    }</span>
+
+    @FXML
+    private void stateModReset(){
+<span class="nc" id="L193">        toggleArcs(true);</span>
+<span class="nc" id="L194">        stageCounter = 1;</span>
+<span class="nc" id="L195">        statesMemory = new StringBuilder();</span>
+<span class="nc" id="L196">        toggleButtons(false);</span>
+<span class="nc" id="L197">        SimonStates.resetMod();</span>
+<span class="nc" id="L198">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

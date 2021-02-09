@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Coordinates.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools</a> &gt; <span class="el_source">Coordinates.java</span></div><h1>Coordinates.java</h1><pre class="source lang-java linenums">package bomb.tools;
+
+import bomb.interfaces.Coordinate;
+
+import java.util.Arrays;
+
+public class Coordinates implements Coordinate {
+    private int x, y;
+
+<span class="nc" id="L10">    public Coordinates(int x, int y){</span>
+<span class="nc" id="L11">        this.x = x;</span>
+<span class="nc" id="L12">        this.y = y;</span>
+<span class="nc" id="L13">    }</span>
+
+    public int getX() {
+<span class="nc" id="L16">        return x;</span>
+    }
+
+    public int getY() {
+<span class="nc" id="L20">        return y;</span>
+    }
+
+<span class="nc" id="L23">    public Coordinates(Coordinates original){</span>
+<span class="nc" id="L24">        this.x = original.x;</span>
+<span class="nc" id="L25">        this.y = original.y;</span>
+<span class="nc" id="L26">    }</span>
+
+    @Override
+    public int[] getCoords() {
+<span class="nc" id="L30">        return new int[]{x, y};</span>
+    }
+
+    public void alterCurrentCoords(Coordinates alterSet){
+<span class="nc" id="L34">        this.x += alterSet.x;</span>
+<span class="nc" id="L35">        this.y += alterSet.y;</span>
+<span class="nc" id="L36">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ChainList.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.data.structures</a> &gt; <span class="el_source">ChainList.java</span></div><h1>ChainList.java</h1><pre class="source lang-java linenums">package bomb.tools.data.structures;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class ChainList&lt;E&gt; implements Queue&lt;E&gt; {
+    private final LinkedList&lt;E&gt; struct;
+
+<span class="fc" id="L11">    public ChainList(){</span>
+<span class="fc" id="L12">        struct = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L13">    }</span>
+
+    @Override
+    public int size() {
+<span class="nc" id="L17">        return struct.size();</span>
+    }
+
+    @Override
+    public boolean isEmpty() {
+<span class="nc" id="L22">        return struct.isEmpty();</span>
+    }
+
+    @Override
+    public boolean contains(Object o) {
+<span class="nc" id="L27">        return struct.contains(o);</span>
+    }
+
+    @Override
+    public Iterator&lt;E&gt; iterator() {
+<span class="nc" id="L32">        return struct.iterator();</span>
+    }
+
+    @Override
+    public Object[] toArray() {
+<span class="nc" id="L37">        return struct.toArray();</span>
+    }
+
+    @Override
+    public &lt;T&gt; T[] toArray(T[] a) throws UnsupportedOperationException{
+<span class="nc" id="L42">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean add(E e) throws UnsupportedOperationException{
+<span class="nc" id="L47">       throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean remove(Object o) {
+<span class="nc" id="L52">        return false;</span>
+    }
+
+    @Override
+    public boolean containsAll(Collection&lt;?&gt; c) {
+<span class="nc" id="L57">        return false;</span>
+    }
+
+    @Override
+    public boolean addAll(Collection&lt;? extends E&gt; c) {
+<span class="nc" id="L62">        return false;</span>
+    }
+
+    @Override
+    public boolean removeAll(Collection&lt;?&gt; c) throws UnsupportedOperationException {
+<span class="nc" id="L67">        return false;</span>
+    }
+
+    @Override
+    public boolean retainAll(Collection&lt;?&gt; c) throws UnsupportedOperationException {
+<span class="nc" id="L72">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public void clear() {
+<span class="nc" id="L77">        struct.clear();</span>
+<span class="nc" id="L78">    }</span>
+
+    @Override
+    public boolean offer(E e) {
+<span class="nc" id="L82">        return struct.offer(e);</span>
+    }
+
+    @Override
+    public E remove() {
+<span class="nc" id="L87">        return struct.remove();</span>
+    }
+
+    @Override
+    public E poll() {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (!struct.isEmpty()){</span>
+<span class="nc" id="L93">            return struct.poll();</span>
+        }
+<span class="nc" id="L95">        return null;</span>
+    }
+
+    @Override
+    public E element() throws UnsupportedOperationException{
+<span class="nc" id="L100">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public E peek() {
+<span class="nc bnc" id="L105" title="All 2 branches missed.">        if (!struct.isEmpty()){</span>
+<span class="nc" id="L106">            return struct.peek();</span>
+        }
+<span class="nc" id="L108">        return null;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimonStates.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.s</a> &gt; <span class="el_source">SimonStates.java</span></div><h1>SimonStates.java</h1><pre class="source lang-java linenums">package bomb.modules.s;
+
+import bomb.enumerations.Simon;
+import bomb.interfaces.Index;
+import bomb.Widget;
+
+import static bomb.enumerations.Simon.States.*;
+
+/**
+ *
+ */
+<span class="nc" id="L12">public class SimonStates extends Widget {</span>
+    private static int prior;
+<span class="nc" id="L14">    private static final Simon.States[][] priorities = new Simon.States[][]{</span>
+            {RED, BLUE, GREEN, YELLOW}, //Highest to Lowest
+            {BLUE, YELLOW, RED, GREEN},
+            {GREEN, RED, YELLOW, BLUE},
+            {YELLOW, GREEN, BLUE, RED}};
+<span class="nc" id="L19">    private static StringBuilder toPress = new StringBuilder();</span>
+
+<span class="nc" id="L21">    enum Priorities implements Index {</span>
+<span class="nc" id="L22">        HIGHEST(0), HIGH(1), LOW(2), LOWEST(3);</span>
+
+        private final int idx;
+
+        @Override
+        public int getIdx() {
+<span class="nc" id="L28">            return idx;</span>
+        }
+
+<span class="nc" id="L31">        Priorities(int idx){</span>
+<span class="nc" id="L32">            this.idx = idx;</span>
+<span class="nc" id="L33">        }</span>
+    }
+
+    /**
+     *
+     *
+     * @param color
+     */
+    public static void setPriority(Simon.States color){
+<span class="nc" id="L42">        prior = color.getIdx();</span>
+<span class="nc" id="L43">    }</span>
+
+    /**
+     *
+     *
+     * @param colors
+     * @param stage
+     * @return
+     */
+    public static String add(Simon.States[] colors, int stage){
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (souvenir)</span>
+<span class="nc" id="L54">            Souvenir.addRelic(&quot;Simon States - Stage &quot; + stage, writeOut(colors));</span>
+
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (stage == 1)</span>
+<span class="nc" id="L57">            toPress.append(stageOne(colors)).append(&quot; &quot;);</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        else if (stage == 2)</span>
+<span class="nc" id="L59">            toPress.append(stageTwo(colors)).append(&quot; &quot;);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        else if (stage == 3)</span>
+<span class="nc" id="L61">            toPress.append(stageThree(colors)).append(&quot; &quot;);</span>
+        else
+<span class="nc" id="L63">            toPress.append(stageFour(colors)).append(&quot; &quot;);</span>
+<span class="nc" id="L64">        return toPress.toString();</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static String stageOne(Simon.States[] colors){
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (colors.length == 1)</span>
+<span class="nc" id="L75">            return firstCap(colors[0]);</span>
+<span class="nc bnc" id="L76" title="All 4 branches missed.">        else if(colors.length == 2 &amp;&amp; contains(colors, BLUE))</span>
+<span class="nc" id="L77">            return firstCap(highest(colors));</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        else if (colors.length == 2)</span>
+<span class="nc" id="L79">            return firstCap(BLUE);</span>
+<span class="nc bnc" id="L80" title="All 4 branches missed.">        else if (colors.length == 3 &amp;&amp; contains(colors, RED))</span>
+<span class="nc" id="L81">            return firstCap(lowest(colors));</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        else if (colors.length == 3)</span>
+<span class="nc" id="L83">            return firstCap(RED);</span>
+<span class="nc" id="L84">        return firstCap(priorities[prior][Priorities.HIGH.getIdx()]);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static String stageTwo(Simon.States[] colors){
+<span class="nc bnc" id="L94" title="All 6 branches missed.">        if (colors.length == 2 &amp;&amp; contains(colors, BLUE) &amp;&amp; contains(colors, RED))</span>
+<span class="nc" id="L95">            return firstCap(highestNotFlashed(colors));</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        else if (colors.length == 2)</span>
+<span class="nc" id="L97">            return firstCap(lowestNotFlashed(colors));</span>
+<span class="nc bnc" id="L98" title="All 4 branches missed.">        else if (colors.length == 1 &amp;&amp; !contains(colors, BLUE))</span>
+<span class="nc" id="L99">            return firstCap(BLUE);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        else if (colors.length == 1)</span>
+<span class="nc" id="L101">            return firstCap(YELLOW);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        else if (colors.length == 4)</span>
+<span class="nc" id="L103">            return toPress.toString().split(&quot; &quot;)[0];</span>
+        else
+<span class="nc" id="L105">            return firstCap(oddOneOut(colors));</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static String stageThree(Simon.States[] colors){
+<span class="nc bnc" id="L115" title="All 4 branches missed.">        if (colors.length == 3 &amp;&amp; previouslyPressed(colors))</span>
+<span class="nc" id="L116">            return firstCap(highestNotPressed(colors));</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        else if (colors.length == 3)</span>
+<span class="nc" id="L118">            return firstCap(highest(colors));</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        else if (colors.length == 2)</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">            return (bothPreviouslyPressed(colors))?</span>
+<span class="nc" id="L121">                    firstCap(lowestNotFlashed(colors)):</span>
+<span class="nc" id="L122">                    toPress.toString().split(&quot; &quot;)[0];</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        else if (colors.length == 1)</span>
+<span class="nc" id="L124">            return firstCap(colors[0]);</span>
+        else
+<span class="nc" id="L126">            return firstCap(priorities[prior][Priorities.LOW.getIdx()]);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static String stageFour(Simon.States[] colors){
+<span class="nc bnc" id="L136" title="All 2 branches missed.">        if (allUnique())</span>
+<span class="nc" id="L137">            return oddOneOut();</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        else if (oneNotPressed(colors))</span>
+<span class="nc" id="L139">            return pressOneNot(colors);</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">        else if (colors.length == 3)</span>
+<span class="nc" id="L141">            return firstCap(priorities[prior][Priorities.LOWEST.getIdx()]);</span>
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        else if (colors.length == 1)</span>
+<span class="nc" id="L143">            return firstCap(colors[0]);</span>
+        else
+<span class="nc" id="L145">            return firstCap(GREEN);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     * @throws IllegalArgumentException
+     */
+    private static Simon.States highest(Simon.States[] colors) throws IllegalArgumentException{
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        for (Simon.States current : priorities[prior]){</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">            if(contains(colors, current)) return current;</span>
+        }
+<span class="nc" id="L159">        throw new IllegalArgumentException(&quot;Unreachable section of highest() was reached&quot;);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     * @throws IllegalArgumentException
+     */
+    private static Simon.States highestNotFlashed(Simon.States[] colors) throws IllegalArgumentException{
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        for (Simon.States current : priorities[prior]){</span>
+<span class="nc bnc" id="L171" title="All 2 branches missed.">            if(!contains(colors, current)) return current;</span>
+        }
+<span class="nc" id="L173">        throw new IllegalArgumentException(&quot;Unreachable section of highestNotFlashed() was reached&quot;);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static Simon.States highestNotPressed(Simon.States[] colors){
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        for (Simon.States current : priorities[prior]){</span>
+<span class="nc bnc" id="L184" title="All 4 branches missed.">            if (contains(colors, current) &amp;&amp; containsNotPressed(colors)) return current;</span>
+        }
+<span class="nc" id="L186">        throw new IllegalArgumentException(&quot;Unreachable section of highestNotPressed() was reached&quot;);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     * @throws IllegalArgumentException
+     */
+    private static Simon.States lowest(Simon.States[] colors) throws IllegalArgumentException{
+<span class="nc bnc" id="L197" title="All 2 branches missed.">        for (int i = 3; i &gt;= 0; i--){</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">            if (contains(colors, priorities[prior][i])) return priorities[prior][i];</span>
+        }
+<span class="nc" id="L200">        throw new IllegalArgumentException(&quot;Unreachable section of lowest() was reached&quot;);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     * @throws IllegalArgumentException
+     */
+    private static Simon.States lowestNotFlashed(Simon.States[] colors) throws IllegalArgumentException{
+<span class="nc bnc" id="L211" title="All 2 branches missed.">        for (int i = 3; i &gt;= 0; i--){</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (!contains(colors, priorities[prior][i])) return priorities[prior][i];</span>
+        }
+<span class="nc" id="L214">        throw new IllegalArgumentException(&quot;Unreachable section of lowestNotFlashed() was reached&quot;);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @param has
+     * @return
+     */
+    private static boolean contains(Simon.States[] colors, Simon.States has){
+<span class="nc bnc" id="L225" title="All 2 branches missed.">        for (Simon.States current : colors) {</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">            if (current == has) return true;</span>
+        }
+<span class="nc" id="L228">        return false;</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static boolean containsNotPressed(Simon.States[] colors){
+<span class="nc bnc" id="L238" title="All 2 branches missed.">        for (Simon.States color : colors) {</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">            for (String sample : toPress.toString().split(&quot; &quot;)) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">                if (sample.equals(firstCap(color))) return false;</span>
+            }
+        }
+<span class="nc" id="L243">        return true;</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static boolean bothPreviouslyPressed(Simon.States[] colors){
+<span class="nc" id="L253">        boolean[] firstSet = new boolean[2], secondSet = new boolean[2];</span>
+<span class="nc" id="L254">        String[] temp = toPress.toString().split(&quot; &quot;);</span>
+<span class="nc" id="L255">        firstSet[0] = temp[0].equals(firstCap(colors[0]));</span>
+<span class="nc" id="L256">        firstSet[1] = temp[1].equals(firstCap(colors[1]));</span>
+
+<span class="nc" id="L258">        secondSet[0] = temp[0].equals(firstCap(colors[1]));</span>
+<span class="nc" id="L259">        secondSet[1] = temp[1].equals(firstCap(colors[0]));</span>
+<span class="nc bnc" id="L260" title="All 8 branches missed.">        return (firstSet[0] &amp;&amp; firstSet[1]) || (secondSet[0] &amp;&amp; secondSet[1]);</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static boolean previouslyPressed(Simon.States[] colors){
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        for (Simon.States current : colors){</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            for (String sample : toPress.toString().split(&quot; &quot;)){</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">                if (sample.equals(firstCap(current))) return true;</span>
+            }
+<span class="nc" id="L274">        } return false;</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static Simon.States oddOneOut(Simon.States[] colors){
+<span class="nc bnc" id="L284" title="All 2 branches missed.">        if (!contains(colors, RED)) return RED;</span>
+<span class="nc bnc" id="L285" title="All 2 branches missed.">        else if (!contains(colors, YELLOW)) return YELLOW;</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        else if (!contains(colors, GREEN)) return GREEN;</span>
+<span class="nc" id="L287">        else return BLUE;</span>
+    }
+
+    /**
+     *
+     *
+     * @return
+     */
+    private static String oddOneOut(){
+<span class="nc bnc" id="L296" title="All 2 branches missed.">        if (!toPress.toString().contains(&quot;Red&quot;))</span>
+<span class="nc" id="L297">            return &quot;Red&quot;;</span>
+<span class="nc bnc" id="L298" title="All 2 branches missed.">        else if (!toPress.toString().contains(&quot;Yellow&quot;))</span>
+<span class="nc" id="L299">            return &quot;Yellow&quot;;</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">        else if (!toPress.toString().contains(&quot;Green&quot;))</span>
+<span class="nc" id="L301">            return &quot;Green&quot;;</span>
+<span class="nc" id="L302">        return &quot;Blue&quot;;</span>
+    }
+
+    /**
+     *
+     *
+     * @return
+     */
+    private static boolean allUnique(){
+<span class="nc" id="L311">        String[] temp = toPress.toString().split(&quot; &quot;);</span>
+<span class="nc bnc" id="L312" title="All 6 branches missed.">        return !((temp[0].equals(temp[1])) || (temp[0].equals(temp[2])) || (temp[1].equals(temp[2])));</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static boolean oneNotPressed(Simon.States[] colors){
+<span class="nc" id="L322">       int counter = 4;</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">       for (Simon.States current : colors){</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">           for (String sample : toPress.toString().split(&quot; &quot;)){</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">               if (sample.equals(firstCap(current))) counter--;</span>
+           }
+       }
+<span class="nc bnc" id="L328" title="All 2 branches missed.">        return counter == 3;</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static String pressOneNot(Simon.States[] colors){
+<span class="nc bnc" id="L338" title="All 2 branches missed.">        for (Simon.States current : colors){</span>
+<span class="nc bnc" id="L339" title="All 2 branches missed.">            for (String sample : toPress.toString().split(&quot; &quot;)){</span>
+<span class="nc bnc" id="L340" title="All 2 branches missed.">                if (sample.equals(firstCap(current))) return firstCap(current);</span>
+            }
+        }
+<span class="nc" id="L343">        return null;</span>
+    }
+
+    /**
+     *
+     */
+    public static void resetMod(){
+<span class="nc" id="L350">        toPress = new StringBuilder();</span>
+<span class="nc" id="L351">    }</span>
+
+    /**
+     *
+     *
+     * @param text
+     * @return
+     */
+    private static String firstCap(Simon.States text){
+<span class="nc bnc" id="L360" title="All 2 branches missed.">        return (text.name().length() != 1)?</span>
+<span class="nc" id="L361">                text.name().substring(0,1).toUpperCase() + text.name().substring(1):</span>
+<span class="nc" id="L362">                text.name().toUpperCase();</span>
+    }
+
+    /**
+     *
+     *
+     * @param colors
+     * @return
+     */
+    private static String writeOut(Simon.States[] colors){
+<span class="nc" id="L372">        StringBuilder temp = new StringBuilder();</span>
+
+<span class="nc bnc" id="L374" title="All 2 branches missed.">        for (int i = 0; i &lt; colors.length; i++){</span>
+<span class="nc" id="L375">            temp.append(firstCap(colors[i]));</span>
+<span class="nc bnc" id="L376" title="All 2 branches missed.">            if (i &lt; colors.length-1)</span>
+<span class="nc" id="L377">                temp.append(&quot; &quot;);</span>
+        }
+<span class="nc" id="L379">        return temp.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

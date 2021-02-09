@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TheBulb.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.t</a> &gt; <span class="el_source">TheBulb.java</span></div><h1>TheBulb.java</h1><pre class="source lang-java linenums">package bomb.modules.t;
+
+import bomb.modules.s.Souvenir;
+import bomb.enumerations.Bulb;
+import bomb.enumerations.Indicators;
+import bomb.Widget;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
+import static bomb.tools.Mechanics.ultimateFilter;
+
+//TODO - Finish Javadocs
+<span class="nc" id="L16">public class TheBulb extends Widget {</span>
+    private static boolean stepOneWentOff, currentLight, shutdownAtPressOne;
+    private static Bulb.Light stepOnePressed;
+    private static Indicators remembered;
+    private static final String arrow = &quot; -&gt; &quot;;
+
+    /**
+     *
+     *
+     * @param next
+     * @return
+     */
+    public static String entry(Bulb next){
+<span class="nc" id="L29">        StringBuilder script = new StringBuilder();</span>
+<span class="nc" id="L30">        String scriptOut = findSet(next, 1, script);</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">        if (Souvenir.getSet())</span>
+<span class="nc" id="L32">            Souvenir.addRelic(&quot;The Bulb&quot;, ultimateFilter(scriptOut</span>
+<span class="nc" id="L33">                            .replaceAll(&quot;Screw it back in&quot;, &quot;&quot;), &quot;i&quot;, &quot;o&quot;, &quot; &quot;)</span>
+<span class="nc" id="L34">                    .toUpperCase());</span>
+<span class="nc" id="L35">        return scriptOut;</span>
+    }
+
+    /**
+     *
+     *
+     * @param next
+     * @param stage
+     * @param instruction
+     * @return
+     */
+    private static String findSet(Bulb next, int stage, StringBuilder instruction){
+        //TODO - Break down
+<span class="nc bnc" id="L48" title="All 15 branches missed.">        switch (stage){</span>
+            case 1: {
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                if (next.getLight() == Bulb.Light.ON){</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">                    if (next.getOpacity() == Bulb.Opacity.TRANSLUCENT){</span>
+<span class="nc" id="L52">                        stepOnePressed = Bulb.Light.ON;</span>
+<span class="nc" id="L53">                        instruction.append(&quot;Press I&quot;);</span>
+<span class="nc" id="L54">                        lightConfirmation(next, instruction.toString(), true);</span>
+<span class="nc" id="L55">                        instruction.append(arrow);</span>
+<span class="nc" id="L56">                        return findSet(next, 2, instruction);</span>
+                    }
+<span class="nc" id="L58">                    stepOnePressed = Bulb.Light.OFF;</span>
+<span class="nc" id="L59">                    instruction.append(&quot;Press O&quot;);</span>
+<span class="nc" id="L60">                    lightConfirmation(next, instruction.toString(), true);</span>
+<span class="nc" id="L61">                    instruction.append(arrow);</span>
+<span class="nc" id="L62">                    return findSet(next, 3, instruction);</span>
+                }
+<span class="nc" id="L64">                unscrew(next);</span>
+<span class="nc" id="L65">                instruction.append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L66">                return findSet(next, 4, instruction);</span>
+            }
+            case 2: {
+<span class="nc bnc" id="L69" title="All 2 branches missed.">                if (next.getColor() == Bulb.Color.RED){</span>
+<span class="nc" id="L70">                    instruction.append(&quot;Press I&quot;).append(arrow).append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L71">                    return findSet(next, 5, instruction);</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">                } else if (next.getColor() == Bulb.Color.WHITE){</span>
+<span class="nc" id="L73">                    instruction.append(&quot;Press O&quot;).append(arrow).append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L74">                    unscrew(next);</span>
+<span class="nc" id="L75">                    return findSet(next, 6, instruction);</span>
+                }
+<span class="nc" id="L77">                unscrew(next);</span>
+<span class="nc" id="L78">                instruction.append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L79">                return findSet(next, 7, instruction);</span>
+            }
+            case 3: {
+<span class="nc" id="L82">                unscrew(next);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                if (next.getColor() == Bulb.Color.GREEN){</span>
+<span class="nc" id="L84">                    instruction.append(&quot;Press I&quot;);</span>
+<span class="nc" id="L85">                    offAtPressI(next, instruction.toString());</span>
+<span class="nc" id="L86">                    instruction.append(arrow).append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L87">                    return findSet(next, 6, instruction);</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">                } else if (next.getColor() == Bulb.Color.PURPLE){</span>
+<span class="nc" id="L89">                    instruction.append(&quot;Press O&quot;).append(arrow).append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L90">                    return findSet(next, 5, instruction);</span>
+                }
+<span class="nc" id="L92">                instruction.append(&quot;Unscrew&quot;).append(arrow);</span>
+<span class="nc" id="L93">                return findSet(next, 8, instruction);</span>
+            }
+            case 4: {
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                if (Widget.hasFollowingInds(Indicators.CAR, Indicators.IND, Indicators.MSA, Indicators.SND)){</span>
+<span class="nc" id="L97">                    instruction.append(&quot;Press I&quot;).append(arrow);</span>
+<span class="nc" id="L98">                    return findSet(next, 9, instruction);</span>
+                }
+<span class="nc" id="L100">                instruction.append(&quot;Press O&quot;).append(arrow);</span>
+<span class="nc" id="L101">                return findSet(next, 10, instruction);</span>
+            }
+            case 5: {
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                if (stepOneWentOff){</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">                    instruction.append(&quot;Press &quot;).append(stepOnePressed == Bulb.Light.ON?&quot;I&quot;:&quot;O&quot;).append(arrow);</span>
+<span class="nc" id="L106">                    return instruction.append(&quot;Screw the Bulb&quot;).toString();</span>
+                }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                instruction.append(&quot;Press &quot;).append(stepOnePressed == Bulb.Light.ON?&quot;O&quot;:&quot;I&quot;)</span>
+<span class="nc" id="L109">                        .append(arrow).append(&quot;Screw the Bulb&quot;);</span>
+<span class="nc" id="L110">                return instruction.toString();</span>
+            }
+            case 6: {
+                //TODO - Figure out a way to scan this
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                if (shutdownAtPressOne){</span>
+<span class="nc" id="L115">                    return instruction.append(&quot;Press the button from step 1&quot;).toString();</span>
+                }
+<span class="nc" id="L117">                return instruction.append(&quot;Press the button from the previous step&quot;).toString();</span>
+            }
+            case 7: {
+<span class="nc bnc" id="L120" title="All 2 branches missed.">                if (next.getColor() == Bulb.Color.GREEN){</span>
+<span class="nc" id="L121">                    remembered = Indicators.SIG;</span>
+<span class="nc" id="L122">                    instruction.append(&quot;Press I&quot;).append(arrow);</span>
+<span class="nc" id="L123">                    return findSet(next, 11, instruction);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                } else if (next.getColor() == Bulb.Color.PURPLE){</span>
+<span class="nc" id="L125">                    instruction.append(&quot;Press I&quot;).append(arrow).append(&quot;Screw it back in&quot;).append(arrow);</span>
+<span class="nc" id="L126">                    screw(next);</span>
+<span class="nc" id="L127">                    return findSet(next, 12, instruction);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                } else if (next.getColor() == Bulb.Color.BLUE){</span>
+<span class="nc" id="L129">                    remembered = Indicators.CLR;</span>
+<span class="nc" id="L130">                    instruction.append(&quot;Press O&quot;);</span>
+<span class="nc" id="L131">                    return findSet(next, 11, instruction);</span>
+                }
+<span class="nc" id="L133">                instruction.append(&quot;Press O&quot;).append(arrow).append(&quot;Screw it back in&quot;).append(arrow);</span>
+<span class="nc" id="L134">                return findSet(next, 13, instruction);</span>
+            }
+            case 8: {
+<span class="nc bnc" id="L137" title="All 2 branches missed.">                if (next.getColor() == Bulb.Color.WHITE){</span>
+<span class="nc" id="L138">                    remembered = Indicators.FRQ;</span>
+<span class="nc" id="L139">                    instruction.append(&quot;Press I&quot;).append(arrow);</span>
+<span class="nc" id="L140">                    return findSet(next, 11, instruction);</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">                } else if (next.getColor() == Bulb.Color.RED){</span>
+<span class="nc" id="L142">                    instruction.append(&quot;Press I&quot;).append(arrow).append(&quot;Screw it back in&quot;).append(arrow);</span>
+<span class="nc" id="L143">                    return findSet(next, 13, instruction);</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                } else if (next.getColor() == Bulb.Color.YELLOW){</span>
+<span class="nc" id="L145">                    remembered = Indicators.FRK;</span>
+<span class="nc" id="L146">                    instruction.append(&quot;Press O&quot;).append(arrow);</span>
+<span class="nc" id="L147">                    return findSet(next, 11, instruction);</span>
+                }
+<span class="nc" id="L149">                instruction.append(&quot;Press O&quot;).append(arrow).append(&quot;Screw it back in&quot;).append(arrow);</span>
+<span class="nc" id="L150">                return findSet(next, 12, instruction);</span>
+            }
+            case 9:{
+<span class="nc bnc" id="L153" title="All 6 branches missed.">               switch (next.getColor()){</span>
+                   case BLUE: {
+<span class="nc" id="L155">                       instruction.append(&quot;Press I&quot;).append(arrow);</span>
+<span class="nc" id="L156">                       return findSet(next, 14, instruction);</span>
+                   }
+                   case GREEN: {
+<span class="nc" id="L159">                       instruction.append(&quot;Press I&quot;).append(arrow).append(&quot;Screw it back in&quot;)</span>
+<span class="nc" id="L160">                               .append(arrow);</span>
+<span class="nc" id="L161">                       return findSet(next, 12, instruction);</span>
+                   }
+                   case YELLOW: {
+<span class="nc" id="L164">                       instruction.append(&quot;Press O&quot;).append(arrow);</span>
+<span class="nc" id="L165">                       return findSet(next, 15, instruction);</span>
+                   }
+                   case WHITE: {
+<span class="nc" id="L168">                       instruction.append(&quot;Press O&quot;).append(arrow).append(&quot;Screw it back in&quot;)</span>
+<span class="nc" id="L169">                               .append(arrow);</span>
+<span class="nc" id="L170">                       return findSet(next, 13, instruction);</span>
+                   }
+                   case PURPLE: {
+<span class="nc" id="L173">                       instruction.append(&quot;Screw it back in&quot;).append(arrow).append(&quot;Press I&quot;)</span>
+<span class="nc" id="L174">                               .append(arrow);</span>
+<span class="nc" id="L175">                       return findSet(next, 12, instruction);</span>
+                   }
+                   default: {
+<span class="nc" id="L178">                       instruction.append(&quot;Screw it back in&quot;).append(arrow).append(&quot;Press O&quot;)</span>
+<span class="nc" id="L179">                               .append(arrow);</span>
+<span class="nc" id="L180">                       return findSet(next, 13, instruction);</span>
+                   }
+               }
+            }
+            case 10: {
+<span class="nc bnc" id="L185" title="All 6 branches missed.">                switch (next.getColor()){</span>
+                    case PURPLE: {
+<span class="nc" id="L187">                        instruction.append(&quot;Press I&quot;).append(arrow);</span>
+<span class="nc" id="L188">                        return findSet(next, 14, instruction);</span>
+                    }
+                    case RED: {
+<span class="nc" id="L191">                        instruction.append(&quot;Press I&quot;).append(arrow).append(&quot;Screw it back in&quot;)</span>
+<span class="nc" id="L192">                            .append(arrow);</span>
+<span class="nc" id="L193">                        return findSet(next, 13, instruction);</span>
+                    }
+                    case BLUE: {
+<span class="nc" id="L196">                        instruction.append(&quot;Press O&quot;).append(arrow);</span>
+<span class="nc" id="L197">                        return findSet(next, 15, instruction);</span>
+                    }
+                    case YELLOW: {
+<span class="nc" id="L200">                        instruction.append(&quot;Press O&quot;).append(arrow).append(&quot;Screw it back in&quot;)</span>
+<span class="nc" id="L201">                                .append(arrow);</span>
+<span class="nc" id="L202">                        return findSet(next, 12, instruction);</span>
+                    }
+                    case GREEN: {
+<span class="nc" id="L205">                        instruction.append(&quot;Screw it back in&quot;).append(arrow).append(&quot;Press I&quot;)</span>
+<span class="nc" id="L206">                            .append(arrow);</span>
+<span class="nc" id="L207">                        return findSet(next, 13, instruction);</span>
+                    }
+                    default: {
+<span class="nc" id="L210">                        instruction.append(&quot;Screw it back in&quot;).append(arrow).append(&quot;Press O&quot;)</span>
+<span class="nc" id="L211">                                .append(arrow);</span>
+<span class="nc" id="L212">                        return findSet(next, 12, instruction);</span>
+                    }
+                }
+            }
+            case 11: {
+<span class="nc bnc" id="L217" title="All 2 branches missed.">                if (hasRem()){</span>
+<span class="nc" id="L218">                    return instruction.toString() + &quot;Press I&quot; +arrow + &quot;Screw it back in&quot;;</span>
+                }
+<span class="nc" id="L220">                return instruction.toString() + &quot;Press O&quot; +arrow + &quot;Screw it back in&quot;;</span>
+            }
+            case 12:{
+<span class="nc" id="L223">                lightConfirmation(next, instruction.toString(), false);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">                return instruction.toString() + (currentLight?&quot;Press I&quot;:&quot;Press O&quot;);</span>
+            }
+            case 13: {
+<span class="nc" id="L227">                lightConfirmation(next, instruction.toString(), false);</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">                return instruction.toString() + (currentLight?&quot;Press O&quot;:&quot;Press I&quot;);</span>
+            }
+            case 14: {
+<span class="nc bnc" id="L231" title="All 2 branches missed.">                if (next.getOpacity() == Bulb.Opacity.OPAQUE){</span>
+<span class="nc" id="L232">                    return instruction.toString() + &quot;Press I&quot; + arrow + &quot;Screw it back in&quot;;</span>
+                }
+<span class="nc" id="L234">                return instruction.toString() + &quot;Press O&quot; + arrow + &quot;Screw it back in&quot;;</span>
+            }
+            default: {
+<span class="nc bnc" id="L237" title="All 2 branches missed.">                if (next.getOpacity() == Bulb.Opacity.TRANSLUCENT){</span>
+<span class="nc" id="L238">                    return instruction.toString() + &quot;Press I&quot; + arrow + &quot;Screw it back in&quot;;</span>
+                }
+<span class="nc" id="L240">                return instruction.toString() + &quot;Press O&quot; + arrow + &quot;Screw it back in&quot;;</span>
+            }
+        }
+    }
+
+    /**
+     *
+     *
+     * @param next
+     */
+    private static void unscrew(Bulb next){
+<span class="nc" id="L251">        next.setPosition(Bulb.Position.UNSCREWED);</span>
+<span class="nc" id="L252">    }</span>
+
+    /**
+     *
+     *
+     * @param next
+     */
+    private static void screw(Bulb next){
+<span class="nc" id="L260">        next.setPosition(Bulb.Position.SCREWED);</span>
+<span class="nc" id="L261">    }</span>
+
+    /**
+     *
+     *
+     * @param next
+     * @param instr
+     * @param isStepOne
+     */
+    private static void lightConfirmation(Bulb next, String instr, boolean isStepOne){
+        //TODO - Break down????
+<span class="nc" id="L272">        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);</span>
+<span class="nc" id="L273">        alert.setTitle(&quot;Light Confirmation&quot;);</span>
+<span class="nc" id="L274">        alert.setContentText(&quot;Is the bulb now on or off?&quot;);</span>
+<span class="nc" id="L275">        alert.setHeaderText(instr);</span>
+
+<span class="nc" id="L277">        ButtonType on = new ButtonType(&quot;On&quot;),</span>
+<span class="nc" id="L278">                off = new ButtonType(&quot;Off&quot;);</span>
+
+<span class="nc" id="L280">        alert.getButtonTypes().clear();</span>
+<span class="nc" id="L281">        alert.getButtonTypes().addAll(on, off);</span>
+<span class="nc" id="L282">        Optional&lt;ButtonType&gt; options = alert.showAndWait();</span>
+
+        try {
+<span class="nc bnc" id="L285" title="All 2 branches missed.">            if (options.isPresent()) {</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">                if (isStepOne) {</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">                    stepOneWentOff = options.get() == off;</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">                    if (stepOneWentOff) {</span>
+<span class="nc" id="L289">                        next.setLight(Bulb.Light.OFF);</span>
+                    }
+                } else {
+<span class="nc bnc" id="L292" title="All 2 branches missed.">                    currentLight = options.get() == on;</span>
+<span class="nc bnc" id="L293" title="All 2 branches missed.">                    if (currentLight) {</span>
+<span class="nc" id="L294">                        next.setLight(Bulb.Light.ON);</span>
+                    }
+                }
+            }
+<span class="nc" id="L298">        } catch (NoSuchElementException noElement){</span>
+<span class="nc" id="L299">            Alert wrong = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L300">            wrong.setContentText(&quot;This shouldn't be happening&quot;);</span>
+<span class="nc" id="L301">            wrong.showAndWait();</span>
+<span class="nc" id="L302">        }</span>
+<span class="nc" id="L303">    }</span>
+
+    /**
+     *
+     *
+     * @param next
+     * @param instr
+     */
+    private static void offAtPressI(Bulb next, String instr){
+<span class="nc" id="L312">        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);</span>
+<span class="nc" id="L313">        alert.setTitle(&quot;Off at the Press I&quot;);</span>
+<span class="nc" id="L314">        alert.setContentText(&quot;Did the Bulb turn off when you pressed I?&quot;);</span>
+<span class="nc" id="L315">        alert.setHeaderText(instr);</span>
+
+<span class="nc" id="L317">        ButtonType no = new ButtonType(&quot;No&quot;),</span>
+<span class="nc" id="L318">                yes = new ButtonType(&quot;Yes&quot;);</span>
+
+<span class="nc" id="L320">        alert.getButtonTypes().clear();</span>
+<span class="nc" id="L321">        alert.getButtonTypes().addAll(yes, no);</span>
+<span class="nc" id="L322">        Optional&lt;ButtonType&gt; options = alert.showAndWait();</span>
+
+        try {
+<span class="nc bnc" id="L325" title="All 2 branches missed.">            if (options.isPresent()) {</span>
+<span class="nc bnc" id="L326" title="All 2 branches missed.">                shutdownAtPressOne = options.get() == yes;</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">                if (shutdownAtPressOne) {</span>
+<span class="nc" id="L328">                    next.setLight(Bulb.Light.OFF);</span>
+<span class="nc" id="L329">                    currentLight = false;</span>
+                }
+            }
+<span class="nc" id="L332">        } catch (NoSuchElementException noElement){</span>
+<span class="nc" id="L333">            Alert wrong = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L334">            wrong.setContentText(&quot;This shouldn't be happening&quot;);</span>
+<span class="nc" id="L335">            wrong.showAndWait();</span>
+<span class="nc" id="L336">        }</span>
+<span class="nc" id="L337">    }</span>
+
+    /**
+     *
+     *
+     * @return
+     */
+    private static boolean hasRem(){
+<span class="nc bnc" id="L345" title="All 4 branches missed.">        return remembered != null &amp;&amp; Widget.hasIndicator(remembered);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

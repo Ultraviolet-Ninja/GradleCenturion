@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Bitwise.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.ab</a> &gt; <span class="el_source">Bitwise.java</span></div><h1>Bitwise.java</h1><pre class="source lang-java linenums">package bomb.modules.ab;
+
+import bomb.Widget;
+import bomb.enumerations.BitwiseOps;
+import bomb.enumerations.Indicators;
+import bomb.enumerations.Ports;
+
+import static bomb.tools.Mechanics.NUMBER_REGEX;
+import static bomb.tools.Mechanics.ultimateFilter;
+
+/**
+ * This class deals with the Bitwise Operators module. Bitwise Ops is a screen containing a simple 8-bit
+ * number line with a specific boolean operator that the defuser reads to the expert. The class evaluates
+ * which bits will be 1 or 0 in the byte line.
+ */
+<span class="nc" id="L16">public class Bitwise extends Widget {</span>
+
+    //TODO - Finish Javadocs
+    /**
+     * Turns the edgework conditions into a byte that the defuser will input into the bomb module
+     *
+     * @param bit The operation that must be used on each pair of bits
+     * @return The String of 1's and 0's that the defuser must put into the module screen
+     * @throws IllegalArgumentException - The serial code, number of timer minutes and modules
+     * are needed for this module to work
+     */
+    public static String getByte(BitwiseOps bit) throws IllegalArgumentException{
+<span class="fc" id="L28">        StringBuilder builder = new StringBuilder();</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        for (int i = 0; i &lt; 8; i++)</span>
+<span class="fc" id="L30">            builder.append(solve(i, bit));</span>
+<span class="fc" id="L31">        return builder.toString();</span>
+    }
+
+    /**
+     * Evaluates the resulting bitOp from the position, the needed operation and the edgework conditions
+     *
+     * @param sigBit Which bitOp in the byte the method will focus on
+     * @param bitOp The operation that must be used on each pair of bits
+     * @return The value of the resulting bitOp
+     * @throws IllegalArgumentException - The serial code is needed for this module to work
+     */
+    private static int solve(int sigBit, BitwiseOps bitOp) throws IllegalArgumentException{
+        boolean[] bits;
+<span class="fc bfc" id="L44" title="All 8 branches covered.">        switch (sigBit) {</span>
+<span class="fc" id="L45">            case 0: bits = firstBits(); break;</span>
+<span class="fc" id="L46">            case 1: bits = secondBits(); break;</span>
+<span class="fc" id="L47">            case 2: bits = thirdBits(); break;</span>
+<span class="fc" id="L48">            case 3: bits = forthBits(); break;</span>
+<span class="fc" id="L49">            case 4: bits = fifthBits(); break;</span>
+<span class="fc" id="L50">            case 5: bits = sixthBits(); break;</span>
+<span class="fc" id="L51">            case 6: bits = seventhBits(); break;</span>
+<span class="fc" id="L52">            default: bits = eighthBits(); break;</span>
+        }
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        return operator(bitOp, bits)?1:0;</span>
+    }
+
+    /**
+     * Executes a boolean operation on the 2 bits to determine the resulting bit
+     *
+     * @param bitOp The operation to be executed on the bits
+     * @param bits
+     * @return The result from the operation
+     */
+    private static boolean operator(BitwiseOps bitOp, boolean[] bits){
+<span class="fc bfc" id="L65" title="All 4 branches covered.">        switch (bitOp) {</span>
+<span class="pc bpc" id="L66" title="1 of 4 branches missed.">            case OR: return bits[0] || bits[1];</span>
+<span class="fc bfc" id="L67" title="All 4 branches covered.">            case AND: return bits[0] &amp;&amp; bits[1];</span>
+<span class="pc bpc" id="L68" title="1 of 8 branches missed.">            case XOR: return ((bits[0] &amp;&amp; !bits[1])||(!bits[0] &amp;&amp; bits[1]));</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            default: return !bits[0];</span>
+        }
+    }
+
+    private static boolean[] firstBits(){
+<span class="fc bfc" id="L74" title="All 4 branches covered.">        return new boolean[]{numDoubleAs == 0, numDBatteries &gt; 0};</span>
+    }
+
+    private static boolean[] secondBits(){
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        return new boolean[]{hasMoreThan(Ports.PARALLEL, 0), getTotalPorts() &gt; 2};</span>
+    }
+
+    private static boolean[] thirdBits(){
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        return new boolean[]{hasLitIndicator(Indicators.NSA), numHolders &gt; 1};</span>
+    }
+
+    private static boolean[] forthBits() throws IllegalArgumentException{
+<span class="fc bfc" id="L86" title="All 4 branches covered.">        if (numModules == 0 || numStartingMin == 0) throw new IllegalArgumentException(</span>
+                &quot;Number of starting modules and minutes should be filled!&quot;);
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        return new boolean[]{numModules &gt; numStartingMin, hasLitIndicator(Indicators.BOB)};</span>
+    }
+
+    private static boolean[] fifthBits(){
+<span class="fc bfc" id="L92" title="All 4 branches covered.">        return new boolean[]{countIndicators(true, false) &gt; 1, countIndicators(false, false) &gt; 1};</span>
+    }
+
+    private static boolean[] sixthBits() throws IllegalArgumentException{
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (serialCode.isEmpty())</span>
+<span class="fc" id="L97">            throw new IllegalArgumentException(&quot;You need the serial code to solve Bitwise Ops!&quot;);</span>
+<span class="fc" id="L98">        String nums = ultimateFilter(serialCode, NUMBER_REGEX);</span>
+<span class="fc bfc" id="L99" title="All 4 branches covered.">        return new boolean[]{numModules % 3 == 0, nums.charAt(nums.length() - 1) % 2 == 1};</span>
+    }
+
+    private static boolean[] seventhBits(){
+<span class="pc bpc" id="L103" title="1 of 4 branches missed.">        return new boolean[]{numDBatteries &lt; 2, numModules % 2 == 0};</span>
+    }
+
+    private static boolean[] eighthBits(){
+<span class="pc bpc" id="L107" title="1 of 4 branches missed.">        return new boolean[]{getTotalPorts() &lt; 4, getAllBatteries() &gt; 1};</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Button.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.t.translated</a> &gt; <span class="el_source">Button.java</span></div><h1>Button.java</h1><pre class="source lang-java linenums">/*
+ * Author: Ultraviolet-Ninja
+ * Project: Bomb Defusal Manual for Keep Talking and Nobody Explodes [Vanilla]
+ * Section: Button
+ */
+
+package bomb.modules.t.translated;
+
+import bomb.enumerations.Indicators;
+import bomb.enumerations.TheButton;
+
+/**
+ * Button class deals with a button module
+ */
+<span class="nc" id="L15">public class Button extends TranslationCenter {</span>
+    private static final String hold = &quot;Hold&quot;,
+            tap = &quot;Tap&quot;;
+
+    /**
+     * evaluate() sorts through the conditions of the current bomb and tells either to hold or tap the button
+     *
+     * @param properties - Takes in 2 properties, one color and one label
+     *                   and determines what to do with the button.
+     * @return - The String instruction of what to do
+     */
+    public static String evaluate(TheButton[] properties){
+        boolean which;
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        if (properties[0] == TheButton.BLUE &amp;&amp; properties[1] == TheButton.ABORT)</span>
+<span class="nc" id="L29">            which = false;</span>
+<span class="nc bnc" id="L30" title="All 4 branches missed.">        else if (getAllBatteries() &gt; 1 &amp;&amp; properties[1] == TheButton.DETONATE)</span>
+<span class="nc" id="L31">            which = true;</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">        else if (hasLitIndicator(Indicators.CAR))</span>
+<span class="nc" id="L33">            which = false;</span>
+<span class="nc bnc" id="L34" title="All 4 branches missed.">        else if (getAllBatteries() &gt; 2 &amp;&amp; hasLitIndicator(Indicators.FRK))</span>
+<span class="nc" id="L35">            which = true;</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        else if (properties[0] == TheButton.YELLOW)</span>
+<span class="nc" id="L37">            which = false;</span>
+<span class="nc bnc" id="L38" title="All 4 branches missed.">        else which = properties[0] == TheButton.RED &amp;&amp; properties[1] == TheButton.HOLD;</span>
+
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        return which ? tap : hold;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

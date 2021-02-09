@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EnglishDict.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.dictionary</a> &gt; <span class="el_source">EnglishDict.java</span></div><h1>EnglishDict.java</h1><pre class="source lang-java linenums">package bomb.tools.dictionary;
+
+import java.util.HashMap;
+
+public class EnglishDict extends Dictionary{
+<span class="nc" id="L6">    public EnglishDict(){</span>
+<span class="nc" id="L7">        frequencies = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L8">        stepTwoMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L9">        initFreqs();</span>
+<span class="nc" id="L10">        initStepTwo();</span>
+<span class="nc" id="L11">        yes = &quot;Vent Gas? - Yes&quot;;</span>
+<span class="nc" id="L12">        no = &quot;Detonate - No&quot;;</span>
+<span class="nc" id="L13">        fancyChars = &quot;&quot;;</span>
+<span class="nc" id="L14">        buttonLabels = new String[]{&quot;Red&quot;, &quot;Blue&quot;, &quot;Yellow&quot;, &quot;White&quot;, &quot;Hold&quot;, &quot;Press&quot;, &quot;Detonate&quot;, &quot;Abort&quot;};</span>
+<span class="nc" id="L15">        moduleLabels = new String[]{&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;};</span>
+<span class="nc" id="L16">        passwords = new String[]{</span>
+                &quot;about&quot;, &quot;after&quot;, &quot;again&quot;, &quot;below&quot;, &quot;could&quot;,
+                &quot;every&quot;, &quot;first&quot;, &quot;found&quot;, &quot;great&quot;, &quot;house&quot;,
+                &quot;large&quot;, &quot;learn&quot;, &quot;never&quot;, &quot;other&quot;, &quot;place&quot;,
+                &quot;plant&quot;, &quot;point&quot;, &quot;right&quot;, &quot;small&quot;, &quot;sound&quot;,
+                &quot;spell&quot;, &quot;still&quot;, &quot;study&quot;, &quot;their&quot;, &quot;there&quot;,
+                &quot;these&quot;,&quot;thing&quot;, &quot;think&quot;, &quot;three&quot;, &quot;water&quot;,
+                &quot;where&quot;, &quot;which&quot;, &quot;world&quot;, &quot;would&quot;, &quot;write&quot;};
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public String predictWord(String part, boolean isMorse) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (!isMorse) {</span>
+<span class="nc bnc" id="L29" title="All 41 branches missed.">            switch (part.toLowerCase()) {</span>
+<span class="nc" id="L30">                case &quot;n&quot;: return&quot;no&quot;;</span>
+<span class="nc" id="L31">                case &quot;w&quot;: case &quot;wa&quot;: case &quot;wai&quot;: case &quot;wt&quot;: case &quot;wat&quot;: case &quot;wit&quot;: return&quot;wait&quot;;</span>
+<span class="nc" id="L32">                case &quot;redy&quot;: case &quot;rdy&quot;: case &quot;ry&quot;: return&quot;ready&quot;;</span>
+<span class="nc" id="L33">                case &quot;b&quot;: case &quot;blk&quot;: case &quot;blnk&quot;: case &quot;bnk&quot;: case &quot;bl&quot;: case &quot;bla&quot;: case &quot;baln&quot;: case &quot;balnk&quot;: case &quot;blan&quot;: return&quot;blank&quot;;</span>
+<span class="nc" id="L34">                case &quot;p&quot;: case &quot;pr&quot;: case &quot;pre&quot;: case &quot;ss&quot;: case &quot;pres&quot;: case &quot;prss&quot;: case &quot;ress&quot;: return&quot;press&quot;;</span>
+<span class="nc" id="L35">                case &quot;rig&quot;: case &quot;righ&quot;: case &quot;ryt&quot;: case &quot;rye&quot;: return&quot;right&quot;;</span>
+<span class="nc" id="L36">                case &quot;mid&quot;: case &quot;mi&quot;: case &quot;midd&quot;: case &quot;middl&quot;: return&quot;middle&quot;;</span>
+<span class="nc" id="L37">                case &quot;nex&quot;: case &quot;ne&quot;: case &quot;xt&quot;: return&quot;next&quot;;</span>
+<span class="nc" id="L38">                case &quot;s&quot;: case &quot;su&quot;: case &quot;ure&quot;: return&quot;sure&quot;;</span>
+<span class="nc" id="L39">                case &quot;e&quot;: case &quot;ty&quot;: case &quot;em&quot;: case &quot;emp&quot;: case &quot;ep&quot;: case &quot;ept&quot;: return&quot;empty&quot;;</span>
+<span class="nc" id="L40">                case &quot;l&quot;: return&quot;led&quot;;</span>
+<span class="nc" id="L41">                case &quot;le&quot;: case &quot;lee&quot;: return&quot;leed&quot;;</span>
+<span class="nc" id="L42">                case &quot;la&quot;: case &quot;lea&quot;: return&quot;lead&quot;;</span>
+<span class="nc" id="L43">                case &quot;li&quot;: case &quot;ike&quot;: case &quot;lik&quot;: case &quot;lke&quot;: return&quot;like&quot;;</span>
+<span class="nc" id="L44">                case &quot;r&quot;: case &quot;rd&quot;: return&quot;red&quot;;</span>
+<span class="nc" id="L45">                case &quot;ree&quot;: case &quot;re&quot;: return&quot;reed&quot;;</span>
+<span class="nc" id="L46">                case &quot;rad&quot;: case &quot;rea&quot;: case &quot;ra&quot;: return&quot;read&quot;;</span>
+<span class="nc" id="L47">                case &quot;ho&quot;: case &quot;hol&quot;: return&quot;hold&quot;;</span>
+<span class="nc" id="L48">                case &quot;holdn&quot;: case &quot;holdon&quot;: case &quot;hod&quot;: case &quot;hoon&quot;: case &quot;holon&quot;: case &quot;holn&quot;: return&quot;hold on&quot;;</span>
+<span class="nc" id="L49">                case &quot;d&quot;: case &quot;di&quot;: case &quot;dis&quot;: case &quot;disp&quot;: case &quot;displ&quot;: case &quot;displa&quot;: return&quot;display&quot;;</span>
+<span class="nc" id="L50">                case &quot;do&quot;: case &quot;don&quot;: case &quot;dne&quot;: case &quot;one&quot;: return&quot;done&quot;;</span>
+<span class="nc" id="L51">                case &quot;uh&quot;: case &quot;uh u&quot;: case &quot;uhu&quot;: case &quot;uhuh&quot;: return&quot;uh uh&quot;;</span>
+<span class="nc" id="L52">                case &quot;yre&quot;: case &quot;y're&quot;: case &quot;y'r&quot;: case &quot;yr'&quot;: case &quot;yu're&quot;: case &quot;youre&quot;: case &quot;yur'&quot;: case &quot;yor'&quot;: case &quot;yor'e&quot;: case &quot;yur'e&quot;: return&quot;you're&quot;;</span>
+<span class="nc" id="L53">                case &quot;uh h&quot;: case &quot;uh &quot;: case &quot;uhh&quot;: case &quot;uhhuh&quot;: return&quot;uh huh&quot;;</span>
+                case &quot;yur&quot;: case &quot;yure&quot;: case &quot;youare&quot;: case &quot;you &quot;: case &quot;you a&quot;: case &quot;you ar&quot;: case &quot;youa&quot;: case &quot;youar&quot;: case &quot;yare&quot;: case &quot;ya&quot;: case &quot;yar&quot;: case &quot;yoare&quot;: case
+<span class="nc" id="L55">                        &quot;yuare&quot;: case &quot;yoa&quot;: case &quot;yoar&quot;: case &quot;yuar&quot;: case &quot;yua&quot;: return&quot;you are&quot;;</span>
+<span class="nc" id="L56">                case &quot;q&quot;: case &quot;?&quot;: case &quot;wq&quot;: case &quot;whatq&quot;: return&quot;what?&quot;;</span>
+<span class="nc" id="L57">                case &quot;tyre&quot;: case &quot;th're&quot;: case &quot;ty're&quot;: case &quot;t're&quot;: case &quot;thyr&quot;: case &quot;thyre&quot;: case &quot;theyr&quot;: case &quot;theyre&quot;: case &quot;eyre&quot;: return&quot;they're&quot;;</span>
+                case &quot;tyare&quot;: case &quot;eyare&quot;: case &quot;they ar&quot;: case &quot;they re&quot;: case &quot;they r&quot;: case &quot;theya&quot;: case &quot;theyar&quot;: case &quot;theyare&quot;: case
+<span class="nc" id="L59">                        &quot;thya&quot;: case &quot;thy&quot;: return&quot;they are&quot;;</span>
+<span class="nc" id="L60">                case &quot;wht&quot;: case &quot;wh&quot;: case &quot;wnq&quot;: return&quot;what&quot;;</span>
+<span class="nc" id="L61">                case &quot;ye&quot;: case &quot;es&quot;: return&quot;yes&quot;;</span>
+<span class="nc" id="L62">                case &quot;yor&quot;: case &quot;our&quot;: case &quot;yr&quot;: return&quot;your&quot;;</span>
+<span class="nc" id="L63">                case &quot;y&quot;: case &quot;yo&quot;: case &quot;yu&quot;: return&quot;you&quot;;</span>
+<span class="nc" id="L64">                case &quot;ce&quot;: return&quot;cee&quot;;</span>
+<span class="nc" id="L65">                case &quot;ok&quot;: case &quot;oka&quot;: case &quot;oak&quot;: case &quot;oaky&quot;: return&quot;okay&quot;;</span>
+<span class="nc" id="L66">                case &quot;sa&quot;: case &quot;say&quot;: case &quot;sys&quot;: return&quot;says&quot;;</span>
+<span class="nc" id="L67">                case &quot;f&quot;: case &quot;fir&quot;: case &quot;firs&quot;: case &quot;fi&quot;: case &quot;1st&quot;: return&quot;first&quot;;</span>
+<span class="nc" id="L68">                case &quot;not&quot;: case &quot;noth&quot;: return&quot;nothing&quot;;</span>
+<span class="nc" id="L69">                case &quot;ere&quot;: return&quot;there&quot;;</span>
+<span class="nc" id="L70">                case &quot;eir&quot;: case &quot;ir&quot;: return&quot;their&quot;;</span>
+<span class="nc" id="L71">                case &quot;lef&quot;: case &quot;lft&quot;: return&quot;left&quot;;</span>
+<span class="nc" id="L72">                default: return part;</span>
+            }
+        }
+<span class="nc bnc" id="L75" title="All 16 branches missed.">        switch (part) {</span>
+<span class="nc" id="L76">            case &quot;sh&quot;: case &quot;she&quot;: case &quot;shel&quot;: return &quot;shell&quot;;</span>
+<span class="nc" id="L77">            case &quot;h&quot; : case&quot;ha&quot;: case &quot;hal&quot;: case &quot;hall&quot;: return&quot;halls&quot;;</span>
+<span class="nc" id="L78">            case &quot;sl&quot;: case &quot;sli&quot;: case &quot;slic&quot;: return&quot;slick&quot;;</span>
+<span class="nc" id="L79">            case &quot;t&quot;: case &quot;tr&quot;: case &quot;tri&quot;: case &quot;tric&quot;: return&quot;trick&quot;;</span>
+<span class="nc" id="L80">            case &quot;box&quot;: case &quot;boxe&quot;: return&quot;boxes&quot;;</span>
+<span class="nc" id="L81">            case &quot;l&quot;: case &quot;le&quot;: case &quot;lea&quot;: case &quot;leak&quot;: return&quot;leaks&quot;;</span>
+<span class="nc" id="L82">            case &quot;str&quot;: case &quot;stro&quot;: case &quot;strob&quot;: case &quot;strb&quot;: return&quot;strobe&quot;;</span>
+<span class="nc" id="L83">            case &quot;f&quot;: case &quot;fl&quot;: case &quot;fli&quot;: case &quot;flic&quot;: return&quot;flick&quot;;</span>
+<span class="nc" id="L84">            case &quot;bom&quot;: case &quot;bomb&quot;: return&quot;bombs&quot;;</span>
+<span class="nc" id="L85">            case &quot;bre&quot;: case &quot;brea&quot;: case &quot;break&quot;: case &quot;reak&quot;: return&quot;breaks&quot;;</span>
+<span class="nc" id="L86">            case &quot;bri&quot;: case &quot;bric&quot;: case &quot;brick&quot;: case &quot;icks&quot;: return&quot;bricks&quot;;</span>
+<span class="nc" id="L87">            case &quot;ste&quot;: case &quot;stea&quot;: return&quot;steak&quot;;</span>
+<span class="nc" id="L88">            case &quot;st&quot;: case &quot;sti&quot;: case &quot;stin&quot;: return&quot;sting&quot;;</span>
+<span class="nc" id="L89">            case &quot;v&quot;: case &quot;ve&quot;: case &quot;vec&quot;: case &quot;vect&quot;: case &quot;vecto&quot;: return&quot;vector&quot;;</span>
+<span class="nc" id="L90">            case &quot;be&quot;: case &quot;bea&quot;: case &quot;beat&quot;: case &quot;eats&quot;: case &quot;ats&quot;: return &quot;beats&quot;;</span>
+<span class="nc" id="L91">            default: return part;</span>
+        }
+    }
+
+    @Override
+    protected void initFreqs() {
+<span class="nc" id="L97">        frequencies.put(&quot;shell&quot;, 3.505);</span>
+<span class="nc" id="L98">        frequencies.put(&quot;halls&quot;, 3.515);</span>
+<span class="nc" id="L99">        frequencies.put(&quot;slick&quot;, 3.522);</span>
+<span class="nc" id="L100">        frequencies.put(&quot;trick&quot;, 3.532);</span>
+<span class="nc" id="L101">        frequencies.put(&quot;boxes&quot;, 3.535);</span>
+<span class="nc" id="L102">        frequencies.put(&quot;leaks&quot;, 3.542);</span>
+<span class="nc" id="L103">        frequencies.put(&quot;strobe&quot;, 3.545);</span>
+<span class="nc" id="L104">        frequencies.put(&quot;bistro&quot;, 3.552);</span>
+<span class="nc" id="L105">        frequencies.put(&quot;flick&quot;, 3.555);</span>
+<span class="nc" id="L106">        frequencies.put(&quot;bombs&quot;, 3.565);</span>
+<span class="nc" id="L107">        frequencies.put(&quot;break&quot;, 3.572);</span>
+<span class="nc" id="L108">        frequencies.put(&quot;brick&quot;, 3.575);</span>
+<span class="nc" id="L109">        frequencies.put(&quot;steak&quot;, 3.582);</span>
+<span class="nc" id="L110">        frequencies.put(&quot;sting&quot;, 3.592);</span>
+<span class="nc" id="L111">        frequencies.put(&quot;vector&quot;, 3.595);</span>
+<span class="nc" id="L112">        frequencies.put(&quot;beats&quot;, 3.6);</span>
+<span class="nc" id="L113">}</span>
+
+    @Override
+    protected void initStepTwo() {
+<span class="nc" id="L117">        stepTwoMap.put(&quot;ready&quot;, &quot;YES, OKAY, WHAT, MIDDLE, LEFT, PRESS, RIGHT, BLANK, READY&quot;);</span>
+<span class="nc" id="L118">        stepTwoMap.put(&quot;first&quot;, &quot;LEFT, OKAY, YES, MIDDLE, NO, RIGHT, NOTHING, UHHH, WAIT, READY, BLANK, WHAT, PRESS, FIRST&quot;);</span>
+<span class="nc" id="L119">        stepTwoMap.put(&quot;no&quot;, &quot;BLANK, UHHH, WAIT, FIRST, WHAT, READY, RIGHT, YES, NOTHING, LEFT, PRESS, OKAY, NO&quot;);</span>
+<span class="nc" id="L120">        stepTwoMap.put(&quot;blank&quot;, &quot;WAIT, RIGHT, OKAY, MIDDLE, BLANK&quot;);</span>
+<span class="nc" id="L121">        stepTwoMap.put(&quot;nothing&quot;, &quot;UHHH, RIGHT, OKAY, MIDDLE, YES, BLANK, NO, PRESS, LEFT, WHAT, WAIT, FIRST, NOTHING&quot;);</span>
+<span class="nc" id="L122">        stepTwoMap.put(&quot;yes&quot;, &quot;OKAY, RIGHT, UHHH, MIDDLE, FIRST, WHAT, PRESS, READY, NOTHING, YES&quot;);</span>
+<span class="nc" id="L123">        stepTwoMap.put(&quot;what&quot;, &quot;UHHH, WHAT&quot;);</span>
+<span class="nc" id="L124">        stepTwoMap.put(&quot;uhhh&quot;, &quot;READY, NOTHING, LEFT, WHAT, OKAY, YES, RIGHT, NO, PRESS, BLANK, UHHH&quot;);</span>
+<span class="nc" id="L125">        stepTwoMap.put(&quot;left&quot;, &quot;RIGHT, LEFT&quot;);</span>
+<span class="nc" id="L126">        stepTwoMap.put(&quot;right&quot;, &quot;YES, NOTHING, READY, PRESS, NO, WAIT, WHAT, RIGHT&quot;);</span>
+<span class="nc" id="L127">        stepTwoMap.put(&quot;middle&quot;, &quot;BLANK, READY, OKAY, WHAT, NOTHING, PRESS, NO, WAIT, LEFT, MIDDLE&quot;);</span>
+<span class="nc" id="L128">        stepTwoMap.put(&quot;okay&quot;, &quot;MIDDLE, NO, FIRST, YES, UHHH, NOTHING, WAIT, OKAY&quot;);</span>
+<span class="nc" id="L129">        stepTwoMap.put(&quot;wait&quot;, &quot;UHHH, NO, BLANK, OKAY, YES, LEFT, FIRST, PRESS, WHAT, WAIT&quot;);</span>
+<span class="nc" id="L130">        stepTwoMap.put(&quot;press&quot;, &quot;RIGHT, MIDDLE, YES, READY, PRESS&quot;);</span>
+<span class="nc" id="L131">        stepTwoMap.put(&quot;you&quot;, &quot;SURE, YOU ARE, YOUR, YOU'RE, NEXT, UH HUH, UR, HOLD, WHAT?, YOU&quot;);</span>
+<span class="nc" id="L132">        stepTwoMap.put(&quot;you are&quot;, &quot;YOUR, NEXT, LIKE, UH HUH, WHAT?, DONE, UH UH, HOLD, YOU, U, YOU'RE, SURE, UR, YOU ARE&quot;);</span>
+<span class="nc" id="L133">        stepTwoMap.put(&quot;your&quot;, &quot;UH UH, YOU ARE, UH HUH, YOUR&quot;);</span>
+<span class="nc" id="L134">        stepTwoMap.put(&quot;you're&quot;, &quot;YOU, YOU'RE&quot;);</span>
+<span class="nc" id="L135">        stepTwoMap.put(&quot;ur&quot;, &quot;DONE, U, UR&quot;);</span>
+<span class="nc" id="L136">        stepTwoMap.put(&quot;u&quot;, &quot;UH HUH, SURE, NEXT, WHAT?, YOU'RE, UR, UH UH, DONE, U&quot;);</span>
+<span class="nc" id="L137">        stepTwoMap.put(&quot;uh huh&quot;, &quot;UH HUH&quot;);</span>
+<span class="nc" id="L138">        stepTwoMap.put(&quot;uh uh&quot;, &quot;UR, U, YOU ARE, YOU'RE, NEXT, UH UH&quot;);</span>
+<span class="nc" id="L139">        stepTwoMap.put(&quot;what?&quot;, &quot;YOU, HOLD, YOU'RE, YOUR, U, DONE, UH UH, LIKE, YOU ARE, UH HUH, UR, NEXT, WHAT?&quot;);</span>
+<span class="nc" id="L140">        stepTwoMap.put(&quot;done&quot;, &quot;SURE, UH HUH, NEXT, WHAT?, YOUR, UR, YOU'RE, HOLD, LIKE, YOU, U, YOU ARE, UH UH, DONE&quot;);</span>
+<span class="nc" id="L141">        stepTwoMap.put(&quot;next&quot;, &quot;WHAT?, UH HUH, UH UH, YOUR, HOLD, SURE, NEXT&quot;);</span>
+<span class="nc" id="L142">        stepTwoMap.put(&quot;hold&quot;, &quot;YOU ARE, U, DONE, UH UH, YOU, UR, SURE, WHAT?, YOU'RE, NEXT, HOLD&quot;);</span>
+<span class="nc" id="L143">        stepTwoMap.put(&quot;sure&quot;, &quot;YOU ARE, DONE, LIKE, YOU'RE, YOU, HOLD, UH HUH, UR, SURE&quot;);</span>
+<span class="nc" id="L144">        stepTwoMap.put(&quot;like&quot;, &quot;YOU'RE, NEXT, U, UR, HOLD, DONE, UH UH, WHAT?, UH HUH, YOU, LIKE&quot;);</span>
+<span class="nc" id="L145">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

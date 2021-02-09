@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MapStack.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.data.structures</a> &gt; <span class="el_source">MapStack.java</span></div><h1>MapStack.java</h1><pre class="source lang-java linenums">package bomb.tools.data.structures;
+
+import java.util.AbstractMap;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+
+/**
+ * The HashStack is a HashMap with a LinkedList as a Stack that controls what elements can be accessed,
+ * altered, or popped off the HashMap. This data structure is based on the following criteria:
+ * â€¢ Having (key, value) pairs
+ * â€¢ Being able to access the values easily
+ * â€¢ Being able to pop newer pairs off the stack when they're not needed
+ *
+ * This is designed to work as a back-tracking data structure with 2 generic classes that need to be tracked
+ *
+ * @param &lt;K&gt; The key
+ * @param &lt;V&gt; The value
+ */
+public class MapStack&lt;K, V&gt; {
+    private final HashMap&lt;K, V&gt; map;
+    private final LinkedList&lt;K&gt; controlStack;
+
+<span class="fc" id="L24">    public MapStack(){</span>
+<span class="fc" id="L25">        map = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L26">        controlStack = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L27">    }</span>
+
+    public boolean containsKey(K key){
+<span class="nc" id="L30">        return controlStack.contains(key);</span>
+    }
+
+    public boolean containsValue(V value){
+<span class="nc" id="L34">        return map.containsValue(value);</span>
+    }
+
+    public LinkedList&lt;K&gt; exportKeys(){
+<span class="nc" id="L38">        return controlStack;</span>
+    }
+
+    public LinkedList&lt;V&gt; exportValues(){
+<span class="nc" id="L42">        return new LinkedList&lt;&gt;(map.values());</span>
+    }
+
+    public K getBottomKey(){
+<span class="nc" id="L46">        return controlStack.getLast();</span>
+    }
+
+    public K getTopKey(){
+<span class="nc" id="L50">        return controlStack.getFirst();</span>
+    }
+
+    public K getKey(int index){
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        return index &lt; controlStack.size() ? controlStack.get(index) : null;</span>
+    }
+
+    public V getBottomValue(){
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        return controlStack.peekLast() == null ? null : map.get(controlStack.peekLast());</span>
+    }
+
+    public V getTopValue(){
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        return controlStack.peekFirst() == null ? null : map.get(controlStack.peekFirst());</span>
+    }
+
+    public V getValue(K key){
+<span class="fc" id="L66">        return map.getOrDefault(key, null);</span>
+    }
+
+    public V getValueByIndex(int index){
+<span class="nc" id="L70">        K tempKey = getKey(index);</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">        return tempKey == null ? null : map.get(tempKey);</span>
+    }
+
+    public boolean push(K key, V value){
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        if (map.containsKey(key)) return false;</span>
+<span class="fc" id="L76">        map.put(key, value);</span>
+<span class="fc" id="L77">        controlStack.push(key);</span>
+<span class="fc" id="L78">        return true;</span>
+    }
+
+    public Map.Entry&lt;K, V&gt; peek(){
+<span class="nc" id="L82">        K tempKey = controlStack.peek();</span>
+<span class="nc" id="L83">        V tempValue = getValue(tempKey);</span>
+<span class="nc" id="L84">        return new AbstractMap.SimpleEntry&lt;&gt;(tempKey, tempValue);</span>
+    }
+
+    public Map.Entry&lt;K, V&gt; pop(){
+<span class="fc" id="L88">        K tempKey = controlStack.pop();</span>
+<span class="fc" id="L89">        V tempValue = map.remove(tempKey);</span>
+<span class="fc" id="L90">        return new AbstractMap.SimpleEntry&lt;&gt;(tempKey, tempValue);</span>
+    }
+
+    public V setTopValue(V newValue){
+<span class="fc" id="L94">        K tempKey = controlStack.peek();</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        return tempKey == null ? null : map.put(tempKey, newValue);</span>
+    }
+
+    public int size(){
+<span class="nc" id="L99">        return map.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

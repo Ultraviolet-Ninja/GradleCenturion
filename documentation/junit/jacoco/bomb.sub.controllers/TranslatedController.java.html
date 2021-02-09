@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TranslatedController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.sub.controllers</a> &gt; <span class="el_source">TranslatedController.java</span></div><h1>TranslatedController.java</h1><pre class="source lang-java linenums">package bomb.sub.controllers;
+
+import bomb.modules.t.translated.*;
+import bomb.enumerations.TheButton;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+import java.io.IOException;
+import java.util.LinkedList;
+
+import static bomb.tools.Mechanics.ultimateFilter;
+
+<span class="nc" id="L19">public class TranslatedController {</span>
+<span class="nc" id="L20">    private boolean firstTime = true;</span>
+<span class="nc" id="L21">    private Label current = new Label();</span>
+<span class="nc" id="L22">    private final LinkedList&lt;ToggleGroup&gt; groups = new LinkedList&lt;&gt;();</span>
+<span class="nc" id="L23">    private TheButton[] traits = new TheButton[2];</span>
+
+    @FXML
+    private ImageView brazil, czech, danish, dutch, english, esperanto, estonian,
+            finnish, french, german, italian, norwegian, polish, spanish, swedish;
+
+    @FXML
+    private Label brazilLabel, czechLabel, danishLabel, dutchLabel, englishLabel, esperantoLabel, estonianLabel,
+            finnishLabel, frenchLabel, germanLabel, italianLabel, norwegianLabel, polishLabel,
+            spanishLabel, swedishLabel,
+            yesLabel, noLabel;
+
+    @FXML
+    private RadioButton red, blue, yellow, white, press, hold, detonate, abort;
+
+    @FXML
+    private Tab button, onFirst, morse, password, ventGas;
+
+    @FXML
+    private TextArea morseOutput;
+
+    @FXML
+    private TextField
+            morseInput, morseLetters, morseManual, morseManOut;
+
+    public void initialize(){
+<span class="nc" id="L49">        groups.add(new ToggleGroup());</span>
+<span class="nc" id="L50">        groups.add(new ToggleGroup());</span>
+<span class="nc" id="L51">        red.setToggleGroup(groups.get(0));</span>
+<span class="nc" id="L52">        blue.setToggleGroup(groups.get(0));</span>
+<span class="nc" id="L53">        yellow.setToggleGroup(groups.get(0));</span>
+<span class="nc" id="L54">        white.setToggleGroup(groups.get(0));</span>
+<span class="nc" id="L55">        press.setToggleGroup(groups.get(1));</span>
+<span class="nc" id="L56">        hold.setToggleGroup(groups.get(1));</span>
+<span class="nc" id="L57">        detonate.setToggleGroup(groups.get(1));</span>
+<span class="nc" id="L58">        abort.setToggleGroup(groups.get(1));</span>
+<span class="nc" id="L59">        red.setStyle(&quot;-fx-text-fill: #EB190E&quot;);</span>
+<span class="nc" id="L60">        yellow.setStyle(&quot;-fx-text-fill: #FBE118&quot;);</span>
+<span class="nc" id="L61">        blue.setStyle(&quot;-fx-text-fill: #3043AC&quot;);</span>
+<span class="nc" id="L62">        white.setStyle(&quot;-fx-text-fill: #FFF9ED; -fx-background-color: black&quot;);</span>
+        try {
+<span class="nc" id="L64">            Morse.init();</span>
+<span class="nc" id="L65">        } catch (IOException ioException){</span>
+<span class="nc" id="L66">            Alert alert = new Alert(Alert.AlertType.WARNING);</span>
+<span class="nc" id="L67">            alert.setContentText(&quot;Hey Chief, the file has a problem&quot;);</span>
+<span class="nc" id="L68">            alert.showAndWait();</span>
+<span class="nc" id="L69">        }</span>
+<span class="nc" id="L70">    }</span>
+
+    //Translation Center Method
+    @FXML
+    private void getFlag(){
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (brazil.isHover()){</span>
+<span class="nc" id="L76">            TranslationCenter.setLanguage(&quot;Brazil&quot;);</span>
+<span class="nc" id="L77">            setNextLabel(brazilLabel);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        } else if (czech.isHover()){</span>
+<span class="nc" id="L79">            TranslationCenter.setLanguage(&quot;Czech&quot;);</span>
+<span class="nc" id="L80">            setNextLabel(czechLabel);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        } else if (danish.isHover()){</span>
+<span class="nc" id="L82">            TranslationCenter.setLanguage(&quot;Denmark&quot;);</span>
+<span class="nc" id="L83">            setNextLabel(danishLabel);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        } else if (dutch.isHover()){</span>
+<span class="nc" id="L85">            TranslationCenter.setLanguage(&quot;Netherlands&quot;);</span>
+<span class="nc" id="L86">            setNextLabel(dutchLabel);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        } else if (english.isHover()){</span>
+<span class="nc" id="L88">            TranslationCenter.setLanguage(&quot;US&quot;);</span>
+<span class="nc" id="L89">            setNextLabel(englishLabel);</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        } else if (esperanto.isHover()){</span>
+<span class="nc" id="L91">            TranslationCenter.setLanguage(&quot;Esperanto&quot;);</span>
+<span class="nc" id="L92">            setNextLabel(esperantoLabel);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        } else if (estonian.isHover()){</span>
+<span class="nc" id="L94">            TranslationCenter.setLanguage(&quot;Estonia&quot;);</span>
+<span class="nc" id="L95">            setNextLabel(estonianLabel);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        } else if (finnish.isHover()){</span>
+<span class="nc" id="L97">            TranslationCenter.setLanguage(&quot;Finnish&quot;);</span>
+<span class="nc" id="L98">            setNextLabel(finnishLabel);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        } else if (french.isHover()){</span>
+<span class="nc" id="L100">            setNextLabel(frenchLabel);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        } else if (german.isHover()){</span>
+<span class="nc" id="L102">            TranslationCenter.setLanguage(&quot;&quot;);</span>
+<span class="nc" id="L103">            setNextLabel(germanLabel);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        } else if (italian.isHover()){</span>
+<span class="nc" id="L105">            setNextLabel(italianLabel);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        } else if (norwegian.isHover()){</span>
+<span class="nc" id="L107">            setNextLabel(norwegianLabel);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        } else if (polish.isHover()){</span>
+<span class="nc" id="L109">            setNextLabel(polishLabel);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        } else if (spanish.isHover()){</span>
+<span class="nc" id="L111">            setNextLabel(spanishLabel);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        } else if (swedish.isHover()){</span>
+<span class="nc" id="L113">            setNextLabel(swedishLabel);</span>
+        }
+<span class="nc" id="L115">        clearButtons();</span>
+<span class="nc" id="L116">    }</span>
+
+    private void setNextLabel(Label next){
+<span class="nc" id="L119">        current.setStyle(&quot;-fx-text-fill: black&quot;);</span>
+<span class="nc" id="L120">        current = next;</span>
+<span class="nc" id="L121">        current.setStyle(&quot;-fx-text-fill: crimson&quot;);</span>
+<span class="nc" id="L122">        tabRename();</span>
+<span class="nc" id="L123">        buttonRename();</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">        if (firstTime){</span>
+<span class="nc" id="L125">            firstTime = false;</span>
+<span class="nc" id="L126">            button.setDisable(false);</span>
+<span class="nc" id="L127">            ventGas.setDisable(false);</span>
+<span class="nc" id="L128">            morse.setDisable(false);</span>
+<span class="nc" id="L129">            password.setDisable(false);</span>
+<span class="nc" id="L130">            onFirst.setDisable(false);</span>
+        }
+<span class="nc" id="L132">    }</span>
+
+    private void tabRename(){
+<span class="nc" id="L135">        button.setText(TranslationCenter.moduleNames[0] + &quot;(Button)&quot;);</span>
+<span class="nc" id="L136">        onFirst.setText(TranslationCenter.moduleNames[1] + &quot;(Who's On First)&quot;);</span>
+<span class="nc" id="L137">        morse.setText(TranslationCenter.moduleNames[2] + &quot;(Morse Code)&quot;);</span>
+<span class="nc" id="L138">        password.setText(TranslationCenter.moduleNames[3] + &quot;(Password)&quot;);</span>
+<span class="nc" id="L139">        ventGas.setText(TranslationCenter.moduleNames[4] + &quot;(Vent Gas)&quot;);</span>
+<span class="nc" id="L140">    }</span>
+
+    private void buttonRename(){
+<span class="nc" id="L143">        red.setText(TranslationCenter.buttonNames[0]);</span>
+<span class="nc" id="L144">        blue.setText(TranslationCenter.buttonNames[1]);</span>
+<span class="nc" id="L145">        yellow.setText(TranslationCenter.buttonNames[2]);</span>
+<span class="nc" id="L146">        white.setText(TranslationCenter.buttonNames[3]);</span>
+<span class="nc" id="L147">        press.setText(TranslationCenter.buttonNames[4]);</span>
+<span class="nc" id="L148">        hold.setText(TranslationCenter.buttonNames[5]);</span>
+<span class="nc" id="L149">        detonate.setText(TranslationCenter.buttonNames[6]);</span>
+<span class="nc" id="L150">        abort.setText(TranslationCenter.buttonNames[7]);</span>
+<span class="nc" id="L151">    }</span>
+
+    private void clearButtons(){
+<span class="nc" id="L154">        traits = new TheButton[2];</span>
+<span class="nc" id="L155">        red.setSelected(false);</span>
+<span class="nc" id="L156">        blue.setSelected(false);</span>
+<span class="nc" id="L157">        yellow.setSelected(false);</span>
+<span class="nc" id="L158">        white.setSelected(false);</span>
+<span class="nc" id="L159">        abort.setSelected(false);</span>
+<span class="nc" id="L160">        press.setSelected(false);</span>
+<span class="nc" id="L161">        detonate.setSelected(false);</span>
+<span class="nc" id="L162">        hold.setSelected(false);</span>
+<span class="nc" id="L163">    }</span>
+
+    //Button Methods
+    @FXML
+    private void scanButtons(){
+<span class="nc bnc" id="L168" title="All 2 branches missed.">        if (blue.isSelected()){</span>
+<span class="nc" id="L169">            traits[0] = TheButton.BLUE;</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        } else if (red.isSelected()){</span>
+<span class="nc" id="L171">            traits[0] = TheButton.RED;</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        } else if (yellow.isSelected()){</span>
+<span class="nc" id="L173">            traits[0] = TheButton.YELLOW;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        } else if (white.isSelected()){</span>
+<span class="nc" id="L175">            traits[0] = TheButton.WHITE;</span>
+        }
+
+<span class="nc bnc" id="L178" title="All 2 branches missed.">        if (abort.isSelected()){</span>
+<span class="nc" id="L179">            traits[1] = TheButton.ABORT;</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        } else if (press.isSelected()){</span>
+<span class="nc" id="L181">            traits[1] = TheButton.PRESS;</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">        } else if (detonate.isSelected()){</span>
+<span class="nc" id="L183">            traits[1] = TheButton.DETONATE;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        } else if (hold.isSelected()){</span>
+<span class="nc" id="L185">            traits[1] = TheButton.HOLD;</span>
+        }
+
+<span class="nc bnc" id="L188" title="All 4 branches missed.">        if (traits[0] != null &amp;&amp; traits[1] != null){</span>
+<span class="nc" id="L189">            String goingIn = Button.evaluate(traits);</span>
+
+//            isHold(goingIn);
+//            buttonLabel.setText(goingIn + &quot; the Button&quot;);
+        }
+<span class="nc" id="L194">    }</span>
+
+    private void isHold(String text){
+//        if (text.equals(&quot;Hold&quot;)){
+//            stripRed.setOpacity(0.5);
+//            stripBlue.setOpacity(0.5);
+//            stripYellow.setOpacity(0.5);
+//            stripWhite.setOpacity(0.5);
+//            stripNumTop.setOpacity(1);
+//            stripNumBottom.setOpacity(1);
+//        } else {
+//            stripRed.setOpacity(0);
+//            stripBlue.setOpacity(0);
+//            stripYellow.setOpacity(0);
+//            stripWhite.setOpacity(0);
+//            stripNumTop.setOpacity(0);
+//            stripNumBottom.setOpacity(0);
+//        }
+<span class="nc" id="L212">    }</span>
+
+    //Morse Code Methods
+    @FXML
+    private void typeTrigger() {
+<span class="nc" id="L217">        String input = ultimateFilter(morseInput.getText(),</span>
+                &quot;-&quot;, &quot;.&quot;, &quot; &quot;);
+
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        if (!input.isEmpty()) {</span>
+<span class="nc" id="L221">            StringBuilder builder = new StringBuilder();</span>
+<span class="nc" id="L222">            String[] outputs = Morse.translate(input),</span>
+<span class="nc" id="L223">                    results = outputs[0].split(&quot;/&quot;);</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">            for (int i = 0; i &lt; results.length; i++){</span>
+<span class="nc" id="L225">                builder.append(results[i]);</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">                if (i &lt; results.length -1){</span>
+<span class="nc" id="L227">                    builder.append(&quot;\n&quot;);</span>
+                }
+            }
+<span class="nc" id="L230">            morseOutput.setText(builder.toString());</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            if (!outputs[1].contains(&quot;null&quot;)) {</span>
+<span class="nc" id="L232">                morseLetters.setText(outputs[1]);</span>
+            } else {
+<span class="nc" id="L234">                morseLetters.setText(&quot;&quot;);</span>
+            }
+<span class="nc" id="L236">        } else {</span>
+<span class="nc" id="L237">            morseOutput.setText(&quot;&quot;);</span>
+<span class="nc" id="L238">            morseInput.setText(input);</span>
+<span class="nc" id="L239">            morseLetters.setText(&quot;&quot;);</span>
+        }
+<span class="nc" id="L241">    }</span>
+
+    @FXML
+    private void searchWord(){
+//        String takeIn = ultimateFilter(morseManual.getText().toLowerCase(), lowercaseRegex);
+//        if (!takeIn.isEmpty()){
+//            takeIn = Morse.predict(takeIn);
+//            MorseCodeFrequencies[] freqs = MorseCodeFrequencies.values();
+//
+//            for (int i = 0; i &lt; freqs.length; i++){
+//                if (takeIn.equals(freqs[i].getLabel())){
+//                    morseManOut.setText(freqs[i].getLabel() + &quot; - &quot; + freqs[i].frequency() + &quot;MHz&quot;);
+//                    i = MorseCodeFrequencies.values().length;
+//                } else {
+//                    morseManOut.setText(&quot;&quot;);
+//                }
+//            }
+//        } else {
+//            morseManOut.setText(&quot;&quot;);
+//        }
+<span class="nc" id="L261">    }</span>
+
+    @FXML
+    private void clearMorseFields(){
+<span class="nc" id="L265">        morseOutput.setText(&quot;&quot;);</span>
+<span class="nc" id="L266">        morseInput.setText(&quot;&quot;);</span>
+<span class="nc" id="L267">        morseManOut.setText(&quot;&quot;);</span>
+<span class="nc" id="L268">        morseManual.setText(&quot;&quot;);</span>
+<span class="nc" id="L269">        morseLetters.setText(&quot;&quot;);</span>
+<span class="nc" id="L270">    }</span>
+
+    //Vent Gas method
+    @FXML
+    private void setGas(){
+<span class="nc bnc" id="L275" title="All 2 branches missed.">        if (ventGas.isSelected()){</span>
+<span class="nc" id="L276">            yesLabel.setText(VentGas.writeYes());</span>
+<span class="nc" id="L277">            noLabel.setText(VentGas.writeNo());</span>
+        }
+<span class="nc" id="L279">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

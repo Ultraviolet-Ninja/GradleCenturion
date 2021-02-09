@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Keypads.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.enumerations</a> &gt; <span class="el_source">Keypads.java</span></div><h1>Keypads.java</h1><pre class="source lang-java linenums">package bomb.enumerations;
+
+import bomb.interfaces.Flaggable;
+import bomb.interfaces.Labeled;
+
+<span class="nc" id="L6">public enum Keypads implements Labeled, Flaggable {</span>
+<span class="nc" id="L7">    RACKET1(&quot;Empty Racket&quot;, false), A_T(&quot;A_T&quot;, false),</span>
+<span class="nc" id="L8">    STROKED_LAMBDA1(&quot;Lambda&quot;, false), HARRY_POTTER(&quot;Harry Potter&quot;, false),</span>
+<span class="nc" id="L9">    RUSSIAN_CAT1(&quot;Russian Cat&quot;, false), CURVY_H1(&quot;Curvy H&quot;, false),</span>
+<span class="nc" id="L10">    BACK_C1(&quot;BackwardsC&quot;, false),</span>
+
+<span class="nc" id="L12">    REVERSE_EURO1(&quot;Reverse Euro&quot;, false), RACKET2(&quot;Empty Racket&quot;, false),</span>
+<span class="nc" id="L13">    BACK_C2(&quot;BackwardsC&quot;, false), DISNEY_Q1(&quot;Disney Q&quot;, false),</span>
+<span class="nc" id="L14">    HOLLOW_STAR1(&quot;Hollow Star&quot;, false), CURVY_H2(&quot;Curvy H&quot;, false),</span>
+<span class="nc" id="L15">    SPANISH_QUESTION1(&quot;Spanish Question&quot;, false),</span>
+
+<span class="nc" id="L17">    COPYRIGHT(&quot;Copyright&quot;, false), THE_SAC(&quot;Sac&quot;, false),</span>
+<span class="nc" id="L18">    DISNEY_Q2(&quot;Disney Q&quot;, false), RUSSIAN_X1(&quot;Russian X&quot;, false),</span>
+<span class="nc" id="L19">    NOT_THREE(&quot;Not3&quot;, false), STROKED_LAMBDA2(&quot;Lambda&quot;, false),</span>
+<span class="nc" id="L20">    HOLLOW_STAR2(&quot;Hollow Star&quot;, false),</span>
+
+<span class="nc" id="L22">    RUSSIAN_SIX1(&quot;Russian 6&quot;, false),PARAGRAPH1(&quot;Paragraph&quot;, false),</span>
+<span class="nc" id="L23">    TB_1(&quot;Tb&quot;, false), RUSSIAN_CAT2(&quot;Russian Cat&quot;, false),</span>
+<span class="nc" id="L24">    RUSSIAN_X2(&quot;Russian X&quot;, false), SPANISH_QUESTION2(&quot;Spanish Question&quot;, false),</span>
+<span class="nc" id="L25">    SMILEY1(&quot;Smily&quot;, false),</span>
+
+<span class="nc" id="L27">    PSI1(&quot;Psi&quot;, false),SMILEY2(&quot;Smily&quot;, false), TB_2(&quot;Tb&quot;, false),</span>
+<span class="nc" id="L28">    C_DOT(&quot;C&quot;, false), PARAGRAPH2(&quot;Paragraph&quot;, false),</span>
+<span class="nc" id="L29">    ALIEN_THREE(&quot;Alien 3&quot;, false), STAR(&quot;Star&quot;, false),</span>
+
+<span class="nc" id="L31">    RUSSIAN_SIX2(&quot;Russian 6&quot;, false), REVERSE_EURO2(&quot;Reverse Euro&quot;, false),</span>
+<span class="nc" id="L32">    PUZZLE(&quot;Puzzle&quot;, false), AE(&quot;ae&quot;, false), PSI2(&quot;Psi&quot;, false),</span>
+<span class="nc" id="L33">    RUSSIAN_NH(&quot;Russian NH&quot;, false), OMEGA(&quot;Omega&quot;, false);</span>
+
+    private final String imageLocation;
+    private boolean flag;
+
+<span class="nc" id="L38">    Keypads(String label, boolean flag){</span>
+<span class="nc" id="L39">        this.flag = flag;</span>
+<span class="nc" id="L40">        imageLocation = label;</span>
+<span class="nc" id="L41">    }</span>
+
+    @Override
+    public String getLabel() {
+<span class="nc" id="L45">        return &quot;file:src\\bomb\\resources\\symbols\\&quot; + imageLocation + &quot;.PNG&quot;;</span>
+    }
+
+    @Override
+    public void setFlag(boolean flag) {
+<span class="nc" id="L50">        this.flag = flag;</span>
+<span class="nc" id="L51">    }</span>
+
+    @Override
+    public boolean getFlag() {
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        return !flag;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

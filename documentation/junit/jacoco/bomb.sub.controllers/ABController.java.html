@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ABController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.sub.controllers</a> &gt; <span class="el_source">ABController.java</span></div><h1>ABController.java</h1><pre class="source lang-java linenums">package bomb.sub.controllers;
+
+import bomb.modules.ab.Alphabet;
+import bomb.modules.ab.Astrology;
+import bomb.modules.ab.Bitwise;
+import bomb.modules.ab.BlindAlley;
+import bomb.modules.ab.BooleanVenn;
+import bomb.enumerations.AstroSymbols;
+import bomb.enumerations.BitwiseOps;
+import bomb.interfaces.Reset;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
+
+import static bomb.tools.Mechanics.LOGIC_SYMBOL_REGEX;
+import static bomb.tools.Mechanics.LOWERCASE_REGEX;
+import static bomb.tools.Mechanics.ultimateFilter;
+
+<span class="nc" id="L26">public class ABController implements Reset {</span>
+<span class="nc" id="L27">    private AstroSymbols[] set = new AstroSymbols[3];</span>
+<span class="nc" id="L28">    private boolean booleanShift = true;</span>
+<span class="nc" id="L29">    private StringBuilder currentOp = new StringBuilder();</span>
+
+    @FXML
+    private Button astroReset, bitAnd, bitOr, bitXor, bitNot,
+            boolAB, boolBC, boolAnd, boolOr, boolXor, boolImp,
+            boolNand, boolNor, boolXnor, boolImpB, booleanReset;
+
+    @FXML
+    private Circle a, b, c, ab, bc, ac, all, not;
+
+    @FXML
+    private ImageView fire, water, earth, air,
+            mercury, venus, mars, jupiter, saturn, uranus, neptune, pluto, sun, moon,
+            aquarius, aries, cancer, capricorn, gemini, leo, libra, pisces, sag, scorpio, taurus, virgo;
+
+    @FXML
+    private Label maxAlley;
+
+    @FXML
+    private Tab blindAlley;
+
+    @FXML
+    private TextArea topLeft, topMid, midLeft, trueMid, midRight, bottomLeft, bottomMid, bottomRight;
+
+    @FXML
+    private TextField alphabetOut,
+            bitOut,
+            omen,
+            boolOperation;
+
+    //Alphabet methods
+    @FXML
+    private void getAlphaField(){
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (!alphabetOut.getText().isEmpty()){</span>
+<span class="nc" id="L63">            String text = ultimateFilter(alphabetOut.getText(), LOWERCASE_REGEX);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">            if (text.length() == 4){</span>
+<span class="nc" id="L65">                alphabetOut.setText(Alphabet.order(text));</span>
+            } else {
+<span class="nc" id="L67">                Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L68">                alert.setContentText(&quot;That wasn't 4 valid characters there, bud&quot;);</span>
+<span class="nc" id="L69">                alert.show();</span>
+<span class="nc" id="L70">                alphabetOut.setText(&quot;&quot;);</span>
+            }
+<span class="nc" id="L72">        } else {</span>
+<span class="nc" id="L73">            Alert alert = new Alert(Alert.AlertType.INFORMATION);</span>
+<span class="nc" id="L74">            alert.setContentText(&quot;That field is empty there, bud&quot;);</span>
+<span class="nc" id="L75">            alert.show();</span>
+        }
+<span class="nc" id="L77">    }</span>
+
+    //Astrology methods
+    @FXML
+    private void getElement(){
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (fire.isHover()){</span>
+<span class="nc" id="L83">            set[0] = AstroSymbols.FIRE;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">        } else if (earth.isHover()){</span>
+<span class="nc" id="L85">            set[0] = AstroSymbols.EARTH;</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        } else if (air.isHover()){</span>
+<span class="nc" id="L87">            set[0] = AstroSymbols.AIR;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        } else if (water.isHover()){</span>
+<span class="nc" id="L89">            set[0] = AstroSymbols.WATER;</span>
+        }
+
+<span class="nc" id="L92">        elementDisable(true);</span>
+<span class="nc" id="L93">        getOmen();</span>
+<span class="nc" id="L94">    }</span>
+
+    @FXML
+    private void getZodiac(){
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (aquarius.isHover()){</span>
+<span class="nc" id="L99">            set[2] = AstroSymbols.AQUARIUS;</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        } else if (aries.isHover()){</span>
+<span class="nc" id="L101">            set[2] = AstroSymbols.ARIES;</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        } else if (cancer.isHover()){</span>
+<span class="nc" id="L103">            set[2] = AstroSymbols.CANCER;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">        } else if (capricorn.isHover()){</span>
+<span class="nc" id="L105">            set[2] = AstroSymbols.CAPRICORN;</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        } else if (gemini.isHover()){</span>
+<span class="nc" id="L107">            set[2] = AstroSymbols.GEMINI;</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        } else if (leo.isHover()){</span>
+<span class="nc" id="L109">            set[2] = AstroSymbols.LEO;</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">        } else if (libra.isHover()){</span>
+<span class="nc" id="L111">            set[2] = AstroSymbols.LIBRA;</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        } else if (pisces.isHover()){</span>
+<span class="nc" id="L113">            set[2] = AstroSymbols.PISCES;</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        } else if (sag.isHover()){</span>
+<span class="nc" id="L115">            set[2] = AstroSymbols.SAGITTARIUS;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        } else if (scorpio.isHover()){</span>
+<span class="nc" id="L117">            set[2] = AstroSymbols.SCORPIO;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        } else if (taurus.isHover()){</span>
+<span class="nc" id="L119">            set[2] = AstroSymbols.TAURUS;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        } else if (virgo.isHover()){</span>
+<span class="nc" id="L121">            set[2] = AstroSymbols.VIRGO;</span>
+        }
+<span class="nc" id="L123">        zodiacDisable(true);</span>
+<span class="nc" id="L124">        getOmen();</span>
+<span class="nc" id="L125">    }</span>
+
+    @FXML
+    private void getCeleste(){
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (mercury.isHover()){</span>
+<span class="nc" id="L130">            set[1] = AstroSymbols.MERCURY;</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        } else if (venus.isHover()){</span>
+<span class="nc" id="L132">            set[1] = AstroSymbols.VENUS;</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">        } else if (mars.isHover()){</span>
+<span class="nc" id="L134">            set[1] = AstroSymbols.MARS;</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">        } else if (jupiter.isHover()){</span>
+<span class="nc" id="L136">            set[1] = AstroSymbols.JUPITER;</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        } else if (saturn.isHover()){</span>
+<span class="nc" id="L138">            set[1] = AstroSymbols.SATURN;</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">        } else if (uranus.isHover()){</span>
+<span class="nc" id="L140">            set[1] = AstroSymbols.URANUS;</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        } else if (neptune.isHover()){</span>
+<span class="nc" id="L142">            set[1] = AstroSymbols.NEPTUNE;</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        } else if (pluto.isHover()){</span>
+<span class="nc" id="L144">            set[1] = AstroSymbols.PLUTO;</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">        } else if (sun.isHover()){</span>
+<span class="nc" id="L146">            set[1] = AstroSymbols.SUN;</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        } else if (moon.isHover()){</span>
+<span class="nc" id="L148">            set[1] = AstroSymbols.MOON;</span>
+        }
+<span class="nc" id="L150">        celesteDisable(true);</span>
+<span class="nc" id="L151">        getOmen();</span>
+<span class="nc" id="L152">    }</span>
+
+    @FXML
+    private void astroReset(){
+<span class="nc" id="L156">        elementDisable(false);</span>
+<span class="nc" id="L157">        celesteDisable(false);</span>
+<span class="nc" id="L158">        zodiacDisable(false);</span>
+<span class="nc" id="L159">        set = new AstroSymbols[3];</span>
+<span class="nc" id="L160">        astroReset.setDisable(true);</span>
+<span class="nc" id="L161">    }</span>
+
+    private void elementDisable(boolean set){
+<span class="nc" id="L164">        fire.setDisable(set);</span>
+<span class="nc" id="L165">        earth.setDisable(set);</span>
+<span class="nc" id="L166">        air.setDisable(set);</span>
+<span class="nc" id="L167">        water.setDisable(set);</span>
+<span class="nc" id="L168">    }</span>
+
+    private void celesteDisable(boolean set){
+<span class="nc" id="L171">        sun.setDisable(set);</span>
+<span class="nc" id="L172">        moon.setDisable(set);</span>
+<span class="nc" id="L173">        mercury.setDisable(set);</span>
+<span class="nc" id="L174">        venus.setDisable(set);</span>
+<span class="nc" id="L175">        mars.setDisable(set);</span>
+<span class="nc" id="L176">        jupiter.setDisable(set);</span>
+<span class="nc" id="L177">        saturn.setDisable(set);</span>
+<span class="nc" id="L178">        uranus.setDisable(set);</span>
+<span class="nc" id="L179">        neptune.setDisable(set);</span>
+<span class="nc" id="L180">        pluto.setDisable(set);</span>
+<span class="nc" id="L181">    }</span>
+
+    private void zodiacDisable(boolean set){
+<span class="nc" id="L184">        aquarius.setDisable(set);</span>
+<span class="nc" id="L185">        aries.setDisable(set);</span>
+<span class="nc" id="L186">        cancer.setDisable(set);</span>
+<span class="nc" id="L187">        capricorn.setDisable(set);</span>
+<span class="nc" id="L188">        gemini.setDisable(set);</span>
+<span class="nc" id="L189">        leo.setDisable(set);</span>
+<span class="nc" id="L190">        libra.setDisable(set);</span>
+<span class="nc" id="L191">        pisces.setDisable(set);</span>
+<span class="nc" id="L192">        sag.setDisable(set);</span>
+<span class="nc" id="L193">        scorpio.setDisable(set);</span>
+<span class="nc" id="L194">        taurus.setDisable(set);</span>
+<span class="nc" id="L195">        virgo.setDisable(set);</span>
+<span class="nc" id="L196">    }</span>
+
+    private void getOmen(){
+        try {
+<span class="nc bnc" id="L200" title="All 6 branches missed.">            if (set[0] != null &amp;&amp; set[1] != null &amp;&amp; set[2] != null) {</span>
+<span class="nc" id="L201">                omen.setText(Astrology.calculate(set[0], set[1], set[2]));</span>
+<span class="nc" id="L202">                astroReset();</span>
+<span class="nc" id="L203">                astroReset.setDisable(true);</span>
+            } else {
+<span class="nc" id="L205">                astroReset.setDisable(false);</span>
+            }
+<span class="nc" id="L207">        } catch (IllegalArgumentException illegal){</span>
+<span class="nc" id="L208">            Alert alert = new Alert(Alert.AlertType.ERROR);</span>
+<span class="nc" id="L209">            alert.setContentText(&quot;The Serial Code wasn't set&quot;);</span>
+<span class="nc" id="L210">            alert.showAndWait();</span>
+<span class="nc" id="L211">        }</span>
+<span class="nc" id="L212">    }</span>
+
+    //Blind Alley methods
+    @FXML
+    private void liveUpdate() {
+<span class="nc bnc" id="L217" title="All 2 branches missed.">        if (blindAlley.isSelected()){</span>
+<span class="nc" id="L218">            int[][] buffer = BlindAlley.getAlleyCat();</span>
+<span class="nc" id="L219">            stylerSet(buffer);</span>
+<span class="nc" id="L220">            topLeft.setText(String.valueOf(buffer[0][0]));</span>
+<span class="nc" id="L221">            topMid.setText(String.valueOf(buffer[0][1]));</span>
+<span class="nc" id="L222">            midLeft.setText(String.valueOf(buffer[1][0]));</span>
+<span class="nc" id="L223">            trueMid.setText(String.valueOf(buffer[1][1]));</span>
+<span class="nc" id="L224">            midRight.setText(String.valueOf(buffer[1][2]));</span>
+<span class="nc" id="L225">            bottomLeft.setText(String.valueOf(buffer[2][0]));</span>
+<span class="nc" id="L226">            bottomMid.setText(String.valueOf(buffer[2][1]));</span>
+<span class="nc" id="L227">            bottomRight.setText(String.valueOf(buffer[2][2]));</span>
+<span class="nc" id="L228">            writeMax(buffer);</span>
+        }
+<span class="nc" id="L230">    }</span>
+
+    private void stylerSet(int[][] array){
+<span class="nc" id="L233">        topLeft.setStyle(style(array[0][0]));</span>
+<span class="nc" id="L234">        topMid.setStyle(style(array[0][1]));</span>
+<span class="nc" id="L235">        midLeft.setStyle(style(array[1][0]));</span>
+<span class="nc" id="L236">        trueMid.setStyle(style(array[1][1]));</span>
+<span class="nc" id="L237">        midRight.setStyle(style(array[1][2]));</span>
+<span class="nc" id="L238">        bottomLeft.setStyle(style(array[2][0]));</span>
+<span class="nc" id="L239">        bottomMid.setStyle(style(array[2][1]));</span>
+<span class="nc" id="L240">        bottomRight.setStyle(style(array[2][2]));</span>
+<span class="nc" id="L241">    }</span>
+
+    private String style(int number){
+<span class="nc bnc" id="L244" title="All 5 branches missed.">        switch (number){</span>
+<span class="nc" id="L245">            case 0: return &quot;-fx-text-fill: black&quot;;</span>
+<span class="nc" id="L246">            case 1: return &quot;-fx-text-fill: green&quot;;</span>
+<span class="nc" id="L247">            case 2: return &quot;-fx-text-fill: yellow&quot;;</span>
+<span class="nc" id="L248">            case 3: return &quot;-fx-text-fill: orange&quot;;</span>
+<span class="nc" id="L249">            default: return &quot;-fx-text-fill: red&quot;;</span>
+        }
+    }
+
+    private void writeMax(int[][] array){
+<span class="nc" id="L254">        int max = 0;</span>
+<span class="nc bnc" id="L255" title="All 2 branches missed.">        for (int[] col : array){</span>
+<span class="nc bnc" id="L256" title="All 2 branches missed.">            for (int num : col){</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">                if (num &gt; max) max = num;</span>
+            }
+        }
+
+<span class="nc" id="L261">        maxAlley.setText(&quot;All with &quot; + max) ;</span>
+<span class="nc" id="L262">    }</span>
+
+    //Bitwise Op method
+    @FXML
+    private void bitwiseSolve(){
+<span class="nc" id="L267">        BitwiseOps bit = null;</span>
+<span class="nc bnc" id="L268" title="All 2 branches missed.">        if (bitAnd.isHover()){</span>
+<span class="nc" id="L269">            bit = BitwiseOps.AND;</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        } else if (bitOr.isHover()){</span>
+<span class="nc" id="L271">            bit = BitwiseOps.OR;</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">        } else if (bitXor.isHover()){</span>
+<span class="nc" id="L273">            bit = BitwiseOps.XOR;</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">        } else if (bitNot.isHover()){</span>
+<span class="nc" id="L275">            bit = BitwiseOps.NOT;</span>
+        }
+        try {
+<span class="nc" id="L278">            bitOut.setText(Bitwise.getByte(bit));</span>
+<span class="nc" id="L279">        } catch (IllegalArgumentException illegal){</span>
+<span class="nc" id="L280">            Alert alert = new Alert(Alert.AlertType.INFORMATION, illegal.getMessage());</span>
+<span class="nc" id="L281">            alert.setHeaderText(&quot;Something's empty&quot;);</span>
+<span class="nc" id="L282">            alert.setTitle(&quot;Do more edge work&quot;);</span>
+<span class="nc" id="L283">            alert.show();</span>
+<span class="nc" id="L284">        }</span>
+<span class="nc" id="L285">    }</span>
+
+    //Boolean Venn Diagram Methods
+    @FXML
+    private void prioritySet(){
+<span class="nc" id="L290">        booleanReset.setDisable(false);</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">        if (currentOp.toString().isEmpty()) {</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">            currentOp.append(boolAB.isHover() ? &quot;(AB)C&quot; : &quot;A(BC)&quot;);</span>
+<span class="nc" id="L293">            toggleOps(false);</span>
+        }
+        else
+<span class="nc" id="L296">            currentOp = reFormatPriority(currentOp.toString());</span>
+<span class="nc" id="L297">        setCircles();</span>
+<span class="nc" id="L298">        writeOut(currentOp.toString());</span>
+<span class="nc" id="L299">        switchButton();</span>
+<span class="nc" id="L300">    }</span>
+
+    @FXML
+    private void operate(){
+<span class="nc bnc" id="L304" title="All 2 branches missed.">        if (booleanShift){</span>
+<span class="nc" id="L305">            currentOp = adder(currentOp.toString(), &quot;B&quot;);</span>
+<span class="nc" id="L306">            booleanShift = false;</span>
+        } else {
+<span class="nc" id="L308">            currentOp = adder(currentOp.toString(), &quot;C&quot;);</span>
+<span class="nc" id="L309">            toggleOps(true);</span>
+<span class="nc" id="L310">            setCircles();</span>
+<span class="nc" id="L311">            booleanShift = true;</span>
+        }
+<span class="nc" id="L313">        writeOut(currentOp.toString());</span>
+<span class="nc" id="L314">    }</span>
+
+    private void setCircles(){
+<span class="nc" id="L317">        String press = &quot;rgb(115,208,115)&quot;, dontPress = &quot;rgb(255,103,103)&quot;;</span>
+<span class="nc bnc" id="L318" title="All 2 branches missed.">        if (ultimateFilter(currentOp.toString(), LOGIC_SYMBOL_REGEX).length() == 2){</span>
+<span class="nc" id="L319">            String code = BooleanVenn.resultCode(currentOp.toString());</span>
+<span class="nc bnc" id="L320" title="All 2 branches missed.">            not.setFill(Paint.valueOf(code.charAt(0)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">            c.setFill(Paint.valueOf(code.charAt(1)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L322" title="All 2 branches missed.">            b.setFill(Paint.valueOf(code.charAt(2)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L323" title="All 2 branches missed.">            a.setFill(Paint.valueOf(code.charAt(3)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">            bc.setFill(Paint.valueOf(code.charAt(4)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">            ac.setFill(Paint.valueOf(code.charAt(5)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L326" title="All 2 branches missed.">            ab.setFill(Paint.valueOf(code.charAt(6)=='1'?press:dontPress));</span>
+<span class="nc bnc" id="L327" title="All 2 branches missed.">            all.setFill(Paint.valueOf(code.charAt(7)=='1'?press:dontPress));</span>
+        }
+<span class="nc" id="L329">    }</span>
+
+    private StringBuilder adder(String text, String splitter){
+<span class="nc bnc" id="L332" title="All 4 branches missed.">        if (text.charAt(text.length()-1) == ')' &amp;&amp; !splitter.equals(&quot;C&quot;)) splitter = &quot;\\(&quot;;</span>
+<span class="nc" id="L333">        StringBuilder temp = new StringBuilder();</span>
+<span class="nc" id="L334">        temp.append(text.split(splitter)[0]);</span>
+<span class="nc" id="L335">        temp.append(operand());</span>
+<span class="nc" id="L336">        temp.append(splitter.replace('\\', ' ').replaceAll(&quot; &quot;, &quot;&quot;));</span>
+<span class="nc bnc" id="L337" title="All 6 branches missed.">        if (splitter.equals(&quot;(&quot;) || splitter.equals(&quot;B&quot;) || text.charAt(text.length()-1) == ')')</span>
+<span class="nc" id="L338">            temp.append(text.split(splitter)[1]);</span>
+<span class="nc" id="L339">        return temp;</span>
+    }
+
+    private String operand(){
+<span class="nc bnc" id="L343" title="All 2 branches missed.">        if (boolAnd.isHover()){</span>
+<span class="nc" id="L344">            return grabIt(boolAnd);</span>
+<span class="nc bnc" id="L345" title="All 2 branches missed.">        } else if (boolOr.isHover()){</span>
+<span class="nc" id="L346">            return grabIt(boolOr);</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">        } else if (boolXor.isHover()){</span>
+<span class="nc" id="L348">            return grabIt(boolXor);</span>
+<span class="nc bnc" id="L349" title="All 2 branches missed.">        } else if (boolImp.isHover()){</span>
+<span class="nc" id="L350">            return grabIt(boolImp);</span>
+<span class="nc bnc" id="L351" title="All 2 branches missed.">        } else if (boolNand.isHover()){</span>
+<span class="nc" id="L352">            return grabIt(boolNand);</span>
+<span class="nc bnc" id="L353" title="All 2 branches missed.">        } else if (boolNor.isHover()){</span>
+<span class="nc" id="L354">            return grabIt(boolNor);</span>
+<span class="nc bnc" id="L355" title="All 2 branches missed.">        } else if (boolXnor.isHover()){</span>
+<span class="nc" id="L356">            return grabIt(boolXnor);</span>
+        } else {
+<span class="nc" id="L358">            return grabIt(boolImpB);</span>
+        }
+    }
+
+    private String grabIt(Button button){
+<span class="nc" id="L363">        return String.valueOf(button.getText().charAt(0));</span>
+    }
+
+    private void toggleOps(boolean toggle){
+<span class="nc" id="L367">        boolAnd.setDisable(toggle);</span>
+<span class="nc" id="L368">        boolOr.setDisable(toggle);</span>
+<span class="nc" id="L369">        boolXor .setDisable(toggle);</span>
+<span class="nc" id="L370">        boolImp.setDisable(toggle);</span>
+<span class="nc" id="L371">        boolNand.setDisable(toggle);</span>
+<span class="nc" id="L372">        boolNor.setDisable(toggle);</span>
+<span class="nc" id="L373">        boolXnor.setDisable(toggle);</span>
+<span class="nc" id="L374">        boolImpB.setDisable(toggle);</span>
+<span class="nc" id="L375">    }</span>
+
+    private StringBuilder reFormatPriority(String reference){
+<span class="nc" id="L378">        StringBuilder temp = new StringBuilder();</span>
+<span class="nc bnc" id="L379" title="All 2 branches missed.">        if (reference.charAt(0) == '(') { //When AB has Priority</span>
+<span class="nc" id="L380">            reference = reference.replaceAll(&quot;\\(&quot;, &quot;&quot;)</span>
+<span class="nc" id="L381">                    .replaceAll(&quot;\\)&quot;, &quot;&quot;);</span>
+<span class="nc" id="L382">            temp.append(reference.split(&quot;B&quot;)[0]).append(&quot;(B&quot;)</span>
+<span class="nc" id="L383">                    .append(reference.split(&quot;B&quot;)[1]).append(&quot;)&quot;);</span>
+        } else { // When BC has Priority
+<span class="nc" id="L385">            reference = reference.replaceAll(&quot;\\(&quot;, &quot;&quot;)</span>
+<span class="nc" id="L386">                    .replaceAll(&quot;\\)&quot;, &quot;&quot;);</span>
+<span class="nc" id="L387">            temp.append(&quot;(&quot;).append(reference.split(&quot;B&quot;)[0]).append(&quot;B)&quot;)</span>
+<span class="nc" id="L388">                    .append(reference.split(&quot;B&quot;)[1]);</span>
+        }
+<span class="nc" id="L390">        return temp;</span>
+    }
+
+    private void writeOut(String in){
+<span class="nc" id="L394">        boolOperation.setText(in);</span>
+<span class="nc" id="L395">    }</span>
+
+    private void switchButton(){
+<span class="nc" id="L398">        boolAB.setDisable(boolAB.isHover());</span>
+<span class="nc" id="L399">        boolBC.setDisable(boolBC.isHover());</span>
+<span class="nc" id="L400">    }</span>
+
+    @FXML
+    private void resetBool(){
+<span class="nc" id="L404">        currentOp = new StringBuilder();</span>
+<span class="nc" id="L405">        booleanShift = true;</span>
+<span class="nc" id="L406">        boolOperation.setText(&quot;&quot;);</span>
+<span class="nc" id="L407">        toggleOps(true);</span>
+<span class="nc" id="L408">        boolAB.setDisable(false);</span>
+<span class="nc" id="L409">        boolBC.setDisable(false);</span>
+<span class="nc" id="L410">        booleanReset.setDisable(true);</span>
+<span class="nc" id="L411">        a.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L412">        b.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L413">        c.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L414">        ab.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L415">        ac.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L416">        bc.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L417">        all.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L418">        not.setFill(Paint.valueOf(&quot;rgba(130,130,130,0)&quot;));</span>
+<span class="nc" id="L419">    }</span>
+
+    @Override
+    public void reset() {
+<span class="nc" id="L423">        bitOut.setText(&quot;&quot;);</span>
+<span class="nc" id="L424">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

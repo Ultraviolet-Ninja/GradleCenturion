@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Qualities.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.enumerations</a> &gt; <span class="el_source">Qualities.java</span></div><h1>Qualities.java</h1><pre class="source lang-java linenums">package bomb.enumerations;
+
+import bomb.interfaces.Labeled;
+
+<span class="fc" id="L5">public enum Qualities implements Labeled {</span>
+<span class="fc" id="L6">    SEVENTH(&quot;G&quot;), NEG_SEVETH( &quot;G#&quot;),</span>
+<span class="fc" id="L7">    TRIAD_SEVENTH(&quot;A#&quot;),</span>
+<span class="fc" id="L8">    NEG_TRIAD_SEVENTH(&quot;F&quot;),</span>
+<span class="fc" id="L9">    SEVENTH_SHARP_NINTH(&quot;A&quot;),</span>
+<span class="fc" id="L10">    HALF_DIMINISHED(&quot;C#&quot;),</span>
+<span class="fc" id="L11">    ADD_NINTH(&quot;D#&quot;),</span>
+<span class="fc" id="L12">    NEG_ADD_NINTH(&quot;E&quot;),</span>
+<span class="fc" id="L13">    SEVENTH_SHARP_FIFTH(&quot;F#&quot;), TRIAD_SEVENTH_SHARP_FIFTH(&quot;C&quot;),</span>
+<span class="fc" id="L14">    SEVENTH_SUSTAIN(&quot;D&quot;),</span>
+<span class="fc" id="L15">    NEG_TRIAD_SEVENTH_SHARP_FIFTH(&quot;B&quot;);</span>
+
+    private final String newNote;
+
+    @Override
+    public String getLabel() {
+<span class="fc" id="L21">        return newNote;</span>
+    }
+
+<span class="fc" id="L24">    Qualities(String note){</span>
+<span class="fc" id="L25">        newNote = note;</span>
+<span class="fc" id="L26">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

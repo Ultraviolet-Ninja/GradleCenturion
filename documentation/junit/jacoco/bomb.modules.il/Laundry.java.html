@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Laundry.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.il</a> &gt; <span class="el_source">Laundry.java</span></div><h1>Laundry.java</h1><pre class="source lang-java linenums">package bomb.modules.il;
+
+import bomb.enumerations.Clothing;
+import bomb.enumerations.Indicators;
+import bomb.Widget;
+
+import static bomb.enumerations.Clothing.ARTICLE;
+import static bomb.tools.Mechanics.LOWERCASE_REGEX;
+import static bomb.tools.Mechanics.ultimateFilter;
+
+/**
+ * This class deals with the Laundry module. The module requires a plethora of conditions that involve the
+ * widget data, the number of solved modules, and the number of needy bomb.modules to determine the clothing
+ * item, material, and color. These will lead to the instructions for washing, drying, ironing,
+ * and dry cleaning your clothing.
+ */
+<span class="nc" id="L17">public class Laundry extends Widget {</span>
+    private static int needy;
+
+    //TODO - Finish Javadocs
+    /**
+     * Picks out the right conditions to clean the current laundry load
+     *
+     * @param solved The number of solved modules on the bomb
+     * @param needy The number of needy modules on the bomb
+     * @return The array of Strings containing the solve conditions
+     * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
+     */
+    public static String[] clean(String solved, String needy) throws IllegalArgumentException{
+<span class="fc" id="L30">        exceptionSafeguard(solved, needy);</span>
+<span class="fc" id="L31">        Laundry.needy = Integer.parseInt(needy);</span>
+<span class="fc" id="L32">        setClothing(Integer.parseInt(solved));</span>
+<span class="fc" id="L33">        return conditions();</span>
+    }
+
+    /**
+     * Handles the exceptions that protect the module from running into any empty fields
+     *
+     * @param solved The number of solved modules on the bomb
+     * @param needy The number of needy modules on the bomb
+     * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
+     */
+    private static void exceptionSafeguard(String solved, String needy) throws IllegalArgumentException{
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (serialCode.isEmpty()) throw new</span>
+                IllegalArgumentException(&quot;Serial Code must be typed in.&quot;);
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        else if (needy.isEmpty()) throw new</span>
+                IllegalArgumentException(&quot;Need to know about the needy modules&quot;);
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        else if (solved.isEmpty())throw new</span>
+                IllegalArgumentException(&quot;This needs the number of currently solved modules.&quot;);
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Determines the type of clothing based its Material, color and article
+     *
+     * @param solved The number of solved modules
+     */
+    private static void setClothing(int solved) throws IllegalArgumentException{
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (numModules != 0) {</span>
+<span class="fc" id="L59">            setMaterial(solved);</span>
+<span class="fc" id="L60">            setColor();</span>
+<span class="fc" id="L61">            setItem(numModules - solved - needy);</span>
+<span class="nc" id="L62">        } else throw new IllegalArgumentException(&quot;This needs the number of modules to function.&quot;);</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Sets the material based on...
+     * No. of Solved Modules + Total Ports - the No. of Battery Holders
+     *
+     * @param solved The number of solved modules
+     */
+    private static void setMaterial(int solved){
+<span class="pc bpc" id="L72" title="5 of 6 branches missed.">        switch (balance(solved + getTotalPorts() - numHolders)){</span>
+<span class="nc" id="L73">            case 0: ARTICLE.setMat(Clothing.Material.POLYESTER);</span>
+<span class="fc" id="L74">            case 1: ARTICLE.setMat(Clothing.Material.COTTON);</span>
+<span class="fc" id="L75">            case 2: ARTICLE.setMat(Clothing.Material.WOOL);</span>
+<span class="fc" id="L76">            case 3: ARTICLE.setMat(Clothing.Material.NYLON);</span>
+<span class="fc" id="L77">            case 4: ARTICLE.setMat(Clothing.Material.CORDUROY);</span>
+<span class="fc" id="L78">            default: ARTICLE.setMat(Clothing.Material.LEATHER);</span>
+        };
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * Sets the color based on...
+     * Last Digit of the Serial Code + the No. of All Batteries
+     */
+    private static void setColor(){
+<span class="pc bpc" id="L87" title="5 of 6 branches missed.">        switch (balance(lastDigit() + getAllBatteries())){</span>
+<span class="nc" id="L88">            case 0: ARTICLE.setColor(Clothing.Color.RUBY); break;</span>
+<span class="nc" id="L89">            case 1: ARTICLE.setColor(Clothing.Color.STAR); break;</span>
+<span class="nc" id="L90">            case 2: ARTICLE.setColor(Clothing.Color.SAPPHIRE); break;</span>
+<span class="nc" id="L91">            case 3: ARTICLE.setColor(Clothing.Color.JADE); break;</span>
+<span class="nc" id="L92">            case 4: ARTICLE.setColor(Clothing.Color.PEARL); break;</span>
+<span class="fc" id="L93">            default: ARTICLE.setColor(Clothing.Color.MALINITE);</span>
+        }
+<span class="fc" id="L95">    }</span>
+
+    /**
+     * Sets the item based on...
+     * The No. of Unsolved Modules + the No. of All Indicators
+     *
+     * @param unsolved The number of unsolved modules
+     */
+    private static void setItem(int unsolved){
+<span class="pc bpc" id="L104" title="5 of 6 branches missed.">        switch (balance(unsolved + countIndicators(true, true))){</span>
+<span class="nc" id="L105">            case 0: ARTICLE.setItem(Clothing.Item.CORSET); break;</span>
+<span class="nc" id="L106">            case 1: ARTICLE.setItem(Clothing.Item.SHIRT); break;</span>
+<span class="fc" id="L107">            case 2: ARTICLE.setItem(Clothing.Item.SKIRT); break;</span>
+<span class="nc" id="L108">            case 3: ARTICLE.setItem(Clothing.Item.SKORT); break;</span>
+<span class="nc" id="L109">            case 4: ARTICLE.setItem(Clothing.Item.SHORTS); break;</span>
+<span class="nc" id="L110">            default: ARTICLE.setItem(Clothing.Item.SCARF);</span>
+        }
+<span class="fc" id="L112">    }</span>
+
+    /**
+     * Creates the solve conditions for the module
+     *
+     * @return The array of Strings for the solve conditions
+     */
+    private static String[] conditions(){
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (thanksBob()) return done();</span>
+
+<span class="fc" id="L122">        String[] attributes = new String[5];</span>
+<span class="fc" id="L123">        fillThird(attributes);</span>
+
+<span class="pc bpc" id="L125" title="3 of 4 branches missed.">        if (ARTICLE.getMat() == Clothing.Material.LEATHER || ARTICLE.getColor() == Clothing.Color.JADE)</span>
+<span class="fc" id="L126">            attributes[0] = &quot;file:src\\Bomb\\Resources\\Laundry\\Wash\\80F.png&quot;;</span>
+
+<span class="pc bpc" id="L128" title="2 of 4 branches missed.">        if (ARTICLE.getMat() == Clothing.Material.WOOL || ARTICLE.getColor() == Clothing.Color.STAR)</span>
+<span class="nc" id="L129">            attributes[1] = &quot;file:src\\Bomb\\Resources\\Laundry\\Dry\\High Heat.png&quot;;</span>
+
+<span class="fc" id="L131">        attributes[4] = ARTICLE.getMat().name() + &quot; - &quot; + ARTICLE.getColor().name()</span>
+<span class="fc" id="L132">                + &quot; - &quot; + ARTICLE.getItem().name();</span>
+<span class="fc" id="L133">        return fillRest(attributes);</span>
+    }
+
+    /**
+     * Creates the win conditions for when Bob does the work for us
+     * Thanks Bob, you the man
+     *
+     * @return The win conditions
+     */
+    private static String[] done(){
+<span class="nc" id="L143">        return new String[]{ARTICLE.getMat().getLabel(), ARTICLE.getColor().getLabel(),</span>
+<span class="nc" id="L144">                ARTICLE.getItem().getWords()[0], ARTICLE.getItem().getWords()[1],</span>
+<span class="nc" id="L145">                ARTICLE.getMat().name() + &quot; - &quot; + ARTICLE.getColor().name() + &quot; - &quot; + ARTICLE.getItem().name()</span>
+                , &quot;Thanks, Bob!&quot;};
+    }
+
+    /**
+     *
+     *
+     * @param att
+     */
+    private static void fillThird(String[] att){
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">        if (ARTICLE.getColor() == Clothing.Color.PEARL)</span>
+<span class="nc" id="L156">            att[3] = &quot;Non-Chlorine Bleach&quot;;</span>
+<span class="pc bpc" id="L157" title="2 of 4 branches missed.">        else if (ARTICLE.getItem() == Clothing.Item.CORSET || ARTICLE.getMat() == Clothing.Material.CORDUROY)</span>
+<span class="nc" id="L158">            att[3] = ARTICLE.getMat().getSpecialInstr();</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">        else if (letterMatch())</span>
+<span class="fc" id="L160">            att[3] = ARTICLE.getColor().getSpecialInstr();</span>
+<span class="fc" id="L161">    }</span>
+
+    /**
+     * Fills in the rest of the win conditions
+     *
+     * @param att
+     * @return The completed win conditions
+     */
+    private static String[] fillRest(String[] att){
+<span class="fc bfc" id="L170" title="All 2 branches covered.">        for (int i = 0; i &lt; 4; i++){</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">            if (att[i] == null){</span>
+<span class="pc bpc" id="L172" title="2 of 4 branches missed.">                switch (i){</span>
+<span class="nc" id="L173">                    case 0: att[i] = ARTICLE.getMat().getLabel(); break;</span>
+<span class="fc" id="L174">                    case 1: att[i] = ARTICLE.getColor().getLabel(); break;</span>
+<span class="fc" id="L175">                    case 2: att[i] = ARTICLE.getItem().getWords()[0]; break;</span>
+<span class="nc" id="L176">                    default : att[i] = ARTICLE.getItem().getWords()[1];</span>
+                }
+            }
+        }
+<span class="fc" id="L180">        return att;</span>
+    }
+
+    /**
+     * Keeps the balance factor between 0 and 6 for determining clothing properties
+     *
+     * @param in The number
+     * @return The balanced number
+     */
+    private static int balance(int in){
+<span class="fc bfc" id="L190" title="All 2 branches covered.">        if (in &gt; 5) in %= 6;</span>
+<span class="pc bpc" id="L191" title="1 of 2 branches missed.">        else if (in &lt; 0) in += 6;</span>
+<span class="fc" id="L192">        return in;</span>
+    }
+
+    /**
+     * Determines if Bob did all the work for us
+     *
+     * @return True if the edgework matches the BOB conditions
+     */
+    private static boolean thanksBob(){
+<span class="pc bpc" id="L201" title="5 of 6 branches missed.">        return getAllBatteries() == 4 &amp;&amp; numHolders == 2 &amp;&amp; hasLitIndicator(Indicators.BOB);</span>
+    }
+
+    /**
+     * Checks to see if a letter in the Serial Code matches to a letter
+     * in the clothing material
+     *
+     * @return True if a letter from the Serial Code matches a letter in the clothing material
+     */
+    private static boolean letterMatch(){
+<span class="fc" id="L211">        String letters = ultimateFilter(serialCode, LOWERCASE_REGEX);</span>
+<span class="pc bpc" id="L212" title="1 of 2 branches missed.">        for (char instance : letters.toCharArray())</span>
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">            if (ARTICLE.getMat().name().toLowerCase().indexOf(instance) != -1) return true;</span>
+<span class="nc" id="L214">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BlindAlley.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.ab</a> &gt; <span class="el_source">BlindAlley.java</span></div><h1>BlindAlley.java</h1><pre class="source lang-java linenums">package bomb.modules.ab;
+
+import bomb.enumerations.Ports;
+import bomb.Widget;
+
+import static bomb.enumerations.Indicators.*;
+
+/**
+ * This class works on the Blind Alley module, updating the internal 2-D array whenever
+ * changes to specific widgets are made and exporting that info whenever the user displays
+ * the 'Blind Alley' tab pane. Blind Alley in a widget-dependant module that require you to press
+ * specific sections of the module based on the indicators, LED's, ports and batteries are on the bomb.
+ */
+<span class="nc" id="L14">public class BlindAlley extends Widget {</span>
+<span class="fc" id="L15">    private static int[][] alleyCat = new int[3][3];</span>
+
+    /**
+     * Updates all fields every time an appropriate change is made to the edgework
+     */
+    public static void alleyUpdate() {
+<span class="fc" id="L21">        topLeft();</span>
+<span class="fc" id="L22">        topMid();</span>
+<span class="fc" id="L23">        left();</span>
+<span class="fc" id="L24">        middle();</span>
+<span class="fc" id="L25">        right();</span>
+<span class="fc" id="L26">        bottomLeft();</span>
+<span class="fc" id="L27">        bottomMid();</span>
+<span class="fc" id="L28">        bottomRight();</span>
+<span class="fc" id="L29">    }</span>
+
+    private static void topLeft(){
+<span class="fc" id="L32">        alleyCat[0][0] = convertBool(hasUnlitIndicator(BOB)) + convertBool(hasLitIndicator(CAR)) +</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">                convertBool(hasLitIndicator(IND)) + convertBool(getNumHolders() % 2 == 0);</span>
+<span class="fc" id="L34">    }</span>
+
+    private static void topMid(){
+<span class="fc" id="L37">        alleyCat[0][1] = convertBool(hasUnlitIndicator(NSA)) + convertBool(hasLitIndicator(FRK)) +</span>
+<span class="fc" id="L38">                convertBool(hasUnlitIndicator(CAR)) + convertBool(portExists(Ports.RJ45));</span>
+<span class="fc" id="L39">    }</span>
+
+    private static void left(){
+<span class="fc" id="L42">        alleyCat[1][0] = convertBool(hasUnlitIndicator(FRQ)) + convertBool(hasUnlitIndicator(IND)) +</span>
+<span class="fc" id="L43">                convertBool(hasUnlitIndicator(TRN)) + convertBool(portExists(Ports.DVI));</span>
+<span class="fc" id="L44">    }</span>
+
+    private static void middle(){
+<span class="fc" id="L47">        alleyCat[1][1] = convertBool(hasUnlitIndicator(SIG)) + convertBool(hasUnlitIndicator(SND)) +</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">                convertBool(hasLitIndicator(NSA)) + convertBool(getAllBatteries() % 2 == 0);</span>
+<span class="fc" id="L49">    }</span>
+
+    private static void right(){
+<span class="fc" id="L52">        alleyCat[1][2] = convertBool(hasLitIndicator(BOB)) + convertBool(hasLitIndicator(CLR)) +</span>
+<span class="fc" id="L53">                convertBool(portExists(Ports.PS2)) + convertBool(portExists(Ports.SERIAL));</span>
+<span class="fc" id="L54">    }</span>
+
+    private static void bottomLeft(){
+<span class="fc" id="L57">        alleyCat[2][0] = convertBool(hasLitIndicator(FRQ)) + convertBool(hasLitIndicator(SIG)) +</span>
+<span class="fc bfc" id="L58" title="All 2 branches covered.">                convertBool(hasLitIndicator(TRN)) + convertBool(hasEven() == 0);</span>
+<span class="fc" id="L59">    }</span>
+
+    private static void bottomMid(){
+<span class="fc" id="L62">        alleyCat[2][1] = convertBool(hasUnlitIndicator(FRK)) + convertBool(hasLitIndicator(MSA)) +</span>
+<span class="fc" id="L63">                convertBool(portExists(Ports.PARALLEL)) + convertBool(hasVowel());</span>
+<span class="fc" id="L64">    }</span>
+
+    private static void bottomRight(){
+<span class="fc" id="L67">        alleyCat[2][2] = convertBool(hasUnlitIndicator(CLR)) + convertBool(hasUnlitIndicator(MSA)) +</span>
+<span class="fc" id="L68">                convertBool(hasLitIndicator(SND)) + convertBool(portExists(Ports.RCA));</span>
+<span class="fc" id="L69">    }</span>
+
+    private static int convertBool(boolean bool){
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        return bool ? 1 : 0;</span>
+    }
+
+    /**
+     * Exports the information of which button to press
+     *
+     * @return A 2D array with the information
+     */
+    public static int[][] getAlleyCat(){
+<span class="fc" id="L81">        return alleyCat;</span>
+    }
+
+    public static void reset(){
+<span class="fc" id="L85">        alleyCat = new int[3][3];</span>
+<span class="fc" id="L86">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

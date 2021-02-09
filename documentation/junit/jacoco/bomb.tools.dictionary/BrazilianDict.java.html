@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BrazilianDict.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.dictionary</a> &gt; <span class="el_source">BrazilianDict.java</span></div><h1>BrazilianDict.java</h1><pre class="source lang-java linenums">package bomb.tools.dictionary;
+
+import java.util.HashMap;
+
+public class BrazilianDict extends Dictionary{
+<span class="nc" id="L6">    public BrazilianDict(){</span>
+<span class="nc" id="L7">        frequencies = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L8">        stepTwoMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L9">        initFreqs();</span>
+<span class="nc" id="L10">        initStepTwo();</span>
+<span class="nc" id="L11">        yes = &quot;Desabafar gÃ¡s? - Sim&quot;; // gÃ¡s de ventilaÃ§Ã£o</span>
+<span class="nc" id="L12">        no = &quot;Detonar? - NÃ£o&quot;;</span>
+<span class="nc" id="L13">        fancyChars = &quot;Ã¡ Ã  Ã¢ Ã£ Ã§ Ã© Ãª Ã­ Ã³ Ã´ Ãµ Ãº Ã¼&quot;;</span>
+<span class="nc" id="L14">        moduleLabels = new String[]{&quot;BotÃµes&quot;, &quot;&quot;, &quot;Codigo Morse&quot;, &quot;Senhas&quot;, &quot;VentilaÃ§Ã£o de gÃ¡s&quot;};</span>
+<span class="nc" id="L15">        buttonLabels = new String[]{&quot;Vermelho&quot;, &quot;Azul&quot;, &quot;Amarelo&quot;, &quot;Branco&quot;, &quot;Segurar&quot;, &quot;Pressionar&quot;, &quot;Detonar&quot;, &quot;Abortar&quot;};</span>
+<span class="nc" id="L16">        passwords = new String[]{</span>
+                &quot;achar&quot;, &quot;aluno&quot;, &quot;baixo&quot;, &quot;breve&quot;, &quot;caixa&quot;,
+                &quot;canto&quot;, &quot;carta&quot;, &quot;certo&quot;, &quot;cinco&quot;, &quot;coisa&quot;,
+                &quot;disco&quot;, &quot;falar&quot;, &quot;horas&quot;, &quot;letra&quot;, &quot;livro&quot;,
+                &quot;lugar&quot;, &quot;menor&quot;, &quot;,menos&quot;, &quot;mesmo&quot;, &quot;mundo&quot;,
+                &quot;nobre&quot;, &quot;nunca&quot;, &quot;ontem&quot;, &quot;outro&quot;, &quot;parou&quot;,
+                &quot;pensa&quot;, &quot;pobre&quot;, &quot;ponto&quot;, &quot;praia&quot;, &quot;salas&quot;,
+                &quot;sobre&quot;, &quot;terra&quot;, &quot;troca&quot;, &quot;trono&quot;, &quot;verde&quot;};
+<span class="nc" id="L24">    }</span>
+
+    @Override
+    public String predictWord(String part, boolean isMorse) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (!isMorse) {</span>
+<span class="nc bnc" id="L29" title="All 40 branches missed.">            switch (part.toLowerCase()) {</span>
+<span class="nc" id="L30">                case &quot;i&quot;: case &quot;is&quot;: case &quot;iss&quot;: return  &quot;isso&quot;;</span>
+<span class="nc" id="L31">                case &quot;no&quot;: case &quot;n&quot;: case &quot;nao&quot;: case &quot;nÃ£&quot;: case &quot;na&quot;: return &quot;nÃ£o&quot;;</span>
+<span class="nc" id="L32">                case &quot;6&quot;: return &quot;^&quot;;</span>
+<span class="nc" id="L33">                case &quot;v&quot;: case &quot;vi&quot;: case &quot;vis&quot;: case &quot;viso&quot;: return &quot;visor&quot;;</span>
+<span class="nc" id="L34">                case &quot;nad&quot;: case &quot;nd&quot;: return &quot;nada&quot;;</span>
+<span class="nc" id="L35">                case &quot;p&quot;: case &quot;pr&quot;: case &quot;pro&quot;: case &quot;pron&quot;: case &quot;pront&quot;: return &quot;pronto&quot;;</span>
+<span class="nc" id="L36">                case &quot;pri&quot;: case &quot;prim&quot;: case &quot;prime&quot;: case &quot;primei&quot;: case &quot;primeir&quot;: return &quot;primeiro&quot;;</span>
+<span class="nc" id="L37">                case &quot;b&quot;: case &quot;br&quot;: case &quot;bra&quot;: case &quot;bran&quot;: case &quot;branc&quot;: return &quot;branco&quot;;</span>
+<span class="nc" id="L38">                case &quot;q&quot;: case &quot;qu&quot;: case &quot;que&quot;: case &quot;qe&quot;: case &quot;qÃª&quot;: return &quot;quÃª&quot;;</span>
+<span class="nc" id="L39">                case &quot;s&quot;: case &quot;se&quot;: case &quot;sei&quot;: case &quot;si&quot;: return &quot;sei&quot;;</span>
+<span class="nc" id="L40">                case &quot;ses&quot;: case &quot;sis&quot;: return &quot;seis&quot;;</span>
+<span class="nc" id="L41">                case &quot;e&quot;: case &quot;es&quot;: case &quot;esq&quot;: case &quot;esqu&quot;: case &quot;esque&quot;: case &quot;esquer&quot;: case &quot;esquerd&quot;: return &quot;esquerda&quot;;</span>
+<span class="nc" id="L42">                case &quot;d&quot;: case &quot;di&quot;: case &quot;dir&quot;: case &quot;dire&quot;: case &quot;direi&quot;: case &quot;direit&quot;: return &quot;direita&quot;;</span>
+<span class="nc" id="L43">                case &quot;m&quot;: case &quot;me&quot;: case &quot;mei&quot;: return &quot;meio&quot;;</span>
+<span class="nc" id="L44">                case &quot;be&quot;: case &quot;bel&quot;: case &quot;bele&quot;: case &quot;belez&quot;: return &quot;beleza&quot;;</span>
+<span class="nc" id="L45">                case &quot;a&quot;: case &quot;ap&quot;: case &quot;ape&quot;: case &quot;aper&quot;: case &quot;apert&quot;: return &quot;aperta&quot;;</span>
+<span class="nc" id="L46">                case &quot;vo&quot;: case &quot;voc&quot;: case &quot;voce&quot;: case &quot;vce&quot;: case &quot;voe&quot;: return &quot;vocÃª&quot;;</span>
+<span class="nc" id="L47">                case &quot;c&quot;: case &quot;ce&quot;: case &quot;ces&quot;: case &quot;cest&quot;: return &quot;cesto&quot;;</span>
+<span class="nc" id="L48">                case &quot;sex&quot;: case &quot;sext&quot;: return &quot;sexto&quot;;</span>
+<span class="nc" id="L49">                case &quot;c &quot;: return &quot;c e&quot;;</span>
+<span class="nc" id="L50">                case &quot;Ãª Ã©&quot;: case &quot;e e&quot;: case &quot;ce e&quot;: case &quot;cee&quot;: case &quot;cÃªÃ©&quot;: return &quot;cÃª Ã©&quot;;</span>
+<span class="nc" id="L51">                case &quot;q?&quot;: case &quot;qu?&quot;: case &quot;que?&quot;: return &quot;quÃª?&quot;;</span>
+<span class="nc" id="L52">                case &quot;seg&quot;: case &quot;segu&quot;: case &quot;segur&quot;: return &quot;segura&quot;;</span>
+<span class="nc" id="L53">                case &quot;f&quot;: case &quot;fo&quot;: case &quot;fi&quot;: return &quot;foi&quot;;</span>
+<span class="nc" id="L54">                case &quot;prÃ³&quot;: case &quot;prox&quot;: case &quot;prÃ³x&quot;: case &quot;proxi&quot;: case &quot;prÃ³xi&quot;: case &quot;proxim&quot;: case &quot;prÃ³xim&quot;: case &quot;proximo&quot;: return &quot;prÃ³ximo&quot;;</span>
+<span class="nc" id="L55">                case &quot;t&quot;: case &quot;ti&quot;: case &quot;tip&quot;: case &quot;tpo&quot;: case &quot;tp&quot;: return &quot;tipo&quot;;</span>
+<span class="nc" id="L56">                case &quot;em&quot;: case &quot;emp&quot;: case &quot;empt&quot;: return &quot;empty&quot;;</span>
+<span class="nc" id="L57">                case &quot;esc&quot;: case &quot;escr&quot;: case &quot;escri&quot;: case &quot;escrit&quot;: return &quot;escrito&quot;;</span>
+<span class="nc" id="L58">                case &quot;ac&quot;: case &quot;ace&quot;: case &quot;acen&quot;: case &quot;acent&quot;: return &quot;acento&quot;;</span>
+<span class="nc" id="L59">                case &quot;cel&quot;: case &quot;cla&quot;: return &quot;cela&quot;;</span>
+<span class="nc" id="L60">                case &quot;2&quot;: return &quot;2S&quot;;</span>
+<span class="nc" id="L61">                case &quot;asse&quot;: case &quot;assen&quot;: case &quot;assent&quot;: return &quot;assento&quot;;</span>
+<span class="nc" id="L62">                case &quot;s la&quot;: case &quot;sla&quot;: case &quot;seila&quot;: case &quot;sei la&quot;: return &quot;sei lÃ¡&quot;;</span>
+<span class="nc" id="L63">                case &quot;sel&quot;: return &quot;sela&quot;;</span>
+<span class="nc" id="L64">                case &quot;pe&quot;: case &quot;per&quot;: case &quot;pera&quot;: case &quot;perai&quot;: case &quot;peria&quot;: case &quot;peraÃ­&quot;: return &quot;perÃ­a&quot;;</span>
+<span class="nc" id="L65">                case &quot;voce e&quot;: case &quot;vocÃª e&quot;: case &quot;vocÃªÃ©&quot;: return &quot;vocÃª Ã©&quot;;</span>
+<span class="nc" id="L66">                case &quot;ess&quot;: return &quot;esse&quot;;</span>
+<span class="nc" id="L67">                case &quot;as&quot;: case &quot;ass&quot;: case &quot;ao&quot;: case &quot;aso&quot;: return &quot;asso&quot;;</span>
+<span class="nc" id="L68">                case &quot;aco&quot;: return &quot;aÃ§o&quot;;</span>
+<span class="nc" id="L69">                default: return part;</span>
+            }
+        }
+<span class="nc bnc" id="L72" title="All 17 branches missed.">        switch (part.toLowerCase()){</span>
+<span class="nc" id="L73">            case &quot;b&quot;: case &quot;bu&quot;: case &quot;bur&quot;: case &quot;burr&quot;: case &quot;brr&quot;: case &quot;brro&quot;: return &quot;burro&quot;;</span>
+<span class="nc" id="L74">            case &quot;bo&quot;: case &quot;bos&quot;: case &quot;boss&quot;: return &quot;bossa&quot;;</span>
+<span class="nc" id="L75">            case &quot;bom&quot;: case &quot;bomb&quot;: return &quot;bomba&quot;;</span>
+<span class="nc" id="L76">            case &quot;ba&quot;: case &quot;bat&quot;: case &quot;bato&quot;: return &quot;batom&quot;;</span>
+<span class="nc" id="L77">            case &quot;bombo&quot;: case &quot;bbom&quot;: return &quot;bombom&quot;;</span>
+<span class="nc" id="L78">            case &quot;d&quot;: case &quot;da&quot;: case &quot;dad&quot;: case &quot;dado&quot;: return &quot;dados&quot;;</span>
+<span class="nc" id="L79">            case &quot;do&quot;: case &quot;dos&quot;: case &quot;doss&quot;: case &quot;dossi&quot;: case &quot;dossie&quot;: return &quot;dossiÃª&quot;;</span>
+<span class="nc" id="L80">            case &quot;m&quot;: case &quot;mo&quot;: case &quot;mor&quot;: case &quot;mors&quot;: return &quot;morse&quot;;</span>
+<span class="nc" id="L81">            case &quot;doi&quot;: case &quot;doid&quot;: return &quot;doido&quot;;</span>
+<span class="nc" id="L82">            case &quot;mod&quot;: case &quot;modu&quot;: case &quot;modul&quot;: return &quot;modulo&quot;;</span>
+<span class="nc" id="L83">            case &quot;s&quot;: case &quot;se&quot;: case &quot;sen&quot;: case &quot;senh&quot;: return &quot;senha&quot;;</span>
+<span class="nc" id="L84">            case &quot;ser&quot;: case &quot;seri&quot;: case &quot;seria&quot;: return &quot;serial&quot;;</span>
+<span class="nc" id="L85">            case &quot;sa&quot;: case &quot;sam&quot;: case &quot;samb&quot;: return &quot;samba&quot;;</span>
+<span class="nc" id="L86">            case &quot;c&quot;: case &quot;ch&quot;: case &quot;cha&quot;: case &quot;chav&quot;: case &quot;chva&quot;: return &quot;chave&quot;;</span>
+<span class="nc" id="L87">            case &quot;co&quot;: case &quot;cod&quot;: case &quot;codi&quot;: case &quot;codig&quot;: return &quot;codigo&quot;;</span>
+<span class="nc" id="L88">            case &quot;con&quot;: case &quot;cont&quot;: return &quot;conta&quot;;</span>
+<span class="nc" id="L89">            default: return part;</span>
+        }
+    }
+
+    @Override
+    protected void initFreqs() {
+<span class="nc" id="L95">        frequencies.put(&quot;bossa&quot;, 3.505);</span>
+<span class="nc" id="L96">        frequencies.put(&quot;bomba&quot;, 3.515);</span>
+<span class="nc" id="L97">        frequencies.put(&quot;batom&quot;, 3.522);</span>
+<span class="nc" id="L98">        frequencies.put(&quot;bombom&quot;, 3.532);</span>
+<span class="nc" id="L99">        frequencies.put(&quot;burro&quot;, 3.535);</span>
+<span class="nc" id="L100">        frequencies.put(&quot;dados&quot;, 3.542);</span>
+<span class="nc" id="L101">        frequencies.put(&quot;dossiÃª&quot;, 3.545);</span>
+<span class="nc" id="L102">        frequencies.put(&quot;doido&quot;, 3.552);</span>
+<span class="nc" id="L103">        frequencies.put(&quot;morse&quot;, 3.555);</span>
+<span class="nc" id="L104">        frequencies.put(&quot;modulo&quot;, 3.565);</span>
+<span class="nc" id="L105">        frequencies.put(&quot;senha&quot;, 3.572);</span>
+<span class="nc" id="L106">        frequencies.put(&quot;serial&quot;, 3.575);</span>
+<span class="nc" id="L107">        frequencies.put(&quot;samba&quot;, 3.582);</span>
+<span class="nc" id="L108">        frequencies.put(&quot;chave&quot;, 3.592);</span>
+<span class="nc" id="L109">        frequencies.put(&quot;codigo&quot;, 3.595);</span>
+<span class="nc" id="L110">        frequencies.put(&quot;conta&quot;, 3.6);</span>
+<span class="nc" id="L111">    }</span>
+
+    @Override
+    protected void initStepTwo() {
+<span class="nc" id="L115">        stepTwoMap.put(&quot;PRONTO&quot;, &quot;ISSO, BELEZA, QUÃŠ, MEIO, ESQUERDA, APERTA, DIREITA, BRANCO, PRONTO&quot;);</span>
+<span class="nc" id="L116">        stepTwoMap.put(&quot;PRIMEIRO&quot;, &quot;ESQUERDA, BELEZA, ISSO, MEIO, NÃƒO, DIREITA, NADA, SEIS, ESPERA, PRONTO, BRANCO, QUÃŠ, APERTA, PRIMEIRO&quot;);</span>
+<span class="nc" id="L117">        stepTwoMap.put(&quot;NÃƒO&quot;, &quot; BRANCO, SEIS, ESPERA, PRIMEIRO, QUÃŠ, PRONTO, DIREITA, ISSO, NADA, ESQUERDA, APERTA, BELEZA, NÃƒO&quot;);</span>
+<span class="nc" id="L118">        stepTwoMap.put(&quot;BRANCO&quot;, &quot;ESPERA, DIREITA, BELEZA, MEIO, BRANCO&quot;);</span>
+<span class="nc" id="L119">        stepTwoMap.put(&quot;NADA&quot;, &quot;SEIS, DIREITA, BELEZA, MEIO, ISSO, BRANCO, NÃƒO, APERTA, ESQUERDA, QUÃŠ, ESPERA, PRIMEIRO, NADA&quot;);</span>
+<span class="nc" id="L120">        stepTwoMap.put(&quot;ISSO&quot;, &quot;BELEZA, DIREITA, SEIS, MEIO, PRIMEIRO, QUÃŠ, APERTA, PRONTO, NADA, ISSO&quot;);</span>
+<span class="nc" id="L121">        stepTwoMap.put(&quot;QUÃŠ&quot;, &quot;SEIS, QUÃŠ&quot;);</span>
+<span class="nc" id="L122">        stepTwoMap.put(&quot;SEIS&quot;, &quot;PRONTO, NADA, ESQUERDA, QUÃŠ, BELEZA, ISSO, DIREITA, NÃƒO, APERTA, BRANCO, SEIS&quot;);</span>
+<span class="nc" id="L123">        stepTwoMap.put(&quot;ESQUERDA&quot;, &quot;DIREITA, ESQUERDA&quot;);</span>
+<span class="nc" id="L124">        stepTwoMap.put(&quot;DIREITA&quot;, &quot;ISSO, NADA, PRONTO, APERTA, NÃƒO, ESPERA, QUÃŠ, DIREITA&quot;);</span>
+<span class="nc" id="L125">        stepTwoMap.put(&quot;MEIO&quot;, &quot;BRANCO, PRONTO, BELEZA, QUÃŠ, NADA, APERTA, NÃƒO, ESPERA, ESQUERDA, MEIO&quot;);</span>
+<span class="nc" id="L126">        stepTwoMap.put(&quot;BELEZA&quot;, &quot;MEIO, NÃƒO, PRIMEIRO, ISSO, SEIS, NADA, ESPERA, BELEZA&quot;);</span>
+<span class="nc" id="L127">        stepTwoMap.put(&quot;ESPERA&quot;, &quot;SEIS, NÃƒO, BRANCO, BELEZA, ISSO, ESQUERDA, PRIMEIRO, APERTA, QUÃŠ, ESPERA&quot;);</span>
+<span class="nc" id="L128">        stepTwoMap.put(&quot;APERTA&quot;, &quot;DIREITA, MEIO, ISSO, PRONTO, APERTA&quot;);</span>
+<span class="nc" id="L129">        stepTwoMap.put(&quot;VOCÃŠ&quot;, &quot;SEI, VOCÃŠ Ã‰, C, CÃŠ Ã‰, PRÃ“XIMO, CESTO, C E, SEGURA, QUÃŠ?, VOCÃŠ&quot;);</span>
+<span class="nc" id="L130">        stepTwoMap.put(&quot;VOCÃŠ Ã‰&quot;, &quot; C, PRÃ“XIMO, TIPO, CESTO, QUÃŠ?, FOI, SEXTO, SEGURA, VOCÃŠ, CÃŠ, CÃŠ Ã‰, SEI, C E, VOCÃŠ Ã‰&quot;);</span>
+<span class="nc" id="L131">        stepTwoMap.put(&quot;C&quot;, &quot;SEXTO, VOCÃŠ Ã‰, CESTO, C&quot;);</span>
+<span class="nc" id="L132">        stepTwoMap.put(&quot;CÃŠ Ã‰&quot;, &quot;VOCÃŠ, CÃŠ Ã‰&quot;);</span>
+<span class="nc" id="L133">        stepTwoMap.put(&quot;C E&quot;, &quot;FOI, CÃŠ, C E&quot;);</span>
+<span class="nc" id="L134">        stepTwoMap.put(&quot;CÃŠ&quot;, &quot;CESTO, SEI, PRÃ“XIMO, QUÃŠ?, CÃŠ Ã‰, C E, SEXTO, FOI, CÃŠ&quot;);</span>
+<span class="nc" id="L135">        stepTwoMap.put(&quot;CESTO&quot;, &quot;CESTO&quot;);</span>
+<span class="nc" id="L136">        stepTwoMap.put(&quot;SEXTO&quot;, &quot;C E, CÃŠ, VOCÃŠ Ã‰, CÃŠ Ã‰, PRÃ“XIMO, SEXTO&quot;);</span>
+<span class="nc" id="L137">        stepTwoMap.put(&quot;QUÃŠ?&quot;, &quot;VOCÃŠ, SEGURA, CÃŠ Ã‰, C, CÃŠ, FOI, SEXTO, TIPO, VOCÃŠ Ã‰, CESTO, C E, PRÃ“XIMO, QUÃŠ?&quot;);</span>
+<span class="nc" id="L138">        stepTwoMap.put(&quot;FOI&quot;, &quot;SEI, CESTO, PRÃ“XIMO, QUÃŠ?, C, C E, CÃŠ Ã‰, SEGURA, TIPO, VOCÃŠ, CÃŠ, VOCÃŠ Ã‰, SEXTO, FOI&quot;);</span>
+<span class="nc" id="L139">        stepTwoMap.put(&quot;PRÃ“XIMO&quot;, &quot;QUÃŠ?, CESTO, SEXTO, C, SEGURA, SEI, PRÃ“XIMO&quot;);</span>
+<span class="nc" id="L140">        stepTwoMap.put(&quot;SEGURA&quot;, &quot;VOCÃŠ Ã‰, CÃŠ, FOI, SEXTO, VOCÃŠ, C E, SEI, QUÃŠ?, CÃŠ Ã‰, PRÃ“XIMO, SEGURA&quot;);</span>
+<span class="nc" id="L141">        stepTwoMap.put(&quot;SEI&quot;, &quot;VOCÃŠ Ã‰, FOI, TIPO, CÃŠ Ã‰, VOCÃŠ, SEGURA, CESTO, C E, SEI&quot;);</span>
+<span class="nc" id="L142">        stepTwoMap.put(&quot;TIPO&quot;, &quot;CÃŠ Ã‰, PRÃ“XIMO, CÃŠ, C E, SEGURA, FOI, SEXTO, QUÃŠ?, CESTO, VOCÃŠ, TIPO&quot;);</span>
+<span class="nc" id="L143">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

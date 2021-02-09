@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Hex.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.hexalgorithm</a> &gt; <span class="el_source">Hex.java</span></div><h1>Hex.java</h1><pre class="source lang-java linenums">package bomb.tools.hexalgorithm;
+
+import bomb.enumerations.HexTraits;
+import bomb.enumerations.HexTraits.*;
+import bomb.tools.data.structures.FixedArrayQueue;
+
+
+import java.util.ArrayList;
+
+/**
+ * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
+ * using individual HexNodes to represent what a tile contains.
+ */
+public class Hex {
+    /**
+     * This class is the backing node to a given hexagon data structure.
+     */
+    public static class HexNode{
+        public ArrayList&lt;HexWall&gt; walls;
+        public HexShape fill;
+
+        /**
+         * Initializes a HexNode with the important info:
+         * Any combination of the 6 walls and a shape in the center
+         *
+         * @param hexShape The shape within the HexNode
+         * @param constructs Which walls are present in this HexNode
+         */
+<span class="nc" id="L29">        public HexNode(HexShape hexShape, ArrayList&lt;HexWall&gt; constructs){</span>
+<span class="nc" id="L30">            walls = constructs;</span>
+<span class="nc" id="L31">            fill = hexShape;</span>
+<span class="nc" id="L32">        }</span>
+
+<span class="nc" id="L34">        public HexNode(HexNode toCopy){</span>
+<span class="nc" id="L35">            walls = deepCopyWalls(toCopy.walls);</span>
+<span class="nc" id="L36">            fill = deepCopyShape(toCopy.fill);</span>
+<span class="nc" id="L37">        }</span>
+
+        private ArrayList&lt;HexWall&gt; deepCopyWalls(ArrayList&lt;HexWall&gt;constructs){
+<span class="nc" id="L40">            ArrayList&lt;HexWall&gt; newWalls = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L41" title="All 2 branches missed.">            for (HexWall construct : constructs) {</span>
+<span class="nc bnc" id="L42" title="All 6 branches missed.">                switch (construct) {</span>
+<span class="nc" id="L43">                    case Top: newWalls.add(HexWall.Top); break;</span>
+<span class="nc" id="L44">                    case TopLeft: newWalls.add(HexWall.TopLeft); break;</span>
+<span class="nc" id="L45">                    case TopRight: newWalls.add(HexWall.TopRight); break;</span>
+<span class="nc" id="L46">                    case Bottom: newWalls.add(HexWall.Bottom); break;</span>
+<span class="nc" id="L47">                    case BottomLeft: newWalls.add(HexWall.BottomLeft); break;</span>
+<span class="nc" id="L48">                    default: newWalls.add(HexWall.BottomRight);</span>
+                }
+<span class="nc" id="L50">            }</span>
+<span class="nc" id="L51">            return newWalls;</span>
+        }
+
+        private HexShape deepCopyShape(HexShape shape){
+<span class="nc bnc" id="L55" title="All 2 branches missed.">            if (shape == null) return null;</span>
+<span class="nc bnc" id="L56" title="All 6 branches missed.">            switch (shape){</span>
+<span class="nc" id="L57">                case Circle: return HexShape.Circle;</span>
+<span class="nc" id="L58">                case Hexagon: return HexShape.Hexagon;</span>
+<span class="nc" id="L59">                case LeftTriangle: return HexShape.LeftTriangle;</span>
+<span class="nc" id="L60">                case RightTriangle: return HexShape.RightTriangle;</span>
+<span class="nc" id="L61">                case UpTriangle: return HexShape.UpTriangle;</span>
+<span class="nc" id="L62">                default: return HexShape.DownTriangle;</span>
+            }
+        }
+
+        public void addWalls(HexWall... walls){
+<span class="nc bnc" id="L67" title="All 2 branches missed.">            for (HexWall wall : walls){</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">                if (!this.walls.contains(wall))</span>
+<span class="nc" id="L69">                    this.walls.add(wall);</span>
+            }
+<span class="nc" id="L71">        }</span>
+
+        /**
+         * Checks whether a certain wall is contained within the HexNode
+         *
+         * @param wallTag The number associated with a particular wall to check
+         * @return True or false, whether there was the specified wall
+         */
+        public boolean checkWall(int wallTag){
+<span class="nc bnc" id="L80" title="All 2 branches missed.">            for (HexWall testWall : walls)</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                if (testWall.getIdx() == wallTag)</span>
+<span class="nc" id="L82">                    return true;</span>
+<span class="nc" id="L83">            return false;</span>
+        }
+
+        public int checkExits(){
+<span class="nc" id="L87">            return 6 - (walls.size() + 1);</span>
+        }
+    }
+
+    private FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; hexagon;
+    private final byte sideLength;
+    private final int span;
+
+    /**
+     * Initializes a hexagonal storage system based on the side length given
+     *
+     * @param sideLength - the length of a side of the hexagon
+     * @throws IllegalArgumentException - Signals that the specified length is too short
+     */
+<span class="nc" id="L101">    public Hex(int sideLength) throws IllegalArgumentException{</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (sideLength &lt; 128) {</span>
+<span class="nc" id="L103">            hexagon = listHexagon((byte) sideLength);</span>
+<span class="nc" id="L104">            this.sideLength = (byte) sideLength;</span>
+<span class="nc" id="L105">            span = calculateHexagonalSpan();</span>
+        }
+<span class="nc" id="L107">        else throw new IllegalArgumentException(&quot;Side length was too large&quot;);</span>
+<span class="nc" id="L108">    }</span>
+
+    /**
+     * Initializes a hexagonal storage system based on a given backing data structure
+     * and its side length
+     *
+     * @param imports The List of Lists backing structure
+     * @param sideLength The matching side length
+     */
+<span class="nc" id="L117">    public Hex(FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; imports, int sideLength){</span>
+<span class="nc" id="L118">        hexagon = imports;</span>
+<span class="nc" id="L119">        this.sideLength = (byte) sideLength;</span>
+<span class="nc" id="L120">        span = calculateHexagonalSpan();</span>
+<span class="nc" id="L121">    }</span>
+
+    /**
+     * Initializes a hexagonal storage system based on a simple ArrayList of HexNodes,
+     * taking the size of the list before sending it to the stream method
+     *
+     * @param imports The Arraylist of HexNodes
+     * @throws IllegalArgumentException The side length didn't given an integer value
+     */
+<span class="nc" id="L130">    public Hex(ArrayList&lt;HexNode&gt; imports) throws IllegalArgumentException{</span>
+<span class="nc" id="L131">        sideLength = nodalSideLength(imports.size());</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (sideLength == 0)</span>
+<span class="nc" id="L133">            throw new IllegalArgumentException(&quot;Area given did not return an integer&quot;);</span>
+<span class="nc" id="L134">        injectList(imports);</span>
+<span class="nc" id="L135">        span = calculateHexagonalSpan();</span>
+<span class="nc" id="L136">    }</span>
+
+    /**
+     * Creates a FinalList of empty FinalLists. This will represent the hexagon
+     *
+     * @param sideLength The given side length of a hexagon
+     * @return The FinalList of FinalLists
+     */
+    private FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; listHexagon(byte sideLength){
+        FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; hex;
+<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (sideLength &gt; 2) {</span>
+            //Initializing the horizontal size of the hex to be 2n-1
+<span class="nc" id="L148">            hex = new FixedArrayQueue&lt;&gt;(2*sideLength-1);</span>
+
+            //Adding lists from the starting length to 2n-1
+<span class="nc bnc" id="L151" title="All 2 branches missed.">            for (int i = sideLength; i &lt; sideLength * 2; i++)</span>
+<span class="nc" id="L152">                hex.add(new FixedArrayQueue&lt;&gt;(i));</span>
+
+            //Adding lists from 2n-2 to starting length
+<span class="nc bnc" id="L155" title="All 2 branches missed.">            for (int i = sideLength * 2 - 2; i &gt;= sideLength; i--)</span>
+<span class="nc" id="L156">                hex.add(new FixedArrayQueue&lt;&gt;(i));</span>
+<span class="nc" id="L157">            return hex;</span>
+<span class="nc" id="L158">        } else throw new IllegalArgumentException(&quot;Size is too small&quot;);</span>
+    }
+
+    /**
+     * Streams in an ArrayList of HexNodes, converts it to the hexagon representation and
+     * saves it in the internal hexagon
+     *
+     * @param stream The ArrayList of HexNodes
+     */
+    public void injectList(ArrayList&lt;HexNode&gt; stream){
+<span class="nc" id="L168">        hexagon = interpretList(stream);</span>
+<span class="nc" id="L169">    }</span>
+
+    /**
+     * Takes in an ArrayList of HexNodes and converts to a hexagonal representation
+     *
+     * @param newStream The ArrayList of HexNodes
+     * @return A successfully streamed FinalList of FinalLists
+     * @throws IllegalArgumentException Too few or too many HexNodes were given
+     */
+    private FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; interpretList(ArrayList&lt;HexNode&gt; newStream)
+            throws IllegalArgumentException{
+<span class="nc bnc" id="L180" title="All 2 branches missed.">        if (nodalSideLength(newStream.size()) == 0)</span>
+<span class="nc" id="L181">            throw new IllegalArgumentException(&quot;Too few nodes were sent: &quot; + newStream.size());</span>
+<span class="nc" id="L182">        FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; temp = listHexagon(sideLength);</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        for (HexNode hexNode : newStream)</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            if (!add(temp, hexNode)) throw new IllegalArgumentException(&quot;We have extra nodes being added&quot;);</span>
+<span class="nc" id="L185">        return temp;</span>
+    }
+
+    /**
+     * Adds one HexNode to the hexagon
+     *
+     * @param toFill The FinalList of FinalLists needing to be filled
+     * @param toAdd The hexNode to add
+     * @return False if full
+     */
+    private boolean add(FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; toFill, HexNode toAdd){
+<span class="nc bnc" id="L196" title="All 2 branches missed.">        for (int i = 0; i &lt; toFill.cap(); i++){</span>
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            if (!toFill.get(i).full()){</span>
+<span class="nc" id="L198">                toFill.get(i).add(toAdd);</span>
+<span class="nc" id="L199">                return true;</span>
+            }
+        }
+<span class="nc" id="L202">        return false;</span>
+    }
+
+    /**
+     * Returns the side length of the hexagon
+     *
+     * @return The length of one side of the hexagon
+     */
+    public int sideLength(){
+<span class="nc" id="L211">        return sideLength;</span>
+    }
+
+    /**
+     * Returns the span of the columns
+     *
+     * @return The length of the columns
+     */
+    public int getSpan() {
+<span class="nc" id="L220">        return span;</span>
+    }
+
+    /**
+     * Creates an ArrayList of HexNodes from the FinalList of FinalLists
+     *
+     * @return The ArrayList containing HexNodes
+     */
+    public ArrayList&lt;HexNode&gt; exportToList(){
+<span class="nc" id="L229">        ArrayList&lt;HexNode&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">        for (int i = 0; i &lt; hexagon.cap(); i++)</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">            for (int j = 0; j &lt; hexagon.get(i).cap(); j++)</span>
+<span class="nc" id="L232">                output.add(hexagon.get(i).get(j));</span>
+<span class="nc" id="L233">        return output;</span>
+    }
+
+    /**
+     * Rotates the entire hexagon 60Â° clockwise
+     *
+     * @throws IllegalArgumentException If extra nodes were being added to the new hexagon
+     */
+    public void rotate() throws IllegalArgumentException{
+<span class="nc" id="L242">        ArrayList&lt;HexNode&gt; linearOrder = new ArrayList&lt;&gt;();</span>
+        //TODO - Needs to be broken down
+        //For loop for the entire algorithm
+<span class="nc bnc" id="L245" title="All 2 branches missed.">        for (int a = 0; a &lt; hexagon.cap(); a++){</span>
+            //For loop for 1st half of the hexagon and its center
+<span class="nc bnc" id="L247" title="All 2 branches missed.">            for (int b = 0; b &lt; sideLength; b++){</span>
+                //If the row capacity - a is less than zero,
+                // that means we can't draw from that FinalList row anymore
+<span class="nc bnc" id="L250" title="All 2 branches missed.">                if (hexagon.get(b).cap() - a &gt; 0){</span>
+<span class="nc" id="L251">                    int lastIndex = hexagon.get(b).cap() - 1;</span>
+<span class="nc" id="L252">                    linearOrder.add(hexagon.get(b).get(lastIndex - a));</span>
+                }
+            }
+
+<span class="nc" id="L256">            int rowCounter = sideLength;</span>
+            //If loop prevents the 2nd half from running on the first total algorithm run
+<span class="nc bnc" id="L258" title="All 2 branches missed.">            if (a != 0) {</span>
+                //For loop for 2nd half copies value from a and decreases for each row past Center
+<span class="nc bnc" id="L260" title="All 2 branches missed.">                for (int c = a; c &gt; 0; c--){</span>
+                    //If statement prevents excess instances from being copied over to the new hexagon
+<span class="nc bnc" id="L262" title="All 2 branches missed.">                    if (rowCounter &lt; hexagon.cap()) {</span>
+<span class="nc" id="L263">                        int lastIndex = hexagon.get(rowCounter).cap() - c;</span>
+<span class="nc" id="L264">                        linearOrder.add(hexagon.get(rowCounter).get(lastIndex));</span>
+<span class="nc" id="L265">                        rowCounter++;</span>
+<span class="nc" id="L266">                    } else c = 0;</span>
+                }
+            }
+        }
+
+<span class="nc bnc" id="L271" title="All 2 branches missed.">        for (HexNode hexNode : linearOrder) {</span>
+<span class="nc" id="L272">            hexNode.walls = rotateWallPositions(hexNode.walls);</span>
+<span class="nc" id="L273">            hexNode.fill = rotateShape(hexNode.fill);</span>
+<span class="nc" id="L274">        }</span>
+
+<span class="nc" id="L276">        hexagon = interpretList(linearOrder);</span>
+<span class="nc" id="L277">    }</span>
+
+    /**
+     * Rotates the walls of a given HexNode 60Â° (1 position)
+     *
+     * @param walls The array needing to be rotated
+     * @return The newly rotated wall array
+     */
+    private ArrayList&lt;HexWall&gt; rotateWallPositions(ArrayList&lt;HexWall&gt; walls){
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        if (walls.get(0) == null) return null;</span>
+<span class="nc" id="L287">        ArrayList&lt;HexWall&gt; temp = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L288">        int counter = 0;</span>
+
+<span class="nc bnc" id="L290" title="All 2 branches missed.">        for (HexWall wall : walls){</span>
+<span class="nc bnc" id="L291" title="All 6 branches missed.">            switch (wall) {</span>
+<span class="nc" id="L292">                case TopLeft: temp.add(HexWall.Top); break;</span>
+<span class="nc" id="L293">                case Top: temp.add(HexWall.TopRight); break;</span>
+<span class="nc" id="L294">                case TopRight: temp.add(HexWall.BottomRight); break;</span>
+<span class="nc" id="L295">                case BottomRight: temp.add(HexWall.Bottom); break;</span>
+<span class="nc" id="L296">                case Bottom: temp.add(HexWall.BottomLeft); break;</span>
+<span class="nc" id="L297">                default: temp.add(HexWall.TopLeft);</span>
+            }
+<span class="nc" id="L299">        }</span>
+<span class="nc" id="L300">        return temp;</span>
+    }
+
+    /**
+     * Simulates a triangle being rotated 60Â° clockwise.
+     * This has no barring on empty nodes or ones containing circles or hexagons.
+     *
+     *
+     * @param currentShape The shape inside the current HexNode
+     * @return The HexShape needed after a rotation occurs
+     */
+    private HexShape rotateShape(HexShape currentShape){
+<span class="nc bnc" id="L312" title="All 2 branches missed.">        if (currentShape == null) return null;</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">        if (currentShape == HexShape.Circle) return HexShape.Circle;</span>
+<span class="nc bnc" id="L314" title="All 2 branches missed.">        if (currentShape == HexShape.Hexagon) return HexShape.Hexagon;</span>
+
+<span class="nc bnc" id="L316" title="All 4 branches missed.">        switch (currentShape) {</span>
+<span class="nc" id="L317">            case UpTriangle: return HexShape.DownTriangle;</span>
+<span class="nc" id="L318">            case DownTriangle: return HexShape.UpTriangle;</span>
+<span class="nc" id="L319">            case LeftTriangle: return HexShape.RightTriangle;</span>
+<span class="nc" id="L320">            default: return HexShape.LeftTriangle;</span>
+        }
+    }
+
+    /**
+     * Exports the FinalList of FinalLists of hexagon data
+     *
+     * @return The FinalList of FinalLists of HexNodes
+     */
+    public FixedArrayQueue&lt;FixedArrayQueue&lt;HexNode&gt;&gt; exportTo2DQueue(){
+<span class="nc" id="L330">        return hexagon;</span>
+    }
+
+    /**
+     * Takes the letter from the text file and outputs the appropriate shape
+     *
+     * @param letter The character(s) noting the shape
+     * @return The shape for the HexNode
+     */
+    public static HexShape decodeShape(String letter){
+<span class="nc bnc" id="L340" title="All 7 branches missed.">        switch (letter.toLowerCase()) {</span>
+<span class="nc" id="L341">            case &quot;c&quot;: return HexShape.Circle;</span>
+<span class="nc" id="L342">            case &quot;h&quot;: return HexShape.Hexagon;</span>
+<span class="nc" id="L343">            case &quot;lt&quot;: return HexShape.LeftTriangle;</span>
+<span class="nc" id="L344">            case &quot;rt&quot;: return HexShape.RightTriangle;</span>
+<span class="nc" id="L345">            case &quot;ut&quot;: return HexShape.UpTriangle;</span>
+<span class="nc" id="L346">            case &quot;dt&quot;: return HexShape.DownTriangle;</span>
+<span class="nc" id="L347">            default: return null;</span>
+        }
+    }
+
+    /**
+     * Takes in the numbers from the text file, adds the appropriate walls an array
+     * and outputs the array when done
+     *
+     * @param numbers The string of numbers representing the walls
+     * @return The array containing all existing walls in a HexNode
+     */
+    public static ArrayList&lt;HexTraits.HexWall&gt; decodeWalls(String numbers){
+<span class="nc" id="L359">        ArrayList&lt;HexTraits.HexWall&gt; constructs = new ArrayList&lt;&gt;(6);</span>
+
+<span class="nc bnc" id="L361" title="All 2 branches missed.">        for (HexTraits.HexWall index : HexTraits.HexWall.values())</span>
+<span class="nc bnc" id="L362" title="All 2 branches missed.">            if (numbers.contains(String.valueOf(index.getIdx())))</span>
+<span class="nc" id="L363">                constructs.add(index);</span>
+<span class="nc" id="L364">        return constructs;</span>
+    }
+
+    /**
+     * Retrieves the FinalList at the center of the hexagon
+     *
+     * @return The FinalList of the center column of the hexagon
+     */
+    public FixedArrayQueue&lt;HexNode&gt; getCenterHexagonColumn(){
+<span class="nc" id="L373">        return hexagon.get(sideLength-1);</span>
+    }
+
+    /**
+     * Finds the area of a hexagon based on a given side length
+     * The equation: 3x^2 - 3x + 1
+     *
+     * @param sideLength Side length given
+     * @return The area of the hexagon
+     */
+    public static int nodalArea(int sideLength){
+<span class="nc" id="L384">        return (int)(3*Math.pow(sideLength,2))-(3*sideLength)+1;</span>
+    }
+
+    /**
+     * Finds the side length of a hexagon given its area.
+     * Returns zero if the equation outputs a non-integer number
+     * The equation: (3 + âˆš(12*area - 3)) / 6
+     *
+     * @param area The area of a hexagon
+     * @return The length of one side of a hexagon or 0
+     */
+    private byte nodalSideLength(int area){
+<span class="nc" id="L396">        double math = (3 + Math.sqrt(12 * area - 3)) / 6;</span>
+<span class="nc bnc" id="L397" title="All 2 branches missed.">        if (notAnInteger(math))</span>
+<span class="nc" id="L398">            return 0;</span>
+<span class="nc" id="L399">        return (byte) math;</span>
+    }
+
+    /**
+     * Detects if the number given was an integer
+     *
+     * @param number The number to evaluate
+     * @return True if an integer
+     */
+    private boolean notAnInteger(double number){
+<span class="nc bnc" id="L409" title="All 2 branches missed.">        return number % 1 != 0.0;</span>
+    }
+
+    private int calculateHexagonalSpan(){
+<span class="nc" id="L413">        return (2 * sideLength) - 1;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

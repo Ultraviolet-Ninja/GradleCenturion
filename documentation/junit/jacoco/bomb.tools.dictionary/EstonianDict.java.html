@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EstonianDict.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.dictionary</a> &gt; <span class="el_source">EstonianDict.java</span></div><h1>EstonianDict.java</h1><pre class="source lang-java linenums">package bomb.tools.dictionary;
+
+import java.util.HashMap;
+
+public class EstonianDict extends Dictionary{
+<span class="nc" id="L6"> public EstonianDict(){</span>
+<span class="nc" id="L7">  frequencies = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L8">  stepTwoMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L9">  initFreqs();</span>
+<span class="nc" id="L10">  initStepTwo();</span>
+<span class="nc" id="L11">  yes = &quot;Kas Ãµhutada Ãµhku? - Jah&quot;;</span>
+<span class="nc" id="L12">  no = &quot;Detoneerima? - Ei&quot;;</span>
+<span class="nc" id="L13">  fancyChars = &quot;Ã¤ Ã¶ Ãµ Å¡ Ã¼ Å¾&quot;;</span>
+<span class="nc" id="L14">  buttonLabels = new String[]{&quot;Punane&quot;, &quot;Sinine&quot;, &quot;Kollane&quot;, &quot;Valge&quot;, &quot;Hoia&quot;, &quot;Vajutage&quot;, &quot;Ã•hka&quot;, &quot;Katkesta&quot;};</span>
+<span class="nc" id="L15">  moduleLabels = new String[]{&quot;Nupp&quot;, &quot;Kes on esimesel&quot;, &quot;Morse kood&quot;, &quot;Paroolid&quot;, &quot;Gaasi tuulutamine&quot;};</span>
+<span class="nc" id="L16">  passwords = new String[]{</span>
+          &quot;aitan&quot;, &quot;aknal&quot;, &quot;aksel&quot;, &quot;diiva&quot;, &quot;dinod&quot;,
+          &quot;edasi&quot;, &quot;eesti&quot;, &quot;ehtne&quot;, &quot;haile&quot;, &quot;happe&quot;,
+          &quot;herne&quot;, &quot;ihkan&quot;, &quot;jumal&quot;, &quot;juura&quot;, &quot;kaart&quot;,
+          &quot;kanad&quot;, &quot;kevad&quot;, &quot;magus&quot;, &quot;morss&quot;, &quot;nupud&quot;,
+          &quot;piima&quot;, &quot;ratas&quot;, &quot;ringi&quot;, &quot;rumal&quot;, &quot;sÃ¤rin&quot;,
+          &quot;sÃ¼gav&quot;, &quot;sÃ¼gis&quot;, &quot;tabav&quot;, &quot;taibu&quot;, &quot;taust&quot;,
+          &quot;tugev&quot;, &quot;vaata&quot;, &quot;Ã¶htus&quot;, &quot;Ã¶igem&quot;, &quot;Ã¼tlen&quot;};
+<span class="nc" id="L24">}</span>
+
+ @Override
+ public String predictWord(String part, boolean isMorse) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">  if (!isMorse) {</span>
+<span class="nc" id="L29">    switch (part.toLowerCase()) {</span>
+<span class="nc" id="L30">    default: return part;</span>
+   }
+  }
+<span class="nc" id="L33">  switch (part.toLowerCase()){</span>
+
+<span class="nc" id="L35">   default: return part;</span>
+  }
+ }
+
+ @Override
+ protected void initFreqs() {
+<span class="nc" id="L41">  frequencies.put(&quot;parras&quot;, 3.505);</span>
+<span class="nc" id="L42">  frequencies.put(&quot;varras&quot;, 3.515);</span>
+<span class="nc" id="L43">  frequencies.put(&quot;varas&quot;, 3.522);</span>
+<span class="nc" id="L44">  frequencies.put(&quot;emake&quot;, 3.532);</span>
+<span class="nc" id="L45">  frequencies.put(&quot;kenake&quot;, 3.535);</span>
+<span class="nc" id="L46">  frequencies.put(&quot;nupud&quot;, 3.542);</span>
+<span class="nc" id="L47">  frequencies.put(&quot;taimer&quot;, 3.545);</span>
+<span class="nc" id="L48">  frequencies.put(&quot;vaikne&quot;, 3.552);</span>
+<span class="nc" id="L49">  frequencies.put(&quot;paigal&quot;, 3.555);</span>
+<span class="nc" id="L50">  frequencies.put(&quot;pusker&quot;, 3.565);</span>
+<span class="nc" id="L51">  frequencies.put(&quot;Ã¤Ã¤res&quot;, 3.572);</span>
+<span class="nc" id="L52">  frequencies.put(&quot;Ã¤mblik&quot;, 3.575);</span>
+<span class="nc" id="L53">  frequencies.put(&quot;kallis&quot;, 3.582);</span>
+<span class="nc" id="L54">  frequencies.put(&quot;juurde&quot;, 3.592);</span>
+<span class="nc" id="L55">  frequencies.put(&quot;kuular&quot;, 3.595);</span>
+<span class="nc" id="L56">  frequencies.put(&quot;Ã¶Ã¶sel&quot;, 3.6);</span>
+<span class="nc" id="L57"> }</span>
+
+ @Override
+ protected void initStepTwo() {
+<span class="nc" id="L61">  stepTwoMap.put(&quot;VALMIS&quot;, &quot;JAH, OKEI, MIDA, KESKEL, VASAK, VAJUTA, PAREM, TÃœHI, VALMIS&quot;);</span>
+<span class="nc" id="L62">  stepTwoMap.put(&quot;ESIMENE&quot;, &quot;VASAK, OKEI, JAH, KESKEL, EI, PAREM, MIDAGI, AHHH, OOTA, VALMIS, TÃœHI, MIDA, VAJUTA, ESIMENE&quot;);</span>
+<span class="nc" id="L63">  stepTwoMap.put(&quot;EI&quot;, &quot;TÃœHI, AHHH, OOTA, ESIMENE, MIDA, VALMIS, PAREM, JAH, MIDAGI, VASAK, VAJUTA, OKEI, EI&quot;);</span>
+<span class="nc" id="L64">  stepTwoMap.put(&quot;TÃœHI&quot;, &quot;OOTA, PAREM, OKEI, KESKEL, TÃœHI&quot;);</span>
+<span class="nc" id="L65">  stepTwoMap.put(&quot;MIDAGI&quot;, &quot;AHHH, PAREM, OKEI, KESKEL, JAH, TÃœHI, EI, VAJUTA, VASAK, MIDA, OOTA, ESIMENE, MIDAGI&quot;);</span>
+<span class="nc" id="L66">  stepTwoMap.put(&quot;JAH&quot;, &quot;OKEI, PAREM, AHHH, KESKEL, ESIMENE, MIDA, VAJUTA, VALMIS, MIDAGI, JAH&quot;);</span>
+<span class="nc" id="L67">  stepTwoMap.put(&quot;MIDA&quot;, &quot;AHHH, MIDA&quot;);</span>
+<span class="nc" id="L68">  stepTwoMap.put(&quot;AHHH&quot;, &quot;VALMIS, MIDAGI, VASAK, MIDA, OKEI, JAH, PAREM, EI, VAJUTA, TÃœHI, AHHH&quot;);</span>
+<span class="nc" id="L69">  stepTwoMap.put(&quot;VASAK&quot;, &quot;PAREM, VASAK&quot;);</span>
+<span class="nc" id="L70">  stepTwoMap.put(&quot;PAREM&quot;, &quot;JAH, MIDAGI, VALMIS, VAJUTA, EI, OOTA, MIDA, PAREM&quot;);</span>
+<span class="nc" id="L71">  stepTwoMap.put(&quot;KESKEL&quot;, &quot;TÃœHI, VALMIS, OKEI, MIDA, MIDAGI, VAJUTA, EI, OOTA, VASAK, KESKEL&quot;);</span>
+<span class="nc" id="L72">  stepTwoMap.put(&quot;OKEI&quot;, &quot;KESKEL, EI, ESIMENE, JAH, AHHH, MIDAGI, OOTA, OKEI&quot;);</span>
+<span class="nc" id="L73">  stepTwoMap.put(&quot;OOTA&quot;, &quot;AHHH, EI, TÃœHI, OKEI, JAH, VASAK, ESIMENE, VAJUTA, MIDA, OOTA&quot;);</span>
+<span class="nc" id="L74">  stepTwoMap.put(&quot;VAJUTA&quot;, &quot;PAREM, KESKEL, JAH, VALMIS, VAJUTA&quot;);</span>
+<span class="nc" id="L75">  stepTwoMap.put(&quot;SA&quot;, &quot;OK, SINA, SINU, SU, EDASI, AH HAH, SUU, OOT, MIDA?, SA&quot;);</span>
+<span class="nc" id="L76">  stepTwoMap.put(&quot;SINA&quot;, &quot;SINU, EDASI, NAGU, AH HAH, MIDA?, OLEMAS, AH AH, OOT, SA, U, SU, OK, SUU, SINA&quot;);</span>
+<span class="nc" id="L77">  stepTwoMap.put(&quot;SINU&quot;, &quot;AH AH, SINA, AH HAH, SINU&quot;);</span>
+<span class="nc" id="L78">  stepTwoMap.put(&quot;SU&quot;, &quot;SA, SU&quot;);</span>
+<span class="nc" id="L79">  stepTwoMap.put(&quot;SUU&quot;, &quot;OLEMAS, U, SUU&quot;);</span>
+<span class="nc" id="L80">  stepTwoMap.put(&quot;U&quot;, &quot;AH HAH, OK, EDASI, MIDA?, SU, SUU, AH AH, OLEMAS, U&quot;);</span>
+<span class="nc" id="L81">  stepTwoMap.put(&quot;AH HAH&quot;, &quot;AH HAH&quot;);</span>
+<span class="nc" id="L82">  stepTwoMap.put(&quot;AH AH&quot;, &quot;SUU, U, SINA, SU, EDASI, AH AH&quot;);</span>
+<span class="nc" id="L83">  stepTwoMap.put(&quot;MIDA?&quot;, &quot;SA, OOT, SU, SINU, U, OLEMAS, AH AH, NAGU, SINA, AH HAH, SUU, EDASI, MIDA?&quot;);</span>
+<span class="nc" id="L84">  stepTwoMap.put(&quot;OLEMAS&quot;, &quot;OK, AH HAH, EDASI, MIDA?, SINU, SUU, SU, OOT, NAGU, SA, U, SINA, AH AH, OLEMAS&quot;);</span>
+<span class="nc" id="L85">  stepTwoMap.put(&quot;EDASI&quot;, &quot;MIDA?, AH HAH, AH AH, SINU, OOT, OK, EDASI&quot;);</span>
+<span class="nc" id="L86">  stepTwoMap.put(&quot;OOT&quot;, &quot;SINA, U, OLEMAS, AH AH, SA, SUU, OK, MIDA?, SU, EDASI, OOT&quot;);</span>
+<span class="nc" id="L87">  stepTwoMap.put(&quot;OK&quot;, &quot;SINA, OLEMAS, NAGU, SU, SA, OOT, AH HAH, SUU, OK&quot;);</span>
+<span class="nc" id="L88">  stepTwoMap.put(&quot;NAGU&quot;, &quot;SU, EDASI, U, SUU, OOT, OLEMAS, AH AH, MIDA?, AH HAH, SA, NAGU&quot;);</span>
+<span class="nc" id="L89"> }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

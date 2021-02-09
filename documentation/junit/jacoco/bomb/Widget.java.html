@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Widget.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb</a> &gt; <span class="el_source">Widget.java</span></div><h1>Widget.java</h1><pre class="source lang-java linenums">package bomb;
+
+import bomb.modules.ab.BlindAlley;
+import bomb.modules.dh.ForgetMeNot;
+import bomb.enumerations.Indicators;
+import bomb.enumerations.Ports;
+import bomb.enumerations.TriState;
+
+import static bomb.tools.Mechanics.*;
+import static bomb.enumerations.TriState.*;
+
+/**
+ * Widget class carries all the important widgets of the current bomb.
+ * This class is extended by the Module classes, and all bomb widgets are accessible by those classes,
+ * as well as the MainController to add/subtract to the widgets.
+ */
+<span class="nc" id="L17">public class Widget {</span>
+<span class="fc" id="L18">    protected static boolean souvenir = false, forgetMeNot = false;</span>
+<span class="fc" id="L19">    protected static int numDoubleAs = 0,</span>
+<span class="fc" id="L20">            numDBatteries = 0,</span>
+<span class="fc" id="L21">            numHolders = 0,</span>
+<span class="fc" id="L22">            numModules = 0,</span>
+<span class="fc" id="L23">            numPlates = 0,</span>
+<span class="fc" id="L24">            numStartingMin = 0;</span>
+<span class="fc" id="L25">    protected static String serialCode = &quot;&quot;, twoFactor = &quot;&quot;;</span>
+<span class="fc" id="L26">    protected static int[] ports = {0,0,0,0,0,0};</span>
+<span class="fc" id="L27">    protected static Indicators[] list = Indicators.values();</span>
+
+    /**
+     * Sets the number of battery holders on the bomb
+     *
+     * @param numHolders The given number
+     */
+    public static void setNumHolders(int numHolders) {
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (numHolders &gt;= 0) {</span>
+<span class="fc" id="L36">            Widget.numHolders = numHolders;</span>
+<span class="fc" id="L37">            BlindAlley.alleyUpdate();</span>
+        }
+<span class="fc" id="L39">    }</span>
+
+    /**
+     * Sets the number of minutes on the bomb
+     *
+     * @param startTime The given number
+     */
+    public static void setStartTime(int startTime){
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if (startTime &gt;= 0){</span>
+<span class="fc" id="L48">            numStartingMin = startTime;</span>
+        }
+<span class="fc" id="L50">    }</span>
+
+    /**
+     * Sets the Serial Code
+     *
+     * @param serialCode The given code
+     */
+    public static void setSerialCode(String serialCode) {
+<span class="fc" id="L58">        Widget.serialCode = ultimateFilter(serialCode, NORMAL_CHAR_REGEX);</span>
+<span class="fc" id="L59">        updates();</span>
+<span class="fc" id="L60">    }</span>
+
+    /**
+     * Records updates for Blind Alley and Forget Me Not that occur while doing edgework
+     */
+    private static void updates(){
+<span class="fc" id="L66">        BlindAlley.alleyUpdate();</span>
+<span class="fc" id="L67">        ForgetMeNot.updateGreatest();</span>
+<span class="fc" id="L68">    }</span>
+
+    /**
+     * Sets the number of double A's on the bomb
+     *
+     * @param doubleAs The given number
+     */
+    public static void setDoubleAs(int doubleAs) {
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (doubleAs &gt;= 0) {</span>
+<span class="fc" id="L77">            numDoubleAs = doubleAs;</span>
+<span class="fc" id="L78">            BlindAlley.alleyUpdate();</span>
+        }
+<span class="fc" id="L80">    }</span>
+
+    /**
+     * Sets the number of D batteries on the bomb
+     *
+     * @param dBatteries The given number
+     */
+    public static void setDBatteries(int dBatteries){
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (dBatteries &gt;= 0) {</span>
+<span class="fc" id="L89">            numDBatteries = dBatteries;</span>
+<span class="fc" id="L90">            BlindAlley.alleyUpdate();</span>
+        }
+<span class="fc" id="L92">    }</span>
+
+    /**
+     * Sets a specified Indicator with a specified state
+     *
+     * @param state The state to give the Indicator
+     * @param which The Indicator to change
+     */
+    public static void setIndicator(TriState state, Indicators which){
+<span class="fc" id="L101">        list[which.getIdx()].setProp(state);</span>
+<span class="fc" id="L102">        BlindAlley.alleyUpdate();</span>
+<span class="fc" id="L103">    }</span>
+
+    /**
+     * Sets the number of modules on the bomb
+     *
+     * @param numModules The given number
+     */
+    public static void setNumModules(int numModules) {
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (numModules &gt;= 0) {</span>
+<span class="fc" id="L112">            Widget.numModules = numModules;</span>
+        }
+<span class="fc" id="L114">    }</span>
+
+    /**
+     * Sets the number of port plates on the bomb
+     *
+     * @param plates The given number
+     */
+    public static void setPlates(int plates){
+<span class="pc bpc" id="L122" title="1 of 2 branches missed.">        if (plates &gt;= 0){</span>
+<span class="fc" id="L123">            numPlates = plates;</span>
+        }
+<span class="fc" id="L125">    }</span>
+
+    /**
+     * Stores the current Two Factor Authentication
+     *
+     * @param twoFactor The String containing the 2-Factor
+     */
+    public static void setTwoFactor(String twoFactor){
+<span class="nc" id="L133">        Widget.twoFactor = twoFactor;</span>
+<span class="nc" id="L134">    }</span>
+
+    /**
+     * Sets whether the Souvenir module is active on the Bomb
+     *
+     * @param set The toggle
+     */
+    public static void setSouvenir(boolean set){
+<span class="nc" id="L142">        souvenir = set;</span>
+<span class="nc" id="L143">    }</span>
+
+    /**
+     * Sets whether the Forget Me Not module is active on the Bomb
+     *
+     * @param set The toggle
+     */
+    public static void setForgetMeNot(boolean set){
+<span class="nc" id="L151">        forgetMeNot = set;</span>
+<span class="nc" id="L152">    }</span>
+
+    /**
+     * Adds to the count a specified port, with a max of 9
+     *
+     * @param which The port to add on
+     */
+    public static void addPort(Ports which){
+<span class="pc bpc" id="L160" title="1 of 2 branches missed.">        if (ports[which.getIdx()] &lt; 10){</span>
+<span class="fc" id="L161">            ports[which.getIdx()]++;</span>
+<span class="fc" id="L162">            BlindAlley.alleyUpdate();</span>
+        }
+<span class="fc" id="L164">    }</span>
+
+    /**
+     * Subtracts from the count of a specified port, with a minimum of 0
+     *
+     * @param which The port to subtract
+     */
+    public static void subPort(Ports which){
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        if (ports[which.getIdx()] &gt; 0){</span>
+<span class="nc" id="L173">            ports[which.getIdx()]--;</span>
+<span class="nc" id="L174">            BlindAlley.alleyUpdate();</span>
+        }
+<span class="nc" id="L176">    }</span>
+
+    /**
+     * Zeroes out the port count on a specified port
+     *
+     * @param which The port to zero out
+     */
+    public static void portZero(Ports which){
+<span class="nc" id="L184">        ports[which.getIdx()] = 0;</span>
+<span class="nc" id="L185">        BlindAlley.alleyUpdate();</span>
+<span class="nc" id="L186">    }</span>
+
+    /**
+     * Checks the Serial Code of an even number
+     *
+     * @return 0 for Yes, 1 for No, 2 for No Number
+     */
+    public static int hasEven(){
+        //TODO - Might need to rename, hasEven sends the wrong message,
+        // probably by adding even and odd number regexes
+<span class="fc" id="L196">        String sample = ultimateFilter(serialCode, NUMBER_REGEX);</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">        if (!sample.isEmpty()){</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">            for (char num : sample.toCharArray())</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">                if ((int) num % 2 == 0) return 0;</span>
+<span class="fc" id="L200">            return 1;</span>
+        }
+<span class="fc" id="L202">        return 2;</span>
+    }
+
+    /**
+     * Finds the last number in the Serial Code
+     *
+     * @return An int of the last digit from a String
+     */
+    public static int lastDigit(){
+<span class="fc" id="L211">        String buffer = ultimateFilter(serialCode, NUMBER_REGEX);</span>
+<span class="fc" id="L212">        return Integer.parseInt(buffer.substring(buffer.length()-1));</span>
+    }
+
+    /**
+     * Looks to if any listed Indicators are on the current bomb
+     *
+     * @param inds The array of possible Indicators
+     * @return True if any Indicator is found
+     */
+    public static boolean hasFollowingInds(Indicators...inds){
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        for (Indicators current : inds){</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">            if (hasIndicator(current)) return true;</span>
+        }
+<span class="nc" id="L225">        return false;</span>
+    }
+
+    /**
+     * Checks to see if a specified Indicator is on the bomb, whether lit or unlit
+     *
+     * @param ind The Indicator to check
+     * @return True if the Indicator is found
+     */
+    public static boolean hasIndicator(Indicators ind){
+<span class="nc bnc" id="L235" title="All 4 branches missed.">        return hasLitIndicator(ind) || hasUnlitIndicator(ind);</span>
+    }
+
+    /**
+     * Checks to see if a specified lit Indicator is on the bomb
+     *
+     * @param ind The Indicator to check
+     * @return True if the lit Indicator is found
+     */
+    public static boolean hasLitIndicator(Indicators ind){
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        return list[ind.getIdx()].getProp() == ON;</span>
+    }
+
+    /**
+     * Checks to see if a specified unlit Indicator is on the bomb
+     *
+     * @param ind The Indicator to check
+     * @return True if the unlit Indicator is found
+     */
+    public static boolean hasUnlitIndicator(Indicators ind){
+<span class="fc bfc" id="L255" title="All 2 branches covered.">        return list[ind.getIdx()].getProp() == OFF;</span>
+    }
+
+    /**
+     * Checks to see if the Serial Code has contains a vowel
+     *
+     * @return True if A,E,I,O, or U appear
+     */
+    public static boolean hasVowel(){
+<span class="fc bfc" id="L264" title="All 2 branches covered.">        return !ultimateFilter(serialCode, VOWEL_REGEX).isEmpty();</span>
+    }
+
+    /**
+     * Counts the number of letters that appear in the Serial Code
+     *
+     * @return The number of letters
+     */
+    public static int serialCodeLetters(){
+<span class="nc" id="L273">        return ultimateFilter(serialCode, LOWERCASE_REGEX).length();</span>
+    }
+
+    /**
+     * Counts the number of numbers that appear in the Serial Code
+     *
+     * @return The number of numbers
+     */
+    public static int serialCodeNumbers(){
+<span class="nc" id="L282">        return ultimateFilter(serialCode, NUMBER_REGEX).length();</span>
+    }
+
+    /**
+     * Checks to see if the bomb contains more that the required amount of a specified ports
+     *
+     * @param port The port to check
+     * @param howMany The required amount
+     * @return True if the bomb contains more the required amount
+     */
+    public static boolean hasMoreThan(Ports port, int howMany){
+<span class="fc bfc" id="L293" title="All 2 branches covered.">        return ports[port.getIdx()] &gt; howMany;</span>
+    }
+
+    /**
+     * Returns the number of battery holders
+     *
+     * @return The number of battery holders
+     */
+    public static int getNumHolders() {
+<span class="fc" id="L302">        return numHolders;</span>
+    }
+
+    public static int getNumModules(){
+<span class="nc" id="L306">        return numModules;</span>
+    }
+
+    /**
+     * Returns the number of a specified port
+     *
+     * @param which The port to check
+     * @return The number of that port
+     */
+    public static int getPort(Ports which){
+<span class="fc" id="L316">        return ports[which.getIdx()];</span>
+    }
+
+    /**
+     * Counts the number of all ports on the bomb
+     *
+     * @return The total number of ports
+     */
+    public static int getTotalPorts(){
+<span class="fc" id="L325">        int counter = 0;</span>
+<span class="fc bfc" id="L326" title="All 2 branches covered.">        for (int num : ports) counter += num;</span>
+<span class="fc" id="L327">        return counter;</span>
+    }
+
+    /**
+     *
+     *
+     * @return The number of port types on the bomb
+     */
+    public static int getPortTypes(){
+<span class="fc" id="L336">        int counter = 0;</span>
+<span class="fc bfc" id="L337" title="All 2 branches covered.">        for (int type : ports){</span>
+<span class="fc bfc" id="L338" title="All 2 branches covered.">            if (type &gt; 0)</span>
+<span class="fc" id="L339">                counter++;</span>
+        }
+<span class="fc" id="L341">        return counter;</span>
+    }
+
+    /**
+     * Counts all indicators, whether lit, unlit or all if specified
+     *
+     * @param lit Whether the lit or unlit indicators should be counted
+     * @param all Whether all indicators should be counted
+     * @return The number of indicators
+     */
+    public static int countIndicators(boolean lit, boolean all){
+<span class="fc" id="L352">        int counter = 0;</span>
+<span class="fc bfc" id="L353" title="All 2 branches covered.">        TriState current = lit?ON:OFF;</span>
+<span class="fc bfc" id="L354" title="All 2 branches covered.">        for (Indicators ind : list){</span>
+<span class="fc bfc" id="L355" title="All 8 branches covered.">            if (ind.getProp() == current &amp;&amp; !all || (ind.getProp() != UNKNOWN &amp;&amp; all))</span>
+<span class="fc" id="L356">                counter++;</span>
+        }
+<span class="fc" id="L358">        return counter;</span>
+    }
+
+    /**
+     * Returns the sum of double A and D batteries
+     *
+     * @return The sum of all batteries
+     */
+    public static int getAllBatteries(){
+<span class="fc" id="L367">        return numDBatteries + numDoubleAs;</span>
+    }
+
+    /**
+     * Tests to see if a specified port exists on the current bomb
+     *
+     * @param port The port to test
+     * @return True if the port is present somewhere on the Bomb
+     */
+    public static boolean portExists(Ports port){
+<span class="fc bfc" id="L377" title="All 2 branches covered.">        return ports[port.getIdx()] &gt; 0;</span>
+    }
+
+    public static void resetProperties(){
+<span class="fc" id="L381">        numDoubleAs = 0;</span>
+<span class="fc" id="L382">        numDBatteries = 0;</span>
+<span class="fc" id="L383">        numHolders = 0;</span>
+<span class="fc" id="L384">        numModules = 0;</span>
+<span class="fc" id="L385">        numPlates = 0;</span>
+<span class="fc" id="L386">        numStartingMin = 0;</span>
+<span class="fc" id="L387">        serialCode = &quot;&quot;;</span>
+<span class="fc" id="L388">        twoFactor = &quot;&quot;;</span>
+<span class="fc" id="L389">        ports = new int[]{0,0,0,0,0,0};</span>
+<span class="fc" id="L390">        setAllUnknown();</span>
+<span class="fc" id="L391">    }</span>
+
+    private static void setAllUnknown(){
+<span class="fc bfc" id="L394" title="All 2 branches covered.">        for (Indicators ind : list)</span>
+<span class="fc" id="L395">            ind.setProp(UNKNOWN);</span>
+<span class="fc" id="L396">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

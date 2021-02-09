@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AstroSymbols.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.enumerations</a> &gt; <span class="el_source">AstroSymbols.java</span></div><h1>AstroSymbols.java</h1><pre class="source lang-java linenums">package bomb.enumerations;
+
+import bomb.interfaces.Index;
+
+/**
+ * This enum deals with the symbols from Astrology, each containing an index in arrays
+ * when used in the Astrology class
+ */
+<span class="fc" id="L9">public enum AstroSymbols implements Index {</span>
+    /**
+     * The Elemental symbols
+     */
+<span class="fc" id="L13">    FIRE(0), WATER(1), EARTH(2), AIR(3),</span>
+    /**
+     * The Planetary symbols
+     */
+<span class="fc" id="L17">    SUN(0), MOON(1), MERCURY(2), VENUS(3), MARS(4),</span>
+<span class="fc" id="L18">    JUPITER(5), SATURN(6), URANUS(7), NEPTUNE(8), PLUTO(9),</span>
+    /**
+     * The Astrological symbols
+     */
+<span class="fc" id="L22">    ARIES(0), TAURUS(1), GEMINI(2), CANCER(3), LEO(4), VIRGO(5),</span>
+<span class="fc" id="L23">    LIBRA(6), SCORPIO(7), SAGITTARIUS(8), CAPRICORN(9),</span>
+<span class="fc" id="L24">    AQUARIUS(10), PISCES(11);</span>
+
+    private final int index;
+
+    @Override
+    public int getIdx() {
+<span class="fc" id="L30">        return index;</span>
+    }
+
+    /**
+     * AstroSymbols constructor
+     *
+     * @param index Its index number found in the bomb manual page for Astrology
+     */
+<span class="fc" id="L38">    AstroSymbols(int index){</span>
+<span class="fc" id="L39">        this.index = index;</span>
+<span class="fc" id="L40">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

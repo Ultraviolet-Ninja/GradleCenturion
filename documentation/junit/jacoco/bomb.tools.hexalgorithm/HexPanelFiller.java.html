@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HexPanelFiller.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.hexalgorithm</a> &gt; <span class="el_source">HexPanelFiller.java</span></div><h1>HexPanelFiller.java</h1><pre class="source lang-java linenums">package bomb.tools.hexalgorithm;
+
+import bomb.components.hex.HexMazePanel;
+import bomb.tools.Coordinates;
+import javafx.scene.paint.Color;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+
+public class HexPanelFiller {
+
+    private HexPanelFiller(){}
+
+    public static void fillPanels
+            (LinkedList&lt;Coordinates&gt; directionSet, ArrayList&lt;HexMazePanel&gt; panelArray,
+             Color toFill, int hexagonSideLength){
+        //directionSet.removeLast(); //TODO can be taken out if I want
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        for (HexMazePanel panel : panelArray) panel.resetHexagonalFill();</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        for (Coordinates coordinates : directionSet){</span>
+<span class="nc" id="L20">            panelArray.get(coordinateToIndex(coordinates, hexagonSideLength)).setHexagonalFill(toFill);</span>
+<span class="nc" id="L21">        }</span>
+<span class="nc" id="L22">    }</span>
+
+    private static int coordinateToIndex(Coordinates set, int sideLength){
+<span class="nc" id="L25">        int counter = 0;</span>
+<span class="nc" id="L26">        int[] coordinates = set.getCoords(),</span>
+<span class="nc" id="L27">                pings = HexComparator.pingRequest(sideLength);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        for (int i = 0; i &lt; coordinates[0]; i++) counter += pings[i];</span>
+<span class="nc" id="L29">        return counter + coordinates[1];</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

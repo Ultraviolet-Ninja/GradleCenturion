@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FixedArrayQueue.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.tools.data.structures</a> &gt; <span class="el_source">FixedArrayQueue.java</span></div><h1>FixedArrayQueue.java</h1><pre class="source lang-java linenums">package bomb.tools.data.structures;
+
+import java.util.*;
+import java.util.stream.Stream;
+
+/**
+ * This class acts as a finite stack with an array as the internal storage
+ * to contain a specified set of objects.
+ * @param &lt;E&gt; Any object
+ */
+public class FixedArrayQueue&lt;E&gt; implements Collection&lt;E&gt;, List&lt;E&gt; {
+    private final LinkedList&lt;E&gt; linkedData;
+    private final Object[] data;
+    private int size;
+    private final int capacity;
+
+    /**
+     * Initializes the FinalList with a permanent capacity
+     *
+     * @param capacity How many objects this can hold
+     */
+<span class="fc" id="L22">    public FixedArrayQueue(int capacity){</span>
+<span class="fc" id="L23">        this.capacity = capacity;</span>
+<span class="fc" id="L24">        data = new Object[capacity];</span>
+<span class="fc" id="L25">        linkedData = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L26">        size = 0;</span>
+<span class="fc" id="L27">    }</span>
+
+    /**
+     * Returns the object at a specified location in the list
+     *
+     * @param index The position of the object in the list
+     * @return The object at the specified index
+     * @throws NumberFormatException The number given was negative
+     */
+    @Override
+    public E get(int index) throws ArrayIndexOutOfBoundsException {
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (index &gt;= 0)</span>
+<span class="nc" id="L39">            return (E) data[index];</span>
+<span class="nc" id="L40">        throw new ArrayIndexOutOfBoundsException();</span>
+    }
+
+    /**
+     * Returns the current number of objects in the FinalList
+     *
+     * @return The int signifying the capacity
+     */
+    public int size() {
+<span class="fc" id="L49">        return size;</span>
+    }
+
+    @Override
+    public boolean isEmpty() {
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        return size == 0;</span>
+    }
+
+    @Override
+    public boolean contains(Object o) {
+<span class="nc" id="L59">        return false;</span>
+    }
+
+    /**
+     * Returns how many objects can be stored within the FinalList
+     *
+     * @return The int signifying the capacity
+     */
+    public int cap(){
+<span class="fc" id="L68">        return capacity;</span>
+    }
+
+    /**
+     * Shows whether the List is at capacity
+     *
+     * @return True or false whether the FinalList is full
+     */
+    public boolean full(){
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        return size == capacity;</span>
+    }
+
+    /**
+     * Adds an element to the FinalList and returns a boolean to show whether this list
+     * was completed with addition of that last object
+     *
+     * @param o The object to add to the FinalList
+     * @return Whether the last element added made the FinalList full
+     */
+    @Override
+    public boolean add(Object o) {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        if (!full()) {</span>
+<span class="fc" id="L90">            data[size++] = o;</span>
+<span class="fc" id="L91">            linkedData.add((E) o);</span>
+        }
+<span class="fc" id="L93">        return full();</span>
+    }
+
+    /**
+     * Converts the FinalList into an expandable ArrayList
+     *
+     * @return The ArrayList of info
+     */
+    public ArrayList&lt;E&gt; convert(){
+<span class="nc" id="L102">        return new ArrayList&lt;&gt;(linkedData);</span>
+    }
+
+    /**
+     * Removes a number of elements from array of data
+     *
+     * @param num The number of elements to remove
+     */
+    public void removeFromHead(int num) throws IllegalArgumentException{
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">        if (num &lt;= 0) return;</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        if (num &lt; capacity) {</span>
+<span class="fc" id="L113">            removeLoop(num);</span>
+<span class="fc" id="L114">            overwrite();</span>
+        } else
+<span class="nc" id="L116">            throw new IllegalArgumentException(&quot;The removal number is larger than the capacity&quot;);</span>
+<span class="fc" id="L117">    }</span>
+
+    private void removeLoop(int num){
+<span class="fc bfc" id="L120" title="All 2 branches covered.">        for (int i = 0; i &lt; num; i++){</span>
+<span class="fc" id="L121">            linkedData.removeFirst();</span>
+<span class="fc" id="L122">            data[size-- - 1] = null;</span>
+        }
+<span class="fc" id="L124">    }</span>
+
+    private void overwrite(){
+<span class="fc" id="L127">        Iterator&lt;E&gt; toArray = linkedData.iterator();</span>
+<span class="fc bfc" id="L128" title="All 2 branches covered.">        for (int j = 0; toArray.hasNext(); j++)</span>
+<span class="fc" id="L129">            data[j] = toArray.next();</span>
+<span class="fc" id="L130">    }</span>
+
+    @Override
+    public Iterator&lt;E&gt; iterator() {
+<span class="nc" id="L134">        return linkedData.listIterator();</span>
+    }
+
+    @Override
+    public Object[] toArray() {
+<span class="nc" id="L139">        return new Object[0];</span>
+    }
+
+    @Override
+    public boolean remove(Object o) throws UnsupportedOperationException{
+<span class="nc" id="L144">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean addAll(int index, Collection&lt;? extends E&gt; c) throws UnsupportedOperationException{
+<span class="nc" id="L149">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean addAll(Collection c) throws UnsupportedOperationException{
+<span class="nc" id="L154">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public void clear() throws UnsupportedOperationException{
+<span class="nc" id="L159">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public E set(int index, E element) throws UnsupportedOperationException{
+<span class="nc" id="L164">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public void add(int index, E element) throws UnsupportedOperationException{
+<span class="nc" id="L169">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public E remove(int index) throws UnsupportedOperationException{
+<span class="nc" id="L174">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public int indexOf(Object o) throws UnsupportedOperationException{
+<span class="nc" id="L179">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public ListIterator&lt;E&gt; listIterator() {
+<span class="nc" id="L184">        return linkedData.listIterator();</span>
+    }
+
+    @Override
+    public int lastIndexOf(Object o) throws UnsupportedOperationException{
+<span class="nc" id="L189">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public ListIterator&lt;E&gt; listIterator(int index) throws UnsupportedOperationException{
+<span class="nc" id="L194">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public List&lt;E&gt; subList(int fromIndex, int toIndex) throws UnsupportedOperationException{
+<span class="nc" id="L199">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean retainAll(Collection c) throws UnsupportedOperationException{
+<span class="nc" id="L204">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean removeAll(Collection c) throws UnsupportedOperationException{
+<span class="nc" id="L209">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public boolean containsAll(Collection c) throws UnsupportedOperationException{
+<span class="nc" id="L214">        throw new UnsupportedOperationException();</span>
+    }
+
+    @Override
+    public Object[] toArray(Object[] a) throws UnsupportedOperationException{
+<span class="nc" id="L219">        throw new UnsupportedOperationException();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

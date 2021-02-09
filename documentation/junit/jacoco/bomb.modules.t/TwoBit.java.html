@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TwoBit.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Cent2</a> &gt; <a href="index.source.html" class="el_package">bomb.modules.t</a> &gt; <span class="el_source">TwoBit.java</span></div><h1>TwoBit.java</h1><pre class="source lang-java linenums">package bomb.modules.t;
+
+import bomb.modules.s.Souvenir;
+import bomb.Widget;
+import bomb.enumerations.Ports;
+
+import static bomb.tools.Mechanics.*;
+
+//TODO - Probably change var names, finish Javadocs and break down a few methods
+/**
+ *
+ */
+<span class="nc" id="L13">public class TwoBit extends Widget {</span>
+    public static final String QUERY = &quot;Query: &quot;, SUBMIT = &quot;Submit: &quot;;
+<span class="fc" id="L15">    private static final String[][] CODES = {</span>
+            {&quot;kb&quot;, &quot;dk&quot;, &quot;gv&quot;, &quot;tk&quot;, &quot;pv&quot;, &quot;kp&quot;, &quot;bv&quot;, &quot;vt&quot;, &quot;pz&quot;, &quot;dt&quot;},
+            {&quot;ee&quot;, &quot;zk&quot;, &quot;ke&quot;, &quot;ck&quot;, &quot;zp&quot;, &quot;pp&quot;, &quot;tp&quot;, &quot;tg&quot;, &quot;pd&quot;, &quot;pt&quot;},
+            {&quot;tz&quot;, &quot;eb&quot;, &quot;ec&quot;, &quot;cc&quot;, &quot;cz&quot;, &quot;zv&quot;, &quot;cv&quot;, &quot;gc&quot;, &quot;bt&quot;, &quot;gt&quot;},
+            {&quot;bz&quot;, &quot;pk&quot;, &quot;kz&quot;, &quot;kg&quot;, &quot;vd&quot;, &quot;ce&quot;, &quot;vb&quot;, &quot;kd&quot;, &quot;gg&quot;, &quot;dg&quot;},
+            {&quot;pb&quot;, &quot;vv&quot;, &quot;ge&quot;, &quot;kv&quot;, &quot;dz&quot;, &quot;pe&quot;, &quot;db&quot;, &quot;cd&quot;, &quot;td&quot;, &quot;cb&quot;},
+            {&quot;gb&quot;, &quot;tv&quot;, &quot;kk&quot;, &quot;bg&quot;, &quot;bp&quot;, &quot;vp&quot;, &quot;ep&quot;, &quot;tt&quot;, &quot;ed&quot;, &quot;zg&quot;},
+            {&quot;de&quot;, &quot;dd&quot;, &quot;ev&quot;, &quot;te&quot;, &quot;zd&quot;, &quot;bb&quot;, &quot;pc&quot;, &quot;bd&quot;, &quot;kc&quot;, &quot;zb&quot;},
+            {&quot;eg&quot;, &quot;bc&quot;, &quot;tc&quot;, &quot;ze&quot;, &quot;zc&quot;, &quot;gp&quot;, &quot;et&quot;, &quot;vc&quot;, &quot;tb&quot;, &quot;vz&quot;},
+            {&quot;ez&quot;, &quot;ek&quot;, &quot;dv&quot;, &quot;cg&quot;, &quot;ve&quot;, &quot;dp&quot;, &quot;bk&quot;, &quot;pg&quot;, &quot;gk&quot;, &quot;gz&quot;},
+            {&quot;kt&quot;, &quot;ct&quot;, &quot;zz&quot;, &quot;vg&quot;, &quot;gd&quot;, &quot;cp&quot;, &quot;be&quot;, &quot;zt&quot;, &quot;vk&quot;, &quot;dc&quot;}};
+<span class="fc" id="L26">    private static int stage = 2;</span>
+
+    /**
+     *
+     *
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public static String initialCode() throws IllegalArgumentException{
+        //TODO - Break down
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (!serialCode.isEmpty()) {</span>
+<span class="fc" id="L37">            String first = ultimateFilter(serialCode, LOWERCASE_REGEX);</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">            int num = !first.isEmpty() ?</span>
+<span class="pc" id="L39">                    first.charAt(0) - 96 :</span>
+                    0;
+<span class="fc" id="L41">            String numbers = ultimateFilter(serialCode, NUMBER_REGEX);</span>
+<span class="fc" id="L42">            num += getAllBatteries() * Integer.parseInt(numbers.substring(numbers.length()-1));</span>
+
+<span class="pc bpc" id="L44" title="1 of 4 branches missed.">            if (getPort(Ports.RCA) &gt; 0 &amp;&amp; getPort(Ports.RJ45) == 0) num *= 2;</span>
+<span class="pc bpc" id="L45" title="1 of 2 branches missed.">            if (num &gt; 99) num -= 100;</span>
+
+<span class="fc" id="L47">            int[] bits = translate(String.valueOf(num));</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">            if (Souvenir.getSet())</span>
+<span class="nc" id="L49">                Souvenir.addRelic(&quot;(TwoBit)1st Query&quot;, CODES[bits[0]][bits[1]]);</span>
+<span class="fc" id="L50">            return CODES[bits[0]][bits[1]];</span>
+<span class="fc" id="L51">        } else throw new IllegalArgumentException(&quot;Serial Code required&quot;);</span>
+    }
+
+    /**
+     *
+     *
+     * @param code
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public static String nextCode(String code) throws IllegalArgumentException{
+<span class="fc" id="L62">        String newCode = ultimateFilter(code, NUMBER_REGEX);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        if (newCode.length() == 2) {</span>
+<span class="fc" id="L64">            int[] coords = translate(newCode);</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">            if (stage != 4) {</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">                if (Souvenir.getSet())</span>
+<span class="nc" id="L67">                    Souvenir.addRelic(&quot;(TwoBit)&quot;+ ordinal(stage) + &quot; Query&quot;, newCode + &quot; - &quot;</span>
+                            + CODES[coords[0]][coords[1]]);
+<span class="fc" id="L69">                stage++;</span>
+<span class="fc" id="L70">                return QUERY + CODES[coords[0]][coords[1]];</span>
+            } else {
+<span class="fc" id="L72">                stage = 2;</span>
+<span class="fc" id="L73">                return SUBMIT + CODES[coords[0]][coords[1]];</span>
+            }
+<span class="fc" id="L75">        } else throw new</span>
+                IllegalArgumentException(&quot;The provided code is not 2 numbers long: &quot; + code + &quot;(NUMBERS ONLY)&quot;);
+    }
+
+    /**
+     *
+     *
+     * @param code
+     * @return
+     */
+    private static int[] translate(String code){
+<span class="fc" id="L86">        int[] codeOut = new int[2];</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        if (code.length() == 1){</span>
+<span class="fc" id="L88">            codeOut[1] = Integer.parseInt(code);</span>
+        } else {
+<span class="fc" id="L90">            codeOut[0] = Integer.parseInt(code.substring(0, 1));</span>
+<span class="fc" id="L91">            codeOut[1] = Integer.parseInt(code.substring(1));</span>
+        }
+<span class="fc" id="L93">        return codeOut;</span>
+    }
+
+    /**
+     *
+     *
+     * @param num
+     * @return
+     */
+    private static String ordinal(int num){
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        return (num == 2)?&quot;2nd&quot;:&quot;3rd&quot;;</span>
+    }
+
+<span class="fc" id="L106">    public static void resetStage(){stage = 2;}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
