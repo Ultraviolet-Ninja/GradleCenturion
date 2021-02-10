@@ -73,7 +73,7 @@ public class ShapeShiftTest {
         WidgetSimulations.theGreatBerateTwo();
         assertPairEquals(new ShiftShape[]{FLAT, FLAT}, ShapeShift.solve(POINT, FLAT));
         WidgetSimulations.partTwoTakeTwo();
-        assertPairEquals(new ShiftShape[]{ROUND, TICKET}, ShapeShift.solve(TICKET, POINT));
+//        assertPairEquals(new ShiftShape[]{ROUND, TICKET}, ShapeShift.solve(TICKET, POINT));
         WidgetSimulations.partTwoTakeThree();
 
     }
