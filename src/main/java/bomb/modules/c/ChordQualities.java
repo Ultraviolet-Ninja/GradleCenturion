@@ -13,6 +13,8 @@ import static bomb.tools.Mechanics.ultimateFilter;
  * This class deals with the Chord Qualities module.
  */
 public class ChordQualities extends Widget {
+    public static final String NEW_CHORD = "New Chord: ";
+
     private static final String[]
             ALL_NOTES = new String[]{"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"},
 
@@ -25,7 +27,7 @@ public class ChordQualities extends Widget {
      */
     public static String solve(String input) throws IllegalArgumentException {
         String[] og = originalInfo(input);
-        return "New Chord: " + getNextRoot(Integer.parseInt(og[1])) + " " + getNextQuality(og[0]);
+        return NEW_CHORD + getNextRoot(Integer.parseInt(og[1])) + " " + getNextQuality(og[0]);
     }
 
     /**

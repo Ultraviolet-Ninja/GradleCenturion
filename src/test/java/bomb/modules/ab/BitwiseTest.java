@@ -64,6 +64,10 @@ public class BitwiseTest {
         assertEquals(MIN_AND, Bitwise.getByte(AND));
         WidgetSimulations.theGreatBerateTwo();
         assertEquals("10110011", Bitwise.getByte(XOR));
+        WidgetSimulations.partTwoTakeTwo();
+        assertEquals("01101110", Bitwise.getByte(NOT));
+        WidgetSimulations.partTwoTakeThree();
+
     }
 
     private void setEssentialTrueConditions(){
