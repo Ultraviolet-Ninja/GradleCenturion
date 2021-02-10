@@ -63,6 +63,7 @@ public class LaundryTest {
         WidgetSimulations.partTwoTakeTwo();
         assertContains(new String[]{"80F", "Medium Heat", "300", "No Tetrachlorethylene",
                 "LEATHER - MALINITE - CORSET"}, "0", "1");
+        WidgetSimulations.partTwoTakeThree();
     }
 
     private void setupTwo(){

@@ -18,6 +18,9 @@ public class AlphabetTest {
 
     @Test
     void theGreatBerate(){
+        assertEquals("ZNYL", Alphabet.order("ZYNL"));
         assertEquals("YKQV", Alphabet.order("QYVK"));
+        assertEquals("ACHZ", Alphabet.order("HZAC"));
+
     }
 }

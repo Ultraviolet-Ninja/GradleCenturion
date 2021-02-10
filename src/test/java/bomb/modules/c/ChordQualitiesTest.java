@@ -24,9 +24,10 @@ public class ChordQualitiesTest {
 
     @Test
     void theGreatBerate(){
-
+        assertEqualsAnyOrder("G +5 +2 +3", new String[]{"G#", "B", "D", "E"});
         assertEqualsAnyOrder("E +3 +1 +6", new String[]{"A#", "D#", "F", "F#"});
-//        assertEqualsAnyOrder("", new String[]{"F#", "A", "C#", "D#"});
+        assertEqualsAnyOrder("C# +3 +1 +6", new String[]{"F#", "A", "C#", "D#"});
+
     }
 
     private void assertEqualsAnyOrder(String expected, String[] notes){

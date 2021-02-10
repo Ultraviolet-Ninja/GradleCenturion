@@ -40,8 +40,9 @@ public class BooleanVennTest {
 
     @Test
     void theGreatBerate(){
-
+        assertEquals("10000000", BooleanVenn.resultCode("A↓(B∨C)"));
         assertEquals("11111000", BooleanVenn.resultCode("A|(B∨C)"));
         assertEquals("00001101", BooleanVenn.resultCode("(A∨B)∧C"));
+
     }
 }

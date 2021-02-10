@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import static bomb.enumerations.AstroSymbols.ARIES;
 import static bomb.enumerations.AstroSymbols.EARTH;
 import static bomb.enumerations.AstroSymbols.FIRE;
+import static bomb.enumerations.AstroSymbols.GEMINI;
+import static bomb.enumerations.AstroSymbols.JUPITER;
 import static bomb.enumerations.AstroSymbols.MARS;
 import static bomb.enumerations.AstroSymbols.MERCURY;
 import static bomb.enumerations.AstroSymbols.SAGITTARIUS;
@@ -60,8 +62,12 @@ public class AstrologyTest {
     @Test
     void theGreatBerate(){
         WidgetSimulations.theGreatBerate();
-
+        assertEquals(POOR_OMEN + 1, Astrology.calculate(URANUS, FIRE, ARIES));
         WidgetSimulations.theGreatBerateTwo();
         assertEquals(POOR_OMEN + 2, Astrology.calculate(WATER, URANUS, VIRGO));
+        WidgetSimulations.partTwoTakeTwo();
+        assertEquals(GOOD_OMEN + 6, Astrology.calculate(JUPITER, EARTH, GEMINI));
+        WidgetSimulations.partTwoTakeThree();
+
     }
 }

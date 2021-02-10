@@ -15,6 +15,7 @@ import static bomb.enumerations.ShiftShape.ROUND;
 import static bomb.enumerations.ShiftShape.TICKET;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ShapeShiftTest {
@@ -67,15 +68,22 @@ public class ShapeShiftTest {
     @Test
     void theGreatBerate(){
         WidgetSimulations.theGreatBerate();
-
+        assertPairDoesNotEqual(new ShiftShape[]{TICKET, FLAT}, ShapeShift.solve(FLAT, ROUND));
+        assertPairEquals(new ShiftShape[]{TICKET, POINT}, ShapeShift.solve(FLAT, ROUND));
         WidgetSimulations.theGreatBerateTwo();
         assertPairEquals(new ShiftShape[]{FLAT, FLAT}, ShapeShift.solve(POINT, FLAT));
         WidgetSimulations.partTwoTakeTwo();
-//        assertPairEquals(new ShiftShape[]{}, ShapeShift.solve(TICKET, POINT));
+        assertPairEquals(new ShiftShape[]{ROUND, TICKET}, ShapeShift.solve(TICKET, POINT));
+        WidgetSimulations.partTwoTakeThree();
+
     }
 
     private void assertPairEquals(ShiftShape[] expected, ShiftShape[] actual){
         assertEquals(expected[0], actual[0]);
         assertEquals(expected[1], actual[1]);
+    }
+
+    private void assertPairDoesNotEqual(ShiftShape[] expected, ShiftShape[] actual){
+        assertFalse(expected[0].equals(actual[0]) && expected[1].equals(actual[1]));
     }
 }

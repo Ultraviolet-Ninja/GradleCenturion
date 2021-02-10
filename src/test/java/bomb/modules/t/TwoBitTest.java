@@ -66,6 +66,9 @@ public class TwoBitTest {
         assertEquals(QUERY + "dk", TwoBit.nextCode("01"));
         assertEquals(QUERY + "tk", TwoBit.nextCode("03"));
         assertEquals(SUBMIT + "ep", TwoBit.nextCode("56"));
+        WidgetSimulations.partTwoTakeTwo();
+
+        WidgetSimulations.partTwoTakeThree();
     }
 
     //TODO - Create a scenario that tests an "over 100" bomb

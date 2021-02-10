@@ -67,6 +67,10 @@ public class BlindAlleyTest {
         assertArrayEquals(new int[][]{{0,0,0}, {0,0,0}, {1,2,0}});
         WidgetSimulations.theGreatBerateTwo();
         assertArrayEquals(new int[][]{{1,1,0}, {1,0,2}, {1,2,1}});
+        WidgetSimulations.partTwoTakeTwo();
+        assertArrayEquals(new int[][]{{1,0,0}, {0,1,0}, {0,2,2}});
+        WidgetSimulations.partTwoTakeThree();
+
     }
 
     private void assertArrayEquals(int[][] numbers){
