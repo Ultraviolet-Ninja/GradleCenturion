@@ -60,6 +60,9 @@ public class LaundryTest {
         WidgetSimulations.theGreatBerateTwo();
         assertContains(new String[]{"105F", "Medium Heat", "110", "Wet Cleaning",
                 "CORDUROY - MALINITE - SCARF"}, "0", "1");
+        WidgetSimulations.partTwoTakeTwo();
+        assertContains(new String[]{"80F", "Medium Heat", "300", "No Tetrachlorethylene",
+                "LEATHER - MALINITE - CORSET"}, "0", "1");
     }
 
     private void setupTwo(){

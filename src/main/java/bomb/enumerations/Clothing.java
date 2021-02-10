@@ -54,7 +54,7 @@ public enum Clothing {
     public enum Material implements Labeled{
         POLYESTER("120F.png", "Petroleum Solvent Only"), COTTON("200F.png", "Do not Dry Clean"),
         WOOL("Hand Wash.png", "Reduced Moisture"), NYLON("80F.png", "Low Heat"),
-        CORDUROY("105F.png", "Wet Cleaning"), LEATHER("Don't Wash", "Any Solvent except Tetrachlorethylene");
+        CORDUROY("105F.png", "Wet Cleaning"), LEATHER("Don't Wash", "No Tetrachlorethylene");
 
         private final String picLocation, specialInstr;
 

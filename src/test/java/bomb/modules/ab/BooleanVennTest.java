@@ -42,5 +42,6 @@ public class BooleanVennTest {
     void theGreatBerate(){
 
         assertEquals("11111000", BooleanVenn.resultCode("A|(B∨C)"));
+        assertEquals("00001101", BooleanVenn.resultCode("(A∨B)∧C"));
     }
 }

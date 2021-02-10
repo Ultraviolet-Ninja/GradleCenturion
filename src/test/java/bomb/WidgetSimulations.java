@@ -2,7 +2,10 @@ package bomb;
 
 import bomb.enumerations.Ports;
 
+import static bomb.enumerations.Indicators.FRK;
 import static bomb.enumerations.Indicators.MSA;
+import static bomb.enumerations.Indicators.SND;
+import static bomb.enumerations.TriState.OFF;
 import static bomb.enumerations.TriState.ON;
 import static bomb.enumerations.Ports.*;
 
@@ -45,6 +48,24 @@ public class WidgetSimulations {
         Widget.addPort(PS2);
         Widget.addPort(RJ45);
         Widget.addPort(DVI);
+        centurionDefaults();
+    }
+
+    public static void partTwoTakeTwo(){
+        Widget.resetProperties();
+        Widget.setDBatteries(2);
+        Widget.setNumHolders(2);
+        Widget.setIndicator(ON, SND);
+        Widget.setIndicator(OFF, FRK);
+        Widget.setSerialCode("ah5nj9");
+        Widget.addPort(RCA);
+        Widget.setPlates(1);
+        centurionDefaults();
+    }
+
+    public static void partTwoTakeThree(){
+        Widget.resetProperties();
+
         centurionDefaults();
     }
 
