@@ -1,6 +1,7 @@
 package bomb.modules.np;
 
 import bomb.Widget;
+import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
@@ -61,6 +62,15 @@ public class NeutralizationTest {
         Widget.setSerialCode("ew7qw5");
         Widget.setIndicator(TriState.ON, Indicators.MSA);
         Widget.setIndicator(TriState.ON, Indicators.NSA);
+    }
+
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+
+        WidgetSimulations.theGreatBerateTwo();
+        assertEqual(5, Color.RED, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
+                "4", Neutralization.FILTER});
     }
 
     private void assertEqual(int volume, Color color, String[] expected){

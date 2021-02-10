@@ -70,13 +70,13 @@ public class Laundry extends Widget {
      */
     private static void setMaterial(int solved){
         switch (balance(solved + getTotalPorts() - numHolders)){
-            case 0: ARTICLE.setMat(Clothing.Material.POLYESTER);
-            case 1: ARTICLE.setMat(Clothing.Material.COTTON);
-            case 2: ARTICLE.setMat(Clothing.Material.WOOL);
-            case 3: ARTICLE.setMat(Clothing.Material.NYLON);
-            case 4: ARTICLE.setMat(Clothing.Material.CORDUROY);
+            case 0: ARTICLE.setMat(Clothing.Material.POLYESTER); break;
+            case 1: ARTICLE.setMat(Clothing.Material.COTTON); break;
+            case 2: ARTICLE.setMat(Clothing.Material.WOOL); break;
+            case 3: ARTICLE.setMat(Clothing.Material.NYLON); break;
+            case 4: ARTICLE.setMat(Clothing.Material.CORDUROY); break;
             default: ARTICLE.setMat(Clothing.Material.LEATHER);
-        };
+        }
     }
 
     /**

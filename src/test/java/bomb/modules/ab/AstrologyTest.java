@@ -1,6 +1,7 @@
 package bomb.modules.ab;
 
 import bomb.Widget;
+import bomb.WidgetSimulations;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +12,9 @@ import static bomb.enumerations.AstroSymbols.MARS;
 import static bomb.enumerations.AstroSymbols.MERCURY;
 import static bomb.enumerations.AstroSymbols.SAGITTARIUS;
 import static bomb.enumerations.AstroSymbols.TAURUS;
+import static bomb.enumerations.AstroSymbols.URANUS;
 import static bomb.enumerations.AstroSymbols.VENUS;
+import static bomb.enumerations.AstroSymbols.VIRGO;
 import static bomb.enumerations.AstroSymbols.WATER;
 import static bomb.modules.ab.Astrology.GOOD_OMEN;
 import static bomb.modules.ab.Astrology.POOR_OMEN;
@@ -44,7 +47,7 @@ public class AstrologyTest {
     }
 
     @Test
-    void sortTest(){
+    void interchangeabilityTest(){
         String expected = POOR_OMEN + 4;
         Widget.setSerialCode("jt3gu5");
         assertEquals(expected, Astrology.calculate(EARTH, MARS, ARIES));
@@ -52,5 +55,13 @@ public class AstrologyTest {
         assertEquals(expected, Astrology.calculate(MARS, ARIES, EARTH));
         assertEquals(expected, Astrology.calculate(ARIES, MARS, EARTH));
         assertEquals(expected, Astrology.calculate(ARIES, EARTH, MARS));
+    }
+
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+
+        WidgetSimulations.theGreatBerateTwo();
+        assertEquals(POOR_OMEN + 2, Astrology.calculate(WATER, URANUS, VIRGO));
     }
 }

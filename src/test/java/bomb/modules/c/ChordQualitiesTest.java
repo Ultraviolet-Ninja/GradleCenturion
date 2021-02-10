@@ -22,6 +22,12 @@ public class ChordQualitiesTest {
         assertEqualsAnyOrder("New Chord: D +2 +1 +4", new String[]{"B", "C#", "F#", "G#"});
     }
 
+    @Test
+    void theGreatBerate(){
+
+        assertEqualsAnyOrder("New Chord: E +3 +1 +6", new String[]{"A#", "D#", "F", "F#"});
+    }
+
     private void assertEqualsAnyOrder(String expected, String[] notes){
         int length = notes.length;
         for (int i = 0; i < length; i++) {

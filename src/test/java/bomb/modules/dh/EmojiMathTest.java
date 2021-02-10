@@ -47,4 +47,10 @@ public class EmojiMathTest {
         assertEquals(189, EmojiMath.calculate("|:=)+|:)="));
         assertEquals(-10, EmojiMath.calculate(":(:)-)::)"));
     }
+
+    @Test
+    void theGreatBerate(){
+
+        assertEquals(120, EmojiMath.calculate(":((=+(=)="));
+    }
 }

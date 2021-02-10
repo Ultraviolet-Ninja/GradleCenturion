@@ -1,6 +1,7 @@
 package bomb.modules.ab;
 
 import bomb.Widget;
+import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
@@ -18,13 +19,13 @@ public class BlindAlleyTest {
 
     @Test
     void nullTest(){
-        test(new int[][]{{0,0,0}, {0,0,0}, {0,0,0}});
+        assertArrayEquals(new int[][]{{0,0,0}, {0,0,0}, {0,0,0}});
     }
 
     @Test
     void videoTestOne(){
         widgetSetupOne();
-        test(new int[][] {{1,1,0}, {1,0,2}, {1,2,0}});
+        assertArrayEquals(new int[][] {{1,1,0}, {1,0,2}, {1,2,0}});
     }
 
     private void widgetSetupOne(){
@@ -43,7 +44,7 @@ public class BlindAlleyTest {
     @Test
     void videoTestTwo(){
         widgetSetupTwo();
-        test(new int[][]{{0,1,0}, {2,1,1}, {1,1,2}});
+        assertArrayEquals(new int[][]{{0,1,0}, {2,1,1}, {1,1,2}});
     }
 
     private void widgetSetupTwo(){
@@ -60,7 +61,15 @@ public class BlindAlleyTest {
         Widget.setIndicator(TriState.OFF, Indicators.FRQ);
     }
 
-    private void test(int[][] numbers){
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+        assertArrayEquals(new int[][]{{0,0,0}, {0,0,0}, {1,2,0}});
+        WidgetSimulations.theGreatBerateTwo();
+        assertArrayEquals(new int[][]{{1,1,0}, {1,0,2}, {1,2,1}});
+    }
+
+    private void assertArrayEquals(int[][] numbers){
         int[][] actual = BlindAlley.getAlleyCat();
         for (int i = 0; i < numbers.length; i++){
             for (int j = 0; j < numbers[i].length; j++)

@@ -15,4 +15,9 @@ public class AlphabetTest {
         IntStream.range(0, FOUR_LETTER_CORRECT.length)
                 .forEach(i -> assertEquals(FOUR_LETTER_CORRECT[i], Alphabet.order(FOUR_LETTER_INPUTS[i])));
     }
+
+    @Test
+    void theGreatBerate(){
+        assertEquals("YKQV", Alphabet.order("QYVK"));
+    }
 }

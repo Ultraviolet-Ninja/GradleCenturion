@@ -1,6 +1,7 @@
 package bomb.modules.t;
 
 import bomb.Widget;
+import bomb.WidgetSimulations;
 import bomb.enumerations.Ports;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,6 +55,17 @@ public class TwoBitTest {
         Widget.addPort(Ports.PS2);
         Widget.addPort(Ports.RCA);
         Widget.setSerialCode("AI3ZC1");
+    }
+
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+
+        WidgetSimulations.theGreatBerateTwo();
+        assertEquals("kz", TwoBit.initialCode());
+        assertEquals(QUERY + "dk", TwoBit.nextCode("01"));
+        assertEquals(QUERY + "tk", TwoBit.nextCode("03"));
+        assertEquals(SUBMIT + "ep", TwoBit.nextCode("56"));
     }
 
     //TODO - Create a scenario that tests an "over 100" bomb

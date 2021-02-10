@@ -1,6 +1,7 @@
 package bomb.modules.ab;
 
 import bomb.Widget;
+import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
@@ -55,6 +56,14 @@ public class BitwiseTest {
         assertEquals(MAX_OR, Bitwise.getByte(OR));
         assertEquals(MAX_XOR, Bitwise.getByte(XOR));
         assertEquals(MAX_NOT, Bitwise.getByte(NOT));
+    }
+
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+        assertEquals(MIN_AND, Bitwise.getByte(AND));
+        WidgetSimulations.theGreatBerateTwo();
+        assertEquals("10110011", Bitwise.getByte(XOR));
     }
 
     private void setEssentialTrueConditions(){
