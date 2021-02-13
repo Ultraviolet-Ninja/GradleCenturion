@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import static bomb.enumerations.Chemical.Base.Ammonia;
 import static bomb.enumerations.Chemical.Base.Lithium_Hydroxide;
+import static bomb.enumerations.Chemical.Base.Potassium_Hydroxide;
+import static bomb.modules.np.Neutralization.FILTER;
+import static bomb.modules.np.Neutralization.NO_FILTER;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,7 +35,7 @@ public class NeutralizationTest {
     @Test
     void videoTestOne(){ //Order: Base Name, Base Formula, Drop Count, Filter or No Filter
         setupOne();
-        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", Neutralization.FILTER});
+        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", FILTER});
     }
 
     private void setupOne(){
@@ -51,7 +54,7 @@ public class NeutralizationTest {
     void videoTestTwo(){
         setupTwo();
         assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                "48", Neutralization.NO_FILTER});
+                "48", NO_FILTER});
     }
 
     private void setupTwo(){
@@ -67,15 +70,21 @@ public class NeutralizationTest {
     @Test
     void theGreatBerate(){
         WidgetSimulations.theGreatBerate();
-
+        assertEqual(5, Color.BLUE, new String[]{"Lithium Hydroxide",
+                Lithium_Hydroxide.getFormula(), "12", NO_FILTER});
         WidgetSimulations.theGreatBerateTwo();
         assertEqual(5, Color.RED, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                "4", Neutralization.FILTER});
+                "4", FILTER});
+        WidgetSimulations.partTwoTakeTwo();
+        assertEqual(10, Color.YELLOW, new String[]{"Potassium Hydroxide", Potassium_Hydroxide.getFormula(),
+                "4", FILTER});
+        WidgetSimulations.partTwoTakeThree();
+
     }
 
     private void assertEqual(int volume, Color color, String[] expected){
         String[] actual = Neutralization.titrate(volume, color).split("-");
         for (int i = 0; i < expected.length; i++)
-            assertEquals(actual[i], expected[i]);
+            assertEquals(expected[i], actual[i]);
     }
 }

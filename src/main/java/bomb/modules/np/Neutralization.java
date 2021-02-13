@@ -211,7 +211,7 @@ public class Neutralization extends Widget {
      * @return
      */
     private static boolean bromideCombos(){
-        return currentAcid == Chemical.Acid.Hydrobromic_Acid && (currentBase == Chemical.Base.Ammonia||
+        return currentAcid == Chemical.Acid.Hydrobromic_Acid && (currentBase == Chemical.Base.Ammonia ||
                 currentBase == Chemical.Base.Sodium_Hydroxide);
     }
 
