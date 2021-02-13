@@ -1,7 +1,6 @@
 package bomb.modules.r.round_keypads;
 
 import bomb.Widget;
-import bomb.enumerations.Keypads;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;

@@ -1,8 +1,8 @@
 package bomb.sub.controllers;
 
-import bomb.modules.t.the_bulb.TheBulb;
+import bomb.modules.t.bulb.TheBulb;
 import bomb.modules.t.two_bit.TwoBit;
-import bomb.enumerations.Bulb;
+import bomb.modules.t.bulb.Bulb;
 import bomb.interfaces.Reset;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,7 +14,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.shape.Rectangle;
 
-import static bomb.enumerations.Bulb.THE_BULB;
+import static bomb.modules.t.bulb.Bulb.THE_BULB;
 import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 

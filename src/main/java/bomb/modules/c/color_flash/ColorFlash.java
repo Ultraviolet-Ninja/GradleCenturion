@@ -1,6 +1,5 @@
 package bomb.modules.c.color_flash;
 
-import bomb.enumerations.CFlash;
 import bomb.Widget;
 
 //TODO - Complete, then make Javadocs

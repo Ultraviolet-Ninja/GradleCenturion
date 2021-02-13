@@ -6,7 +6,7 @@ import bomb.modules.ab.bitwise.Bitwise;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.ab.boolean_venn.BooleanVenn;
 import bomb.modules.ab.astrology.AstroSymbols;
-import bomb.enumerations.BitwiseOps;
+import bomb.modules.ab.bitwise.BitwiseOps;
 import bomb.interfaces.Reset;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

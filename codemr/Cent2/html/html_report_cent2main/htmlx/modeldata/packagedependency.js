@@ -33,7 +33,7 @@ var packages = [{
 "name": " bomb.modules.t", "color": " #a1d99b"
 }
 ,{
-"name": " bomb.tools.hexalgorithm", "color": " #c7e9c0"
+"name": " bomb.modules.dh.hexamaze.hexalgorithm", "color": " #c7e9c0"
 }
 ,{
 "name": " bomb.interfaces", "color": " #756bb1"

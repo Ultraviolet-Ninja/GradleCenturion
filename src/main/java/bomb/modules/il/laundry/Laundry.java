@@ -1,10 +1,9 @@
 package bomb.modules.il.laundry;
 
-import bomb.enumerations.Clothing;
 import bomb.enumerations.Indicators;
 import bomb.Widget;
 
-import static bomb.enumerations.Clothing.ARTICLE;
+import static bomb.modules.il.laundry.Clothing.ARTICLE;
 import static bomb.tools.Mechanics.LOWERCASE_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 

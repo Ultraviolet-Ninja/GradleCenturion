@@ -3,15 +3,15 @@ package bomb.modules.dh.hexamaze;
 import bomb.Widget;
 import bomb.components.hex.HexMazePanel;
 import bomb.tools.Coordinates;
-import bomb.tools.hexalgorithm.*;
-import bomb.enumerations.HexTraits.HexShape;
+import bomb.modules.dh.hexamaze.hexalgorithm.*;
+import bomb.modules.dh.hexamaze.HexTraits.HexShape;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static bomb.tools.hexalgorithm.Hex.nodalArea;
+import static bomb.modules.dh.hexamaze.hexalgorithm.Hex.nodalArea;
 
 public class Hexamaze extends Widget{
     private final static ArrayList<HexShape> hexShapeTracker = new ArrayList<>();

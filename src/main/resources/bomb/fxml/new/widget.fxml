@@ -13,188 +13,202 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+      prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="bomb.WidgetController">
     <GridPane>
         <columnConstraints>
-            <ColumnConstraints />
+            <ColumnConstraints/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints />
+            <RowConstraints/>
         </rowConstraints>
         <GridPane prefHeight="741.0" prefWidth="1203.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="421.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="10.0" prefWidth="60.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="679.0" minWidth="10.0" prefWidth="679.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="421.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="10.0" prefWidth="60.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="679.0" minWidth="10.0" prefWidth="679.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="433.0" minHeight="10.0" prefHeight="428.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="355.0" minHeight="10.0" prefHeight="313.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="433.0" minHeight="10.0" prefHeight="428.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="355.0" minHeight="10.0" prefHeight="313.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <GridPane>
                 <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints maxHeight="174.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="351.0" minHeight="10.0" prefHeight="347.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="174.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES"/>
+                    <RowConstraints maxHeight="351.0" minHeight="10.0" prefHeight="347.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
                 <GridPane GridPane.rowIndex="1">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="125.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="168.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="155.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="125.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="168.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="155.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
                     <VBox prefHeight="200.0" prefWidth="100.0">
                         <TextField fx:id="dvi" alignment="CENTER" editable="false" text="0">
                             <VBox.margin>
-                                <Insets top="10.0" />
+                                <Insets top="10.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="parallel" alignment="CENTER" editable="false" text="0">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="ps" alignment="CENTER" editable="false" text="0">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </TextField>
                         <TextField fx:id="rj" alignment="CENTER" editable="false" text="0">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </TextField>
-                        <TextField fx:id="serial" alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="118.0" text="0">
+                        <TextField fx:id="serial" alignment="CENTER" editable="false" prefHeight="38.0"
+                                   prefWidth="118.0" text="0">
                             <VBox.margin>
-                                <Insets top="20.0" />
+                                <Insets top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </TextField>
-                        <TextField fx:id="rca" alignment="CENTER" editable="false" prefHeight="37.0" prefWidth="118.0" text="0">
+                        <TextField fx:id="rca" alignment="CENTER" editable="false" prefHeight="37.0" prefWidth="118.0"
+                                   text="0">
                             <VBox.margin>
-                                <Insets top="15.0" />
+                                <Insets top="15.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </TextField>
                     </VBox>
                     <VBox prefHeight="360.0" prefWidth="160.0" GridPane.columnIndex="1">
                         <Button fx:id="dviUp" mnemonicParsing="false" onAction="#incrementPort" text="+1 DVI">
                             <VBox.margin>
-                                <Insets left="40.0" top="10.0" />
+                                <Insets left="40.0" top="10.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="parallelUp" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#incrementPort" text="+1 Parallel">
+                        <Button fx:id="parallelUp" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                                onAction="#incrementPort" text="+1 Parallel">
                             <VBox.margin>
-                                <Insets left="30.0" top="20.0" />
+                                <Insets left="30.0" top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="psUp" layoutX="10.0" layoutY="35.0" mnemonicParsing="false" onAction="#incrementPort" text="+1 PS2">
+                        <Button fx:id="psUp" layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
+                                onAction="#incrementPort" text="+1 PS2">
                             <VBox.margin>
-                                <Insets left="40.0" top="20.0" />
+                                <Insets left="40.0" top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="rjUp" layoutX="10.0" layoutY="60.0" mnemonicParsing="false" onAction="#incrementPort" text="+1 RJ-45">
+                        <Button fx:id="rjUp" layoutX="10.0" layoutY="60.0" mnemonicParsing="false"
+                                onAction="#incrementPort" text="+1 RJ-45">
                             <VBox.margin>
-                                <Insets left="35.0" top="20.0" />
+                                <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="serialUp" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#incrementPort" text="+1 Serial">
+                        <Button fx:id="serialUp" layoutX="10.0" layoutY="85.0" mnemonicParsing="false"
+                                onAction="#incrementPort" text="+1 Serial">
                             <VBox.margin>
-                                <Insets left="35.0" top="20.0" />
+                                <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Button>
-                        <Button fx:id="rcaUp" layoutX="10.0" layoutY="110.0" mnemonicParsing="false" onAction="#incrementPort" text="+1 RCA">
+                        <Button fx:id="rcaUp" layoutX="10.0" layoutY="110.0" mnemonicParsing="false"
+                                onAction="#incrementPort" text="+1 RCA">
                             <VBox.margin>
-                                <Insets left="40.0" top="15.0" />
+                                <Insets left="40.0" top="15.0"/>
                             </VBox.margin>
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                         </Button>
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                         <Button fx:id="dviDown" mnemonicParsing="false" onAction="#decrementPort" text="-1 DVI">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets left="40.0" top="10.0" />
+                                <Insets left="40.0" top="10.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="parallelDown" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#decrementPort" text="-1 Parallel">
+                        <Button fx:id="parallelDown" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                                onAction="#decrementPort" text="-1 Parallel">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets left="30.0" top="20.0" />
+                                <Insets left="30.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="psDown" layoutX="10.0" layoutY="49.0" mnemonicParsing="false" onAction="#decrementPort" text="-1 PS2">
+                        <Button fx:id="psDown" layoutX="10.0" layoutY="49.0" mnemonicParsing="false"
+                                onAction="#decrementPort" text="-1 PS2">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets left="40.0" top="20.0" />
+                                <Insets left="40.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="rjDown" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" onAction="#decrementPort" text="-1 RJ-45">
+                        <Button fx:id="rjDown" layoutX="10.0" layoutY="88.0" mnemonicParsing="false"
+                                onAction="#decrementPort" text="-1 RJ-45">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets left="35.0" top="20.0" />
+                                <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="serialDown" layoutX="10.0" layoutY="127.0" mnemonicParsing="false" onAction="#decrementPort" text="-1 Serial">
+                        <Button fx:id="serialDown" layoutX="10.0" layoutY="127.0" mnemonicParsing="false"
+                                onAction="#decrementPort" text="-1 Serial">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets left="35.0" top="20.0" />
+                                <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="rcaDown" layoutX="10.0" layoutY="166.0" mnemonicParsing="false" onAction="#decrementPort" text="-1 RCA">
+                        <Button fx:id="rcaDown" layoutX="10.0" layoutY="166.0" mnemonicParsing="false"
+                                onAction="#decrementPort" text="-1 RCA">
                             <font>
-                                <Font size="18.0" />
+                                <Font size="18.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets left="40.0" top="15.0" />
+                                <Insets left="40.0" top="15.0"/>
                             </VBox.margin>
                         </Button>
                     </VBox>
@@ -202,272 +216,306 @@
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <Label text="Port Counts">
                         <font>
-                            <Font size="24.0" />
+                            <Font size="24.0"/>
                         </font>
                         <HBox.margin>
-                            <Insets left="150.0" top="15.0" />
+                            <Insets left="150.0" top="15.0"/>
                         </HBox.margin>
                     </Label>
                 </HBox>
             </GridPane>
             <Pane GridPane.rowIndex="1">
-                <Button layoutX="83.0" layoutY="237.0" mnemonicParsing="false" onAction="#reset" opacity="0.04" text="Full Bomb Reset">
+                <Button layoutX="83.0" layoutY="237.0" mnemonicParsing="false" onAction="#reset" opacity="0.04"
+                        text="Full Bomb Reset">
                     <font>
-                        <Font size="28.0" />
+                        <Font size="28.0"/>
                     </font>
                 </Button>
-                <ToggleButton fx:id="souvenir" layoutX="116.0" layoutY="39.0" mnemonicParsing="false" onAction="#souvenirToggle" style="-fx-background-color: crimson; -fx-text-fill: seashell;" text="Souvenir: Disabled">
+                <ToggleButton fx:id="souvenir" layoutX="116.0" layoutY="39.0" mnemonicParsing="false"
+                              onAction="#souvenirToggle" style="-fx-background-color: crimson; -fx-text-fill: seashell;"
+                              text="Souvenir: Disabled">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="forgetMeNot" layoutX="92.0" layoutY="124.0" mnemonicParsing="false" onAction="#forgetMeToggle" style="-fx-background-color: crimson; -fx-text-fill: seashell;" text="Forget Me Not: Disabled">
+                <ToggleButton fx:id="forgetMeNot" layoutX="92.0" layoutY="124.0" mnemonicParsing="false"
+                              onAction="#forgetMeToggle" style="-fx-background-color: crimson; -fx-text-fill: seashell;"
+                              text="Forget Me Not: Disabled">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                 <Label fx:id="bob" layoutX="146.0" layoutY="54.0" text="BOB">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="car" layoutX="146.0" layoutY="126.0" text="CAR">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="frq" layoutX="146.0" layoutY="325.0" text="FRQ">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="frk" layoutX="148.0" layoutY="265.0" text="FRK">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="clr" layoutX="148.0" layoutY="197.0" text="CLR">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="nsa" layoutX="437.0" layoutY="194.0" text="NSA">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="msa" layoutX="438.0" layoutY="123.0" text="MSA">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="sig" layoutX="441.0" layoutY="262.0" text="SIG">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="snd" layoutX="436.0" layoutY="328.0" text="SND">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
                 <Label fx:id="ind" layoutX="442.0" layoutY="51.0" text="IND">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
-                <ToggleButton fx:id="bobLit" layoutX="59.0" layoutY="48.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="bobLit" layoutX="59.0" layoutY="48.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="carLit" layoutX="59.0" layoutY="120.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="carLit" layoutX="59.0" layoutY="120.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="clrLit" layoutX="59.0" layoutY="191.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="clrLit" layoutX="59.0" layoutY="191.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="frkLit" layoutX="59.0" layoutY="259.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="frkLit" layoutX="59.0" layoutY="259.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="frqLit" layoutX="59.0" layoutY="319.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="frqLit" layoutX="59.0" layoutY="319.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="sndLit" layoutX="358.0" layoutY="322.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="sndLit" layoutX="358.0" layoutY="322.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="sigLit" layoutX="358.0" layoutY="256.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="sigLit" layoutX="358.0" layoutY="256.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="nsaLit" layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="nsaLit" layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="msaLit" layoutX="358.0" layoutY="117.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="msaLit" layoutX="358.0" layoutY="117.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="indLit" layoutX="358.0" layoutY="45.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="indLit" layoutX="358.0" layoutY="45.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="bobUnlit" layoutX="208.0" layoutY="48.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="bobUnlit" layoutX="208.0" layoutY="48.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="carUnlit" layoutX="208.0" layoutY="120.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="carUnlit" layoutX="208.0" layoutY="120.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="clrUnlit" layoutX="208.0" layoutY="191.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="clrUnlit" layoutX="208.0" layoutY="191.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="frkUnlit" layoutX="208.0" layoutY="259.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="frkUnlit" layoutX="208.0" layoutY="259.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="frqUnlit" layoutX="208.0" layoutY="319.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="frqUnlit" layoutX="208.0" layoutY="319.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="indUnlit" layoutX="494.0" layoutY="45.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="indUnlit" layoutX="494.0" layoutY="45.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="msaUnlit" layoutX="494.0" layoutY="117.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="msaUnlit" layoutX="494.0" layoutY="117.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="nsaUnlit" layoutX="494.0" layoutY="188.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="nsaUnlit" layoutX="494.0" layoutY="188.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="sigUnlit" layoutX="494.0" layoutY="256.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="sigUnlit" layoutX="494.0" layoutY="256.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="sndUnlit" layoutX="494.0" layoutY="322.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="sndUnlit" layoutX="494.0" layoutY="322.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
                 <Label layoutX="254.0" layoutY="14.0" text="Indicators">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
-                <ToggleButton fx:id="trnUnlit" layoutX="351.0" layoutY="375.0" mnemonicParsing="false" onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton fx:id="trnUnlit" layoutX="351.0" layoutY="375.0" mnemonicParsing="false"
+                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
-                <ToggleButton fx:id="trnLit" layoutX="216.0" layoutY="375.0" mnemonicParsing="false" onAction="#setLit" prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton fx:id="trnLit" layoutX="216.0" layoutY="375.0" mnemonicParsing="false" onAction="#setLit"
+                              prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </ToggleButton>
                 <Label fx:id="trn" layoutX="288.0" layoutY="381.0" text="TRN">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </Label>
             </Pane>
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <TextField fx:id="doubleAField" layoutX="47.0" layoutY="45.0" onKeyReleased="#doubleAInfo" prefHeight="39.0" prefWidth="160.0" promptText="Double A's">
+                <TextField fx:id="doubleAField" layoutX="47.0" layoutY="45.0" onKeyReleased="#doubleAInfo"
+                           prefHeight="39.0" prefWidth="160.0" promptText="Double A's">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="dBatField" layoutX="47.0" layoutY="120.0" onKeyReleased="#dBatInfo" prefHeight="39.0" prefWidth="160.0" promptText="D Batteries">
+                <TextField fx:id="dBatField" layoutX="47.0" layoutY="120.0" onKeyReleased="#dBatInfo" prefHeight="39.0"
+                           prefWidth="160.0" promptText="D Batteries">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="holderField" layoutX="47.0" layoutY="182.0" onKeyReleased="#holderInfo" prefHeight="39.0" prefWidth="160.0" promptText="Battery Holders">
+                <TextField fx:id="holderField" layoutX="47.0" layoutY="182.0" onKeyReleased="#holderInfo"
+                           prefHeight="39.0" prefWidth="160.0" promptText="Battery Holders">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="plateField" layoutX="364.0" layoutY="46.0" onKeyReleased="#plateInfo" prefHeight="39.0" prefWidth="160.0" promptText="Port Plates">
+                <TextField fx:id="plateField" layoutX="364.0" layoutY="46.0" onKeyReleased="#plateInfo"
+                           prefHeight="39.0" prefWidth="160.0" promptText="Port Plates">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="minField" layoutX="364.0" layoutY="121.0" onKeyReleased="#minuteInfo" prefHeight="39.0" prefWidth="160.0" promptText="Number of Min">
+                <TextField fx:id="minField" layoutX="364.0" layoutY="121.0" onKeyReleased="#minuteInfo"
+                           prefHeight="39.0" prefWidth="160.0" promptText="Number of Min">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="modField" layoutX="364.0" layoutY="183.0" onKeyReleased="#modInfo" prefHeight="39.0" prefWidth="160.0" promptText="Module Number">
+                <TextField fx:id="modField" layoutX="364.0" layoutY="183.0" onKeyReleased="#modInfo" prefHeight="39.0"
+                           prefWidth="160.0" promptText="Module Number">
                     <font>
-                        <Font size="18.0" />
+                        <Font size="18.0"/>
                     </font>
                 </TextField>
-                <TextField fx:id="serialField" layoutX="173.0" layoutY="252.0" onKeyReleased="#serialCode" promptText="Serial Code">
+                <TextField fx:id="serialField" layoutX="173.0" layoutY="252.0" onKeyReleased="#serialCode"
+                           promptText="Serial Code">
                     <font>
-                        <Font size="20.0" />
+                        <Font size="20.0"/>
                     </font>
                 </TextField>
                 <Label fx:id="aLabel" layoutX="219.0" layoutY="47.0">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
                 <Label fx:id="dLabel" layoutX="219.0" layoutY="122.0">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
                 <Label fx:id="plateLabel" layoutX="532.0" layoutY="48.0">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
                 <Label fx:id="minuteLabel" layoutX="532.0" layoutY="123.0">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
                 <Label fx:id="moduleLabel" layoutX="532.0" layoutY="185.0">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
                 <Label fx:id="holderLabel" layoutX="219.0" layoutY="184.0">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
                 <Label layoutX="246.0" text="Everything Else">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="24.0"/>
                     </font>
                 </Label>
             </Pane>

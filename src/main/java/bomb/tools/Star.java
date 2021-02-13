@@ -1,9 +1,9 @@
 package bomb.tools;
 
-import bomb.enumerations.Simon.Screams;
+import bomb.modules.s.simon.Simon.Screams;
 import java.util.Arrays;
 
-import static bomb.enumerations.Simon.Screams.*;
+import static bomb.modules.s.simon.Simon.Screams.*;
 
 public class Star {
     private final Screams[] colorOrder;

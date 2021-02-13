@@ -1,7 +1,6 @@
 package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
-import bomb.enumerations.BitwiseOps;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 

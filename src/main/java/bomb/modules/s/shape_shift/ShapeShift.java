@@ -3,7 +3,6 @@ package bomb.modules.s.shape_shift;
 import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
-import bomb.enumerations.ShiftShape;
 import bomb.tools.data.structures.graph.list.ListGraph;
 
 import java.util.AbstractMap;

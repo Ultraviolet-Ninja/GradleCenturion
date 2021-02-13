@@ -11,8 +11,8 @@ import static bomb.enumerations.Ports.PS2;
 import static bomb.enumerations.Ports.RCA;
 import static bomb.enumerations.Ports.RJ45;
 import static bomb.enumerations.Ports.SERIAL;
-import static bomb.enumerations.ShiftShape.FLAT;
-import static bomb.enumerations.ShiftShape.POINT;
+import static bomb.modules.s.shape_shift.ShiftShape.FLAT;
+import static bomb.modules.s.shape_shift.ShiftShape.POINT;
 import static bomb.enumerations.TriState.ON;
 
 public class TestingArea {

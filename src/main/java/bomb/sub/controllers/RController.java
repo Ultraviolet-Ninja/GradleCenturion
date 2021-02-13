@@ -1,7 +1,7 @@
 package bomb.sub.controllers;
 
 import bomb.modules.r.round_keypads.RoundKeypads;
-import bomb.enumerations.Keypads;
+import bomb.modules.r.round_keypads.Keypads;
 import bomb.interfaces.Reset;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;

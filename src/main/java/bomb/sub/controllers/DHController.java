@@ -1,7 +1,7 @@
 package bomb.sub.controllers;
 
 import bomb.components.hex.HexMazePanel;
-import bomb.modules.dh.emoji_math.EmojiMath;
+import bomb.modules.dh.emoji.EmojiMath;
 import bomb.modules.dh.hexamaze.Hexamaze;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-import static bomb.enumerations.Emojis.*;
+import static bomb.modules.dh.emoji.Emojis.*;
 
 public class DHController {
     private boolean hexColorToggleSwitch = false;

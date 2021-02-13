@@ -260,7 +260,7 @@ function EQ_GET_DATA(){
 }
 ]
 },{
-"name": "bomb.tools.hexalgorithm", "key": "o", "value":559, 
+"name": "bomb.modules.dh.hexamaze.hexalgorithm", "key": "o", "value":559,
 "pmetrics":{"4":2,"12":2,"13":1,"14":2,"3":1,"1":2,"0":2,"6":2,"8":2,"2":2,"15":1,"16":2},
 "pmetricvalues":{"4":2,"12":7,"13":0,"14":8,"3":1,"1":2,"0":2,"17":0.097,"6":8,"18":0.125,"8":559,"19":0.778,"2":2,"15":2,"16":254},
 "children":[

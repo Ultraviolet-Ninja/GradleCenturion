@@ -1,7 +1,6 @@
 package bomb.modules.np.neutralization;
 
 import bomb.modules.s.souvenir.Souvenir;
-import bomb.enumerations.Chemical;
 import bomb.enumerations.Indicators;
 import bomb.Widget;
 import javafx.scene.paint.Color;

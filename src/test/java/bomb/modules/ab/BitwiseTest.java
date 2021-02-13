@@ -9,10 +9,10 @@ import bomb.modules.ab.bitwise.Bitwise;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static bomb.enumerations.BitwiseOps.AND;
-import static bomb.enumerations.BitwiseOps.NOT;
-import static bomb.enumerations.BitwiseOps.OR;
-import static bomb.enumerations.BitwiseOps.XOR;
+import static bomb.modules.ab.bitwise.BitwiseOps.AND;
+import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
+import static bomb.modules.ab.bitwise.BitwiseOps.OR;
+import static bomb.modules.ab.bitwise.BitwiseOps.XOR;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

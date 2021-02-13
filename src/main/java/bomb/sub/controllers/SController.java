@@ -1,7 +1,7 @@
 package bomb.sub.controllers;
 
-import bomb.modules.s.simon.SimonStates;
-import bomb.enumerations.Simon;
+import bomb.modules.s.simon.states.SimonStates;
+import bomb.modules.s.simon.Simon;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
