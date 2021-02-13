@@ -3,11 +3,12 @@ package bomb.modules.t;
 import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Ports;
+import bomb.modules.t.two_bit.TwoBit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static bomb.modules.t.TwoBit.QUERY;
-import static bomb.modules.t.TwoBit.SUBMIT;
+import static bomb.modules.t.two_bit.TwoBit.QUERY;
+import static bomb.modules.t.two_bit.TwoBit.SUBMIT;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

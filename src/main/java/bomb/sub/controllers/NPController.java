@@ -1,6 +1,6 @@
 package bomb.sub.controllers;
 
-import bomb.modules.np.Neutralization;
+import bomb.modules.np.neutralization.Neutralization;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

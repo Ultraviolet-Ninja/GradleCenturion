@@ -5,6 +5,7 @@ import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import bomb.modules.il.laundry.Laundry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

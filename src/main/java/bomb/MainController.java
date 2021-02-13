@@ -1,7 +1,7 @@
 package bomb;
 
-import bomb.modules.dh.ForgetMeNot;
-import bomb.modules.s.Souvenir;
+import bomb.modules.dh.forget_me.ForgetMeNot;
+import bomb.modules.s.souvenir.Souvenir;
 import bomb.enumerations.*;
 import bomb.interfaces.Reset;
 import javafx.fxml.FXML;

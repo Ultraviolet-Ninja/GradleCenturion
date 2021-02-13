@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1160.0"
+          xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.dh.emoji.EmojiController">
+    <columnConstraints>
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+    </rowConstraints>
+    <GridPane prefHeight="869.0" prefWidth="1327.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="364.0" minHeight="10.0" prefHeight="304.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="457.0" minHeight="10.0" prefHeight="144.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="457.0" minHeight="10.0" prefHeight="129.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="457.0" minHeight="10.0" prefHeight="204.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <VBox prefHeight="200.0" prefWidth="100.0">
+            <TextField fx:id="equationBar" alignment="CENTER" editable="false" promptText="Equation">
+                <font>
+                    <Font size="36.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="150.0" />
+                </VBox.margin>
+            </TextField>
+        </VBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <Button fx:id="first" mnemonicParsing="false" onAction="#addToEquation" text=":)">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="375.0" top="50.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="second" layoutX="310.0" layoutY="60.0" mnemonicParsing="false" onAction="#addToEquation" text="=(">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="50.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="third" layoutX="414.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="(:">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="50.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="forth" layoutX="518.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text=")=">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="50.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="fifth" layoutX="622.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text=":(">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="50.0" />
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <Button fx:id="sixth" mnemonicParsing="false" onAction="#addToEquation" text="):">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="375.0" top="40.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="seventh" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="=)">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="40.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="eighth" layoutX="114.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="(=">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="40.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="ninth" layoutX="218.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text=":|">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="40.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="tenth" layoutX="322.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToEquation" text="|:">
+                <font>
+                    <Font size="24.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="40.0" />
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+            <Button fx:id="add" disable="true" mnemonicParsing="false" onAction="#operator" text="+">
+                <font>
+                    <Font size="36.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="375.0" top="30.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="minus" disable="true" mnemonicParsing="false" onAction="#operator" text="-">
+                <font>
+                    <Font size="36.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="125.0" top="30.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="equal" disable="true" mnemonicParsing="false" onAction="#submitEquation" text="=">
+                <font>
+                    <Font size="36.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="125.0" top="30.0" />
+                </HBox.margin>
+            </Button>
+            <Button fx:id="clear" disable="true" mnemonicParsing="false" onAction="#clearParam" text="Clear">
+                <font>
+                    <Font size="30.0" />
+                </font>
+                <HBox.margin>
+                    <Insets left="200.0" top="125.0" />
+                </HBox.margin>
+            </Button>
+        </HBox>
+    </GridPane>
+</GridPane>

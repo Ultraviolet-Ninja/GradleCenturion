@@ -5,6 +5,7 @@ import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import bomb.modules.np.neutralization.Neutralization;
 import javafx.scene.paint.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

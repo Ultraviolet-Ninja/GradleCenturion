@@ -1,5 +1,6 @@
 package bomb.modules.ab;
 
+import bomb.modules.ab.boolean_venn.BooleanVenn;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

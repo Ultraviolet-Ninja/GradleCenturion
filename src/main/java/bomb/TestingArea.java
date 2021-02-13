@@ -1,10 +1,6 @@
 package bomb;
 
-import bomb.enumerations.Indicators;
-import bomb.enumerations.Ports;
-import bomb.enumerations.TriState;
-import bomb.modules.il.Laundry;
-import bomb.modules.s.ShapeShift;
+import bomb.modules.s.shape_shift.ShapeShift;
 
 import java.util.Arrays;
 

@@ -1,7 +1,7 @@
 package bomb;
 
-import bomb.modules.ab.BlindAlley;
-import bomb.modules.dh.ForgetMeNot;
+import bomb.modules.ab.blind_alley.BlindAlley;
+import bomb.modules.dh.forget_me.ForgetMeNot;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;

@@ -1,8 +1,8 @@
 package bomb.sub.controllers;
 
 import bomb.components.hex.HexMazePanel;
-import bomb.modules.dh.EmojiMath;
-import bomb.modules.dh.Hexamaze;
+import bomb.modules.dh.emoji_math.EmojiMath;
+import bomb.modules.dh.hexamaze.Hexamaze;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
