@@ -1,7 +1,7 @@
 package bomb.sub.controllers;
 
-import bomb.modules.t.TheBulb;
-import bomb.modules.t.TwoBit;
+import bomb.modules.t.the_bulb.TheBulb;
+import bomb.modules.t.two_bit.TwoBit;
 import bomb.enumerations.Bulb;
 import bomb.interfaces.Reset;
 import javafx.fxml.FXML;

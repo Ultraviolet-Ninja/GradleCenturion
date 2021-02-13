@@ -1,5 +1,6 @@
 package bomb.modules.ab;
 
+import bomb.modules.ab.alphabet.Alphabet;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;

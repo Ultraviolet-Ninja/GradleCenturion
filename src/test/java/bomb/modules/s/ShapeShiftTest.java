@@ -6,6 +6,7 @@ import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.ShiftShape;
 import bomb.enumerations.TriState;
+import bomb.modules.s.shape_shift.ShapeShift;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

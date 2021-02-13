@@ -1,6 +1,6 @@
 package bomb.sub.controllers;
 
-import bomb.modules.c.ChordQualities;
+import bomb.modules.c.chord_qualities.ChordQualities;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

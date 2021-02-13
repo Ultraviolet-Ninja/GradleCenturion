@@ -1,6 +1,6 @@
 package bomb.sub.controllers;
 
-import bomb.modules.il.Laundry;
+import bomb.modules.il.laundry.Laundry;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;

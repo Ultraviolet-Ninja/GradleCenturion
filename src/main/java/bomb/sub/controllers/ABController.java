@@ -1,11 +1,11 @@
 package bomb.sub.controllers;
 
-import bomb.modules.ab.Alphabet;
-import bomb.modules.ab.Astrology;
-import bomb.modules.ab.Bitwise;
-import bomb.modules.ab.BlindAlley;
-import bomb.modules.ab.BooleanVenn;
-import bomb.enumerations.AstroSymbols;
+import bomb.modules.ab.alphabet.Alphabet;
+import bomb.modules.ab.astrology.Astrology;
+import bomb.modules.ab.bitwise.Bitwise;
+import bomb.modules.ab.blind_alley.BlindAlley;
+import bomb.modules.ab.boolean_venn.BooleanVenn;
+import bomb.modules.ab.astrology.AstroSymbols;
 import bomb.enumerations.BitwiseOps;
 import bomb.interfaces.Reset;
 import javafx.fxml.FXML;
