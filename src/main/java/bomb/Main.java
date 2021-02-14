@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("manual.fxml"));
-        primaryStage.setTitle("Centurion Manual");
-        primaryStage.setScene(new Scene(root, 1160, 770));
+        primaryStage.setTitle("Centurion Bomb Manual");
+        primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image("bomb\\KTANE logo.png"));
         primaryStage.show();
     }

@@ -17,7 +17,7 @@ public class NoteController {
     private void addNoteWindow() {
         if (noteWindows.size() != 5) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("note/note.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("note.fxml"));
                 Stage stage = new Stage();
                 stage.setTitle("Extra Notes");
                 stage.setScene(new Scene(root, 600, 400));

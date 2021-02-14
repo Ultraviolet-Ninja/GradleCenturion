@@ -13,7 +13,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 
-<GridPane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1"
+<GridPane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.ab.astrology.AstrologyController">
     <columnConstraints>
         <ColumnConstraints/>
@@ -41,19 +41,19 @@
             <Pane prefHeight="200.0" prefWidth="200.0">
                 <ImageView fx:id="fire" fitHeight="131.0" fitWidth="164.0" layoutX="28.0" layoutY="26.0"
                            onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/elements/Fire.PNG"/>
+                    <Image url="@../../astrology/elements/Fire.PNG"/>
                 </ImageView>
                 <ImageView fx:id="earth" fitHeight="131.0" fitWidth="164.0" layoutX="215.0" layoutY="26.0"
                            onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/elements/Earth.PNG"/>
+                    <Image url="@../../astrology/elements/Earth.PNG"/>
                 </ImageView>
                 <ImageView fx:id="water" fitHeight="131.0" fitWidth="164.0" layoutX="28.0" layoutY="250.0"
                            onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/elements/Water.PNG"/>
+                    <Image url="@../../astrology/elements/Water.PNG"/>
                 </ImageView>
                 <ImageView fx:id="air" fitHeight="131.0" fitWidth="164.0" layoutX="215.0" layoutY="250.0"
                            onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/elements/Air.PNG"/>
+                    <Image url="@../../astrology/elements/Air.PNG"/>
                 </ImageView>
                 <Label layoutX="80.0" layoutY="171.0" text="Fire">
                     <font>
@@ -79,43 +79,43 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                 <ImageView fx:id="mercury" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="14.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Mercury.PNG"/>
+                    <Image url="@../../astrology/celestials/Mercury.PNG"/>
                 </ImageView>
                 <ImageView fx:id="jupiter" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="106.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Jupiter.PNG"/>
+                    <Image url="@../../astrology/celestials/Jupiter.PNG"/>
                 </ImageView>
                 <ImageView fx:id="saturn" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="189.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Saturn.PNG"/>
+                    <Image url="@../../astrology/celestials/Saturn.PNG"/>
                 </ImageView>
                 <ImageView fx:id="venus" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="14.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Venus.PNG"/>
+                    <Image url="@../../astrology/celestials/Venus.PNG"/>
                 </ImageView>
                 <ImageView fx:id="mars" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="107.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Mars.PNG"/>
+                    <Image url="@../../astrology/celestials/Mars.PNG"/>
                 </ImageView>
                 <ImageView fx:id="neptune" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="286.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Neptune.PNG"/>
+                    <Image url="@../../astrology/celestials/Neptune.PNG"/>
                 </ImageView>
                 <ImageView fx:id="sun" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="381.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Sun.PNG"/>
+                    <Image url="@../../astrology/celestials/Sun.PNG"/>
                 </ImageView>
                 <ImageView fx:id="uranus" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="189.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Uranus.PNG"/>
+                    <Image url="@../../astrology/celestials/Uranus.PNG"/>
                 </ImageView>
                 <ImageView fx:id="pluto" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="286.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Pluto.PNG"/>
+                    <Image url="@../../astrology/celestials/Pluto.PNG"/>
                 </ImageView>
                 <ImageView fx:id="moon" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="381.0"
                            onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/celestials/Moon.PNG"/>
+                    <Image url="@../../astrology/celestials/Moon.PNG"/>
                 </ImageView>
                 <Label layoutX="14.0" layoutY="34.0" text="Mercury">
                     <font>
@@ -171,51 +171,51 @@
             <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
                 <ImageView fx:id="aquarius" fitHeight="78.0" fitWidth="106.0" layoutX="14.0" layoutY="14.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Aquarius.PNG"/>
+                    <Image url="@../../astrology/zodiac/Aquarius.PNG"/>
                 </ImageView>
                 <ImageView fx:id="aries" fitHeight="78.0" fitWidth="106.0" layoutX="134.0" layoutY="14.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Aries.PNG"/>
+                    <Image url="@../../astrology/zodiac/Aries.PNG"/>
                 </ImageView>
                 <ImageView fx:id="cancer" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="14.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Cancer.PNG"/>
+                    <Image url="@../../astrology/zodiac/Cancer.PNG"/>
                 </ImageView>
                 <ImageView fx:id="capricorn" fitHeight="78.0" fitWidth="106.0" layoutX="14.0" layoutY="133.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Capricorn.PNG"/>
+                    <Image url="@../../astrology/zodiac/Capricorn.PNG"/>
                 </ImageView>
                 <ImageView fx:id="libra" fitHeight="78.0" fitWidth="106.0" layoutX="21.0" layoutY="257.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Libra.PNG"/>
+                    <Image url="@../../astrology/zodiac/Libra.PNG"/>
                 </ImageView>
                 <ImageView fx:id="gemini" fitHeight="78.0" fitWidth="106.0" layoutX="132.0" layoutY="133.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Gemini.PNG"/>
+                    <Image url="@../../astrology/zodiac/Gemini.PNG"/>
                 </ImageView>
                 <ImageView fx:id="leo" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="133.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Leo.PNG"/>
+                    <Image url="@../../astrology/zodiac/Leo.PNG"/>
                 </ImageView>
                 <ImageView fx:id="scorpio" fitHeight="78.0" fitWidth="106.0" layoutX="21.0" layoutY="377.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Scorpio.PNG"/>
+                    <Image url="@../../astrology/zodiac/Scorpio.PNG"/>
                 </ImageView>
                 <ImageView fx:id="taurus" fitHeight="78.0" fitWidth="106.0" layoutX="140.0" layoutY="377.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Taurus.PNG"/>
+                    <Image url="@../../astrology/zodiac/Taurus.PNG"/>
                 </ImageView>
                 <ImageView fx:id="virgo" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="377.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Virgo.PNG"/>
+                    <Image url="@../../astrology/zodiac/Virgo.PNG"/>
                 </ImageView>
                 <ImageView fx:id="pisces" fitHeight="78.0" fitWidth="106.0" layoutX="132.0" layoutY="257.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Pisces.PNG"/>
+                    <Image url="@../../astrology/zodiac/Pisces.PNG"/>
                 </ImageView>
                 <ImageView fx:id="sag" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="257.0"
                            onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../../astrology/zodiac/Sag.PNG"/>
+                    <Image url="@../../astrology/zodiac/Sag.PNG"/>
                 </ImageView>
                 <Label layoutX="37.0" layoutY="100.0" text="Aquarius"/>
                 <Label layoutX="164.0" layoutY="100.0" text="Aries"/>

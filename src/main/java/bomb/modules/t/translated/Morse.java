@@ -7,30 +7,33 @@
 package bomb.modules.t.translated;
 
 import bomb.tools.data.structures.avl.AVLTree;
-
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Scanner;
 
 /**
  * Morse class deals with the Morse Code module.
  */
 public class Morse extends TranslationCenter {
-    private static final AVLTree<String> codeTree = new AVLTree<>();
+    private static final AVLTree<String> CODE_TREE = new AVLTree<>();
+    private static final String ABSOLUTE_PATH = System.getProperty("user.dir") +
+            "\\src\\main\\resources\\bomb\\modules\\t\\translated\\morsecode.txt";
 
     public static void init() throws IOException{
-        File file = new File("src\\Bomb\\Resources\\morsecode.txt");
-        Scanner fileScanner = new Scanner(file.toPath());
-        while (fileScanner.hasNextLine()) {
-            String[] next = fileScanner.nextLine().split("\\|");
-            codeTree.addNode(next[1], next[0]);
+        BufferedReader input = Files.newBufferedReader(
+                new File(ABSOLUTE_PATH).toPath(), StandardCharsets.UTF_8);
+        while (input.ready()) {
+            String[] next = input.readLine().split("\\|");
+            CODE_TREE.addNode(next[1], next[0]);
         }
     }
 
     public static String[] decode(String code){
-        String test = codeTree.dig(code);
+        String test = CODE_TREE.dig(code);
         if (test != null)
             return test.split(",");
         else

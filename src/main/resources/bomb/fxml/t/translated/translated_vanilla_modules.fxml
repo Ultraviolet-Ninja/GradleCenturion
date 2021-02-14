@@ -34,7 +34,7 @@
                     <center>
                         <ImageView fx:id="brazil" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Brazil.png"/>
+                            <Image url="@../../../flags/Brazil.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -52,7 +52,7 @@
                     <center>
                         <ImageView fx:id="czech" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Czech.png"/>
+                            <Image url="@../../../flags/Czech.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -70,7 +70,7 @@
                     <center>
                         <ImageView fx:id="danish" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Danish.png"/>
+                            <Image url="@../../../flags/Danish.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -88,7 +88,7 @@
                     <center>
                         <ImageView fx:id="dutch" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Dutch.png"/>
+                            <Image url="@../../../flags/Dutch.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -106,7 +106,7 @@
                     <center>
                         <ImageView fx:id="english" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/American.png"/>
+                            <Image url="@../../../flags/American.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -124,7 +124,7 @@
                     <center>
                         <ImageView fx:id="esperanto" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Esperanto.png"/>
+                            <Image url="@../../../flags/Esperanto.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -142,7 +142,7 @@
                     <center>
                         <ImageView fx:id="estonian" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Estonian.png"/>
+                            <Image url="@../../../flags/Estonian.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -161,7 +161,7 @@
                     <center>
                         <ImageView fx:id="finnish" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Finnish.png"/>
+                            <Image url="@../../../flags/Finnish.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -179,7 +179,7 @@
                     <center>
                         <ImageView fx:id="french" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/French.png"/>
+                            <Image url="@../../../flags/French.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -197,7 +197,7 @@
                     <center>
                         <ImageView fx:id="norwegian" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Norwegian.png"/>
+                            <Image url="@../../../flags/Norwegian.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -215,7 +215,7 @@
                     <center>
                         <ImageView fx:id="german" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/German.png"/>
+                            <Image url="@../../../flags/German.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -233,7 +233,7 @@
                     <center>
                         <ImageView fx:id="italian" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Italian.png"/>
+                            <Image url="@../../../flags/Italian.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -251,7 +251,7 @@
                     <center>
                         <ImageView fx:id="polish" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Polish.png"/>
+                            <Image url="@../../../flags/Polish.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -269,7 +269,7 @@
                     <center>
                         <ImageView fx:id="spanish" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Spanish.png"/>
+                            <Image url="@../../../flags/Spanish.png"/>
                         </ImageView>
                     </center>
                     <bottom>
@@ -287,7 +287,7 @@
                     <center>
                         <ImageView fx:id="swedish" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#getFlag"
                                    pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-                            <Image url="@../../../../flags/Swedish.png"/>
+                            <Image url="@../../../flags/Swedish.png"/>
                         </ImageView>
                     </center>
                     <bottom>

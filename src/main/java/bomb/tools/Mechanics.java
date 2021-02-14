@@ -32,21 +32,21 @@ public class Mechanics {
 
     public static String ultimateFilter(String input, String[] regex, String...exceptions){
         StringBuilder builder = new StringBuilder();
-        String[] combine = combine(regex, exceptions);
+        ArrayList<String> combine = combine(regex, exceptions);
         input = input.toLowerCase();
         for (char next : input.toCharArray()){
             for (String exception : combine){
                 if (exception.indexOf(next) != -1)
-                    builder.append(input);
+                    builder.append(exception);
             }
         }
         return builder.toString();
     }
 
-    private static String[] combine (String[] a, String[] b){
+    private static ArrayList<String> combine (String[] a, String[] b){
         ArrayList<String> out = new ArrayList<>();
         out.addAll(Arrays.asList(a));
         out.addAll(Arrays.asList(b));
-        return (String[]) out.toArray();
+        return out;
     }
 }

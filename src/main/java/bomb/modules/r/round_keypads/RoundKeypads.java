@@ -57,10 +57,11 @@ public class RoundKeypads extends Widget {
                 }
             }
             toEdit.setFlag(true);
+            toEdit.setMemoryIfNull(og);
             return nextImage;
         } else {
             toEdit.setFlag(false);
-            return new Image(toEdit.getLabel(), og.getWidth(), og.getHeight(), true, true);
+            return toEdit.getMemory();
         }
     }
 

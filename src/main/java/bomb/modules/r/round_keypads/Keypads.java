@@ -2,6 +2,7 @@ package bomb.modules.r.round_keypads;
 
 import bomb.interfaces.Flaggable;
 import bomb.interfaces.Labeled;
+import javafx.scene.image.Image;
 
 public enum Keypads implements Labeled, Flaggable {
     RACKET1("Empty Racket", false), A_T("A_T", false),
@@ -34,6 +35,16 @@ public enum Keypads implements Labeled, Flaggable {
 
     private final String imageLocation;
     private boolean flag;
+    private Image memory = null;
+
+    public Image getMemory() {
+        return memory;
+    }
+
+    public void setMemoryIfNull(Image memory) {
+        if (this.memory == null)
+            this.memory = memory;
+    }
 
     Keypads(String label, boolean flag){
         this.flag = flag;
@@ -42,7 +53,7 @@ public enum Keypads implements Labeled, Flaggable {
 
     @Override
     public String getLabel() {
-        return "file:src\\bomb\\resources\\symbols\\" + imageLocation + ".PNG";
+        return  imageLocation + ".PNG";
     }
 
     @Override
