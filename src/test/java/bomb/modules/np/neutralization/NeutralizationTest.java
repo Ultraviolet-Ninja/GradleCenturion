@@ -77,7 +77,7 @@ public class NeutralizationTest {
                 "4", FILTER});
         WidgetSimulations.partTwoTakeTwo();
         assertEqual(10, Color.YELLOW, new String[]{"Potassium Hydroxide", Potassium_Hydroxide.getFormula(),
-                "4", FILTER});
+                "4", NO_FILTER});
         WidgetSimulations.partTwoTakeThree();
 
     }

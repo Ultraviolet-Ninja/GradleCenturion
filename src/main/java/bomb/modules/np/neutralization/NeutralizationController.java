@@ -8,6 +8,8 @@ import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class NeutralizationController {
+    private static final double MAX_VOLUME = 20;
+
     private Color solColor = null;
     private double volume;
     private final ToggleGroup acidColors = new ToggleGroup();
@@ -66,10 +68,13 @@ public class NeutralizationController {
         String sample = ultimateFilter(acidVolume.getText(), NUMBER_REGEX);
         if (!sample.isEmpty()) {
             volume = Double.parseDouble(sample);
-            testTube.setProgress(volume / 20);
+            testTube.setProgress(volume / MAX_VOLUME);
             volTyped = true;
-            unlock();
+        } else {
+            testTube.setProgress(0);
+            volTyped = false;
         }
+        toggleLock();
     }
 
     @FXML
@@ -87,10 +92,10 @@ public class NeutralizationController {
             testTube.setStyle("-fx-accent: #00007e");
             solColor = Color.BLUE;
         }
-        unlock();
+        toggleLock();
     }
 
-    private void unlock(){
-        if (solColor != null && volTyped) solve.setDisable(false);
+    private void toggleLock(){
+        solve.setDisable(!(solColor != null && volTyped));
     }
 }

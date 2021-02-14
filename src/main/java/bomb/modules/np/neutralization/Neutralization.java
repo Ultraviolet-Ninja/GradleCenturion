@@ -189,7 +189,7 @@ public class Neutralization extends Widget {
      * @return
      */
     private static String solubility(){
-        return combinations() ?
+        return  combinations() ?
                 NO_FILTER :
                 FILTER;
         //TODO - Take a look at these combos
