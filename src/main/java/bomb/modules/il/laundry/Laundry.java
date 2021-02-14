@@ -14,6 +14,8 @@ import static bomb.tools.Mechanics.ultimateFilter;
  * and dry cleaning your clothing.
  */
 public class Laundry extends Widget {
+    public static final String THANKS_BOB = "Thanks, Bob!";
+
     private static int needy;
 
     //TODO - Finish Javadocs
@@ -44,7 +46,7 @@ public class Laundry extends Widget {
                 IllegalArgumentException("Serial Code must be typed in.");
         else if (needy.isEmpty()) throw new
                 IllegalArgumentException("Need to know about the needy modules");
-        else if (solved.isEmpty())throw new
+        else if (solved.isEmpty()) throw new
                 IllegalArgumentException("This needs the number of currently solved modules.");
     }
 
@@ -142,7 +144,7 @@ public class Laundry extends Widget {
         return new String[]{ARTICLE.getMat().getLabel(), ARTICLE.getColor().getLabel(),
                 ARTICLE.getItem().getWords()[0], ARTICLE.getItem().getWords()[1],
                 ARTICLE.getMat().name() + " - " + ARTICLE.getColor().name() + " - " + ARTICLE.getItem().name()
-                , "Thanks, Bob!"};
+                , THANKS_BOB};
     }
 
     /**

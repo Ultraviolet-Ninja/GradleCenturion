@@ -2,6 +2,7 @@ package bomb;
 
 import bomb.enumerations.Ports;
 
+import static bomb.enumerations.Indicators.BOB;
 import static bomb.enumerations.Indicators.FRK;
 import static bomb.enumerations.Indicators.MSA;
 import static bomb.enumerations.Indicators.SND;
@@ -13,6 +14,15 @@ public class WidgetSimulations {
     public static final int CENTURION_MODULE_NUM = 101, CENTURION_START_TIME = 100,
             PRAETORIAN_START_TIME = 160, PRAETORIAN_MODULE_NUM = 161,
             SOUVENIR_ARMY_MODULE_NUM = 79, SOUVENIR_ARMY_START_TIME = 120;
+
+    public static void thanksBobCenturion(){
+        Widget.resetProperties();
+        Widget.setDoubleAs(4);
+        Widget.setNumHolders(2);
+        Widget.setIndicator(ON, BOB);
+        Widget.setSerialCode("ag42w5");
+        centurionDefaults();
+    }
 
     /**
      * The Great Berate's first Centurion widget details

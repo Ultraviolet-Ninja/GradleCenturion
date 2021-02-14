@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
-            prefWidth="1360.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="1360.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="bomb.MainController">
     <GridPane alignment="CENTER" layoutX="-1.0" layoutY="-2.0" maxHeight="1.7976931348623157E308"
               maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
@@ -37,12 +30,12 @@
                         <ToggleGroup fx:id="group"/>
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton centerShape="false" focusTraversable="false" graphicTextGap="0.0" layoutX="15.0"
-                             layoutY="829.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
+                <RadioButton fx:id="forgetMeNot" centerShape="false" focusTraversable="false" graphicTextGap="0.0"
+                             layoutX="15.0" layoutY="829.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
                              mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#buttonPress"
                              prefHeight="20.0" text="Forget Me Not" toggleGroup="$group"/>
-                <RadioButton centerShape="false" focusTraversable="false" graphicTextGap="0.0" layoutX="15.0"
-                             layoutY="1753.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
+                <RadioButton fx:id="souvenir" centerShape="false" focusTraversable="false" graphicTextGap="0.0"
+                             layoutX="15.0" layoutY="1753.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308"
                              mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#buttonPress"
                              prefHeight="20.0" text="Souvenir" toggleGroup="$group"/>
                 <RadioButton centerShape="false" focusTraversable="false" graphicTextGap="0.0" layoutX="15.0"

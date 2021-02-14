@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class LaundryTest {
+    private static final int EXPECTED_SIZE_FOR_BOB = 6;
+
     @BeforeEach
     void resetProperties(){
         Widget.resetProperties();
@@ -25,6 +27,7 @@ public class LaundryTest {
         Widget.setSerialCode("ajwf45");
         assertThrows(IllegalArgumentException.class, () -> Laundry.clean("", "1"));
         assertThrows(IllegalArgumentException.class, () -> Laundry.clean("1", ""));
+        assertThrows(IllegalArgumentException.class, () -> Laundry.clean("1", "1"));
         Widget.setNumModules(10);
         assertDoesNotThrow(() -> Laundry.clean("1", "1"));
     }
@@ -64,6 +67,19 @@ public class LaundryTest {
         assertContains(new String[]{"80F", "Medium Heat", "300", "No Tetrachlorethylene",
                 "LEATHER - MALINITE - CORSET"}, "0", "1");
         WidgetSimulations.partTwoTakeThree();
+    }
+
+    @Test
+    void thanksBobTest(){
+        WidgetSimulations.thanksBobCenturion();
+        String[] actual = Laundry.clean("0", "0");
+        assertEquals(EXPECTED_SIZE_FOR_BOB, actual.length);
+        assertTrue(actual[0].contains("105F"));
+        assertTrue(actual[1].contains("Don't Tumble Dry"));
+        assertTrue(actual[2].contains("300"));
+        assertTrue(actual[3].contains("Bleach"));
+        assertTrue(actual[4].contains("CORDUROY - JADE - CORSET"));
+        assertEquals(Laundry.THANKS_BOB, actual[5]);
     }
 
     private void setupTwo(){

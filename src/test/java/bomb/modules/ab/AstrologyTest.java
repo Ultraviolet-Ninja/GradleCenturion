@@ -37,6 +37,8 @@ public class AstrologyTest {
         Widget.setSerialCode("412ier");
         assertDoesNotThrow(() -> Astrology.calculate(EARTH, ARIES, MARS));
         assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(ARIES, ARIES, ARIES));
+        assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(VENUS, VENUS, VENUS));
+        assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(FIRE, FIRE, FIRE));
         assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(ARIES, MARS, EARTH, EARTH));
         assertThrows(IllegalArgumentException.class, () -> Astrology.calculate(VENUS));
     }

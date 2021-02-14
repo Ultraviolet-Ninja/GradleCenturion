@@ -67,6 +67,10 @@ public class AVLTree<E extends Comparable<E>> {
         } else throw new UnbalancedEntriesException(list.size(), values.length);
     }
 
+    private E[] castArray(List<E> list){
+        return null;
+    }
+
     /**
      *
      * @param element

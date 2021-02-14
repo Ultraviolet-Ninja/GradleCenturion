@@ -192,7 +192,6 @@ public class Neutralization extends Widget {
         return  combinations() ?
                 NO_FILTER :
                 FILTER;
-        //TODO - Take a look at these combos
     }
 
     /**

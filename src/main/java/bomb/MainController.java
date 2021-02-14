@@ -2,6 +2,7 @@ package bomb;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -23,6 +24,8 @@ public class MainController {
     private HashMap<String, Region> regionMap;
 
     @FXML private Pane displayPane;
+
+    @FXML private RadioButton forgetMeNot, souvenir;
 
     @FXML private ToggleGroup group;
 

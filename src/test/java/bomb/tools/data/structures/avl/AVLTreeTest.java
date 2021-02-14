@@ -3,8 +3,12 @@ package bomb.tools.data.structures.avl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AVLTreeTest {
     private AVLTree<Double> tree;
@@ -12,6 +16,38 @@ public class AVLTreeTest {
     @BeforeEach
     void setup(){
         tree = new AVLTree<>();
+    }
+
+    @Test
+    void exceptionTesting(){
+        assertThrows(UnbalancedEntriesException.class,
+                () -> tree = new AVLTree<>(setupList(10), setupStringArray(15)));
+        assertThrows(UnbalancedEntriesException.class,
+                () -> tree = new AVLTree<>(setupArray(10), setupStringArray(15)));
+//        assertDoesNotThrow(() -> tree = new AVLTree<>(setupList(5), setupStringArray(5)));
+        //TODO - Fix the cast exception
+        assertDoesNotThrow(() -> tree = new AVLTree<>(setupArray(5), setupStringArray(5)));
+    }
+
+    private Double[] setupArray(int max){
+        Double[] output = new Double[max];
+        for (int i = 0; i < max; i++)
+            output[i] = (double) i;
+        return output;
+    }
+
+    private ArrayList<Double> setupList(int max){
+        ArrayList<Double> output = new ArrayList<>();
+        for (int i = 0; i < max; i++)
+            output.add((double) i);
+        return output;
+    }
+
+    private String[] setupStringArray(int max){
+        String[] output = new String[max];
+        for (int i = 0; i < max; i++)
+            output[i] = String.valueOf(i);
+        return output;
     }
 
     @Test

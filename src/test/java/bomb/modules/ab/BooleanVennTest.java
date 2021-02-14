@@ -11,7 +11,9 @@ public class BooleanVennTest {
     @Test
     void incompleteEquationTest(){
         assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode(""));
+        assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode("AB"));
         assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode("ABC"));
+        assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode("AABC"));
         assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode("A(BC)"));
         assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode("A(B↓C)"));
         assertThrows(IllegalArgumentException.class, () -> BooleanVenn.resultCode("A↓(BC)"));
