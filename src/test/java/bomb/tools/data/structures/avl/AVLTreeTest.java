@@ -24,8 +24,7 @@ public class AVLTreeTest {
                 () -> tree = new AVLTree<>(setupList(10), setupStringArray(15)));
         assertThrows(UnbalancedEntriesException.class,
                 () -> tree = new AVLTree<>(setupArray(10), setupStringArray(15)));
-//        assertDoesNotThrow(() -> tree = new AVLTree<>(setupList(5), setupStringArray(5)));
-        //TODO - Fix the cast exception
+        assertDoesNotThrow(() -> tree = new AVLTree<>(setupList(5), setupStringArray(5)));
         assertDoesNotThrow(() -> tree = new AVLTree<>(setupArray(5), setupStringArray(5)));
     }
 

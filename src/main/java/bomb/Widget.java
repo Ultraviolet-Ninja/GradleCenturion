@@ -341,6 +341,14 @@ public class Widget {
         return counter;
     }
 
+    public static boolean getForgetMeNot(){
+        return forgetMeNot;
+    }
+
+    public static boolean getSouvenir(){
+        return souvenir;
+    }
+
     /**
      * Counts all indicators, whether lit, unlit or all if specified
      *

@@ -60,10 +60,8 @@ public class AVLTree<E extends Comparable<E>> {
      */
     public AVLTree(List<E> list, String[] values) throws UnbalancedEntriesException {
         if (list.size() == values.length){
-            @SuppressWarnings("Unchecked cast")
-            E[] array = (E[]) list.toArray();
             for (int i = 0; i< values.length; i++)
-                addNode(array[i], values[i]);
+                addNode(list.get(i), values[i]);
         } else throw new UnbalancedEntriesException(list.size(), values.length);
     }
 

@@ -3,15 +3,13 @@ package bomb;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import bomb.tools.observer.ObserverHub;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.util.ArrayList;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 
 import static bomb.enumerations.TriState.*;
 import static bomb.tools.Mechanics.*;
@@ -307,18 +305,17 @@ public class WidgetController {
         return -1;
     }
 
-    private String addNoun(Label currLab) {
-        if (currLab == moduleLabel) {
+    private String addNoun(Label currLab){
+        if (currLab == moduleLabel)
             return " Module(s)";
-        } else if (currLab == minuteLabel) {
+        else if (currLab == minuteLabel)
             return " Minute(s)";
-        } else if (currLab == plateLabel) {
+        else if (currLab == plateLabel)
             return " Plate(s)";
-        } else if (currLab == aLabel) {
+        else if (currLab == aLabel)
             return " A Bats";
-        } else if (currLab == dLabel) {
+        else if (currLab == dLabel)
             return " D's";
-        }
         return " Holder(s)";
     }
 
@@ -332,7 +329,7 @@ public class WidgetController {
     @FXML
     private void souvenirToggle() {
         bomb.Widget.setSouvenir(souvenir.isSelected());
-//        souvenirTab.setDisable(!souvenir.isSelected());
+        ObserverHub.updateAtIndex(ObserverHub.SOUVENIR_INDEX);
         if (souvenir.isSelected()) {
             souvenir.setStyle("-fx-background-color: forestgreen; -fx-text-fill: black");
             souvenir.setText("Souvenir: Enabled");
@@ -345,7 +342,7 @@ public class WidgetController {
     @FXML
     private void forgetMeToggle() {
         bomb.Widget.setForgetMeNot(forgetMeNot.isSelected());
-//        forgetTab.setDisable(!forgetMeNot.isSelected());
+        ObserverHub.updateAtIndex(ObserverHub.FORGET_ME_INDEX);
         if (forgetMeNot.isSelected()) {
             forgetMeNot.setStyle("-fx-background-color: forestgreen; -fx-text-fill: black");
             forgetMeNot.setText("Forget Me Not: Enabled");

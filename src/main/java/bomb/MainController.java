@@ -1,5 +1,9 @@
 package bomb;
 
+import bomb.tools.observer.BlindAlleyObserver;
+import bomb.tools.observer.ForgetMeNotObserver;
+import bomb.tools.observer.ObserverHub;
+import bomb.tools.observer.SouvenirObserver;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
@@ -11,6 +15,7 @@ import javafx.scene.layout.Region;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,12 +35,15 @@ public class MainController {
     @FXML private ToggleGroup group;
 
     public void initialize(){
+        ObserverHub.addObserver(new ForgetMeNotObserver(forgetMeNot));
+        ObserverHub.addObserver(new SouvenirObserver(souvenir));
         setupMap();
     }
 
     @FXML
     public void buttonPress() {
         String selected = ((ToggleButton) group.getSelectedToggle()).getText();
+        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(ObserverHub.BLIND_ALLEY_INDEX);
         paneSwitch(regionMap.get(selected));
     }
 
@@ -68,12 +76,19 @@ public class MainController {
     private ArrayList<Pane> panesFromFolder(ArrayList<String> fileLocations) {
         ArrayList<Pane> paneList = new ArrayList<>();
         try {
-            for (String fxmlFile : fileLocations)
-                paneList.add(FXMLLoader.load(Paths.get(fxmlFile).toUri().toURL()));
+            for (String fxmlFile : fileLocations) {
+                FXMLLoader loader = new FXMLLoader(Paths.get(fxmlFile).toUri().toURL());
+                paneList.add(loader.load());
+                if (fxmlFile.contains("blind_alley")) getBlindAlleyController(loader);
+            }
         } catch (IOException e){
             e.printStackTrace();
         }
         return paneList;
+    }
+
+    private void getBlindAlleyController(FXMLLoader loader){
+        ObserverHub.addObserver(new BlindAlleyObserver(loader.getController()));
     }
 
     private ArrayList<String> filesFromFolder(final File folder) throws IllegalArgumentException{
