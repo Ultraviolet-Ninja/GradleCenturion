@@ -1,7 +1,7 @@
 package bomb;
 
-import bomb.modules.ab.BlindAlley;
-import bomb.modules.dh.ForgetMeNot;
+import bomb.modules.ab.blind_alley.BlindAlley;
+import bomb.modules.dh.forget_me.ForgetMeNot;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
@@ -55,7 +55,7 @@ public class Widget {
      * @param serialCode The given code
      */
     public static void setSerialCode(String serialCode) {
-        Widget.serialCode = ultimateFilter(serialCode, normalCharRegex);
+        Widget.serialCode = ultimateFilter(serialCode, NORMAL_CHAR_REGEX);
         updates();
     }
 
@@ -191,13 +191,12 @@ public class Widget {
      * @return 0 for Yes, 1 for No, 2 for No Number
      */
     public static int hasEven(){
-        String sample = ultimateFilter(serialCode, numberRegex);
+        //TODO - Might need to rename, hasEven sends the wrong message,
+        // probably by adding even and odd number regexes
+        String sample = ultimateFilter(serialCode, NUMBER_REGEX);
         if (!sample.isEmpty()){
-            for (char num : sample.toCharArray()){
-                if ((int) num % 2 == 0){
-                    return 0;
-                }
-            }
+            for (char num : sample.toCharArray())
+                if ((int) num % 2 == 0) return 0;
             return 1;
         }
         return 2;
@@ -209,7 +208,7 @@ public class Widget {
      * @return An int of the last digit from a String
      */
     public static int lastDigit(){
-        String buffer = ultimateFilter(serialCode, numberRegex);
+        String buffer = ultimateFilter(serialCode, NUMBER_REGEX);
         return Integer.parseInt(buffer.substring(buffer.length()-1));
     }
 
@@ -262,7 +261,7 @@ public class Widget {
      * @return True if A,E,I,O, or U appear
      */
     public static boolean hasVowel(){
-        return !ultimateFilter(serialCode, vowelRegex).isEmpty();
+        return !ultimateFilter(serialCode, VOWEL_REGEX).isEmpty();
     }
 
     /**
@@ -271,7 +270,7 @@ public class Widget {
      * @return The number of letters
      */
     public static int serialCodeLetters(){
-        return ultimateFilter(serialCode, lowercaseRegex).length();
+        return ultimateFilter(serialCode, LOWERCASE_REGEX).length();
     }
 
     /**
@@ -280,7 +279,7 @@ public class Widget {
      * @return The number of numbers
      */
     public static int serialCodeNumbers(){
-        return ultimateFilter(serialCode, numberRegex).length();
+        return ultimateFilter(serialCode, NUMBER_REGEX).length();
     }
 
     /**
@@ -324,9 +323,7 @@ public class Widget {
      */
     public static int getTotalPorts(){
         int counter = 0;
-        for (int num : ports){
-            counter += num;
-        }
+        for (int num : ports) counter += num;
         return counter;
     }
 

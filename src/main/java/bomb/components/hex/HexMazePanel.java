@@ -1,7 +1,7 @@
 package bomb.components.hex;
 
-import bomb.tools.hexalgorithm.Hex;
-import bomb.enumerations.HexTraits;
+import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
+import bomb.modules.dh.hexamaze.HexTraits;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;

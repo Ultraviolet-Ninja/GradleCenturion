@@ -1,16 +1,18 @@
 package bomb.modules.ab;
 
 import bomb.Widget;
+import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import bomb.modules.ab.bitwise.Bitwise;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static bomb.enumerations.BitwiseOps.AND;
-import static bomb.enumerations.BitwiseOps.NOT;
-import static bomb.enumerations.BitwiseOps.OR;
-import static bomb.enumerations.BitwiseOps.XOR;
+import static bomb.modules.ab.bitwise.BitwiseOps.AND;
+import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
+import static bomb.modules.ab.bitwise.BitwiseOps.OR;
+import static bomb.modules.ab.bitwise.BitwiseOps.XOR;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -55,6 +57,18 @@ public class BitwiseTest {
         assertEquals(MAX_OR, Bitwise.getByte(OR));
         assertEquals(MAX_XOR, Bitwise.getByte(XOR));
         assertEquals(MAX_NOT, Bitwise.getByte(NOT));
+    }
+
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+        assertEquals(MIN_AND, Bitwise.getByte(AND));
+        WidgetSimulations.theGreatBerateTwo();
+        assertEquals("10110011", Bitwise.getByte(XOR));
+        WidgetSimulations.partTwoTakeTwo();
+        assertEquals("01101110", Bitwise.getByte(NOT));
+        WidgetSimulations.partTwoTakeThree();
+
     }
 
     private void setEssentialTrueConditions(){

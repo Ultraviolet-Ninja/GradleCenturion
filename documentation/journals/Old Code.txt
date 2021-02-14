@@ -1,0 +1,341 @@
+HexComparator.firstHalfScan() all for loops bundled up
+
+//            for (int j = 0; j < innerLimit; j++) {
+//                int counter = 0;
+//                for (int x = 0; x < ping.length; x++) {
+//                    for (int y = 0; y < ping[x]; y++) {
+//                        if (x > ping.length / 2 + 1) counter++;
+//                        copyNodes.add(maze.retrieve(x, y + counter + j));
+//                    }
+//                }
+//
+//                found = fullRotCompare(grid, new Hex(copyNodes));
+//                if (found) i = maze.rawExport().cap();
+//                else innerLimit++;
+//            }
+
+Hex.rotate() 1st attempt at the code
+
+//        int reverseCounter = 0;
+//        for (int i = 0; i < hexagon.cap(); i++){ //Scans all columns of the hexagon
+//            if (reverseCounter <= (hexagon.cap() - (hexagon.cap() / 2))) {
+//                for (int j = 0; j < (hexagon.cap() - (hexagon.cap() / 2) + reverseCounter); j++) {
+//                    if (hexagon.access(j).cap() - (1 + reverseCounter) >=0) {
+//                        System.out.println(hexagon.access(j).cap());
+//                        linearOrder.add(hexagon.access(j)
+//                                .access(hexagon.access(j).cap() - (1 + reverseCounter)));
+//                    }
+//                }
+//            }
+//            System.out.println("New Access");
+//        }
+
+        /*
+         * 1. Get the rotated order in a linear order
+         * 2. Make a method that adds a stream of HexNodes to a new Hex (FinalList<FinalList<HexNode>>)
+         * 3. Set that as the new hexagon
+         */
+
+HexNode
+//        protected int x, y;
+
+
+Hex
+//    private byte nodalSideLength(int area){
+//        return (byte) switch (area){
+//            case 19 -> 3;
+//            case 37 -> 4;
+//            case 61 -> 5;
+//            case 91 -> 6;
+//            case 127 -> 7;
+//            case 169 -> 8;
+//            case 217 -> 9;
+//            case 271 -> 10;
+//            case 331 -> 11;
+//            case 397 -> 12;
+//            default -> 0;
+//        };
+//    }
+
+//    public static int nodalArea(int sideLength){
+//        return switch (sideLength){
+//            case 3 -> 19;
+//            case 4 -> 37;
+//            case 5 -> 61;
+//            case 6 -> 91;
+//            case 7 -> 127;
+//            case 8 -> 169;
+//            case 9 -> 217;
+//            case 10 -> 271;
+//            case 11 -> 331;
+//            case 12 -> 397;
+//            default -> 0;
+//        };
+//    }
+
+
+//HexComparator MK.1
+/**
+     * Checks for a length that doesn't exceed the side length of the Maze
+     * and finds the list representation of the hexagon if that requirement is met
+     *
+     * @param sideLength The side length of the HexGrid
+     * @param grid The defuser vision
+     * @param fullMaze The full maze
+     * @return The list representation of the HexGrid with the walls in place
+     * @throws IllegalArgumentException The grid side length exceeds that of the Maze
+     */
+    private static FinalList<FinalList<Hex.HexNode>> find(int sideLength, HexGrid grid, Maze fullMaze)
+            throws IllegalArgumentException {
+        if (sideLength < fullMaze.rawExport().cap())
+            return scan(grid, fullMaze, pingRequest(sideLength));
+
+        throw new IllegalArgumentException("Side Length requested exceeds the size of the Maze");
+    }
+
+    /**
+     * Creates an array of lengths corresponding to the columns of the HST
+     *
+     * @param sideLength The side length of the hexagon
+     * @return An array of column lengths
+     */
+    private static int[] pingRequest(int sideLength) {
+        int counter = 0;
+        int[] request = new int[2 * sideLength - 1];
+
+        for (int i = sideLength; i < 2 * sideLength; i++) {
+            request[counter++] = i;
+        }
+
+        for (int j = 2 * sideLength - 2; j >= sideLength; j--) {
+            request[counter++] = j;
+        }
+        return request;
+    }
+
+    /**
+     * Scans the entirety of the Maze, starting with the first half, moving onto the center line
+     * if it couldn't pinpoint a match, lastly, moving to the second half of the Maze if a match wasn't found yet
+     *
+     * @param grid The defuser's HexGrid
+     * @param maze The full maze
+     * @param ping The set of lengths corresponding to thh columns of the HST
+     * @return The list representation with data about the walls
+     */
+    private static FinalList<FinalList<Hex.HexNode>> scan(HexGrid grid, Maze maze, int[] ping) {
+        FinalList<FinalList<Hex.HexNode>> product = firstHalfScan(grid, maze, ping);
+
+
+        //For loop set is for center column
+//        if (scanNull(product)) {
+//            product = downCenter(grid, maze, ping);
+//        }
+
+
+        //For loop set is for 2nd half
+//        if (scanNull(product)) {
+//            product = secondHalfScan(grid, maze, ping);
+//        }
+
+        return product;
+    }
+
+    /**
+     * Deals with scanning the first half of the hexagon excluding the center line
+     *
+     * @param grid The defuser's vision
+     * @param maze The full Maze
+     * @param ping The array of column lengths
+     * @return The list representation if found in the first half of the Maze
+     */
+    private static FinalList<FinalList<Hex.HexNode>> firstHalfScan(HexGrid grid, Maze maze, int[] ping) {
+        ArrayList<Hex.HexNode> copyNodes = new ArrayList<>();
+        //TODO - The caveat to these methods is when it reaches the closer parts to center
+
+        //Loop traverses the 1st half of the maze, excluding the center
+        for (int i = 0; i < maze.rawExport().cap() / 2; i++) {
+            //The inner limit is number of complete scans done in a given column.
+            //Calculated by the length of the column being scanned by the center of the HexGrid
+            // minus the length of the HexGrid center column
+            int innerLimit = maze.rawExport().access(i + grid.hexport().sideLength()).cap()
+                    - grid.getCenter().cap();
+            copyNodes = downColSet(i, innerLimit, ping, grid, maze);
+            if (!copyNodes.isEmpty()) break;
+        }
+        return !copyNodes.isEmpty() ? new Hex(copyNodes).export() : null;
+    }
+
+    /**
+     * Goes down the column to find all possible hexagon sections and compares a copied hexagon instance
+     * to the HexGrid the defuser sees
+     *
+     * @param xIterate The set of columns that the h
+     * @param limit How many iterations is takes to get the HST
+     *              to get to the bottom of the set of columns
+     * @param pings The column lengths representing the HST
+     * @param grid THe defuser's vision
+     * @param maze The full maze
+     * @return An ArrayList of HexNodes containing the info about a specific section of the full maze
+     */
+    private static ArrayList<Hex.HexNode> downColSet(int xIterate, int limit, int[] pings, HexGrid grid, Maze maze){
+        ArrayList<Hex.HexNode> copyNodes = new ArrayList<>(),
+                temp;
+        //Loop iterates downward to scan for all possibilities in a set of columns
+        for(int j = 0; j < limit; j++){
+            temp = retrieveHexStream(xIterate, pings.length, pings, j, maze);
+            boolean found = fullRotCompare(grid, new Hex(temp));
+            if (found){
+                j = limit;
+                copyNodes = temp;
+            }
+        }
+
+        return copyNodes;
+    }
+
+    /**
+     * Iterates through one series of HexNodes that represents a copied hexagon
+     *
+     * @param xIterate
+     * @param xLimit The length of the array
+     * @param yLimits The pings that control the column lengths of the HST
+     * @param jBuffer How far down the HST is
+     * @param maze The full maze
+     * @return An ArrayList of HexNodes containing the info about a specific section of the full maze
+     */
+    private static ArrayList<Hex.HexNode> retrieveHexStream(int xIterate, int xLimit,
+                                                            int[] yLimits, int jBuffer, Maze maze){
+        ArrayList<Hex.HexNode> copyNodes = new ArrayList<>();
+        System.out.println(errorCounter++);
+        //Counter tracks if the scanner has made it past the center column to start moving down
+        int counter = 0;
+        //Loop traverses the needed columns for a single scan
+        for (int x = 0; x < xLimit; x++){
+            if (x >= xLimit/2 + 1) counter++;
+
+            //Loop traverses the needed indices in a given column
+            for (int y = 0; y < yLimits[x]; y++){
+                copyNodes.add(maze.retrieve(x+xIterate, counter+y+jBuffer));
+            }
+        }
+        return copyNodes;
+    }
+
+    /**
+     * Scans the center columns of the Maze
+     *
+     * @param grid The defuser vision
+     * @param maze The full Maze
+     * @param ping The array of column lengths
+     * @return The list representation if found from the center
+     */
+    private static FinalList<FinalList<Hex.HexNode>> downCenter(HexGrid grid, Maze maze, int[] ping){
+        ArrayList<Hex.HexNode> copyNodes = new ArrayList<>();
+        int centerCol = maze.hexport().sideLength() - 1,
+                variation = grid.size() - 1,
+                pingCounter = 0;
+
+        for (int x = centerCol - variation; x <= centerCol + variation; x++){
+            for (int y = 0; y < ping[pingCounter]; y++){
+                copyNodes.add(maze.retrieve(x, y));
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Deals with scanning the second half of the Maze
+     *
+     * @param grid The defuser vision
+     * @param maze The full Maze
+     * @param ping The array of column lengths
+     * @return The list representation if found from the second half
+     */
+    private static FinalList<FinalList<Hex.HexNode>> secondHalfScan(HexGrid grid, Maze maze, int[] ping){
+        return null;
+    }
+
+    /**
+     * Compares the HexGrid to the Hex containing nodes copied from the full Maze.
+     * It does this 6 times, once for each time rotated
+     *
+     * @param grid The original defuser grid
+     * @param copy The maze-copies set of HexNodes
+     * @return True for a match, false for no match
+     * @throws IllegalArgumentException If there's a size difference between the two hexagons
+     */
+    private static boolean fullRotCompare(HexGrid grid, Hex copy) throws IllegalArgumentException{
+        boolean result = false;
+        int counter = 0;
+        expelShapes(copy.streamIt());
+        while (counter < 6) {
+            result = compare(grid, copy);
+            if (!result){
+                counter++;
+                copy.rotate(); //The copy has to fit the grid
+            } else counter = 6;
+        }
+        return result;
+    }
+
+    /**
+     * Compares the HexGrid to the Hex containing nodes copied from the full Maze once.
+     *
+     * @param grid The original defuser grid
+     * @param copy The maze-copies set of HexNodes
+     * @return True for a match, false for no match
+     * @throws IllegalArgumentException If there's a size difference between the two hexagons
+     */
+    private static boolean compare(HexGrid grid, Hex copy) throws IllegalArgumentException{
+        ArrayList<Hex.HexNode> gridArray = grid.hexport().streamIt(),
+                copyArray = copy.streamIt();
+        if (gridArray.size() != copyArray.size()) throw new IllegalArgumentException("Size Difference");
+
+        for (int i = 0; i < gridArray.size(); i++){
+            if (gridArray.get(i).fill != copyArray.get(i).fill) return false;
+        }
+        return true;
+    }
+
+    /**
+     * Scans if the hexagon came out null from the last set of scans
+     *
+     * @param product The hexagon to scan
+     * @return Whether the hexagon has contents or not
+     */
+    private static boolean scanNull(FinalList<FinalList<Hex.HexNode>> product){
+        return product == null;
+    }
+
+    /**
+     * Testing method that writes all the shapes to the console
+     *
+     * @param nodes The hexagon array to write out
+     */
+    private static void expelShapes(ArrayList<Hex.HexNode> nodes){
+        int counter = 0;
+        for (Hex.HexNode node : nodes){
+            System.out.println("    " + counter++ + ":" + node.fill);
+        }
+    }
+
+//    private static int pingPeak(int[] pings){
+//        int biggest = 0;
+//        for (int num : pings){
+//            if (biggest < num) biggest = num;
+//        }
+//        return biggest;
+//    }
+}
+
+        /*
+         * Check if the HexGrid exceeds the size of the full maze
+         * Loop that moves down the columns
+         *   Start cutting off towers
+         *   Shave off current tower so that every column starts at index 0 (not 1, 2, or 3)
+         *   Create the starting hexagon set
+         *   If no match, cut off the top indices and add the next set (Continue this til match or end of the line)
+         *
+         *
+         */

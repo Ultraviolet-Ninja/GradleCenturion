@@ -1,15 +1,15 @@
 package bomb.tools.data.structures.graph.list;
 
 import java.util.AbstractMap;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
 public class WeightedListGraph<E> extends AbstractListGraph<E> implements WeightedEdge<E>{
-    private final HashMap<E, LinkedList<AbstractMap.SimpleEntry<E, Integer>>> list;
+    private final LinkedHashMap<E, LinkedList<AbstractMap.SimpleEntry<E, Integer>>> list;
 
     public WeightedListGraph(boolean biDirectional){
         super(biDirectional);
-        list = new HashMap<>();
+        list = new LinkedHashMap<>();
     }
 
     @Override

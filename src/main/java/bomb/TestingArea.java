@@ -1,41 +1,45 @@
 package bomb;
 
-import bomb.interfaces.Coordinate;
-import bomb.tools.Coordinates;
-import bomb.tools.data.structures.MapStack;
-import bomb.tools.hexalgorithm.Hex;
-import bomb.tools.hexalgorithm.HexPanelFiller;
+import bomb.modules.s.shape_shift.ShapeShift;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+
+import static bomb.enumerations.Indicators.MSA;
+import static bomb.enumerations.Ports.DVI;
+import static bomb.enumerations.Ports.PARALLEL;
+import static bomb.enumerations.Ports.PS2;
+import static bomb.enumerations.Ports.RCA;
+import static bomb.enumerations.Ports.RJ45;
+import static bomb.enumerations.Ports.SERIAL;
+import static bomb.modules.s.shape_shift.ShiftShape.FLAT;
+import static bomb.modules.s.shape_shift.ShiftShape.POINT;
+import static bomb.enumerations.TriState.ON;
 
 public class TestingArea {
     public static void main(String[] args) {
-        int[] array = new int[2];
-        System.out.println(array[-1]);
-//        ArrayList<HexTraits.HexShape> array = new ArrayList<>();
-//        System.out.println(Hex.nodalArea(4));
-//        int length = Hex.nodalArea(4);
-//        for (int i = 0; i < length; i++){
-//            if (i == 12)
-//                array.add(HexTraits.HexShape.Circle);
-////            else if (i ==14)
-////                array.add(HexTraits.HexShape.Hexagon);
-//            else
-//                array.add(null);
-//        }
-//        HexGrid grid = new HexGrid();
-//        grid.fill(array);
-//        Maze maze;
-//        try{
-//            maze = new Maze();
-//            System.out.println(HexComparator.evaluate(maze, grid) == null);
-//        } catch (IOException io){
-//            System.err.println("SHIT BRUV");
-//        }
+//        Widget.setNumModules(11);
+//        Widget.setSerialCode("7h1iv1");
+//        Widget.setDBatteries(1);
+//        Widget.setNumHolders(1);
+//        Widget.setIndicator(TriState.ON, Indicators.NSA);
+//        Widget.setIndicator(TriState.OFF, Indicators.FRQ);
+//        Widget.setPlates(1);
+//        Widget.addPort(Ports.PARALLEL);
+//        System.out.println(Arrays.toString(Laundry.clean("0", "0")));
+        Widget.resetProperties();
+        Widget.setPlates(2);
+        Widget.setIndicator(ON, MSA);
+        Widget.setNumHolders(2);
+        Widget.setDBatteries(1);
+        Widget.setDoubleAs(2);
+        Widget.setSerialCode("h64gz8");
+        Widget.addPort(SERIAL);
+        Widget.addPort(PARALLEL);
+        Widget.addPort(RCA);
+        Widget.addPort(PS2);
+        Widget.addPort(RJ45);
+        Widget.addPort(DVI);
+        System.out.println(Arrays.toString(ShapeShift.solve(POINT, FLAT)));
 
-    }
-
-    private static ArrayList<Hex.HexNode> makeHex(){
-        return null;
     }
 }

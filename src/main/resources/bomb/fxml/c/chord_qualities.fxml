@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+          prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.c.chords.ChordController">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <GridPane prefHeight="741.0" prefWidth="1278.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="365.0" minHeight="10.0" prefHeight="251.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="426.0" minHeight="10.0" prefHeight="257.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="426.0" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+            <TextField fx:id="inputChord" editable="false" promptText="Input Chord">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="50.0" top="80.0"/>
+                </HBox.margin>
+            </TextField>
+            <TextField fx:id="outputChord" editable="false" promptText="New Chord">
+                <font>
+                    <Font size="36.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="160.0" top="80.0"/>
+                </HBox.margin>
+            </TextField>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <Button fx:id="a" mnemonicParsing="false" onAction="#type" text="A">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="100.0" top="80.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="aSharp" mnemonicParsing="false" onAction="#type" text="A#">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="85.0" top="80.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="b" mnemonicParsing="false" onAction="#type" text="B">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="85.0" top="80.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="c" mnemonicParsing="false" onAction="#type" text="C">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="85.0" top="80.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="cSharp" mnemonicParsing="false" onAction="#type" text="C#">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="85.0" top="80.0"/>
+                </HBox.margin>
+            </Button>
+            <Button fx:id="d" mnemonicParsing="false" onAction="#type" text="D">
+                <font>
+                    <Font size="40.0"/>
+                </font>
+                <HBox.margin>
+                    <Insets left="85.0" top="80.0"/>
+                </HBox.margin>
+            </Button>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <Button fx:id="dSharp" mnemonicParsing="false" onAction="#type" text="D#">
+                <HBox.margin>
+                    <Insets left="100.0" top="75.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="40.0"/>
+                </font>
+            </Button>
+            <Button fx:id="e" mnemonicParsing="false" onAction="#type" text="E">
+                <HBox.margin>
+                    <Insets left="85.0" top="75.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="40.0"/>
+                </font>
+            </Button>
+            <Button fx:id="f" mnemonicParsing="false" onAction="#type" text="F">
+                <HBox.margin>
+                    <Insets left="85.0" top="75.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="40.0"/>
+                </font>
+            </Button>
+            <Button fx:id="fSharp" mnemonicParsing="false" onAction="#type" text="F#">
+                <HBox.margin>
+                    <Insets left="85.0" top="75.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="40.0"/>
+                </font>
+            </Button>
+            <Button fx:id="g" mnemonicParsing="false" onAction="#type" text="G">
+                <HBox.margin>
+                    <Insets left="85.0" top="75.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="40.0"/>
+                </font>
+            </Button>
+            <Button fx:id="gSharp" mnemonicParsing="false" onAction="#type" text="G#">
+                <HBox.margin>
+                    <Insets left="85.0" top="75.0"/>
+                </HBox.margin>
+                <font>
+                    <Font size="40.0"/>
+                </font>
+            </Button>
+        </HBox>
+    </GridPane>
+</GridPane>

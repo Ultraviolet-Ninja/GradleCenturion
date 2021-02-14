@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Pane?>
+<?import bomb.components.hex.HexMazePanel?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.control.Button?>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+          prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.dh.hexamaze.HexamazeController">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <GridPane prefHeight="791.0" prefWidth="1266.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Pane prefHeight="200.0" prefWidth="200.0">
+            <HexMazePanel fx:id="fourOne" layoutX="326.0" layoutY="11.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourTwo" layoutX="326.0" layoutY="111.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourThree" layoutX="326.0" layoutY="211.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourFour" layoutX="326.0" layoutY="311.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourFive" layoutX="326.0" layoutY="411.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourSix" layoutX="326.0" layoutY="511.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourSeven" layoutX="326.0" layoutY="611.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeOne" layoutX="245.0" layoutY="61.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoOne" layoutX="164.0" layoutY="111.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneOne" layoutX="83.0" layoutY="161.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveOne" layoutX="406.0" layoutY="61.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeTwo" layoutX="245.0" layoutY="161.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoTwo" layoutX="164.0" layoutY="211.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeThree" layoutX="245.0" layoutY="261.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeSix" layoutX="245.0" layoutY="561.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeFour" layoutX="245.0" layoutY="361.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneTwo" layoutX="83.0" layoutY="261.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoThree" layoutX="164.0" layoutY="311.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneThree" layoutX="83.0" layoutY="361.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneFour" layoutX="83.0" layoutY="461.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoFour" layoutX="164.0" layoutY="411.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeFive" layoutX="245.0" layoutY="461.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoFive" layoutX="164.0" layoutY="511.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveTwo" layoutX="406.0" layoutY="161.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveThree" layoutX="406.0" layoutY="261.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveFour" layoutX="406.0" layoutY="361.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveFive" layoutX="406.0" layoutY="461.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveSix" layoutX="406.0" layoutY="561.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixFive" layoutX="486.0" layoutY="511.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenFour" layoutX="566.0" layoutY="461.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixFour" layoutX="486.0" layoutY="411.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenThree" layoutX="566.0" layoutY="361.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixThree" layoutX="486.0" layoutY="311.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixTwo" layoutX="486.0" layoutY="211.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixOne" layoutX="486.0" layoutY="111.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenOne" layoutX="566.0" layoutY="161.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenTwo" layoutX="566.0" layoutY="261.0" onMouseClicked="#plotShape"/>
+            <RadioButton fx:id="circleButton" layoutX="792.0" layoutY="81.0" mnemonicParsing="false"
+                         onAction="#setShape" text="Circle">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="hexButton" layoutX="792.0" layoutY="121.0" mnemonicParsing="false" onAction="#setShape"
+                         text="Hexagon">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="lTriangleButton" layoutX="919.0" layoutY="81.0" mnemonicParsing="false"
+                         onAction="#setShape" text="Left Triangle">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="rTriangleButton" layoutX="920.0" layoutY="121.0" mnemonicParsing="false"
+                         onAction="#setShape" text="Right Triangle">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="uTriangleButton" layoutX="919.0" layoutY="160.0" mnemonicParsing="false"
+                         onAction="#setShape" text="Up Triangle">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="dTriangleButton" layoutX="920.0" layoutY="194.0" mnemonicParsing="false"
+                         onAction="#setShape" text="Down Triangle">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="nullButton" layoutX="792.0" layoutY="194.0" mnemonicParsing="false" onAction="#setShape"
+                         text="Blank">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="pegButton" layoutX="792.0" layoutY="160.0" mnemonicParsing="false" onAction="#setShape"
+                         text="Peg">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <Button layoutX="867.0" layoutY="517.0" mnemonicParsing="false" onAction="#mazeCompare" text="Submit">
+                <font>
+                    <Font size="20.0"/>
+                </font>
+            </Button>
+            <RadioButton fx:id="redButton" disable="true" layoutX="792.0" layoutY="299.0" mnemonicParsing="false"
+                         onAction="#setPegFill" text="Red">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="yellowButton" disable="true" layoutX="793.0" layoutY="348.0" mnemonicParsing="false"
+                         onAction="#setPegFill" text="Yellow">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="greenButton" disable="true" layoutX="794.0" layoutY="401.0" mnemonicParsing="false"
+                         onAction="#setPegFill" text="Green">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="cyanButton" disable="true" layoutX="925.0" layoutY="299.0" mnemonicParsing="false"
+                         onAction="#setPegFill" text="Cyan">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="blueButton" disable="true" layoutX="924.0" layoutY="348.0" mnemonicParsing="false"
+                         onAction="#setPegFill" text="Blue">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+            <RadioButton fx:id="pinkButton" disable="true" layoutX="925.0" layoutY="401.0" mnemonicParsing="false"
+                         onAction="#setPegFill" text="Pink">
+                <font>
+                    <Font size="18.0"/>
+                </font>
+            </RadioButton>
+        </Pane>
+    </GridPane>
+</GridPane>

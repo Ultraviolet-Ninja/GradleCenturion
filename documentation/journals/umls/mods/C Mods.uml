@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>Bomb.Widget</OriginalElement>
+  <nodes>
+    <node x="482.99999999999994" y="1185.5">Bomb.Modules.C.Caesar</node>
+    <node x="1263.0" y="0.0">Bomb.Objects.CheckoutItems</node>
+    <node x="0.0" y="307.0">Bomb.Objects.Qualities</node>
+    <node x="952.0" y="1174.5">Bomb.Modules.C.ColorFlash</node>
+    <node x="0.0" y="1463.0">Bomb.Objects.CFlash</node>
+    <node x="702.0" y="1219.5">Bomb.Modules.C.CheapCheckout</node>
+    <node x="228.99999999999994" y="296.0">Bomb.Objects.Roots</node>
+    <node x="188.69642857142856" y="1064.0">Bomb.Modules.C.ChordQualities</node>
+    <node x="461.8392857142857" y="0.0">Bomb.Widget</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Bomb.Modules.C.Caesar" target="Bomb.Widget">
+      <point x="49.75" y="-55.5" />
+      <point x="632.25" y="1044.0" />
+      <point x="611.172619047619" y="1044.0" />
+      <point x="21.333333333333258" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.C.ChordQualities" target="Bomb.Widget">
+      <point x="30.5" y="-177.0" />
+      <point x="341.19642857142856" y="1034.0" />
+      <point x="483.1726190476191" y="1034.0" />
+      <point x="-106.66666666666663" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.C.CheapCheckout" target="Bomb.Widget">
+      <point x="0.0" y="-21.5" />
+      <point x="817.0" y="1044.0" />
+      <point x="653.8392857142858" y="1044.0" />
+      <point x="64.0" y="507.0" />
+    </edge>
+    <edge source="Bomb.Modules.C.ColorFlash" target="Bomb.Widget">
+      <point x="0.0" y="-66.5" />
+      <point x="1085.0" y="1034.0" />
+      <point x="696.5059523809523" y="1034.0" />
+      <point x="106.66666666666663" y="507.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5159033078880407" x="746.5" y="776.0" />
+  <SelectedNodes>
+    <node>Bomb.Widget</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

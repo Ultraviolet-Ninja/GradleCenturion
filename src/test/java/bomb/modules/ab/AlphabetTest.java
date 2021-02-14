@@ -1,5 +1,6 @@
 package bomb.modules.ab;
 
+import bomb.modules.ab.alphabet.Alphabet;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
@@ -14,5 +15,13 @@ public class AlphabetTest {
     void fourLetterTest(){
         IntStream.range(0, FOUR_LETTER_CORRECT.length)
                 .forEach(i -> assertEquals(FOUR_LETTER_CORRECT[i], Alphabet.order(FOUR_LETTER_INPUTS[i])));
+    }
+
+    @Test
+    void theGreatBerate(){
+        assertEquals("ZNYL", Alphabet.order("ZYNL"));
+        assertEquals("YKQV", Alphabet.order("QYVK"));
+        assertEquals("ACHZ", Alphabet.order("HZAC"));
+
     }
 }

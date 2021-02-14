@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="bomb.modules.m.microcontroller.ControllerController"
+            prefHeight="770.0" prefWidth="1160.0">
+
+</AnchorPane>
