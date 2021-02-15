@@ -16,6 +16,7 @@
 
 ### Incomplete Modules
 - Hexamaze
+- MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon Screams
 - Simon States
@@ -65,7 +66,6 @@
 - Listening
 - Logic Gates
 - Math is Hard
-- MicroController
 - MineSweeper
 - Modules Against Humanity
 - Monsplode Fight
