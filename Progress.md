@@ -24,7 +24,7 @@
 - Souvenir
 - Shape Shift
 
-7/100
+8/100
 
 ### Untouched Modules
 - 3D Maze
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-81/100 + Colored Switches
+80/100 + Colored Switches
