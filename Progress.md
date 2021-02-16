@@ -16,6 +16,7 @@
 
 ### Incomplete Modules
 - Hexamaze
+- MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon Screams
 - Simon States
@@ -23,7 +24,7 @@
 - Souvenir
 - Shape Shift
 
-7/100
+8/100
 
 ### Untouched Modules
 - 3D Maze
@@ -65,7 +66,6 @@
 - Listening
 - Logic Gates
 - Math is Hard
-- MicroController
 - MineSweeper
 - Modules Against Humanity
 - Monsplode Fight
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-81/100 + Colored Switches
+80/100 + Colored Switches

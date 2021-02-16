@@ -4,10 +4,10 @@ This is the Gradle implementation of the [Centurion Manual project](https://gith
 
 ### Technologies
 - JDK 8
-- Java FX
-- Gradle
-- Circle CI
-- Jacoco
+- Java FX - GUI
+- Gradle - Automation Tool
+- Circle CI - Test Automation
+- Jacoco - Test Coverage Analysis
 
 ### Status
 Currently, in progress\
