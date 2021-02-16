@@ -29,7 +29,7 @@ public class MicroController extends Widget {
             return instance.traversePins(2);
         else if (numbersMatch(serialNumbers))
             return instance.traversePins(3);
-        else return instance.traversePins(4);
+        return instance.traversePins(4);
     }
 
     private static boolean containsRequiredNumbers(String serialNumbers){

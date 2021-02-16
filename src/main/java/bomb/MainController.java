@@ -1,5 +1,6 @@
 package bomb;
 
+import bomb.tools.FacadeFX;
 import bomb.tools.observer.BlindAlleyObserver;
 import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
@@ -42,7 +43,7 @@ public class MainController {
 
     @FXML
     public void buttonPress() {
-        String selected = ((ToggleButton) group.getSelectedToggle()).getText();
+        String selected = FacadeFX.getToggleName(group);
         if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(ObserverHub.BLIND_ALLEY_INDEX);
         paneSwitch(regionMap.get(selected));
     }

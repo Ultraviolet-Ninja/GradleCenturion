@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="bomb.modules.m.microcontroller.ControllerController"
-            prefHeight="770.0" prefWidth="1160.0">
 
+<AnchorPane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.m.microcontroller.ControllerController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="36.0" layoutY="110.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="36.0" layoutY="376.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
+      <ToggleButton layoutX="53.0" layoutY="156.0" mnemonicParsing="false" text="STRK">
+         <font>
+            <Font size="24.0" />
+         </font>
+          <toggleGroup>
+              <ToggleGroup fx:id="controllerGroup" />
+          </toggleGroup>
+      </ToggleButton>
+      <ToggleButton layoutX="157.0" layoutY="156.0" mnemonicParsing="false" text="LEDS" toggleGroup="$controllerGroup">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton layoutX="53.0" layoutY="258.0" mnemonicParsing="false" text="EXPL" toggleGroup="$controllerGroup">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton layoutX="154.0" layoutY="258.0" mnemonicParsing="false" text="CNTD" toggleGroup="$controllerGroup">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton layoutX="52.0" layoutY="429.0" mnemonicParsing="false" text="6-Pin">
+         <font>
+            <Font size="24.0" />
+         </font>
+          <toggleGroup>
+              <ToggleGroup fx:id="pinCountGroup" />
+          </toggleGroup>
+      </ToggleButton>
+      <ToggleButton layoutX="166.0" layoutY="429.0" mnemonicParsing="false" text="8-Pin" toggleGroup="$pinCountGroup">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </ToggleButton>
+      <ToggleButton layoutX="101.0" layoutY="520.0" mnemonicParsing="false" text="10-Pin" toggleGroup="$pinCountGroup">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </ToggleButton>
+   </children>
 </AnchorPane>
