@@ -18,7 +18,7 @@ public abstract class AbstractController {
         setController();
     }
 
-    private void setController(){
+    private void setController() throws IllegalArgumentException{
         switch (pinCount){
             case SIX_PIN: setSixPin(); break;
             case EIGHT_PIN: setEightPin(); break;

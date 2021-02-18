@@ -11,15 +11,23 @@ import bomb.modules.m.microcontroller.chip.ExplodeController;
 import bomb.modules.m.microcontroller.chip.StrikeController;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 
 public class ControllerController {
     private AbstractChip currentChip;
-    private String controllerType, pinCount;
+    private String controllerType = "", pinCount = "";
+
+    @FXML
+    private Button clearButton;
 
     @FXML
     private Pane chipBackground;
+
+    @FXML
+    private TextField serialInput;
 
     @FXML
     private ToggleGroup controllerGroup, pinCountGroup;
@@ -33,8 +41,25 @@ public class ControllerController {
     @FXML
     private void setPinCount(){
         pinCount = FacadeFX.getToggleName(pinCountGroup).replace("-Pin", "");
-//        setFrontEnd();
+        setFrontEnd();
         transferToMicro();
+    }
+
+    @FXML
+    private void trackTextField(){
+        if (currentChip != null) currentChip.setChipSerialNum(serialInput.getText());
+        if (serialInput.getText().length() == 2) {
+            transferToMicro();
+            FacadeFX.disable(serialInput);
+        }
+        FacadeFX.enable(clearButton);
+    }
+
+    @FXML
+    private void clearText(){
+        FacadeFX.clearText(serialInput);
+        FacadeFX.enable(serialInput);
+        FacadeFX.disable(clearButton);
     }
 
     private void setFrontEnd(){
@@ -53,9 +78,10 @@ public class ControllerController {
     }
 
     private void transferToMicro(){
-        if (!(controllerType.isEmpty() && pinCount.isEmpty())) {
+        if (!(controllerType.isEmpty() || pinCount.isEmpty())) {
             MicroController.setController(getType());
-//            currentChip.setColors(MicroController.getPinColors());
+            currentChip.setColors(MicroController.getPinColors(serialInput.getText()));
+            currentChip.setChipType(controllerType);
         }
     }
 

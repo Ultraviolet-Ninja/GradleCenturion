@@ -22,7 +22,7 @@
         <Pane prefHeight="200.0" prefWidth="200.0">
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="25.0" layoutY="95.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="235.0" layoutX="25.0" layoutY="361.0" stroke="BLACK" strokeType="INSIDE" width="235.0" />
-            <ToggleButton layoutX="42.0" layoutY="141.0" mnemonicParsing="false" text="STRK">
+            <ToggleButton layoutX="42.0" layoutY="141.0" mnemonicParsing="false" onAction="#setController" text="STRK">
                 <font>
                     <Font size="24.0" />
                 </font>
@@ -30,22 +30,22 @@
                     <ToggleGroup fx:id="controllerGroup" />
                 </toggleGroup>
             </ToggleButton>
-            <ToggleButton layoutX="146.0" layoutY="141.0" mnemonicParsing="false" text="LEDS" toggleGroup="$controllerGroup">
+            <ToggleButton layoutX="146.0" layoutY="141.0" mnemonicParsing="false" onAction="#setController" text="LEDS" toggleGroup="$controllerGroup">
                 <font>
                     <Font size="24.0" />
                 </font>
             </ToggleButton>
-            <ToggleButton layoutX="42.0" layoutY="243.0" mnemonicParsing="false" text="EXPL" toggleGroup="$controllerGroup">
+            <ToggleButton layoutX="42.0" layoutY="243.0" mnemonicParsing="false" onAction="#setController" text="EXPL" toggleGroup="$controllerGroup">
                 <font>
                     <Font size="24.0" />
                 </font>
             </ToggleButton>
-            <ToggleButton layoutX="143.0" layoutY="243.0" mnemonicParsing="false" text="CNTD" toggleGroup="$controllerGroup">
+            <ToggleButton layoutX="143.0" layoutY="243.0" mnemonicParsing="false" onAction="#setController" text="CNTD" toggleGroup="$controllerGroup">
                 <font>
                     <Font size="24.0" />
                 </font>
             </ToggleButton>
-            <ToggleButton layoutX="41.0" layoutY="414.0" mnemonicParsing="false" text="6-Pin">
+            <ToggleButton layoutX="41.0" layoutY="414.0" mnemonicParsing="false" onAction="#setPinCount" text="6-Pin">
                 <font>
                     <Font size="24.0" />
                 </font>
@@ -53,21 +53,25 @@
                     <ToggleGroup fx:id="pinCountGroup" />
                 </toggleGroup>
             </ToggleButton>
-            <ToggleButton layoutX="155.0" layoutY="414.0" mnemonicParsing="false" text="8-Pin" toggleGroup="$pinCountGroup">
+            <ToggleButton layoutX="155.0" layoutY="414.0" mnemonicParsing="false" onAction="#setPinCount" text="8-Pin" toggleGroup="$pinCountGroup">
                 <font>
                     <Font size="24.0" />
                 </font>
             </ToggleButton>
-            <ToggleButton layoutX="90.0" layoutY="505.0" mnemonicParsing="false" text="10-Pin" toggleGroup="$pinCountGroup">
+            <ToggleButton layoutX="90.0" layoutY="505.0" mnemonicParsing="false" onAction="#setPinCount" text="10-Pin" toggleGroup="$pinCountGroup">
                 <font>
                     <Font size="24.0" />
                 </font>
             </ToggleButton>
-         <TextField layoutX="28.0" layoutY="631.0" prefHeight="39.0" prefWidth="235.0" promptText="Microcontroller Serial No.">
+         <TextField fx:id="serialInput" layoutX="28.0" layoutY="631.0" onKeyReleased="#trackTextField" prefHeight="39.0" prefWidth="235.0" promptText="Microcontroller Serial No.">
             <font>
                <Font size="18.0" />
             </font>
          </TextField>
+         <Button fx:id="clearButton" disable="true" layoutX="177.0" layoutY="686.0" mnemonicParsing="false" onAction="#clearText" text="Clear">
+            <font>
+               <Font size="18.0" />
+            </font></Button>
         </Pane>
     </children>
 
