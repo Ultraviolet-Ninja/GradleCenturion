@@ -51,12 +51,12 @@ public class MazeRunner {
     public static LinkedList<Coordinates> runMaze(HexGrid grid){
         if (currentPegColor == null) return null;
         int sideToExit = grid.getRing().findIndex(currentPegColor);
-        HexGrid gatedGridCopy = gateOff(new HexGrid(grid), sideToExit);
+        HexGrid gatedGridCopy = gateOffExits(new HexGrid(grid), sideToExit);
         historyStack = new MapStack<>();
         return decidePath(gatedGridCopy, sideToExit);
     }
 
-    private static HexGrid gateOff(HexGrid copiedGrid, int sideToExit){
+    private static HexGrid gateOffExits(HexGrid copiedGrid, int sideToExit){
         HexTraits.HexWall[] allWalls = HexTraits.HexWall.values();
         FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> extraction = copiedGrid.exportTo2DQueue();
         if (sideToExit != 0)
@@ -187,10 +187,10 @@ public class MazeRunner {
         String copyOrder = wallOrder;
         do{
             boolean traversedPath = false;
-            String directionCheck = copyOrder.substring(0, 1);
-            if (!playerPosition.checkWall(Integer.parseInt(directionCheck))) {
+            String directionCheck = takeFirstChar(copyOrder);
+            if (playerPosition.isPathClear(Integer.parseInt(directionCheck))) {
                 documentMovement(gatedGrid, directionCheck);
-                exitOrder = traverse(gatedGrid, wallOrder);
+                exitOrder = traverseMaze(gatedGrid, wallOrder, getBackTrackingMove(directionCheck));
                 traversedPath = true;
             }
 
@@ -204,11 +204,12 @@ public class MazeRunner {
         return exitOrder;
     }
 
-    private static LinkedList<Coordinates> traverse
-            (HexGrid gatedGrid, final String wallOrder){
+    private static LinkedList<Coordinates> traverseMaze(HexGrid gatedGrid, final String wallOrder, Coordinates backTrackMove){
+        boolean loopFlag;
         Hex.HexNode playerPosition = gatedGrid.retrieveNode(currentLocation);
-        String copyOrder = wallOrder;
         LinkedList<Coordinates> exitOrder = null;
+        String copyOrder = wallOrder;
+
         do {
             boolean traversedPath = false;
             if (historyStack.getTopValue() == 0) {
@@ -216,21 +217,24 @@ public class MazeRunner {
                 return null;
             }
 
-            String directionCheck = copyOrder.substring(0, 1);
-            if (!playerPosition.checkWall(Integer.parseInt(directionCheck))) {
+            String directionCheck = takeFirstChar(copyOrder);
+            if (playerPosition.isPathClear(Integer.parseInt(directionCheck))) {
                 try {
                     documentMovement(gatedGrid, directionCheck);
                 } catch (ArrayIndexOutOfBoundsException e){
 //                    historyStack.push(new Coordinates(currentLocation), 0);
                     return historyStack.exportKeys();
                 }
-                exitOrder = traverse(gatedGrid, wallOrder);
+                exitOrder = traverseMaze(gatedGrid, wallOrder, getBackTrackingMove(directionCheck));
                 traversedPath = true;
             }
+
             if (exitOrder != null) return exitOrder;
             copyOrder = copyOrder.replace(directionCheck, "");
             if (traversedPath) decrementExits();
-        } while(copyOrder.length() != 1);
+            loopFlag = backTrackMove == getBackTrackingMove(takeFirstChar(copyOrder));
+            if (!loopFlag && copyOrder.length() > 1) copyOrder = putMoveToEnd(copyOrder);
+        } while(loopFlag || copyOrder.length() > 1);
         return null;
     }
 
@@ -246,19 +250,27 @@ public class MazeRunner {
     }
 
     private static void movePosition(String direction){
+        currentLocation.alterCurrentCoords(getCoordinatesFromDir(direction));
+    }
+
+    private static Coordinates getBackTrackingMove(String direction){
+        int oppositeDirection = 5 - Integer.parseInt(direction);
+        return getCoordinatesFromDir(String.valueOf(oppositeDirection));
+    }
+
+    private static String putMoveToEnd(String operationOrder){
+        String first = operationOrder.substring(0, 1);
+        return operationOrder.substring(1) + first;
+    }
+
+    private static Coordinates getCoordinatesFromDir(String direction){
         switch (direction){
-            case "0":
-                currentLocation.alterCurrentCoords(MOVE_NORTH_WEST); break;
-            case "1":
-                currentLocation.alterCurrentCoords(MOVE_NORTH); break;
-            case "2":
-                currentLocation.alterCurrentCoords(MOVE_NORTH_EAST); break;
-            case "3":
-                currentLocation.alterCurrentCoords(MOVE_SOUTH_WEST); break;
-            case "4":
-                currentLocation.alterCurrentCoords(MOVE_SOUTH); break;
-            default:
-                currentLocation.alterCurrentCoords(MOVE_SOUTH_EAST);
+            case "0": return MOVE_NORTH_WEST;
+            case "1": return MOVE_NORTH;
+            case "2": return MOVE_NORTH_EAST;
+            case "3": return MOVE_SOUTH_WEST;
+            case "4": return MOVE_SOUTH;
+            default: return MOVE_SOUTH_EAST;
         }
     }
 
@@ -269,5 +281,9 @@ public class MazeRunner {
 
     private static void decrementExits(){
         historyStack.setTopValue(historyStack.getTopValue() - 1);
+    }
+
+    private static String takeFirstChar(String in){
+        return String.valueOf(in.charAt(0));
     }
 }

@@ -11,8 +11,7 @@ public class HexPanelFiller {
 
     private HexPanelFiller(){}
 
-    public static void fillPanels
-            (LinkedList<Coordinates> directionSet, ArrayList<HexMazePanel> panelArray,
+    public static void fillPanels(LinkedList<Coordinates> directionSet, ArrayList<HexMazePanel> panelArray,
              Color toFill, int hexagonSideLength){
         //directionSet.removeLast(); //TODO can be taken out if I want
         for (HexMazePanel panel : panelArray) panel.resetHexagonalFill();
