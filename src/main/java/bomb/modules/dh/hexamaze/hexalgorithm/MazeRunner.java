@@ -18,9 +18,11 @@ public class MazeRunner {
     private static final Coordinates NORTH = new Coordinates(0, -1), SOUTH = new Coordinates(0, 1),
             LEFT_SIDE_NORTH_WEST = new Coordinates(-1, -1), LEFT_SIDE_NORTH_EAST = new Coordinates(1, 0),
             LEFT_SIDE_SOUTH_EAST = new Coordinates(1, 1), LEFT_SIDE_SOUTH_WEST = new Coordinates(-1, 0),
-
-    RIGHT_SIDE_NORTH_WEST = LEFT_SIDE_SOUTH_WEST, RIGHT_SIDE_NORTH_EAST = new Coordinates(1, -1),
+            RIGHT_SIDE_NORTH_WEST = LEFT_SIDE_SOUTH_WEST, RIGHT_SIDE_NORTH_EAST = new Coordinates(1, -1),
             RIGHT_SIDE_SOUTH_EAST = LEFT_SIDE_NORTH_EAST, RIGHT_SIDE_SOUTH_WEST = new Coordinates(-1, 1);
+    //Orders of movement
+    private static final String EXIT_NORTH_WEST = "013245", EXIT_NORTH_EAST = "215403", EXIT_EAST = "524103",
+            EXIT_SOUTH_EAST = "542310", EXIT_SOUTH_WEST = "340512", EXIT_WEST = "031425";
 
     /**
      * Don't let anyone instantiate this class
@@ -61,26 +63,19 @@ public class MazeRunner {
     private static LinkedList<Coordinates> decidePath(HexGrid gatedGrid, final int sideToExit) {
         switch (sideToExit) {
             case 0:
-                return findExit(gatedGrid, "013245");
+                return findExit(gatedGrid, EXIT_NORTH_WEST);
             case 1:
-                return findExit(gatedGrid, "215403");
+                return findExit(gatedGrid, EXIT_NORTH_EAST);
             case 2:
-                return findExit(gatedGrid, "");
+                return findExit(gatedGrid, EXIT_EAST);
             case 3:
-                return findExit(gatedGrid, "542310");
+                return findExit(gatedGrid, EXIT_SOUTH_EAST);
             case 4:
-                return findExit(gatedGrid, "340512");
+                return findExit(gatedGrid, EXIT_SOUTH_WEST);
             default:
-                return findExit(gatedGrid, "");
+                return findExit(gatedGrid, EXIT_WEST);
         }
     }
-
-    /*
-     * Basic Functionality
-     * Checks walls in a specific order
-     * Moves down the first one with an opening
-     * Runs that path until a solution is found or all roads lead to dead ends
-     */
 
     private static LinkedList<Coordinates> findExit(HexGrid gatedGrid, String wallOrder) {
         Hex.HexNode playerPosition = gatedGrid.retrieveNode(currentLocation);
