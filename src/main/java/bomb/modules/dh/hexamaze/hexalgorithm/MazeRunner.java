@@ -15,7 +15,8 @@ public class MazeRunner {
     private static MapStack<Coordinates, Integer> historyStack;
 
     //Movement Vectors
-    private static final Coordinates NORTH = new Coordinates(0, -1), SOUTH = new Coordinates(0, 1),
+    private static final Coordinates NULL_MOVE = new Coordinates(0, 0),
+            NORTH = new Coordinates(0, -1), SOUTH = new Coordinates(0, 1),
             LEFT_SIDE_NORTH_WEST = new Coordinates(-1, -1), LEFT_SIDE_NORTH_EAST = new Coordinates(1, 0),
             LEFT_SIDE_SOUTH_EAST = new Coordinates(1, 1), LEFT_SIDE_SOUTH_WEST = new Coordinates(-1, 0),
             RIGHT_SIDE_NORTH_WEST = LEFT_SIDE_SOUTH_WEST, RIGHT_SIDE_NORTH_EAST = new Coordinates(1, -1),
@@ -77,7 +78,7 @@ public class MazeRunner {
         }
     }
 
-    private static LinkedList<Coordinates> findExit(HexGrid gatedGrid, String wallOrder) {
+    private static LinkedList<Coordinates> findExit(HexGrid gatedGrid, final String wallOrder) {
         Hex.HexNode playerPosition = gatedGrid.retrieveNode(currentLocation);
         historyStack.push(new Coordinates(currentLocation),
                 playerPosition.checkExits() + 1);
@@ -136,7 +137,6 @@ public class MazeRunner {
             if (exitStack != null) return exitStack;
             copiedSearchOrder = copiedSearchOrder.replace(directionCheck, "");
             if (traversedPath) decrementExits();
-//            backTrackFlag = backTrackMove == leftSideNextMove(takeFirstChar(copiedSearchOrder));
             backTrackFlag = backTrackMatch(takeFirstChar(copiedSearchOrder), backTrackMove);
 
             if (backTrackFlag && copiedSearchOrder.length() > 1) copiedSearchOrder = putMoveToEnd(copiedSearchOrder);
@@ -147,7 +147,7 @@ public class MazeRunner {
     private static boolean backTrackMatch(String direction, Coordinates backTrackMove) {
         boolean leftSide = backTrackMove == leftSideNextMove(direction),
                 rightSide = backTrackMove == rightSideNextMove(direction),
-                upOrDown = backTrackMove == upOrDown(direction);
+                upOrDown = backTrackMove == upOrDown(direction); //TODO that's a problem
         return leftSide || rightSide || upOrDown;
     }
 
@@ -193,7 +193,11 @@ public class MazeRunner {
     }
 
     private static Coordinates upOrDown(String direction) {
-        return direction.equals("1") ? NORTH : SOUTH;
+        if (direction.equals("1"))
+            return NORTH;
+        else if(direction.equals("4"))
+            return SOUTH;
+        return NULL_MOVE;
     }
 
     private static Coordinates centerColumnNextMove(String direction) {
@@ -228,7 +232,7 @@ public class MazeRunner {
             case "5":
                 return southEast;
             default:
-                return new Coordinates(0, 0);
+                return NULL_MOVE;
         }
     }
 

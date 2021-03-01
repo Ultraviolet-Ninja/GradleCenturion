@@ -135,7 +135,7 @@ public class Hexamaze extends Widget{
         ArrayList<Hex.HexNode> stream = hexGrid.hexport().exportToList();
         for (int i = 0; i < stream.size(); i++) panelArray.get(i).setup(stream.get(i));
         if (exitOrder != null) HexPanelFiller.fillPanels(exitOrder, panelArray, currentPegColor, grid.sideLength());
-        else System.err.println("We found nothing");
+//        else System.err.println("We found nothing");
     }
 
     private static void clearPreviousLines(ArrayList<HexMazePanel> panelArray){
