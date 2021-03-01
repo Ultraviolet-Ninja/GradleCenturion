@@ -1,5 +1,6 @@
 package bomb.modules.ab.boolean_venn;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -102,14 +103,7 @@ public class BooleanController {
     }
 
     private void toggleOps(boolean toggle){
-        boolAnd.setDisable(toggle);
-        boolOr.setDisable(toggle);
-        boolXor .setDisable(toggle);
-        boolImp.setDisable(toggle);
-        boolNand.setDisable(toggle);
-        boolNor.setDisable(toggle);
-        boolXnor.setDisable(toggle);
-        boolImpB.setDisable(toggle);
+        FacadeFX.toggleNodes(toggle, boolAnd, boolOr, boolXor, boolImp, boolNand, boolNor, boolXnor, boolImpB);
     }
 
     private StringBuilder reFormatPriority(String reference){
@@ -141,10 +135,9 @@ public class BooleanController {
     private void resetBool(){
         currentOp = new StringBuilder();
         booleanShift = true;
-        boolOperation.setText("");
+        FacadeFX.clearText(boolOperation);
         toggleOps(true);
-        boolAB.setDisable(false);
-        boolBC.setDisable(false);
+        FacadeFX.toggleNodes(false, boolAB, boolBC);
         booleanReset.setDisable(true);
         a.setFill(Paint.valueOf(CLEAR));
         b.setFill(Paint.valueOf(CLEAR));

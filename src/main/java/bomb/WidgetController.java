@@ -3,24 +3,20 @@ package bomb;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import bomb.tools.FacadeFX;
 import bomb.tools.observer.ObserverHub;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 
 import static bomb.enumerations.TriState.*;
 import static bomb.tools.Mechanics.*;
 
 public class WidgetController {
-    private final ToggleGroup bobGroup = new ToggleGroup(),
-            carGroup = new ToggleGroup(), clrGroup = new ToggleGroup(),
-            frkGroup = new ToggleGroup(), frqGroup = new ToggleGroup(),
-            indGroup = new ToggleGroup(), msaGroup = new ToggleGroup(),
-            nsaGroup = new ToggleGroup(), sigGroup = new ToggleGroup(),
-            sndGroup = new ToggleGroup(), trnGroup = new ToggleGroup();
+    private static final String ENABLE_STYLE = "-fx-background-color: forestgreen; -fx-text-fill: black",
+            DISABLE_STYLE = "-fx-background-color: crimson; -fx-text-fill: seashell";
 
     @FXML
     private Button
@@ -40,26 +36,6 @@ public class WidgetController {
             bobLit, carLit, clrLit, frkLit, frqLit, indLit, msaLit, nsaLit, sigLit, sndLit, trnLit,
             bobUnlit, carUnlit, clrUnlit, frkUnlit, frqUnlit, indUnlit, msaUnlit, nsaUnlit, sigUnlit,
             sndUnlit, trnUnlit;
-
-    public void initialize() {
-        toggle(bobGroup, bobLit, bobUnlit);
-        toggle(carGroup, carLit, carUnlit);
-        toggle(clrGroup, clrLit, clrUnlit);
-        toggle(frkGroup, frkLit, frkUnlit);
-        toggle(frqGroup, frqLit, frqUnlit);
-        toggle(indGroup, indLit, indUnlit);
-        toggle(msaGroup, msaLit, msaUnlit);
-        toggle(nsaGroup, nsaLit, nsaUnlit);
-        toggle(sigGroup, sigLit, sigUnlit);
-        toggle(sndGroup, sndLit, sndUnlit);
-        toggle(trnGroup, trnLit, trnUnlit);
-    }
-
-    private void toggle(ToggleGroup select, ToggleButton... buttons) {
-        for (ToggleButton button : buttons) {
-            button.setToggleGroup(select);
-        }
-    }
 
     @FXML
     private void incrementPort() {
@@ -330,26 +306,24 @@ public class WidgetController {
     private void souvenirToggle() {
         bomb.Widget.setSouvenir(souvenir.isSelected());
         ObserverHub.updateAtIndex(ObserverHub.SOUVENIR_INDEX);
-        if (souvenir.isSelected()) {
-            souvenir.setStyle("-fx-background-color: forestgreen; -fx-text-fill: black");
-            souvenir.setText("Souvenir: Enabled");
-        } else {
-            souvenir.setStyle("-fx-background-color: crimson; -fx-text-fill: seashell");
-            souvenir.setText("Souvenir: Disabled");
-        }
+        souvenir.setStyle(setStyle(souvenir.isSelected()));
+        souvenir.setText("Souvenir" + setEnableText(souvenir.isSelected()));
     }
 
     @FXML
     private void forgetMeToggle() {
         bomb.Widget.setForgetMeNot(forgetMeNot.isSelected());
         ObserverHub.updateAtIndex(ObserverHub.FORGET_ME_INDEX);
-        if (forgetMeNot.isSelected()) {
-            forgetMeNot.setStyle("-fx-background-color: forestgreen; -fx-text-fill: black");
-            forgetMeNot.setText("Forget Me Not: Enabled");
-        } else {
-            forgetMeNot.setStyle("-fx-background-color: crimson; -fx-text-fill: seashell");
-            forgetMeNot.setText("Forget Me Not: Disabled");
-        }
+        forgetMeNot.setStyle(setStyle(forgetMeNot.isSelected()));
+        forgetMeNot.setText("Forget Me Not" + setEnableText(forgetMeNot.isSelected()));
+    }
+
+    private String setStyle(boolean condition){
+        return condition ? ENABLE_STYLE : DISABLE_STYLE;
+    }
+
+    private String setEnableText(boolean condition){
+        return ": " + (condition ? "Enabled" : "Disabled");
     }
 
     @FXML
@@ -366,16 +340,7 @@ public class WidgetController {
 
     private void allFalse(ToggleButton bob, ToggleButton car, ToggleButton clr, ToggleButton frk, ToggleButton frq,
                           ToggleButton ind, ToggleButton msa, ToggleButton nsa, ToggleButton sig, ToggleButton snd) {
-        bob.setSelected(false);
-        car.setSelected(false);
-        clr.setSelected(false);
-        frk.setSelected(false);
-        frq.setSelected(false);
-        ind.setSelected(false);
-        msa.setSelected(false);
-        nsa.setSelected(false);
-        sig.setSelected(false);
-        snd.setSelected(false);
+        FacadeFX.toggleNodes(false, bob, car, clr, frk, frq, ind, msa, nsa, sig, snd);
     }
 
     private void allUnknown() {

@@ -54,9 +54,8 @@ public class BlindAlleyController {
 
     private void writeMax(int[][] array) {
         int max = 0;
-        for (int[] col : array) {
+        for (int[] col : array)
             for (int num : col) if (num > max) max = num;
-        }
 
         maxAlley.setText("All with " + max);
     }

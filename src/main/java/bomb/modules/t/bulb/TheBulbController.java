@@ -1,19 +1,23 @@
 package bomb.modules.t.bulb;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.shape.Rectangle;
 
 import static bomb.modules.t.bulb.Bulb.THE_BULB;
 
 public class TheBulbController {
+    private static final String RED_STYLE = "-fx-text-fill: red", YELLOW_STYLE = "-fx-text-fill: yellow",
+            GREEN_STYLE = "-fx-text-fill: #07c307", BLUE_STYLE = "-fx-text-fill: dodgerblue",
+            BLACK_STYLE = "-fx-text-fill: black", WHITE_STYLE = "-fx-text-fill: white";
+
     private final boolean[] bulbConditions = new boolean[3];
 
-    private final ToggleGroup opacity = new ToggleGroup(),
-            luminosity = new ToggleGroup();
+    @FXML
+    private ToggleGroup opacity, luminosity;
 
     @FXML
     private Label redLabel, yellowLabel, greenLabel, blueLabel, purpleLabel, whiteLabel;
@@ -23,16 +27,6 @@ public class TheBulbController {
 
     @FXML
     private TextArea bulbResults;
-
-    @FXML
-    private ToggleButton onButton, offButton, opaqueButton, transparentButton;
-
-    public void initialize(){
-        onButton.setToggleGroup(luminosity);
-        offButton.setToggleGroup(luminosity);
-        opaqueButton.setToggleGroup(opacity);
-        transparentButton.setToggleGroup(opacity);
-    }
 
     @FXML
     private void colorSet(){
@@ -62,52 +56,52 @@ public class TheBulbController {
     private void labelSet(int color){
         switch (color){
             case 0: {
-                redLabel.setStyle("-fx-text-fill: red");
-                yellowLabel.setStyle("-fx-text-fill: black");
-                greenLabel.setStyle("-fx-text-fill: black");
-                blueLabel.setStyle("-fx-text-fill: black");
-                purpleLabel.setStyle("-fx-text-fill: black");
-                whiteLabel.setStyle("-fx-text-fill: black");
+                redLabel.setStyle(RED_STYLE);
+                yellowLabel.setStyle(BLACK_STYLE);
+                greenLabel.setStyle(BLACK_STYLE);
+                blueLabel.setStyle(BLACK_STYLE);
+                purpleLabel.setStyle(BLACK_STYLE);
+                whiteLabel.setStyle(BLACK_STYLE);
             }
             case 1: {
-                redLabel.setStyle("-fx-text-fill: black");
-                yellowLabel.setStyle("-fx-text-fill: yellow");
-                greenLabel.setStyle("-fx-text-fill: black");
-                blueLabel.setStyle("-fx-text-fill: black");
-                purpleLabel.setStyle("-fx-text-fill: black");
-                whiteLabel.setStyle("-fx-text-fill: black");
+                redLabel.setStyle(BLACK_STYLE);
+                yellowLabel.setStyle(YELLOW_STYLE);
+                greenLabel.setStyle(BLACK_STYLE);
+                blueLabel.setStyle(BLACK_STYLE);
+                purpleLabel.setStyle(BLACK_STYLE);
+                whiteLabel.setStyle(BLACK_STYLE);
             }
             case 2: {
-                redLabel.setStyle("-fx-text-fill: black");
-                yellowLabel.setStyle("-fx-text-fill: black");
-                greenLabel.setStyle("-fx-text-fill: #07c307");
-                blueLabel.setStyle("-fx-text-fill: black");
-                purpleLabel.setStyle("-fx-text-fill: black");
-                whiteLabel.setStyle("-fx-text-fill: black");
+                redLabel.setStyle(BLACK_STYLE);
+                yellowLabel.setStyle(BLACK_STYLE);
+                greenLabel.setStyle(GREEN_STYLE);
+                blueLabel.setStyle(BLACK_STYLE);
+                purpleLabel.setStyle(BLACK_STYLE);
+                whiteLabel.setStyle(BLACK_STYLE);
             }
             case 3: {
-                redLabel.setStyle("-fx-text-fill: black");
-                yellowLabel.setStyle("-fx-text-fill: black");
-                greenLabel.setStyle("-fx-text-fill: black");
-                blueLabel.setStyle("-fx-text-fill: dodgerblue");
-                purpleLabel.setStyle("-fx-text-fill: black");
-                whiteLabel.setStyle("-fx-text-fill: black");
+                redLabel.setStyle(BLACK_STYLE);
+                yellowLabel.setStyle(BLACK_STYLE);
+                greenLabel.setStyle(BLACK_STYLE);
+                blueLabel.setStyle(BLUE_STYLE);
+                purpleLabel.setStyle(BLACK_STYLE);
+                whiteLabel.setStyle(BLACK_STYLE);
             }
             case 4: {
-                redLabel.setStyle("-fx-text-fill: black");
-                yellowLabel.setStyle("-fx-text-fill: black");
-                greenLabel.setStyle("-fx-text-fill: black");
-                blueLabel.setStyle("-fx-text-fill: black");
+                redLabel.setStyle(BLACK_STYLE);
+                yellowLabel.setStyle(BLACK_STYLE);
+                greenLabel.setStyle(BLACK_STYLE);
+                blueLabel.setStyle(BLACK_STYLE);
                 purpleLabel.setStyle("-fx-text-fill: #cc0bdd");
-                whiteLabel.setStyle("-fx-text-fill: black");
+                whiteLabel.setStyle(BLACK_STYLE);
             }
             default: {
-                redLabel.setStyle("-fx-text-fill: black");
-                yellowLabel.setStyle("-fx-text-fill: black");
-                greenLabel.setStyle("-fx-text-fill: black");
-                blueLabel.setStyle("-fx-text-fill: black");
-                purpleLabel.setStyle("-fx-text-fill: black");
-                whiteLabel.setStyle("-fx-text-fill: white");
+                redLabel.setStyle(BLACK_STYLE);
+                yellowLabel.setStyle(BLACK_STYLE);
+                greenLabel.setStyle(BLACK_STYLE);
+                blueLabel.setStyle(BLACK_STYLE);
+                purpleLabel.setStyle(BLACK_STYLE);
+                whiteLabel.setStyle(WHITE_STYLE);
             }
         }
     }
@@ -115,14 +109,18 @@ public class TheBulbController {
     @FXML
     private void luminositySet(){
         bulbConditions[1] = true;
-        THE_BULB.setLight(onButton.isSelected()? Bulb.Light.ON: Bulb.Light.OFF);
+        THE_BULB.setLight(FacadeFX.getToggleName(opacity).equals("On") ?
+                Bulb.Light.ON :
+                Bulb.Light.OFF);
         plugInBulb();
     }
 
     @FXML
     private void opacitySet(){
         bulbConditions[2] = true;
-        THE_BULB.setOpacity(opaqueButton.isSelected()? Bulb.Opacity.OPAQUE: Bulb.Opacity.TRANSLUCENT);
+        THE_BULB.setOpacity(FacadeFX.getToggleName(luminosity).equals("Opaque") ?
+                Bulb.Opacity.OPAQUE :
+                Bulb.Opacity.TRANSLUCENT);
         plugInBulb();
     }
 

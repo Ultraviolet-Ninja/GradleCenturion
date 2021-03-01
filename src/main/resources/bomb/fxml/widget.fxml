@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
       prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
@@ -302,60 +303,90 @@
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="bobGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="carLit" layoutX="59.0" layoutY="120.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="carGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="clrLit" layoutX="59.0" layoutY="191.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="clrGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="frkLit" layoutX="59.0" layoutY="259.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="frkGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="frqLit" layoutX="59.0" layoutY="319.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="frqGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="sndLit" layoutX="358.0" layoutY="322.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="sndGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="sigLit" layoutX="358.0" layoutY="256.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="sigGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="nsaLit" layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="nsaGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="msaLit" layoutX="358.0" layoutY="117.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="msaGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="indLit" layoutX="358.0" layoutY="45.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="indGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="bobUnlit" layoutX="208.0" layoutY="48.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
@@ -374,48 +405,72 @@
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="clrGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="frkUnlit" layoutX="208.0" layoutY="259.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="frkGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="frqUnlit" layoutX="208.0" layoutY="319.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="frqGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="indUnlit" layoutX="494.0" layoutY="45.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="indGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="msaUnlit" layoutX="494.0" layoutY="117.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="msaGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="nsaUnlit" layoutX="494.0" layoutY="188.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="nsaGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="sigUnlit" layoutX="494.0" layoutY="256.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="sigGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="sndUnlit" layoutX="494.0" layoutY="322.0" mnemonicParsing="false"
                               onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="sndGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <Label layoutX="254.0" layoutY="14.0" text="Indicators">
                     <font>
@@ -427,12 +482,18 @@
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <ToggleGroup fx:id="trnGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <ToggleButton fx:id="trnLit" layoutX="216.0" layoutY="375.0" mnemonicParsing="false" onAction="#setLit"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="trnGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
                 <Label fx:id="trn" layoutX="288.0" layoutY="381.0" text="TRN">
                     <font>

@@ -1,6 +1,7 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.components.hex.HexMazePanel;
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
@@ -10,8 +11,8 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 
 public class HexamazeController {
-    private final ToggleGroup hexGroup = new ToggleGroup(),
-            hexColorGroup = new ToggleGroup();
+    @FXML
+    private ToggleGroup hexGroup, hexColorGroup;
 
     @FXML
     private HexMazePanel oneOne, oneTwo, oneThree, oneFour,
@@ -23,69 +24,28 @@ public class HexamazeController {
             sevenOne, sevenTwo, sevenThree, sevenFour;
 
     @FXML
-    private RadioButton nullButton, circleButton, hexButton, lTriangleButton,
-            rTriangleButton, uTriangleButton, dTriangleButton, pegButton,
-            redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton;
+    private RadioButton redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton;
 
     public void initialize(){
-        setHexGroup();
-        setHexColorGroup();
-        Hexamaze.setupVariables();
-    }
-
-    private void setHexGroup(){
-        nullButton.setToggleGroup(hexGroup);
-        circleButton.setToggleGroup(hexGroup);
-        hexButton.setToggleGroup(hexGroup);
-        pegButton.setToggleGroup(hexGroup);
-        lTriangleButton.setToggleGroup(hexGroup);
-        rTriangleButton .setToggleGroup(hexGroup);
-        uTriangleButton .setToggleGroup(hexGroup);
-        dTriangleButton.setToggleGroup(hexGroup);
-        pegButton.setToggleGroup(hexGroup);
-    }
-
-    private void setHexColorGroup(){
-        redButton.setToggleGroup(hexColorGroup);
-        yellowButton.setToggleGroup(hexColorGroup);
-        greenButton.setToggleGroup(hexColorGroup);
-        cyanButton.setToggleGroup(hexColorGroup);
-        blueButton.setToggleGroup(hexColorGroup);
-        pinkButton.setToggleGroup(hexColorGroup);
+        Hexamaze.setupVariables(transportPanels());
     }
 
 
     @FXML
     private void setShape(){
         toggleColorControl();
-        if (!((RadioButton) hexGroup.getSelectedToggle()).getText().equals("Peg"))
-            Hexamaze.setShapeSelector(((RadioButton) hexGroup.getSelectedToggle()).getText());
+        if (!FacadeFX.getToggleName(hexGroup).equals("Peg"))
+            Hexamaze.setShapeSelector(FacadeFX.getToggleName(hexGroup));
     }
 
     private void toggleColorControl(){
-        toggleColor(!((RadioButton)hexGroup.getSelectedToggle()).getText().equals("Peg"));
-
-//        if (toggleFlag){
-//            toggleColor(!toggleFlag);
-//            hexColorToggleSwitch = toggleFlag;
-//        } else if (hexColorToggleSwitch){
-//            toggleColor(toggleFlag);
-//            hexColorToggleSwitch = !toggleFlag;
-//        }
-    }
-
-    private void toggleColor(boolean toggle){
-        redButton.setDisable(toggle);
-        yellowButton.setDisable(toggle);
-        greenButton.setDisable(toggle);
-        cyanButton.setDisable(toggle);
-        blueButton.setDisable(toggle);
-        pinkButton.setDisable(toggle);
+        boolean toggle = !FacadeFX.getToggleName(hexGroup).equals("Peg");
+        FacadeFX.toggleNodes(toggle, redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
     }
 
     @FXML
     private void setPegFill(){
-        Hexamaze.setPegFillSelector(colorPicker(((RadioButton)hexColorGroup.getSelectedToggle()).getText()));
+        Hexamaze.setPegFillSelector(colorPicker(FacadeFX.getToggleName(hexColorGroup)));
     }
 
     private Color colorPicker(String strColor){
@@ -102,18 +62,18 @@ public class HexamazeController {
 
     @FXML
     private void plotShape(){
-        if (((RadioButton) hexGroup.getSelectedToggle()).getText().equals("Peg")) {
-            if (hexColorGroup.getSelectedToggle() != null)
-                Hexamaze.setPegFillSelector(transportPanels());
+        if (FacadeFX.getToggleName(hexGroup).equals("Peg")) {
+            if (FacadeFX.getToggleName(hexColorGroup)!= null)
+                Hexamaze.setPegFillSelector();
         }
         else
-            Hexamaze.setShapeFill(transportPanels());
+            Hexamaze.setShapeFill();
     }
 
     @FXML
     private void mazeCompare(){
         try {
-            Hexamaze.compareToFullMaze(transportPanels());
+            Hexamaze.compareToFullMaze();
         } catch (IllegalArgumentException ex){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(ex.getMessage());

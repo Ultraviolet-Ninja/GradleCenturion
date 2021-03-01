@@ -1,5 +1,6 @@
 package bomb.modules.np.neutralization;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
@@ -9,10 +10,13 @@ import static bomb.tools.Mechanics.ultimateFilter;
 
 public class NeutralizationController {
     private static final double MAX_VOLUME = 20;
+    private static final String RED_STYLE = "-fx-accent: #ea0001", YELLOW_STYLE = "-fx-accent: #f8db03",
+            GREEN_STYLE = "-fx-accent: #00fe01", BLUE_STYLE = "-fx-accent: #00007e",
+            NO_FILTER_STYLE = "-fx-background-color: #fa0001; -fx-text-fill: whitesmoke",
+            FILTER_STYLE = "-fx-background-color: #00ff01; -fx-text-fill: whitesmoke";
 
-    private Color solColor = null;
+    private Color solutionColor = null;
     private double volume;
-    private final ToggleGroup acidColors = new ToggleGroup();
     private boolean volTyped = false;
 
     @FXML
@@ -28,39 +32,26 @@ public class NeutralizationController {
     private TextField chemName, chemForm, acidVolume, dropCount;
 
     @FXML
-    private ToggleButton red, yellow, green, blue;
-
-    public void initialize(){
-        red.setToggleGroup(acidColors);
-        yellow.setToggleGroup(acidColors);
-        green.setToggleGroup(acidColors);
-        blue.setToggleGroup(acidColors);
-    }
+    private ToggleGroup acidColors;
 
     @FXML
     private void titrate(){
         //TODO - For GUI Overhaul, TextFields get cyan text with black background
         try {
-            String[] answers = Neutralization.titrate((int) volume, solColor).split("-");
+            String[] answers = Neutralization.titrate((int) volume, solutionColor).split("-");
             chemName.setText(answers[0]);
             chemForm.setText(answers[1]);
             dropCount.setText(answers[2]);
             setFilter(answers[3]);
         } catch (IllegalArgumentException illegal){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(illegal.getMessage());
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "", "");
         }
     }
 
     private void setFilter(String fil){
-        if (fil.contains("No")){
-            filterInstr.setText("Filter: Off");
-            filterInstr.setStyle("-fx-background-color: #fa0001; -fx-text-fill: whitesmoke");
-        } else {
-            filterInstr.setText("Filter: On");
-            filterInstr.setStyle("-fx-background-color: #00ff01; -fx-text-fill: whitesmoke");
-        }
+        boolean cond = fil.contains("No");
+        filterInstr.setStyle(cond ? NO_FILTER_STYLE : FILTER_STYLE);
+        filterInstr.setText("Filter: " + (cond ? "Off" : "On"));
     }
 
     @FXML
@@ -69,33 +60,38 @@ public class NeutralizationController {
         if (!sample.isEmpty()) {
             volume = Double.parseDouble(sample);
             testTube.setProgress(volume / MAX_VOLUME);
-            volTyped = true;
-        } else {
-            testTube.setProgress(0);
-            volTyped = false;
-        }
+        } else testTube.setProgress(0);
+        volTyped = !sample.isEmpty();
         toggleLock();
     }
 
     @FXML
     private void changeColor(){
-        if (red.isSelected()){
-            testTube.setStyle("-fx-accent: #ea0001");
-            solColor = Color.RED;
-        } else if (yellow.isSelected()){
-            testTube.setStyle("-fx-accent: #f8db03");
-            solColor = Color.YELLOW;
-        } else if (green.isSelected()){
-            testTube.setStyle("-fx-accent: #00fe01");
-            solColor = Color.GREEN;
-        } else {
-            testTube.setStyle("-fx-accent: #00007e");
-            solColor = Color.BLUE;
+        switch(FacadeFX.getToggleName(acidColors)){
+            case "Red":{
+                testTube.setStyle(RED_STYLE);
+                solutionColor = Color.RED;
+                break;
+            }
+            case "Yellow":{
+                testTube.setStyle(YELLOW_STYLE);
+                solutionColor = Color.YELLOW;
+                break;
+            }
+            case "Green":{
+                testTube.setStyle(GREEN_STYLE);
+                solutionColor = Color.GREEN;
+                break;
+            }
+            default:{
+                testTube.setStyle(BLUE_STYLE);
+                solutionColor = Color.BLUE;
+            }
         }
         toggleLock();
     }
 
     private void toggleLock(){
-        solve.setDisable(!(solColor != null && volTyped));
+        solve.setDisable(!(solutionColor != null && volTyped));
     }
 }

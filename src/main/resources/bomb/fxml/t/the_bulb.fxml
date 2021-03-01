@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.ToggleGroup?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1160.0"
           xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
@@ -93,33 +94,42 @@
             </TextArea>
         </HBox>
         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-            <ToggleButton fx:id="onButton" mnemonicParsing="false" onAction="#luminositySet" text="On">
+            <ToggleButton mnemonicParsing="false" onAction="#luminositySet" text="On">
                 <font>
                     <Font size="36.0"/>
                 </font>
                 <HBox.margin>
                     <Insets left="350.0"/>
                 </HBox.margin>
+                <toggleGroup>
+                    <ToggleGroup fx:id="opacity"/>
+                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="offButton" mnemonicParsing="false" onAction="#luminositySet" text="Off">
+            <ToggleButton mnemonicParsing="false" onAction="#luminositySet" text="Off">
                 <font>
                     <Font size="36.0"/>
                 </font>
                 <HBox.margin>
                     <Insets left="250.0"/>
                 </HBox.margin>
+                <toggleGroup>
+                    <fx:reference source="opacity"/>
+                </toggleGroup>
             </ToggleButton>
         </HBox>
         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-            <ToggleButton fx:id="opaqueButton" mnemonicParsing="false" onAction="#opacitySet" text="Opaque">
+            <ToggleButton mnemonicParsing="false" onAction="#opacitySet" text="Opaque">
                 <font>
                     <Font size="36.0"/>
                 </font>
                 <HBox.margin>
                     <Insets left="270.0"/>
                 </HBox.margin>
+                <toggleGroup>
+                    <ToggleGroup fx:id="luminosity"/>
+                </toggleGroup>
             </ToggleButton>
-            <ToggleButton fx:id="transparentButton" mnemonicParsing="false" onAction="#opacitySet"
+            <ToggleButton mnemonicParsing="false" onAction="#opacitySet"
                           text="See Through">
                 <font>
                     <Font size="36.0"/>
@@ -127,6 +137,9 @@
                 <HBox.margin>
                     <Insets left="250.0"/>
                 </HBox.margin>
+                <toggleGroup>
+                    <fx:reference source="luminosity"/>
+                </toggleGroup>
             </ToggleButton>
         </HBox>
     </GridPane>

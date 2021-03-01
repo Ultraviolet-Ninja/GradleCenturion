@@ -1,6 +1,7 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -9,6 +10,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class ForgetController {
+    private static final double COMPLETION_PERCENTAGE = 0.9;
+
     private int stageCounter = 1;
 
     @FXML
@@ -50,10 +53,7 @@ public class ForgetController {
                 undoButton.setDisable(false);
                 writeNext();
             } catch (IllegalArgumentException illegal) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Serial Code");
-                alert.setContentText(illegal.getMessage());
-                alert.showAndWait();
+                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -75,22 +75,12 @@ public class ForgetController {
     }
 
     private void judge(){
-        if (stageCounter >= Widget.getNumModules() * 0.9) flush.setDisable(false);
+        if (stageCounter >= Widget.getNumModules() * COMPLETION_PERCENTAGE) flush.setDisable(false);
     }
 
     private void maxCap(){
-        if (stageCounter == Widget.getNumModules()){
-            one.setDisable(true);
-            two.setDisable(true);
-            three.setDisable(true);
-            four.setDisable(true);
-            five.setDisable(true);
-            six.setDisable(true);
-            seven.setDisable(true);
-            eight.setDisable(true);
-            nine.setDisable(true);
-            zero.setDisable(true);
-        }
+        if (stageCounter == Widget.getNumModules())
+            FacadeFX.toggleNodes(true, one, two, three, four, five, six, seven, eight, nine, zero);
     }
 
     @FXML
@@ -110,22 +100,12 @@ public class ForgetController {
     @FXML
     private void flushOut(){
         flushArea.setText(ForgetMeNot.flush());
-        flush.setDisable(true);
-        undoButton.setDisable(true);
+        FacadeFX.toggleNodes(true, undoButton, flush);
         stageCounter = 1;
         reEnable();
     }
 
     private void reEnable(){
-        one.setDisable(false);
-        two.setDisable(false);
-        three.setDisable(false);
-        four.setDisable(false);
-        five.setDisable(false);
-        six.setDisable(false);
-        seven.setDisable(false);
-        eight.setDisable(false);
-        nine.setDisable(false);
-        zero.setDisable(false);
+        FacadeFX.toggleNodes(false, one, two, three, four, five, six, seven, eight, nine, zero);
     }
 }

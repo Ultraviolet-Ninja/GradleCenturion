@@ -1,5 +1,6 @@
 package bomb.modules.t.two_bit;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,17 +20,11 @@ public class TwoBitController {
     private void initQueue(){
         try {
             query.setText(TwoBit.initialCode());
-            numberCode.setDisable(false);
-            cmdLine.setDisable(false);
-            next.setDisable(false);
+            FacadeFX.toggleNodes(false, numberCode, cmdLine, next);
         } catch (IllegalArgumentException illegal){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("You need to set the Serial Code");
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.WARNING,"You need to set the Serial Code", "", "");
         } catch (StringIndexOutOfBoundsException incomplete){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("The Serial Code is incomplete");
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.ERROR, "The Serial Code is incomplete", "", "");
         }
     }
 
@@ -39,9 +34,7 @@ public class TwoBitController {
             cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), NUMBER_REGEX)));
             numberCode.setText("");
         } catch (IllegalArgumentException illegal){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("That wasn't two bits");
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits", "", "");
         }
     }
 }

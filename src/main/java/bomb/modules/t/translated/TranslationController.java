@@ -1,6 +1,7 @@
 package bomb.modules.t.translated;
 
 import bomb.enumerations.TheButton;
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -16,9 +17,12 @@ import java.util.LinkedList;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class TranslationController {
+    private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",
+            BLUE_STYLE = "-fx-text-fill: #3043AC",
+            WHITE_STYLE = "-fx-text-fill: #FFF9ED; -fx-background-color: black";
+
     private boolean firstTime = true;
     private Label current = new Label();
-    private final LinkedList<ToggleGroup> groups = new LinkedList<>();
     private TheButton[] traits = new TheButton[2];
 
     @FXML
@@ -45,26 +49,14 @@ public class TranslationController {
             morseInput, morseLetters, morseManual, morseManOut;
 
     public void initialize(){
-        groups.add(new ToggleGroup());
-        groups.add(new ToggleGroup());
-        red.setToggleGroup(groups.get(0));
-        blue.setToggleGroup(groups.get(0));
-        yellow.setToggleGroup(groups.get(0));
-        white.setToggleGroup(groups.get(0));
-        press.setToggleGroup(groups.get(1));
-        hold.setToggleGroup(groups.get(1));
-        detonate.setToggleGroup(groups.get(1));
-        abort.setToggleGroup(groups.get(1));
-        red.setStyle("-fx-text-fill: #EB190E");
-        yellow.setStyle("-fx-text-fill: #FBE118");
-        blue.setStyle("-fx-text-fill: #3043AC");
-        white.setStyle("-fx-text-fill: #FFF9ED; -fx-background-color: black");
+        red.setStyle(RED_STYLE);
+        yellow.setStyle(YELLOW_STYLE);
+        blue.setStyle(BLUE_STYLE);
+        white.setStyle(WHITE_STYLE);
         try {
             Morse.init();
         } catch (IOException ioException){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Hey Chief, the file has a problem");
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.WARNING, "Hey Chief, the file has a problem", "", "");
         }
     }
 
@@ -151,14 +143,7 @@ public class TranslationController {
 
     private void clearButtons(){
         traits = new TheButton[2];
-        red.setSelected(false);
-        blue.setSelected(false);
-        yellow.setSelected(false);
-        white.setSelected(false);
-        abort.setSelected(false);
-        press.setSelected(false);
-        detonate.setSelected(false);
-        hold.setSelected(false);
+        FacadeFX.unselectButtons(red, white, blue, yellow, abort, press, detonate, hold);
     }
 
     //Button Methods

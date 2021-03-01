@@ -1,5 +1,6 @@
 package bomb.modules.dh.emoji;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -91,24 +92,12 @@ public class EmojiController {
     @FXML
     private void clearParam(){
         eqCount = 0;
-        add.setDisable(true);
-        minus.setDisable(true);
-        equal.setDisable(true);
-        clear.setDisable(true);
+        FacadeFX.toggleNodes(true, add, minus, equal, clear);
         toggleNumberButtons(false);
         equation = new StringBuilder();
     }
 
     private void toggleNumberButtons(boolean set) {
-        first.setDisable(set);
-        second.setDisable(set);
-        third.setDisable(set);
-        forth.setDisable(set);
-        fifth.setDisable(set);
-        sixth.setDisable(set);
-        seventh.setDisable(set);
-        eighth.setDisable(set);
-        ninth.setDisable(set);
-        tenth.setDisable(set);
+        FacadeFX.toggleNodes(set, first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth);
     }
 }

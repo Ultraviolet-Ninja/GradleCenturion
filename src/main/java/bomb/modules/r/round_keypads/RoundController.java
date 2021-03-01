@@ -5,6 +5,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
 public class RoundController {
+    private static final String TO_HIGHLIGHT = "-fx-background-color: crimson",
+            FROM_HIGHLIGHT = "-fx-background-color: white";
+
     @FXML
     private ImageView
             emptyRacket1, aT, lambda1, harryPotter, russianCat1, curvyH1, backC1,
@@ -210,65 +213,62 @@ public class RoundController {
     }
 
     private void highlightBox(int which){
-        String toHighlight = "-fx-background-color: crimson",
-                fromHighlight = "-fx-background-color: white";
-
         switch (which) {
             case -1: {
-                keypad1.setStyle(fromHighlight);
-                keypad2.setStyle(fromHighlight);
-                keypad3.setStyle(fromHighlight);
-                keypad4.setStyle(fromHighlight);
-                keypad5.setStyle(fromHighlight);
-                keypad6.setStyle(fromHighlight);
+                keypad1.setStyle(FROM_HIGHLIGHT);
+                keypad2.setStyle(FROM_HIGHLIGHT);
+                keypad3.setStyle(FROM_HIGHLIGHT);
+                keypad4.setStyle(FROM_HIGHLIGHT);
+                keypad5.setStyle(FROM_HIGHLIGHT);
+                keypad6.setStyle(FROM_HIGHLIGHT);
             } break;
             case 0: {
-                keypad1.setStyle(toHighlight);
-                keypad2.setStyle(fromHighlight);
-                keypad3.setStyle(fromHighlight);
-                keypad4.setStyle(fromHighlight);
-                keypad5.setStyle(fromHighlight);
-                keypad6.setStyle(fromHighlight);
+                keypad1.setStyle(TO_HIGHLIGHT);
+                keypad2.setStyle(FROM_HIGHLIGHT);
+                keypad3.setStyle(FROM_HIGHLIGHT);
+                keypad4.setStyle(FROM_HIGHLIGHT);
+                keypad5.setStyle(FROM_HIGHLIGHT);
+                keypad6.setStyle(FROM_HIGHLIGHT);
             } break;
             case 1: {
-                keypad1.setStyle(fromHighlight);
-                keypad2.setStyle(toHighlight);
-                keypad3.setStyle(fromHighlight);
-                keypad4.setStyle(fromHighlight);
-                keypad5.setStyle(fromHighlight);
-                keypad6.setStyle(fromHighlight);
+                keypad1.setStyle(FROM_HIGHLIGHT);
+                keypad2.setStyle(TO_HIGHLIGHT);
+                keypad3.setStyle(FROM_HIGHLIGHT);
+                keypad4.setStyle(FROM_HIGHLIGHT);
+                keypad5.setStyle(FROM_HIGHLIGHT);
+                keypad6.setStyle(FROM_HIGHLIGHT);
             } break;
             case 2: {
-                keypad1.setStyle(fromHighlight);
-                keypad2.setStyle(fromHighlight);
-                keypad3.setStyle(toHighlight);
-                keypad4.setStyle(fromHighlight);
-                keypad5.setStyle(fromHighlight);
-                keypad6.setStyle(fromHighlight);
+                keypad1.setStyle(FROM_HIGHLIGHT);
+                keypad2.setStyle(FROM_HIGHLIGHT);
+                keypad3.setStyle(TO_HIGHLIGHT);
+                keypad4.setStyle(FROM_HIGHLIGHT);
+                keypad5.setStyle(FROM_HIGHLIGHT);
+                keypad6.setStyle(FROM_HIGHLIGHT);
             } break;
             case 3: {
-                keypad1.setStyle(fromHighlight);
-                keypad2.setStyle(fromHighlight);
-                keypad3.setStyle(fromHighlight);
-                keypad4.setStyle(toHighlight);
-                keypad5.setStyle(fromHighlight);
-                keypad6.setStyle(fromHighlight);
+                keypad1.setStyle(FROM_HIGHLIGHT);
+                keypad2.setStyle(FROM_HIGHLIGHT);
+                keypad3.setStyle(FROM_HIGHLIGHT);
+                keypad4.setStyle(TO_HIGHLIGHT);
+                keypad5.setStyle(FROM_HIGHLIGHT);
+                keypad6.setStyle(FROM_HIGHLIGHT);
             } break;
             case 4: {
-                keypad1.setStyle(fromHighlight);
-                keypad2.setStyle(fromHighlight);
-                keypad3.setStyle(fromHighlight);
-                keypad4.setStyle(fromHighlight);
-                keypad5.setStyle(toHighlight);
-                keypad6.setStyle(fromHighlight);
+                keypad1.setStyle(FROM_HIGHLIGHT);
+                keypad2.setStyle(FROM_HIGHLIGHT);
+                keypad3.setStyle(FROM_HIGHLIGHT);
+                keypad4.setStyle(FROM_HIGHLIGHT);
+                keypad5.setStyle(TO_HIGHLIGHT);
+                keypad6.setStyle(FROM_HIGHLIGHT);
             } break;
             default: {
-                keypad1.setStyle(fromHighlight);
-                keypad2.setStyle(fromHighlight);
-                keypad3.setStyle(fromHighlight);
-                keypad4.setStyle(fromHighlight);
-                keypad5.setStyle(fromHighlight);
-                keypad6.setStyle(toHighlight);
+                keypad1.setStyle(FROM_HIGHLIGHT);
+                keypad2.setStyle(FROM_HIGHLIGHT);
+                keypad3.setStyle(FROM_HIGHLIGHT);
+                keypad4.setStyle(FROM_HIGHLIGHT);
+                keypad5.setStyle(FROM_HIGHLIGHT);
+                keypad6.setStyle(TO_HIGHLIGHT);
             }
         }
     }

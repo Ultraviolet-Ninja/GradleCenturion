@@ -327,24 +327,36 @@
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <ToggleGroup fx:id="colorGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                     <RadioButton fx:id="blue" layoutX="717.0" layoutY="104.0" mnemonicParsing="false"
                                  onAction="#scanButtons" text="RadioButton">
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <fx:reference source="colorGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                     <RadioButton fx:id="yellow" layoutX="191.0" layoutY="164.0" mnemonicParsing="false"
                                  onAction="#scanButtons" text="RadioButton">
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <fx:reference source="colorGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                     <RadioButton fx:id="white" layoutX="660.0" layoutY="181.0" mnemonicParsing="false"
                                  onAction="#scanButtons" text="RadioButton">
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <fx:reference source="colorGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -353,24 +365,36 @@
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <ToggleGroup fx:id="wordGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                     <RadioButton fx:id="hold" layoutX="694.0" layoutY="65.0" mnemonicParsing="false"
                                  onAction="#scanButtons" text="RadioButton">
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <fx:reference source="wordGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                     <RadioButton fx:id="detonate" layoutX="182.0" layoutY="161.0" mnemonicParsing="false"
                                  onAction="#scanButtons" text="RadioButton">
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <fx:reference source="wordGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                     <RadioButton fx:id="abort" layoutX="682.0" layoutY="178.0" mnemonicParsing="false"
                                  onAction="#scanButtons" text="RadioButton">
                         <font>
                             <Font size="36.0"/>
                         </font>
+                        <toggleGroup>
+                            <fx:reference source="wordGroup"/>
+                        </toggleGroup>
                     </RadioButton>
                 </Pane>
                 <Pane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2"/>

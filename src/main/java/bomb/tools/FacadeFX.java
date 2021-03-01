@@ -2,7 +2,6 @@ package bomb.tools;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -23,9 +22,7 @@ public class FacadeFX {
     }
 
     public static String getToggleName(ToggleGroup group){
-        return group.getSelectedToggle() instanceof ToggleButton ?
-                ((ToggleButton) group.getSelectedToggle()).getText() :
-                ((RadioButton) group.getSelectedToggle()).getText();
+        return ((ToggleButton) group.getSelectedToggle()).getText();
     }
 
     public static void setAlert(Alert.AlertType type, String context, String header, String title){
@@ -33,5 +30,15 @@ public class FacadeFX {
         alert.setHeaderText(header);
         alert.setTitle(title);
         alert.showAndWait();
+    }
+
+    public static void toggleNodes(boolean toggle, Node ... nodes){
+        if (nodes.length > 0) if (nodes[0].isDisabled() == toggle) return;
+        for (Node node : nodes) node.setDisable(toggle);
+    }
+
+    public static void unselectButtons(ToggleButton ... toggleButtons){
+        for (ToggleButton button : toggleButtons)
+            button.setSelected(false);
     }
 }

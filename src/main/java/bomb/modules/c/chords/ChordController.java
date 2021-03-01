@@ -1,5 +1,6 @@
 package bomb.modules.c.chords;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -51,9 +52,7 @@ public class ChordController {
             try {
                 solve();
             } catch (IllegalArgumentException illegal){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(illegal.getMessage());
-                alert.showAndWait();
+                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "", "");
             }
             counter = 0;
             track = new StringBuilder();
