@@ -8,6 +8,7 @@ This is the Gradle implementation of the [Centurion Manual project](https://gith
 - Gradle - Automation Tool
 - Circle CI - Test Automation
 - Jacoco - Test Coverage Analysis
+- CodeMR Free Trial - Coupling/Cohesion/Code Complexity Analysis
 
 ### Status
 Currently, in progress\
