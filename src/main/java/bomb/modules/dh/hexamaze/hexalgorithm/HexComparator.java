@@ -238,7 +238,7 @@ public class HexComparator {
      * @return True for a match, false for no match
      * @throws IllegalArgumentException If there's a size difference between the two hexagons
      */
-    private static int fullRotationCompare(HexGrid grid, Hex copy) throws IllegalArgumentException {
+    static int fullRotationCompare(HexGrid grid, Hex copy) throws IllegalArgumentException {
         boolean result = false;
         int counter = 0;
         while (counter < 6 && !result) {
@@ -288,7 +288,7 @@ public class HexComparator {
      *
      * @param array The array of integers
      */
-    private static void incrementArray(int[] array) {
+    static void incrementArray(int[] array) {
         for (int idx = 0; idx < array.length; idx++) array[idx] += 1;
     }
 

@@ -3,6 +3,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.tools.data.structures.FixedArrayQueue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.function.BinaryOperator;
@@ -67,9 +68,8 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
     private HexGrid sequentialWork(Maze fullMaze, HexGrid grid, int startColumn){
         FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns =
                 getColumns(fullMaze, grid.hexport().getSpan(), startColumn);
-
-
-        return null;
+        int[] startPositions = calculateStartPositions(columns);
+        return runColumns(columns, grid, startPositions);
     }
 
     private FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> getColumns(Maze fullMaze,
@@ -82,7 +82,62 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         return outputColumns;
     }
 
-    private int[] calculateStartPositions(){
+    private int[] calculateStartPositions(FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns){
+        int[] positions = new int[columns.cap()];
+
+        for(int i = 0; i < columns.cap(); i++)
+            positions[i] = columns.get(i).cap();
+
+        int lastIndex = positions.length - 1,
+                middleIndex = positions.length/2;
+
+        if (positions[0] < positions[lastIndex]){//We're in the first half of the maze
+            //Alters the second half
+            for (int i = lastIndex; i > middleIndex; i--)
+                positions[i] -= positions[lastIndex - i];
+            //Zeroes out the first half
+            for (int j = 0; j <= middleIndex; j++)
+                positions[j] = 0;
+        } else if (positions[0] > positions[lastIndex]) {//We're in the second half of the maze
+            //Alters the first half
+            for (int i = 0; i < middleIndex; i++)
+                positions[i] -= positions[lastIndex - i];
+            //Zeroes out the second half
+            for (int j = middleIndex; j <= lastIndex; j++)
+                positions[j] = 0;
+        } else Arrays.fill(positions, 0); //We're in the middle columns of the maze
+
+        return positions;
+    }
+
+    private HexGrid runColumns(FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns, HexGrid grid, int[] positions){
+        final int hexagonalSideLength = (positions.length + 1) / 2;
+        final int[] travelDistances = HexComparator.pingRequest(hexagonalSideLength);
+        int[] endPositions = addArrays(travelDistances, positions);
+
+        while(endPositions[0] < columns.get(0).cap()){
+            Hex currentIterator = new Hex(retrieveHexagon(positions, endPositions, columns), hexagonalSideLength);
+
+            int rotations = HexComparator.fullRotationCompare(grid, currentIterator);
+            if (rotations != -1) return new HexGrid(currentIterator, rotations);
+
+            HexComparator.incrementArray(positions);
+            HexComparator.incrementArray(endPositions);
+        }
+
+
         return null;
+    }
+
+    private static FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> retrieveHexagon
+            (int[] startPositions, int[] endPositions, FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns){
+        return null;
+    }
+
+    private static int[] addArrays(int[] arrayOne, int[] arrayTwo){
+        int[] output = new int[arrayOne.length];
+        for (int i = 0; i < arrayOne.length; i++)
+            output[i] = arrayOne[i] + arrayTwo[i];
+        return output;
     }
 }
