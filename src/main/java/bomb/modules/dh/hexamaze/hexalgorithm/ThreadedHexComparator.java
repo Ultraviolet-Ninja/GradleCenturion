@@ -45,7 +45,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
     @Override
     protected HexGrid compute() {
         if (columnList.size() != 1){
-            ArrayList<ArrayList<Integer>> splitList = splitter(columnList);
+            ArrayList<ArrayList<Integer>> splitList = splitList(columnList);
             ComparatorThread taskOne = new ComparatorThread(fullMaze, grid, splitList.get(0));
             ComparatorThread taskTwo = new ComparatorThread(fullMaze, grid, splitList.get(1));
 
@@ -56,7 +56,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         } else return sequentialWork(fullMaze, grid, columnList.get(0));
     }
 
-    private ArrayList<ArrayList<Integer>> splitter(ArrayList<Integer> list){
+    private ArrayList<ArrayList<Integer>> splitList(ArrayList<Integer> list){
         int split = list.size() / 2;
         int end = list.size() - 1;
         ArrayList<ArrayList<Integer>> output = new ArrayList<>();
@@ -116,7 +116,8 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         int[] endPositions = addArrays(travelDistances, positions);
 
         while(endPositions[0] < columns.get(0).cap()){
-            Hex currentIterator = new Hex(retrieveHexagon(positions, endPositions, columns), hexagonalSideLength);
+            Hex currentIterator = new Hex(retrieveHexagon(positions, travelDistances, endPositions, columns),
+                    hexagonalSideLength);
 
             int rotations = HexComparator.fullRotationCompare(grid, currentIterator);
             if (rotations != -1) return new HexGrid(currentIterator, rotations);
@@ -125,13 +126,21 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
             HexComparator.incrementArray(endPositions);
         }
 
-
         return null;
     }
 
     private static FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> retrieveHexagon
-            (int[] startPositions, int[] endPositions, FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns){
-        return null;
+            (int[] startPositions, int[] travelDistances,int[] endPositions,
+             FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns){
+        FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> hexagon = new FixedArrayQueue<>(travelDistances.length);
+        for (int i = 0; i < startPositions.length; i++){
+            FixedArrayQueue<Hex.HexNode> inputColumn = new FixedArrayQueue<>(travelDistances[i]);
+            for (int j = startPositions[i]; j < endPositions[i]; j++)
+                inputColumn.add(columns.get(i).get(j));
+            hexagon.add(inputColumn);
+        }
+
+        return hexagon;
     }
 
     private static int[] addArrays(int[] arrayOne, int[] arrayTwo){
