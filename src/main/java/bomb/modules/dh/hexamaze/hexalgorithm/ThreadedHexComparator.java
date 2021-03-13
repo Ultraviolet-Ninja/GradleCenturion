@@ -58,7 +58,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
 
     private ArrayList<ArrayList<Integer>> splitList(ArrayList<Integer> list){
         int split = list.size() / 2;
-        int end = list.size() - 1;
+        int end = Math.max(list.size() - 1, 0);
         ArrayList<ArrayList<Integer>> output = new ArrayList<>();
         output.add(new ArrayList<>(list.subList(0, split)));
         output.add(new ArrayList<>(list.subList(split, end)));

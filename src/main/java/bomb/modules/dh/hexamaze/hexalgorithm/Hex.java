@@ -103,6 +103,20 @@ public class Hex {
         public int checkExits() {
             return 6 - (walls.size() + 1);
         }
+
+        @Override
+        public boolean equals(Object obj){
+            if (!(obj instanceof HexNode)) return false;
+            return ((HexNode)obj).fill == this.fill && hasMatchingWalls(((HexNode)obj).walls);
+        }
+
+        private boolean hasMatchingWalls(ArrayList<HexWall> toCompare){
+            if (this.walls.size() != toCompare.size()) return false;
+            for (HexWall wall : toCompare){
+                if (!this.walls.contains(wall)) return false;
+            }
+            return true;
+        }
     }
 
     private FixedArrayQueue<FixedArrayQueue<HexNode>> hexagon;
