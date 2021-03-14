@@ -271,18 +271,6 @@ public class HexComparator {
     }
 
     /**
-     * Rotates the resulting Hex to be in the correct position
-     *
-     * @param copy      The Hexagon duplicate
-     * @param rotations The number of rotations the Hexagon needs to go through
-     * @return The rotated hexagon
-     */
-    private static Hex rotateTo(Hex copy, int rotations) {
-        for (int i = 0; i < rotations; i++) copy.rotate();
-        return copy;
-    }
-
-    /**
      * Increments each number in the array
      *
      * @param array The array of integers

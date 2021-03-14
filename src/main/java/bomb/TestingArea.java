@@ -1,6 +1,7 @@
 package bomb;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
@@ -9,16 +10,37 @@ import java.util.ArrayList;
 
 public class TestingArea {
     public static void main(String[] args) {
-        String[] shapes = "n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n".split(",");
-        ArrayList<Hex.HexNode> nodes = new ArrayList<>();
-        for (String shape : shapes){
-            nodes.add(new Hex.HexNode(Hex.decodeShape(shape), null));
-        }
-        HexGrid inputGrid = new HexGrid(new Hex(nodes), 0);
+        Maze maze;
+        HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+        HexGrid worstCase = fromLine("n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+        HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
         try{
-            System.out.println(ThreadedHexComparator.evaluate(new Maze(), inputGrid));
+            maze = new Maze();
+            testComparators(maze, bestCase);
+            testComparators(maze, worstCase);
+            testComparators(maze, nullCase);
         } catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    private static HexGrid fromLine(String line){
+        ArrayList<Hex.HexNode> list = new ArrayList<>();
+        for (String shape : line.split(","))
+            list.add(new Hex.HexNode(Hex.decodeShape(shape), null));
+        return new HexGrid(new Hex(list), 0);
+    }
+
+    private static void testComparators(Maze fullMaze, HexGrid testGrid){
+        long linearStart = System.nanoTime();
+        HexComparator.evaluate(fullMaze, testGrid);
+        long linearStop = System.nanoTime();
+
+        long threadedStart = System.nanoTime();
+        ThreadedHexComparator.evaluate(fullMaze, testGrid);
+        long threadedStop = System.nanoTime();
+
+        System.out.println(linearStop - linearStart);
+        System.out.println(threadedStop - threadedStart);
     }
 }
