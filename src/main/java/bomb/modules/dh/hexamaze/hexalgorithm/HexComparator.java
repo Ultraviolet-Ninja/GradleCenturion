@@ -93,7 +93,7 @@ public class HexComparator {
         return outputTower;
     }
 
-    private static FixedArrayQueue<Hex.HexNode> deepCopyList(FixedArrayQueue<Hex.HexNode> input) {
+    static FixedArrayQueue<Hex.HexNode> deepCopyList(FixedArrayQueue<Hex.HexNode> input) {
         //TODO - Streamable?
         FixedArrayQueue<Hex.HexNode> output = new FixedArrayQueue<>(input.cap());
         for (int i = 0; i < output.cap(); i++)
@@ -206,7 +206,7 @@ public class HexComparator {
     /**
      * @param startingGrid The 2D iterator
      * @param tower
-     * @param grid         The grid that the defuser sees
+     * @param grid The grid that the defuser sees
      * @param pings
      * @return
      * @throws IllegalArgumentException If there's a size difference between the two hexagons
@@ -265,7 +265,6 @@ public class HexComparator {
         if (gridArray.size() != copyArray.size())
             throw new IllegalArgumentException("Size Difference in compare()");
 
-        //TODO - Streamable?
         for (int i = 0; i < gridArray.size(); i++)
             if (gridArray.get(i).fill != copyArray.get(i).fill) return false;
         return true;

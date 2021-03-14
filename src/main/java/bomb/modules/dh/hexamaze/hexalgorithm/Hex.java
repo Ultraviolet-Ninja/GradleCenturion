@@ -117,6 +117,15 @@ public class Hex {
             }
             return true;
         }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder().append(fill != null ? fill.toString() : "null");
+            sb.append("-");
+            for (HexWall wall : this.walls)
+                sb.append(wall.toString()).append(" ");
+            return sb.toString();
+        }
     }
 
     private FixedArrayQueue<FixedArrayQueue<HexNode>> hexagon;

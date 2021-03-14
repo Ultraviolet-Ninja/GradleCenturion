@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class TestingArea {
     public static void main(String[] args) {
-        String[] shapes = "n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,h,n,n,n,n,n".split(",");
+        String[] shapes = "n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n".split(",");
         ArrayList<Hex.HexNode> nodes = new ArrayList<>();
         for (String shape : shapes){
             nodes.add(new Hex.HexNode(Hex.decodeShape(shape), null));

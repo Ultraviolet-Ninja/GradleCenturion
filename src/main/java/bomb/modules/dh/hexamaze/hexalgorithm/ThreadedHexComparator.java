@@ -19,7 +19,7 @@ public class ThreadedHexComparator {
 
     public static HexGrid evaluate(Maze fullMaze, HexGrid grid){
         int iterations = fullMaze.hexport().getSpan() - grid.hexport().getSpan();
-        ArrayList<Integer> columnList = IntStream.range(0, iterations)
+        ArrayList<Integer> columnList = IntStream.range(0, iterations + 1)
                 .boxed()
                 .collect(Collectors.toCollection(ArrayList::new));
         ForkJoinPool mazePool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
@@ -58,10 +58,9 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
 
     private ArrayList<ArrayList<Integer>> splitList(ArrayList<Integer> list){
         int split = list.size() / 2;
-        int end = Math.max(list.size() - 1, 0);
         ArrayList<ArrayList<Integer>> output = new ArrayList<>();
         output.add(new ArrayList<>(list.subList(0, split)));
-        output.add(new ArrayList<>(list.subList(split, end)));
+        output.add(new ArrayList<>(list.subList(split, list.size())));
         return output;
     }
 
@@ -77,7 +76,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> strippedMaze = fullMaze.exportTo2DQueue();
         FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> outputColumns = new FixedArrayQueue<>(iteratorSize);
         for (int i = startColumn; i < iteratorSize + startColumn; i++)
-            outputColumns.add(strippedMaze.get(i));
+            outputColumns.add(HexComparator.deepCopyList(strippedMaze.get(i)));
 
         return outputColumns;
     }
@@ -107,29 +106,38 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
                 positions[j] = 0;
         } else Arrays.fill(positions, 0); //We're in the middle columns of the maze
 
+        for (int i = 0; i < positions.length; i++)
+            positions[i] /= 2;
+
         return positions;
     }
 
-    private HexGrid runColumns(FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns, HexGrid grid, int[] positions){
-        final int hexagonalSideLength = (positions.length + 1) / 2;
+    private HexGrid runColumns(FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns, HexGrid grid, int[] startPositions){
+        final int hexagonalSideLength = (startPositions.length + 1) / 2;
         final int[] travelDistances = HexComparator.pingRequest(hexagonalSideLength);
-        int[] endPositions = addArrays(travelDistances, positions);
+        int[] endPositions = addArrays(travelDistances, startPositions);
 
-        while(endPositions[0] < columns.get(0).cap()){
-            Hex currentIterator = new Hex(retrieveHexagon(positions, travelDistances, endPositions, columns),
+        while(notDone(columns, endPositions)){
+            Hex currentIterator = new Hex(retrieveHexagon(startPositions, travelDistances, endPositions, columns),
                     hexagonalSideLength);
-
             int rotations = HexComparator.fullRotationCompare(grid, currentIterator);
-            if (rotations != -1) return new HexGrid(currentIterator, rotations);
+            if (rotations != -1)
+                return new HexGrid(currentIterator, rotations);
 
-            HexComparator.incrementArray(positions);
+            HexComparator.incrementArray(startPositions);
             HexComparator.incrementArray(endPositions);
         }
 
         return null;
     }
 
-    private static FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> retrieveHexagon
+    private boolean notDone(FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns, int[] endPositions){
+        for (int i = 0; i < columns.cap(); i++)
+            if (endPositions[i] > columns.get(i).cap()) return false;
+        return true;
+    }
+
+    private FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> retrieveHexagon
             (int[] startPositions, int[] travelDistances,int[] endPositions,
              FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns){
         FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> hexagon = new FixedArrayQueue<>(travelDistances.length);
@@ -143,7 +151,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         return hexagon;
     }
 
-    private static int[] addArrays(int[] arrayOne, int[] arrayTwo){
+    private int[] addArrays(int[] arrayOne, int[] arrayTwo){
         int[] output = new int[arrayOne.length];
         for (int i = 0; i < arrayOne.length; i++)
             output[i] = arrayOne[i] + arrayTwo[i];

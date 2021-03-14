@@ -7,7 +7,6 @@ import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import bomb.tools.data.structures.FixedArrayQueue;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
@@ -16,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -23,48 +23,63 @@ public class HexComparatorTest {
     private static final int NO_ROTATIONS = 0;
     private static final String PATH = System.getProperty("user.dir") +
             "\\src\\test\\resources\\bomb\\modules\\dh\\";
+    private static final String FAILED_AT = "Failed at test ";
 
     private static Maze fullMaze;
-    private static boolean runTests = true;
 
     @BeforeAll
     static void initializeMaze(){
         try {
             fullMaze = new Maze();
         } catch (IOException e){
-            runTests = false;
+            fail(e);
         }
     }
 
     @Test
-    @Order(0)
-    void stop(){
-        if (!runTests) fail("Full Maze not initialized. Tests cannot proceed");
-    }
-
-//    @Test
-//    @Order(1)
     void matchTest(){
         String csvLine;
         int testNumber = 1;
         try {
             BufferedReader csvReader =
-                    new BufferedReader(new FileReader(PATH + "testHexGrids.csv"));
+                    new BufferedReader(new FileReader(PATH + "existentHexGrids.csv"));
             csvReader.readLine();
-            csvLine = csvReader.readLine();
+            csvLine = csvReader.readLine().replace("\n", "");
             while(csvLine != null){
-                System.out.println("Test number: " + testNumber++);
-                HexGrid inputGrid = getNextHexagon(new StringTokenizer(csvLine, ","));
-                HexGrid linearOutput = HexComparator.evaluate(fullMaze, inputGrid);
-                HexGrid threadedOutput = ThreadedHexComparator.evaluate(fullMaze, inputGrid);
-                assertTrue(hexagonsMatch(linearOutput, threadedOutput));
+                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
+                assertTrue(hexagonsMatch(outputs[0], outputs[1]), FAILED_AT + testNumber++);
                 csvLine = csvReader.readLine();
             }
             csvReader.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            fail();
+            fail(e);
         }
+    }
+
+    @Test
+    void nullTest(){
+        String csvLine;
+        int testNumber = 1;
+        try {
+            BufferedReader csvReader =
+                    new BufferedReader(new FileReader(PATH + "nonExistentHexGrids.csv"));
+            csvReader.readLine();
+            csvLine = csvReader.readLine().replace("\n", "");
+            while (csvLine != null){
+                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
+                assertNull(outputs[0], FAILED_AT + testNumber++);
+                assertNull(outputs[1], FAILED_AT + testNumber);
+                csvLine = csvReader.readLine();
+            }
+            csvReader.close();
+        } catch (IOException e){
+            fail(e);
+        }
+    }
+
+    private HexGrid[] getOutputHexGrids(HexGrid inputGrid){
+        return new HexGrid[]{HexComparator.evaluate(fullMaze, inputGrid),
+                ThreadedHexComparator.evaluate(fullMaze, inputGrid)};
     }
 
     private HexGrid getNextHexagon(StringTokenizer shapeLine){

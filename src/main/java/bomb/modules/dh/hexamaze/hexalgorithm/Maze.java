@@ -42,7 +42,6 @@ public class Maze {
     private ArrayList<Hex.HexNode> decodeDoc() throws IOException, URISyntaxException {
         ArrayList<Hex.HexNode> nodes = new ArrayList<>();
         Scanner docScan = new Scanner(new File(getClass().getResource("HexMaze.txt").toURI()).toPath());
-        //TODO - Streamable?
         while (docScan.hasNextLine()) {
             String[] elements = docScan.nextLine().split(" ");
             nodes.add(new Hex.HexNode(decodeShape(elements[1]), decodeWalls(elements[0])));
