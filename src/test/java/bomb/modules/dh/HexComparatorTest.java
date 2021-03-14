@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class HexComparatorTest {
     private static final int NO_ROTATIONS = 0;
     private static final String PATH = System.getProperty("user.dir") +
-            "\\src\\test\\resources\\bomb\\modules\\dh\\";
+            "/src/test/resources/bomb/modules/dh/";
     private static final String FAILED_AT = "Failed at test ";
 
     private static Maze fullMaze;
