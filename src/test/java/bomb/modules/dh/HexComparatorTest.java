@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -46,8 +47,10 @@ public class HexComparatorTest {
             csvReader.readLine();
             csvLine = csvReader.readLine().replace("\n", "");
             while(csvLine != null){
-                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
-                assertTrue(hexagonsMatch(outputs[0], outputs[1]), FAILED_AT + testNumber++);
+//                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
+//                assertTrue(hexagonsMatch(outputs[0], outputs[1]), FAILED_AT + testNumber++);
+                assertNotNull(HexComparator.evaluate(fullMaze, getNextHexagon(new StringTokenizer(csvLine, ","))),
+                        FAILED_AT + testNumber++);
                 csvLine = csvReader.readLine();
             }
             csvReader.close();
@@ -66,9 +69,10 @@ public class HexComparatorTest {
             csvReader.readLine();
             csvLine = csvReader.readLine().replace("\n", "");
             while (csvLine != null){
-                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
-                assertNull(outputs[0], FAILED_AT + testNumber++);
-                assertNull(outputs[1], FAILED_AT + testNumber);
+//                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
+                assertNull(HexComparator.evaluate(fullMaze, getNextHexagon(new StringTokenizer(csvLine, ","))),
+                        FAILED_AT + testNumber++);
+//                assertNull(outputs[1], FAILED_AT + testNumber);
                 csvLine = csvReader.readLine();
             }
             csvReader.close();

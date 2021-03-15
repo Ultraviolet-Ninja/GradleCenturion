@@ -7,8 +7,6 @@ import java.util.Arrays;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.function.BinaryOperator;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ThreadedHexComparator {
 
@@ -19,9 +17,9 @@ public class ThreadedHexComparator {
 
     public static HexGrid evaluate(Maze fullMaze, HexGrid grid){
         int iterations = fullMaze.hexport().getSpan() - grid.hexport().getSpan();
-        ArrayList<Integer> columnList = IntStream.range(0, iterations + 1)
-                .boxed()
-                .collect(Collectors.toCollection(ArrayList::new));
+        ArrayList<Integer> columnList = new ArrayList<>();
+        for (int i = 0; i <= iterations; i++)
+            columnList.add(i);
         ForkJoinPool mazePool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         ComparatorThread task = new ComparatorThread(fullMaze, grid, columnList);
         return mazePool.invoke(task);
