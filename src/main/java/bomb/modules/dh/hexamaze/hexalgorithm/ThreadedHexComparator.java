@@ -22,7 +22,7 @@ public class ThreadedHexComparator {
         ArrayList<Integer> columnList = IntStream.range(0, iterations + 1)
                 .boxed()
                 .collect(Collectors.toCollection(ArrayList::new));
-        ForkJoinPool mazePool = new ForkJoinPool(2);
+        ForkJoinPool mazePool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
         ComparatorThread task = new ComparatorThread(fullMaze, grid, columnList);
         return mazePool.invoke(task);
     }
