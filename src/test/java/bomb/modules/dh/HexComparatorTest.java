@@ -47,8 +47,8 @@ public class HexComparatorTest {
             csvReader.readLine();
             csvLine = csvReader.readLine().replace("\n", "");
             while(csvLine != null){
-//                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
-//                assertTrue(hexagonsMatch(outputs[0], outputs[1]), FAILED_AT + testNumber++);
+                HexGrid[] outputs = getOutputHexGrids(getNextHexagon(new StringTokenizer(csvLine, ",")));
+                assertTrue(hexagonsMatch(outputs[0], outputs[1]), FAILED_AT + testNumber++);
                 assertNotNull(HexComparator.evaluate(fullMaze, getNextHexagon(new StringTokenizer(csvLine, ","))),
                         FAILED_AT + testNumber++);
                 csvLine = csvReader.readLine();
