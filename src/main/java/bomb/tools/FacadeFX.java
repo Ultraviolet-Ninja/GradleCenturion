@@ -2,6 +2,7 @@ package bomb.tools;
 
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -11,6 +12,20 @@ public class FacadeFX {
 
     public static void clearText(TextInputControl text){
         text.setText("");
+    }
+
+    public static void clearText(Label label){
+        label.setText("");
+    }
+
+    public static void clearTextMultiple(TextInputControl ... texts){
+        for (TextInputControl text : texts)
+            clearText(text);
+    }
+
+    public static void clearTextMultiple(Label ... labels){
+        for (Label label : labels)
+            clearText(label);
     }
 
     public static void disable(Node node){

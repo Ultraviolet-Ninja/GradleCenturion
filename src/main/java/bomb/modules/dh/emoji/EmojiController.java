@@ -37,6 +37,7 @@ public class EmojiController {
         disableControl();
     }
 
+    //FIXME
     @FXML
     private void addToEquation(){
         eqCount++;

@@ -86,7 +86,8 @@ public class WidgetController {
     private void updateField(TextField field, int nextNum) {
         field.setText(String.valueOf(nextNum));
     }
-
+    //FIXME - Design a quicker system
+    //<editor-fold desc="To Fix">
     @FXML
     private void setLit() {
         checkUnknown(buttonSetter(bobLit, carLit, clrLit, frkLit, frqLit, indLit, msaLit, nsaLit,
@@ -154,6 +155,7 @@ public class WidgetController {
         currentLabel.setStyle(currentState.getLabel());
         return updateCheck;
     }
+    //</editor-fold>
 
     private void checkUnknown(int check) {
         switch (check) {
@@ -364,18 +366,8 @@ public class WidgetController {
         rj.setText("0");
         serial.setText("0");
         rca.setText("0");
-        aLabel.setText("");
-        dLabel.setText("");
-        holderLabel.setText("");
-        plateLabel.setText("");
-        minuteLabel.setText("");
-        moduleLabel.setText("");
-        serialField.setText("");
-        doubleAField.setText("");
-        dBatField.setText("");
-        holderField.setText("");
-        modField.setText("");
-        minField.setText("");
-        plateField.setText("");
+        FacadeFX.clearTextMultiple(aLabel, dLabel, holderLabel, plateLabel, minuteLabel, moduleLabel);
+        FacadeFX.clearTextMultiple(serialField, doubleAField, dBatField, holderField,
+                modField, minField, plateField);
     }
 }

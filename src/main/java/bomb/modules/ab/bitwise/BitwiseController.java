@@ -12,6 +12,7 @@ public class BitwiseController {
     @FXML
     private TextField bitOut;
 
+    //FIXME
     @FXML
     private void bitwiseSolve(){
         BitwiseOps bit = null;

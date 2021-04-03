@@ -19,6 +19,7 @@ public class AstrologyController {
     @FXML
     private Button astroReset;
 
+    //FIXME - Lots of hover fixes
     @FXML
     private void getElement(){
         if (fire.isHover()){

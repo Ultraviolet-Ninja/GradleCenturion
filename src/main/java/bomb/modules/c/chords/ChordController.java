@@ -17,6 +17,7 @@ public class ChordController {
     @FXML
     private TextField inputChord, outputChord;
 
+    //FIXME
     @FXML
     private void type(){
         if (a.isHover())

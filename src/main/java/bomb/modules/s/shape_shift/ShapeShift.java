@@ -13,34 +13,10 @@ public class ShapeShift extends Widget {
     private static final int[][] countTracker = new int[4][4];
     private static ListGraph<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> graph;
 
+    //<editor-fold desc="Init methods">
     static {
         zeroOutArray();
         initializeGraph();
-    }
-
-    public static ShiftShape[] solve(ShiftShape left, ShiftShape right){
-        serialCodeChecker();
-        increment(left, right);
-        if (checkIfVisitedTwice(left, right)) {
-            AbstractMap.SimpleEntry<ShiftShape, ShiftShape> pair = graph.get(
-                    new AbstractMap.SimpleEntry<>(left, right))
-                    .get(booleanIntConversion(conditionMap(left, right)));
-            return solve(pair.getKey(), pair.getValue());
-        }
-        resetMod();
-        return new ShiftShape[]{left, right};
-    }
-
-    private static void serialCodeChecker() throws IllegalArgumentException{
-        if (!serialCodeCheck) {
-            if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is empty");
-            serialCodeCheck = true;
-        }
-    }
-
-    private static void resetMod(){
-        serialCodeCheck = false;
-        zeroOutArray();
     }
 
     private static void zeroOutArray(){
@@ -89,6 +65,32 @@ public class ShapeShift extends Widget {
         graph.addEdge(trios[0], trios[1]);
         graph.addEdge(trios[0], trios[2]);
     }
+    //</editor-fold>
+
+    public static ShiftShape[] solve(ShiftShape left, ShiftShape right){
+        serialCodeChecker();
+        increment(left, right);
+        if (checkIfVisitedTwice(left, right)) {
+            AbstractMap.SimpleEntry<ShiftShape, ShiftShape> pair = graph.get(
+                    new AbstractMap.SimpleEntry<>(left, right))
+                    .get(booleanIntConversion(conditionMap(left, right)));
+            return solve(pair.getKey(), pair.getValue());
+        }
+        resetMod();
+        return new ShiftShape[]{left, right};
+    }
+
+    private static void serialCodeChecker() throws IllegalArgumentException{
+        if (!serialCodeCheck) {
+            if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is empty");
+            serialCodeCheck = true;
+        }
+    }
+
+    private static void resetMod(){
+        serialCodeCheck = false;
+        zeroOutArray();
+    }
 
     private static void increment(ShiftShape left, ShiftShape right){
         countTracker[left.getIdx()][right.getIdx()] += 1;
@@ -98,6 +100,7 @@ public class ShapeShift extends Widget {
         return countTracker[left.getIdx()][right.getIdx()] < 2;
     }
 
+    //<editor-fold desc="Boolean Methods">
     private static boolean conditionMap(ShiftShape left, ShiftShape right){
         switch (left){
             case ROUND:
@@ -162,6 +165,7 @@ public class ShapeShift extends Widget {
                 return getAllBatteries() >= 3;
         }
     }
+    //</editor-fold>
 
     private static int booleanIntConversion(boolean bool){
         return bool ? 1 : 0;
