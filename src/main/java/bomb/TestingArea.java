@@ -6,9 +6,12 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class TestingArea {
+    public static DecimalFormat format = new DecimalFormat("###,###,###,###");
+
     public static void main(String[] args) {
         Maze maze;
         HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
@@ -40,7 +43,7 @@ public class TestingArea {
         ThreadedHexComparator.evaluate(fullMaze, testGrid);
         long threadedStop = System.nanoTime();
 
-        System.out.println(linearStop - linearStart);
-        System.out.println(threadedStop - threadedStart);
+        System.out.println("Linear Time: " + format.format(linearStop - linearStart));
+        System.out.println("Threaded time: " + format.format(threadedStop - threadedStart));
     }
 }

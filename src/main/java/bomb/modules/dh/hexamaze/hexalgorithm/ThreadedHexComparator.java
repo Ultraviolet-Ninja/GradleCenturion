@@ -20,7 +20,7 @@ public class ThreadedHexComparator {
         ArrayList<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
-        ForkJoinPool mazePool = new ForkJoinPool(Runtime.getRuntime().availableProcessors());
+        ForkJoinPool mazePool = new ForkJoinPool(2);
         ComparatorThread task = new ComparatorThread(fullMaze, grid, columnList);
         return mazePool.invoke(task);
     }
