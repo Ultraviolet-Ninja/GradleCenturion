@@ -1,5 +1,6 @@
 package bomb.modules.ab.bitwise;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -28,10 +29,8 @@ public class BitwiseController {
         try {
             bitOut.setText(Bitwise.getByte(bit));
         } catch (IllegalArgumentException illegal){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, illegal.getMessage());
-            alert.setHeaderText("Something's empty");
-            alert.setTitle("Do more edge work");
-            alert.show();
+            FacadeFX.setAlert(Alert.AlertType.INFORMATION, illegal.getMessage(),
+                    "Something's empty", "Do more edge work");
         }
     }
 }

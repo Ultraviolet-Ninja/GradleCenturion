@@ -9,10 +9,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
-import java.util.LinkedList;
 
 import static bomb.tools.Mechanics.ultimateFilter;
 
@@ -60,6 +58,7 @@ public class TranslationController {
         }
     }
 
+    //FIXME
     //Translation Center Method
     @FXML
     private void getFlag(){

@@ -28,6 +28,7 @@ public class TheBulbController {
     @FXML
     private TextArea bulbResults;
 
+    //FIXME
     @FXML
     private void colorSet(){
         bulbConditions[0] = true;
