@@ -28,7 +28,7 @@
             <RowConstraints maxHeight="527.0" minHeight="10.0" prefHeight="461.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <HBox prefHeight="100.0" prefWidth="200.0">
-            <Button fx:id="bitAnd" mnemonicParsing="false" onAction="#bitwiseSolve" text="And">
+            <Button fx:id="bitAnd" mnemonicParsing="false" text="And">
                 <font>
                     <Font size="40.0"/>
                 </font>
@@ -36,8 +36,7 @@
                     <Insets left="190.0" top="75.0"/>
                 </HBox.margin>
             </Button>
-            <Button fx:id="bitOr" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#bitwiseSolve"
-                    text="Or">
+            <Button fx:id="bitOr" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" text="Or">
                 <font>
                     <Font size="40.0"/>
                 </font>
@@ -45,8 +44,7 @@
                     <Insets left="80.0" top="75.0"/>
                 </HBox.margin>
             </Button>
-            <Button fx:id="bitXor" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#bitwiseSolve"
-                    text="Xor">
+            <Button fx:id="bitXor" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" text="Xor">
                 <font>
                     <Font size="40.0"/>
                 </font>
@@ -54,8 +52,7 @@
                     <Insets left="80.0" top="75.0"/>
                 </HBox.margin>
             </Button>
-            <Button fx:id="bitNot" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" onAction="#bitwiseSolve"
-                    text="Not">
+            <Button fx:id="bitNot" layoutX="10.0" layoutY="85.0" mnemonicParsing="false" text="Not">
                 <font>
                     <Font size="40.0"/>
                 </font>
