@@ -1,13 +1,17 @@
 package bomb.modules.c.chords;
 
 import bomb.tools.FacadeFX;
+import bomb.tools.HoverHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import java.util.function.Consumer;
 
 public class ChordController {
     private int counter = 0;
+    private HoverHandler<ActionEvent> handler;
     private final String[] notes = new String[4];
     private StringBuilder track = new StringBuilder();
 
@@ -16,6 +20,28 @@ public class ChordController {
 
     @FXML
     private TextField inputChord, outputChord;
+    
+    public void initialize(){
+      handler = new HoverHandler(createAction());
+      a.setOnAction(handler);
+      aSharp.setOnAction(handler);
+      b.setOnAction(handler);
+      c.setOnAction(handler);
+      cSharp.setOnAction(handler);
+      d.setOnAction(handler);
+      dSharp.setOnAction(handler);
+      e.setOnAction(handler);
+      f.setOnAction(handler);
+      fSharp.setOnAction(handler);
+      g.setOnAction(handler);
+      gSharp.setOnAction(handler);
+    }
+    
+    private Consumer<ActionEvent> createAction(){
+      return event -> {
+        add(((Button)event.getSource()).getText());
+      };
+    }
 
     //FIXME
     @FXML
