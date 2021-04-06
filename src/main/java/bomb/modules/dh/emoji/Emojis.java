@@ -22,6 +22,14 @@ public enum Emojis implements Index, Labeled {
         return index;
     }
 
+    public static Emojis getEmojiFromText(String incoming){
+        for (Emojis emoji : Emojis.values()) {
+            if (emoji.label.equals(incoming))
+                return emoji;
+        }
+        return null;
+    }
+
     Emojis(int index, String label){
         this.index = index;
         this.label = label;

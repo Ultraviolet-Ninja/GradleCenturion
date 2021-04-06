@@ -22,18 +22,7 @@ public class ChordController {
     
     public void initialize(){
         HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
-      a.setOnAction(handler);
-      aSharp.setOnAction(handler);
-      b.setOnAction(handler);
-      c.setOnAction(handler);
-      cSharp.setOnAction(handler);
-      d.setOnAction(handler);
-      dSharp.setOnAction(handler);
-      e.setOnAction(handler);
-      f.setOnAction(handler);
-      fSharp.setOnAction(handler);
-      g.setOnAction(handler);
-      gSharp.setOnAction(handler);
+        FacadeFX.bindHandler(handler, a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp);
     }
     
     private Consumer<ActionEvent> createAction(){

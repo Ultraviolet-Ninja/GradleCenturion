@@ -12,7 +12,8 @@ import static bomb.modules.t.bulb.Bulb.THE_BULB;
 public class TheBulbController {
     private static final String RED_STYLE = "-fx-text-fill: red", YELLOW_STYLE = "-fx-text-fill: yellow",
             GREEN_STYLE = "-fx-text-fill: #07c307", BLUE_STYLE = "-fx-text-fill: dodgerblue",
-            BLACK_STYLE = "-fx-text-fill: black", WHITE_STYLE = "-fx-text-fill: white";
+            MAGENTA_STYLE = "-fx-text-fill: #cc0bdd", BLACK_STYLE = "-fx-text-fill: black",
+            WHITE_STYLE = "-fx-text-fill: white";
 
     private final boolean[] bulbConditions = new boolean[3];
 
@@ -55,56 +56,12 @@ public class TheBulbController {
     }
 
     private void labelSet(int color){
-        switch (color){
-            case 0: {
-                redLabel.setStyle(RED_STYLE);
-                yellowLabel.setStyle(BLACK_STYLE);
-                greenLabel.setStyle(BLACK_STYLE);
-                blueLabel.setStyle(BLACK_STYLE);
-                purpleLabel.setStyle(BLACK_STYLE);
-                whiteLabel.setStyle(BLACK_STYLE);
-            }
-            case 1: {
-                redLabel.setStyle(BLACK_STYLE);
-                yellowLabel.setStyle(YELLOW_STYLE);
-                greenLabel.setStyle(BLACK_STYLE);
-                blueLabel.setStyle(BLACK_STYLE);
-                purpleLabel.setStyle(BLACK_STYLE);
-                whiteLabel.setStyle(BLACK_STYLE);
-            }
-            case 2: {
-                redLabel.setStyle(BLACK_STYLE);
-                yellowLabel.setStyle(BLACK_STYLE);
-                greenLabel.setStyle(GREEN_STYLE);
-                blueLabel.setStyle(BLACK_STYLE);
-                purpleLabel.setStyle(BLACK_STYLE);
-                whiteLabel.setStyle(BLACK_STYLE);
-            }
-            case 3: {
-                redLabel.setStyle(BLACK_STYLE);
-                yellowLabel.setStyle(BLACK_STYLE);
-                greenLabel.setStyle(BLACK_STYLE);
-                blueLabel.setStyle(BLUE_STYLE);
-                purpleLabel.setStyle(BLACK_STYLE);
-                whiteLabel.setStyle(BLACK_STYLE);
-            }
-            case 4: {
-                redLabel.setStyle(BLACK_STYLE);
-                yellowLabel.setStyle(BLACK_STYLE);
-                greenLabel.setStyle(BLACK_STYLE);
-                blueLabel.setStyle(BLACK_STYLE);
-                purpleLabel.setStyle("-fx-text-fill: #cc0bdd");
-                whiteLabel.setStyle(BLACK_STYLE);
-            }
-            default: {
-                redLabel.setStyle(BLACK_STYLE);
-                yellowLabel.setStyle(BLACK_STYLE);
-                greenLabel.setStyle(BLACK_STYLE);
-                blueLabel.setStyle(BLACK_STYLE);
-                purpleLabel.setStyle(BLACK_STYLE);
-                whiteLabel.setStyle(WHITE_STYLE);
-            }
-        }
+        redLabel.setStyle(color == 0 ? RED_STYLE : BLACK_STYLE);
+        yellowLabel.setStyle(color == 1 ? YELLOW_STYLE : BLACK_STYLE);
+        greenLabel.setStyle(color == 2 ? GREEN_STYLE : BLACK_STYLE);
+        blueLabel.setStyle(color == 3 ? BLUE_STYLE : BLACK_STYLE);
+        purpleLabel.setStyle(color == 4 ? MAGENTA_STYLE : BLACK_STYLE);
+        whiteLabel.setStyle(color == 5 ? WHITE_STYLE : BLACK_STYLE);
     }
 
     @FXML

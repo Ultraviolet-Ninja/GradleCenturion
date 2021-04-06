@@ -18,15 +18,6 @@ public enum Roots implements Labeled {
     public String getNote() {
         return note;
     }
-    
-    public Roots getRootByNote(String noteName){
-      for(Roots root : Roots.values()){
-        if(root.note.equals(noteName)){
-          return root;
-        }
-      }
-      return null;
-    }
 
     Roots(String note, String label){
         this.note = note;
