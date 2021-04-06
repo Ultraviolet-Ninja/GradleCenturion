@@ -19,8 +19,8 @@ public enum Roots implements Labeled {
         return note;
     }
     
-    public Root getRootByNote(String noteName){
-      for(Root root : Root.values()){
+    public Roots getRootByNote(String noteName){
+      for(Roots root : Roots.values()){
         if(root.note.equals(noteName)){
           return root;
         }
