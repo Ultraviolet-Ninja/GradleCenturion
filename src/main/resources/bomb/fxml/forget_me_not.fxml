@@ -64,7 +64,7 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
                 <VBox prefHeight="200.0" prefWidth="100.0">
-                    <Button fx:id="one" mnemonicParsing="false" onAction="#nextNumber" text="1">
+                    <Button fx:id="one" mnemonicParsing="false" text="1">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -72,7 +72,7 @@
                             <Insets left="40.0" top="75.0"/>
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="four" mnemonicParsing="false" onAction="#nextNumber" text="4">
+                    <Button fx:id="four" mnemonicParsing="false" text="4">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -80,7 +80,7 @@
                             <Insets left="40.0" top="50.0"/>
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="seven" mnemonicParsing="false" onAction="#nextNumber" text="7">
+                    <Button fx:id="seven" mnemonicParsing="false" text="7">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -90,7 +90,7 @@
                     </Button>
                 </VBox>
                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-                    <Button fx:id="two" mnemonicParsing="false" onAction="#nextNumber" text="2">
+                    <Button fx:id="two" mnemonicParsing="false" text="2">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -98,8 +98,7 @@
                             <Insets left="40.0" top="75.0"/>
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="five" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#nextNumber"
-                            text="5">
+                    <Button fx:id="five" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="5">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -107,8 +106,7 @@
                             <Insets left="40.0" top="50.0"/>
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="eight" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onAction="#nextNumber"
-                            text="8">
+                    <Button fx:id="eight" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" text="8">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -118,7 +116,7 @@
                     </Button>
                 </VBox>
                 <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
-                    <Button fx:id="three" mnemonicParsing="false" onAction="#nextNumber" text="3">
+                    <Button fx:id="three" mnemonicParsing="false" text="3">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -126,8 +124,7 @@
                             <Insets left="40.0" top="75.0"/>
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="six" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#nextNumber"
-                            text="6">
+                    <Button fx:id="six" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="6">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -135,8 +132,7 @@
                             <Insets left="40.0" top="50.0"/>
                         </VBox.margin>
                     </Button>
-                    <Button fx:id="nine" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" onAction="#nextNumber"
-                            text="9">
+                    <Button fx:id="nine" layoutX="10.0" layoutY="87.0" mnemonicParsing="false" text="9">
                         <font>
                             <Font size="36.0"/>
                         </font>
@@ -155,7 +151,7 @@
                             <Font size="36.0"/>
                         </font>
                     </Label>
-                    <Button fx:id="zero" mnemonicParsing="false" onAction="#nextNumber" text="0">
+                    <Button fx:id="zero" mnemonicParsing="false" text="0">
                         <font>
                             <Font size="36.0"/>
                         </font>

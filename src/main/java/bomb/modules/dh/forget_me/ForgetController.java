@@ -2,12 +2,15 @@ package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
 import bomb.tools.FacadeFX;
+import bomb.tools.HoverHandler;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import java.util.function.Consumer;
 
 public class ForgetController {
     private static final double COMPLETION_PERCENTAGE = 0.9;
@@ -25,41 +28,26 @@ public class ForgetController {
 
     @FXML
     private TextField forgetMeOutput;
-
-    @FXML
-    private void nextNumber(){
-        if (Widget.getNumModules() != 0) {
-            try {
-                if (one.isHover())
-                    addTo(one);
-                else if (two.isHover())
-                    addTo(two);
-                else if (three.isHover())
-                    addTo(three);
-                else if (four.isHover())
-                    addTo(four);
-                else if (five.isHover())
-                    addTo(five);
-                else if (six.isHover())
-                    addTo(six);
-                else if (seven.isHover())
-                    addTo(seven);
-                else if (eight.isHover())
-                    addTo(eight);
-                else if (nine.isHover())
-                    addTo(nine);
-                else if (zero.isHover())
-                    addTo(zero);
-                undoButton.setDisable(false);
-                writeNext();
-            } catch (IllegalArgumentException illegal) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
-            }
+    
+    public void initialize(){
+      HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
+      FacadeFX.bindHandler(handler, one, two, three, four, five, six, seven, eight, nine, zero);
+    }
+    
+    private Consumer<ActionEvent> createAction(){
+      return event -> {
+        if(Widget.getNumModules() > 0){
+          try {
+            addTo((Button) event.getSource());
+            undoButton.setDisable(false);
+            writeNext();
+          } catch(IllegalArgumentExceptionillegal){
+            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
+          }
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Need to set the number of modules for this to work");
-            alert.showAndWait();
+          FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work", "", "");
         }
+      };
     }
 
     private void writeNext(){
