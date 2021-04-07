@@ -115,7 +115,7 @@ public class Hexamaze extends Widget{
 
     /**
      * Fills the HexGrid with the array and sends it to the HexComparator to find the section of the maze
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException No sub-maze was found in the maze
      */
     public static void compareToFullMaze() throws IllegalArgumentException{
         grid.fillWithShapes(hexShapeTracker);
