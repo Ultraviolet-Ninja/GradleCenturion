@@ -41,11 +41,12 @@ public class ForgetController {
             addTo((Button) event.getSource());
             undoButton.setDisable(false);
             writeNext();
-          } catch(IllegalArgumentExceptionillegal){
+          } catch(IllegalArgumentException illegal){
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
           }
         } else {
-          FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work", "", "");
+          FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work",
+                  "", "");
         }
       };
     }
