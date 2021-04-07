@@ -3,7 +3,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.modules.dh.hexamaze.HexTraits;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.FixedArrayQueue;
-import bomb.tools.data.structures.FixedRing;
+import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -15,14 +15,14 @@ import java.util.ArrayList;
  */
 public class HexGrid {
     private final Hex defuserVision;
-    private final FixedRing<Color> colorRing;
+    private final ReadOnlyRing<Color> colorRing;
 
     /**
      * Initializes a Hex object with a side length of 4, representing what the defuser sees on thr bomb
      */
     public HexGrid(){
         defuserVision = new Hex(4);
-        colorRing = new FixedRing<>(6);
+        colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
     }
 
@@ -37,7 +37,7 @@ public class HexGrid {
         if (grid.sideLength() != 4)
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
         defuserVision = grid;
-        colorRing = new FixedRing<>(6);
+        colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
         for (int i = 0; i < neededRotations; i++) rotateColorOrder();
     }
@@ -67,7 +67,7 @@ public class HexGrid {
         colorRing.rotateHeadCounter();
     }
 
-    public FixedRing<Color> getRing(){
+    public ReadOnlyRing<Color> getRing(){
         return colorRing;
     }
 

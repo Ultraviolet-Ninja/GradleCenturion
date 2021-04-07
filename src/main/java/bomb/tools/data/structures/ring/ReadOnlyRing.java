@@ -1,9 +1,9 @@
-package bomb.tools.data.structures;
+package bomb.tools.data.structures.ring;
 
 import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 
-public class FixedRing<E> {
+public class ReadOnlyRing<E> {
     private static class Node<E>{
         private final E data;
         private Node<E> prev, next;
@@ -18,7 +18,7 @@ public class FixedRing<E> {
     private int size;
     private Node<E> head;
 
-    public FixedRing(int capacity){
+    public ReadOnlyRing(int capacity){
         this.capacity = capacity;
         size = 0;
         head = null;
