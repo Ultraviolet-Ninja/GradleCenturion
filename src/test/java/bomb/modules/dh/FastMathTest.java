@@ -21,8 +21,9 @@ public class FastMathTest {
     void exceptionTest(){
         assertThrows(IllegalArgumentException.class, () -> FastMath.solve(""));
         assertThrows(IllegalArgumentException.class, () -> FastMath.solve(null));
-        assertThrows(IllegalArgumentException.class, () -> FastMath.solve("AY"));
         assertThrows(IllegalArgumentException.class, () -> FastMath.solve("AZ"));
+        Widget.setSerialCode("fr4op2");
+        assertThrows(IllegalArgumentException.class, () -> FastMath.solve("AY"));
     }
 
     @Test
