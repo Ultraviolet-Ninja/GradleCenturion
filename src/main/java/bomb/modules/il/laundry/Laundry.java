@@ -18,7 +18,6 @@ public class Laundry extends Widget {
 
     private static int needy;
 
-    //TODO - Finish Javadocs
     /**
      * Picks out the right conditions to clean the current laundry load
      *
@@ -148,9 +147,9 @@ public class Laundry extends Widget {
     }
 
     /**
+     * Fills the forth attribute based on conditions specified on the manual page
      *
-     *
-     * @param att
+     * @param att The array of attributes to fill
      */
     private static void fillThird(String[] att){
         if (ARTICLE.getColor() == Clothing.Color.PEARL)
@@ -164,7 +163,7 @@ public class Laundry extends Widget {
     /**
      * Fills in the rest of the win conditions
      *
-     * @param att
+     * @param att The array of attributes to fill
      * @return The completed win conditions
      */
     private static String[] fillRest(String[] att){

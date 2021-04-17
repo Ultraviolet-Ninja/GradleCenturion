@@ -7,6 +7,7 @@ import java.util.ArrayList;
 public class Souvenir extends Widget {
     //TODO - Check out how Souvenir handles 2+ modules of the same type
     //TODO - CENTURION SOUVENIR IS DIFFERENT, CHANGE SOME SHITE, M8
+    //TODO - Consider changing how souvenirs are stored
     private static int prevSize = 0;
     private static final ArrayList<String> relics = new ArrayList<>();
 

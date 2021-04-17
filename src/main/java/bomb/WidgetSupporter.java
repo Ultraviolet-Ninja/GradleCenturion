@@ -40,6 +40,4 @@ public class WidgetSupporter {
     private void updateField(TextField current, int nextNum){
         current.setText(String.valueOf(nextNum));
     }
-
-
 }

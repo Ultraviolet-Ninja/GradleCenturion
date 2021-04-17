@@ -8,6 +8,7 @@ import bomb.tools.data.structures.graph.list.ListGraph;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 
+//TODO Eventually document the code
 public class ShapeShift extends Widget {
     private static boolean serialCodeCheck = false;
     private static final int[][] countTracker = new int[4][4];

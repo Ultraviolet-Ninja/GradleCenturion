@@ -67,6 +67,7 @@ public class Hexamaze extends Widget{
 
     public static void setPegFillSelector(Color fillColor){
         pegFillSelector = fillColor;
+        if (souvenir){}
     }
 
     /**
