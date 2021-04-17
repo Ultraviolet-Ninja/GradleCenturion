@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 public class FacadeFX {
     private FacadeFX(){}
@@ -16,6 +17,11 @@ public class FacadeFX {
     public static void bindHandlerToButtons(EventHandler<ActionEvent> handler, Button... buttons){
         for (Button button : buttons)
             button.setOnAction(handler);
+    }
+
+    public static void bindOnClickHandler(EventHandler<MouseEvent> handler, Node ... nodes){
+        for (Node node : nodes)
+            node.setOnMouseClicked(handler);
     }
 
     public static void clearText(TextInputControl text){

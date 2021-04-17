@@ -9,8 +9,7 @@ public class RoundController {
             FROM_HIGHLIGHT = "-fx-background-color: white";
 
     @FXML
-    private ImageView
-            emptyRacket1, aT, lambda1, harryPotter, russianCat1, curvyH1, backC1,
+    private ImageView emptyRacket1, aT, lambda1, harryPotter, russianCat1, curvyH1, backC1,
             backEuro1, emptyRacket2, backC2, disneyQ1, hollowStar1, curvyH2, spanish1,
             copyright, leSac, disneyQ2, russianX1, not3, lambda2, hollowStar2,
             russianSix1, paragraph1, tB1, russianCat2, russianX2, spanish2, smile1,
@@ -20,9 +19,6 @@ public class RoundController {
     @FXML
     private VBox keypad1, keypad2, keypad3, keypad4, keypad5, keypad6;
 
-    //TODO - Be able to flag keypads to not press
-    //Don't know what I meant by this
-    //FIXME
     @FXML
     private void keyPressed(){
         if (emptyRacket1.isHover()) {
@@ -215,63 +211,15 @@ public class RoundController {
     }
 
     private void highlightBox(int which){
-        switch (which) {
-            case -1: {
-                keypad1.setStyle(FROM_HIGHLIGHT);
-                keypad2.setStyle(FROM_HIGHLIGHT);
-                keypad3.setStyle(FROM_HIGHLIGHT);
-                keypad4.setStyle(FROM_HIGHLIGHT);
-                keypad5.setStyle(FROM_HIGHLIGHT);
-                keypad6.setStyle(FROM_HIGHLIGHT);
-            } break;
-            case 0: {
-                keypad1.setStyle(TO_HIGHLIGHT);
-                keypad2.setStyle(FROM_HIGHLIGHT);
-                keypad3.setStyle(FROM_HIGHLIGHT);
-                keypad4.setStyle(FROM_HIGHLIGHT);
-                keypad5.setStyle(FROM_HIGHLIGHT);
-                keypad6.setStyle(FROM_HIGHLIGHT);
-            } break;
-            case 1: {
-                keypad1.setStyle(FROM_HIGHLIGHT);
-                keypad2.setStyle(TO_HIGHLIGHT);
-                keypad3.setStyle(FROM_HIGHLIGHT);
-                keypad4.setStyle(FROM_HIGHLIGHT);
-                keypad5.setStyle(FROM_HIGHLIGHT);
-                keypad6.setStyle(FROM_HIGHLIGHT);
-            } break;
-            case 2: {
-                keypad1.setStyle(FROM_HIGHLIGHT);
-                keypad2.setStyle(FROM_HIGHLIGHT);
-                keypad3.setStyle(TO_HIGHLIGHT);
-                keypad4.setStyle(FROM_HIGHLIGHT);
-                keypad5.setStyle(FROM_HIGHLIGHT);
-                keypad6.setStyle(FROM_HIGHLIGHT);
-            } break;
-            case 3: {
-                keypad1.setStyle(FROM_HIGHLIGHT);
-                keypad2.setStyle(FROM_HIGHLIGHT);
-                keypad3.setStyle(FROM_HIGHLIGHT);
-                keypad4.setStyle(TO_HIGHLIGHT);
-                keypad5.setStyle(FROM_HIGHLIGHT);
-                keypad6.setStyle(FROM_HIGHLIGHT);
-            } break;
-            case 4: {
-                keypad1.setStyle(FROM_HIGHLIGHT);
-                keypad2.setStyle(FROM_HIGHLIGHT);
-                keypad3.setStyle(FROM_HIGHLIGHT);
-                keypad4.setStyle(FROM_HIGHLIGHT);
-                keypad5.setStyle(TO_HIGHLIGHT);
-                keypad6.setStyle(FROM_HIGHLIGHT);
-            } break;
-            default: {
-                keypad1.setStyle(FROM_HIGHLIGHT);
-                keypad2.setStyle(FROM_HIGHLIGHT);
-                keypad3.setStyle(FROM_HIGHLIGHT);
-                keypad4.setStyle(FROM_HIGHLIGHT);
-                keypad5.setStyle(FROM_HIGHLIGHT);
-                keypad6.setStyle(TO_HIGHLIGHT);
-            }
-        }
+        setBoxStyle(keypad1, which, 0);
+        setBoxStyle(keypad2, which, 1);
+        setBoxStyle(keypad3, which, 2);
+        setBoxStyle(keypad4, which, 3);
+        setBoxStyle(keypad5, which, 4);
+        setBoxStyle(keypad6, which, 5);
+    }
+
+    private void setBoxStyle(VBox keypad, int which, int required){
+        keypad.setStyle(which == required ? TO_HIGHLIGHT : FROM_HIGHLIGHT);
     }
 }

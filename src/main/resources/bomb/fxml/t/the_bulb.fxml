@@ -13,14 +13,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.ToggleGroup?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1160.0"
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+          prefWidth="1160.0"
           xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.t.bulb.TheBulbController">
     <columnConstraints>
-        <ColumnConstraints />
+        <ColumnConstraints/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints />
+        <RowConstraints/>
     </rowConstraints>
     <GridPane prefHeight="741.0" prefWidth="1192.0">
         <columnConstraints>
@@ -34,23 +35,17 @@
         </rowConstraints>
         <Pane prefHeight="200.0" prefWidth="200.0">
             <Rectangle fx:id="yellow" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="99.0"
-                       layoutX="262.0" onMouseClicked="#colorSet" stroke="BLACK" strokeType="INSIDE"
-                       width="106.0"/>
+                       layoutX="262.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
             <Rectangle fx:id="red" arcHeight="5.0" arcWidth="5.0" fill="RED" height="99.0" layoutX="88.0"
-                       layoutY="154.0" onMouseClicked="#colorSet" stroke="BLACK" strokeType="INSIDE"
-                       width="106.0"/>
+                       layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
             <Rectangle fx:id="white" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="99.0"
-                       layoutX="984.0" onMouseClicked="#colorSet" stroke="BLACK" strokeType="INSIDE"
-                       width="106.0"/>
+                       layoutX="984.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
             <Rectangle fx:id="purple" arcHeight="5.0" arcWidth="5.0" fill="#cc0bdd" height="99.0"
-                       layoutX="813.0" layoutY="154.0" onMouseClicked="#colorSet" stroke="BLACK"
-                       strokeType="INSIDE" width="106.0"/>
+                       layoutX="813.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
             <Rectangle fx:id="green" arcHeight="5.0" arcWidth="5.0" fill="#07c307" height="99.0"
-                       layoutX="453.0" layoutY="154.0" onMouseClicked="#colorSet" stroke="BLACK"
-                       strokeType="INSIDE" width="106.0"/>
+                       layoutX="453.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
             <Rectangle fx:id="blue" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="99.0"
-                       layoutX="629.0" onMouseClicked="#colorSet" stroke="BLACK" strokeType="INSIDE"
-                       width="106.0"/>
+                       layoutX="629.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
             <Label fx:id="redLabel" layoutX="101.0" layoutY="27.0" text="Is Red">
                 <font>
                     <Font size="30.0"/>

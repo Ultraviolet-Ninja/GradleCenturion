@@ -1,11 +1,15 @@
 package bomb.modules.t.bulb;
 
 import bomb.tools.FacadeFX;
+import bomb.tools.HoverHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+
+import java.util.function.Consumer;
 
 import static bomb.modules.t.bulb.Bulb.THE_BULB;
 
@@ -29,30 +33,22 @@ public class TheBulbController {
     @FXML
     private TextArea bulbResults;
 
-    //FIXME
-    @FXML
-    private void colorSet(){
-        bulbConditions[0] = true;
-        if (red.isHover()){
-            THE_BULB.setColor(Bulb.Color.RED);
-            labelSet(0);
-        } else if (yellow.isHover()){
-            THE_BULB.setColor(Bulb.Color.YELLOW);
-            labelSet(1);
-        } else if (green.isHover()){
-            THE_BULB.setColor(Bulb.Color.GREEN);
-            labelSet(2);
-        } else if (blue.isHover()){
-            THE_BULB.setColor(Bulb.Color.BLUE);
-            labelSet(3);
-        } else if (purple.isHover()){
-            THE_BULB.setColor(Bulb.Color.PURPLE);
-            labelSet(4);
-        } else if (white.isHover()){
-            THE_BULB.setColor(Bulb.Color.WHITE);
-            labelSet(5);
-        }
-        plugInBulb();
+    public void initialize(){
+        FacadeFX.bindOnClickHandler(new HoverHandler<>(createAction()), red, yellow, green, blue, purple, white);
+    }
+
+    private Consumer<MouseEvent> createAction(){
+        return event -> {
+            bulbConditions[0] = true;
+            Rectangle rect = (Rectangle) event.getSource();
+            for (Bulb.Color color : Bulb.Color.values()) {
+                if (rect.getFill().equals(color.getAssociatedColor())){
+                    THE_BULB.setColor(color);
+                    labelSet(color.ordinal());
+                }
+            }
+            plugInBulb();
+        };
     }
 
     private void labelSet(int color){

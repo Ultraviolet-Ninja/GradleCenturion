@@ -69,6 +69,7 @@ public class EmojiController {
         }
     }
 
+    //TODO There's a problem with the equation submission
     @FXML
     private void submitEquation() {
         equation.append("\t = ").append(EmojiMath.calculate(equationBar.getText()));
