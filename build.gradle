@@ -24,7 +24,6 @@ dependencies {
 }
 
 test {
-    maxParallelForks(3)
     useJUnitPlatform()
     finalizedBy(jacocoTestReport)
 }
