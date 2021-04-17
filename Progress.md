@@ -15,6 +15,7 @@
 12/100
 
 ### Incomplete Modules
+- FastMath
 - Hexamaze
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
@@ -51,8 +52,7 @@
 - Crossover
 - Crypto
 - Double Oh
-- English Java8_Conversion
-- Fast Math
+- English Test
 - Filibuster
 - FizzBuzz
 - Flags
