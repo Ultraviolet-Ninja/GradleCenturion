@@ -47,4 +47,4 @@ jobs:
       - store_artifacts:
           path: ./build/reports
       - store_artifacts:
-          path: ./.cache
+          path: ./.gradle
