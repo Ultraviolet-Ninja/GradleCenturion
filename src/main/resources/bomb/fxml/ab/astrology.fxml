@@ -232,7 +232,7 @@
             </Pane>
         </GridPane>
         <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-            <TextField fx:id="omen" alignment="CENTER" promptText="Output">
+            <TextField fx:id="omen" alignment="CENTER" promptText="Output" editable="false">
                 <font>
                     <Font size="36.0"/>
                 </font>

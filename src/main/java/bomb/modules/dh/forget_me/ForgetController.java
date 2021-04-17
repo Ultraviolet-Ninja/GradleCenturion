@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
 import java.util.function.Consumer;
 
 public class ForgetController {
@@ -28,52 +29,52 @@ public class ForgetController {
 
     @FXML
     private TextField forgetMeOutput;
-    
-    public void initialize(){
-      HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
-      FacadeFX.bindHandler(handler, one, two, three, four, five, six, seven, eight, nine, zero);
-    }
-    
-    private Consumer<ActionEvent> createAction(){
-      return event -> {
-        if(Widget.getNumModules() > 0){
-          try {
-            addTo((Button) event.getSource());
-            undoButton.setDisable(false);
-            writeNext();
-          } catch(IllegalArgumentException illegal){
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
-          }
-        } else {
-          FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work",
-                  "", "");
-        }
-      };
+
+    public void initialize() {
+        HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
+        FacadeFX.bindHandlerToButtons(handler, one, two, three, four, five, six, seven, eight, nine, zero);
     }
 
-    private void writeNext(){
+    private Consumer<ActionEvent> createAction() {
+        return event -> {
+            if (Widget.getNumModules() > 0) {
+                try {
+                    addTo((Button) event.getSource());
+                    undoButton.setDisable(false);
+                    writeNext();
+                } catch (IllegalArgumentException illegal) {
+                    FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
+                }
+            } else {
+                FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work",
+                        "", "");
+            }
+        };
+    }
+
+    private void writeNext() {
         currentStage.setText(String.valueOf(++stageCounter));
         judge();
         maxCap();
     }
 
-    private void addTo(Button button){
+    private void addTo(Button button) {
         int temp = Integer.parseInt(button.getText());
         ForgetMeNot.add(stageCounter, temp);
         forgetMeOutput.setText("Stage " + stageCounter + " was a " + temp);
     }
 
-    private void judge(){
+    private void judge() {
         if (stageCounter >= Widget.getNumModules() * COMPLETION_PERCENTAGE) flush.setDisable(false);
     }
 
-    private void maxCap(){
+    private void maxCap() {
         if (stageCounter == Widget.getNumModules())
             FacadeFX.toggleNodes(true, one, two, three, four, five, six, seven, eight, nine, zero);
     }
 
     @FXML
-    private void undo(){
+    private void undo() {
         if (stageCounter > 1) {
             ForgetMeNot.undo();
             forgetMeOutput.setText("Previous stage undone");
@@ -82,19 +83,19 @@ public class ForgetController {
         undoCheck();
     }
 
-    private void undoCheck(){
+    private void undoCheck() {
         if (stageCounter == 1) undoButton.setDisable(true);
     }
 
     @FXML
-    private void flushOut(){
+    private void flushOut() {
         flushArea.setText(ForgetMeNot.flush());
         FacadeFX.toggleNodes(true, undoButton, flush);
         stageCounter = 1;
         reEnable();
     }
 
-    private void reEnable(){
+    private void reEnable() {
         FacadeFX.toggleNodes(false, one, two, three, four, five, six, seven, eight, nine, zero);
     }
 }

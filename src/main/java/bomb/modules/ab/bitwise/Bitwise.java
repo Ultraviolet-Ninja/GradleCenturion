@@ -14,7 +14,6 @@ import static bomb.tools.Mechanics.ultimateFilter;
  */
 public class Bitwise extends Widget {
 
-    //TODO - Finish Javadocs
     /**
      * Turns the edgework conditions into a byte that the defuser will input into the bomb module
      *
@@ -57,7 +56,7 @@ public class Bitwise extends Widget {
      * Executes a boolean operation on the 2 bits to determine the resulting bit
      *
      * @param bitOp The operation to be executed on the bits
-     * @param bits
+     * @param bits The pair of bits that being compared
      * @return The result from the operation
      */
     private static boolean operator(BitwiseOps bitOp, boolean[] bits){

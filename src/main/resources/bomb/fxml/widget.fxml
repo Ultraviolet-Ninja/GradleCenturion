@@ -104,7 +104,7 @@
                         </TextField>
                     </VBox>
                     <VBox prefHeight="360.0" prefWidth="160.0" GridPane.columnIndex="1">
-                        <Button fx:id="dviUp" mnemonicParsing="false" onAction="#incrementPort" text="+1 DVI">
+                        <Button fx:id="dviUp" mnemonicParsing="false" text="+1 DVI">
                             <VBox.margin>
                                 <Insets left="40.0" top="10.0"/>
                             </VBox.margin>
@@ -113,7 +113,7 @@
                             </font>
                         </Button>
                         <Button fx:id="parallelUp" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                                onAction="#incrementPort" text="+1 Parallel">
+                                text="+1 Parallel">
                             <VBox.margin>
                                 <Insets left="30.0" top="20.0"/>
                             </VBox.margin>
@@ -122,7 +122,7 @@
                             </font>
                         </Button>
                         <Button fx:id="psUp" layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-                                onAction="#incrementPort" text="+1 PS2">
+                                text="+1 PS2">
                             <VBox.margin>
                                 <Insets left="40.0" top="20.0"/>
                             </VBox.margin>
@@ -131,7 +131,7 @@
                             </font>
                         </Button>
                         <Button fx:id="rjUp" layoutX="10.0" layoutY="60.0" mnemonicParsing="false"
-                                onAction="#incrementPort" text="+1 RJ-45">
+                                text="+1 RJ-45">
                             <VBox.margin>
                                 <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
@@ -140,7 +140,7 @@
                             </font>
                         </Button>
                         <Button fx:id="serialUp" layoutX="10.0" layoutY="85.0" mnemonicParsing="false"
-                                onAction="#incrementPort" text="+1 Serial">
+                                text="+1 Serial">
                             <VBox.margin>
                                 <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
@@ -149,7 +149,7 @@
                             </font>
                         </Button>
                         <Button fx:id="rcaUp" layoutX="10.0" layoutY="110.0" mnemonicParsing="false"
-                                onAction="#incrementPort" text="+1 RCA">
+                                text="+1 RCA">
                             <VBox.margin>
                                 <Insets left="40.0" top="15.0"/>
                             </VBox.margin>
@@ -159,7 +159,7 @@
                         </Button>
                     </VBox>
                     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
-                        <Button fx:id="dviDown" mnemonicParsing="false" onAction="#decrementPort" text="-1 DVI">
+                        <Button fx:id="dviDown" mnemonicParsing="false" text="-1 DVI">
                             <font>
                                 <Font size="18.0"/>
                             </font>
@@ -168,7 +168,7 @@
                             </VBox.margin>
                         </Button>
                         <Button fx:id="parallelDown" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                                onAction="#decrementPort" text="-1 Parallel">
+                                text="-1 Parallel">
                             <font>
                                 <Font size="18.0"/>
                             </font>
@@ -176,8 +176,7 @@
                                 <Insets left="30.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="psDown" layoutX="10.0" layoutY="49.0" mnemonicParsing="false"
-                                onAction="#decrementPort" text="-1 PS2">
+                        <Button fx:id="psDown" layoutX="10.0" layoutY="49.0" mnemonicParsing="false" text="-1 PS2">
                             <font>
                                 <Font size="18.0"/>
                             </font>
@@ -185,8 +184,7 @@
                                 <Insets left="40.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="rjDown" layoutX="10.0" layoutY="88.0" mnemonicParsing="false"
-                                onAction="#decrementPort" text="-1 RJ-45">
+                        <Button fx:id="rjDown" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" text="-1 RJ-45">
                             <font>
                                 <Font size="18.0"/>
                             </font>
@@ -195,7 +193,7 @@
                             </VBox.margin>
                         </Button>
                         <Button fx:id="serialDown" layoutX="10.0" layoutY="127.0" mnemonicParsing="false"
-                                onAction="#decrementPort" text="-1 Serial">
+                                text="-1 Serial">
                             <font>
                                 <Font size="18.0"/>
                             </font>
@@ -203,8 +201,7 @@
                                 <Insets left="35.0" top="20.0"/>
                             </VBox.margin>
                         </Button>
-                        <Button fx:id="rcaDown" layoutX="10.0" layoutY="166.0" mnemonicParsing="false"
-                                onAction="#decrementPort" text="-1 RCA">
+                        <Button fx:id="rcaDown" layoutX="10.0" layoutY="166.0" mnemonicParsing="false" text="-1 RCA">
                             <font>
                                 <Font size="18.0"/>
                             </font>
@@ -298,7 +295,7 @@
                         <Font size="18.0"/>
                     </font>
                 </Label>
-                <ToggleButton fx:id="bobLit" layoutX="59.0" layoutY="48.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="59.0" layoutY="48.0" mnemonicParsing="false" onAction="#bobGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -307,7 +304,7 @@
                         <ToggleGroup fx:id="bobGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="carLit" layoutX="59.0" layoutY="120.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="59.0" layoutY="120.0" mnemonicParsing="false" onAction="#carGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -316,7 +313,7 @@
                         <ToggleGroup fx:id="carGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="clrLit" layoutX="59.0" layoutY="191.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="59.0" layoutY="191.0" mnemonicParsing="false" onAction="#clrGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -325,7 +322,7 @@
                         <ToggleGroup fx:id="clrGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="frkLit" layoutX="59.0" layoutY="259.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="59.0" layoutY="259.0" mnemonicParsing="false" onAction="#frkGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -334,7 +331,7 @@
                         <ToggleGroup fx:id="frkGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="frqLit" layoutX="59.0" layoutY="319.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="59.0" layoutY="319.0" mnemonicParsing="false" onAction="#frqGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -343,7 +340,7 @@
                         <ToggleGroup fx:id="frqGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="sndLit" layoutX="358.0" layoutY="322.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="358.0" layoutY="322.0" mnemonicParsing="false" onAction="#sndGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -352,7 +349,7 @@
                         <ToggleGroup fx:id="sndGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="sigLit" layoutX="358.0" layoutY="256.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="358.0" layoutY="256.0" mnemonicParsing="false" onAction="#sigGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -361,7 +358,7 @@
                         <ToggleGroup fx:id="sigGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="nsaLit" layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#nsaGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -370,7 +367,7 @@
                         <ToggleGroup fx:id="nsaGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="msaLit" layoutX="358.0" layoutY="117.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="358.0" layoutY="117.0" mnemonicParsing="false" onAction="#msaGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -379,7 +376,7 @@
                         <ToggleGroup fx:id="msaGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="indLit" layoutX="358.0" layoutY="45.0" mnemonicParsing="false" onAction="#setLit"
+                <ToggleButton layoutX="358.0" layoutY="45.0" mnemonicParsing="false" onAction="#indGroup"
                               prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
@@ -388,20 +385,26 @@
                         <ToggleGroup fx:id="indGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="bobUnlit" layoutX="208.0" layoutY="48.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="208.0" layoutY="48.0" mnemonicParsing="false"
+                              onAction="#bobGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="bobGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="carUnlit" layoutX="208.0" layoutY="120.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="208.0" layoutY="120.0" mnemonicParsing="false"
+                              onAction="#carGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
+                    <toggleGroup>
+                        <fx:reference source="carGroup"/>
+                    </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="clrUnlit" layoutX="208.0" layoutY="191.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="208.0" layoutY="191.0" mnemonicParsing="false"
+                              onAction="#clrGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -409,8 +412,8 @@
                         <fx:reference source="clrGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="frkUnlit" layoutX="208.0" layoutY="259.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="208.0" layoutY="259.0" mnemonicParsing="false"
+                              onAction="#frkGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -418,8 +421,8 @@
                         <fx:reference source="frkGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="frqUnlit" layoutX="208.0" layoutY="319.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="208.0" layoutY="319.0" mnemonicParsing="false"
+                              onAction="#frqGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -427,8 +430,8 @@
                         <fx:reference source="frqGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="indUnlit" layoutX="494.0" layoutY="45.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="494.0" layoutY="45.0" mnemonicParsing="false"
+                              onAction="#indGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -436,8 +439,8 @@
                         <fx:reference source="indGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="msaUnlit" layoutX="494.0" layoutY="117.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="494.0" layoutY="117.0" mnemonicParsing="false"
+                              onAction="#msaGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -445,8 +448,8 @@
                         <fx:reference source="msaGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="nsaUnlit" layoutX="494.0" layoutY="188.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="494.0" layoutY="188.0" mnemonicParsing="false"
+                              onAction="#nsaGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -454,8 +457,8 @@
                         <fx:reference source="nsaGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="sigUnlit" layoutX="494.0" layoutY="256.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="494.0" layoutY="256.0" mnemonicParsing="false"
+                              onAction="#sigGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -463,8 +466,8 @@
                         <fx:reference source="sigGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="sndUnlit" layoutX="494.0" layoutY="322.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="494.0" layoutY="322.0" mnemonicParsing="false"
+                              onAction="#sndGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -477,8 +480,8 @@
                         <Font size="24.0"/>
                     </font>
                 </Label>
-                <ToggleButton fx:id="trnUnlit" layoutX="351.0" layoutY="375.0" mnemonicParsing="false"
-                              onAction="#setUnlit" prefHeight="39.0" prefWidth="67.0" text="Unlit">
+                <ToggleButton layoutX="351.0" layoutY="375.0" mnemonicParsing="false"
+                              onAction="#trnGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
                     <font>
                         <Font size="18.0"/>
                     </font>
@@ -486,8 +489,8 @@
                         <ToggleGroup fx:id="trnGroup"/>
                     </toggleGroup>
                 </ToggleButton>
-                <ToggleButton fx:id="trnLit" layoutX="216.0" layoutY="375.0" mnemonicParsing="false" onAction="#setLit"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
+                <ToggleButton layoutX="216.0" layoutY="375.0" mnemonicParsing="false"
+                              onAction="#trnGroup" prefHeight="39.0" prefWidth="52.0" text="Lit">
                     <font>
                         <Font size="18.0"/>
                     </font>

@@ -1,6 +1,7 @@
 package bomb.tools;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ import javafx.scene.control.ToggleGroup;
 public class FacadeFX {
     private FacadeFX(){}
 
-    public static void bindHandler(HoverHandler<ActionEvent> handler, Button... buttons){
+    public static void bindHandlerToButtons(EventHandler<ActionEvent> handler, Button... buttons){
         for (Button button : buttons)
             button.setOnAction(handler);
     }

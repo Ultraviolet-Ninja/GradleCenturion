@@ -60,11 +60,11 @@ public class Alphabet extends Widget {
      * Cuts out the letters that were found by a particular letter pattern in the wordBank
      *
      * @param buttons The String containing the input letters
-     * @param cortar The letters that need to be cut out
+     * @param toCut The letters that need to be cut out
      * @return The remaining letters of the input String
      */
-    private static String cutOut(String buttons, String cortar){
-        for (char cut : cortar.toCharArray()) buttons = buttons.replace(String.valueOf(cut), "");
+    private static String cutOut(String buttons, String toCut){
+        for (char cut : toCut.toCharArray()) buttons = buttons.replace(String.valueOf(cut), "");
         return buttons;
     }
 }

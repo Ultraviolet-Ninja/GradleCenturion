@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
 import java.util.function.Consumer;
 
 public class ChordController {
@@ -19,23 +20,23 @@ public class ChordController {
 
     @FXML
     private TextField inputChord, outputChord;
-    
-    public void initialize(){
+
+    public void initialize() {
         HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
-        FacadeFX.bindHandler(handler, a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp);
-    }
-    
-    private Consumer<ActionEvent> createAction(){
-      return event -> add(((Button)event.getSource()).getText());
+        FacadeFX.bindHandlerToButtons(handler, a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp);
     }
 
-    private void add(String note){
+    private Consumer<ActionEvent> createAction() {
+        return event -> add(((Button) event.getSource()).getText());
+    }
+
+    private void add(String note) {
         notes[counter++] = note;
         track.append(note);
         if (counter == 4) {
             try {
                 solve();
-            } catch (IllegalArgumentException illegal){
+            } catch (IllegalArgumentException illegal) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "", "");
             }
             counter = 0;
@@ -45,9 +46,9 @@ public class ChordController {
         inputChord.setText(track.toString());
     }
 
-    private void solve(){
+    private void solve() {
         StringBuilder temp = new StringBuilder();
-        for (int i = 0; i < notes.length; i++){
+        for (int i = 0; i < notes.length; i++) {
             temp.append(notes[i]);
             if (i != 3)
                 temp.append(" ");

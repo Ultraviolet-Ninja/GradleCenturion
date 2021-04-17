@@ -21,12 +21,12 @@ public class EmojiController {
     @FXML
     private TextField equationBar;
 
-    public void initialize(){
+    public void initialize() {
         HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
-        FacadeFX.bindHandler(handler, first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth);
+        FacadeFX.bindHandlerToButtons(handler, first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth);
     }
 
-    private Consumer<ActionEvent> createAction(){
+    private Consumer<ActionEvent> createAction() {
         return event -> {
             eqCount++;
             Emojis current = Emojis.getEmojiFromText(((Button) event.getSource()).getText());
@@ -38,7 +38,7 @@ public class EmojiController {
     }
 
     @FXML
-    private void operator(){
+    private void operator() {
         eqCount = 3;
         if (add.isHover()) equation.append("+");
         else if (minus.isHover()) equation.append("-");
@@ -46,33 +46,38 @@ public class EmojiController {
         disableControl();
     }
 
-    private void disableControl(){
-        switch (eqCount){
+    private void disableControl() {
+        switch (eqCount) {
             case 1: {
                 add.setDisable(false);
                 minus.setDisable(false);
                 clear.setDisable(false);
-            } break;
+            }
+            break;
             case 2:
-            case 5: toggleNumberButtons(true); break;
+            case 5:
+                toggleNumberButtons(true);
+                break;
             case 3: {
                 add.setDisable(true);
                 minus.setDisable(true);
                 toggleNumberButtons(false);
-            } break;
-            case 4: equal.setDisable(false);
+            }
+            break;
+            case 4:
+                equal.setDisable(false);
         }
     }
 
     @FXML
-    private void submitEquation(){
+    private void submitEquation() {
         equation.append("\t = ").append(EmojiMath.calculate(equationBar.getText()));
         equationBar.setText(equation.toString());
         clearParam();
     }
 
     @FXML
-    private void clearParam(){
+    private void clearParam() {
         eqCount = 0;
         FacadeFX.toggleNodes(true, add, minus, equal, clear);
         toggleNumberButtons(false);

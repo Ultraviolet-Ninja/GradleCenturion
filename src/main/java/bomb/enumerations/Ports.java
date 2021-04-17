@@ -15,4 +15,11 @@ public enum Ports implements Index {
     Ports(int index){
         this.index = index;
     }
+
+    public static Ports fromString(String string){
+        for(Ports port : Ports.values()){
+            if (string.equalsIgnoreCase(port.name()))return port;
+        }
+        return null;
+    }
 }
