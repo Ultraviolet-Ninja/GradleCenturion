@@ -10,56 +10,52 @@ import static bomb.tools.Mechanics.ultimateFilter;
  */
 public class EmojiMath extends Widget {
 
-    //TODO - Complete Javadocs
     /**
+     * Calculates the sum/difference from the equation of emojis
      *
-     *
-     * @param input
-     * @return
+     * @param input The equation from the TextField
+     * @return The values gathered from the emoji equation
      */
     public static int calculate(String input){
         input = ultimateFilter(input, ":", "|", "(", ")", "=", "+", "-");
         boolean toAdd = input.contains("+");
-        String plugIn = toAdd ?
-                resolve(input.split("\\+"), true) :
-                resolve(input.split("-"), false);
+        String translatedEq = toAdd ?
+                translateEmojis(input.split("\\+"), true) :
+                translateEmojis(input.split("-"), false);
 
-        return calculator(plugIn, toAdd);
+        return calculateRealNumbers(translatedEq, toAdd);
     }
 
     /**
+     * Translates the emojis in the equation to real numbers
      *
-     *
-     * @param samples
-     * @param add
-     * @return
+     * @param samples The 2 sides of the equation split by the + or - symbol
+     * @param add Whether the equation will be added or not
+     * @return The equation translated from emojis to numbers
      */
-    private static String resolve(String[] samples, boolean add){
-        //TODO - Break down
+    private static String translateEmojis(String[] samples, boolean add){
         StringBuilder result = new StringBuilder();
-        if (samples[0].length() == 4) {
-            result.append(find(samples[0].substring(0, samples[0].length()/2)));
-            result.append(find(samples[0].substring(samples[0].length()/2)));
-        } else {
-            result.append(find(samples[0]));
-        }
-        result.append(add?"+":"-");
-        if (samples[1].length() == 4) {
-            result.append(find(samples[1].substring(0, samples[1].length()/2)));
-            result.append(find(samples[1].substring(samples[1].length()/2)));
-        } else {
-            result.append(find(samples[1]));
+        boolean flag = true;
+        for (String half : samples){
+            if (half.length() == 4){
+                result.append(findEmoji(half.substring(0, half.length()/2)));
+                result.append(findEmoji(half.substring(half.length()/2)));
+            } else result.append(findEmoji(half));
+            if(flag){
+                flag = false;
+                result.append(add?"+":"-");
+            }
         }
         return result.toString();
     }
 
     /**
+     * Translates a single emoji into the number associated with it
      *
-     *
-     * @param emoji
-     * @return
+     * @param emoji The emoji to translate
+     * @return The number
      */
-    private static String find(String emoji){
+    private static String findEmoji(String emoji){
         for (Emojis emo : Emojis.values()) {
             if (emo.getLabel().equals(emoji)){
                 return String.valueOf(emo.getIdx());
@@ -69,17 +65,19 @@ public class EmojiMath extends Widget {
     }
 
     /**
+     * Calculates the sum or difference of the translated equation
      *
-     *
-     * @param equation
+     * @param equation The equation put into real numbers
      * @param add Whether the equation should be added or subtracted
-     * @return
+     * @return The sum or difference of the translated numbers
      */
-    private static int calculator(String equation, boolean add){
+    private static int calculateRealNumbers(String equation, boolean add){
         String[] toNum = equation.split(add?"\\+":"-");
         int[] nums = new int[toNum.length];
         nums[0] = Integer.parseInt(toNum[0]);
         nums[1] = Integer.parseInt(toNum[1]);
-        return add?nums[0]+nums[1]:nums[0]-nums[1];
+        return add ?
+                nums[0] + nums[1] :
+                nums[0] - nums[1];
     }
 }

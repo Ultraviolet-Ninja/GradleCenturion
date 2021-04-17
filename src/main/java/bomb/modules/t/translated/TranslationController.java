@@ -54,11 +54,10 @@ public class TranslationController {
         try {
             Morse.init();
         } catch (IOException ioException){
-            FacadeFX.setAlert(Alert.AlertType.WARNING, "Hey Chief, the file has a problem", "", "");
+            FacadeFX.setAlert(Alert.AlertType.WARNING, "Hey Chief, the file has a problem");
         }
     }
 
-    //FIXME
     //Translation Center Method
     @FXML
     private void getFlag(){

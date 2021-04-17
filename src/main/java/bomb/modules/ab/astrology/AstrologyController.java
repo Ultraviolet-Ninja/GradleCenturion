@@ -1,5 +1,6 @@
 package bomb.modules.ab.astrology;
 
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -19,7 +20,6 @@ public class AstrologyController {
     @FXML
     private Button astroReset;
 
-    //FIXME - Lots of hover fixes
     @FXML
     private void getElement(){
         if (fire.isHover()){
@@ -104,38 +104,21 @@ public class AstrologyController {
     }
 
     private void elementDisable(boolean set){
-        fire.setDisable(set);
-        earth.setDisable(set);
-        air.setDisable(set);
-        water.setDisable(set);
+        toggleImageViewArray(set, fire, earth, air, water);
     }
 
     private void celesteDisable(boolean set){
-        sun.setDisable(set);
-        moon.setDisable(set);
-        mercury.setDisable(set);
-        venus.setDisable(set);
-        mars.setDisable(set);
-        jupiter.setDisable(set);
-        saturn.setDisable(set);
-        uranus.setDisable(set);
-        neptune.setDisable(set);
-        pluto.setDisable(set);
+        toggleImageViewArray(set, sun, moon, mercury, venus, mars, jupiter, saturn, uranus, neptune, pluto);
     }
 
     private void zodiacDisable(boolean set){
-        aquarius.setDisable(set);
-        aries.setDisable(set);
-        cancer.setDisable(set);
-        capricorn.setDisable(set);
-        gemini.setDisable(set);
-        leo.setDisable(set);
-        libra.setDisable(set);
-        pisces.setDisable(set);
-        sag.setDisable(set);
-        scorpio.setDisable(set);
-        taurus.setDisable(set);
-        virgo.setDisable(set);
+        toggleImageViewArray(set, aquarius, aries, cancer, capricorn, gemini, leo, libra, pisces, sag, scorpio,
+                taurus, virgo);
+    }
+
+    private void toggleImageViewArray(boolean set, ImageView ... views){
+        if (set) FacadeFX.disableMultiple(views);
+        else FacadeFX.enableMultiple(views);
     }
 
     private void getOmen(){
@@ -144,13 +127,10 @@ public class AstrologyController {
                 omen.setText(Astrology.calculate(set[0], set[1], set[2]));
                 astroReset();
                 astroReset.setDisable(true);
-            } else {
+            } else
                 astroReset.setDisable(false);
-            }
         } catch (IllegalArgumentException illegal){
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("The Serial Code wasn't set");
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.ERROR, "The Serial Code wasn't set");
         }
     }
 }

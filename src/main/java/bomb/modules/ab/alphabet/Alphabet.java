@@ -24,13 +24,11 @@ public class Alphabet extends Widget {
         StringBuilder output = new StringBuilder();
         buttons = buttons.toUpperCase();
 
-        //TODO - Needs to be split up
         for (String s : WORD_BANK) {
             boolean[] tests = new boolean[s.length()];
             int j = 0;
-            for (char sample : s.toCharArray()) {
-                tests[j++] = buttons.indexOf(sample) != -1;
-            }
+            for (char sample : s.toCharArray()) tests[j++] = buttons.indexOf(sample) != -1;
+
             if (allTrue(tests)) {
                 output.append(s);
                 buttons = cutOut(buttons, s);

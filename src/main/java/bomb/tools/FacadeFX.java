@@ -46,12 +46,26 @@ public class FacadeFX {
         node.setDisable(true);
     }
 
+    public static void disableMultiple(Node ... nodes){
+        for (Node node : nodes)
+            disable(node);
+    }
+
     public static void enable(Node node){
         node.setDisable(false);
     }
 
+    public static void enableMultiple(Node ... nodes){
+        for (Node node : nodes)
+            enable(node);
+    }
+
     public static String getToggleName(ToggleGroup group){
         return ((ToggleButton) group.getSelectedToggle()).getText();
+    }
+
+    public static void setAlert(Alert.AlertType type, String context){
+        setAlert(type, context, "", "");
     }
 
     public static void setAlert(Alert.AlertType type, String context, String header, String title){

@@ -44,7 +44,7 @@ public class NeutralizationController {
             dropCount.setText(answers[2]);
             setFilter(answers[3]);
         } catch (IllegalArgumentException illegal){
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "", "");
+            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
     }
 

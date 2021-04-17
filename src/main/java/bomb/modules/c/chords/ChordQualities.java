@@ -20,8 +20,10 @@ public class ChordQualities extends Widget {
             "3,1,6", "3,3,4", "2,2,3", "2,1,4", "4,4,2", "4,4,3", "5,2,3", "3,5,3"};
 
     /**
+     *
      * @param input
      * @return
+     * @throws IllegalArgumentException
      */
     public static String solve(String input) throws IllegalArgumentException {
         String[] og = originalInfo(input);

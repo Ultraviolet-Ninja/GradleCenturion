@@ -17,11 +17,7 @@ public class BitwiseController {
     private TextField bitOut;
 
     public void initialize(){
-        HoverHandler<ActionEvent> handler = new HoverHandler<>(initAction());
-        bitAnd.setOnAction(handler);
-        bitNot.setOnAction(handler);
-        bitOr.setOnAction(handler);
-        bitXor.setOnAction(handler);
+        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initAction()), bitAnd, bitNot, bitXor, bitOr);
     }
 
     private Consumer<ActionEvent> initAction(){

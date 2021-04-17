@@ -37,7 +37,7 @@ public class ChordController {
             try {
                 solve();
             } catch (IllegalArgumentException illegal) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "", "");
+                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
             }
             counter = 0;
             track = new StringBuilder();

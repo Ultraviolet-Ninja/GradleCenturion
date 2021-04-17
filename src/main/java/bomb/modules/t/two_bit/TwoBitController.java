@@ -22,9 +22,9 @@ public class TwoBitController {
             query.setText(TwoBit.initialCode());
             FacadeFX.toggleNodes(false, numberCode, cmdLine, next);
         } catch (IllegalArgumentException illegal){
-            FacadeFX.setAlert(Alert.AlertType.WARNING,"You need to set the Serial Code", "", "");
+            FacadeFX.setAlert(Alert.AlertType.WARNING,"You need to set the Serial Code");
         } catch (StringIndexOutOfBoundsException incomplete){
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "The Serial Code is incomplete", "", "");
+            FacadeFX.setAlert(Alert.AlertType.ERROR, "The Serial Code is incomplete");
         }
     }
 
@@ -34,7 +34,7 @@ public class TwoBitController {
             cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), NUMBER_REGEX)));
             numberCode.setText("");
         } catch (IllegalArgumentException illegal){
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits", "", "");
+            FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits");
         }
     }
 }
