@@ -20,6 +20,9 @@ public class FastMath extends Widget {
     public static String solve(String letters){
         if (letters == null || letters.length() != 2)
             throw new IllegalArgumentException("Input 2 letters, please");
+        //TODO consider putting guard clause in Widgets, it's repeated code
+        if (serialCode.length() != 6)
+            throw new IllegalArgumentException("Serial Code not initialized");
         int preconditions = edgework();
         int leftNum = translateLetter(letters.substring(0,1));
         int rightNum = translateLetter(letters.substring(1));
