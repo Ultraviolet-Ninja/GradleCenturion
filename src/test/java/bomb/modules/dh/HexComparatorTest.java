@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class HexComparatorTest {
-    private static final int NO_ROTATIONS = 0;
     private static final String PATH = System.getProperty("user.dir") +
             "/src/test/resources/bomb/modules/dh/";
     private static final String FAILED_AT = "Failed at test ";
@@ -90,7 +89,7 @@ public class HexComparatorTest {
         ArrayList<Hex.HexNode> inputNodes = new ArrayList<>();
         while (shapeLine.hasMoreElements())
             inputNodes.add(new Hex.HexNode(Hex.decodeShape(shapeLine.nextToken()), null));
-        return new HexGrid(new Hex(inputNodes), NO_ROTATIONS);
+        return new HexGrid(new Hex(inputNodes));
     }
 
     private boolean hexagonsMatch(HexGrid linear, HexGrid threaded){

@@ -42,6 +42,10 @@ public class HexGrid {
         for (int i = 0; i < neededRotations; i++) rotateColorOrder();
     }
 
+    public HexGrid(Hex grid){
+        this(grid, 0);
+    }
+
     public HexGrid(HexGrid toCopy){
         defuserVision = new Hex(copyNodes(toCopy.hexport()));
         colorRing = toCopy.colorRing;
@@ -142,5 +146,22 @@ public class HexGrid {
         colorRing.add(Color.CYAN);
         colorRing.add(Color.BLUE);
         colorRing.add(Color.PINK);
+    }
+
+    public ArrayList<String> hashStrings(){
+        ArrayList<String> outputs = new ArrayList<>(2);
+        StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
+        FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> queues = defuserVision.exportTo2DQueue();
+
+        for (FixedArrayQueue<Hex.HexNode> queue : queues){
+            for (Hex.HexNode node : queue){
+                shapeHash.append(node.getShapeHash());
+                wallHash.append(node.getWallHash());
+            }
+        }
+
+        outputs.add(shapeHash.toString());
+        outputs.add(wallHash.toString());
+        return outputs;
     }
 }

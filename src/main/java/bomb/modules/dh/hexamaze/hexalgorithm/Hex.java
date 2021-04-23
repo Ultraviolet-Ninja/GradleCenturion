@@ -118,6 +118,14 @@ public class Hex {
             return true;
         }
 
+        public int getShapeHash(){
+            return HexShape.shapeOrdinality(fill);
+        }
+
+        public String getWallHash(){
+            return HexWall.toHash(walls);
+        }
+
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder().append(fill != null ? fill.toString() : "null");
