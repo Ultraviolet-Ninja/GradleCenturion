@@ -43,7 +43,7 @@ class HashingThread extends RecursiveAction {
     private static Maze maze;
     private static HexGrid grid;
 
-    private List<Integer> colList;
+    private final List<Integer> colList;
     @Override
     protected void compute() {
         if (colList.size() != 1){
