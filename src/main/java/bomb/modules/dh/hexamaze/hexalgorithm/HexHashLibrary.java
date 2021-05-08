@@ -11,6 +11,8 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
 public class HexHashLibrary {
+    public static final int HASH_STRING_SHAPES = 0, HASH_STRING_WALLS = 1;
+
     private static HashMap<String, String> library;
 
     /**
@@ -25,16 +27,19 @@ public class HexHashLibrary {
             columnList.add(i);
         HashingThread.setMaze(fullMaze);
         HashingThread.setGrid(grid);
-        ForkJoinPool mazePool = new ForkJoinPool(2);
+        ForkJoinPool mazePool = new ForkJoinPool();
         HashingThread task = new HashingThread(columnList);
-        mazePool.execute(task);
+        mazePool.invoke(task);
         library = HashingThread.returnResults();
     }
 
     public static HexGrid find(HexGrid userGrid){
         String hash = userGrid.hashStrings().get(0);
-
+        String hashOut = library.get(hash);
         return null;
+
+//        if (hashOut == null) return null;
+//        else return new HexGrid(hashOut);
     }
 }
 
@@ -51,8 +56,7 @@ class HashingThread extends RecursiveAction {
             HashingThread taskOne = new HashingThread(splitList.get(0));
             HashingThread taskTwo = new HashingThread(splitList.get(1));
 
-            taskOne.fork();
-            taskTwo.fork();
+            invokeAll(taskOne, taskTwo);
 
         } else sequentialWork(colList.get(0));
     }
@@ -138,7 +142,7 @@ class HashingThread extends RecursiveAction {
             HexGrid current = new HexGrid(currentIterator);
             for (int i = 0; i < 6; i++){
                 ArrayList<String> temp = current.hashStrings();
-                PILE.put(temp.get(0), temp.get(1));
+                PILE.put(temp.get(HexHashLibrary.HASH_STRING_SHAPES), temp.get(HexHashLibrary.HASH_STRING_WALLS));
                 current.rotateColorOrder();
                 current.hexport().rotate();
             }
