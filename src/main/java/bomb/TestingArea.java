@@ -6,6 +6,8 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexHashLibrary;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
+import bomb.modules.np.neutralization.Chemical;
+import bomb.tools.Base91;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -30,18 +32,12 @@ public class TestingArea {
 //            e.printStackTrace();
 //        }
 
-//        try{
-//            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
-//            Maze maze = new Maze();
-//            HexHashLibrary.initialize(maze, bestCase);
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-
-        for (int i = 0; i< 1000; i++){
-            byte[] arr = BigInteger.valueOf(i).toByteArray();
-            String encoded = Base64.getEncoder().encodeToString(arr);
-            System.out.println(Character.digit((char)i, 64));
+        try{
+            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+            Maze maze = new Maze();
+            HexHashLibrary.initialize(maze, bestCase);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

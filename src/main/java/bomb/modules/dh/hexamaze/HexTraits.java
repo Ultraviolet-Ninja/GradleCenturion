@@ -1,10 +1,9 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.interfaces.Index;
+import bomb.tools.Base91;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,7 @@ public enum HexTraits {
         private static final Map<String, List<HexWall>> fromHashCode = new HashMap<>();
         private static final Map<List<HexWall>, String> toHashCode = new HashMap<>();
         private static final BiConsumer<List<HexWall>, Integer> action = (list, num) -> {
-            String encoded = Base64.getEncoder().encodeToString(BigInteger.valueOf(num).toByteArray());
+            String encoded = Base91.encrypt(num);
             fromHashCode.put(encoded, list);
             toHashCode.put(list, encoded);
         };
@@ -58,8 +57,8 @@ public enum HexTraits {
         private static void applyToPermutations(HexWall[] arr){
             for (int i = 0; i < Math.pow(2, arr.length); i++){
                 List<HexWall> temp = new ArrayList<>();
-                for (int j = 1; j < arr.length; j++){
-                    if ((i & ((int)Math.pow(2, j))) == 1){
+                for (int j = 0; j < arr.length; j++){
+                    if ((i >> j) % 2 == 1){
                         temp.add(arr[j]);
                     }
                 }

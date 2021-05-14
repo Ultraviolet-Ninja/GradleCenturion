@@ -21,6 +21,7 @@ public class MazeRunner {
             LEFT_SIDE_SOUTH_EAST = new Coordinates(1, 1), LEFT_SIDE_SOUTH_WEST = new Coordinates(-1, 0),
             RIGHT_SIDE_NORTH_WEST = LEFT_SIDE_SOUTH_WEST, RIGHT_SIDE_NORTH_EAST = new Coordinates(1, -1),
             RIGHT_SIDE_SOUTH_EAST = LEFT_SIDE_NORTH_EAST, RIGHT_SIDE_SOUTH_WEST = new Coordinates(-1, 1);
+
     //Orders of movement
     private static final String EXIT_NORTH_WEST = "013245", EXIT_NORTH_EAST = "215403", EXIT_EAST = "524103",
             EXIT_SOUTH_EAST = "542310", EXIT_SOUTH_WEST = "340512", EXIT_WEST = "031425";
@@ -28,8 +29,7 @@ public class MazeRunner {
     /**
      * Don't let anyone instantiate this class
      */
-    private MazeRunner() {
-    }
+    private MazeRunner() {}
 
     public static void getPegInformation(Color pegColor, int location) {
         currentPegColor = pegColor;
@@ -161,7 +161,7 @@ public class MazeRunner {
     }
 
     private static void moveForward(String direction, HexGrid gatedGrid) {
-        if (direction.equals("1") || direction.equals("4"))
+        if ("14".contains(direction))
             currentLocation.alterCurrentCoords(upOrDown(direction));
         else
             calculateNextMove(direction, gatedGrid);
@@ -177,7 +177,7 @@ public class MazeRunner {
     }
 
     private static Coordinates calculateMove(String direction, HexGrid gatedGrid){
-        if (direction.equals("1") || direction.equals("4")) return upOrDown(direction);
+        if ("14".contains(direction)) return upOrDown(direction);
         int x = currentLocation.getX();
         if (x == gatedGrid.sideLength() - 1)
             return centerColumnNextMove(direction);
@@ -201,13 +201,10 @@ public class MazeRunner {
     }
 
     private static Coordinates centerColumnNextMove(String direction) {
-        switch (direction) {
-            case "0":
-            case "3":
-                return leftSideNextMove(direction);
-            default:
-                return rightSideNextMove(direction);
+        if ("03".contains(direction)) {
+            return leftSideNextMove(direction);
         }
+        return rightSideNextMove(direction);
     }
 
     private static Coordinates rightSideNextMove(String direction) {

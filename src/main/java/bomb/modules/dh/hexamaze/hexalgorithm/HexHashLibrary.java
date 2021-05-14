@@ -4,7 +4,6 @@ import bomb.tools.data.structures.FixedArrayQueue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
@@ -12,8 +11,6 @@ import java.util.concurrent.RecursiveAction;
 
 public class HexHashLibrary {
     public static final int HASH_STRING_SHAPES = 0, HASH_STRING_WALLS = 1;
-
-    private static HashMap<String, String> library;
 
     /**
      * Don't let anyone instantiate this class
@@ -25,17 +22,15 @@ public class HexHashLibrary {
         ArrayList<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
-        HashingThread.setMaze(fullMaze);
-        HashingThread.setGrid(grid);
+
         ForkJoinPool mazePool = new ForkJoinPool();
-        HashingThread task = new HashingThread(columnList);
+        HashingThread task = new HashingThread(columnList, fullMaze, grid);
         mazePool.invoke(task);
-        library = HashingThread.returnResults();
     }
 
     public static HexGrid find(HexGrid userGrid){
-        String hash = userGrid.hashStrings().get(0);
-        String hashOut = library.get(hash);
+        String shapeHash = userGrid.hashStrings().get(HexHashLibrary.HASH_STRING_SHAPES);
+        String wallHash = HashingThread.library().get(shapeHash);
         return null;
 
 //        if (hashOut == null) return null;
@@ -45,16 +40,16 @@ public class HexHashLibrary {
 
 class HashingThread extends RecursiveAction {
     private static final ConcurrentHashMap<String, String> PILE = new ConcurrentHashMap<>();
-    private static Maze maze;
-    private static HexGrid grid;
+    private final Maze maze;
+    private final HexGrid grid;
 
     private final List<Integer> colList;
     @Override
     protected void compute() {
         if (colList.size() != 1){
             ArrayList<ArrayList<Integer>> splitList = splitList(colList);
-            HashingThread taskOne = new HashingThread(splitList.get(0));
-            HashingThread taskTwo = new HashingThread(splitList.get(1));
+            HashingThread taskOne = new HashingThread(splitList.get(0), maze, grid);
+            HashingThread taskTwo = new HashingThread(splitList.get(1), maze, grid);
 
             invokeAll(taskOne, taskTwo);
 
@@ -69,20 +64,14 @@ class HashingThread extends RecursiveAction {
         return output;
     }
 
-    public static void setMaze(Maze maze){
-        HashingThread.maze = maze;
-    }
-
-    public static void setGrid(HexGrid grid){
-        HashingThread.grid = grid;
-    }
-
-    public HashingThread(ArrayList<Integer> columnList){
+    public HashingThread(ArrayList<Integer> columnList, Maze maze, HexGrid grid){
         colList = columnList;
+        this.maze = maze;
+        this.grid = grid;
     }
 
-    public static HashMap<String, String> returnResults(){
-        return new HashMap<>(PILE);
+    public static ConcurrentHashMap<String, String> library(){
+        return PILE;
     }
 
     private void sequentialWork(int col){

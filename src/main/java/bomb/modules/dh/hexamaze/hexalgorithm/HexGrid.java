@@ -85,7 +85,7 @@ public class HexGrid {
     }
 
     /**
-     * Givers the side length of the HexGrid
+     * Gives the side length of the HexGrid
      *
      * @return The side length of the internal Hex object
      */
