@@ -1,5 +1,6 @@
 package bomb;
 
+import bomb.modules.dh.hexamaze.HexTraits;
 import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
@@ -14,6 +15,8 @@ import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
+import java.util.List;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -39,6 +42,7 @@ public class TestingArea {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     private static HexGrid fromLine(String line){

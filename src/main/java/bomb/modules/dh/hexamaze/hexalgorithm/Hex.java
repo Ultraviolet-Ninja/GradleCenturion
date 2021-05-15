@@ -6,6 +6,7 @@ import bomb.tools.data.structures.FixedArrayQueue;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
@@ -123,6 +124,7 @@ public class Hex {
         }
 
         public String getWallHash(){
+            Collections.sort(walls);
             return HexWall.toHash(walls);
         }
 
@@ -332,7 +334,6 @@ public class Hex {
     private ArrayList<HexWall> rotateWallPositions(ArrayList<HexWall> walls) {
         if (walls.get(0) == null) return null;
         ArrayList<HexWall> temp = new ArrayList<>();
-        int counter = 0;
 
         for (HexWall wall : walls) {
             switch (wall) {

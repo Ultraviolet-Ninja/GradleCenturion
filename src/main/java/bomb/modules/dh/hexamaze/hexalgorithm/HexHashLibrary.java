@@ -40,10 +40,11 @@ public class HexHashLibrary {
 
 class HashingThread extends RecursiveAction {
     private static final ConcurrentHashMap<String, String> PILE = new ConcurrentHashMap<>();
+
     private final Maze maze;
     private final HexGrid grid;
-
     private final List<Integer> colList;
+
     @Override
     protected void compute() {
         if (colList.size() != 1){
@@ -52,7 +53,6 @@ class HashingThread extends RecursiveAction {
             HashingThread taskTwo = new HashingThread(splitList.get(1), maze, grid);
 
             invokeAll(taskOne, taskTwo);
-
         } else sequentialWork(colList.get(0));
     }
 
