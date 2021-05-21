@@ -1,27 +1,34 @@
 package bomb.modules.ab;
 
 import bomb.modules.ab.alphabet.Alphabet;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-import java.util.stream.IntStream;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 public class AlphabetTest {
-    private static final String[] FOUR_LETTER_INPUTS = {"XZQJ", "KOVB", "QJPS", "RINM", "YDXQ", "FGAR"},
-            FOUR_LETTER_CORRECT = {"JQXZ", "OKBV", "PQJS", "IRNM", "QYDX", "ARGF"};
-
-    @Test
-    void fourLetterTest(){
-        IntStream.range(0, FOUR_LETTER_CORRECT.length)
-                .forEach(i -> assertEquals(FOUR_LETTER_CORRECT[i], Alphabet.order(FOUR_LETTER_INPUTS[i])));
+    @DataProvider
+    public Object[][] fourLetterProvider(){
+        return new Object[][] {
+                {"JQXZ", "XZQJ"}, {"OKBV", "KOVB"}, {"PQJS", "QJPS"}, {"IRNM", "RINM"},
+                {"QYDX", "YDXQ"}, {"ARGF", "FGAR"}
+        };
     }
 
-    @Test
-    void theGreatBerate(){
-        assertEquals("ZNYL", Alphabet.order("ZYNL"));
-        assertEquals("YKQV", Alphabet.order("QYVK"));
-        assertEquals("ACHZ", Alphabet.order("HZAC"));
+    @Test(dataProvider = "fourLetterProvider")
+    public void fourLetterTest(String expected, String testPhrase){
+        assertEquals(Alphabet.order(testPhrase), expected);
+    }
 
+    @DataProvider
+    public Object[][] theGreatBerateProvider(){
+        return new Object[][]{
+                {"ZNYL", "ZYNL"}, {"YKQV", "QYVK"}, {"ACHZ", "HZAC"}
+        };
+    }
+
+    @Test(dataProvider = "theGreatBerateProvider")
+    public void theGreatBerate(String expected, String testPhrase){
+        assertEquals(Alphabet.order(testPhrase), expected);
     }
 }
