@@ -82,6 +82,6 @@ public class BlindAlley extends Widget {
     }
 
     public static void reset(){
-        alleyCat = new int[3][3];
+        alleyCat = new int[][]{{0,0,0}, {0,0,0}, {0,0,0}};
     }
 }

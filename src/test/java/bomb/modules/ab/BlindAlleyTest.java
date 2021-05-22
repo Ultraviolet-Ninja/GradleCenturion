@@ -7,6 +7,7 @@ import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import bomb.modules.ab.blind_alley.BlindAlley;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
@@ -18,10 +19,6 @@ public class BlindAlleyTest {
     @BeforeMethod
     public void methodSetup(){
         Widget.resetProperties();
-    }
-
-    @BeforeTest
-    public void testSetup(){
         BlindAlley.reset();
     }
 
@@ -92,5 +89,10 @@ public class BlindAlleyTest {
             for (int j = 0; j < numbers[i].length; j++)
                 assertEquals(numbers[i][j], actual[i][j]);
         }
+    }
+
+    @AfterClass
+    public static void tearDown(){
+        Widget.resetProperties();
     }
 }

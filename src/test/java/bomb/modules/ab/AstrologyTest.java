@@ -5,6 +5,7 @@ import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.modules.ab.astrology.AstroSymbols;
 import bomb.modules.ab.astrology.Astrology;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -96,5 +97,10 @@ public class AstrologyTest {
         cond.setCondition();
 
         assertEquals(Astrology.calculate(set), expected);
+    }
+
+    @AfterClass
+    public static void tearDown(){
+        Widget.resetProperties();
     }
 }

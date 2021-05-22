@@ -7,6 +7,7 @@ import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import bomb.modules.ab.bitwise.Bitwise;
 import bomb.modules.ab.bitwise.BitwiseOps;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -91,5 +92,10 @@ public class BitwiseTest {
         Widget.setIndicator(TriState.OFF, Indicators.CAR);
         Widget.setDBatteries(1);
         Widget.setNumHolders(2);
+    }
+
+    @AfterClass
+    public static void tearDown(){
+        Widget.resetProperties();
     }
 }
