@@ -1,57 +1,82 @@
 package bomb.modules.dh;
 
+import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import bomb.modules.dh.fast_math.FastMath;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.testng.Assert.assertEquals;
 
 public class FastMathTest {
-    @BeforeEach
-    void setUp(){
+    @BeforeMethod
+    public void setUp(){
         Widget.resetProperties();
     }
 
-    @Test
-    void exceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> FastMath.solve(""));
-        assertThrows(IllegalArgumentException.class, () -> FastMath.solve(null));
-        assertThrows(IllegalArgumentException.class, () -> FastMath.solve("AZ"));
-        Widget.setSerialCode("fr4op2");
-        assertThrows(IllegalArgumentException.class, () -> FastMath.solve("AY"));
+    @DataProvider
+    public Object[][] exceptionProvider(){
+        ConditionSetter empty = () -> {};
+        ConditionSetter setSerialCode = () -> Widget.setSerialCode("fr4op2");
+        return new Object[][]{
+                {empty, ""}, {empty, null}, {empty, "AZ"}, {setSerialCode, "AY"}
+        };
     }
 
-    @Test
-    void allPreconditionsTest(){
+    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    public void exceptionTest(ConditionSetter setter, String input){
+        setter.setCondition();
+        FastMath.solve(input);
+    }
+
+    @DataProvider
+    public Object[][] allPreconditionProvider(){
+        return new String[][]{
+                {"40", "zz"}, {"81", "xS"}, {"22", "KK"}
+        };
+    }
+
+    @Test(dataProvider = "allPreconditionProvider")
+    public void allPreconditionTest(String expected, String input){
         Widget.addPort(Ports.SERIAL);
         Widget.addPort(Ports.RJ45);
         Widget.setIndicator(TriState.ON, Indicators.MSA);
         Widget.setDBatteries(4);
         Widget.setSerialCode("fr4op2"); //In total, adds 41 to the count
-        assertEquals("40", FastMath.solve("zz"));
-        assertEquals("81", FastMath.solve("xS"));
-        assertEquals("22", FastMath.solve("KK"));
+
+        assertEquals(FastMath.solve(input), expected);
     }
 
-    @Test
-    void belowZeroTest(){
+    @DataProvider
+    public Object[][] belowZeroProvider(){
+        return new String[][]{
+                {"41", "ab"}, {"30", "Dg"}, {"43", "BX"}
+        };
+    }
+
+    @Test(dataProvider = "belowZeroProvider")
+    public void belowZeroTest(String expected, String input){
         Widget.setSerialCode("fr4op2");
         Widget.setDBatteries(4);//In total, adds -20 to the count
-        assertEquals("41", FastMath.solve("ab"));
-        assertEquals("30", FastMath.solve("Dg"));
-        assertEquals("43", FastMath.solve("BX"));
+
+        assertEquals(FastMath.solve(input), expected);
     }
 
-    @Test
-    void noPreconditionsTest(){
+    @DataProvider
+    public Object[][] noPreconditionProvider(){
+        return new String[][]{
+                {"25", "aa"}, {"40", "xS"}, {"14", "KT"}
+        };
+    }
+
+    @Test(dataProvider = "noPreconditionProvider")
+    public void noPreconditionTest(String expected, String input){
         Widget.setSerialCode("nr4op2");
-        assertEquals("25", FastMath.solve("aa"));
-        assertEquals("40", FastMath.solve("xS"));
-        assertEquals("14", FastMath.solve("KT"));
+
+        assertEquals(FastMath.solve(input), expected);
     }
 }

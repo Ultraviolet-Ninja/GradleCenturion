@@ -42,7 +42,6 @@ public class TestingArea {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private static HexGrid fromLine(String line){

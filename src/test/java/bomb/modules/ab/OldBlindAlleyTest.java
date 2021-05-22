@@ -1,37 +1,30 @@
 package bomb.modules.ab;
 
-import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import bomb.modules.ab.blind_alley.BlindAlley;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BlindAlleyTest {
-    @BeforeMethod
-    public void methodSetup(){
+public class OldBlindAlleyTest {
+    @BeforeEach
+    void resetWidget(){
         Widget.resetProperties();
-    }
-
-    @BeforeTest
-    public void testSetup(){
         BlindAlley.reset();
     }
 
     @Test
-    public void emptyTest(){
+    void nullTest(){
         assertArrayEquals(new int[][]{{0,0,0}, {0,0,0}, {0,0,0}});
     }
 
     @Test
-    public void trainingVideoTestOne(){
+    void videoTestOne(){
         widgetSetupOne();
         assertArrayEquals(new int[][] {{1,1,0}, {1,0,2}, {1,2,0}});
     }
@@ -69,21 +62,16 @@ public class BlindAlleyTest {
         Widget.setIndicator(TriState.OFF, Indicators.FRQ);
     }
 
-    @DataProvider
-    public Object[][] theGreatBerateProvider(){
-        ConditionSetter partOne = WidgetSimulations::theGreatBerate;
-        ConditionSetter partTwo = WidgetSimulations::theGreatBerateTwo;
-        ConditionSetter partThree = WidgetSimulations::partTwoTakeTwo;
-        return new Object[][]{
-                {partOne, new int[][]{{0,0,0}, {0,0,0}, {1,2,0}}}, {partTwo, new int[][]{{1,1,0}, {1,0,2}, {1,2,1}}},
-                {partThree, new int[][]{{1,0,0}, {0,1,0}, {0,2,2}}}
-        };
-    }
+    @Test
+    void theGreatBerate(){
+        WidgetSimulations.theGreatBerate();
+        assertArrayEquals(new int[][]{{0,0,0}, {0,0,0}, {1,2,0}});
+        WidgetSimulations.theGreatBerateTwo();
+        assertArrayEquals(new int[][]{{1,1,0}, {1,0,2}, {1,2,1}});
+        WidgetSimulations.partTwoTakeTwo();
+        assertArrayEquals(new int[][]{{1,0,0}, {0,1,0}, {0,2,2}});
+        WidgetSimulations.partTwoTakeThree();
 
-    @Test(dataProvider = "theGreatBerateProvider")
-    public void theGreatBerateTest(ConditionSetter setter, int[][] arr){
-        setter.setCondition();
-        assertArrayEquals(arr);
     }
 
     private void assertArrayEquals(int[][] numbers){

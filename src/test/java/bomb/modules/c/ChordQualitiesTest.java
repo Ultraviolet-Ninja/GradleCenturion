@@ -1,34 +1,43 @@
 package bomb.modules.c;
 
 import bomb.modules.c.chords.ChordQualities;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertThrows;
 
 public class ChordQualitiesTest {
     @Test
-    void exceptionTest(){
+    public void exceptionTest(){
         assertThrows(IllegalArgumentException.class, () -> ChordQualities.solve("A A A A"));
     }
 
-    @Test
-    void videoTest(){
-        assertEqualsAnyOrder("A +2 +2 +3", new String[]{"D#", "F", "G#", "A"});
-        assertEqualsAnyOrder("F +3 +1 +6", new String[]{"A#", "D", "D#", "F#"});
-        assertEqualsAnyOrder("D# +3 +5 +3", new String[]{"A", "B", "C#", "E"});
-        assertEqualsAnyOrder("E +2 +1 +4", new String[]{"G#", "C#", "D#", "E"});
-        assertEqualsAnyOrder("E +4 +3 +4", new String[]{"A", "D", "E", "F"});
-        assertEqualsAnyOrder("D +2 +1 +4", new String[]{"B", "C#", "F#", "G#"});
+    @DataProvider
+    public Object[][] trainingVideoProvider(){
+        return new String[][]{
+                {"A +2 +2 +3", "D#", "F", "G#", "A"}, {"F +3 +1 +6", "A#", "D", "D#", "F#"},
+                {"D# +3 +5 +3", "A", "B", "C#", "E"}, {"E +2 +1 +4", "G#", "C#", "D#", "E"},
+                {"E +4 +3 +4", "A", "D", "E", "F"}, {"D +2 +1 +4", "B", "C#", "F#", "G#"}
+        };
     }
 
-    @Test
-    void theGreatBerate(){
-        assertEqualsAnyOrder("G +5 +2 +3", new String[]{"G#", "B", "D", "E"});
-        assertEqualsAnyOrder("E +3 +1 +6", new String[]{"A#", "D#", "F", "F#"});
-        assertEqualsAnyOrder("C# +3 +1 +6", new String[]{"F#", "A", "C#", "D#"});
+    @Test(dataProvider = "trainingVideoProvider")
+    public void trainingVideoTest(String expected, String ... testSet){
+        assertEqualsAnyOrder(expected, testSet);
+    }
 
+    @DataProvider
+    public Object[][] theGreatBerateProvider(){
+        return new String[][]{
+                {"G +5 +2 +3", "G#", "B", "D", "E"}, {"E +3 +1 +6", "A#", "D#", "F", "F#"},
+                {"C# +3 +1 +6", "F#", "A", "C#", "D#"}
+        };
+    }
+
+    @Test(dataProvider = "theGreatBerateProvider")
+    public void theGreatBerateTest(String expected, String ... testSet){
+        assertEqualsAnyOrder(expected, testSet);
     }
 
     private void assertEqualsAnyOrder(String expected, String[] notes){
@@ -36,7 +45,7 @@ public class ChordQualitiesTest {
         for (int i = 0; i < length; i++) {
             String input = notes[i % length] + " " + notes[(i + 1) % length] +
                     " " + notes[(i + 2) % length] + " " + notes[(i + 3) % length];
-            assertEquals(ChordQualities.NEW_CHORD + expected, ChordQualities.solve(input));
+            assertEquals(ChordQualities.solve(input), ChordQualities.NEW_CHORD + expected);
         }
     }
 }

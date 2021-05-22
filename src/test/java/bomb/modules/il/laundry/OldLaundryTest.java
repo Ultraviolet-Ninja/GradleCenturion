@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class LaundryTest {
+public class OldLaundryTest {
     private static final int EXPECTED_SIZE_FOR_BOB = 6;
 
     @BeforeEach

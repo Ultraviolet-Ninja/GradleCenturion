@@ -1,21 +1,21 @@
 package bomb.modules.ab;
 
+import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import bomb.modules.ab.bitwise.Bitwise;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import bomb.modules.ab.bitwise.BitwiseOps;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import static bomb.modules.ab.bitwise.BitwiseOps.AND;
 import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
 import static bomb.modules.ab.bitwise.BitwiseOps.OR;
 import static bomb.modules.ab.bitwise.BitwiseOps.XOR;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.testng.Assert.assertEquals;
 
 public class BitwiseTest {
     private static final int DEFAULT_START_TIME = 5;
@@ -23,53 +23,53 @@ public class BitwiseTest {
             MAX_AND = "11111110", MAX_OR = "11111111", MAX_XOR = "00000001", MAX_NOT = "00000000",
             LAST_DIGIT_EVEN = "ask412", LAST_DIGIT_ODD = "wo24l5";
 
-    @BeforeEach
-    void clearProperties(){
+    @BeforeTest
+    public void setUp(){
         Widget.resetProperties();
     }
 
-    @Test
-    void exceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> Bitwise.getByte(NOT));
-        Widget.setNumModules(1);
-        assertThrows(IllegalArgumentException.class, () -> Bitwise.getByte(NOT));
-        Widget.setStartTime(4);
-        assertThrows(IllegalArgumentException.class, () -> Bitwise.getByte(NOT));
-        Widget.setSerialCode("942kws");
-        assertDoesNotThrow(() -> Bitwise.getByte(NOT));
+    @DataProvider
+    public Object[] exceptionProvider(){
+        return new ConditionSetter[]{
+                () -> {}, () -> Widget.setNumModules(1), () -> Widget.setStartTime(4)
+        };
     }
 
-    @Test
-    void minimumConditionTest(){
-        setEssentialFalseConditions();
-        Widget.setDoubleAs(2);
-        assertEquals(MIN_AND, Bitwise.getByte(AND));
-        assertEquals(MIN_OR, Bitwise.getByte(OR));
-        assertEquals(MIN_XOR, Bitwise.getByte(XOR));
-        assertEquals(MIN_NOT, Bitwise.getByte(NOT));
+    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    public void exceptionTest(ConditionSetter setter){
+        setter.setCondition();
+        Bitwise.getByte(NOT);
     }
 
-    @Test
-    void maximumConditionTest(){
-        setEssentialTrueConditions();
-        maximizeConditions();
-        assertEquals(MAX_AND, Bitwise.getByte(AND));
-        assertEquals(MAX_OR, Bitwise.getByte(OR));
-        assertEquals(MAX_XOR, Bitwise.getByte(XOR));
-        assertEquals(MAX_NOT, Bitwise.getByte(NOT));
-    }
-
-    @Test
-    void theGreatBerate(){
-        WidgetSimulations.theGreatBerate();
-        assertEquals(MIN_AND, Bitwise.getByte(AND));
-        WidgetSimulations.theGreatBerateTwo();
-        assertEquals("10110011", Bitwise.getByte(XOR));
-        WidgetSimulations.partTwoTakeTwo();
-        assertEquals("01101110", Bitwise.getByte(NOT));
-        WidgetSimulations.partTwoTakeThree();
-
-    }
+//    @DataProvider
+//    public Object[][] minimumConditionProvider(){
+//        return new Object[][] {
+//                {MIN_AND, AND}, {MIN_OR, OR}, {MIN_XOR, XOR}, {MIN_NOT, NOT}
+//        };
+//    }
+//
+//    @Test(dataProvider = "minimumConditionProvider")
+//    public void minimumConditionTest(String expected, BitwiseOps operation){
+//        setEssentialFalseConditions();
+//        Widget.setDoubleAs(2);
+//
+//        assertEquals(Bitwise.getByte(operation), expected);
+//    }
+//
+//    @DataProvider
+//    public Object[][] maximumConditionProvider(){
+//        return new Object[][] {
+//                {MAX_AND, AND}, {MAX_OR, OR}, {MAX_XOR, XOR}, {MAX_NOT, NOT}
+//        };
+//    }
+//
+//    @Test(dataProvider = "maximumConditionProvider")
+//    public void maximumConditionTest(String expected, BitwiseOps operation){
+//        setEssentialTrueConditions();
+//        maximizeConditions();
+//
+//        assertEquals(Bitwise.getByte(operation), expected);
+//    }
 
     private void setEssentialTrueConditions(){
         Widget.setSerialCode(LAST_DIGIT_ODD);
