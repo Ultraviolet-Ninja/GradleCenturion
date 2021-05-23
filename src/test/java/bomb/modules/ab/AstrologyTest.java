@@ -100,7 +100,7 @@ public class AstrologyTest {
     }
 
     @AfterClass
-    public static void tearDown(){
+    public void tearDown(){
         Widget.resetProperties();
     }
 }

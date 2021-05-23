@@ -95,7 +95,7 @@ public class BitwiseTest {
     }
 
     @AfterClass
-    public static void tearDown(){
+    public void tearDown(){
         Widget.resetProperties();
     }
 }

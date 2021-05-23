@@ -65,7 +65,7 @@ public class TwoBitTest {
     }
 
     @AfterClass
-    public static void tearDown(){
+    public void tearDown(){
         Widget.resetProperties();
     }
 }
