@@ -6,6 +6,7 @@ import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -80,5 +81,10 @@ public class ShapeShiftTest {
     private void assertPairEquals(ShiftShape[] expected, ShiftShape[] actual){
         assertEquals(expected[0], actual[0]);
         assertEquals(expected[1], actual[1]);
+    }
+
+    @AfterClass
+    public void tearDown(){
+        Widget.resetProperties();
     }
 }
