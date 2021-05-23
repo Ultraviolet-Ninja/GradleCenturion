@@ -54,6 +54,5 @@ public class OldEmojiMathTest {
         assertEquals(-54, EmojiMath.calculate(")=:)-:|:("));
         assertEquals(120, EmojiMath.calculate(":((=+(=)="));
         assertEquals(144, EmojiMath.calculate("(=:(+(=:)"));
-
     }
 }
