@@ -15,6 +15,8 @@ import static bomb.enumerations.TriState.*;
  * as well as the MainController to add/subtract to the widgets.
  */
 public class Widget {
+    private static final int LOWER_PORT_LIMIT = 0, UPPER_PORT_LIMIT = 10;
+
     protected static boolean souvenir = false, forgetMeNot = false;
     protected static int numDoubleAs = 0,
             numDBatteries = 0,
@@ -157,7 +159,7 @@ public class Widget {
      * @param which The port to add on
      */
     public static void addPort(Ports which){
-        if (ports[which.getIdx()] < 10){
+        if (ports[which.getIdx()] < UPPER_PORT_LIMIT){
             ports[which.getIdx()]++;
             BlindAlley.alleyUpdate();
         }
@@ -169,7 +171,7 @@ public class Widget {
      * @param which The port to subtract
      */
     public static void subPort(Ports which){
-        if (ports[which.getIdx()] > 0){
+        if (ports[which.getIdx()] > LOWER_PORT_LIMIT){
             ports[which.getIdx()]--;
             BlindAlley.alleyUpdate();
         }
