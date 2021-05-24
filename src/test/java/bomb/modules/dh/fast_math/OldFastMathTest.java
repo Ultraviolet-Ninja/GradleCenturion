@@ -1,10 +1,9 @@
-package bomb.modules.dh;
+package bomb.modules.dh.fast_math;
 
 import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
-import bomb.modules.dh.fast_math.FastMath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

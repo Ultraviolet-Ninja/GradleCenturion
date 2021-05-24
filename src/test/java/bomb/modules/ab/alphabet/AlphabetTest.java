@@ -1,6 +1,5 @@
-package bomb.modules.ab;
+package bomb.modules.ab.alphabet;
 
-import bomb.modules.ab.alphabet.Alphabet;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

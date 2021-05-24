@@ -1,10 +1,8 @@
-package bomb.modules.ab;
+package bomb.modules.ab.astrology;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
-import bomb.modules.ab.astrology.AstroSymbols;
-import bomb.modules.ab.astrology.Astrology;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

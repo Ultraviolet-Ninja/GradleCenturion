@@ -1,9 +1,7 @@
-package bomb.modules.c;
+package bomb.modules.c.chords;
 
-import bomb.modules.c.chords.ChordQualities;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

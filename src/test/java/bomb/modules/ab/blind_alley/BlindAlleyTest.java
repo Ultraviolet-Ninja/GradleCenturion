@@ -1,4 +1,4 @@
-package bomb.modules.ab;
+package bomb.modules.ab.blind_alley;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
@@ -6,7 +6,6 @@ import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
-import bomb.modules.ab.blind_alley.BlindAlley;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;

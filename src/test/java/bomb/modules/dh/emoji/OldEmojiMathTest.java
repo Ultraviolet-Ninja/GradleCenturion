@@ -1,7 +1,5 @@
-package bomb.modules.dh;
+package bomb.modules.dh.emoji;
 
-import bomb.modules.dh.emoji.Emojis;
-import bomb.modules.dh.emoji.EmojiMath;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

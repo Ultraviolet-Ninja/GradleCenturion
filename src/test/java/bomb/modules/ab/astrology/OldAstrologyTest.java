@@ -1,9 +1,8 @@
 
-package bomb.modules.ab;
+package bomb.modules.ab.astrology;
 
 import bomb.Widget;
 import bomb.WidgetSimulations;
-import bomb.modules.ab.astrology.Astrology;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

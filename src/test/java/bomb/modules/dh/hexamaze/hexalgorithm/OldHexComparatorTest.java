@@ -1,10 +1,5 @@
-package bomb.modules.dh;
+package bomb.modules.dh.hexamaze.hexalgorithm;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
-import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import bomb.tools.data.structures.FixedArrayQueue;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class HexComparatorTest {
+public class OldHexComparatorTest {
     private static final String PATH = System.getProperty("user.dir") +
             "/src/test/resources/bomb/modules/dh/";
     private static final String FAILED_AT = "Failed at test ";

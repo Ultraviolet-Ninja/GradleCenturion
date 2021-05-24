@@ -1,11 +1,10 @@
-package bomb.modules.ab;
+package bomb.modules.ab.blind_alley;
 
 import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
-import bomb.modules.ab.blind_alley.BlindAlley;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

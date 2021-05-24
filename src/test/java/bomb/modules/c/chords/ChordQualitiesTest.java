@@ -1,6 +1,5 @@
-package bomb.modules.c;
+package bomb.modules.c.chords;
 
-import bomb.modules.c.chords.ChordQualities;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

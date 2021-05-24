@@ -1,8 +1,5 @@
-package bomb.modules.ab;
+package bomb.modules.ab.boolean_venn;
 
-import bomb.Widget;
-import bomb.modules.ab.boolean_venn.BooleanVenn;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

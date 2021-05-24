@@ -1,12 +1,10 @@
-package bomb.modules.ab;
+package bomb.modules.ab.bitwise;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
-import bomb.modules.ab.bitwise.Bitwise;
-import bomb.modules.ab.bitwise.BitwiseOps;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;

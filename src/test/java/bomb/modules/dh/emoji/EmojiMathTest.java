@@ -1,6 +1,5 @@
-package bomb.modules.dh;
+package bomb.modules.dh.emoji;
 
-import bomb.modules.dh.emoji.EmojiMath;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
