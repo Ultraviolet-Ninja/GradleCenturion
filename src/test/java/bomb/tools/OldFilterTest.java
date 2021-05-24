@@ -7,7 +7,7 @@ import static bomb.tools.Mechanics.NUMBER_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FilterTest {
+public class OldFilterTest {
     @Test
     void letterTest(){
         assertEquals("u", ultimateFilter("53212323u6434123", LOWERCASE_REGEX));

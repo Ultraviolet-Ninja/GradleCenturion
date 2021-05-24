@@ -8,16 +8,16 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ListGraphTest {
+public class OldWeightedListGraphTest {
     private final String[] testArray = {"Check check", "Again", "Thrice Cream", "The Forth",
             "The Fifth", "Incomplete", "Lucky No.", "Sideways Infinity"};
-    private ListGraph<String> directedGraph, undirectedGraph;
+    private WeightedListGraph<String> directedGraph, undirectedGraph;
 
 
     @BeforeEach
     void setUp() {
-        directedGraph = new ListGraph<>(false);
-        undirectedGraph= new ListGraph<>(true);
+        directedGraph = new WeightedListGraph<>(false);
+        undirectedGraph= new WeightedListGraph<>(true);
     }
 
     @Test
@@ -27,12 +27,18 @@ public class ListGraphTest {
             assertTrue(undirectedGraph.addVertex(s));
         });
 
-        Arrays.stream(testArray).forEach(s -> {
-            assertFalse(directedGraph.addVertex(s));
-            assertFalse(undirectedGraph.addVertex(s));
-        });
+        Arrays.stream(testArray)
+                .forEach(s -> {
+                    assertFalse(directedGraph.addVertex(s));
+                    assertFalse(undirectedGraph.addVertex(s));
+                });
     }
 
+    @Test
+    void edgeAddition(){
+//        fill();
+
+    }
 
     private void fill(){
         Arrays.stream(testArray)

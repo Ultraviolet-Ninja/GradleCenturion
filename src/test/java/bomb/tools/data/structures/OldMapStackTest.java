@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MapStackTest {
+public class OldMapStackTest {
     private MapStack<Integer, String> stack;
 
     private final Integer[] integers = new Integer[]{1, 2, 4, 41, 684, 50324, 124, 8345};
