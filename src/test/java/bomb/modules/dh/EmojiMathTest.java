@@ -7,6 +7,11 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class EmojiMathTest {
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void invalidityTest(){
+        EmojiMath.calculate(":||+):");
+    }
+
     @DataProvider
     public Object[][] trainingVideoProvider(){
         return new Object[][] {

@@ -69,9 +69,10 @@ public class EmojiMath extends Widget {
      *
      * @param equation The equation put into real numbers
      * @param add Whether the equation should be added or subtracted
+     * @throws NumberFormatException When a non-number or null is entered into the equation
      * @return The sum or difference of the translated numbers
      */
-    private static int calculateRealNumbers(String equation, boolean add){
+    private static int calculateRealNumbers(String equation, boolean add) throws NumberFormatException{
         String[] toNum = equation.split(add?"\\+":"-");
         int[] nums = new int[toNum.length];
         nums[0] = Integer.parseInt(toNum[0]);
