@@ -7,7 +7,7 @@ import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -15,8 +15,8 @@ import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
 public class LaundryTest {
-    @BeforeTest
-    public void testSetup(){
+    @BeforeMethod
+    public void methodSetup(){
         Widget.resetProperties();
     }
 
@@ -53,7 +53,6 @@ public class LaundryTest {
     }
 
     private void setupOne(){
-        Widget.resetProperties();
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
         Widget.addPort(Ports.SERIAL);
@@ -64,7 +63,6 @@ public class LaundryTest {
     }
 
     private void setupTwo(){
-        Widget.resetProperties();
         Widget.setNumModules(11);
         Widget.setSerialCode("7h1iv1");
         Widget.setDBatteries(1);

@@ -6,7 +6,7 @@ import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -22,7 +22,7 @@ public class BitwiseTest {
             MAX_AND = "11111110", MAX_OR = "11111111", MAX_XOR = "00000001", MAX_NOT = "00000000",
             LAST_DIGIT_EVEN = "ask412", LAST_DIGIT_ODD = "wo24l5";
 
-    @BeforeTest
+    @BeforeMethod
     public void setUp(){
         Widget.resetProperties();
     }
@@ -30,7 +30,12 @@ public class BitwiseTest {
     @DataProvider
     public Object[] exceptionProvider(){
         return new ConditionSetter[]{
-                () -> {}, () -> Widget.setNumModules(1), () -> Widget.setStartTime(4)
+                () -> {},
+                () -> Widget.setNumModules(1),
+                () -> {
+                    Widget.setStartTime(4);
+                    Widget.setNumModules(1);
+                }
         };
     }
 
@@ -40,35 +45,35 @@ public class BitwiseTest {
         Bitwise.getByte(NOT);
     }
 
-//    @DataProvider
-//    public Object[][] minimumConditionProvider(){
-//        return new Object[][] {
-//                {MIN_AND, AND}, {MIN_OR, OR}, {MIN_XOR, XOR}, {MIN_NOT, NOT}
-//        };
-//    }
-//
-//    @Test(dataProvider = "minimumConditionProvider")
-//    public void minimumConditionTest(String expected, BitwiseOps operation){
-//        setEssentialFalseConditions();
-//        Widget.setDoubleAs(2);
-//
-//        assertEquals(Bitwise.getByte(operation), expected);
-//    }
-//
-//    @DataProvider
-//    public Object[][] maximumConditionProvider(){
-//        return new Object[][] {
-//                {MAX_AND, AND}, {MAX_OR, OR}, {MAX_XOR, XOR}, {MAX_NOT, NOT}
-//        };
-//    }
-//
-//    @Test(dataProvider = "maximumConditionProvider")
-//    public void maximumConditionTest(String expected, BitwiseOps operation){
-//        setEssentialTrueConditions();
-//        maximizeConditions();
-//
-//        assertEquals(Bitwise.getByte(operation), expected);
-//    }
+    @DataProvider
+    public Object[][] minimumConditionProvider(){
+        return new Object[][] {
+                {MIN_AND, AND}, {MIN_OR, OR}, {MIN_XOR, XOR}, {MIN_NOT, NOT}
+        };
+    }
+
+    @Test(dataProvider = "minimumConditionProvider")
+    public void minimumConditionTest(String expected, BitwiseOps operation){
+        setEssentialFalseConditions();
+        Widget.setDoubleAs(2);
+
+        assertEquals(Bitwise.getByte(operation), expected);
+    }
+
+    @DataProvider
+    public Object[][] maximumConditionProvider(){
+        return new Object[][] {
+                {MAX_AND, AND}, {MAX_OR, OR}, {MAX_XOR, XOR}, {MAX_NOT, NOT}
+        };
+    }
+
+    @Test(dataProvider = "maximumConditionProvider")
+    public void maximumConditionTest(String expected, BitwiseOps operation){
+        setEssentialTrueConditions();
+        maximizeConditions();
+
+        assertEquals(Bitwise.getByte(operation), expected);
+    }
 
     private void setEssentialTrueConditions(){
         Widget.setSerialCode(LAST_DIGIT_ODD);

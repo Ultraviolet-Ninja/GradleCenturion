@@ -3,7 +3,7 @@ package bomb.modules.t.two_bit;
 import bomb.Widget;
 import bomb.enumerations.Ports;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -12,8 +12,8 @@ import static bomb.modules.t.two_bit.TwoBit.SUBMIT;
 import static org.testng.Assert.assertEquals;
 
 public class TwoBitTest {
-    @BeforeTest
-    void setUp(){
+    @BeforeMethod
+    public void setUp(){
         Widget.resetProperties();
         TwoBit.resetStage();
     }
@@ -44,15 +44,17 @@ public class TwoBitTest {
     @DataProvider
     public Object[][] trainingVideoProvider(){
         widgetSetupOne();
-        return new String[][]{
-                {QUERY + "gv", "02"}, {QUERY + "vt", "07"}, {SUBMIT + "gz", "89"},
-                {QUERY + "vc", "77"}, {QUERY + "bd", "67"}, {SUBMIT + "vg", "93"}
+        return new Object[][]{
+                {new String[]{QUERY + "gv", QUERY + "vt", SUBMIT + "gz"}, new String[]{"02", "07", "89"}},
+                {new String[]{QUERY + "vc", QUERY + "bd", SUBMIT + "vg"}, new String[]{"77", "67", "93"}}
         };
     }
 
     @Test(dataProvider = "trainingVideoProvider")
-    public void trainingVideoQuerySubmitTest(String expected, String input){
-        assertEquals(TwoBit.nextCode(input), expected);
+    public void trainingVideoQuerySubmitTest(String[] expectedArr, String[] inputArr){
+        for (int i = 0; i < expectedArr.length; i++){
+            assertEquals(expectedArr[i], TwoBit.nextCode(inputArr[i]));
+        }
     }
 
     private void widgetSetupOne(){

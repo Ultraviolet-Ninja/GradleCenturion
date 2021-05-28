@@ -1,6 +1,7 @@
 package bomb;
 
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -8,7 +9,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class WidgetTest {
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         Widget.resetProperties();
     }
@@ -46,6 +47,51 @@ public class WidgetTest {
         Widget.setSouvenir(val);
 
         assertEquals(Widget.getSouvenir(), expected);
+    }
+
+    @DataProvider
+    public Object[][] negativeValueProvider(){
+
+        return new Object[][]{
+                {-1, 0}, {5, 5}
+        };
+    }
+
+    @Test(dataProvider = "negativeValueProvider")
+    public void negativePortPlateTest(int val, int expected){
+        Widget.setPlates(val);
+
+        assertEquals(Widget.numPlates, expected);
+    }
+
+    @Test(dataProvider = "negativeValueProvider")
+    public void negativeModNumberTest(int val, int expected){
+        Widget.setNumModules(val);
+
+        assertEquals(Widget.getNumModules(), expected);
+    }
+
+    @Test(dataProvider = "negativeValueProvider")
+    public void negativeHolderNumberTest(int val, int expected){
+        Widget.setNumHolders(val);
+
+        assertEquals(Widget.getNumHolders(), expected);
+    }
+
+    @Test(dataProvider = "negativeValueProvider")
+    public void negativeDBatteriesTest(int val, int expected){
+        Widget.setDBatteries(val);
+
+        assertEquals(Widget.getAllBatteries(), expected);
+        assertEquals(Widget.numDBatteries, expected);
+    }
+
+    @Test(dataProvider = "negativeValueProvider")
+    public void negativeDoubleATest(int val, int expected){
+        Widget.setDoubleAs(val);
+
+        assertEquals(Widget.getAllBatteries(), expected);
+        assertEquals(Widget.numDoubleAs, expected);
     }
 
     @AfterClass
