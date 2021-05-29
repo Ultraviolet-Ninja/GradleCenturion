@@ -1,4 +1,4 @@
-package bomb.tools.data.structures;
+package bomb.tools;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

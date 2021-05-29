@@ -30,6 +30,20 @@ public enum Emojis implements Index, Labeled {
         return null;
     }
 
+    public static String generateCaptureGroup(){
+        StringBuilder sb = new StringBuilder("(");
+        Emojis[] emojis = Emojis.values();
+        for (int i = 0; i < emojis.length; i++) {
+            sb.append(emojis[i].label
+                    .replace("(", "\\(")
+                    .replace(")", "\\)")
+                    .replace("|", "\\|")
+            );
+            if (i < emojis.length - 1) sb.append("|");
+        }
+        return sb.toString();
+    }
+
     Emojis(int index, String label){
         this.index = index;
         this.label = label;
