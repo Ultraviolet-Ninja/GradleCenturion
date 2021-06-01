@@ -9,14 +9,17 @@ import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import bomb.modules.np.neutralization.Chemical;
 import bomb.tools.Base91;
+import bomb.tools.Filter;
+import bomb.tools.Mechanics;
+import bomb.tools.Regex;
 
+import java.io.File;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -35,13 +38,17 @@ public class TestingArea {
 //            e.printStackTrace();
 //        }
 
-        try{
-            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
-            Maze maze = new Maze();
-            HexHashLibrary.initialize(maze, bestCase);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try{
+//            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+//            Maze maze = new Maze();
+//            HexHashLibrary.initialize(maze, bestCase);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+        filterComparison("12T4h65is5 %i34s2 a s(5en34t6e4nce.");
+        filterComparison("53212323u6434123");
+        filterComparison("42^&35é");
     }
 
     private static HexGrid fromLine(String line){
@@ -62,5 +69,19 @@ public class TestingArea {
 
         System.out.println("Linear Time: " + format.format(linearStop - linearStart));
         System.out.println("Threaded time: " + format.format(threadedStop - threadedStart));
+    }
+
+    private static void filterComparison(String body){
+        long mechanicStart = System.nanoTime();
+        System.out.println("Mechanic result: " + Mechanics.ultimateFilter(body, Mechanics.LOWERCASE_REGEX));
+        long mechanicEnd = System.nanoTime();
+
+        long filterStart = System.nanoTime();
+        Regex r = new Regex(Filter.CHAR_REGEX, body, Pattern.CASE_INSENSITIVE);
+        System.out.println("Filter result: " + r.toNewString());
+        long filterEnd = System.nanoTime();
+
+        System.out.println("Mechanic Time: " + format.format(mechanicEnd -  mechanicStart));
+        System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
     }
 }
