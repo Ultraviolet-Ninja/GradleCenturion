@@ -4,7 +4,7 @@ import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.ultimateFilter;
 
 public class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID = new int[][]{
@@ -20,9 +20,7 @@ public class FastMath extends Widget {
     public static String solve(String letters){
         if (letters == null || letters.length() != 2)
             throw new IllegalArgumentException("Input 2 letters, please");
-        //TODO consider putting guard clause in Widgets, it's repeated code
-        if (serialCode.length() != 6)
-            throw new IllegalArgumentException("Serial Code not initialized");
+        serialCodeChecker();
         int preconditions = edgework();
         int leftNum = translateLetter(letters.substring(0,1));
         int rightNum = translateLetter(letters.substring(1));
@@ -53,7 +51,7 @@ public class FastMath extends Widget {
         int output = hasLitIndicator(Indicators.MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
         output += portExists(Ports.SERIAL) ? 14 : 0; //If the bomb has a Serial Port
         //If the serial number has the letters F A S T
-        output -= !ultimateFilter(serialCode, "f", "a", "s", "t").isEmpty() ? 5 : 0;
+        output -= !ultimateFilter(serialCode, "[fast]").isEmpty() ? 5 : 0;
         output += portExists(Ports.RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
         output -= getAllBatteries() > 3 ? 15 : 0; //If the bomb has more than 3 batteries
         return output;

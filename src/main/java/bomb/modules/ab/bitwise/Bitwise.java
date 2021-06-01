@@ -4,8 +4,8 @@ import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.NUMBER_REGEX;
+import static bomb.tools.Filter.ultimateFilter;
 
 /**
  * This class deals with the Bitwise Operators module. Bitwise Ops is a screen containing a simple 8-bit

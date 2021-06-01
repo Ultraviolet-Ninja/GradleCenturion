@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 //TODO Eventually document the code
 public class ShapeShift extends Widget {
-    private static boolean serialCodeCheck = false;
     private static final int[][] countTracker = new int[4][4];
     private static ListGraph<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> graph;
 
@@ -81,15 +80,7 @@ public class ShapeShift extends Widget {
         return new ShiftShape[]{left, right};
     }
 
-    private static void serialCodeChecker() throws IllegalArgumentException{
-        if (!serialCodeCheck) {
-            if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is empty");
-            serialCodeCheck = true;
-        }
-    }
-
     private static void resetMod(){
-        serialCodeCheck = false;
         zeroOutArray();
     }
 

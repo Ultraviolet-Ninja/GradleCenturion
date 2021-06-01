@@ -4,7 +4,9 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 import bomb.enumerations.Ports;
 
-import static bomb.tools.Mechanics.*;
+import static bomb.tools.Filter.CHAR_REGEX;
+import static bomb.tools.Filter.NUMBER_REGEX;
+import static bomb.tools.Filter.ultimateFilter;
 
 //TODO - Probably change var names, finish Javadocs and break down a few methods
 /**
@@ -34,7 +36,7 @@ public class TwoBit extends Widget {
     public static String initialCode() throws IllegalArgumentException{
         //TODO - Break down
         if (!serialCode.isEmpty()) {
-            String first = ultimateFilter(serialCode, LOWERCASE_REGEX);
+            String first = ultimateFilter(serialCode, CHAR_REGEX);
             int num = !first.isEmpty() ?
                     first.charAt(0) - 96 :
                     0;

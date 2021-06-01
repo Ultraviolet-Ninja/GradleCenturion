@@ -41,7 +41,7 @@ public enum Emojis implements Index, Labeled {
             );
             if (i < emojis.length - 1) sb.append("|");
         }
-        return sb.toString();
+        return sb.append(")").toString();
     }
 
     Emojis(int index, String label){

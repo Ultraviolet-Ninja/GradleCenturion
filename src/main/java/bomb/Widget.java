@@ -5,6 +5,8 @@ import bomb.modules.dh.forget_me.ForgetMeNot;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
+import bomb.tools.Filter;
+import bomb.tools.Regex;
 
 import static bomb.tools.Mechanics.*;
 import static bomb.enumerations.TriState.*;
@@ -385,6 +387,11 @@ public class Widget {
      */
     public static boolean portExists(Ports port){
         return ports[port.getIdx()] > 0;
+    }
+
+    public static void serialCodeChecker(){
+        Regex checker = new Regex(Filter.SERIAL_CODE_REGEX, serialCode);
+        if (!checker.hasMatch()) throw new IllegalArgumentException("Serial Code is required");
     }
 
     public static void resetProperties(){

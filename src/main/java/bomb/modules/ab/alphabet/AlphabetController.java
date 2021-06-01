@@ -1,5 +1,6 @@
 package bomb.modules.ab.alphabet;
 
+import bomb.tools.Filter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -14,7 +15,7 @@ public class AlphabetController {
     @FXML
     private void getAlphaField(){
         if (!alphabetOut.getText().isEmpty()){
-            String text = ultimateFilter(alphabetOut.getText(), LOWERCASE_REGEX);
+            String text = Filter.ultimateFilter(alphabetOut.getText(), Filter.CHAR_REGEX);
             if (text.length() == 4){
                 alphabetOut.setText(Alphabet.order(text));
             } else {

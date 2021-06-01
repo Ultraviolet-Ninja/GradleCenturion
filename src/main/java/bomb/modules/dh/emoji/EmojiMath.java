@@ -2,13 +2,16 @@ package bomb.modules.dh.emoji;
 
 import bomb.Widget;
 
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.ultimateFilter;
 
 /**
  * This class deals with the Emoji Math module.
  * It's simple math, but replacing numbers with text emojis.
  */
 public class EmojiMath extends Widget {
+    private static final String EMOJI_REGEX = Emojis.generateCaptureGroup();
+    private static final String
+            ADDITION = EMOJI_REGEX + "?" + EMOJI_REGEX + "\\+" + EMOJI_REGEX + EMOJI_REGEX + "?";
 
     /**
      * Calculates the sum/difference from the equation of emojis
@@ -17,8 +20,8 @@ public class EmojiMath extends Widget {
      * @return The values gathered from the emoji equation
      */
     public static int calculate(String input){
-        input = ultimateFilter(input, ":", "|", "(", ")", "=", "+", "-");
-        boolean toAdd = input.contains("+");
+        String temp = ultimateFilter(input, ADDITION);
+        boolean toAdd = !temp.isEmpty();
         String translatedEq = toAdd ?
                 translateEmojis(input.split("\\+"), true) :
                 translateEmojis(input.split("-"), false);
