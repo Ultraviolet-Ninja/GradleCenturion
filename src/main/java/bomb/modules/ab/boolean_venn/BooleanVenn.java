@@ -1,9 +1,7 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
-
-import static bomb.tools.Mechanics.LOGIC_SYMBOL_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import bomb.tools.Filter;
 
 /**
  * This class deals with the Boolean Venn Diagram module.
@@ -22,114 +20,86 @@ public class BooleanVenn extends Widget {
             {true, true, true}};
     private static final int A = 0, B = 1, C = 2;
 
+    private static final String
+            AB_PRIORITY_REGEX = "\\(A" + Filter.LOGIC_REGEX + "B\\)" + Filter.LOGIC_REGEX + "C",
+            BC_PRIORITY_REGEX = "A" + Filter.LOGIC_REGEX+ "\\(B" + Filter.LOGIC_REGEX + "C\\)";
+
     /**
      * Turns the String operation into a String code for the Venn Diagram to decode by choosing
      * the correct method depending on which side of the operation has the priority, that being
      * the operation between parenthesis
      *
      * @param operation The operation that the defuser sees on the bomb
+     * @throws IllegalArgumentException Format mismatch for the input equation
      * @return A String code that represents the state of each Venn Diagram section
      *          The output order is not, c, b, a, bc, ac, ab, all
      */
     public static String resultCode(String operation) throws IllegalArgumentException{
         if (operation.isEmpty()) throw new IllegalArgumentException("Cannot have empty String");
-        checkEquation(operation);
-        return (operation.charAt(0) != 'A') ?
-                abPriority(operation) :
-                bcPriority(operation);
-    }
-
-    private static void checkEquation(String equation){
-        String errorMessage = "Component missing from equation: ";
-        if (ultimateFilter(equation, "a", "b", "c").length() != 3)
-            throw new IllegalArgumentException(errorMessage + "ABC");
-        else if (ultimateFilter(equation, "(", ")").length() != 2)
-            throw new IllegalArgumentException(errorMessage + "()");
-        else if (ultimateFilter(equation, LOGIC_SYMBOL_REGEX).length() != 2)
-            throw new IllegalArgumentException(errorMessage + "Logic Symbol");
-        else if (!checkFormat(equation))
-            throw new IllegalArgumentException("Incorrect Format");
-    }
-
-    private static boolean checkFormat(String equation){
-        for (String firstLetter : LOGIC_SYMBOL_REGEX){
-            for (String secondLetter : LOGIC_SYMBOL_REGEX){
-                String priorityAB = "(A" + firstLetter + "B)" + secondLetter + "C";
-                String priorityBC = "A" + firstLetter + "(B" + secondLetter + "C)";
-                if (equation.equals(priorityAB) || equation.equals(priorityBC))
-                    return true;
-            }
-        }
-        return false;
+        return checkFormat(operation) ?
+                interpretAB(operation) :
+                interpretBC(operation);
     }
 
     /**
-     * Performs the operation between A and B first, then adds the operation for C
+     * Checks the formatting of the equation to see if it fits either of (AB)C or A(BC)
+     * with logic symbols in between AB and BC
      *
-     * @param op The operation that the defuser sees on the bomb
-     * @return A String code that represents the state of each Venn Diagram section.
+     * @param equation The valid or invalid equation
+     * @throws IllegalArgumentException Format mismatch for the input equation
+     * @return Whether the equation matches the
      */
-    private static String abPriority(String op){
-        String[] parts = op.split("\\)");
-        StringBuilder builder = new StringBuilder();
-
-        int[] functions = new int[]{detect(parts[0]), detect(parts[1])};
-        boolean[] priorityCases = priorityOutputs(functions[0], A+B);
-
-        for (int i = 0; i < TEST_CASES.length; i++)
-            builder.append(outsideOutputs(functions[1], priorityCases[i], TEST_CASES[i][C]));
-        return builder.toString();
+    private static boolean checkFormat(String equation) throws IllegalArgumentException{
+        String abPriority = Filter.ultimateFilter(equation, AB_PRIORITY_REGEX);
+        String bcPriority = Filter.ultimateFilter(equation, BC_PRIORITY_REGEX);
+        if (xnor(abPriority.isEmpty(), bcPriority.isEmpty())) throw new IllegalArgumentException("Format mismatch!!");
+        return !abPriority.isEmpty();
     }
 
     /**
-     * Performs the operation between B and C first, then adds A
+     * Interprets (AB)C
      *
-     * @param op The operation that the defuser sees on the bomb
+     * @param operation The appropriate equation
      * @return A String code that represents the state of each Venn Diagram section
+     *          The output order is not, c, b, a, bc, ac, ab, all
      */
-    private static String bcPriority(String op){
-        String[] parts = op.split("\\(");
+    private static String interpretAB(String operation){
+        String logicSymbols = Filter.ultimateFilter(operation, Filter.LOGIC_REGEX);
         StringBuilder builder = new StringBuilder();
-
-        int[] functions = new int[]{detect(parts[1]), detect(parts[0])};
-        boolean[] priorityCases = priorityOutputs(functions[0], B+C);
+        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0,1), A+B);
 
         for (int i = 0; i < TEST_CASES.length; i++)
-            builder.append(outsideOutputs(functions[1], TEST_CASES[i][A], priorityCases[i]));
+            builder.append(outsideOutputs(logicSymbols.substring(1), priorityCases[i], TEST_CASES[i][C]));
         return builder.toString();
     }
 
     /**
-     * Outputs the number selector based on the symbol that resembles a bitwise operator
+     * Interprets A(BC)
      *
-     * @param part The string that contains the operation
-     * @return The number selector
+     * @param operation The appropriate equation
+     * @return A String code that represents the state of each Venn Diagram section
+     *          The output order is not, c, b, a, bc, ac, ab, all
      */
-    private static int detect(String part){
-        part = ultimateFilter(part, "∧", "∨", "↓", "⊻", "←", "→", "↔", "|");
+    private static String interpretBC(String operation){
+        String logicSymbols = Filter.ultimateFilter(operation, Filter.LOGIC_REGEX);
+        StringBuilder builder = new StringBuilder();
+        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(1), B+C);
 
-        switch (part){
-            case "∧": return 0; // And
-            case "∨": return 1; // Or
-            case "↓": return 2; // Nor
-            case "⊻": return 3; // Xor
-            case "|": return 4; // Nand
-            case "↔": return 5; // Xnor
-            case "→": return 6; // Implies
-            default: return 7; // Implied By
-        }
+        for (int i = 0; i < TEST_CASES.length; i++)
+            builder.append(outsideOutputs(logicSymbols.substring(0,1),TEST_CASES[i][A] , priorityCases[i]));
+        return builder.toString();
     }
 
     /**
      * Performs the operation on the two variables inside the original equation's ()
      * and returns the outputs from those test cases
      *
-     * @param func The number selector
+     * @param func The logic selector
      * @param priorityNum The determining number to reflect whether the method call came from ab or bc
      * @return A set of booleans that reflect all test cases possible for the operation inside the ()
      */
-    private static boolean[] priorityOutputs(int func, int priorityNum) {
-        boolean[] out = new boolean[8];
+    private static boolean[] priorityOutputs(String func, int priorityNum) {
+        boolean[] out = new boolean[TEST_CASES.length];
         if (priorityNum == 1){
             for (int i = 0; i < TEST_CASES.length; i++)
                 out[i] = functionMap(func, TEST_CASES[i][A], TEST_CASES[i][B]);
@@ -143,12 +113,12 @@ public class BooleanVenn extends Widget {
     /**
      * Returns 0 or 1 based on the boolean operation that gets passed in
      *
-     * @param func The number selector
+     * @param func The logic selector
      * @param x 1st bit
      * @param y 2nd bit
      * @return 1 or 0 based on their respective booleans
      */
-    private static String outsideOutputs(int func, boolean x, boolean y){
+    private static String outsideOutputs(String func, boolean x, boolean y){
         return functionMap(func, x, y)?"1":"0";
     }
 
@@ -160,15 +130,15 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return The result of the operation
      */
-    private static boolean functionMap(int func, boolean x, boolean y){
+    private static boolean functionMap(String func, boolean x, boolean y){
         switch (func){
-            case 0: return and(x,y);
-            case 1: return or(x,y);
-            case 2: return nor(x,y);
-            case 3: return xor(x,y);
-            case 4: return nand(x,y);
-            case 5: return xnor(x,y);
-            case 6: return implies(x,y);
+            case "∧": return and(x,y);
+            case "∨": return or(x,y);
+            case "↓": return nor(x,y);
+            case "⊻": return xor(x,y);
+            case "|": return nand(x,y);
+            case "↔": return xnor(x,y);
+            case "→": return implies(x,y);
             default: return impliedBy(x,y);
         }
     }

@@ -1,5 +1,6 @@
 package bomb;
 
+import bomb.modules.ab.boolean_venn.BooleanVenn;
 import bomb.modules.dh.hexamaze.HexTraits;
 import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
@@ -46,9 +47,9 @@ public class TestingArea {
 //            e.printStackTrace();
 //        }
 
-        filterComparison("12T4h65is5 %i34s2 a s(5en34t6e4nce.");
-        filterComparison("53212323u6434123");
-        filterComparison("42^&35é");
+//        filterComparison("12T4h65is5 %i34s2 a s(5en34t6e4nce.");
+//        filterComparison("53212323u6434123");
+//        filterComparison("42^&35é");
     }
 
     private static HexGrid fromLine(String line){
