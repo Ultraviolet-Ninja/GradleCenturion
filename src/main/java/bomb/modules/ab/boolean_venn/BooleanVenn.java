@@ -21,8 +21,8 @@ public class BooleanVenn extends Widget {
     private static final int A = 0, B = 1, C = 2;
 
     private static final String
-            AB_PRIORITY_REGEX = "\\(A" + Filter.LOGIC_REGEX + "B\\)" + Filter.LOGIC_REGEX + "C",
-            BC_PRIORITY_REGEX = "A" + Filter.LOGIC_REGEX+ "\\(B" + Filter.LOGIC_REGEX + "C\\)";
+            AB_PRIORITY_REGEX = "\\(?:A" + Filter.LOGIC_REGEX + "B\\)" + Filter.LOGIC_REGEX + "C",
+            BC_PRIORITY_REGEX = "A" + Filter.LOGIC_REGEX+ "\\(?:B" + Filter.LOGIC_REGEX + "C\\)";
 
     /**
      * Turns the String operation into a String code for the Venn Diagram to decode by choosing

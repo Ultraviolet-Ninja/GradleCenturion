@@ -1,48 +1,49 @@
 package bomb.tools;
 
+import bomb.tools.lib.com.google.re2j.Matcher;
+import bomb.tools.lib.com.google.re2j.Pattern;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class Regex implements Iterable<String>{
-    private static final int MAX_FLAG_SIZE = 511;
+public class Regex2 implements Iterable<String>{
+    private static final int MAX_FLAG_SIZE = 31;
 
     private final Pattern regPattern;
     private final Matcher textMatcher;
 
-    public Regex(String regex){
+    public Regex2(String regex){
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int flags){
+    public Regex2(String regex, int flags){
         maxFlagCheck(flags);
         regPattern = Pattern.compile(regex, flags);
         textMatcher = regPattern.matcher("");
     }
 
     @SuppressWarnings("MagicConstant")
-    public Regex(String regex, int ... flags){
+    public Regex2(String regex, int ... flags){
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, String matchText){
+    public Regex2(String regex, String matchText){
         this(regex);
         loadText(matchText);
     }
 
-    public Regex(String regex, String matchText, int flags){
+    public Regex2(String regex, String matchText, int flags){
         this(regex, flags);
         loadText(matchText);
     }
 
-    public Regex(String regex, String matchText, int ... flags){
+    public Regex2(String regex, String matchText, int ... flags){
         this(regex, flags);
         loadText(matchText);
     }

@@ -1,26 +1,20 @@
 package bomb;
 
-import bomb.modules.ab.boolean_venn.BooleanVenn;
-import bomb.modules.dh.hexamaze.HexTraits;
 import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexHashLibrary;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
-import bomb.modules.np.neutralization.Chemical;
-import bomb.tools.Base91;
 import bomb.tools.Filter;
 import bomb.tools.Mechanics;
 import bomb.tools.Regex;
+import bomb.tools.Regex2;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.regex.Pattern;
+
+import static bomb.tools.lib.com.google.re2j.Pattern.CASE_INSENSITIVE;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -50,6 +44,28 @@ public class TestingArea {
 //        filterComparison("12T4h65is5 %i34s2 a s(5en34t6e4nce.");
 //        filterComparison("53212323u6434123");
 //        filterComparison("42^&35é");
+
+        Regex r = new Regex(Filter.CHAR_REGEX, Pattern.CASE_INSENSITIVE);
+        Regex2 r2 = new Regex2(Filter.CHAR_REGEX, CASE_INSENSITIVE);
+        for (String body : new String[]{"12T4h65is5 %i34s2 a s(5en34t6e4nce.", "53212323u6434123", "42^&35é"}) {
+            long mechanicStart = System.nanoTime();
+            System.out.println("Mechanic result: " + Mechanics.ultimateFilter(body, Mechanics.LOWERCASE_REGEX));
+            long mechanicEnd = System.nanoTime();
+
+            long filterStart = System.nanoTime();
+            r.loadText(body);
+            System.out.println("Filter result: " + r.toNewString());
+            long filterEnd = System.nanoTime();
+
+            long filter2Start = System.nanoTime();
+            r2.loadText(body);
+            System.out.println("Filter result: " + r2.toNewString());
+            long filter2End = System.nanoTime();
+
+            System.out.println("Mechanic Time: " + format.format(mechanicEnd - mechanicStart));
+            System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
+            System.out.println("Filter2 Time: " + format.format(filter2End - filter2Start));
+        }
     }
 
     private static HexGrid fromLine(String line){
@@ -82,7 +98,13 @@ public class TestingArea {
         System.out.println("Filter result: " + r.toNewString());
         long filterEnd = System.nanoTime();
 
+        long filter2Start = System.nanoTime();
+        Regex2 r2 = new Regex2(Filter.CHAR_REGEX, body, CASE_INSENSITIVE);
+        System.out.println("Filter result: " + r2.toNewString());
+        long filter2End = System.nanoTime();
+
         System.out.println("Mechanic Time: " + format.format(mechanicEnd -  mechanicStart));
         System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
+        System.out.println("Filter2 Time: " + format.format(filter2End - filter2Start));
     }
 }
