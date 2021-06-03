@@ -15,7 +15,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
 import static bomb.enumerations.TriState.*;
-import static bomb.tools.Mechanics.*;
+import static bomb.tools.Filter.ALL_CHAR_FILTER;
+import static bomb.tools.Filter.NUMBER_PATTERN;
 
 public class WidgetController {
     private static final String ENABLE_STYLE = "-fx-background-color: forestgreen; -fx-text-fill: black",
@@ -148,7 +149,8 @@ public class WidgetController {
     }
 
     private int info(TextField currField, Label currLab) {
-        String sample = ultimateFilter(currField.getText(), NUMBER_REGEX);
+        NUMBER_PATTERN.loadText(currField.getText());
+        String sample = NUMBER_PATTERN.toNewString();
         if (!sample.isEmpty()) {
             currLab.setText(sample + addNoun(currLab));
             return Integer.parseInt(sample);
@@ -173,8 +175,9 @@ public class WidgetController {
 
     @FXML
     private void serialCode() {
-        bomb.Widget.setSerialCode(ultimateFilter(serialField.getText(), NORMAL_CHAR_REGEX));
-        if (ultimateFilter(serialField.getText(), NORMAL_CHAR_REGEX).length() == 6)
+        ALL_CHAR_FILTER.loadText(serialField.getText());
+        bomb.Widget.setSerialCode(ALL_CHAR_FILTER.toNewString());
+        if (ALL_CHAR_FILTER.findAllMatches().size() == 6)
             serialField.setDisable(true);
     }
 

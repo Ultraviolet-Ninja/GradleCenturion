@@ -5,8 +5,7 @@ import bomb.enumerations.Ports;
 import bomb.tools.data.structures.ChainList;
 import bomb.Widget;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.NUMBER_PATTERN;
 
 /**
  *
@@ -31,8 +30,9 @@ public class ForgetMeNot extends Widget {
      *
      */
     public static void updateGreatest(){
-        if (!ultimateFilter(serialCode, NUMBER_REGEX).isEmpty()) {
-            for (String num : ultimateFilter(serialCode, NUMBER_REGEX).split("")) {
+        NUMBER_PATTERN.loadText(serialCode);
+        if (!NUMBER_PATTERN.findAllMatches().isEmpty()) {
+            for (String num : NUMBER_PATTERN) {
                 if (Integer.parseInt(num) > greatestNum)
                     greatestNum = Integer.parseInt(num);
             }
@@ -104,7 +104,7 @@ public class ForgetMeNot extends Widget {
      * @param num
      */
     private static void addSecond(int num){
-        if (portExists(Ports.SERIAL) && ultimateFilter(serialCode, NUMBER_REGEX).length() > 2)
+        if (portExists(Ports.SERIAL) && serialCodeNumbers() > 2)
             forgot.offer(nextBuffer(leastSigDig(num+3)));
         else if (prev1%2 == 0)forgot.offer(nextBuffer(leastSigDig(prev1+1+num)));
         else forgot.offer(nextBuffer(leastSigDig(num+prev1-1)));
@@ -170,7 +170,8 @@ public class ForgetMeNot extends Widget {
      */
     private static int smallestOddDigit(){
         int compare = 10;
-        for (String num : ultimateFilter(serialCode, NUMBER_REGEX).split("")){
+        NUMBER_PATTERN.loadText(serialCode);
+        for (String num : NUMBER_PATTERN){
             if (Integer.parseInt(num) < compare)
                 compare = Integer.parseInt(num);
         }

@@ -16,8 +16,7 @@ public class Mechanics {
                     "ê","ę","è","é","f","g","ĝ","h","ĥ","i","î","ï","j","ĵ","k","l","ł",
                     "m","n","ń","ñ","o","ô","ö","ó","ø","œ","p","q","r","s","ŝ","ś", "t",
                     "u","û","ü","ŭ","v","w","x","y","z","ź","ż","ß",
-                    "0","1","2","3","4","5","6","7","8","9"},
-            LOGIC_SYMBOL_REGEX = {"∧", "∨", "↓", "⊻", "←", "→", "↔", "|"};
+                    "0","1","2","3","4","5","6","7","8","9"};
 
     public static String ultimateFilter(String input, String... exceptions){
         StringBuilder builder = new StringBuilder();

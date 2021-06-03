@@ -7,7 +7,6 @@ public class Filter {
 //            VOWEL_REGEX = "[aæąåàeêęèéiîïoôöóøœuûüŭ]+?",
 //            SERIAL_CODE_REGEX = "\\w{6,6}?",
 //            NUMBER_REGEX = "\\d+(?:\\.\\d+)?",
-
 //            CHAR_REGEX = "[a-zæąåàêęèéîïôöóøœûüŭ]+?",
 //            NORMAL_CHAR_REGEX = "[a-z0-9æąåàêęèéîïôöóøœûüŭ]+?";
 

@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
+import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class MicroController extends Widget {
@@ -33,7 +33,8 @@ public class MicroController extends Widget {
     }
 
     private static boolean containsRequiredNumbers(String serialNumbers){
-        String numbers = ultimateFilter(serialNumbers, NUMBER_REGEX);
+        NUMBER_PATTERN.loadText(serialNumbers);
+        String numbers = NUMBER_PATTERN.toNewString();
         return numbers.contains("1") || numbers.contains("4");
     }
 
