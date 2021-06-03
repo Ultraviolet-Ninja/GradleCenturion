@@ -58,17 +58,22 @@ public class Regex implements Iterable<String>{
     }
 
     public boolean hasMatch(){
-        nullChecker();
         return textMatcher.matches();
     }
 
     public String captureGroup(int group){
-        nullChecker();
         return textMatcher.group(group);
     }
 
+    public String captureGroup(String customGroup){
+        return textMatcher.group(customGroup);
+    }
+
+    public int countGroups(){
+        return textMatcher.groupCount();
+    }
+
     public List<String> findAllMatches(){
-        nullChecker();
         reset();
         ArrayList<String> output = new ArrayList<>();
         while(textMatcher.find()){
@@ -78,7 +83,6 @@ public class Regex implements Iterable<String>{
     }
 
     public String toNewString(){
-        nullChecker();
         reset();
         StringBuilder result = new StringBuilder();
         for (String sample : findAllMatches()){
@@ -98,11 +102,6 @@ public class Regex implements Iterable<String>{
     @Override
     public Iterator<String> iterator() {
         return findAllMatches().iterator();
-    }
-
-    private void nullChecker(){
-        if (textMatcher == null)
-            throw new IllegalArgumentException("No text was inserted");
     }
 
     private static void maxFlagCheck(int flags){

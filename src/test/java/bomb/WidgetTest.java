@@ -1,5 +1,8 @@
 package bomb;
 
+import bomb.enumerations.Indicators;
+import bomb.enumerations.Ports;
+import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -50,7 +53,6 @@ public class WidgetTest {
 
     @DataProvider
     public Object[][] negativeValueProvider(){
-
         return new Object[][]{
                 {-1, 0}, {5, 5}
         };
@@ -91,6 +93,72 @@ public class WidgetTest {
 
         assertEquals(Widget.getAllBatteries(), expected);
         assertEquals(Widget.numDoubleAs, expected);
+    }
+
+    @Test
+    public void addPortTest(){
+        for (int i = 0; i < 11; i++){
+            Widget.addPort(Ports.PARALLEL);
+        }
+
+        assertEquals(Widget.getPort(Ports.PARALLEL), 10);
+    }
+
+    @DataProvider
+    public Object[][] subtractPortProvider(){
+        ConditionSetter subOnly = () -> Widget.subPort(Ports.PARALLEL);
+        ConditionSetter addThenSubtract = () -> {
+            Widget.addPort(Ports.PARALLEL);
+            Widget.addPort(Ports.PARALLEL);
+            Widget.addPort(Ports.PARALLEL);
+            Widget.subPort(Ports.PARALLEL);
+        };
+        return new Object[][]{
+                {subOnly, 0}, {addThenSubtract, 2}
+        };
+    }
+
+    @Test(dataProvider = "subtractPortProvider")
+    public void subtractPortTest(ConditionSetter conditions, int expected){
+        conditions.setCondition();
+
+        assertEquals(Widget.getPort(Ports.PARALLEL), expected);
+    }
+
+    @DataProvider
+    public Object[][] serialCodeProvider(){
+        return new Object[][]{
+                {"andkws", 6, 0}, {"124367", 0, 6}, {"19kwk4", 3, 3}
+        };
+    }
+
+    @Test(dataProvider = "serialCodeProvider")
+    public void serialCodeLengthTest(String input, int expectedLetterLength, int expectedNumberLength){
+        Widget.setSerialCode(input);
+
+        assertEquals(Widget.serialCodeLetters(), expectedLetterLength);
+        assertEquals(Widget.serialCodeNumbers(), expectedNumberLength);
+    }
+
+    @DataProvider
+    public Object[][] indicatorProvider(){
+        ConditionSetter empty = () -> {};
+        ConditionSetter trueSetter = () -> {
+            Widget.setIndicator(TriState.ON, Indicators.MSA);
+            Widget.setIndicator(TriState.OFF, Indicators.NSA);
+        };
+
+        return new Object[][]{
+                {empty, Indicators.BOB, false}, {trueSetter, Indicators.MSA },
+                {trueSetter, Indicators.NSA, true}
+        };
+    }
+
+    @Test(dataProvider = "indicatorProvider")
+    public void containsIndicatorTest(ConditionSetter setter, Indicators ind, boolean expected){
+        setter.setCondition();
+
+        assertEquals(Widget.hasFollowingInds(ind), expected);
     }
 
     @AfterClass
