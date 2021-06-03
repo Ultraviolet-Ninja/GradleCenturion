@@ -1,11 +1,13 @@
 package bomb.modules.s.simon.states;
 
-import bomb.modules.s.simon.Simon;
-import bomb.interfaces.Index;
 import bomb.Widget;
+import bomb.modules.s.simon.Simon;
 import bomb.modules.s.souvenir.Souvenir;
 
-import static bomb.modules.s.simon.Simon.States.*;
+import static bomb.modules.s.simon.Simon.States.BLUE;
+import static bomb.modules.s.simon.Simon.States.GREEN;
+import static bomb.modules.s.simon.Simon.States.RED;
+import static bomb.modules.s.simon.Simon.States.YELLOW;
 
 /**
  *
@@ -19,19 +21,8 @@ public class SimonStates extends Widget {
             {YELLOW, GREEN, BLUE, RED}};
     private static StringBuilder toPress = new StringBuilder();
 
-    enum Priorities implements Index {
-        HIGHEST(0), HIGH(1), LOW(2), LOWEST(3);
-
-        private final int idx;
-
-        @Override
-        public int getIdx() {
-            return idx;
-        }
-
-        Priorities(int idx){
-            this.idx = idx;
-        }
+    enum Priorities {
+        HIGHEST, HIGH, LOW, LOWEST
     }
 
     /**
@@ -40,7 +31,7 @@ public class SimonStates extends Widget {
      * @param color
      */
     public static void setPriority(Simon.States color){
-        prior = color.getIdx();
+        prior = color.ordinal();
     }
 
     /**
@@ -82,7 +73,7 @@ public class SimonStates extends Widget {
             return firstCap(lowest(colors));
         else if (colors.length == 3)
             return firstCap(RED);
-        return firstCap(priorities[prior][Priorities.HIGH.getIdx()]);
+        return firstCap(priorities[prior][Priorities.HIGH.ordinal()]);
     }
 
     /**
@@ -124,7 +115,7 @@ public class SimonStates extends Widget {
         else if (colors.length == 1)
             return firstCap(colors[0]);
         else
-            return firstCap(priorities[prior][Priorities.LOW.getIdx()]);
+            return firstCap(priorities[prior][Priorities.LOW.ordinal()]);
     }
 
     /**
@@ -139,7 +130,7 @@ public class SimonStates extends Widget {
         else if (oneNotPressed(colors))
             return pressOneNot(colors);
         else if (colors.length == 3)
-            return firstCap(priorities[prior][Priorities.LOWEST.getIdx()]);
+            return firstCap(priorities[prior][Priorities.LOWEST.ordinal()]);
         else if (colors.length == 1)
             return firstCap(colors[0]);
         else

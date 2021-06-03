@@ -1,25 +1,18 @@
 package bomb.modules.dh.emoji;
 
-import bomb.interfaces.Index;
 import bomb.interfaces.Labeled;
 
-public enum Emojis implements Index, Labeled {
-    COLON_CLOSE(0, ":)"), EQUAL_OPEN(1, "=("), OPEN_COLON(2, "(:"),
-    CLOSED_EQUAL(3, ")="), COLON_OPEN(4, ":("), CLOSED_COLON(5, "):"),
-    EQUAL_CLOSED(6, "=)"), OPEN_EQUAL(7, "(="), COLON_BAR(8, ":|"),
-    BAR_COLON(9, "|:");
+public enum Emojis implements Labeled {
+    COLON_CLOSE(":)"), EQUAL_OPEN("=("), OPEN_COLON("(:"),
+    CLOSED_EQUAL(")="), COLON_OPEN(":("), CLOSED_COLON("):"),
+    EQUAL_CLOSED("=)"), OPEN_EQUAL("(="), COLON_BAR(":|"),
+    BAR_COLON("|:");
 
     private final String label;
-    private final int index;
 
     @Override
     public String getLabel() {
         return label;
-    }
-
-    @Override
-    public int getIdx() {
-        return index;
     }
 
     public static Emojis getEmojiFromText(String incoming){
@@ -44,8 +37,7 @@ public enum Emojis implements Index, Labeled {
         return sb.append("){1,2}").toString();
     }
 
-    Emojis(int index, String label){
-        this.index = index;
+    Emojis(String label){
         this.label = label;
     }
 }

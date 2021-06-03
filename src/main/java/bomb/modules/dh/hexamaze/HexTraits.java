@@ -1,6 +1,5 @@
 package bomb.modules.dh.hexamaze;
 
-import bomb.interfaces.Index;
 import bomb.tools.Base91;
 
 import java.util.ArrayList;
@@ -27,9 +26,9 @@ public enum HexTraits {
         }
     }
 
-    public enum HexWall implements Index {
-        TopLeft(0), Top(1), TopRight(2),
-        BottomLeft(3), Bottom(4),  BottomRight(5);
+    public enum HexWall {
+        TopLeft, Top, TopRight,
+        BottomLeft, Bottom,  BottomRight;
 
         private static final Map<String, List<HexWall>> fromHashCode = new HashMap<>();
         private static final Map<List<HexWall>, String> toHashCode = new HashMap<>();
@@ -41,17 +40,6 @@ public enum HexTraits {
 
         static{
             applyToPermutations(HexWall.values());
-        }
-
-        private final int idx;
-
-        @Override
-        public int getIdx() {
-            return idx;
-        }
-
-        HexWall(int idx){
-            this.idx = idx;
         }
 
         private static void applyToPermutations(HexWall[] arr){

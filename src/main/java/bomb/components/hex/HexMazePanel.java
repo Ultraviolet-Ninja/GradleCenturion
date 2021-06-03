@@ -105,7 +105,7 @@ public class HexMazePanel extends Pane {
         String remove = "123456";
         if (walls != null) {
             for (HexTraits.HexWall wall : walls) {
-                switch (wall.getIdx()) {
+                switch (wall.ordinal()) {
                     case 0: remove = setLine(northWest, remove, "1"); break;
                     case 1: remove = setLine(north, remove, "2"); break;
                     case 2: remove = setLine(northEast, remove, "3"); break;

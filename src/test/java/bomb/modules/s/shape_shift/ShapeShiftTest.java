@@ -11,10 +11,10 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.modules.s.shape_shift.ShiftShape.FLAT;
-import static bomb.modules.s.shape_shift.ShiftShape.POINT;
-import static bomb.modules.s.shape_shift.ShiftShape.ROUND;
-import static bomb.modules.s.shape_shift.ShiftShape.TICKET;
+import static bomb.modules.s.shape_shift.ShapeEnd.FLAT;
+import static bomb.modules.s.shape_shift.ShapeEnd.POINT;
+import static bomb.modules.s.shape_shift.ShapeEnd.ROUND;
+import static bomb.modules.s.shape_shift.ShapeEnd.TICKET;
 import static org.testng.Assert.assertEquals;
 
 public class ShapeShiftTest {
@@ -33,16 +33,16 @@ public class ShapeShiftTest {
         ConditionSetter firstVideo = this::testOneSetup;
         ConditionSetter secondVideo = this::testTwoSetup;
         return new Object[][]{
-                {firstVideo, new ShiftShape[]{FLAT, FLAT}, ROUND, POINT},
-                {firstVideo, new ShiftShape[]{POINT, POINT}, ROUND, ROUND},
-                {secondVideo, new ShiftShape[]{TICKET, FLAT}, TICKET, FLAT},
-                {secondVideo, new ShiftShape[]{POINT, ROUND}, POINT, TICKET},
-                {secondVideo, new ShiftShape[]{FLAT, FLAT}, ROUND, POINT}
+                {firstVideo, new ShapeEnd[]{FLAT, FLAT}, ROUND, POINT},
+                {firstVideo, new ShapeEnd[]{POINT, POINT}, ROUND, ROUND},
+                {secondVideo, new ShapeEnd[]{TICKET, FLAT}, TICKET, FLAT},
+                {secondVideo, new ShapeEnd[]{POINT, ROUND}, POINT, TICKET},
+                {secondVideo, new ShapeEnd[]{FLAT, FLAT}, ROUND, POINT}
         };
     }
 
     @Test(dataProvider = "trainingVideoProvider")
-    public void trainingVideoTest(ConditionSetter setter, ShiftShape[] expectedArr, ShiftShape left, ShiftShape right){
+    public void trainingVideoTest(ConditionSetter setter, ShapeEnd[] expectedArr, ShapeEnd left, ShapeEnd right){
         setter.setCondition();
         assertPairEquals(expectedArr, ShapeShift.solve(left, right));
     }
@@ -53,9 +53,9 @@ public class ShapeShiftTest {
         ConditionSetter secondTake = WidgetSimulations::theGreatBerateTwo;
         ConditionSetter thirdTake = WidgetSimulations::partTwoTakeTwo;
         return new Object[][]{
-                {firstTake, new ShiftShape[]{TICKET, POINT}, FLAT, ROUND},
-                {secondTake, new ShiftShape[]{FLAT, FLAT}, POINT, FLAT},
-                {thirdTake, new ShiftShape[]{FLAT, TICKET}, TICKET, POINT}
+                {firstTake, new ShapeEnd[]{TICKET, POINT}, FLAT, ROUND},
+                {secondTake, new ShapeEnd[]{FLAT, FLAT}, POINT, FLAT},
+                {thirdTake, new ShapeEnd[]{FLAT, TICKET}, TICKET, POINT}
         };
     }
 
@@ -78,7 +78,7 @@ public class ShapeShiftTest {
         Widget.setIndicator(TriState.OFF, Indicators.TRN);
     }
 
-    private void assertPairEquals(ShiftShape[] expected, ShiftShape[] actual){
+    private void assertPairEquals(ShapeEnd[] expected, ShapeEnd[] actual){
         assertEquals(expected[0], actual[0]);
         assertEquals(expected[1], actual[1]);
     }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 //TODO Eventually document the code
 public class ShapeShift extends Widget {
     private static final int[][] countTracker = new int[4][4];
-    private static ListGraph<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> graph;
+    private static ListGraph<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> graph;
 
     //<editor-fold desc="Init methods">
     static {
@@ -20,9 +20,9 @@ public class ShapeShift extends Widget {
     }
 
     private static void zeroOutArray(){
-        for (ShiftShape leftSide : ShiftShape.values()){
-            for (ShiftShape rightSide : ShiftShape.values())
-                countTracker[leftSide.getIdx()][rightSide.getIdx()] = 0;
+        for (ShapeEnd leftSide : ShapeEnd.values()){
+            for (ShapeEnd rightSide : ShapeEnd.values())
+                countTracker[leftSide.ordinal()][rightSide.ordinal()] = 0;
         }
     }
 
@@ -31,17 +31,17 @@ public class ShapeShift extends Widget {
         initializeTriples();
     }
 
-    private static ArrayList<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> createList(){
-        ArrayList<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> list = new ArrayList<>();
-        for (ShiftShape left : ShiftShape.values()){
-            for (ShiftShape right : ShiftShape.values())
+    private static ArrayList<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> createList(){
+        ArrayList<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> list = new ArrayList<>();
+        for (ShapeEnd left : ShapeEnd.values()){
+            for (ShapeEnd right : ShapeEnd.values())
                 list.add(new AbstractMap.SimpleEntry<>(left, right));
         }
         return list;
     }
 
     private static void initializeTriples(){
-        ArrayList<AbstractMap.SimpleEntry<ShiftShape, ShiftShape>> list = createList();
+        ArrayList<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> list = createList();
         initializePairs(list.get(0), list.get(8), list.get(15));
         initializePairs(list.get(1), list.get(10), list.get(15));
         initializePairs(list.get(2), list.get(3), list.get(0));
@@ -61,39 +61,39 @@ public class ShapeShift extends Widget {
     }
 
     @SafeVarargs
-    private static void initializePairs(AbstractMap.SimpleEntry<ShiftShape, ShiftShape>... trios){
+    private static void initializePairs(AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>... trios){
         graph.addEdge(trios[0], trios[1]);
         graph.addEdge(trios[0], trios[2]);
     }
     //</editor-fold>
 
-    public static ShiftShape[] solve(ShiftShape left, ShiftShape right){
+    public static ShapeEnd[] solve(ShapeEnd left, ShapeEnd right){
         serialCodeChecker();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {
-            AbstractMap.SimpleEntry<ShiftShape, ShiftShape> pair = graph.get(
+            AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd> pair = graph.get(
                     new AbstractMap.SimpleEntry<>(left, right))
                     .get(booleanIntConversion(conditionMap(left, right)));
             return solve(pair.getKey(), pair.getValue());
         }
         resetMod();
-        return new ShiftShape[]{left, right};
+        return new ShapeEnd[]{left, right};
     }
 
     private static void resetMod(){
         zeroOutArray();
     }
 
-    private static void increment(ShiftShape left, ShiftShape right){
-        countTracker[left.getIdx()][right.getIdx()] += 1;
+    private static void increment(ShapeEnd left, ShapeEnd right){
+        countTracker[left.ordinal()][right.ordinal()] += 1;
     }
 
-    private static boolean checkIfVisitedTwice(ShiftShape left, ShiftShape right){
-        return countTracker[left.getIdx()][right.getIdx()] < 2;
+    private static boolean checkIfVisitedTwice(ShapeEnd left, ShapeEnd right){
+        return countTracker[left.ordinal()][right.ordinal()] < 2;
     }
 
     //<editor-fold desc="Boolean Methods">
-    private static boolean conditionMap(ShiftShape left, ShiftShape right){
+    private static boolean conditionMap(ShapeEnd left, ShapeEnd right){
         switch (left){
             case ROUND:
                 return roundedOptions(right);
@@ -106,7 +106,7 @@ public class ShapeShift extends Widget {
         }
     }
 
-    private static boolean roundedOptions(ShiftShape right){
+    private static boolean roundedOptions(ShapeEnd right){
         switch (right){
             case ROUND:
                 return hasVowel();
@@ -119,7 +119,7 @@ public class ShapeShift extends Widget {
         }
     }
 
-    private static boolean rectangularOptions(ShiftShape right){
+    private static boolean rectangularOptions(ShapeEnd right){
         switch (right){
             case ROUND:
                 return hasMoreThan(Ports.DVI, 0);
@@ -132,7 +132,7 @@ public class ShapeShift extends Widget {
         }
     }
 
-    private static boolean triangularOptions(ShiftShape right){
+    private static boolean triangularOptions(ShapeEnd right){
         switch (right){
             case ROUND:
                 return hasMoreThan(Ports.PARALLEL, 0);
@@ -145,7 +145,7 @@ public class ShapeShift extends Widget {
         }
     }
 
-    private static boolean ticketOptions(ShiftShape right){
+    private static boolean ticketOptions(ShapeEnd right){
         switch (right){
             case ROUND:
                 return hasMoreThan(Ports.RCA, 0);

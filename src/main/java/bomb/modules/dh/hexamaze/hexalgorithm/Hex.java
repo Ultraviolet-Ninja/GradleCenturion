@@ -96,7 +96,7 @@ public class Hex {
          */
         public boolean isPathClear(int wallTag) {
             for (HexWall testWall : walls)
-                if (testWall.getIdx() == wallTag)
+                if (testWall.ordinal() == wallTag)
                     return false;
             return true;
         }
@@ -428,7 +428,7 @@ public class Hex {
         ArrayList<HexTraits.HexWall> constructs = new ArrayList<>(6);
 
         for (HexTraits.HexWall index : HexTraits.HexWall.values())
-            if (numbers.contains(String.valueOf(index.getIdx())))
+            if (numbers.contains(String.valueOf(index.ordinal())))
                 constructs.add(index);
         return constructs;
     }

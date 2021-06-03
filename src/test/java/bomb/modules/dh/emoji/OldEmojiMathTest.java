@@ -11,7 +11,7 @@ public class OldEmojiMathTest {
     void firstAdditionTest(){
         for (Emojis first : emojiArray)
             for (Emojis second : emojiArray)
-                assertEquals((first.getIdx() + second.getIdx()),
+                assertEquals((first.ordinal() + second.ordinal()),
                         EmojiMath.calculate(first.getLabel() + "+" + second.getLabel()));
     }
 
@@ -19,7 +19,7 @@ public class OldEmojiMathTest {
     void secondAdditionTest(){
         for (Emojis first : emojiArray)
             for (Emojis second : emojiArray)
-                assertEquals((second.getIdx() + first.getIdx()),
+                assertEquals((second.ordinal() + first.ordinal()),
                         EmojiMath.calculate(second.getLabel() + "+" + first.getLabel()));
     }
 
@@ -27,7 +27,7 @@ public class OldEmojiMathTest {
     void firstSubtractionTest(){
         for (Emojis first : emojiArray)
             for (Emojis second : emojiArray)
-                assertEquals((first.getIdx() - second.getIdx()),
+                assertEquals((first.ordinal() - second.ordinal()),
                         EmojiMath.calculate(first.getLabel() + "-" + second.getLabel()));
     }
 
@@ -35,7 +35,7 @@ public class OldEmojiMathTest {
     void secondSubtractionTest(){
         for (Emojis first : emojiArray)
             for (Emojis second : emojiArray)
-                assertEquals((second.getIdx() - first.getIdx()),
+                assertEquals((second.ordinal() - first.ordinal()),
                         EmojiMath.calculate(second.getLabel() + "-" + first.getLabel()));
     }
 

@@ -8,10 +8,10 @@ import bomb.enumerations.TriState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static bomb.modules.s.shape_shift.ShiftShape.FLAT;
-import static bomb.modules.s.shape_shift.ShiftShape.POINT;
-import static bomb.modules.s.shape_shift.ShiftShape.ROUND;
-import static bomb.modules.s.shape_shift.ShiftShape.TICKET;
+import static bomb.modules.s.shape_shift.ShapeEnd.FLAT;
+import static bomb.modules.s.shape_shift.ShapeEnd.POINT;
+import static bomb.modules.s.shape_shift.ShapeEnd.ROUND;
+import static bomb.modules.s.shape_shift.ShapeEnd.TICKET;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -33,8 +33,8 @@ public class OldShapeShiftTest {
     @Test
     void videoTestOne(){
         testOneSetup();
-        assertPairEquals(new ShiftShape[]{FLAT, FLAT}, ShapeShift.solve(ROUND, POINT));
-        assertPairEquals(new ShiftShape[]{POINT, POINT}, ShapeShift.solve(ROUND, ROUND));
+        assertPairEquals(new ShapeEnd[]{FLAT, FLAT}, ShapeShift.solve(ROUND, POINT));
+        assertPairEquals(new ShapeEnd[]{POINT, POINT}, ShapeShift.solve(ROUND, ROUND));
     }
 
     private void testOneSetup(){
@@ -49,9 +49,9 @@ public class OldShapeShiftTest {
     @Test
     void videoTestTwo(){
         testTwoSetup();
-        assertPairEquals(new ShiftShape[]{TICKET, FLAT}, ShapeShift.solve(TICKET, FLAT));
-        assertPairEquals(new ShiftShape[]{POINT, ROUND}, ShapeShift.solve(POINT, TICKET));
-        assertPairEquals(new ShiftShape[]{FLAT, FLAT}, ShapeShift.solve(ROUND, POINT));
+        assertPairEquals(new ShapeEnd[]{TICKET, FLAT}, ShapeShift.solve(TICKET, FLAT));
+        assertPairEquals(new ShapeEnd[]{POINT, ROUND}, ShapeShift.solve(POINT, TICKET));
+        assertPairEquals(new ShapeEnd[]{FLAT, FLAT}, ShapeShift.solve(ROUND, POINT));
     }
 
     private void testTwoSetup(){
@@ -67,22 +67,22 @@ public class OldShapeShiftTest {
     @Test
     void theGreatBerate(){
         WidgetSimulations.theGreatBerate();
-        assertPairDoesNotEqual(new ShiftShape[]{TICKET, FLAT}, ShapeShift.solve(FLAT, ROUND));
-        assertPairEquals(new ShiftShape[]{TICKET, POINT}, ShapeShift.solve(FLAT, ROUND));
+        assertPairDoesNotEqual(new ShapeEnd[]{TICKET, FLAT}, ShapeShift.solve(FLAT, ROUND));
+        assertPairEquals(new ShapeEnd[]{TICKET, POINT}, ShapeShift.solve(FLAT, ROUND));
         WidgetSimulations.theGreatBerateTwo();
-        assertPairEquals(new ShiftShape[]{FLAT, FLAT}, ShapeShift.solve(POINT, FLAT));
+        assertPairEquals(new ShapeEnd[]{FLAT, FLAT}, ShapeShift.solve(POINT, FLAT));
         WidgetSimulations.partTwoTakeTwo();
-        assertPairEquals(new ShiftShape[]{FLAT, TICKET}, ShapeShift.solve(TICKET, POINT));
+        assertPairEquals(new ShapeEnd[]{FLAT, TICKET}, ShapeShift.solve(TICKET, POINT));
         WidgetSimulations.partTwoTakeThree();
 
     }
 
-    private void assertPairEquals(ShiftShape[] expected, ShiftShape[] actual){
+    private void assertPairEquals(ShapeEnd[] expected, ShapeEnd[] actual){
         assertEquals(expected[0], actual[0]);
         assertEquals(expected[1], actual[1]);
     }
 
-    private void assertPairDoesNotEqual(ShiftShape[] expected, ShiftShape[] actual){
+    private void assertPairDoesNotEqual(ShapeEnd[] expected, ShapeEnd[] actual){
         assertFalse(expected[0].equals(actual[0]) && expected[1].equals(actual[1]));
     }
 }

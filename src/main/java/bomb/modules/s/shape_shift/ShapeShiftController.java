@@ -4,12 +4,12 @@ import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.fxml.FXML;
 
 public class ShapeShiftController {
-    private ReadOnlyRing<ShiftShape> leftSide, rightSide;
+    private ReadOnlyRing<ShapeEnd> leftSide, rightSide;
 
     public void initialize(){
-        leftSide = new ReadOnlyRing<>(ShiftShape.values().length);
-        rightSide = new ReadOnlyRing<>(ShiftShape.values().length);
-        for (ShiftShape shape : ShiftShape.values()){
+        leftSide = new ReadOnlyRing<>(ShapeEnd.values().length);
+        rightSide = new ReadOnlyRing<>(ShapeEnd.values().length);
+        for (ShapeEnd shape : ShapeEnd.values()){
             leftSide.add(shape);
             rightSide.add(shape);
         }

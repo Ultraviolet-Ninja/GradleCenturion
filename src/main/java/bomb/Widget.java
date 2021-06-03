@@ -105,7 +105,7 @@ public class Widget {
      * @param which The Indicator to change
      */
     public static void setIndicator(TriState state, Indicators which){
-        list[which.getIdx()].setProp(state);
+        list[which.ordinal()].setProp(state);
         BlindAlley.alleyUpdate();
     }
 
@@ -164,8 +164,8 @@ public class Widget {
      * @param which The port to add on
      */
     public static void addPort(Ports which){
-        if (ports[which.getIdx()] < UPPER_PORT_LIMIT){
-            ports[which.getIdx()]++;
+        if (ports[which.ordinal()] < UPPER_PORT_LIMIT){
+            ports[which.ordinal()]++;
             BlindAlley.alleyUpdate();
         }
     }
@@ -176,8 +176,8 @@ public class Widget {
      * @param which The port to subtract
      */
     public static void subPort(Ports which){
-        if (ports[which.getIdx()] > LOWER_PORT_LIMIT){
-            ports[which.getIdx()]--;
+        if (ports[which.ordinal()] > LOWER_PORT_LIMIT){
+            ports[which.ordinal()]--;
             BlindAlley.alleyUpdate();
         }
     }
@@ -188,7 +188,7 @@ public class Widget {
      * @param which The port to zero out
      */
     public static void portZero(Ports which){
-        ports[which.getIdx()] = 0;
+        ports[which.ordinal()] = 0;
         BlindAlley.alleyUpdate();
     }
 
@@ -249,7 +249,7 @@ public class Widget {
      * @return True if the lit Indicator is found
      */
     public static boolean hasLitIndicator(Indicators ind){
-        return list[ind.getIdx()].getProp() == ON;
+        return list[ind.ordinal()].getProp() == ON;
     }
 
     /**
@@ -259,7 +259,7 @@ public class Widget {
      * @return True if the unlit Indicator is found
      */
     public static boolean hasUnlitIndicator(Indicators ind){
-        return list[ind.getIdx()].getProp() == OFF;
+        return list[ind.ordinal()].getProp() == OFF;
     }
 
     /**
@@ -297,7 +297,7 @@ public class Widget {
      * @return True if the bomb contains more the required amount
      */
     public static boolean hasMoreThan(Ports port, int howMany){
-        return ports[port.getIdx()] > howMany;
+        return ports[port.ordinal()] > howMany;
     }
 
     /**
@@ -320,7 +320,7 @@ public class Widget {
      * @return The number of that port
      */
     public static int getPort(Ports which){
-        return ports[which.getIdx()];
+        return ports[which.ordinal()];
     }
 
     /**
@@ -389,7 +389,7 @@ public class Widget {
      * @return True if the port is present somewhere on the Bomb
      */
     public static boolean portExists(Ports port){
-        return ports[port.getIdx()] > 0;
+        return ports[port.ordinal()] > 0;
     }
 
     public static void serialCodeChecker(){

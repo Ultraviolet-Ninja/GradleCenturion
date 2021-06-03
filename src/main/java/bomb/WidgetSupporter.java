@@ -28,7 +28,7 @@ public class WidgetSupporter {
                 temp = Objects.requireNonNull(Ports.fromString(title));
                 Widget.subPort(temp);
             }
-            updateField(portFields[temp.getIdx()], Widget.getPort(temp));
+            updateField(portFields[temp.ordinal()], Widget.getPort(temp));
         };
     }
 

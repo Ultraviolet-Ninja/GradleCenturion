@@ -63,7 +63,7 @@ public class EmojiMath extends Widget {
     private static String findEmoji(String emoji){
         for (Emojis emo : Emojis.values()) {
             if (emo.getLabel().equals(emoji)){
-                return String.valueOf(emo.getIdx());
+                return String.valueOf(emo.ordinal());
             }
         }
         return null;

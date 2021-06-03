@@ -2,8 +2,6 @@ package bomb.tools;
 
 import bomb.interfaces.Coordinate;
 
-import java.util.Arrays;
-
 public class Coordinates implements Coordinate {
     private int x, y;
 
