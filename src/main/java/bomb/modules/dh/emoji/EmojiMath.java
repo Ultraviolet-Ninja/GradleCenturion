@@ -1,8 +1,7 @@
 package bomb.modules.dh.emoji;
 
 import bomb.Widget;
-
-import static bomb.tools.Filter.ultimateFilter;
+import bomb.tools.Regex;
 
 /**
  * This class deals with the Emoji Math module.
@@ -10,8 +9,9 @@ import static bomb.tools.Filter.ultimateFilter;
  */
 public class EmojiMath extends Widget {
     private static final String EMOJI_REGEX = Emojis.generateCaptureGroup();
-    private static final String
-            ADDITION = EMOJI_REGEX + "?" + EMOJI_REGEX + "\\+" + EMOJI_REGEX + EMOJI_REGEX + "?";
+    private static final Regex VALIDATION = new Regex("(?<![:|()=])" + EMOJI_REGEX + "(\\+|-)" + EMOJI_REGEX +
+            "(?![:|()=])");
+
 
     /**
      * Calculates the sum/difference from the equation of emojis
@@ -20,8 +20,10 @@ public class EmojiMath extends Widget {
      * @return The values gathered from the emoji equation
      */
     public static int calculate(String input){
-        String temp = ultimateFilter(input, ADDITION);
-        boolean toAdd = !temp.isEmpty();
+        VALIDATION.loadText(input);
+        if (!VALIDATION.hasMatch()) throw new IllegalArgumentException(input + " does not match pattern");
+
+        boolean toAdd = VALIDATION.captureGroup(1).equals("+");
         String translatedEq = toAdd ?
                 translateEmojis(input.split("\\+"), true) :
                 translateEmojis(input.split("-"), false);

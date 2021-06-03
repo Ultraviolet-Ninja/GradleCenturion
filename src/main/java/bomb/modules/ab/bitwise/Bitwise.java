@@ -4,7 +4,7 @@ import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 
-import static bomb.tools.Filter.NUMBER_REGEX;
+import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
 
 /**
@@ -93,7 +93,7 @@ public class Bitwise extends Widget {
     private static boolean[] sixthBits() throws IllegalArgumentException{
         if (serialCode.isEmpty())
             throw new IllegalArgumentException("You need the serial code to solve Bitwise Ops!");
-        String nums = ultimateFilter(serialCode, NUMBER_REGEX);
+        String nums = ultimateFilter(serialCode, NUMBER_PATTERN);
         return new boolean[]{numModules % 3 == 0, nums.charAt(nums.length() - 1) % 2 == 1};
     }
 

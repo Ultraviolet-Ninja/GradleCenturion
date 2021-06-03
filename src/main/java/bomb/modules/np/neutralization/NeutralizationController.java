@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.Filter.ultimateFilter;
 
 public class NeutralizationController {
     private static final double MAX_VOLUME = 20;
@@ -56,7 +56,7 @@ public class NeutralizationController {
 
     @FXML
     private void volume() {
-        String sample = ultimateFilter(acidVolume.getText(), NUMBER_REGEX);
+        String sample = ultimateFilter(acidVolume.getText(), NUMBER_PATTERN);
         if (!sample.isEmpty()) {
             volume = Double.parseDouble(sample);
             testTube.setProgress(volume / MAX_VOLUME);

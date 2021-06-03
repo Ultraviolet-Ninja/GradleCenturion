@@ -4,8 +4,8 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 import bomb.enumerations.Ports;
 
-import static bomb.tools.Filter.CHAR_REGEX;
-import static bomb.tools.Filter.NUMBER_REGEX;
+import static bomb.tools.Filter.CHAR_FILTER;
+import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
 
 //TODO - Probably change var names, finish Javadocs and break down a few methods
@@ -36,11 +36,11 @@ public class TwoBit extends Widget {
     public static String initialCode() throws IllegalArgumentException{
         //TODO - Break down
         if (!serialCode.isEmpty()) {
-            String first = ultimateFilter(serialCode, CHAR_REGEX);
+            String first = ultimateFilter(serialCode, CHAR_FILTER).toLowerCase();
             int num = !first.isEmpty() ?
                     first.charAt(0) - 96 :
                     0;
-            String numbers = ultimateFilter(serialCode, NUMBER_REGEX);
+            String numbers = ultimateFilter(serialCode, NUMBER_PATTERN);
             num += getAllBatteries() * Integer.parseInt(numbers.substring(numbers.length()-1));
 
             if (getPort(Ports.RCA) > 0 && getPort(Ports.RJ45) == 0) num *= 2;
@@ -61,7 +61,7 @@ public class TwoBit extends Widget {
      * @throws IllegalArgumentException
      */
     public static String nextCode(String code) throws IllegalArgumentException{
-        String newCode = ultimateFilter(code, NUMBER_REGEX);
+        String newCode = ultimateFilter(code, NUMBER_PATTERN);
         if (newCode.length() == 2) {
             int[] coords = translate(newCode);
             if (stage != 4) {

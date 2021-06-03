@@ -6,8 +6,8 @@ import bomb.Widget;
 import javafx.scene.paint.Color;
 
 import static bomb.enumerations.TriState.UNKNOWN;
-import static bomb.tools.Mechanics.ultimateFilter;
-import static bomb.tools.Mechanics.VOWEL_REGEX;
+import static bomb.tools.Filter.VOWEL_FILTER;
+import static bomb.tools.Filter.ultimateFilter;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;
@@ -109,8 +109,8 @@ public class Neutralization extends Widget {
     private static double acidConcentration(int acidVol){
         double concentrate = currentAcid.getAtomicNum() - currentBase.getAtomicNum();
 
-        if (!ultimateFilter(currentAcid.getSymbol(), VOWEL_REGEX).isEmpty() ||
-                !ultimateFilter(currentBase.getSymbol(), VOWEL_REGEX).isEmpty())
+        if (!ultimateFilter(currentAcid.getSymbol(), VOWEL_FILTER).isEmpty() ||
+                !ultimateFilter(currentBase.getSymbol(), VOWEL_FILTER).isEmpty())
             //Either the cation or the anion contains a vowel
             concentrate -= 4;
 

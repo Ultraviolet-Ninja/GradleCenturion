@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
 public class EmojiMathTest {
-    @Test(expectedExceptions = NumberFormatException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void invalidityTest(){
         EmojiMath.calculate(":||+):");
     }

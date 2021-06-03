@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import static bomb.tools.Filter.LOGIC_REGEX;
+import static bomb.tools.Filter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.Filter.ultimateFilter;
 
 public class BooleanController {
@@ -56,7 +56,7 @@ public class BooleanController {
     }
 
     private void setCircles(){
-        if (ultimateFilter(currentOp.toString(), LOGIC_REGEX).length() == 2){
+        if (ultimateFilter(currentOp.toString(), LOGIC_SYMBOL_FILTER).length() == 2){
             String code = BooleanVenn.resultCode(currentOp.toString());
             setFill(new Circle[]{not, c, b, a, bc, ac, ab, all}, code.toCharArray());
         }

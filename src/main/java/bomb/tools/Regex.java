@@ -62,6 +62,11 @@ public class Regex implements Iterable<String>{
         return textMatcher.matches();
     }
 
+    public String captureGroup(int group){
+        nullChecker();
+        return textMatcher.group(group);
+    }
+
     public List<String> findAllMatches(){
         nullChecker();
         reset();
@@ -109,20 +114,5 @@ public class Regex implements Iterable<String>{
         for (int flag : flags)
             result |= flag;
         return result;
-    }
-
-    @SuppressWarnings("MagicConstant")
-    public static String quickCompile(String regex, String text, int ... flags){
-        int value = orMask(flags);
-        maxFlagCheck(value);
-
-        Pattern pattern = Pattern.compile(regex, value);
-        Matcher match = pattern.matcher(text);
-        StringBuilder sb = new StringBuilder();
-
-        while (match.find()){
-            sb.append(match.group());
-        }
-        return sb.toString();
     }
 }

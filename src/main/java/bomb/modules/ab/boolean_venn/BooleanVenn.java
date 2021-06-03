@@ -1,7 +1,11 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
-import bomb.tools.Filter;
+import bomb.tools.Regex;
+
+import static bomb.tools.Filter.LOGIC_REGEX;
+import static bomb.tools.Filter.LOGIC_SYMBOL_FILTER;
+import static bomb.tools.Filter.ultimateFilter;
 
 /**
  * This class deals with the Boolean Venn Diagram module.
@@ -20,9 +24,8 @@ public class BooleanVenn extends Widget {
             {true, true, true}};
     private static final int A = 0, B = 1, C = 2;
 
-    private static final String
-            AB_PRIORITY_REGEX = "\\(?:A" + Filter.LOGIC_REGEX + "B\\)" + Filter.LOGIC_REGEX + "C",
-            BC_PRIORITY_REGEX = "A" + Filter.LOGIC_REGEX+ "\\(?:B" + Filter.LOGIC_REGEX + "C\\)";
+    private static final Regex AB_PRIORITY = new Regex("\\(A" + LOGIC_REGEX + "B\\)" + LOGIC_REGEX + "C"),
+            BC_PRIORITY = new Regex("A" + LOGIC_REGEX + "\\(B" + LOGIC_REGEX + "C\\)");
 
     /**
      * Turns the String operation into a String code for the Venn Diagram to decode by choosing
@@ -50,8 +53,8 @@ public class BooleanVenn extends Widget {
      * @return Whether the equation matches the
      */
     private static boolean checkFormat(String equation) throws IllegalArgumentException{
-        String abPriority = Filter.ultimateFilter(equation, AB_PRIORITY_REGEX);
-        String bcPriority = Filter.ultimateFilter(equation, BC_PRIORITY_REGEX);
+        String abPriority = ultimateFilter(equation, AB_PRIORITY);
+        String bcPriority = ultimateFilter(equation, BC_PRIORITY);
         if (xnor(abPriority.isEmpty(), bcPriority.isEmpty())) throw new IllegalArgumentException("Format mismatch!!");
         return !abPriority.isEmpty();
     }
@@ -64,7 +67,7 @@ public class BooleanVenn extends Widget {
      *          The output order is not, c, b, a, bc, ac, ab, all
      */
     private static String interpretAB(String operation){
-        String logicSymbols = Filter.ultimateFilter(operation, Filter.LOGIC_REGEX);
+        String logicSymbols = ultimateFilter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
         boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0,1), A+B);
 
@@ -81,7 +84,7 @@ public class BooleanVenn extends Widget {
      *          The output order is not, c, b, a, bc, ac, ab, all
      */
     private static String interpretBC(String operation){
-        String logicSymbols = Filter.ultimateFilter(operation, Filter.LOGIC_REGEX);
+        String logicSymbols = ultimateFilter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
         boolean[] priorityCases = priorityOutputs(logicSymbols.substring(1), B+C);
 

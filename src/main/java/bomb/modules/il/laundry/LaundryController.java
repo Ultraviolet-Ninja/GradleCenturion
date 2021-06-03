@@ -7,8 +7,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.Filter.ultimateFilter;
 
 public class LaundryController {
     @FXML
@@ -23,8 +23,8 @@ public class LaundryController {
     @FXML
     private void coinInsert(){
         try{
-            String modBuffer = ultimateFilter(modNum.getText(), NUMBER_REGEX),
-                    needyBuffer = ultimateFilter(needyMods.getText(), NUMBER_REGEX);
+            String modBuffer = ultimateFilter(modNum.getText(), NUMBER_PATTERN),
+                    needyBuffer = ultimateFilter(needyMods.getText(), NUMBER_PATTERN);
             String[] outputs = Laundry.clean(modBuffer, needyBuffer);
             wash.setImage(new Image(outputs[0]));
             dry.setImage(new Image(outputs[1]));

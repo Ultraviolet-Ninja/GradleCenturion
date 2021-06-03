@@ -5,11 +5,14 @@ import bomb.modules.dh.forget_me.ForgetMeNot;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
-import bomb.tools.Filter;
-import bomb.tools.Regex;
 
-import static bomb.tools.Mechanics.*;
 import static bomb.enumerations.TriState.*;
+import static bomb.tools.Filter.ALL_CHAR_FILTER;
+import static bomb.tools.Filter.CHAR_FILTER;
+import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.Filter.SERIAL_CODE_PATTERN;
+import static bomb.tools.Filter.VOWEL_FILTER;
+import static bomb.tools.Filter.ultimateFilter;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -59,7 +62,7 @@ public class Widget {
      * @param serialCode The given code
      */
     public static void setSerialCode(String serialCode) {
-        Widget.serialCode = ultimateFilter(serialCode, NORMAL_CHAR_REGEX);
+        Widget.serialCode = ultimateFilter(serialCode, ALL_CHAR_FILTER);
         updates();
     }
 
@@ -197,7 +200,7 @@ public class Widget {
     public static int hasEven(){
         //TODO - Might need to rename, hasEven sends the wrong message,
         // probably by adding even and odd number regexes
-        String sample = ultimateFilter(serialCode, NUMBER_REGEX);
+        String sample = ultimateFilter(serialCode, NUMBER_PATTERN);
         if (!sample.isEmpty()){
             for (char num : sample.toCharArray())
                 if ((int) num % 2 == 0) return 0;
@@ -212,7 +215,7 @@ public class Widget {
      * @return An int of the last digit from a String
      */
     public static int lastDigit(){
-        String buffer = ultimateFilter(serialCode, NUMBER_REGEX);
+        String buffer = ultimateFilter(serialCode, NUMBER_PATTERN);
         return Integer.parseInt(buffer.substring(buffer.length()-1));
     }
 
@@ -265,7 +268,7 @@ public class Widget {
      * @return True if A,E,I,O, or U appear
      */
     public static boolean hasVowel(){
-        return !ultimateFilter(serialCode, VOWEL_REGEX).isEmpty();
+        return !ultimateFilter(serialCode, VOWEL_FILTER).isEmpty();
     }
 
     /**
@@ -274,7 +277,7 @@ public class Widget {
      * @return The number of letters
      */
     public static int serialCodeLetters(){
-        return ultimateFilter(serialCode, LOWERCASE_REGEX).length();
+        return ultimateFilter(serialCode, CHAR_FILTER).length();
     }
 
     /**
@@ -283,7 +286,7 @@ public class Widget {
      * @return The number of numbers
      */
     public static int serialCodeNumbers(){
-        return ultimateFilter(serialCode, NUMBER_REGEX).length();
+        return ultimateFilter(serialCode, NUMBER_PATTERN).length();
     }
 
     /**
@@ -390,8 +393,8 @@ public class Widget {
     }
 
     public static void serialCodeChecker(){
-        Regex checker = new Regex(Filter.SERIAL_CODE_REGEX, serialCode);
-        if (!checker.hasMatch()) throw new IllegalArgumentException("Serial Code is required");
+        SERIAL_CODE_PATTERN.loadText(serialCode);
+        if (!SERIAL_CODE_PATTERN.hasMatch()) throw new IllegalArgumentException("Serial Code is required");
     }
 
     public static void resetProperties(){

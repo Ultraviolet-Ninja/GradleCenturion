@@ -6,8 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.Filter.ultimateFilter;
 
 public class TwoBitController {
     @FXML
@@ -31,7 +31,7 @@ public class TwoBitController {
     @FXML
     private void nextCode(){
         try {
-            cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), NUMBER_REGEX)));
+            cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), NUMBER_PATTERN)));
             numberCode.setText("");
         } catch (IllegalArgumentException illegal){
             FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits");

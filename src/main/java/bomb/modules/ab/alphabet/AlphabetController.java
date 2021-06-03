@@ -1,12 +1,12 @@
 package bomb.modules.ab.alphabet;
 
-import bomb.tools.Filter;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
-import static bomb.tools.Mechanics.LOWERCASE_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.CHAR_FILTER;
+import static bomb.tools.Filter.ultimateFilter;
+
 
 public class AlphabetController {
     @FXML
@@ -15,7 +15,7 @@ public class AlphabetController {
     @FXML
     private void getAlphaField(){
         if (!alphabetOut.getText().isEmpty()){
-            String text = Filter.ultimateFilter(alphabetOut.getText(), Filter.CHAR_REGEX);
+            String text = ultimateFilter(alphabetOut.getText(), CHAR_FILTER);
             if (text.length() == 4){
                 alphabetOut.setText(Alphabet.order(text));
             } else {

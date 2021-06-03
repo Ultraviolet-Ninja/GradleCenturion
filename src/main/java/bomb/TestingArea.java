@@ -8,13 +8,12 @@ import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import bomb.tools.Filter;
 import bomb.tools.Mechanics;
 import bomb.tools.Regex;
-import bomb.tools.Regex2;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import static bomb.tools.lib.com.google.re2j.Pattern.CASE_INSENSITIVE;
+import static bomb.tools.Filter.CHAR_FILTER;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -45,26 +44,18 @@ public class TestingArea {
 //        filterComparison("53212323u6434123");
 //        filterComparison("42^&35é");
 
-        Regex r = new Regex(Filter.CHAR_REGEX, Pattern.CASE_INSENSITIVE);
-        Regex2 r2 = new Regex2(Filter.CHAR_REGEX, CASE_INSENSITIVE);
         for (String body : new String[]{"12T4h65is5 %i34s2 a s(5en34t6e4nce.", "53212323u6434123", "42^&35é"}) {
             long mechanicStart = System.nanoTime();
             System.out.println("Mechanic result: " + Mechanics.ultimateFilter(body, Mechanics.LOWERCASE_REGEX));
             long mechanicEnd = System.nanoTime();
 
             long filterStart = System.nanoTime();
-            r.loadText(body);
-            System.out.println("Filter result: " + r.toNewString());
+            CHAR_FILTER.loadText(body);
+            System.out.println("Filter result: " + CHAR_FILTER.toNewString());
             long filterEnd = System.nanoTime();
-
-            long filter2Start = System.nanoTime();
-            r2.loadText(body);
-            System.out.println("Filter result: " + r2.toNewString());
-            long filter2End = System.nanoTime();
 
             System.out.println("Mechanic Time: " + format.format(mechanicEnd - mechanicStart));
             System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
-            System.out.println("Filter2 Time: " + format.format(filter2End - filter2Start));
         }
     }
 
@@ -94,17 +85,11 @@ public class TestingArea {
         long mechanicEnd = System.nanoTime();
 
         long filterStart = System.nanoTime();
-        Regex r = new Regex(Filter.CHAR_REGEX, body, Pattern.CASE_INSENSITIVE);
-        System.out.println("Filter result: " + r.toNewString());
+        CHAR_FILTER.loadText(body);
+        System.out.println("Filter result: " + CHAR_FILTER.toNewString());
         long filterEnd = System.nanoTime();
-
-        long filter2Start = System.nanoTime();
-        Regex2 r2 = new Regex2(Filter.CHAR_REGEX, body, CASE_INSENSITIVE);
-        System.out.println("Filter result: " + r2.toNewString());
-        long filter2End = System.nanoTime();
 
         System.out.println("Mechanic Time: " + format.format(mechanicEnd -  mechanicStart));
         System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
-        System.out.println("Filter2 Time: " + format.format(filter2End - filter2Start));
     }
 }

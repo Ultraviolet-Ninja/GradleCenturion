@@ -1,9 +1,12 @@
 package bomb.modules.ab.astrology;
 
 import bomb.Widget;
+import bomb.tools.Regex;
 
-import static bomb.tools.Mechanics.LOWERCASE_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import java.util.regex.Pattern;
+
+import static bomb.tools.Filter.CHAR_FILTER;
+import static bomb.tools.Filter.ultimateFilter;
 
 /**
  * This class deals with the Astrology module. This module displays three different astrological symbols
@@ -69,9 +72,10 @@ public class Astrology extends Widget {
             throws IllegalArgumentException{
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is required");
 
-        String letters = ultimateFilter(serialCode, LOWERCASE_REGEX);
+        String letters = ultimateFilter(serialCode, CHAR_FILTER);
         for (AstroSymbols symbol : symbols){
-            if (ultimateFilter(symbol.name(), letters).isEmpty()) initialVal--;
+            Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
+            if (checker.findAllMatches().isEmpty()) initialVal--;
             else initialVal++;
         }
         return initialVal;

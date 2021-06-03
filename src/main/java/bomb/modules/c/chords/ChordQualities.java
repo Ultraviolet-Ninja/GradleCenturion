@@ -3,8 +3,7 @@ package bomb.modules.c.chords;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 
-import static bomb.tools.Mechanics.NUMBER_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.Filter.NUMBER_PATTERN;
 //TODO - Probably rename some variables and make the Javadocs
 
 /**
@@ -74,7 +73,8 @@ public class ChordQualities extends Widget {
             }
         }
 
-        if (ultimateFilter(output.toString(), NUMBER_REGEX).length() != 4)
+        NUMBER_PATTERN.loadText(output.toString());
+        if (NUMBER_PATTERN.toNewString().length() != 4)
             throw new IllegalArgumentException("There shouldn't be any duplicate notes");
         return output.toString();
     }
