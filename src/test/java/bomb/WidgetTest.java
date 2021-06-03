@@ -149,7 +149,7 @@ public class WidgetTest {
         };
 
         return new Object[][]{
-                {empty, Indicators.BOB, false}, {trueSetter, Indicators.MSA },
+                {empty, Indicators.BOB, false}, {trueSetter, Indicators.MSA, true},
                 {trueSetter, Indicators.NSA, true}
         };
     }
