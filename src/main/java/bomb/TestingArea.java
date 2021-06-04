@@ -5,13 +5,10 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
-import bomb.tools.Filter;
 import bomb.tools.Mechanics;
-import bomb.tools.Regex;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import static bomb.tools.Filter.CHAR_FILTER;
 
@@ -39,10 +36,6 @@ public class TestingArea {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-
-//        filterComparison("12T4h65is5 %i34s2 a s(5en34t6e4nce.");
-//        filterComparison("53212323u6434123");
-//        filterComparison("42^&35é");
 
         for (String body : new String[]{"12T4h65is5 %i34s2 a s(5en34t6e4nce.", "53212323u6434123", "42^&35é"}) {
             long mechanicStart = System.nanoTime();
@@ -77,19 +70,5 @@ public class TestingArea {
 
         System.out.println("Linear Time: " + format.format(linearStop - linearStart));
         System.out.println("Threaded time: " + format.format(threadedStop - threadedStart));
-    }
-
-    private static void filterComparison(String body){
-        long mechanicStart = System.nanoTime();
-        System.out.println("Mechanic result: " + Mechanics.ultimateFilter(body, Mechanics.LOWERCASE_REGEX));
-        long mechanicEnd = System.nanoTime();
-
-        long filterStart = System.nanoTime();
-        CHAR_FILTER.loadText(body);
-        System.out.println("Filter result: " + CHAR_FILTER.toNewString());
-        long filterEnd = System.nanoTime();
-
-        System.out.println("Mechanic Time: " + format.format(mechanicEnd -  mechanicStart));
-        System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
     }
 }
