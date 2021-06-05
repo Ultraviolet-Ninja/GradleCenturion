@@ -125,6 +125,7 @@ public class SimonScreams extends Widget {
         stage = 0;
         initialized = false;
         currentScreams = null;
+        CURRENT_OUTPUT_NUMBERS.clear();
     }
 
     private enum Letters {
