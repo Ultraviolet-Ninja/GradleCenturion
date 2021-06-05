@@ -5,12 +5,14 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
-import bomb.tools.Mechanics;
+import bomb.modules.s.simon.Simon.Screams;
+import bomb.tools.OldStar;
+import bomb.tools.Star;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static bomb.tools.Filter.CHAR_FILTER;
+import static bomb.modules.s.simon.Simon.Screams.*;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -37,19 +39,29 @@ public class TestingArea {
 //            e.printStackTrace();
 //        }
 
-        for (String body : new String[]{"12T4h65is5 %i34s2 a s(5en34t6e4nce.", "53212323u6434123", "42^&35é"}) {
-            long mechanicStart = System.nanoTime();
-            System.out.println("Mechanic result: " + Mechanics.ultimateFilter(body, Mechanics.LOWERCASE_REGEX));
-            long mechanicEnd = System.nanoTime();
+//        for (String body : new String[]{"12T4h65is5 %i34s2 a s(5en34t6e4nce.", "53212323u6434123", "42^&35é"}) {
+//            long mechanicStart = System.nanoTime();
+//            System.out.println("Mechanic result: " + Mechanics.ultimateFilter(body, Mechanics.LOWERCASE_REGEX));
+//            long mechanicEnd = System.nanoTime();
+//
+//            long filterStart = System.nanoTime();
+//            CHAR_FILTER.loadText(body);
+//            System.out.println("Filter result: " + CHAR_FILTER.toNewString());
+//            long filterEnd = System.nanoTime();
+//
+//            System.out.println("Mechanic Time: " + format.format(mechanicEnd - mechanicStart));
+//            System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
+//        }
 
-            long filterStart = System.nanoTime();
-            CHAR_FILTER.loadText(body);
-            System.out.println("Filter result: " + CHAR_FILTER.toNewString());
-            long filterEnd = System.nanoTime();
 
-            System.out.println("Mechanic Time: " + format.format(mechanicEnd - mechanicStart));
-            System.out.println("Filter Time: " + format.format(filterEnd - filterStart));
-        }
+        Screams[] colorOrder = {RED, PURPLE, YELLOW, GREEN, BLUE, ORANGE};
+
+        Screams[] flashOrder = {RED, PURPLE, RED};
+        OldStar old = new OldStar(colorOrder);
+        Star newStar = new Star(colorOrder);
+
+        System.out.println(old.primaryRule(flashOrder));
+        System.out.println(newStar.primaryRule(flashOrder));
     }
 
     private static HexGrid fromLine(String line){

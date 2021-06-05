@@ -1,8 +1,8 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
-import bomb.modules.s.simon.Simon;
-import bomb.tools.OldStar;
+import bomb.modules.s.simon.Simon.Screams;
+import bomb.tools.Star;
 
 import java.util.ArrayList;
 
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class SimonScreams extends Widget {
     private static boolean initialized = false;
     private static int stage = 0;
-    private static final ArrayList<Integer> CURRENT_OUTPUT_NUMBERS = new ArrayList<>();
-    private static OldStar currentScreams;
+    private static Star currentScreams;
 
+    private static final ArrayList<Integer> CURRENT_OUTPUT_NUMBERS = new ArrayList<>();
     private static final String[][]
             // The output colors that depend on the edgework conditions and enum Letter
             RESULTING_COLORS = {{"Yellow", "Orange", "Green", "Red", "Blue", "Purple"},
@@ -36,11 +36,11 @@ public class SimonScreams extends Widget {
      * @throws IllegalArgumentException - The serial code isn't 6 characters long OR
      *                                      The array is not 6 elements long
      */
-    public static void init(Simon.Screams[] order) throws IllegalArgumentException{
+    public static void init(Screams[] order) throws IllegalArgumentException{
         serialCodeChecker();
         initialized = true;
         outputConditions();
-        currentScreams = new OldStar(order);
+        currentScreams = new Star(order);
     }
 
     /**
@@ -50,7 +50,7 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(Simon.Screams[] flashingOrder) throws IllegalArgumentException{
+    public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException{
         if (initialized) {
             return findColors(Letters.getFromChar(getStringLetter(flashingOrder)));
         } else throw new IllegalArgumentException("Initialization wasn't started");
@@ -62,12 +62,12 @@ public class SimonScreams extends Widget {
      * @param flashingOrder - The column to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char getStringLetter(Simon.Screams[] flashingOrder){
-        if (currentScreams.threeAdjacency(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
-        else if (currentScreams.oneTwoOne(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
+    private static char getStringLetter(Screams[] flashingOrder){
+        if (currentScreams.threeAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
+        else if (currentScreams.oneTwoOneRule(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
         else if (currentScreams.primaryRule(flashingOrder)) return extractCategory(flashingOrder[stage], 2);
         else if (currentScreams.complementRule(flashingOrder)) return extractCategory(flashingOrder[stage], 3);
-        else if (currentScreams.twoAdjacency(flashingOrder)) return extractCategory(flashingOrder[stage], 4);
+        else if (currentScreams.twoAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 4);
         else return extractCategory(flashingOrder[stage], 5);
     }
 
@@ -78,7 +78,7 @@ public class SimonScreams extends Widget {
      * @param correctRule - The row to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char extractCategory(Simon.Screams stageColor, int correctRule){
+    private static char extractCategory(Screams stageColor, int correctRule){
         return CATEGORIES[correctRule][stageColor.ordinal()].charAt(stage++);
     }
 
@@ -102,15 +102,13 @@ public class SimonScreams extends Widget {
      *
      * @throws IllegalArgumentException - There's a problem with the edgework for the bomb
      */
-    private static void outputConditions() throws IllegalArgumentException{
+    private static void outputConditions(){
         if (countIndicators(true, true) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
         if (getTotalPorts() >= 3) CURRENT_OUTPUT_NUMBERS.add(1);
         if (serialCodeNumbers() >= 3) CURRENT_OUTPUT_NUMBERS.add(2);
         if (serialCodeLetters() >= 3) CURRENT_OUTPUT_NUMBERS.add(3);
         if (getAllBatteries() >= 3) CURRENT_OUTPUT_NUMBERS.add(4);
         if (getNumHolders() >= 3) CURRENT_OUTPUT_NUMBERS.add(5);
-        if (CURRENT_OUTPUT_NUMBERS.size() == 0)
-            throw new IllegalArgumentException("Something is SERIOUSLY WRONG with the edgework");
     }
 
     /**
@@ -121,6 +119,12 @@ public class SimonScreams extends Widget {
     public static boolean disableMod(){
         if (stage==2) initialized = false;
         return stage==2;
+    }
+
+    public static void reset(){
+        stage = 0;
+        initialized = false;
+        currentScreams = null;
     }
 
     private enum Letters {

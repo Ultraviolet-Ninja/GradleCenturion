@@ -7,7 +7,7 @@ public enum Simon {
     }
 
     public enum Screams{
-        RED, ORANGE, YELLOW, GREEN, BLUE, MAGENTA;
+        RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
 
         private Screams left, right;
 

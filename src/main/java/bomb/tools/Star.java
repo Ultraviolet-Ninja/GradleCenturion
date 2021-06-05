@@ -4,6 +4,9 @@ import bomb.modules.s.simon.Simon.Screams;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Star {
     private static final byte LIMIT = 6;
@@ -11,9 +14,14 @@ public class Star {
     private final ReadOnlyRing<Screams> colorOrder;
 
     public Star(Screams[] order){
-        if (order.length != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
+        checkUniqueColors(order);
         colorOrder = new ReadOnlyRing<>(LIMIT);
         for (Screams instance : order) colorOrder.add(instance);
+    }
+
+    private void checkUniqueColors(Screams[] order){
+        Set<Screams> set = new HashSet<>(Arrays.asList(order));
+        if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }
 
     public boolean threeAdjacencyRule(Screams[] flashOrder){
