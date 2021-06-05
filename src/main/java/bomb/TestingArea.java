@@ -6,8 +6,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.OldStar;
-import bomb.tools.Star;
+import bomb.modules.s.simon.screams.Star;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -57,10 +56,8 @@ public class TestingArea {
         Screams[] colorOrder = {RED, PURPLE, YELLOW, GREEN, BLUE, ORANGE};
 
         Screams[] flashOrder = {RED, PURPLE, RED};
-        OldStar old = new OldStar(colorOrder);
         Star newStar = new Star(colorOrder);
 
-        System.out.println(old.primaryRule(flashOrder));
         System.out.println(newStar.primaryRule(flashOrder));
     }
 

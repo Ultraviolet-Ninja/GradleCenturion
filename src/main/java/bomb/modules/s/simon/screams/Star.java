@@ -1,4 +1,4 @@
-package bomb.tools;
+package bomb.modules.s.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
 import bomb.tools.data.structures.ring.ReadOnlyRing;

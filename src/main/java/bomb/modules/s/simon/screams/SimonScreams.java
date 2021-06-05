@@ -2,7 +2,6 @@ package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.Star;
 
 import java.util.ArrayList;
 
