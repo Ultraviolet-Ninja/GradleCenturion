@@ -3,8 +3,8 @@ package bomb.tools;
 import bomb.modules.s.simon.Simon.Screams;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,29 +36,26 @@ public class Star {
         int firstIdx = colorOrder.findIndex(first);
         int secondIdx = colorOrder.findIndex(second);
         int thirdIdx = colorOrder.findIndex(third);
-        return thirdIdx == (secondIdx + 1) && secondIdx == (firstIdx + 1);
+        return thirdIdx - secondIdx == 1 && secondIdx - firstIdx == 1;
     }
 
     //Color, Adjacent, then color again
     public boolean oneTwoOneRule(Screams[] flashOrder){
         int track = sameColor(flashOrder);
-        return track != -1 && twoAdjacencyRule(flashOrder[track], flashOrder[track + 1]);
+        return track != -1 && twoAdjacencyRule(flashOrder[track + 1], flashOrder[track + 2]);
     }
 
     //Finding if the same color flashed twice with one color in between
     private int sameColor(Screams[] flashOrder){
-        int tracker = -1;
         for (int i = 0; i < flashOrder.length-2; i++)
-            if (flashOrder[i] == flashOrder[i+2]) tracker = i;
-        return tracker;
+            if (flashOrder[i] == flashOrder[i+2]) return i;
+        return -1;
     }
 
     //If no or one primary colors are flashing
     public boolean primaryRule(Screams[] flashOrder){
-        ArrayList<Screams> unique = new ArrayList<>();
-        for(Screams instance : flashOrder) {
-            if (!unique.contains(instance)) unique.add(instance);
-        }
+        Set<Screams> unique = new HashSet<>();
+        Collections.addAll(unique, flashOrder);
 
         int counter = 0;
         for (Screams instance : unique) {
@@ -97,6 +94,6 @@ public class Star {
     public boolean twoAdjacencyRule(Screams first, Screams second){
         int firstIdx = colorOrder.findIndex(first);
         int secondIdx = colorOrder.findIndex(second);
-        return secondIdx == (firstIdx + 1);
+        return secondIdx - firstIdx == 1;
     }
 }

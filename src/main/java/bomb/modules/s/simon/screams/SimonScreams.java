@@ -99,8 +99,6 @@ public class SimonScreams extends Widget {
 
     /**
      * Keeps track of the edgework that applies to the output colors
-     *
-     * @throws IllegalArgumentException - There's a problem with the edgework for the bomb
      */
     private static void outputConditions(){
         if (countIndicators(true, true) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
