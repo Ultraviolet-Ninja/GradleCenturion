@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
+
+<fx:root prefHeight="150.0" prefWidth="150.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1"
+         xmlns:fx="http://javafx.com/fxml/1">
+   <Polygon fx:id="base" fill="WHITE" layoutX="75.0" layoutY="54.0"
+            points="-35.0, 50.0, 0.0, 96.0, 35.0, 50.0, 0.0, -54.0" stroke="BLACK" strokeType="INSIDE"
+            strokeWidth="2.0"/>
+</fx:root>

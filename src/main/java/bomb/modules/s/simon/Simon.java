@@ -1,30 +1,26 @@
 package bomb.modules.s.simon;
 
+import bomb.interfaces.Labeled;
+
 public enum Simon {
     ;
     public enum States {
         RED, YELLOW, GREEN, BLUE
     }
 
-    public enum Screams{
-        RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE;
+    public enum Screams implements Labeled {
+        RED("#c30606"), ORANGE("#ff9513"), YELLOW("#cfdd00"),
+        GREEN("#00a80e"), BLUE("#0097ff"), PURPLE("#9e64eb");
 
-        private Screams left, right;
+        private final String label;
 
-        public Screams getLeft() {
-            return left;
+        Screams(String label){
+            this.label = label;
         }
 
-        public Screams getRight() {
-            return right;
-        }
-
-        public void setLeft(Screams left){
-            this.left = left;
-        }
-
-        public void setRight(Screams right) {
-            this.right = right;
+        @Override
+        public String getLabel() {
+            return label;
         }
     }
 }
