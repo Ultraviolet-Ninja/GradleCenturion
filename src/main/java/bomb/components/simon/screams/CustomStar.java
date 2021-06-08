@@ -1,8 +1,10 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
+import bomb.tools.HoverHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -28,6 +30,17 @@ public class CustomStar extends Pane {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        initializeEdges();
+    }
+
+    private void initializeEdges(){
+        HoverHandler<MouseEvent> handler = new HoverHandler<>(event -> ((CustomEdge) event.getSource()).clickAction());
+        first.setOnMouseClicked(handler);
+        second.setOnMouseClicked(handler);
+        third.setOnMouseClicked(handler);
+        forth.setOnMouseClicked(handler);
+        fifth.setOnMouseClicked(handler);
+        sixth.setOnMouseClicked(handler);
     }
 
     public Screams[] collect(){

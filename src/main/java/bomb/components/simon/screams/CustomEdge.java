@@ -47,8 +47,7 @@ public class CustomEdge extends Pane{
         selectorMode = nextBool;
     }
 
-    @FXML
-    private void clickAction(){
+    public void clickAction(){
         if (selectorMode){
             colors.rotateHeadClockwise();
             base.setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
