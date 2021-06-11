@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import bomb.components.simon.screams.CustomStar?>
+<?import bomb.components.simon.screams.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Button?>
-
-<Pane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.simon.screams.ScreamsController">
+<Pane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.simon.screams.ScreamsController">
    <children>
-      <ToggleButton fx:id="selectorToggle" layoutX="966.0" layoutY="37.0" mnemonicParsing="false" text="Color Setter">
+      <ToggleButton fx:id="colorSelectorToggle" layoutX="966.0" layoutY="37.0" mnemonicParsing="false" onAction="#setSelector" text="Color Setter">
          <font>
             <Font size="24.0" />
          </font>
       </ToggleButton>
-      <CustomStar layoutX="69.0" layoutY="62.0" prefHeight="454.0" prefWidth="460.0" />
+      <CustomStar fx:id="star" layoutX="161.0" layoutY="235.0" prefHeight="271.0" prefWidth="265.0" scaleX="2.0" scaleY="2.0" />
       <Button layoutX="1007.0" layoutY="712.0" mnemonicParsing="false" onAction="#resetStar" text="Reset">
          <font>
             <Font size="20.0" />

@@ -38,7 +38,7 @@ public class SimonScreams extends Widget {
     public static void init(Screams[] order) throws IllegalArgumentException{
         serialCodeChecker();
         initialized = true;
-        outputConditions();
+        setOutputRules();
         currentScreams = new Star(order);
     }
 
@@ -99,13 +99,21 @@ public class SimonScreams extends Widget {
     /**
      * Keeps track of the edgework that applies to the output colors
      */
-    private static void outputConditions(){
+    private static void setOutputRules(){
         if (countIndicators(true, true) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
         if (getTotalPorts() >= 3) CURRENT_OUTPUT_NUMBERS.add(1);
         if (serialCodeNumbers() >= 3) CURRENT_OUTPUT_NUMBERS.add(2);
         if (serialCodeLetters() >= 3) CURRENT_OUTPUT_NUMBERS.add(3);
         if (getAllBatteries() >= 3) CURRENT_OUTPUT_NUMBERS.add(4);
         if (getNumHolders() >= 3) CURRENT_OUTPUT_NUMBERS.add(5);
+    }
+
+    public static int getStage(){
+        return stage;
+    }
+
+    public static void resetLastStage(){
+        if (stage != 0) stage--;
     }
 
     /**

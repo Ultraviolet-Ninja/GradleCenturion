@@ -9,12 +9,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.WHITE;
 
 public class CustomEdge extends Pane{
     private boolean selectorMode;
-    private boolean isClicked;
+    private ArrayList<CustomEdge> internalReference;
 
     private final ReadOnlyRing<Screams> colors;
 
@@ -24,7 +25,6 @@ public class CustomEdge extends Pane{
     public CustomEdge(){
         super();
         selectorMode = false;
-        isClicked = false;
         colors = new ReadOnlyRing<>(6);
         fill();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("edge.fxml"));
@@ -52,26 +52,24 @@ public class CustomEdge extends Pane{
             colors.rotateHeadClockwise();
             base.setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
         } else {
-            isClicked = true;
+            if (base.getFill() == WHITE) return;
+            internalReference.add(this);
         }
     }
 
     public Screams exportColor(){
+        if (base.getFill() == WHITE)
+            return null;
         return colors.getHeadData();
+    }
+
+    public void getListReference(ArrayList<CustomEdge> list){
+        internalReference = list;
     }
 
     public void resetEdge(){
         base.setFill(WHITE);
-        while (colors.getHeadData() != Screams.RED) colors.rotateHeadClockwise();
+        while (colors.getHeadData() != Screams.PURPLE) colors.rotateHeadClockwise();
         selectorMode = false;
-        isClicked = false;
-    }
-
-    public boolean checkClicked(){
-        return isClicked;
-    }
-
-    public void resetClick(){
-        isClicked = false;
     }
 }

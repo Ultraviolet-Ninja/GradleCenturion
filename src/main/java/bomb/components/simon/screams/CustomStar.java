@@ -14,8 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CustomStar extends Pane {
-    //Might need
-    private ArrayList<CustomEdge> clicks = new ArrayList<>();
+    private final ArrayList<CustomEdge> clicks = new ArrayList<>();
 
     @FXML
     private CustomEdge first, second, third, forth, fifth, sixth;
@@ -35,22 +34,20 @@ public class CustomStar extends Pane {
 
     private void initializeEdges(){
         HoverHandler<MouseEvent> handler = new HoverHandler<>(event -> ((CustomEdge) event.getSource()).clickAction());
-        first.setOnMouseClicked(handler);
-        second.setOnMouseClicked(handler);
-        third.setOnMouseClicked(handler);
-        forth.setOnMouseClicked(handler);
-        fifth.setOnMouseClicked(handler);
-        sixth.setOnMouseClicked(handler);
+        for (CustomEdge edge : new CustomEdge[]{first, second, third, forth, fifth, sixth}) {
+            edge.setOnMouseClicked(handler);
+            edge.getListReference(clicks);
+        }
     }
 
-    public Screams[] collect(){
+    public Screams[] collectOrder(){
         return new Screams[]{first.exportColor(), second.exportColor(), third.exportColor(),
                 forth.exportColor(), fifth.exportColor(), sixth.exportColor()};
     }
 
     public boolean confirmDifferentColors(){
-        Set<Screams> check = new HashSet<>(Arrays.asList(collect()));
-        return check.size() == 6;
+        Set<Screams> check = new HashSet<>(Arrays.asList(collectOrder()));
+        return check.size() == 6 && !check.contains(null);
     }
 
     public void setSelectorMode(boolean nextBool){
@@ -71,12 +68,15 @@ public class CustomStar extends Pane {
         sixth.resetEdge();
     }
 
+    public Screams[] collectFlashOrder(){
+        Screams[] output = new Screams[clicks.size()];
+        for (int i = 0; i < clicks.size(); i++){
+            output[i] = clicks.get(i).exportColor();
+        }
+        return output;
+    }
+
     public void resetClicks(){
-        first.resetClick();
-        second.resetClick();
-        third.resetClick();
-        forth.resetClick();
-        fifth.resetClick();
-        sixth.resetClick();
+        clicks.clear();
     }
 }
