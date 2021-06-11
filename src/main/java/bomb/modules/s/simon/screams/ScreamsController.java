@@ -4,10 +4,14 @@ import bomb.components.simon.screams.CustomStar;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 
 public class ScreamsController {
+    @FXML
+    private Button solve;
+
     @FXML
     private CustomStar star;
 
@@ -28,6 +32,7 @@ public class ScreamsController {
                 try{
                     SimonScreams.init(star.collectOrder());
                     FacadeFX.disable(colorSelectorToggle);
+                    FacadeFX.enable(solve);
                 } catch(IllegalArgumentException ex){
                     FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
                     colorSelectorToggle.setSelected(true);
@@ -38,9 +43,17 @@ public class ScreamsController {
 
     @FXML
     private void collectClicks(){
-        String output = SimonScreams.nextSolve(star.collectFlashOrder());
-        //TODO Some UI stuff
-        star.resetClicks();
+        try {
+            String output = SimonScreams.nextSolve(star.collectFlashOrder());
+            StringBuilder sb = new StringBuilder();
+            for (String point : output.split(",")) {
+                sb.append("\u2022 ").append(point).append("\n");
+            }
+            resultArea.setText(sb.toString());
+            star.resetClicks();
+        } catch (IllegalArgumentException ex){
+            FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
+        }
     }
 
     @FXML
@@ -48,6 +61,7 @@ public class ScreamsController {
         star.resetStar();
         FacadeFX.unselectButtons(colorSelectorToggle);
         FacadeFX.enable(colorSelectorToggle);
+        FacadeFX.disable(solve);
         SimonScreams.reset();
     }
 }

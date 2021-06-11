@@ -50,6 +50,8 @@ public class SimonScreams extends Widget {
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
     public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException{
+        if (flashingOrder == null || flashingOrder.length == 0)
+            throw new IllegalArgumentException("No colors were selected");
         if (initialized) {
             return findColors(Letters.getFromChar(getStringLetter(flashingOrder)));
         } else throw new IllegalArgumentException("Initialization wasn't started");
@@ -136,7 +138,7 @@ public class SimonScreams extends Widget {
     private enum Letters {
         A, C, D, E, F, H;
 
-        public static Letters getFromChar(char letter){
+        private static Letters getFromChar(char letter){
             String sample = String.valueOf(letter);
             for (Letters let : Letters.values()){
                 if (let.name().equals(sample)) return let;
