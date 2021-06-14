@@ -112,7 +112,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
 
     private HexGrid runColumns(FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> columns, HexGrid grid, int[] startPositions){
         final int hexagonalSideLength = (startPositions.length + 1) / 2;
-        final int[] travelDistances = HexComparator.pingRequest(hexagonalSideLength);
+        final int[] travelDistances = AbstractHexagon.calculateColumnLengths(hexagonalSideLength);
         int[] endPositions = addArrays(travelDistances, startPositions);
 
         while(notDone(columns, endPositions)){

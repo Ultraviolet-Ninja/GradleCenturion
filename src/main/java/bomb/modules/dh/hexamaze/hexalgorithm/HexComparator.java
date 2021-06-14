@@ -59,7 +59,7 @@ public class HexComparator {
             tower = getTower(fullMaze, spans[1], xOffset);
             tower = shaveProtocol(tower,
                     fullMaze.hexport().sideLength() - (grid.sideLength() + xOffset), grid);
-            int[] pings = pingRequest(grid.sideLength());
+            int[] pings = AbstractHexagon.calculateColumnLengths(grid.sideLength());
             match = identifyMatch(new Hex(startHexagon(pings, tower), grid.sideLength()),
                     tower, grid, pings);
             if (match != null) xOffset = spans[0];
@@ -75,7 +75,7 @@ public class HexComparator {
      * @return The array of spans
      */
     private static int[] getSpans(Maze fullMaze, HexGrid grid) {
-        return new int[]{fullMaze.hexport().getSpan(), grid.hexport().getSpan()};
+        return new int[]{fullMaze.getSpan(), grid.getSpan()};
     }
 
     /**
@@ -164,26 +164,6 @@ public class HexComparator {
     private static int absCap(int shaveCap, HexGrid grid) {
         int gridCap = grid.sideLength() - 1;
         return Math.min(gridCap, shaveCap);
-    }
-
-    /**
-     * Creates an array of lengths corresponding to the columns of the 2D iterator
-     *
-     * @param sideLength The side length of the hexagon
-     * @return An array of column lengths
-     */
-    static int[] pingRequest(int sideLength) {
-        int counter = 0;
-        int[] request = new int[2 * sideLength - 1];
-
-        for (int i = sideLength; i < 2 * sideLength; i++)
-            request[counter++] = i;
-
-
-        for (int j = 2 * sideLength - 2; j >= sideLength; j--)
-            request[counter++] = j;
-
-        return request;
     }
 
     /**

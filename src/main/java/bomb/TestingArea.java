@@ -5,13 +5,10 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
-import bomb.modules.s.simon.Simon.Screams;
-import bomb.modules.s.simon.screams.Star;
+import bomb.tools.Coordinates;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import static bomb.modules.s.simon.Simon.Screams.*;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -53,12 +50,16 @@ public class TestingArea {
 //        }
 
 
-        Screams[] colorOrder = {RED, PURPLE, YELLOW, GREEN, BLUE, ORANGE};
-
-        Screams[] flashOrder = {RED, PURPLE, RED};
-        Star newStar = new Star(colorOrder);
-
-        System.out.println(newStar.primaryRule(flashOrder));
+//        Screams[] colorOrder = {RED, PURPLE, YELLOW, GREEN, BLUE, ORANGE};
+//
+//        Screams[] flashOrder = {RED, PURPLE, RED};
+//        Star newStar = new Star(colorOrder);
+//
+//        System.out.println(newStar.primaryRule(flashOrder));
+        Coordinates test = new Coordinates(0,0);
+        System.out.println(test.hashCode());
+        test.alterCurrentCoords(new Coordinates(1,1));
+        System.out.println(test.hashCode());
     }
 
     private static HexGrid fromLine(String line){

@@ -13,15 +13,14 @@ import java.util.ArrayList;
  * It encapsulates a Hex class and contains data that's appropriate for that puzzle that
  * wouldn't be needed for all Hex objects
  */
-public class HexGrid {
-    private final Hex defuserVision;
+public class HexGrid extends AbstractHexagon{
     private final ReadOnlyRing<Color> colorRing;
 
     /**
      * Initializes a Hex object with a side length of 4, representing what the defuser sees on thr bomb
      */
     public HexGrid(){
-        defuserVision = new Hex(4);
+        super(new Hex(4));
         colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
     }
@@ -36,7 +35,7 @@ public class HexGrid {
     public HexGrid(Hex grid, int neededRotations) throws IllegalArgumentException{
         if (grid.sideLength() != 4)
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
-        defuserVision = grid;
+        hexagon = grid;
         colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
         for (int i = 0; i < neededRotations; i++) rotateColorOrder();
@@ -47,7 +46,7 @@ public class HexGrid {
     }
 
     public HexGrid(HexGrid toCopy){
-        defuserVision = new Hex(copyNodes(toCopy.hexport()));
+        hexagon = new Hex(copyNodes(toCopy.hexport()));
         colorRing = toCopy.colorRing;
     }
 
@@ -60,7 +59,7 @@ public class HexGrid {
         ArrayList<Hex.HexNode> nodeList = new ArrayList<>();
         for (HexTraits.HexShape shape : shapeList)
             nodeList.add(new Hex.HexNode(shape, null));
-        defuserVision.injectList(nodeList);
+        hexagon.injectList(nodeList);
     }
 
     /**
@@ -84,32 +83,6 @@ public class HexGrid {
         return colorRing.toArrayList();
     }
 
-    /**
-     * Gives the side length of the HexGrid
-     *
-     * @return The side length of the internal Hex object
-     */
-    public int sideLength(){
-        return defuserVision.sideLength();
-    }
-
-    /**
-     * Exports the Hex object
-     *
-     * @return The defuser vision
-     */
-    public Hex hexport(){
-        return defuserVision;
-    }
-
-    /**
-     * Exports the list of lists representing the hexagon
-     *
-     * @return The Hex.export() method
-     */
-    public FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> exportTo2DQueue(){
-        return defuserVision.exportTo2DQueue();
-    }
 
     /**
      * Gets the HexNode from a specific set of coordinates
@@ -128,7 +101,7 @@ public class HexGrid {
      * @return The center column of a Hex object
      */
     public FixedArrayQueue<Hex.HexNode> getCenterColumn(){
-        return defuserVision.getCenterHexagonColumn();
+        return hexagon.getCenterHexagonColumn();
     }
 
     private ArrayList<Hex.HexNode> copyNodes(Hex hex){
@@ -151,7 +124,7 @@ public class HexGrid {
     public ArrayList<String> hashStrings(){
         ArrayList<String> outputs = new ArrayList<>(2);
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
-        FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> queues = defuserVision.exportTo2DQueue();
+        FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> queues = hexagon.exportTo2DQueue();
 
         for (FixedArrayQueue<Hex.HexNode> queue : queues){
             for (Hex.HexNode node : queue){

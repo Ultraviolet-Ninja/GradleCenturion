@@ -1,22 +1,31 @@
 package bomb.tools.data.structures.graph.list;
 
 import java.util.AbstractMap;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class WeightedListGraph<E> extends AbstractListGraph<E> implements WeightedEdge<E>{
-    private final LinkedHashMap<E, LinkedList<AbstractMap.SimpleEntry<E, Integer>>> list;
+    private final HashMap<E, Set<E>> internal;
 
-    public WeightedListGraph(boolean biDirectional){
+    public WeightedListGraph(boolean biDirectional) {
         super(biDirectional);
-        list = new LinkedHashMap<>();
+        internal = new HashMap<>();
     }
 
     @Override
     public boolean addVertex(E vertex) {
-        if (list.containsKey(vertex)) return false;
-        list.put(vertex, new LinkedList<>());
-        return true;
+        return false;
+    }
+
+    @Override
+    public boolean removeEdge(E vertex, E edge) {
+        return false;
+    }
+
+    @Override
+    public LinkedList<AbstractMap.SimpleEntry<E, Integer>> removeVertex(E vertex) {
+        return null;
     }
 
     @Override
@@ -27,17 +36,5 @@ public class WeightedListGraph<E> extends AbstractListGraph<E> implements Weight
     @Override
     public LinkedList<E> dijkstraAlgo(E start, E end) {
         return null;
-    }
-
-    @Override
-    public LinkedList<AbstractMap.SimpleEntry<E, Integer>> removeVertex(E vertex) {
-        if (!list.containsKey(vertex)) return null;
-        return list.remove(vertex);
-    }
-
-    @Override
-    public boolean removeEdge(E vertex, E edge) {
-        if (list.containsKey(vertex)) return true;
-        return false;
     }
 }

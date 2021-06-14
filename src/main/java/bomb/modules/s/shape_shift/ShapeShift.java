@@ -3,7 +3,7 @@ package bomb.modules.s.shape_shift;
 import bomb.Widget;
 import bomb.enumerations.Indicators;
 import bomb.enumerations.Ports;
-import bomb.tools.data.structures.graph.list.ListGraph;
+import bomb.tools.data.structures.graph.list.OldListGraph;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 //TODO Eventually document the code
 public class ShapeShift extends Widget {
     private static final int[][] countTracker = new int[4][4];
-    private static ListGraph<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> graph;
+    private static OldListGraph<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> graph;
 
     //<editor-fold desc="Init methods">
     static {
@@ -27,7 +27,7 @@ public class ShapeShift extends Widget {
     }
 
     private static void initializeGraph(){
-        graph = new ListGraph<>(false);
+        graph = new OldListGraph<>(false);
         initializeTriples();
     }
 
