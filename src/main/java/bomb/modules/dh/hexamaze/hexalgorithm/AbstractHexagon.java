@@ -34,7 +34,6 @@ public abstract class AbstractHexagon {
         for (int i = sideLength; i < 2 * sideLength; i++)
             request[counter++] = i;
 
-
         for (int j = 2 * sideLength - 2; j >= sideLength; j--)
             request[counter++] = j;
 

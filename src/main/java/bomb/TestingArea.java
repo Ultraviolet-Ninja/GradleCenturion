@@ -5,7 +5,6 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
-import bomb.tools.Coordinates;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -56,10 +55,16 @@ public class TestingArea {
 //        Star newStar = new Star(colorOrder);
 //
 //        System.out.println(newStar.primaryRule(flashOrder));
-        Coordinates test = new Coordinates(0,0);
-        System.out.println(test.hashCode());
-        test.alterCurrentCoords(new Coordinates(1,1));
-        System.out.println(test.hashCode());
+//        Maze maze;
+//        try{
+//            maze = new Maze();
+//            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+//            HexGrid full = HexComparator.evaluate(maze, bestCase);
+//            MazeRunnerv2.getPegInformation(Color.YELLOW, 22, full.sideLength());
+//            MazeRunnerv2.runMaze(full);
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
     }
 
     private static HexGrid fromLine(String line){

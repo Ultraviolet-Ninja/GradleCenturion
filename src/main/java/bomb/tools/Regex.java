@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Regex implements Iterable<String>{
-    private static final int MAX_FLAG_SIZE = 511;
+    private static final int MAX_FLAG_SIZE = 0x1ff;
 
     private final Pattern regPattern;
     private final Matcher textMatcher;

@@ -32,4 +32,19 @@ public class Coordinates implements Coordinate {
         this.x += alterSet.x;
         this.y += alterSet.y;
     }
+
+    public Coordinates immutableAdd(Coordinates vector){
+        return new Coordinates(this.x + vector.x, this.y + vector.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return x + 1373 * y;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (!(o instanceof Coordinates)) return false;
+        return ((Coordinates)o).x == this.x && ((Coordinates)o).y == this.y;
+    }
 }
