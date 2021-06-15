@@ -92,7 +92,11 @@ public class HexGrid extends AbstractHexagon{
      */
     public Hex.HexNode retrieveNode(Coordinates pair){
         int[] values = pair.getCoords();
-        return exportTo2DQueue().get(values[0]).get(values[1]);
+        if (values[0] < 0 || values[0] >= hexagon.getSpan()) return null;
+        FixedArrayQueue<Hex.HexNode> column = exportTo2DQueue().get(values[0]);
+
+        if (values[1] < 0 || values[1] >= column.cap()) return null;
+        return column.get(values[1]);
     }
 
     /**
