@@ -47,4 +47,9 @@ public class Coordinates implements Coordinate {
         if (!(o instanceof Coordinates)) return false;
         return ((Coordinates)o).x == this.x && ((Coordinates)o).y == this.y;
     }
+
+    @Override
+    public String toString(){
+        return "(" + x + "," + y + ")";
+    }
 }
