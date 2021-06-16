@@ -9,6 +9,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexPanelFiller;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunner;
+import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 
@@ -17,6 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.Hex.nodalArea;
+import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.CYAN;
+import static javafx.scene.paint.Color.GREEN;
+import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.YELLOW;
 
 public class Hexamaze extends Widget{
     private final static ArrayList<HexShape> hexShapeTracker = new ArrayList<>();
@@ -72,7 +78,18 @@ public class Hexamaze extends Widget{
 
     public static void setPegFillSelector(Color fillColor){
         pegFillSelector = fillColor;
-        if (souvenir){}
+        if (souvenir){
+            Souvenir.addRelic("Hexamaze Pawn Color", getColorName(fillColor));
+        }
+    }
+
+    private static String getColorName(Color color){
+        if (color == RED) return "Red";
+        if (color == YELLOW) return "Yellow";
+        if (color == GREEN) return "Green";
+        if (color == CYAN) return "Cyan";
+        if (color == BLUE) return "Blue";
+        return "Pink";
     }
 
     /**
@@ -88,13 +105,12 @@ public class Hexamaze extends Widget{
     }
 
     /**
-     * Sets the given HexMazePanel
+     * Sets the given HexMazePanel with the current Shape in the {@link Hexamaze currentSelector}
      *
      * @param panel The current HexMazePanel
      * @param index Where it'll show up in array representation
-     * @throws IllegalArgumentException
      */
-    private static void toFill(HexMazePanel panel, int index) throws IllegalArgumentException{
+    private static void toFill(HexMazePanel panel, int index) {
         panel.setup(new Hex.HexNode(currentSelector, null));
         hexShapeTracker.set(index, currentSelector);
     }

@@ -9,7 +9,7 @@ public class Souvenir extends Widget {
     //TODO - CENTURION SOUVENIR IS DIFFERENT, CHANGE SOME SHITE, M8
     //TODO - Consider changing how souvenirs are stored
     private static int prevSize = 0;
-    private static final ArrayList<String> relics = new ArrayList<>();
+    private static final ArrayList<String> MODULE_ARTIFACTS = new ArrayList<>();
 
     /**
      *
@@ -18,7 +18,7 @@ public class Souvenir extends Widget {
      * @param clue
      */
     public static void addRelic(String key, String clue){
-        relics.add(key + " - " + clue + "\n");
+        MODULE_ARTIFACTS.add(key + " - " + clue + "\n");
     }
 
     /**
@@ -28,9 +28,9 @@ public class Souvenir extends Widget {
      */
     public static String flush() {
         StringBuilder builder = new StringBuilder();
-        if (relics.size() != prevSize){
-            prevSize = relics.size();
-            for (String key : relics) builder.append(key);
+        if (MODULE_ARTIFACTS.size() != prevSize){
+            prevSize = MODULE_ARTIFACTS.size();
+            for (String key : MODULE_ARTIFACTS) builder.append(key);
             return builder.toString();
         } return null;
     }
