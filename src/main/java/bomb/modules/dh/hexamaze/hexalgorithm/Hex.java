@@ -434,15 +434,6 @@ public class Hex {
     }
 
     /**
-     * Retrieves the FinalList at the center of the hexagon
-     *
-     * @return The FinalList of the center column of the hexagon
-     */
-    public FixedArrayQueue<HexNode> getCenterHexagonColumn() {
-        return hexagon.get(sideLength - 1);
-    }
-
-    /**
      * Finds the area of a hexagon based on a given side length
      * The equation: 3x^2 - 3x + 1
      *

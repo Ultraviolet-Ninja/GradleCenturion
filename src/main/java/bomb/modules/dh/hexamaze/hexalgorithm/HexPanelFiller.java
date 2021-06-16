@@ -5,15 +5,14 @@ import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 public class HexPanelFiller {
 
     private HexPanelFiller(){}
 
-    public static void fillPanels(LinkedList<Coordinates> directionSet, ArrayList<HexMazePanel> panelArray,
-             Color toFill, int hexagonSideLength){
-        //directionSet.removeLast(); //TODO can be taken out if I want
+    public static void fillPanels(List<Coordinates> directionSet, ArrayList<HexMazePanel> panelArray,
+                                  Color toFill, int hexagonSideLength){
         for (HexMazePanel panel : panelArray) panel.resetHexagonalFill();
         for (Coordinates coordinates : directionSet){
             panelArray.get(coordinateToIndex(coordinates, hexagonSideLength)).setHexagonalFill(toFill);

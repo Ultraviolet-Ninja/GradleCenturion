@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.Hex.decodeShape;
@@ -37,7 +38,8 @@ public class Maze extends AbstractHexagon{
      */
     private ArrayList<Hex.HexNode> decodeDoc() throws IOException, URISyntaxException {
         ArrayList<Hex.HexNode> nodes = new ArrayList<>();
-        Scanner docScan = new Scanner(new File(getClass().getResource("HexMaze.txt").toURI()).toPath());
+        Scanner docScan = new Scanner(new File(Objects.requireNonNull(
+                getClass().getResource("HexMaze.txt")).toURI()).toPath());
         while (docScan.hasNextLine()) {
             String[] elements = docScan.nextLine().split(" ");
             nodes.add(new Hex.HexNode(decodeShape(elements[1]), decodeWalls(elements[0])));

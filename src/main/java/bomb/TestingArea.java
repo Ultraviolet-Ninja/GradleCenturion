@@ -4,8 +4,11 @@ import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
+import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunnerV2;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
+import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -55,16 +58,16 @@ public class TestingArea {
 //        Star newStar = new Star(colorOrder);
 //
 //        System.out.println(newStar.primaryRule(flashOrder));
-//        Maze maze;
-//        try{
-//            maze = new Maze();
-//            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
-//            HexGrid full = HexComparator.evaluate(maze, bestCase);
-//            MazeRunnerv2.getPegInformation(Color.YELLOW, 22, full.sideLength());
-//            MazeRunnerv2.runMaze(full);
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
+        Maze maze;
+        try{
+            maze = new Maze();
+            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+            HexGrid full = HexComparator.evaluate(maze, bestCase);
+            MazeRunnerV2.getPegInformation(Color.CYAN, 23, full.sideLength());
+            System.out.println(MazeRunnerV2.runMaze(full));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     private static HexGrid fromLine(String line){

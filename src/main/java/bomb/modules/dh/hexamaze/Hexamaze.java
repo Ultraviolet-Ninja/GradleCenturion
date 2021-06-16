@@ -2,14 +2,19 @@ package bomb.modules.dh.hexamaze;
 
 import bomb.Widget;
 import bomb.components.hex.HexMazePanel;
-import bomb.tools.Coordinates;
-import bomb.modules.dh.hexamaze.hexalgorithm.*;
 import bomb.modules.dh.hexamaze.HexTraits.HexShape;
+import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexPanelFiller;
+import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
+import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunnerV2;
+import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.Hex.nodalArea;
 
@@ -120,7 +125,7 @@ public class Hexamaze extends Widget{
      */
     public static void compareToFullMaze() throws IllegalArgumentException{
         grid.fillWithShapes(hexShapeTracker);
-        MazeRunner.getPegInformation(currentPegColor, currentPegLocation);
+        MazeRunnerV2.getPegInformation(currentPegColor, currentPegLocation, grid.sideLength());
         HexGrid result = HexComparator.evaluate(maze, grid);
         if(result != null) decipherResults(result);
         else throw new IllegalArgumentException("No resulting maze was found");
@@ -133,7 +138,7 @@ public class Hexamaze extends Widget{
      */
     private static void decipherResults(HexGrid hexGrid){
         clearPreviousLines();
-        LinkedList<Coordinates> exitOrder = MazeRunner.runMaze(hexGrid);
+        List<Coordinates> exitOrder = MazeRunnerV2.runMaze(hexGrid);
         ArrayList<Hex.HexNode> stream = hexGrid.hexport().exportToList();
         for (int i = 0; i < stream.size(); i++) panelList.get(i).setup(stream.get(i));
         if (exitOrder != null) HexPanelFiller.fillPanels(exitOrder, panelList, currentPegColor, grid.sideLength());

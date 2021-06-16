@@ -14,13 +14,15 @@ import java.util.ArrayList;
  * wouldn't be needed for all Hex objects
  */
 public class HexGrid extends AbstractHexagon{
+    private static final int STANDARD_SIDE_LENGTH = 4;
+
     private final ReadOnlyRing<Color> colorRing;
 
     /**
      * Initializes a Hex object with a side length of 4, representing what the defuser sees on thr bomb
      */
     public HexGrid(){
-        super(new Hex(4));
+        super(new Hex(STANDARD_SIDE_LENGTH));
         colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
     }
@@ -29,11 +31,11 @@ public class HexGrid extends AbstractHexagon{
      *
      *
      * @param grid The Hex of side length of 4 to wrap in a HexGrid
-     * @param neededRotations
+     * @param neededRotations The number of rotations the Hexagon needs to be the correct orientation
      * @throws IllegalArgumentException The side length of the given Hexagon isn't 4
      */
     public HexGrid(Hex grid, int neededRotations) throws IllegalArgumentException{
-        if (grid.sideLength() != 4)
+        if (grid.sideLength() != STANDARD_SIDE_LENGTH)
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
         hexagon = grid;
         colorRing = new ReadOnlyRing<>(6);
@@ -75,9 +77,7 @@ public class HexGrid extends AbstractHexagon{
     }
 
     /**
-     *
-     *
-     * @return
+     * @return The ReadOnlyRing in its current rotational order
      */
     public ArrayList<Color> getOrder() {
         return colorRing.toArrayList();
@@ -87,7 +87,7 @@ public class HexGrid extends AbstractHexagon{
     /**
      * Gets the HexNode from a specific set of coordinates
      *
-     * @param pair
+     * @param pair The (x,y) combination to get the HexNode at
      * @return The result HexNode
      */
     public Hex.HexNode retrieveNode(Coordinates pair){
@@ -97,15 +97,6 @@ public class HexGrid extends AbstractHexagon{
 
         if (values[1] < 0 || values[1] >= column.cap()) return null;
         return column.get(values[1]);
-    }
-
-    /**
-     * Passes on the center column of a given hexagon
-     *
-     * @return The center column of a Hex object
-     */
-    public FixedArrayQueue<Hex.HexNode> getCenterColumn(){
-        return hexagon.getCenterHexagonColumn();
     }
 
     private ArrayList<Hex.HexNode> copyNodes(Hex hex){
