@@ -6,17 +6,17 @@
 - Boolean Venn Diagram
 - Chord Qualities
 - Emoji Math
+- Hexamaze
 - Laundry
 - Neutralization
 - Round Keypads
 - The Bulb
 - TwoBit
 
-12/100
+13/100
 
 ### Incomplete Modules
 - FastMath
-- Hexamaze
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon Screams
@@ -25,7 +25,7 @@
 - Souvenir
 - Shape Shift
 
-9/100
+8/100
 
 ### Untouched Modules
 - 3D Maze

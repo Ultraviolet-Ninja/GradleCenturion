@@ -9,7 +9,7 @@ import java.util.LinkedList;
 /**
  *
  */
-public class MazeRunner {
+public class OldMazeRunner {
     private static Color currentPegColor;
     private static Coordinates currentLocation;
     private static MapStack<Coordinates, Integer> historyStack;

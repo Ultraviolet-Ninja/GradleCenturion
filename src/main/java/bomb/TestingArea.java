@@ -4,7 +4,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunnerV2;
+import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunner;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
 import javafx.scene.paint.Color;
 
@@ -63,8 +63,8 @@ public class TestingArea {
             maze = new Maze();
             HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
             HexGrid full = HexComparator.evaluate(maze, bestCase);
-            MazeRunnerV2.getPegInformation(Color.CYAN, 23, full.sideLength());
-            System.out.println(MazeRunnerV2.runMaze(full));
+            MazeRunner.getPegInformation(Color.CYAN, 23, full.sideLength());
+            System.out.println(MazeRunner.runMaze(full));
         } catch (IOException e){
             e.printStackTrace();
         }

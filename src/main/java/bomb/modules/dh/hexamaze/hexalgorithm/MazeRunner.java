@@ -21,7 +21,7 @@ import static bomb.modules.dh.hexamaze.HexTraits.HexWall.Top;
 import static bomb.modules.dh.hexamaze.HexTraits.HexWall.TopLeft;
 import static bomb.modules.dh.hexamaze.HexTraits.HexWall.TopRight;
 
-public class MazeRunnerV2 {
+public class MazeRunner {
     private static Color currentPegColor = null;
     private static Coordinates currentLocation = null;
 
@@ -33,7 +33,7 @@ public class MazeRunnerV2 {
     /**
      * Don't let anyone instantiate this class
      */
-    private MazeRunnerV2() {}
+    private MazeRunner() {}
 
     public static void getPegInformation(Color pegColor, int location, int gridSideLength) {
         currentPegColor = pegColor;

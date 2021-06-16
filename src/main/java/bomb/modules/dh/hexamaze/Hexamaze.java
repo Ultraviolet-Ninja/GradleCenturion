@@ -8,7 +8,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexPanelFiller;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunnerV2;
+import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunner;
 import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 
@@ -125,7 +125,7 @@ public class Hexamaze extends Widget{
      */
     public static void compareToFullMaze() throws IllegalArgumentException{
         grid.fillWithShapes(hexShapeTracker);
-        MazeRunnerV2.getPegInformation(currentPegColor, currentPegLocation, grid.sideLength());
+        MazeRunner.getPegInformation(currentPegColor, currentPegLocation, grid.sideLength());
         HexGrid result = HexComparator.evaluate(maze, grid);
         if(result != null) decipherResults(result);
         else throw new IllegalArgumentException("No resulting maze was found");
@@ -138,7 +138,7 @@ public class Hexamaze extends Widget{
      */
     private static void decipherResults(HexGrid hexGrid){
         clearPreviousLines();
-        List<Coordinates> exitOrder = MazeRunnerV2.runMaze(hexGrid);
+        List<Coordinates> exitOrder = MazeRunner.runMaze(hexGrid);
         ArrayList<Hex.HexNode> stream = hexGrid.hexport().exportToList();
         for (int i = 0; i < stream.size(); i++) panelList.get(i).setup(stream.get(i));
         if (exitOrder != null) HexPanelFiller.fillPanels(exitOrder, panelList, currentPegColor, grid.sideLength());
