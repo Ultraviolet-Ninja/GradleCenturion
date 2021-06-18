@@ -14,12 +14,14 @@ import static bomb.modules.s.simon.Simon.States.YELLOW;
  */
 public class SimonStates extends Widget {
     private static int prior;
-    private static final Simon.States[][] priorities = new Simon.States[][]{
+    private static StringBuilder toPress = new StringBuilder();
+
+    private static final Simon.States[][] PRIORITY_ORDERS = new Simon.States[][]{
             {RED, BLUE, GREEN, YELLOW}, //Highest to Lowest
             {BLUE, YELLOW, RED, GREEN},
             {GREEN, RED, YELLOW, BLUE},
-            {YELLOW, GREEN, BLUE, RED}};
-    private static StringBuilder toPress = new StringBuilder();
+            {YELLOW, GREEN, BLUE, RED}
+    };
 
     enum Priorities {
         HIGHEST, HIGH, LOW, LOWEST
@@ -73,7 +75,7 @@ public class SimonStates extends Widget {
             return firstCap(lowest(colors));
         else if (colors.length == 3)
             return firstCap(RED);
-        return firstCap(priorities[prior][Priorities.HIGH.ordinal()]);
+        return firstCap(PRIORITY_ORDERS[prior][Priorities.HIGH.ordinal()]);
     }
 
     /**
@@ -115,7 +117,7 @@ public class SimonStates extends Widget {
         else if (colors.length == 1)
             return firstCap(colors[0]);
         else
-            return firstCap(priorities[prior][Priorities.LOW.ordinal()]);
+            return firstCap(PRIORITY_ORDERS[prior][Priorities.LOW.ordinal()]);
     }
 
     /**
@@ -130,7 +132,7 @@ public class SimonStates extends Widget {
         else if (oneNotPressed(colors))
             return pressOneNot(colors);
         else if (colors.length == 3)
-            return firstCap(priorities[prior][Priorities.LOWEST.ordinal()]);
+            return firstCap(PRIORITY_ORDERS[prior][Priorities.LOWEST.ordinal()]);
         else if (colors.length == 1)
             return firstCap(colors[0]);
         else
@@ -145,7 +147,7 @@ public class SimonStates extends Widget {
      * @throws IllegalArgumentException
      */
     private static Simon.States highest(Simon.States[] colors) throws IllegalArgumentException{
-        for (Simon.States current : priorities[prior]){
+        for (Simon.States current : PRIORITY_ORDERS[prior]){
             if(contains(colors, current)) return current;
         }
         throw new IllegalArgumentException("Unreachable section of highest() was reached");
@@ -159,7 +161,7 @@ public class SimonStates extends Widget {
      * @throws IllegalArgumentException
      */
     private static Simon.States highestNotFlashed(Simon.States[] colors) throws IllegalArgumentException{
-        for (Simon.States current : priorities[prior]){
+        for (Simon.States current : PRIORITY_ORDERS[prior]){
             if(!contains(colors, current)) return current;
         }
         throw new IllegalArgumentException("Unreachable section of highestNotFlashed() was reached");
@@ -172,7 +174,7 @@ public class SimonStates extends Widget {
      * @return
      */
     private static Simon.States highestNotPressed(Simon.States[] colors){
-        for (Simon.States current : priorities[prior]){
+        for (Simon.States current : PRIORITY_ORDERS[prior]){
             if (contains(colors, current) && containsNotPressed(colors)) return current;
         }
         throw new IllegalArgumentException("Unreachable section of highestNotPressed() was reached");
@@ -187,7 +189,7 @@ public class SimonStates extends Widget {
      */
     private static Simon.States lowest(Simon.States[] colors) throws IllegalArgumentException{
         for (int i = 3; i >= 0; i--){
-            if (contains(colors, priorities[prior][i])) return priorities[prior][i];
+            if (contains(colors, PRIORITY_ORDERS[prior][i])) return PRIORITY_ORDERS[prior][i];
         }
         throw new IllegalArgumentException("Unreachable section of lowest() was reached");
     }
@@ -201,7 +203,7 @@ public class SimonStates extends Widget {
      */
     private static Simon.States lowestNotFlashed(Simon.States[] colors) throws IllegalArgumentException{
         for (int i = 3; i >= 0; i--){
-            if (!contains(colors, priorities[prior][i])) return priorities[prior][i];
+            if (!contains(colors, PRIORITY_ORDERS[prior][i])) return PRIORITY_ORDERS[prior][i];
         }
         throw new IllegalArgumentException("Unreachable section of lowestNotFlashed() was reached");
     }

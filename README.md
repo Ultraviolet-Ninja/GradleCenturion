@@ -12,5 +12,5 @@ This is the Gradle implementation of the [Centurion Manual project](https://gith
 - CodeMR Free Trial - Coupling/Cohesion/Code Complexity Analysis
 
 ### Status
-Currently, in progress\
+In progress\
 See the running list of modules [here](Progress.md)
