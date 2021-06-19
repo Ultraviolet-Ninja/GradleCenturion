@@ -6,6 +6,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunner;
 import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
+import bomb.tools.Regex;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -58,16 +59,18 @@ public class TestingArea {
 //        Star newStar = new Star(colorOrder);
 //
 //        System.out.println(newStar.primaryRule(flashOrder));
-        Maze maze;
-        try{
-            maze = new Maze();
-            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
-            HexGrid full = HexComparator.evaluate(maze, bestCase);
-            MazeRunner.getPegInformation(Color.CYAN, 23, full.sideLength());
-            System.out.println(MazeRunner.runMaze(full));
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+//        Maze maze;
+//        try{
+//            maze = new Maze();
+//            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+//            HexGrid full = HexComparator.evaluate(maze, bestCase);
+//            MazeRunner.getPegInformation(Color.CYAN, 23, full.sideLength());
+//            System.out.println(MazeRunner.runMaze(full));
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
+        Regex regex = new Regex("(s)", "Astrology");
+        System.out.println(regex.hasMatch());
     }
 
     private static HexGrid fromLine(String line){

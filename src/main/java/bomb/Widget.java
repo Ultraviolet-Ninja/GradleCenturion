@@ -394,7 +394,7 @@ public class Widget {
 
     public static void serialCodeChecker(){
         SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (!SERIAL_CODE_PATTERN.hasMatch()) throw new IllegalArgumentException("Serial Code is required");
+        if (!SERIAL_CODE_PATTERN.matchesRegex()) throw new IllegalArgumentException("Serial Code is required");
     }
 
     public static void resetProperties(){

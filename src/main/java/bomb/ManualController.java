@@ -1,18 +1,22 @@
 package bomb;
 
 import bomb.tools.FacadeFX;
+import bomb.tools.Regex;
 import bomb.tools.observer.BlindAlleyObserver;
 import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
 import bomb.tools.observer.SouvenirObserver;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,20 +25,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
-public class MainController {
+public class ManualController {
     private HashMap<String, Region> regionMap;
+    private ArrayList<Node> allRadioButtons;
 
     @FXML private Pane displayPane;
 
     @FXML private RadioButton forgetMeNot, souvenir;
 
+    @FXML private TextField searchBar;
+
     @FXML private ToggleGroup group;
 
+    @FXML private VBox radioButtonHouse;
+
     public void initialize(){
+        allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirObserver(souvenir));
         setupMap();
@@ -52,6 +63,23 @@ public class MainController {
         displayPane.getChildren().add(pane);
     }
 
+    @FXML
+    public void search(){
+        String searchTerm = searchBar.getText();
+        radioButtonHouse.getChildren().clear();
+        if (searchTerm.isEmpty()){
+            radioButtonHouse.getChildren().addAll(allRadioButtons);
+            return;
+        }
+        Regex searchPattern = new Regex(searchTerm, Pattern.CASE_INSENSITIVE);
+
+        for(Node node : allRadioButtons){
+            searchPattern.loadText(((RadioButton)node).getText());
+            if (searchPattern.hasMatch())
+                radioButtonHouse.getChildren().add(node);
+        }
+    }
+
     private void setupMap() throws IllegalArgumentException{
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
         ArrayList<Toggle> nameList = new ArrayList<>(group.getToggles());
@@ -60,7 +88,6 @@ public class MainController {
                 filteredLocations = filterLocations(paneLocations);
         ArrayList<Pane> paneList = panesFromFolder(paneLocations);
         setPairs(nameList, formattedNameList, paneList, filteredLocations);
-        System.out.println();
     }
 
     private ArrayList<String> formatWords(Iterator<Toggle> nameIterator){

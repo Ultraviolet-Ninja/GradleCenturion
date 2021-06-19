@@ -21,7 +21,7 @@ public class EmojiMath extends Widget {
      */
     public static int calculate(String input){
         VALIDATION.loadText(input);
-        if (!VALIDATION.hasMatch()) throw new IllegalArgumentException(input + " does not match pattern");
+        if (!VALIDATION.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
 
         boolean toAdd = VALIDATION.captureGroup(1).equals("+");
         String translatedEq = toAdd ?

@@ -58,6 +58,10 @@ public class Regex implements Iterable<String>{
     }
 
     public boolean hasMatch(){
+        return textMatcher.find();
+    }
+
+    public boolean matchesRegex(){
         return textMatcher.matches();
     }
 
@@ -69,7 +73,7 @@ public class Regex implements Iterable<String>{
         return textMatcher.group(customGroup);
     }
 
-    public int countGroups(){
+    public int groupCount(){
         return textMatcher.groupCount();
     }
 
