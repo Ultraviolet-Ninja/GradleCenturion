@@ -24,6 +24,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -31,7 +32,7 @@ import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 
 public class ManualController {
-    private HashMap<String, Region> regionMap;
+    private Map<String, Region> regionMap;
     private ArrayList<Node> allRadioButtons;
 
     @FXML private Pane displayPane;
