@@ -183,16 +183,6 @@ public class Widget {
     }
 
     /**
-     * Zeroes out the port count on a specified port
-     *
-     * @param which The port to zero out
-     */
-    public static void portZero(Ports which){
-        ports[which.ordinal()] = 0;
-        BlindAlley.alleyUpdate();
-    }
-
-    /**
      * Checks the Serial Code of an even number
      *
      * @return 0 for Yes, 1 for No, 2 for No Number
