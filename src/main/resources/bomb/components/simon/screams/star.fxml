@@ -3,7 +3,8 @@
 <?import bomb.components.simon.screams.CustomEdge?>
 <?import javafx.scene.layout.Pane?>
 
-<fx:root prefHeight="273.0" prefWidth="258.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="273.0" prefWidth="258.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1"
+         xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <CustomEdge fx:id="first" layoutX="47.0" layoutY="22.0" rotate="-48.0" />
       <CustomEdge fx:id="second" layoutX="110.0" rotate="11.0" />

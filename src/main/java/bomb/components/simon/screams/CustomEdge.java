@@ -2,9 +2,7 @@ package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
@@ -13,14 +11,11 @@ import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.WHITE;
 
-public class CustomEdge extends Pane{
+public class CustomEdge extends Polygon {
     private boolean selectorMode;
     private ArrayList<CustomEdge> internalReference;
 
     private final ReadOnlyRing<Screams> colors;
-
-    @FXML
-    private Polygon base;
 
     public CustomEdge(){
         super();
@@ -50,15 +45,15 @@ public class CustomEdge extends Pane{
     public void clickAction(){
         if (selectorMode){
             colors.rotateHeadClockwise();
-            base.setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
+            setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
         } else {
-            if (base.getFill() == WHITE) return;
+            if (getFill() == WHITE) return;
             internalReference.add(this);
         }
     }
 
     public Screams exportColor(){
-        if (base.getFill() == WHITE)
+        if (getFill() == WHITE)
             return null;
         return colors.getHeadData();
     }
@@ -68,7 +63,7 @@ public class CustomEdge extends Pane{
     }
 
     public void resetEdge(){
-        base.setFill(WHITE);
+        setFill(WHITE);
         while (colors.getHeadData() != Screams.PURPLE) colors.rotateHeadClockwise();
         selectorMode = false;
     }

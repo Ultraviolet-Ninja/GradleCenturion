@@ -4,7 +4,7 @@ plugins {
     id 'application'
 }
 
-group 'org.example'
+group 'jasmine.jragon'
 version '1.0-SNAPSHOT'
 
 mainClassName = 'bomb.Main'
