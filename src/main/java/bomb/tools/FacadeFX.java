@@ -1,6 +1,7 @@
 package bomb.tools;
 
-import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -11,7 +12,6 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
 
 public class FacadeFX {
     private FacadeFX(){}
@@ -62,15 +62,10 @@ public class FacadeFX {
             enable(node);
     }
 
-    public static void fadeAutoReverse(Node node, double duration, double startVal){
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(duration));
-        fade.setFromValue(startVal);
-        fade.setToValue(1);
-        fade.setCycleCount(1);
-        fade.setAutoReverse(true);
-        fade.setNode(node);
-        fade.play();
+    public static void parallelTransition(Node node, Transition ... transitions){
+        ParallelTransition parallel = new ParallelTransition(node);
+        parallel.getChildren().addAll(transitions);
+        parallel.play();
     }
 
     public static String getToggleName(ToggleGroup group){

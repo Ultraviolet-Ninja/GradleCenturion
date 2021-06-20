@@ -1,10 +1,11 @@
 package bomb.components.simon.states;
 
-import bomb.tools.FacadeFX;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -27,6 +28,11 @@ public class CustomState extends Pane {
 
     @FXML
     private void press(){
-        FacadeFX.fadeAutoReverse(this, 200, 0.6);
+        FadeTransition fade = new FadeTransition(Duration.millis(200), this);
+        fade.setFromValue(0.6);
+        fade.setToValue(1);
+        fade.setCycleCount(1);
+        fade.setAutoReverse(true);
+        fade.play();
     }
 }
