@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.simon.screams.ScreamsController">
+<Pane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.simon.screams.ScreamsController">
     <children>
         <ToggleButton fx:id="colorSelectorToggle" layoutX="50.0" layoutY="687.0" mnemonicParsing="false" onAction="#setSelector" text="Color Setter">
             <font>
@@ -13,7 +13,7 @@
             </font>
         </ToggleButton>
         <CustomStar fx:id="star" layoutX="161.0" layoutY="235.0" prefHeight="271.0" prefWidth="265.0" scaleX="2.0" scaleY="2.0" />
-        <Button layoutX="1007.0" layoutY="712.0" mnemonicParsing="false" onAction="#resetStar" text="Reset">
+        <Button layoutX="1039.0" layoutY="713.0" mnemonicParsing="false" onAction="#resetStar" text="Reset">
             <font>
                 <Font size="20.0" />
             </font>
@@ -23,15 +23,20 @@
                 <Font size="36.0" />
             </font>
         </TextArea>
-        <Button fx:id="solve" disable="true" layoutX="580.0" layoutY="360.0" mnemonicParsing="false" text="Solve">
+        <Button fx:id="solve" disable="true" layoutX="580.0" layoutY="360.0" mnemonicParsing="false" onAction="#collectClicks" text="Solve">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
-      <Button layoutX="354.0" layoutY="687.0" mnemonicParsing="false" text="Reset Last Stage">
+      <Button fx:id="resetLastStage" disable="true" layoutX="692.0" layoutY="687.0" mnemonicParsing="false" onAction="#resetLastStagePress" text="Reset Last Stage">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
+      <Label fx:id="stageCounter" layoutX="584.0" layoutY="695.0" text="Stage 1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
     </children>
 </Pane>
