@@ -1,12 +1,11 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
+import bomb.tools.FacadeFX;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
-import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,14 +55,7 @@ public class CustomEdge extends Polygon {
     }
 
     private void indicateButtonPress(){
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(200));
-        fade.setFromValue(0.5);
-        fade.setToValue(1);
-        fade.setCycleCount(1);
-        fade.setAutoReverse(true);
-        fade.setNode(this);
-        fade.play();
+        FacadeFX.fadeAutoReverse(this, 200, 0.5);
     }
 
     public Screams exportColor(){

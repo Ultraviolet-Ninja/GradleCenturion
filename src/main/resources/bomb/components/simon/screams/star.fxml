@@ -8,7 +8,7 @@
       <CustomEdge fx:id="first" layoutX="82.0" layoutY="58.0" rotate="-48.0" />
       <CustomEdge fx:id="second" layoutX="147.0" layoutY="36.0" rotate="11.0" />
       <CustomEdge fx:id="third" layoutX="199.0" layoutY="82.0" rotate="71.0" />
-      <CustomEdge fx:id="fifth" layoutX="120.0" layoutY="172.0" rotate="-169.0" />
+      <CustomEdge fx:id="fifth" layoutX="120.0" layoutY="172.0" rotate="-168.7" />
       <CustomEdge fx:id="forth" layoutX="186.0" layoutY="151.0" rotate="131.0" />
       <CustomEdge fx:id="sixth" layoutX="67.0" layoutY="126.0" rotate="-108.0" />
    </children>
