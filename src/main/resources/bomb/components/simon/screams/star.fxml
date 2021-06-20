@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import bomb.components.simon.screams.CustomEdge?>
-<?import javafx.scene.layout.Pane?>
+<?import bomb.components.simon.screams.*?>
+<?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="273.0" prefWidth="258.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefHeight="273.0" prefWidth="267.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <CustomEdge fx:id="first" layoutX="47.0" layoutY="22.0" rotate="-48.0" />
-      <CustomEdge fx:id="second" layoutX="110.0" rotate="11.0" />
-      <CustomEdge fx:id="third" layoutX="160.0" layoutY="44.0" rotate="71.0" />
-      <CustomEdge fx:id="fifth" layoutX="85.0" layoutY="133.0" rotate="-169.0" />
-      <CustomEdge fx:id="forth" layoutX="147.0" layoutY="109.0" rotate="131.0" />
-      <CustomEdge fx:id="sixth" layoutX="35.0" layoutY="88.0" rotate="-108.0" />
+      <CustomEdge fx:id="first" layoutX="82.0" layoutY="58.0" rotate="-48.0" />
+      <CustomEdge fx:id="second" layoutX="147.0" layoutY="36.0" rotate="11.0" />
+      <CustomEdge fx:id="third" layoutX="199.0" layoutY="82.0" rotate="71.0" />
+      <CustomEdge fx:id="fifth" layoutX="120.0" layoutY="172.0" rotate="-169.0" />
+      <CustomEdge fx:id="forth" layoutX="186.0" layoutY="151.0" rotate="131.0" />
+      <CustomEdge fx:id="sixth" layoutX="67.0" layoutY="126.0" rotate="-108.0" />
    </children>
 </fx:root>
