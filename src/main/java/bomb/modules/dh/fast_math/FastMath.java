@@ -1,7 +1,7 @@
 package bomb.modules.dh.fast_math;
 
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.tools.Regex;
 
@@ -49,7 +49,7 @@ public class FastMath extends Widget {
     }
 
     private static int edgework(){
-        int output = hasLitIndicator(Indicators.MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
+        int output = hasLitIndicator(Indicator.MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
         output += portExists(Ports.SERIAL) ? 14 : 0; //If the bomb has a Serial Port
         //If the serial number has the letters F A S T
         output -= !ultimateFilter(serialCode, new Regex("[fast]")).isEmpty() ? 5 : 0;

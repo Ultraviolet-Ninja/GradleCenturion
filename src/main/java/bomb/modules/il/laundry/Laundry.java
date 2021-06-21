@@ -1,6 +1,6 @@
 package bomb.modules.il.laundry;
 
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.Widget;
 
 import static bomb.modules.il.laundry.Clothing.ARTICLE;
@@ -198,7 +198,7 @@ public class Laundry extends Widget {
      * @return True if the edgework matches the BOB conditions
      */
     private static boolean thanksBob(){
-        return getAllBatteries() == 4 && numHolders == 2 && hasLitIndicator(Indicators.BOB);
+        return getAllBatteries() == 4 && numHolders == 2 && hasLitIndicator(Indicator.BOB);
     }
 
     /**

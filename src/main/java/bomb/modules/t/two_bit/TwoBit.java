@@ -47,7 +47,7 @@ public class TwoBit extends Widget {
             if (num > 99) num -= 100;
 
             int[] bits = translate(String.valueOf(num));
-            if (Souvenir.getSet())
+            if (souvenir)
                 Souvenir.addRelic("(TwoBit)1st Query", CODES[bits[0]][bits[1]]);
             return CODES[bits[0]][bits[1]];
         } else throw new IllegalArgumentException("Serial Code required");
@@ -65,7 +65,7 @@ public class TwoBit extends Widget {
         if (newCode.length() == 2) {
             int[] coords = translate(newCode);
             if (stage != 4) {
-                if (Souvenir.getSet())
+                if (souvenir)
                     Souvenir.addRelic("(TwoBit)"+ ordinal(stage) + " Query", newCode + " - "
                             + CODES[coords[0]][coords[1]]);
                 stage++;

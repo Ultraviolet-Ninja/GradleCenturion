@@ -2,7 +2,7 @@ package bomb.modules.s.simon.screams;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import bomb.modules.s.simon.Simon.Screams;
@@ -67,8 +67,8 @@ public class SimonScreamsTest {
     private void setUpOne(){
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TriState.ON, Indicators.SND);
-        Widget.setIndicator(TriState.OFF, Indicators.TRN);
+        Widget.setIndicator(TriState.ON, Indicator.SND);
+        Widget.setIndicator(TriState.OFF, Indicator.TRN);
         Widget.setSerialCode("zr6dt6");
         Widget.setPlates(1);
         Widget.addPort(Ports.RCA);
@@ -97,9 +97,9 @@ public class SimonScreamsTest {
     private void setUpTwo(){
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TriState.ON, Indicators.BOB);
-        Widget.setIndicator(TriState.OFF, Indicators.TRN);
-        Widget.setIndicator(TriState.OFF, Indicators.FRK);
+        Widget.setIndicator(TriState.ON, Indicator.BOB);
+        Widget.setIndicator(TriState.OFF, Indicator.TRN);
+        Widget.setIndicator(TriState.OFF, Indicator.FRK);
         Widget.setSerialCode("kn8rx2");
         SimonScreams.init(new Screams[]{YELLOW, BLUE, GREEN, RED, PURPLE, ORANGE});
     }

@@ -2,7 +2,7 @@ package bomb.modules.dh.fast_math;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
@@ -44,7 +44,7 @@ public class FastMathTest {
     public void allPreconditionTest(String expected, String input){
         Widget.addPort(Ports.SERIAL);
         Widget.addPort(Ports.RJ45);
-        Widget.setIndicator(TriState.ON, Indicators.MSA);
+        Widget.setIndicator(TriState.ON, Indicator.MSA);
         Widget.setDBatteries(4);
         Widget.setSerialCode("fr4op2"); //In total, adds 41 to the count
 

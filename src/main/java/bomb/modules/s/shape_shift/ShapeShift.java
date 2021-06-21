@@ -1,7 +1,7 @@
 package bomb.modules.s.shape_shift;
 
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.tools.data.structures.graph.list.OldListGraph;
 
@@ -111,9 +111,9 @@ public class ShapeShift extends Widget {
             case ROUND:
                 return hasVowel();
             case FLAT:
-                return hasLitIndicator(Indicators.SND);
+                return hasLitIndicator(Indicator.SND);
             case POINT:
-                return hasLitIndicator(Indicators.SIG);
+                return hasLitIndicator(Indicator.SIG);
             default:
                 return numDoubleAs > 1;
         }
@@ -126,9 +126,9 @@ public class ShapeShift extends Widget {
             case FLAT:
                 return lastDigit() % 2 == 1;
             case POINT:
-                return hasLitIndicator(Indicators.MSA);
+                return hasLitIndicator(Indicator.MSA);
             default:
-                return hasUnlitIndicator(Indicators.BOB);
+                return hasUnlitIndicator(Indicator.BOB);
         }
     }
 
@@ -137,9 +137,9 @@ public class ShapeShift extends Widget {
             case ROUND:
                 return hasMoreThan(Ports.PARALLEL, 0);
             case FLAT:
-                return hasUnlitIndicator(Indicators.CAR);
+                return hasUnlitIndicator(Indicator.CAR);
             case POINT:
-                return hasLitIndicator(Indicators.IND);
+                return hasLitIndicator(Indicator.IND);
             default:
                 return hasMoreThan(Ports.RJ45, 0);
         }
@@ -150,7 +150,7 @@ public class ShapeShift extends Widget {
             case ROUND:
                 return hasMoreThan(Ports.RCA, 0);
             case FLAT:
-                return hasUnlitIndicator(Indicators.FRQ);
+                return hasUnlitIndicator(Indicator.FRQ);
             case POINT:
                 return hasMoreThan(Ports.PS2, 0);
             default:

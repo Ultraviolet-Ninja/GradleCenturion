@@ -2,7 +2,7 @@ package bomb;
 
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 
@@ -31,7 +31,7 @@ public class Widget {
             numStartingMin = 0;
     protected static String serialCode = "", twoFactor = "";
     protected static int[] ports = {0,0,0,0,0,0};
-    protected static Indicators[] list = Indicators.values();
+    protected static Indicator[] list = Indicator.values();
 
     /**
      * Sets the number of battery holders on the bomb
@@ -104,7 +104,7 @@ public class Widget {
      * @param state The state to give the Indicator
      * @param which The Indicator to change
      */
-    public static void setIndicator(TriState state, Indicators which){
+    public static void setIndicator(TriState state, Indicator which){
         list[which.ordinal()].setProp(state);
         BlindAlley.alleyUpdate();
     }
@@ -215,8 +215,8 @@ public class Widget {
      * @param inds The array of possible Indicators
      * @return True if any Indicator is found
      */
-    public static boolean hasFollowingInds(Indicators...inds){
-        for (Indicators current : inds){
+    public static boolean hasFollowingInds(Indicator...inds){
+        for (Indicator current : inds){
             if (hasIndicator(current)) return true;
         }
         return false;
@@ -228,7 +228,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the Indicator is found
      */
-    public static boolean hasIndicator(Indicators ind){
+    public static boolean hasIndicator(Indicator ind){
         return hasLitIndicator(ind) || hasUnlitIndicator(ind);
     }
 
@@ -238,7 +238,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the lit Indicator is found
      */
-    public static boolean hasLitIndicator(Indicators ind){
+    public static boolean hasLitIndicator(Indicator ind){
         return list[ind.ordinal()].getProp() == ON;
     }
 
@@ -248,7 +248,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the unlit Indicator is found
      */
-    public static boolean hasUnlitIndicator(Indicators ind){
+    public static boolean hasUnlitIndicator(Indicator ind){
         return list[ind.ordinal()].getProp() == OFF;
     }
 
@@ -356,7 +356,7 @@ public class Widget {
     public static int countIndicators(boolean lit, boolean all){
         int counter = 0;
         TriState current = lit?ON:OFF;
-        for (Indicators ind : list){
+        for (Indicator ind : list){
             if (ind.getProp() == current && !all || (ind.getProp() != UNKNOWN && all))
                 counter++;
         }
@@ -401,7 +401,7 @@ public class Widget {
     }
 
     private static void setAllUnknown(){
-        for (Indicators ind : list)
+        for (Indicator ind : list)
             ind.setProp(UNKNOWN);
     }
 }

@@ -1,7 +1,7 @@
 package bomb.modules.np.neutralization;
 
 import bomb.modules.s.souvenir.Souvenir;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.Widget;
 import javafx.scene.paint.Color;
 
@@ -31,7 +31,7 @@ public class Neutralization extends Widget {
      * @return
      */
     public static String titrate(int acidVol, Color solColor) throws IllegalArgumentException{
-        if (Souvenir.getSet())
+        if (souvenir)
             Souvenir.addRelic("(Neutralization)Acid volume", String.valueOf(acidVol));
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Need to set the serial code");
         getAcid(solColor);
@@ -58,7 +58,7 @@ public class Neutralization extends Widget {
             currentAcid = Chemical.Acid.Hydrochoric_Acid;
         else
             throw new IllegalArgumentException("Incorrect Color was inserted");
-        if (Souvenir.getSet())
+        if (souvenir)
             Souvenir.addRelic("(Neutralization)Acid color", getColorName(color));
     }
 
@@ -66,7 +66,7 @@ public class Neutralization extends Widget {
      *
      */
     private static void getBase(){
-        if (hasLitIndicator(Indicators.NSA) && getAllBatteries() == 3)
+        if (hasLitIndicator(Indicator.NSA) && getAllBatteries() == 3)
             currentBase = Chemical.Base.Ammonia;
         else if (hasAny())
             currentBase = Chemical.Base.Potassium_Hydroxide;
@@ -88,7 +88,7 @@ public class Neutralization extends Widget {
      * @return
      */
     private static boolean indicatorMatch(){
-        for (Indicators ind : list){
+        for (Indicator ind : list){
             if (ind.getProp() != UNKNOWN){
                 for (char letter : ind.name().toCharArray()){
                     if (charMatch(currentAcid.getFormula().toUpperCase(), letter)){
@@ -275,6 +275,6 @@ public class Neutralization extends Widget {
      * @return
      */
     private static boolean hasAny(){
-        return hasLitIndicator(Indicators.CAR) || hasLitIndicator(Indicators.IND) || hasLitIndicator(Indicators.FRQ);
+        return hasLitIndicator(Indicator.CAR) || hasLitIndicator(Indicator.IND) || hasLitIndicator(Indicator.FRQ);
     }
 }

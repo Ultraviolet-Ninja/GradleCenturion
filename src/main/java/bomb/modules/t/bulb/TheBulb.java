@@ -1,7 +1,7 @@
 package bomb.modules.t.bulb;
 
 import bomb.modules.s.souvenir.Souvenir;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.Widget;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -15,7 +15,7 @@ import static bomb.tools.Mechanics.ultimateFilter;
 public class TheBulb extends Widget {
     private static boolean stepOneWentOff, currentLight, shutdownAtPressOne;
     private static Bulb.Light stepOnePressed;
-    private static Indicators remembered;
+    private static Indicator remembered;
     private static final String arrow = " -> ";
 
     /**
@@ -27,7 +27,7 @@ public class TheBulb extends Widget {
     public static String entry(Bulb next){
         StringBuilder script = new StringBuilder();
         String scriptOut = findSet(next, 1, script);
-        if (Souvenir.getSet())
+        if (souvenir)
             Souvenir.addRelic("The Bulb", ultimateFilter(scriptOut
                             .replaceAll("Screw it back in", ""), "i", "o", " ")
                     .toUpperCase());
@@ -92,7 +92,7 @@ public class TheBulb extends Widget {
                 return findSet(next, 8, instruction);
             }
             case 4: {
-                if (Widget.hasFollowingInds(Indicators.CAR, Indicators.IND, Indicators.MSA, Indicators.SND)){
+                if (Widget.hasFollowingInds(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND)){
                     instruction.append("Press I").append(arrow);
                     return findSet(next, 9, instruction);
                 }
@@ -117,7 +117,7 @@ public class TheBulb extends Widget {
             }
             case 7: {
                 if (next.getColor() == Bulb.Color.GREEN){
-                    remembered = Indicators.SIG;
+                    remembered = Indicator.SIG;
                     instruction.append("Press I").append(arrow);
                     return findSet(next, 11, instruction);
                 } else if (next.getColor() == Bulb.Color.PURPLE){
@@ -125,7 +125,7 @@ public class TheBulb extends Widget {
                     screw(next);
                     return findSet(next, 12, instruction);
                 } else if (next.getColor() == Bulb.Color.BLUE){
-                    remembered = Indicators.CLR;
+                    remembered = Indicator.CLR;
                     instruction.append("Press O");
                     return findSet(next, 11, instruction);
                 }
@@ -134,14 +134,14 @@ public class TheBulb extends Widget {
             }
             case 8: {
                 if (next.getColor() == Bulb.Color.WHITE){
-                    remembered = Indicators.FRQ;
+                    remembered = Indicator.FRQ;
                     instruction.append("Press I").append(arrow);
                     return findSet(next, 11, instruction);
                 } else if (next.getColor() == Bulb.Color.RED){
                     instruction.append("Press I").append(arrow).append("Screw it back in").append(arrow);
                     return findSet(next, 13, instruction);
                 } else if (next.getColor() == Bulb.Color.YELLOW){
-                    remembered = Indicators.FRK;
+                    remembered = Indicator.FRK;
                     instruction.append("Press O").append(arrow);
                     return findSet(next, 11, instruction);
                 }

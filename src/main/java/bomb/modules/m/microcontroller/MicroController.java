@@ -1,7 +1,7 @@
 package bomb.modules.m.microcontroller;
 
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.modules.m.microcontroller.chip.AbstractController;
 import javafx.scene.paint.Color;
@@ -23,7 +23,7 @@ public class MicroController extends Widget {
     public static ArrayList<Color> getPinColors(String serialNumbers){
         if (containsRequiredNumbers(serialNumbers))
             return instance.traversePins(0);
-        else if (hasLitIndicator(Indicators.SIG) || portExists(Ports.RJ45))
+        else if (hasLitIndicator(Indicator.SIG) || portExists(Ports.RJ45))
             return instance.traversePins(1);
         else if (ultimateFilter(serialCode, THIRD_CONDITION).length() > 0)
             return instance.traversePins(2);

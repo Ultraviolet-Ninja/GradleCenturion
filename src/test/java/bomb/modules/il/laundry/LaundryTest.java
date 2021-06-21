@@ -3,7 +3,7 @@ package bomb.modules.il.laundry;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
@@ -56,7 +56,7 @@ public class LaundryTest {
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
         Widget.addPort(Ports.SERIAL);
-        Widget.setIndicator(TriState.ON, Indicators.NSA);
+        Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.setNumHolders(2);
         Widget.setSerialCode("g64dv1");
         Widget.setNumModules(11);
@@ -67,8 +67,8 @@ public class LaundryTest {
         Widget.setSerialCode("7h1iv1");
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TriState.ON, Indicators.NSA);
-        Widget.setIndicator(TriState.OFF, Indicators.FRQ);
+        Widget.setIndicator(TriState.ON, Indicator.NSA);
+        Widget.setIndicator(TriState.OFF, Indicator.FRQ);
         Widget.setPlates(1);
         Widget.addPort(Ports.PARALLEL);
     }

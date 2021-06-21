@@ -3,7 +3,7 @@ package bomb.modules.np.neutralization;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import javafx.scene.paint.Color;
@@ -47,7 +47,7 @@ public class NeutralizationTest {
     }
 
     private void setupOne(){
-        Widget.setPlates(1);Widget.setIndicator(TriState.ON, Indicators.NSA);
+        Widget.setPlates(1);Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.addPort(Ports.PARALLEL);
         Widget.addPort(Ports.PARALLEL);
         Widget.addPort(Ports.SERIAL);
@@ -71,8 +71,8 @@ public class NeutralizationTest {
         Widget.addPort(Ports.PARALLEL);
         Widget.addPort(Ports.SERIAL);
         Widget.setSerialCode("ew7qw5");
-        Widget.setIndicator(TriState.ON, Indicators.MSA);
-        Widget.setIndicator(TriState.ON, Indicators.NSA);
+        Widget.setIndicator(TriState.ON, Indicator.MSA);
+        Widget.setIndicator(TriState.ON, Indicator.NSA);
     }
 
     @DataProvider

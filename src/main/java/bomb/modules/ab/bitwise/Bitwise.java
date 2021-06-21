@@ -1,7 +1,7 @@
 package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 
 import static bomb.tools.Filter.NUMBER_PATTERN;
@@ -77,13 +77,13 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] thirdBits(){
-        return new boolean[]{hasLitIndicator(Indicators.NSA), numHolders > 1};
+        return new boolean[]{hasLitIndicator(Indicator.NSA), numHolders > 1};
     }
 
     private static boolean[] forthBits() throws IllegalArgumentException{
         if (numModules == 0 || numStartingMin == 0) throw new IllegalArgumentException(
                 "Number of starting modules and minutes should be filled!");
-        return new boolean[]{numModules > numStartingMin, hasLitIndicator(Indicators.BOB)};
+        return new boolean[]{numModules > numStartingMin, hasLitIndicator(Indicator.BOB)};
     }
 
     private static boolean[] fifthBits(){

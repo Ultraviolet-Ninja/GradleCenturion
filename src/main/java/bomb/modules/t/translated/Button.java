@@ -6,7 +6,7 @@
 
 package bomb.modules.t.translated;
 
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.TheButton;
 
 /**
@@ -29,9 +29,9 @@ public class Button extends TranslationCenter {
             which = false;
         else if (getAllBatteries() > 1 && properties[1] == TheButton.DETONATE)
             which = true;
-        else if (hasLitIndicator(Indicators.CAR))
+        else if (hasLitIndicator(Indicator.CAR))
             which = false;
-        else if (getAllBatteries() > 2 && hasLitIndicator(Indicators.FRK))
+        else if (getAllBatteries() > 2 && hasLitIndicator(Indicator.FRK))
             which = true;
         else if (properties[0] == TheButton.YELLOW)
             which = false;

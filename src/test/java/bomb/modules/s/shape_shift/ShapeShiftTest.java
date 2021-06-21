@@ -3,7 +3,7 @@ package bomb.modules.s.shape_shift;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
@@ -73,9 +73,9 @@ public class ShapeShiftTest {
         Widget.setNumHolders(2);
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
-        Widget.setIndicator(TriState.OFF, Indicators.BOB);
-        Widget.setIndicator(TriState.OFF, Indicators.IND);
-        Widget.setIndicator(TriState.OFF, Indicators.TRN);
+        Widget.setIndicator(TriState.OFF, Indicator.BOB);
+        Widget.setIndicator(TriState.OFF, Indicator.IND);
+        Widget.setIndicator(TriState.OFF, Indicator.TRN);
     }
 
     private void assertPairEquals(ShapeEnd[] expected, ShapeEnd[] actual){

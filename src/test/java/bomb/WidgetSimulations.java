@@ -2,10 +2,10 @@ package bomb;
 
 import bomb.enumerations.Ports;
 
-import static bomb.enumerations.Indicators.BOB;
-import static bomb.enumerations.Indicators.FRK;
-import static bomb.enumerations.Indicators.MSA;
-import static bomb.enumerations.Indicators.SND;
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.FRK;
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Indicator.SND;
 import static bomb.enumerations.TriState.OFF;
 import static bomb.enumerations.TriState.ON;
 import static bomb.enumerations.Ports.*;

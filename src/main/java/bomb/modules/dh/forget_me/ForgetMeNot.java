@@ -1,6 +1,6 @@
 package bomb.modules.dh.forget_me;
 
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.tools.data.structures.ChainList;
 import bomb.Widget;
@@ -90,7 +90,7 @@ public class ForgetMeNot extends Widget {
      * @param num
      */
     private static void addFirst(int num){
-        if (hasUnlitIndicator(Indicators.CAR)) forgot.offer(nextBuffer(leastSigDig(num+2)));
+        if (hasUnlitIndicator(Indicator.CAR)) forgot.offer(nextBuffer(leastSigDig(num+2)));
         else if (countIndicators(false, false) > countIndicators(true, false))
             forgot.offer(nextBuffer(leastSigDig(num+7)));
         else if (countIndicators(false, false) == 0)

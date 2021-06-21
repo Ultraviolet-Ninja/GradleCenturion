@@ -1,6 +1,6 @@
 package bomb;
 
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.TriState;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
@@ -53,60 +53,60 @@ public class WidgetController {
     //<editor-fold desc="To Fix">
     @FXML
     private void bobGroup(){
-        indicatorAction(Indicators.BOB, bobGroup, bob);
+        indicatorAction(Indicator.BOB, bobGroup, bob);
     }
 
     @FXML
     private void carGroup(){
-        indicatorAction(Indicators.CAR, carGroup, car);
+        indicatorAction(Indicator.CAR, carGroup, car);
     }
 
     @FXML
     private void clrGroup(){
-        indicatorAction(Indicators.CLR, clrGroup, clr);
+        indicatorAction(Indicator.CLR, clrGroup, clr);
     }
 
     @FXML
     private void frkGroup(){
-        indicatorAction(Indicators.FRK, frkGroup, frk);
+        indicatorAction(Indicator.FRK, frkGroup, frk);
     }
 
     @FXML
     private void frqGroup(){
-        indicatorAction(Indicators.FRQ, frqGroup, frq);
+        indicatorAction(Indicator.FRQ, frqGroup, frq);
     }
 
     @FXML
     private void indGroup(){
-        indicatorAction(Indicators.IND, indGroup, ind);
+        indicatorAction(Indicator.IND, indGroup, ind);
     }
 
     @FXML
     private void msaGroup(){
-        indicatorAction(Indicators.MSA, msaGroup, msa);
+        indicatorAction(Indicator.MSA, msaGroup, msa);
     }
 
     @FXML
     private void nsaGroup(){
-        indicatorAction(Indicators.NSA, nsaGroup, nsa);
+        indicatorAction(Indicator.NSA, nsaGroup, nsa);
     }
 
     @FXML
     private void sigGroup(){
-        indicatorAction(Indicators.SIG, sigGroup, sig);
+        indicatorAction(Indicator.SIG, sigGroup, sig);
     }
 
     @FXML
     private void sndGroup(){
-        indicatorAction(Indicators.SND, sndGroup, snd);
+        indicatorAction(Indicator.SND, sndGroup, snd);
     }
 
     @FXML
     private void trnGroup(){
-        indicatorAction(Indicators.TRN, trnGroup, trn);
+        indicatorAction(Indicator.TRN, trnGroup, trn);
     }
 
-    private void indicatorAction(Indicators indicator, ToggleGroup group, Label label){
+    private void indicatorAction(Indicator indicator, ToggleGroup group, Label label){
         TriState state = determineState(group.getSelectedToggle());
         Widget.setIndicator(state, indicator);
         label.setStyle(state.getLabel());

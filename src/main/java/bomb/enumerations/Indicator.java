@@ -2,7 +2,7 @@ package bomb.enumerations;
 
 import bomb.interfaces.Ternary;
 
-public enum Indicators implements Ternary {
+public enum Indicator implements Ternary {
     BOB(TriState.UNKNOWN), CAR(TriState.UNKNOWN), CLR(TriState.UNKNOWN),
     FRK(TriState.UNKNOWN), FRQ(TriState.UNKNOWN), IND(TriState.UNKNOWN),
     MSA(TriState.UNKNOWN), NSA(TriState.UNKNOWN), SIG(TriState.UNKNOWN),
@@ -20,7 +20,7 @@ public enum Indicators implements Ternary {
         property = in;
     }
 
-    Indicators(TriState in){
+    Indicator(TriState in){
         property = in;
     }
 }

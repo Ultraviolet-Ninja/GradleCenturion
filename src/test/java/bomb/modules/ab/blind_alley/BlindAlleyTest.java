@@ -3,7 +3,7 @@ package bomb.modules.ab.blind_alley;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
@@ -35,7 +35,7 @@ public class BlindAlleyTest {
         Widget.setSerialCode("bu7we6");
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TriState.ON, Indicators.CAR);
+        Widget.setIndicator(TriState.ON, Indicator.CAR);
         Widget.addPort(Ports.DVI);
         Widget.addPort(Ports.RJ45);
         Widget.addPort(Ports.PS2);
@@ -60,8 +60,8 @@ public class BlindAlleyTest {
         Widget.addPort(Ports.PARALLEL);
         Widget.addPort(Ports.RCA);
         Widget.setSerialCode("718pz5");
-        Widget.setIndicator(TriState.ON, Indicators.SND);
-        Widget.setIndicator(TriState.OFF, Indicators.FRQ);
+        Widget.setIndicator(TriState.ON, Indicator.SND);
+        Widget.setIndicator(TriState.OFF, Indicator.FRQ);
     }
 
     @DataProvider

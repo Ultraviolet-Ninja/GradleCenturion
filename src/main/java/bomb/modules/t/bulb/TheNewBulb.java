@@ -1,7 +1,7 @@
 package bomb.modules.t.bulb;
 
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 
 import java.util.function.Consumer;
 
@@ -18,6 +18,7 @@ public class TheNewBulb extends Widget {
     private static final String PRESS_I = "Press I ", PRESS_O = "Press O ",
             UNSCREW = "Unscrew it ", SCREW = "Screw it ", ARROW = "-> ";
 
+    private static Indicator rememberedIndicator;
 
     public static String solve(){
         //TODO Add Souvenir
@@ -53,7 +54,7 @@ public class TheNewBulb extends Widget {
     }
 
     private static String stepFour(){
-        if (hasFollowingInds(Indicators.CAR, Indicators.IND, Indicators.MSA, Indicators.SND))
+        if (hasFollowingInds(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND))
             return PRESS_I + ARROW + stepNine();
         return PRESS_O + ARROW + stepTen();
     }
@@ -77,6 +78,7 @@ public class TheNewBulb extends Widget {
     private static String stepNine(){
         return null;
     }
+
     private static String stepTen(){
         return null;
     }

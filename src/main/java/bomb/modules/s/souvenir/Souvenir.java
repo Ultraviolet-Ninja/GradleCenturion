@@ -34,15 +34,4 @@ public class Souvenir extends Widget {
             return builder.toString();
         } return null;
     }
-
-    /**
-     *
-     *
-     * @return
-     */
-    public static boolean getSet(){
-        return souvenir;
-    }
-
-    //private static
 }

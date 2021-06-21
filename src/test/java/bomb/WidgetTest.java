@@ -1,6 +1,6 @@
 package bomb;
 
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
@@ -144,18 +144,18 @@ public class WidgetTest {
     public Object[][] indicatorProvider(){
         ConditionSetter empty = () -> {};
         ConditionSetter trueSetter = () -> {
-            Widget.setIndicator(TriState.ON, Indicators.MSA);
-            Widget.setIndicator(TriState.OFF, Indicators.NSA);
+            Widget.setIndicator(TriState.ON, Indicator.MSA);
+            Widget.setIndicator(TriState.OFF, Indicator.NSA);
         };
 
         return new Object[][]{
-                {empty, Indicators.BOB, false}, {trueSetter, Indicators.MSA, true},
-                {trueSetter, Indicators.NSA, true}
+                {empty, Indicator.BOB, false}, {trueSetter, Indicator.MSA, true},
+                {trueSetter, Indicator.NSA, true}
         };
     }
 
     @Test(dataProvider = "indicatorProvider")
-    public void containsIndicatorTest(ConditionSetter setter, Indicators ind, boolean expected){
+    public void containsIndicatorTest(ConditionSetter setter, Indicator ind, boolean expected){
         setter.setCondition();
 
         assertEquals(Widget.hasFollowingInds(ind), expected);

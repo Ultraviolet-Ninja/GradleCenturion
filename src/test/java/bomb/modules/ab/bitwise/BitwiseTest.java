@@ -2,7 +2,7 @@ package bomb.modules.ab.bitwise;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicators;
+import bomb.enumerations.Indicator;
 import bomb.enumerations.Ports;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
@@ -89,10 +89,10 @@ public class BitwiseTest {
 
     private void maximizeConditions(){
         for (int i = 2; i >= 0; i--) Widget.addPort(Ports.PARALLEL);
-        Widget.setIndicator(TriState.ON, Indicators.BOB);
-        Widget.setIndicator(TriState.ON, Indicators.NSA);
-        Widget.setIndicator(TriState.OFF, Indicators.CLR);
-        Widget.setIndicator(TriState.OFF, Indicators.CAR);
+        Widget.setIndicator(TriState.ON, Indicator.BOB);
+        Widget.setIndicator(TriState.ON, Indicator.NSA);
+        Widget.setIndicator(TriState.OFF, Indicator.CLR);
+        Widget.setIndicator(TriState.OFF, Indicator.CAR);
         Widget.setDBatteries(1);
         Widget.setNumHolders(2);
     }
