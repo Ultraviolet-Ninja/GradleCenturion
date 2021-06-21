@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-
-<fx:root prefHeight="138.0" prefWidth="55.0" type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
-   <Polygon fx:id="base" fill="WHITE" layoutX="28.0" layoutY="41.0" points="-25.0, 50.0, 0.0, 96.0, 25.0, 50.0, 0.0, -40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0" />
+<fx:root type="javafx.scene.shape.Polygon" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1"
+         fill="WHITE" layoutX="28.0" layoutY="41.0" points="-25.0, 50.0, 0.0, 96.0, 25.0, 50.0, 0.0, -40.0"
+         stroke="BLACK" strokeType="INSIDE" strokeWidth="2.0">
 </fx:root>

@@ -1,26 +1,25 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
+import bomb.tools.FacadeFX;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
-import javafx.fxml.FXML;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static javafx.scene.paint.Color.WHITE;
 
-public class CustomEdge extends Pane{
+public class CustomEdge extends Polygon {
     private boolean selectorMode;
     private ArrayList<CustomEdge> internalReference;
 
     private final ReadOnlyRing<Screams> colors;
-
-    @FXML
-    private Polygon base;
 
     public CustomEdge(){
         super();
@@ -50,15 +49,44 @@ public class CustomEdge extends Pane{
     public void clickAction(){
         if (selectorMode){
             colors.rotateHeadClockwise();
-            base.setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
+            setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
         } else {
-            if (base.getFill() == WHITE) return;
+            if (getFill() == WHITE) return;
             internalReference.add(this);
+            indicateButtonPress();
         }
     }
 
+    private void indicateButtonPress(){
+        FacadeFX.parallelTransition(
+                this,
+                setupFade(),
+                setupPressAnimation()
+        );
+    }
+
+    private FadeTransition setupFade(){
+        FadeTransition fade = new FadeTransition(Duration.millis(200));
+        fade.setFromValue(0.5);
+        fade.setToValue(1);
+        fade.setCycleCount(1);
+        fade.setAutoReverse(true);
+        return fade;
+    }
+
+    private ScaleTransition setupPressAnimation(){
+        ScaleTransition scale = new ScaleTransition(Duration.millis(50));
+        scale.setFromX(1.0);
+        scale.setFromY(1.0);
+        scale.setToX(0.85);
+        scale.setToY(0.85);
+        scale.setCycleCount(2);
+        scale.setAutoReverse(true);
+        return scale;
+    }
+
     public Screams exportColor(){
-        if (base.getFill() == WHITE)
+        if (getFill() == WHITE)
             return null;
         return colors.getHeadData();
     }
@@ -68,7 +96,7 @@ public class CustomEdge extends Pane{
     }
 
     public void resetEdge(){
-        base.setFill(WHITE);
+        setFill(WHITE);
         while (colors.getHeadData() != Screams.PURPLE) colors.rotateHeadClockwise();
         selectorMode = false;
     }

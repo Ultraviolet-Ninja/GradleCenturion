@@ -1,5 +1,7 @@
 package bomb.tools;
 
+import javafx.animation.ParallelTransition;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -58,6 +60,12 @@ public class FacadeFX {
     public static void enableMultiple(Node ... nodes){
         for (Node node : nodes)
             enable(node);
+    }
+
+    public static void parallelTransition(Node node, Transition ... transitions){
+        ParallelTransition parallel = new ParallelTransition(node);
+        parallel.getChildren().addAll(transitions);
+        parallel.play();
     }
 
     public static String getToggleName(ToggleGroup group){

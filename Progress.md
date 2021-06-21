@@ -10,7 +10,7 @@
 - Laundry
 - Neutralization
 - Round Keypads
-- The Bulb
+- Simon Screams
 - TwoBit
 
 13/100
@@ -19,11 +19,11 @@
 - FastMath
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
-- Simon Screams
 - Simon States
 - Forget Me Not
 - Souvenir
 - Shape Shift
+- The Bulb
 
 8/100
 

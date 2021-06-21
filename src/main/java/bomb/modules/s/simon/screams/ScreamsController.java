@@ -5,15 +5,19 @@ import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 
 public class ScreamsController {
     @FXML
-    private Button solve;
+    private Button solve, resetLastStage;
 
     @FXML
     private CustomStar star;
+
+    @FXML
+    private Label stageCounter;
 
     @FXML
     private TextArea resultArea;
@@ -26,17 +30,17 @@ public class ScreamsController {
         if (!colorSelectorToggle.isSelected() && !star.confirmDifferentColors()) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, "2+ edges have the same color\n\t\tOR\nThere's a white edge");
             colorSelectorToggle.setSelected(true);
-        } else {
-            star.setSelectorMode(colorSelectorToggle.isSelected());
-            if (!colorSelectorToggle.isSelected()){
-                try{
-                    SimonScreams.init(star.collectOrder());
-                    FacadeFX.disable(colorSelectorToggle);
-                    FacadeFX.enable(solve);
-                } catch(IllegalArgumentException ex){
-                    FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
-                    colorSelectorToggle.setSelected(true);
-                }
+            return;
+        }
+        star.setSelectorMode(colorSelectorToggle.isSelected());
+        if (!colorSelectorToggle.isSelected()){
+            try{
+                SimonScreams.init(star.collectOrder());
+                FacadeFX.disable(colorSelectorToggle);
+                FacadeFX.enable(solve);
+            } catch(IllegalArgumentException ex){
+                FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
+                colorSelectorToggle.setSelected(true);
             }
         }
     }
@@ -51,9 +55,22 @@ public class ScreamsController {
             }
             resultArea.setText(sb.toString());
             star.resetClicks();
+            updateStageNumber();
+            resetLastStage.setDisable(false);
         } catch (IllegalArgumentException ex){
             FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
         }
+    }
+
+    @FXML
+    public void resetLastStagePress(){
+        SimonScreams.resetLastStage();
+        updateStageNumber();
+        resetLastStage.setDisable(SimonScreams.getStage() == 1);
+    }
+
+    private void updateStageNumber(){
+        stageCounter.setText("Stage " + (SimonScreams.getStage() + 1));
     }
 
     @FXML
@@ -63,5 +80,6 @@ public class ScreamsController {
         FacadeFX.enable(colorSelectorToggle);
         FacadeFX.disable(solve);
         SimonScreams.reset();
+        updateStageNumber();
     }
 }

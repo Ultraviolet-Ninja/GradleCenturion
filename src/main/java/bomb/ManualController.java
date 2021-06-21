@@ -132,10 +132,9 @@ public class ManualController {
 
     private ArrayList<String> filterLocations(ArrayList<String> originalLocations){
         ArrayList<String> outputList = new ArrayList<>();
-        for (final String location : originalLocations){
-            String[] splits = location.replace("\\", "/").split("/");
-            outputList.add(splits[splits.length - 1].replace(".fxml", ""));
-        }
+        Regex filenamePattern = new Regex("\\w+\\.");
+        filenamePattern.loadCollection(originalLocations);
+        for (String result : filenamePattern) outputList.add(result.substring(0, result.length() - 1));
         return outputList;
     }
 
