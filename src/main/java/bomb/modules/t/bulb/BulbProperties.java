@@ -1,6 +1,6 @@
 package bomb.modules.t.bulb;
 
-public enum Bulb {
+public enum BulbProperties {
     THE_BULB;
 
     private Color color;

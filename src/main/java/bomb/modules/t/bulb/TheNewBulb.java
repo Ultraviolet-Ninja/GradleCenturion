@@ -5,18 +5,18 @@ import bomb.enumerations.Indicator;
 
 import java.util.function.Consumer;
 
-import static bomb.modules.t.bulb.Bulb.Color.GREEN;
-import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
-import static bomb.modules.t.bulb.Bulb.Color.RED;
-import static bomb.modules.t.bulb.Bulb.Color.WHITE;
-import static bomb.modules.t.bulb.Bulb.THE_BULB;
+import static bomb.modules.t.bulb.BulbProperties.Color.GREEN;
+import static bomb.modules.t.bulb.BulbProperties.Color.PURPLE;
+import static bomb.modules.t.bulb.BulbProperties.Color.RED;
+import static bomb.modules.t.bulb.BulbProperties.Color.WHITE;
+import static bomb.modules.t.bulb.BulbProperties.THE_BULB;
 
 public class TheNewBulb extends Widget {
-    private static final Consumer<Bulb> UNSCREW_ACTION = theBulb -> theBulb.setPosition(Bulb.Position.UNSCREWED),
-            SCREW_ACTION = theBulb -> theBulb.setPosition(Bulb.Position.SCREWED);
+    private static final Consumer<BulbProperties> UNSCREW_ACTION = theBulbProperties -> theBulbProperties.setPosition(BulbProperties.Position.UNSCREWED),
+            SCREW_ACTION = theBulbProperties -> theBulbProperties.setPosition(BulbProperties.Position.SCREWED);
 
     private static final String PRESS_I = "Press I ", PRESS_O = "Press O ",
-            UNSCREW = "Unscrew it ", SCREW = "Screw it ", ARROW = "-> ";
+            UNSCREW = "Unscrew it ", SCREW = "Screw it back in ", ARROW = "-> ";
 
     private static Indicator rememberedIndicator;
 
@@ -26,8 +26,8 @@ public class TheNewBulb extends Widget {
     }
 
     private static String stepOne(){
-        if (THE_BULB.getLight() == Bulb.Light.ON){
-            return THE_BULB.getOpacity() == Bulb.Opacity.TRANSLUCENT ?
+        if (THE_BULB.getLight() == BulbProperties.Light.ON){
+            return THE_BULB.getOpacity() == BulbProperties.Opacity.TRANSLUCENT ?
                     PRESS_I + ARROW + stepTwo() :
                     PRESS_O + ARROW + stepThree();
         }
@@ -96,12 +96,12 @@ public class TheNewBulb extends Widget {
     }
 
     private static String stepFourteen(){
-        return (THE_BULB.getOpacity() == Bulb.Opacity.OPAQUE ? PRESS_I : PRESS_O) +
-                ARROW + SCREW + " back in";
+        return (THE_BULB.getOpacity() == BulbProperties.Opacity.OPAQUE ? PRESS_I : PRESS_O) +
+                ARROW + SCREW;
     }
 
     private static String stepFifteen(){
-        return (THE_BULB.getOpacity() == Bulb.Opacity.TRANSLUCENT ? PRESS_I : PRESS_O) +
-                ARROW + SCREW + " back in";
+        return (THE_BULB.getOpacity() == BulbProperties.Opacity.TRANSLUCENT ? PRESS_I : PRESS_O) +
+                ARROW + SCREW;
     }
 }

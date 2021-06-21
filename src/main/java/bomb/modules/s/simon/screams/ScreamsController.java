@@ -76,7 +76,7 @@ public class ScreamsController {
     @FXML
     private void resetStar(){
         star.resetStar();
-        FacadeFX.unselectButtons(colorSelectorToggle);
+        FacadeFX.setToggleButtonsUnselected(colorSelectorToggle);
         FacadeFX.enable(colorSelectorToggle);
         FacadeFX.disable(solve);
         SimonScreams.reset();

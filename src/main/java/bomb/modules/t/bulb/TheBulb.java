@@ -14,7 +14,7 @@ import static bomb.tools.Mechanics.ultimateFilter;
 //TODO - Finish Javadocs
 public class TheBulb extends Widget {
     private static boolean stepOneWentOff, currentLight, shutdownAtPressOne;
-    private static Bulb.Light stepOnePressed;
+    private static BulbProperties.Light stepOnePressed;
     private static Indicator remembered;
     private static final String arrow = " -> ";
 
@@ -24,7 +24,7 @@ public class TheBulb extends Widget {
      * @param next
      * @return
      */
-    public static String entry(Bulb next){
+    public static String entry(BulbProperties next){
         StringBuilder script = new StringBuilder();
         String scriptOut = findSet(next, 1, script);
         if (souvenir)
@@ -42,19 +42,19 @@ public class TheBulb extends Widget {
      * @param instruction
      * @return
      */
-    private static String findSet(Bulb next, int stage, StringBuilder instruction){
+    private static String findSet(BulbProperties next, int stage, StringBuilder instruction){
         //TODO - Break down
         switch (stage){
             case 1: {
-                if (next.getLight() == Bulb.Light.ON){
-                    if (next.getOpacity() == Bulb.Opacity.TRANSLUCENT){
-                        stepOnePressed = Bulb.Light.ON;
+                if (next.getLight() == BulbProperties.Light.ON){
+                    if (next.getOpacity() == BulbProperties.Opacity.TRANSLUCENT){
+                        stepOnePressed = BulbProperties.Light.ON;
                         instruction.append("Press I");
                         lightConfirmation(next, instruction.toString(), true);
                         instruction.append(arrow);
                         return findSet(next, 2, instruction);
                     }
-                    stepOnePressed = Bulb.Light.OFF;
+                    stepOnePressed = BulbProperties.Light.OFF;
                     instruction.append("Press O");
                     lightConfirmation(next, instruction.toString(), true);
                     instruction.append(arrow);
@@ -65,10 +65,10 @@ public class TheBulb extends Widget {
                 return findSet(next, 4, instruction);
             }
             case 2: {
-                if (next.getColor() == Bulb.Color.RED){
+                if (next.getColor() == BulbProperties.Color.RED){
                     instruction.append("Press I").append(arrow).append("Unscrew").append(arrow);
                     return findSet(next, 5, instruction);
-                } else if (next.getColor() == Bulb.Color.WHITE){
+                } else if (next.getColor() == BulbProperties.Color.WHITE){
                     instruction.append("Press O").append(arrow).append("Unscrew").append(arrow);
                     unscrew(next);
                     return findSet(next, 6, instruction);
@@ -79,12 +79,12 @@ public class TheBulb extends Widget {
             }
             case 3: {
                 unscrew(next);
-                if (next.getColor() == Bulb.Color.GREEN){
+                if (next.getColor() == BulbProperties.Color.GREEN){
                     instruction.append("Press I");
                     offAtPressI(next, instruction.toString());
                     instruction.append(arrow).append("Unscrew").append(arrow);
                     return findSet(next, 6, instruction);
-                } else if (next.getColor() == Bulb.Color.PURPLE){
+                } else if (next.getColor() == BulbProperties.Color.PURPLE){
                     instruction.append("Press O").append(arrow).append("Unscrew").append(arrow);
                     return findSet(next, 5, instruction);
                 }
@@ -101,10 +101,10 @@ public class TheBulb extends Widget {
             }
             case 5: {
                 if (stepOneWentOff){
-                    instruction.append("Press ").append(stepOnePressed == Bulb.Light.ON?"I":"O").append(arrow);
+                    instruction.append("Press ").append(stepOnePressed == BulbProperties.Light.ON?"I":"O").append(arrow);
                     return instruction.append("Screw the Bulb").toString();
                 }
-                instruction.append("Press ").append(stepOnePressed == Bulb.Light.ON?"O":"I")
+                instruction.append("Press ").append(stepOnePressed == BulbProperties.Light.ON?"O":"I")
                         .append(arrow).append("Screw the Bulb");
                 return instruction.toString();
             }
@@ -116,15 +116,15 @@ public class TheBulb extends Widget {
                 return instruction.append("Press the button from the previous step").toString();
             }
             case 7: {
-                if (next.getColor() == Bulb.Color.GREEN){
+                if (next.getColor() == BulbProperties.Color.GREEN){
                     remembered = Indicator.SIG;
                     instruction.append("Press I").append(arrow);
                     return findSet(next, 11, instruction);
-                } else if (next.getColor() == Bulb.Color.PURPLE){
+                } else if (next.getColor() == BulbProperties.Color.PURPLE){
                     instruction.append("Press I").append(arrow).append("Screw it back in").append(arrow);
                     screw(next);
                     return findSet(next, 12, instruction);
-                } else if (next.getColor() == Bulb.Color.BLUE){
+                } else if (next.getColor() == BulbProperties.Color.BLUE){
                     remembered = Indicator.CLR;
                     instruction.append("Press O");
                     return findSet(next, 11, instruction);
@@ -133,14 +133,14 @@ public class TheBulb extends Widget {
                 return findSet(next, 13, instruction);
             }
             case 8: {
-                if (next.getColor() == Bulb.Color.WHITE){
+                if (next.getColor() == BulbProperties.Color.WHITE){
                     remembered = Indicator.FRQ;
                     instruction.append("Press I").append(arrow);
                     return findSet(next, 11, instruction);
-                } else if (next.getColor() == Bulb.Color.RED){
+                } else if (next.getColor() == BulbProperties.Color.RED){
                     instruction.append("Press I").append(arrow).append("Screw it back in").append(arrow);
                     return findSet(next, 13, instruction);
-                } else if (next.getColor() == Bulb.Color.YELLOW){
+                } else if (next.getColor() == BulbProperties.Color.YELLOW){
                     remembered = Indicator.FRK;
                     instruction.append("Press O").append(arrow);
                     return findSet(next, 11, instruction);
@@ -227,13 +227,13 @@ public class TheBulb extends Widget {
                 return instruction.toString() + (currentLight?"Press O":"Press I");
             }
             case 14: {
-                if (next.getOpacity() == Bulb.Opacity.OPAQUE){
+                if (next.getOpacity() == BulbProperties.Opacity.OPAQUE){
                     return instruction.toString() + "Press I" + arrow + "Screw it back in";
                 }
                 return instruction.toString() + "Press O" + arrow + "Screw it back in";
             }
             default: {
-                if (next.getOpacity() == Bulb.Opacity.TRANSLUCENT){
+                if (next.getOpacity() == BulbProperties.Opacity.TRANSLUCENT){
                     return instruction.toString() + "Press I" + arrow + "Screw it back in";
                 }
                 return instruction.toString() + "Press O" + arrow + "Screw it back in";
@@ -246,8 +246,8 @@ public class TheBulb extends Widget {
      *
      * @param next
      */
-    private static void unscrew(Bulb next){
-        next.setPosition(Bulb.Position.UNSCREWED);
+    private static void unscrew(BulbProperties next){
+        next.setPosition(BulbProperties.Position.UNSCREWED);
     }
 
     /**
@@ -255,8 +255,8 @@ public class TheBulb extends Widget {
      *
      * @param next
      */
-    private static void screw(Bulb next){
-        next.setPosition(Bulb.Position.SCREWED);
+    private static void screw(BulbProperties next){
+        next.setPosition(BulbProperties.Position.SCREWED);
     }
 
     /**
@@ -266,7 +266,7 @@ public class TheBulb extends Widget {
      * @param instr
      * @param isStepOne
      */
-    private static void lightConfirmation(Bulb next, String instr, boolean isStepOne){
+    private static void lightConfirmation(BulbProperties next, String instr, boolean isStepOne){
         //TODO - Break down????
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Light Confirmation");
@@ -285,12 +285,12 @@ public class TheBulb extends Widget {
                 if (isStepOne) {
                     stepOneWentOff = options.get() == off;
                     if (stepOneWentOff) {
-                        next.setLight(Bulb.Light.OFF);
+                        next.setLight(BulbProperties.Light.OFF);
                     }
                 } else {
                     currentLight = options.get() == on;
                     if (currentLight) {
-                        next.setLight(Bulb.Light.ON);
+                        next.setLight(BulbProperties.Light.ON);
                     }
                 }
             }
@@ -307,7 +307,7 @@ public class TheBulb extends Widget {
      * @param next
      * @param instr
      */
-    private static void offAtPressI(Bulb next, String instr){
+    private static void offAtPressI(BulbProperties next, String instr){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Off at the Press I");
         alert.setContentText("Did the Bulb turn off when you pressed I?");
@@ -324,7 +324,7 @@ public class TheBulb extends Widget {
             if (options.isPresent()) {
                 shutdownAtPressOne = options.get() == yes;
                 if (shutdownAtPressOne) {
-                    next.setLight(Bulb.Light.OFF);
+                    next.setLight(BulbProperties.Light.OFF);
                     currentLight = false;
                 }
             }

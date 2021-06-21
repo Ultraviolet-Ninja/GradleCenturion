@@ -34,12 +34,12 @@ public class FacadeFX {
         label.setText("");
     }
 
-    public static void clearTextMultiple(TextInputControl ... texts){
+    public static void clearMultipleTextFields(TextInputControl ... texts){
         for (TextInputControl text : texts)
             clearText(text);
     }
 
-    public static void clearTextMultiple(Label ... labels){
+    public static void clearMultipleLabels(Label ... labels){
         for (Label label : labels)
             clearText(label);
     }
@@ -88,7 +88,7 @@ public class FacadeFX {
         for (Node node : nodes) node.setDisable(toggle);
     }
 
-    public static void unselectButtons(ToggleButton ... toggleButtons){
+    public static void setToggleButtonsUnselected(ToggleButton ... toggleButtons){
         for (ToggleButton button : toggleButtons)
             button.setSelected(false);
     }

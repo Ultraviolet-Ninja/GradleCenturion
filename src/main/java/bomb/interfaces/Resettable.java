@@ -1,5 +1,5 @@
 package bomb.interfaces;
 
-public interface Reset {
+public interface Resettable {
     void reset();
 }

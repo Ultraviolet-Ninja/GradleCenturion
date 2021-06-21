@@ -141,7 +141,7 @@ public class TranslationController {
 
     private void clearButtons(){
         traits = new TheButton[2];
-        FacadeFX.unselectButtons(red, white, blue, yellow, abort, press, detonate, hold);
+        FacadeFX.setToggleButtonsUnselected(red, white, blue, yellow, abort, press, detonate, hold);
     }
 
     //Button Methods

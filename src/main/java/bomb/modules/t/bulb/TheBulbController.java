@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.function.Consumer;
 
-import static bomb.modules.t.bulb.Bulb.THE_BULB;
+import static bomb.modules.t.bulb.BulbProperties.THE_BULB;
 
 public class TheBulbController {
     private static final String RED_STYLE = "-fx-text-fill: red", YELLOW_STYLE = "-fx-text-fill: yellow",
@@ -41,7 +41,7 @@ public class TheBulbController {
         return event -> {
             bulbConditions[0] = true;
             Rectangle rect = (Rectangle) event.getSource();
-            for (Bulb.Color color : Bulb.Color.values()) {
+            for (BulbProperties.Color color : BulbProperties.Color.values()) {
                 if (rect.getFill().equals(color.getAssociatedColor())){
                     THE_BULB.setColor(color);
                     labelSet(color.ordinal());
@@ -64,8 +64,8 @@ public class TheBulbController {
     private void luminositySet(){
         bulbConditions[1] = true;
         THE_BULB.setLight(FacadeFX.getToggleName(opacity).equals("On") ?
-                Bulb.Light.ON :
-                Bulb.Light.OFF);
+                BulbProperties.Light.ON :
+                BulbProperties.Light.OFF);
         plugInBulb();
     }
 
@@ -73,14 +73,14 @@ public class TheBulbController {
     private void opacitySet(){
         bulbConditions[2] = true;
         THE_BULB.setOpacity(FacadeFX.getToggleName(luminosity).equals("Opaque") ?
-                Bulb.Opacity.OPAQUE :
-                Bulb.Opacity.TRANSLUCENT);
+                BulbProperties.Opacity.OPAQUE :
+                BulbProperties.Opacity.TRANSLUCENT);
         plugInBulb();
     }
 
     private void plugInBulb(){
         if (bulbConditions[0] && bulbConditions[1] && bulbConditions[2]){
-            THE_BULB.setPosition(Bulb.Position.SCREWED);
+            THE_BULB.setPosition(BulbProperties.Position.SCREWED);
             bulbResults.setText(TheBulb.entry(THE_BULB));
         }
     }

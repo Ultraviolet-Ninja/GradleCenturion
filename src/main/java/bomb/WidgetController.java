@@ -47,7 +47,6 @@ public class WidgetController {
         HoverHandler<ActionEvent> portHandler = new HoverHandler<>(support.portAction());
         FacadeFX.bindHandlerToButtons(portHandler, dviUp, dviDown, parallelUp, parallelDown, psUp, psDown);
         FacadeFX.bindHandlerToButtons(portHandler, rjUp, rjDown, serialDown, serialUp, rcaUp, rcaDown);
-
     }
 
     //<editor-fold desc="To Fix">
@@ -236,8 +235,8 @@ public class WidgetController {
         rj.setText("0");
         serial.setText("0");
         rca.setText("0");
-        FacadeFX.clearTextMultiple(aLabel, dLabel, holderLabel, plateLabel, minuteLabel, moduleLabel);
-        FacadeFX.clearTextMultiple(serialField, doubleAField, dBatField, holderField,
+        FacadeFX.clearMultipleLabels(aLabel, dLabel, holderLabel, plateLabel, minuteLabel, moduleLabel);
+        FacadeFX.clearMultipleTextFields(serialField, doubleAField, dBatField, holderField,
                 modField, minField, plateField);
     }
 }
