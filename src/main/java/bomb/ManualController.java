@@ -7,6 +7,7 @@ import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
 import bomb.tools.observer.ResetObserver;
 import bomb.tools.observer.SouvenirObserver;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -31,6 +32,7 @@ import java.util.regex.Pattern;
 
 import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.BLIND_ALLEY;
 
 public class ManualController {
     private Map<String, Region> regionMap;
@@ -56,7 +58,7 @@ public class ManualController {
     @FXML
     public void buttonPress() {
         String selected = FacadeFX.getToggleName(group);
-        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(ObserverHub.BLIND_ALLEY_INDEX);
+        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY);
         paneSwitch(regionMap.get(selected));
     }
 

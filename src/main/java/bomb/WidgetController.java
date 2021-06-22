@@ -17,6 +17,9 @@ import javafx.scene.control.ToggleGroup;
 import static bomb.enumerations.TriState.*;
 import static bomb.tools.Filter.ALL_CHAR_FILTER;
 import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.RESET;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.SOUVENIR;
 
 public class WidgetController {
     private static final String ENABLE_STYLE = "-fx-background-color: forestgreen; -fx-text-fill: black",
@@ -183,7 +186,7 @@ public class WidgetController {
     @FXML
     private void souvenirToggle() {
         bomb.Widget.setSouvenir(souvenir.isSelected());
-        ObserverHub.updateAtIndex(ObserverHub.SOUVENIR_INDEX);
+        ObserverHub.updateAtIndex(SOUVENIR);
         souvenir.setStyle(setStyle(souvenir.isSelected()));
         souvenir.setText("Souvenir" + setEnableText(souvenir.isSelected()));
     }
@@ -191,7 +194,7 @@ public class WidgetController {
     @FXML
     private void forgetMeToggle() {
         bomb.Widget.setForgetMeNot(forgetMeNot.isSelected());
-        ObserverHub.updateAtIndex(ObserverHub.FORGET_ME_INDEX);
+        ObserverHub.updateAtIndex(FORGET_ME_NOT);
         forgetMeNot.setStyle(setStyle(forgetMeNot.isSelected()));
         forgetMeNot.setText("Forget Me Not" + setEnableText(forgetMeNot.isSelected()));
     }

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObserverHub {
-    public static final int FORGET_ME_INDEX = 0, SOUVENIR_INDEX = 1, BLIND_ALLEY_INDEX = 2;
+    public enum ObserverIndex {
+        FORGET_ME_NOT, SOUVENIR, BLIND_ALLEY, RESET
+    }
 
     private static final List<Observer> OBSERVER_LIST = new ArrayList<>();
     
@@ -14,7 +16,7 @@ public class ObserverHub {
         OBSERVER_LIST.add(observer);
     }
 
-    public static void updateAtIndex(int index){
-        OBSERVER_LIST.get(index).update();
+    public static void updateAtIndex(ObserverIndex index){
+        OBSERVER_LIST.get(index.ordinal()).update();
     }
 }
