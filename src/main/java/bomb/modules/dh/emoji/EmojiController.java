@@ -92,6 +92,6 @@ public class EmojiController implements Resettable {
 
     @Override
     public void reset() {
-
+        clearParam();
     }
 }

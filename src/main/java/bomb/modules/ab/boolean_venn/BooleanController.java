@@ -152,6 +152,6 @@ public class BooleanController implements Resettable {
 
     @Override
     public void reset() {
-
+        resetBool();
     }
 }

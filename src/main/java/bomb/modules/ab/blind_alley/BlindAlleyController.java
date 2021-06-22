@@ -1,6 +1,7 @@
 package bomb.modules.ab.blind_alley;
 
 import bomb.interfaces.Resettable;
+import bomb.tools.observer.ObserverHub;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -62,6 +63,6 @@ public class BlindAlleyController implements Resettable {
 
     @Override
     public void reset() {
-
+        ObserverHub.updateAtIndex(ObserverHub.ObserverIndex.SOUVENIR);
     }
 }
