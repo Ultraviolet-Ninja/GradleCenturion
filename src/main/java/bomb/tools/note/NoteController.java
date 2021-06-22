@@ -1,44 +1,31 @@
 package bomb.tools.note;
 
 import bomb.interfaces.Resettable;
+import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
 public class NoteController implements Resettable {
-    private final ArrayList<Stage> noteWindows = new ArrayList<>(5);
+    private static final int SIZE_LIMIT = 5;
+
+    private final Set<NotePageController> extraNotes = new HashSet<>(SIZE_LIMIT);
 
     @FXML
     private void addNoteWindow() {
-        if (noteWindows.size() != 5) {
-            try {
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("note.fxml")));
-                Stage stage = new Stage();
-                stage.setTitle("Extra Notes");
-                stage.setScene(new Scene(root, 600, 400));
-                noteWindows.add(stage);
-                stage.show();
-            } catch (IOException ioException) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("IO Exception");
-                alert.showAndWait();
-            }
+        if (extraNotes.size() != SIZE_LIMIT) {
+            extraNotes.add(new NotePageController(extraNotes));
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Max Capacity reached");
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.ERROR, "Max Capacity reached");
         }
     }
 
     @Override
     public void reset() {
-
+        for (NotePageController page : extraNotes)
+            page.close();
+        extraNotes.clear();
     }
 }
