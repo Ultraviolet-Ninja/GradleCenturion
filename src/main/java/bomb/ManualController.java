@@ -5,6 +5,7 @@ import bomb.tools.Regex;
 import bomb.tools.observer.BlindAlleyObserver;
 import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
+import bomb.tools.observer.ResetObserver;
 import bomb.tools.observer.SouvenirObserver;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -103,12 +104,15 @@ public class ManualController {
 
     private ArrayList<Pane> panesFromFolder(ArrayList<String> fileLocations) {
         ArrayList<Pane> paneList = new ArrayList<>();
+        ResetObserver observer = new ResetObserver();
         try {
             for (String fxmlFile : fileLocations) {
                 FXMLLoader loader = new FXMLLoader(Paths.get(fxmlFile).toUri().toURL());
                 paneList.add(loader.load());
+                if (!fxmlFile.contains("widget")) observer.addController(loader);
                 if (fxmlFile.contains("blind_alley")) getBlindAlleyController(loader);
             }
+            ObserverHub.addObserver(observer);
         } catch (IOException e){
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package bomb.modules.t.bulb;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import java.util.function.Consumer;
 
 import static bomb.modules.t.bulb.BulbProperties.THE_BULB;
 
-public class TheBulbController {
+public class TheBulbController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: red", YELLOW_STYLE = "-fx-text-fill: yellow",
             GREEN_STYLE = "-fx-text-fill: #07c307", BLUE_STYLE = "-fx-text-fill: dodgerblue",
             MAGENTA_STYLE = "-fx-text-fill: #cc0bdd", BLACK_STYLE = "-fx-text-fill: black",
@@ -83,5 +84,10 @@ public class TheBulbController {
             THE_BULB.setPosition(BulbProperties.Position.SCREWED);
             bulbResults.setText(TheBulb.entry(THE_BULB));
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

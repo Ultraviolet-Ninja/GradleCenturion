@@ -1,5 +1,6 @@
 package bomb.modules.np.neutralization;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -8,7 +9,7 @@ import javafx.scene.paint.Color;
 import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
 
-public class NeutralizationController {
+public class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;
     private static final String RED_STYLE = "-fx-accent: #ea0001", YELLOW_STYLE = "-fx-accent: #f8db03",
             GREEN_STYLE = "-fx-accent: #00fe01", BLUE_STYLE = "-fx-accent: #00007e",
@@ -93,5 +94,10 @@ public class NeutralizationController {
 
     private void toggleLock(){
         solve.setDisable(!(solutionColor != null && volTyped));
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

@@ -1,4 +1,10 @@
 package bomb.modules.m.monsplode;
 
-public class MonsplodeController {
+import bomb.interfaces.Resettable;
+
+public class MonsplodeController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

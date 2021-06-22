@@ -1,4 +1,10 @@
 package bomb.modules.s.switches;
 
-public class SwitchesController {
+import bomb.interfaces.Resettable;
+
+public class SwitchesController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

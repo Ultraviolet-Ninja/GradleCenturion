@@ -1,6 +1,7 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
@@ -13,7 +14,7 @@ import javafx.scene.control.TextField;
 
 import java.util.function.Consumer;
 
-public class ForgetController {
+public class ForgetController implements Resettable {
     private static final double COMPLETION_PERCENTAGE = 0.9;
 
     private int stageCounter = 1;
@@ -97,5 +98,10 @@ public class ForgetController {
 
     private void reEnable() {
         FacadeFX.toggleNodes(false, one, two, three, four, five, six, seven, eight, nine, zero);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

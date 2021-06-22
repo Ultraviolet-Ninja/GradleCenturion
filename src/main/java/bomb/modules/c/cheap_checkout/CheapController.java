@@ -1,4 +1,10 @@
 package bomb.modules.c.cheap_checkout;
 
-public class CheapController {
+import bomb.interfaces.Resettable;
+
+public class CheapController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

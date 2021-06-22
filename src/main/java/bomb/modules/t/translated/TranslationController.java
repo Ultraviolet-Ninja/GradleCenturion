@@ -1,6 +1,7 @@
 package bomb.modules.t.translated;
 
 import bomb.enumerations.TheButton;
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,7 +15,7 @@ import java.io.IOException;
 
 import static bomb.tools.Mechanics.ultimateFilter;
 
-public class TranslationController {
+public class TranslationController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",
             BLUE_STYLE = "-fx-text-fill: #3043AC",
             WHITE_STYLE = "-fx-text-fill: #FFF9ED; -fx-background-color: black";
@@ -258,5 +259,10 @@ public class TranslationController {
             yesLabel.setText(VentGas.writeYes());
             noLabel.setText(VentGas.writeNo());
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

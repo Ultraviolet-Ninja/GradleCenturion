@@ -1,5 +1,6 @@
 package bomb.modules.t.two_bit;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,7 +10,7 @@ import javafx.scene.control.TextField;
 import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
 
-public class TwoBitController {
+public class TwoBitController implements Resettable {
     @FXML
     private Button next;
 
@@ -36,5 +37,10 @@ public class TwoBitController {
         } catch (IllegalArgumentException illegal){
             FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits");
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

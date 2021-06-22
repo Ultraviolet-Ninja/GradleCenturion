@@ -1,5 +1,6 @@
 package bomb.modules.il.laundry;
 
+import bomb.interfaces.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -10,7 +11,7 @@ import javafx.scene.image.ImageView;
 import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
 
-public class LaundryController {
+public class LaundryController implements Resettable {
     @FXML
     private ImageView wash, dry;
 
@@ -57,5 +58,10 @@ public class LaundryController {
         }
 
         return builder.substring(0, builder.length()-3);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

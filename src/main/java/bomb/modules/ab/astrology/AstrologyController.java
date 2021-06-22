@@ -1,5 +1,6 @@
 package bomb.modules.ab.astrology;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -7,7 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
-public class AstrologyController {
+public class AstrologyController implements Resettable {
     private AstroSymbols[] set = new AstroSymbols[3];
     @FXML
     private ImageView fire, water, earth, air,
@@ -132,5 +133,10 @@ public class AstrologyController {
         } catch (IllegalArgumentException illegal){
             FacadeFX.setAlert(Alert.AlertType.ERROR, "The Serial Code wasn't set");
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

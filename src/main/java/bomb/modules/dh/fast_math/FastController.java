@@ -1,5 +1,6 @@
 package bomb.modules.dh.fast_math;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.util.function.Consumer;
 
-public class FastController {
+public class FastController implements Resettable {
     private final StringBuilder appendLetters = new StringBuilder(),
             textFieldTracker = new StringBuilder();
 
@@ -48,5 +49,10 @@ public class FastController {
         FacadeFX.clearText(outputMath);
         textFieldTracker.setLength(0);
         appendLetters.setLength(0);
+    }
+
+    @Override
+    public void reset() {
+        clear();
     }
 }

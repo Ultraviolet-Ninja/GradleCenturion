@@ -1,5 +1,6 @@
 package bomb.modules.ab.alphabet;
 
+import bomb.interfaces.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -8,7 +9,7 @@ import static bomb.tools.Filter.CHAR_FILTER;
 import static bomb.tools.Filter.ultimateFilter;
 
 
-public class AlphabetController {
+public class AlphabetController implements Resettable {
     @FXML
     private TextField alphabetOut;
 
@@ -29,6 +30,11 @@ public class AlphabetController {
             alert.setContentText("That field is empty there, bud");
             alert.show();
         }
+    }
+
+    @Override
+    public void reset() {
+
     }
 }
 

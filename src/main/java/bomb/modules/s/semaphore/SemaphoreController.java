@@ -1,4 +1,10 @@
 package bomb.modules.s.semaphore;
 
-public class SemaphoreController {
+import bomb.interfaces.Resettable;
+
+public class SemaphoreController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

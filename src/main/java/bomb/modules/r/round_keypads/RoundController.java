@@ -1,10 +1,11 @@
 package bomb.modules.r.round_keypads;
 
+import bomb.interfaces.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-public class RoundController {
+public class RoundController implements Resettable {
     private static final String TO_HIGHLIGHT = "-fx-background-color: crimson",
             FROM_HIGHLIGHT = "-fx-background-color: white";
 
@@ -221,5 +222,10 @@ public class RoundController {
 
     private void setBoxStyle(VBox keypad, int which, int required){
         keypad.setStyle(which == required ? TO_HIGHLIGHT : FROM_HIGHLIGHT);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

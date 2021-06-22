@@ -1,4 +1,10 @@
 package bomb.modules.t.three_d_maze;
 
-public class ThreeDMazeController {
+import bomb.interfaces.Resettable;
+
+public class ThreeDMazeController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

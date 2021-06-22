@@ -1,5 +1,6 @@
 package bomb.modules.dh.emoji;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
@@ -9,7 +10,7 @@ import javafx.scene.control.TextField;
 
 import java.util.function.Consumer;
 
-public class EmojiController {
+public class EmojiController implements Resettable {
     private int eqCount = 0;
     private StringBuilder equation = new StringBuilder();
 
@@ -87,5 +88,10 @@ public class EmojiController {
 
     private void toggleNumberButtons(boolean set) {
         FacadeFX.toggleNodes(set, first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

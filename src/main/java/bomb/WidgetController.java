@@ -214,6 +214,7 @@ public class WidgetController {
         forgetMeToggle();
         souvenirToggle();
         serialField.setDisable(false);
+        ObserverHub.updateAtIndex(RESET);
     }
 
     private void clearGroups(ToggleGroup ... groups){

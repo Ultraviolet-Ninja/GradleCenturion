@@ -1,5 +1,6 @@
 package bomb.modules.c.chords;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
@@ -10,7 +11,7 @@ import javafx.scene.control.TextField;
 
 import java.util.function.Consumer;
 
-public class ChordController {
+public class ChordController implements Resettable {
     private int counter = 0;
     private final String[] notes = new String[4];
     private StringBuilder track = new StringBuilder();
@@ -54,5 +55,10 @@ public class ChordController {
                 temp.append(" ");
         }
         outputChord.setText(ChordQualities.solve(temp.toString()));
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

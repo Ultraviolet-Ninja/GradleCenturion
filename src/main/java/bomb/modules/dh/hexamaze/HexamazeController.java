@@ -1,6 +1,7 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.components.hex.HexMazePanel;
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -10,7 +11,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-public class HexamazeController {
+public class HexamazeController implements Resettable {
     @FXML
     private ToggleGroup hexGroup, hexColorGroup;
 
@@ -149,5 +150,10 @@ public class HexamazeController {
         out.add(sevenTwo);
         out.add(sevenThree);
         out.add(sevenFour);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

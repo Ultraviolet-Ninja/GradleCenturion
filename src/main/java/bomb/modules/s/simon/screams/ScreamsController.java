@@ -1,6 +1,7 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.components.simon.screams.CustomStar;
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -9,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 
-public class ScreamsController {
+public class ScreamsController implements Resettable {
     @FXML
     private Button solve, resetLastStage;
 
@@ -81,5 +82,10 @@ public class ScreamsController {
         FacadeFX.disable(solve);
         SimonScreams.reset();
         updateStageNumber();
+    }
+
+    @Override
+    public void reset() {
+        resetStar();
     }
 }

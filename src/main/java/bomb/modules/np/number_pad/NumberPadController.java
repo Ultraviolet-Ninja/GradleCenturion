@@ -1,4 +1,10 @@
 package bomb.modules.np.number_pad;
 
-public class NumberPadController {
+import bomb.interfaces.Resettable;
+
+public class NumberPadController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

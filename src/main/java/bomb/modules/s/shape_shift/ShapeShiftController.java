@@ -1,9 +1,10 @@
 package bomb.modules.s.shape_shift;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.fxml.FXML;
 
-public class ShapeShiftController {
+public class ShapeShiftController implements Resettable {
     private ReadOnlyRing<ShapeEnd> leftSide, rightSide;
 
     public void initialize(){
@@ -32,6 +33,11 @@ public class ShapeShiftController {
 
     @FXML
     private void incrementRight(){
+
+    }
+
+    @Override
+    public void reset() {
 
     }
 }

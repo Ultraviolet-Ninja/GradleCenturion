@@ -1,5 +1,6 @@
 package bomb.modules.ab.bitwise;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
@@ -9,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.util.function.Consumer;
 
-public class BitwiseController {
+public class BitwiseController implements Resettable {
     @FXML
     private Button bitAnd, bitOr, bitXor, bitNot;
 
@@ -30,5 +31,10 @@ public class BitwiseController {
                         "Something's empty", "Do more edge work");
             }
         };
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

@@ -1,5 +1,6 @@
 package bomb.modules.ab.boolean_venn;
 
+import bomb.interfaces.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.shape.Circle;
 import static bomb.tools.Filter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.Filter.ultimateFilter;
 
-public class BooleanController {
+public class BooleanController implements Resettable {
     private static final String PRESS = "rgba(115,208,115,1)",
             NO_PRESS = "rgba(255,103,103,1)", CLEAR = "rgba(130,130,130,0)";
 
@@ -147,5 +148,10 @@ public class BooleanController {
         bc.setFill(Paint.valueOf(CLEAR));
         all.setFill(Paint.valueOf(CLEAR));
         not.setFill(Paint.valueOf(CLEAR));
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

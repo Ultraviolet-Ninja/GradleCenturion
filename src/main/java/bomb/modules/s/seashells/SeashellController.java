@@ -1,4 +1,10 @@
 package bomb.modules.s.seashells;
 
-public class SeashellController {
+import bomb.interfaces.Resettable;
+
+public class SeashellController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

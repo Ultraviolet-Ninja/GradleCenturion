@@ -1,10 +1,11 @@
 package bomb.modules.ab.blind_alley;
 
+import bomb.interfaces.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
-public class BlindAlleyController {
+public class BlindAlleyController implements Resettable {
     @FXML
     private Label maxAlley;
 
@@ -57,5 +58,10 @@ public class BlindAlleyController {
             for (int num : col) if (num > max) max = num;
 
         maxAlley.setText("All with " + max);
+    }
+
+    @Override
+    public void reset() {
+
     }
 }
