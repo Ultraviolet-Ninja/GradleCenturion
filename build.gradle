@@ -5,7 +5,6 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '1.0-SNAPSHOT'
 
 mainClassName = 'bomb.Main'
 
@@ -35,5 +34,12 @@ test {
 jacocoTestReport{
     reports{
         xml.enabled(true)
+    }
+}
+
+jar {
+    from { configurations.compile.collect{it.isDirectory() ? it : zipTree(it)}}
+    manifest{
+        attributes "Main-Class": "$mainClassName"
     }
 }
