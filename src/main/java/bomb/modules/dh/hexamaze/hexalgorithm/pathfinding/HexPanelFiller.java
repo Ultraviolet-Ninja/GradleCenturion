@@ -1,6 +1,7 @@
-package bomb.modules.dh.hexamaze.hexalgorithm;
+package bomb.modules.dh.hexamaze.hexalgorithm.pathfinding;
 
 import bomb.components.hex.HexMazePanel;
+import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
 import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 

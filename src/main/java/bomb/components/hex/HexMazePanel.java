@@ -1,7 +1,7 @@
 package bomb.components.hex;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
-import bomb.modules.dh.hexamaze.HexTraits;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -42,12 +42,12 @@ public class HexMazePanel extends Pane {
         peg.setFill(toFill);
     }
 
-    public void setup(Hex.HexNode currentNode) {
+    public void setup(HexagonDataStructure.HexNode currentNode) {
         setupLines(currentNode.walls);
         setupShape(currentNode.fill);
     }
 
-    private void setupShape(HexTraits.HexShape shape){
+    private void setupShape(HexNodeProperties.HexShape shape){
         if(shape != null){
             switch (shape) {
                 case Circle: exclusiveShapeSet(circle);
@@ -101,10 +101,10 @@ public class HexMazePanel extends Pane {
         }
     }
 
-    private void setupLines(ArrayList<HexTraits.HexWall> walls){
+    private void setupLines(ArrayList<HexNodeProperties.HexWall> walls){
         String remove = "123456";
         if (walls != null) {
-            for (HexTraits.HexWall wall : walls) {
+            for (HexNodeProperties.HexWall wall : walls) {
                 switch (wall.ordinal()) {
                     case 0: remove = setLine(northWest, remove, "1"); break;
                     case 1: remove = setLine(north, remove, "2"); break;

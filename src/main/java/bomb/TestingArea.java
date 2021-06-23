@@ -1,15 +1,12 @@
 package bomb;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunner;
-import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.ThreadedHexComparator;
 import bomb.tools.Regex;
-import javafx.scene.paint.Color;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -74,10 +71,10 @@ public class TestingArea {
     }
 
     private static HexGrid fromLine(String line){
-        ArrayList<Hex.HexNode> list = new ArrayList<>();
+        ArrayList<HexagonDataStructure.HexNode> list = new ArrayList<>();
         for (String shape : line.split(","))
-            list.add(new Hex.HexNode(Hex.decodeShape(shape), null));
-        return new HexGrid(new Hex(list));
+            list.add(new HexagonDataStructure.HexNode(HexagonDataStructure.decodeShape(shape), null));
+        return new HexGrid(new HexagonDataStructure(list));
     }
 
     private static void testComparators(Maze fullMaze, HexGrid testGrid){

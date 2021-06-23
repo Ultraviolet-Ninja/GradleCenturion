@@ -3,11 +3,11 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.tools.data.structures.FixedArrayQueue;
 
 public abstract class AbstractHexagon {
-    protected Hex hexagon;
+    protected HexagonDataStructure hexagon;
 
     public AbstractHexagon(){hexagon = null;}
 
-    public AbstractHexagon(Hex hexagon){
+    public AbstractHexagon(HexagonDataStructure hexagon){
         this.hexagon = hexagon;
     }
 
@@ -19,11 +19,11 @@ public abstract class AbstractHexagon {
         return hexagon.getSpan();
     }
 
-    public Hex hexport(){
+    public HexagonDataStructure hexport(){
         return hexagon;
     }
 
-    public FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> exportTo2DQueue(){
+    public FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> exportTo2DQueue(){
         return hexagon.exportTo2DQueue();
     }
 

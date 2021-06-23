@@ -1,7 +1,6 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
-import bomb.modules.dh.hexamaze.HexTraits;
-import bomb.modules.dh.hexamaze.HexTraits.*;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.*;
 import bomb.tools.data.structures.FixedArrayQueue;
 
 
@@ -12,11 +11,11 @@ import java.util.Collections;
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
  * using individual HexNodes to represent what a tile contains.
  */
-public class Hex {
+public class HexagonDataStructure {
     /**
      * This class is the backing node to a given hexagon data structure.
      */
-    public static class HexNode {
+    public static final class HexNode {
         public ArrayList<HexWall> walls;
         public HexShape fill;
 
@@ -81,13 +80,6 @@ public class Hex {
             }
         }
 
-        public void addWalls(HexWall... walls) {
-            for (HexWall wall : walls) {
-                if (!this.walls.contains(wall))
-                    this.walls.add(wall);
-            }
-        }
-
         /**
          * Checks whether a certain wall is contained within the HexNode
          *
@@ -99,10 +91,6 @@ public class Hex {
                 if (testWall.ordinal() == wallTag)
                     return false;
             return true;
-        }
-
-        public int checkExits() {
-            return 6 - (walls.size() + 1);
         }
 
         @Override
@@ -148,7 +136,7 @@ public class Hex {
      * @param sideLength - the length of a side of the hexagon
      * @throws IllegalArgumentException - Signals that the specified length is too short
      */
-    public Hex(int sideLength) throws IllegalArgumentException {
+    public HexagonDataStructure(int sideLength) throws IllegalArgumentException {
         if (sideLength < 128) {
             hexagon = listHexagon((byte) sideLength);
             this.sideLength = (byte) sideLength;
@@ -163,7 +151,7 @@ public class Hex {
      * @param imports    The List of Lists backing structure
      * @param sideLength The matching side length
      */
-    public Hex(FixedArrayQueue<FixedArrayQueue<HexNode>> imports, int sideLength) {
+    public HexagonDataStructure(FixedArrayQueue<FixedArrayQueue<HexNode>> imports, int sideLength) {
         hexagon = imports;
         this.sideLength = (byte) sideLength;
         span = calculateHexagonalSpan();
@@ -176,11 +164,11 @@ public class Hex {
      * @param imports The Arraylist of HexNodes
      * @throws IllegalArgumentException The side length didn't given an integer value
      */
-    public Hex(ArrayList<HexNode> imports) throws IllegalArgumentException {
+    public HexagonDataStructure(ArrayList<HexNode> imports) throws IllegalArgumentException {
         sideLength = nodalSideLength(imports.size());
         if (sideLength == 0)
             throw new IllegalArgumentException("Area given did not return an integer");
-        injectList(imports);
+        readInNodeList(imports);
         span = calculateHexagonalSpan();
     }
 
@@ -213,7 +201,7 @@ public class Hex {
      *
      * @param stream The ArrayList of HexNodes
      */
-    public void injectList(ArrayList<HexNode> stream) {
+    public void readInNodeList(ArrayList<HexNode> stream) {
         hexagon = interpretList(stream);
     }
 
@@ -424,10 +412,10 @@ public class Hex {
      * @param numbers The string of numbers representing the walls
      * @return The array containing all existing walls in a HexNode
      */
-    public static ArrayList<HexTraits.HexWall> decodeWalls(String numbers) {
-        ArrayList<HexTraits.HexWall> constructs = new ArrayList<>(6);
+    public static ArrayList<HexNodeProperties.HexWall> decodeWalls(String numbers) {
+        ArrayList<HexNodeProperties.HexWall> constructs = new ArrayList<>(6);
 
-        for (HexTraits.HexWall index : HexTraits.HexWall.values())
+        for (HexNodeProperties.HexWall index : HexNodeProperties.HexWall.values())
             if (numbers.contains(String.valueOf(index.ordinal())))
                 constructs.add(index);
         return constructs;
@@ -471,5 +459,16 @@ public class Hex {
 
     private int calculateHexagonalSpan() {
         return (2 * sideLength) - 1;
+    }
+
+    @Override
+    public int hashCode() {
+        StringBuilder sb = new StringBuilder();
+        for (int x = 0; x < hexagon.cap(); x++){
+            for (int y = 0; y < hexagon.get(x).cap(); y++){
+                sb.append(hexagon.get(x).get(y).getShapeHash());
+            }
+        }
+        return sb.hashCode();
     }
 }

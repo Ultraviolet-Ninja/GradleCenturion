@@ -1,4 +1,4 @@
-package bomb.modules.dh.hexamaze;
+package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.tools.Base91;
 
@@ -8,14 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-public enum HexTraits {
+public enum HexNodeProperties {
     ;
     public enum HexShape {
         Circle, Hexagon, LeftTriangle, RightTriangle, UpTriangle, DownTriangle;
 
         public static int shapeOrdinality(HexShape shape){
-            if (shape == null) return DownTriangle.ordinal() + 1;
-            return shape.ordinal();
+            return shape == null ?
+                    DownTriangle.ordinal() + 1 :
+                    shape.ordinal();
         }
 
         public static HexShape fromOrdinality(int num){
@@ -27,8 +28,7 @@ public enum HexTraits {
     }
 
     public enum HexWall {
-        TopLeft, Top, TopRight,
-        BottomLeft, Bottom,  BottomRight;
+        TopLeft, Top, TopRight, BottomLeft, Bottom,  BottomRight;
 
         private static final Map<String, List<HexWall>> fromHashCode = new HashMap<>();
         private static final Map<List<HexWall>, String> toHashCode = new HashMap<>();
