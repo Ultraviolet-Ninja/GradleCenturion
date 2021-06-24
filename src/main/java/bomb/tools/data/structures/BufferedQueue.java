@@ -140,7 +140,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return data;
     }
 
     @Override

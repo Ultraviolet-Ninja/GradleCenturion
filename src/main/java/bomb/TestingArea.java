@@ -1,12 +1,11 @@
 package bomb;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexHashLibrary;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.OldHexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
-import bomb.tools.Regex;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexHashLibrary;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.OldHexComparator;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -69,8 +68,6 @@ public class TestingArea {
 //        } catch (IOException e){
 //            e.printStackTrace();
 //        }
-        Regex regex = new Regex("(s)", "Astrology");
-        System.out.println(regex.hasMatch());
     }
 
     private static HexGrid fromLine(String line){
@@ -95,6 +92,6 @@ public class TestingArea {
 
         System.out.println("Old Linear Time: " + format.format(linearStop - linearStart));
         System.out.println("New Linear time: " + format.format(threadedStop - threadedStart));
-        System.out.println("New Linear time: " + format.format(hashStop - hashStart));
+        System.out.println("Hash time: " + format.format(hashStop - hashStart));
     }
 }
