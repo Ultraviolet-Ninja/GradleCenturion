@@ -15,18 +15,18 @@ public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
 
     public static void main(String[] args) {
-//        Maze maze;
-//        HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
-//        HexGrid worstCase = fromLine("n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
-//        HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
-//        try{
-//            maze = new Maze();
-//            testComparators(maze, bestCase);
-//            testComparators(maze, worstCase);
-//            testComparators(maze, nullCase);
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
+        Maze maze;
+        HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+        HexGrid worstCase = fromLine("n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+        HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+        try{
+            maze = new Maze();
+            testComparators(maze, bestCase);
+            testComparators(maze, worstCase);
+            testComparators(maze, nullCase);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
 //        try{
 //            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");

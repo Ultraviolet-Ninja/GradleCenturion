@@ -13,7 +13,7 @@ public abstract class AbstractHexagon {
     }
 
     public int sideLength() {
-        return hexagon.sideLength();
+        return hexagon.getSideLength();
     }
 
     public int getSpan(){
@@ -26,6 +26,10 @@ public abstract class AbstractHexagon {
 
     public BufferedQueue<BufferedQueue<HexNode>> exportTo2DQueue(){
         return hexagon.exportTo2DQueue();
+    }
+
+    public void rotate(){
+        hexagon.rotate();
     }
 
     public static int[] calculateColumnLengths(int sideLength){

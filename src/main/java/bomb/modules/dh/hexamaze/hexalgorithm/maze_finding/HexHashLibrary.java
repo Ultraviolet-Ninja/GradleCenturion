@@ -1,8 +1,9 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.maze_finding;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.tools.data.structures.BufferedQueue;
 
@@ -21,14 +22,14 @@ public class HexHashLibrary {
      */
     private HexHashLibrary(){}
 
-    public static void initialize(Maze fullMaze, HexGrid grid){
-        int iterations = fullMaze.hexport().getSpan() - grid.hexport().getSpan();
+    public static void initialize(Maze fullMaze, int userGridSpan){
+        int iterations = fullMaze.getSpan() - userGridSpan;
         ArrayList<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
 
         ForkJoinPool mazePool = new ForkJoinPool();
-        HashingThread task = new HashingThread(columnList, fullMaze, grid);
+        HashingThread task = new HashingThread(columnList, fullMaze, userGridSpan);
         mazePool.invoke(task);
     }
 
@@ -46,15 +47,15 @@ class HashingThread extends RecursiveAction {
     private static final ConcurrentHashMap<String, String> PILE = new ConcurrentHashMap<>();
 
     private final Maze maze;
-    private final HexGrid grid;
+    private final int userGridSpan;
     private final List<Integer> colList;
 
     @Override
     protected void compute() {
         if (colList.size() != 1){
             ArrayList<ArrayList<Integer>> splitList = splitList(colList);
-            HashingThread taskOne = new HashingThread(splitList.get(0), maze, grid);
-            HashingThread taskTwo = new HashingThread(splitList.get(1), maze, grid);
+            HashingThread taskOne = new HashingThread(splitList.get(0), maze, userGridSpan);
+            HashingThread taskTwo = new HashingThread(splitList.get(1), maze, userGridSpan);
 
             invokeAll(taskOne, taskTwo);
         } else sequentialWork(colList.get(0));
@@ -68,10 +69,10 @@ class HashingThread extends RecursiveAction {
         return output;
     }
 
-    public HashingThread(ArrayList<Integer> columnList, Maze maze, HexGrid grid){
+    public HashingThread(ArrayList<Integer> columnList, Maze maze, int userGridSpan){
         colList = columnList;
         this.maze = maze;
-        this.grid = grid;
+        this.userGridSpan = userGridSpan;
     }
 
     public static ConcurrentHashMap<String, String> library(){
@@ -79,21 +80,21 @@ class HashingThread extends RecursiveAction {
     }
 
     private void sequentialWork(int col){
-        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns = getColumns(grid.hexport().getSpan(), col);
+        BufferedQueue<BufferedQueue<HexNode>> columns = getColumns(userGridSpan, col);
         int[] startPositions = calculateStartPositions(columns);
         runColumns(columns, startPositions);
     }
 
-    private BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> getColumns(int iteratorSize, int startColumn){
-        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> strippedMaze = maze.exportTo2DQueue();
-        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> outputColumns = new BufferedQueue<>(iteratorSize);
+    private BufferedQueue<BufferedQueue<HexNode>> getColumns(int iteratorSize, int startColumn){
+        BufferedQueue<BufferedQueue<HexNode>> strippedMaze = maze.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexNode>> outputColumns = new BufferedQueue<>(iteratorSize);
         for (int i = startColumn; i < iteratorSize + startColumn; i++)
             outputColumns.add(OldHexComparator.deepCopyList(strippedMaze.get(i)));
 
         return outputColumns;
     }
 
-    private int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns){
+    private int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns){
         int[] positions = new int[columns.cap()];
 
         for(int i = 0; i < columns.cap(); i++)
@@ -124,7 +125,7 @@ class HashingThread extends RecursiveAction {
         return positions;
     }
 
-    private void runColumns(BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns, int[] startPositions){
+    private void runColumns(BufferedQueue<BufferedQueue<HexNode>> columns, int[] startPositions){
         final int hexagonalSideLength = (startPositions.length + 1) / 2;
         final int[] travelDistances = AbstractHexagon.calculateColumnLengths(hexagonalSideLength);
         int[] endPositions = addArrays(travelDistances, startPositions);
@@ -137,7 +138,7 @@ class HashingThread extends RecursiveAction {
                 ArrayList<String> temp = current.hashStrings();
                 PILE.put(temp.get(HexHashLibrary.HASH_STRING_SHAPES), temp.get(HexHashLibrary.HASH_STRING_WALLS));
                 current.rotateColorOrder();
-                current.hexport().rotate();
+                current.rotate();
             }
 
             OldHexComparator.incrementArray(startPositions);
@@ -145,18 +146,18 @@ class HashingThread extends RecursiveAction {
         }
     }
 
-    private boolean notDone(BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns, int[] endPositions){
+    private boolean notDone(BufferedQueue<BufferedQueue<HexNode>> columns, int[] endPositions){
         for (int i = 0; i < columns.cap(); i++)
             if (endPositions[i] > columns.get(i).cap()) return false;
         return true;
     }
 
-    private BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> retrieveHexagon
-            (int[] startPositions, int[] travelDistances,int[] endPositions,
-             BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns){
-        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> hexagon = new BufferedQueue<>(travelDistances.length);
+    private BufferedQueue<BufferedQueue<HexNode>> retrieveHexagon
+            (int[] startPositions, int[] travelDistances, int[] endPositions,
+             BufferedQueue<BufferedQueue<HexNode>> columns){
+        BufferedQueue<BufferedQueue<HexNode>> hexagon = new BufferedQueue<>(travelDistances.length);
         for (int i = 0; i < startPositions.length; i++){
-            BufferedQueue<HexagonDataStructure.HexNode> inputColumn = new BufferedQueue<>(travelDistances[i]);
+            BufferedQueue<HexNode> inputColumn = new BufferedQueue<>(travelDistances[i]);
             for (int j = startPositions[i]; j < endPositions[i]; j++)
                 inputColumn.add(columns.get(i).get(j));
             hexagon.add(inputColumn);

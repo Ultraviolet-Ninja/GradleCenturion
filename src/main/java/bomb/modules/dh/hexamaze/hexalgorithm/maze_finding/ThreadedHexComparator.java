@@ -12,6 +12,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 import java.util.function.BinaryOperator;
 
+@Deprecated
 public class ThreadedHexComparator {
 
     /**
@@ -20,7 +21,7 @@ public class ThreadedHexComparator {
     private ThreadedHexComparator(){}
 
     public static HexGrid evaluate(Maze fullMaze, HexGrid grid){
-        int iterations = fullMaze.hexport().getSpan() - grid.hexport().getSpan();
+        int iterations = fullMaze.getSpan() - grid.getSpan();
         ArrayList<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
@@ -68,7 +69,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
 
     private HexGrid sequentialWork(Maze fullMaze, HexGrid grid, int startColumn){
         BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns =
-                getColumns(fullMaze, grid.hexport().getSpan(), startColumn);
+                getColumns(fullMaze, grid.getSpan(), startColumn);
         int[] startPositions = calculateStartPositions(columns);
         return runColumns(columns, grid, startPositions);
     }

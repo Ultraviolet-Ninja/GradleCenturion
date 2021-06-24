@@ -7,6 +7,7 @@ import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class creates a representation of what hte defuser sees on the Bomb.
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * wouldn't be needed for all Hex objects
  */
 public class HexGrid extends AbstractHexagon{
-    private static final int STANDARD_SIDE_LENGTH = 4;
+    public static final int STANDARD_SIDE_LENGTH = 4;
 
     private final ReadOnlyRing<Color> colorRing;
 
@@ -35,7 +36,7 @@ public class HexGrid extends AbstractHexagon{
      * @throws IllegalArgumentException The side length of the given Hexagon isn't 4
      */
     public HexGrid(HexagonDataStructure grid, int neededRotations) throws IllegalArgumentException{
-        if (grid.sideLength() != STANDARD_SIDE_LENGTH)
+        if (grid.getSideLength() != STANDARD_SIDE_LENGTH)
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
         hexagon = grid;
         colorRing = new ReadOnlyRing<>(6);
@@ -62,6 +63,12 @@ public class HexGrid extends AbstractHexagon{
         for (HexNodeProperties.HexShape shape : shapeList)
             nodeList.add(new HexNode(shape, null));
         hexagon.readInNodeList(nodeList);
+    }
+
+    @Override
+    public void rotate(){
+        hexagon.rotate();
+        rotateColorOrder();
     }
 
     /**
@@ -99,8 +106,8 @@ public class HexGrid extends AbstractHexagon{
         return column.get(values[1]);
     }
 
-    private ArrayList<HexNode> copyNodes(HexagonDataStructure hexagonDataStructure){
-        ArrayList<HexNode> toNewHex = new ArrayList<>(),
+    private List<HexNode> copyNodes(HexagonDataStructure hexagonDataStructure){
+        List<HexNode> toNewHex = new ArrayList<>(),
                 old = hexagonDataStructure.exportToList();
         for (HexNode hexNode : old)
             toNewHex.add(new HexagonDataStructure.HexNode(hexNode));

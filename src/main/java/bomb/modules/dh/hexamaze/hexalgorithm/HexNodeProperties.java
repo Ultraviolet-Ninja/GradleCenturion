@@ -13,13 +13,13 @@ public enum HexNodeProperties {
     public enum HexShape {
         Circle, Hexagon, LeftTriangle, RightTriangle, UpTriangle, DownTriangle;
 
-        public static int shapeOrdinality(HexShape shape){
+        public static int toShapeOrdinal(HexShape shape){
             return shape == null ?
                     DownTriangle.ordinal() + 1 :
                     shape.ordinal();
         }
 
-        public static HexShape fromOrdinality(int num){
+        public static HexShape fromShapeOrdinal(int num){
             for (HexShape shape : HexShape.values()){
                 if (shape.ordinal() == num) return shape;
             }

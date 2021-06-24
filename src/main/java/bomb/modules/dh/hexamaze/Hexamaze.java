@@ -25,7 +25,7 @@ import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
 public class Hexamaze extends Widget{
-    private final static ArrayList<HexShape> hexShapeTracker = new ArrayList<>();
+    private final static ArrayList<HexShape> HEX_SHAPE_TRACKER = new ArrayList<>();
 
     private static ArrayList<HexMazePanel> panelList;
     private static Color pegFillSelector = null, currentPegColor = null;
@@ -56,7 +56,7 @@ public class Hexamaze extends Widget{
      * Sets all elements of the representation to null
      */
     private static void setToNull(){
-        for (int i = 0; i < nodalArea(4); i++) hexShapeTracker.add(null);
+        for (int i = 0; i < nodalArea(4); i++) HEX_SHAPE_TRACKER.add(null);
     }
 
     /**
@@ -112,7 +112,7 @@ public class Hexamaze extends Widget{
      */
     private static void toFill(HexMazePanel panel, int index) {
         panel.setup(new HexNode(currentSelector, null));
-        hexShapeTracker.set(index, currentSelector);
+        HEX_SHAPE_TRACKER.set(index, currentSelector);
     }
 
     public static void setPegFillSelector(){
@@ -140,7 +140,7 @@ public class Hexamaze extends Widget{
      * @throws IllegalArgumentException No sub-maze was found in the maze
      */
     public static void compareToFullMaze() throws IllegalArgumentException{
-        grid.fillWithShapes(hexShapeTracker);
+        grid.fillWithShapes(HEX_SHAPE_TRACKER);
         MazeRunner.getPegInformation(currentPegColor, currentPegLocation, grid.sideLength());
         HexGrid result = HexComparator.findSubsection(maze, grid);
         if(result != null) decipherResults(result);
@@ -155,7 +155,7 @@ public class Hexamaze extends Widget{
     private static void decipherResults(HexGrid hexGrid){
         clearPreviousLines();
         List<Coordinates> exitOrder = MazeRunner.runMaze(hexGrid);
-        ArrayList<HexNode> stream = hexGrid.hexport().exportToList();
+        List<HexNode> stream = hexGrid.hexport().exportToList();
         for (int i = 0; i < stream.size(); i++) panelList.get(i).setup(stream.get(i));
         if (exitOrder != null) HexPanelFiller.fillPanels(exitOrder, panelList, currentPegColor, grid.sideLength());
     }

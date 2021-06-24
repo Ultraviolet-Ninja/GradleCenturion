@@ -19,9 +19,8 @@ public class HexComparator {
 
     private static HexGrid browseFullMaze(Maze fullMaze, HexGrid grid) throws IllegalArgumentException {
         for (int startColumn = 0; startColumn < fullMaze.getSpan() - grid.getSpan(); startColumn++){
-            BufferedQueue<BufferedQueue<HexNode>> columnSet =
-                    accessColumnSet(fullMaze, startColumn, grid.getSpan());
-            int[] startingLocations = calculateStartPositionsV2(columnSet);
+            BufferedQueue<BufferedQueue<HexNode>> columnSet = accessColumnSet(fullMaze, startColumn, grid.getSpan());
+            int[] startingLocations = calculateStartPositions(columnSet);
             HexGrid result = runColumnSet(grid, columnSet, startingLocations);
             if (result != null) return result;
         }
@@ -45,7 +44,7 @@ public class HexComparator {
         return output;
     }
 
-    private static int[] calculateStartPositionsV2(BufferedQueue<BufferedQueue<HexNode>> columns){
+    private static int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns){
         int[] positions = new int[columns.cap()];
         int middleValue = columns.get(columns.cap()/2).cap();
         for(int i = 0; i < columns.cap(); i++){
@@ -97,7 +96,6 @@ public class HexComparator {
             int rotations = fullRotationCompare(grid, currentIterator);
             if (rotations != -1)
                 return new HexGrid(currentIterator, rotations);
-
             incrementArray(startingLocations);
             incrementArray(endPositions);
         }

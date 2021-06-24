@@ -1,12 +1,12 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.maze_finding;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.tools.data.structures.BufferedQueue;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class contains the necessary methods to compare the defuser vision (HexGrid) to the full Maze
@@ -48,7 +48,7 @@ public class OldHexComparator {
         for (int xOffset = 0; xOffset <= (spans[0] - spans[1]); xOffset++) {
             tower = getTower(fullMaze, spans[1], xOffset);
             tower = shaveProtocol(tower,
-                    fullMaze.hexport().sideLength() - (grid.sideLength() + xOffset), grid);
+                    fullMaze.sideLength() - (grid.sideLength() + xOffset), grid);
             int[] pings = AbstractHexagon.calculateColumnLengths(grid.sideLength());
             match = identifyMatch(new HexagonDataStructure(startHexagon(pings, tower), grid.sideLength()),
                     tower, grid, pings);
@@ -139,7 +139,7 @@ public class OldHexComparator {
     private static BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> secondHalfShave
     (BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> tower, int shaveCap, HexGrid grid) {
         int cap = absCap(shaveCap, grid), removalCounter = 1;
-        for (int col = grid.sideLength(); col < grid.hexport().getSpan(); col++)
+        for (int col = grid.sideLength(); col < grid.getSpan(); col++)
             tower.get(col).removeFromHead(Math.min(cap, removalCounter++));
         return tower;
     }
@@ -228,7 +228,7 @@ public class OldHexComparator {
      * @throws IllegalArgumentException If there's a size difference between the two hexagons
      */
     private static boolean compare(HexGrid grid, HexagonDataStructure copy) throws IllegalArgumentException {
-        ArrayList<HexagonDataStructure.HexNode> gridArray = grid.hexport().exportToList(),
+        List<HexagonDataStructure.HexNode> gridArray = grid.hexport().exportToList(),
                 copyArray = copy.exportToList();
         if (gridArray.size() != copyArray.size())
             throw new IllegalArgumentException("Size Difference in compare()");
@@ -259,7 +259,7 @@ public class OldHexComparator {
         BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> rawHex = grid.exportTo2DQueue();
         shaveTop(rawHex);
         appendTo(pings, rawHex, tower);
-        return new HexagonDataStructure(rawHex, grid.sideLength());
+        return new HexagonDataStructure(rawHex, grid.getSideLength());
     }
 
     /**
