@@ -37,7 +37,7 @@ public class HexagonDataStructure {
             fill = deepCopyShape(toCopy.fill);
         }
 
-        private ArrayList<HexWall> deepCopyWalls(ArrayList<HexWall> constructs) {
+        private ArrayList<HexWall> deepCopyWalls(List<HexWall> constructs) {
             ArrayList<HexWall> newWalls = new ArrayList<>();
             for (HexWall construct : constructs) {
                 switch (construct) {
@@ -118,10 +118,15 @@ public class HexagonDataStructure {
             return HexWall.toHash(walls);
         }
 
+        public void recreateWallsFromHash(char letter){
+            walls = deepCopyWalls(HexWall.fromHash(String.valueOf(letter)));
+        }
+
         @Override
         public String toString() {
             StringBuilder sb = new StringBuilder().append(fill != null ? fill.toString() : "No Shape");
             sb.append("-");
+            if (walls == null) return sb.append("No walls").toString();
             for (HexWall wall : this.walls)
                 sb.append(wall.toString()).append(" ");
             return sb.toString();

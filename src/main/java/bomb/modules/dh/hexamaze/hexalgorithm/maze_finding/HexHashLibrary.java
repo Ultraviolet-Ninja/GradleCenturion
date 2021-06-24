@@ -22,24 +22,27 @@ public class HexHashLibrary {
      */
     private HexHashLibrary(){}
 
-    public static void initialize(Maze fullMaze, int userGridSpan){
+    public static void initialize(Maze fullMaze, int userGridSpan) {
         int iterations = fullMaze.getSpan() - userGridSpan;
         ArrayList<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
 
-        ForkJoinPool mazePool = new ForkJoinPool();
+        ForkJoinPool mazePool = new ForkJoinPool(2);
         HashingThread task = new HashingThread(columnList, fullMaze, userGridSpan);
         mazePool.invoke(task);
     }
 
     public static HexGrid find(HexGrid userGrid){
-        String shapeHash = userGrid.hashStrings().get(HexHashLibrary.HASH_STRING_SHAPES);
-        String wallHash = HashingThread.library().get(shapeHash);
-        return null;
+//        String shapeHash = userGrid.hashStrings().get(HexHashLibrary.HASH_STRING_SHAPES);
+        String wallHash = HashingThread.library().get(userGrid.hexport().hashString());
+//        return null;
 
-//        if (hashOut == null) return null;
-//        else return new HexGrid(hashOut);
+        if (wallHash == null) return null;
+        else {
+            userGrid.addWallsToHexagon(wallHash);
+            return userGrid;
+        }
     }
 }
 
@@ -137,7 +140,6 @@ class HashingThread extends RecursiveAction {
             for (int i = 0; i < 6; i++){
                 ArrayList<String> temp = current.hashStrings();
                 PILE.put(temp.get(HexHashLibrary.HASH_STRING_SHAPES), temp.get(HexHashLibrary.HASH_STRING_WALLS));
-                current.rotateColorOrder();
                 current.rotate();
             }
 

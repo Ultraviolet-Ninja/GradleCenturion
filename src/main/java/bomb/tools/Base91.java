@@ -2,7 +2,7 @@ package bomb.tools;
 
 public class Base91 {
     private static final char[] CODEX_STRING =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./:;<=>?@[]^_`{|}~\"".toCharArray();
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./;<=>?@[]^_`{|}~\":".toCharArray();
 
     public static String encrypt(int val){
         if (val < CODEX_STRING.length) return String.valueOf(CODEX_STRING[val]);

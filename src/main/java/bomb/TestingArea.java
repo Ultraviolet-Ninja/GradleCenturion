@@ -1,6 +1,7 @@
 package bomb;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexHashLibrary;
 import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.OldHexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
@@ -21,6 +22,7 @@ public class TestingArea {
         HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
         try{
             maze = new Maze();
+            HexHashLibrary.initialize(maze, bestCase.getSpan());
             testComparators(maze, bestCase);
             testComparators(maze, worstCase);
             testComparators(maze, nullCase);
@@ -87,7 +89,12 @@ public class TestingArea {
         HexComparator.findSubsection(fullMaze, testGrid);
         long threadedStop = System.nanoTime();
 
-        System.out.println("Linear Time: " + format.format(linearStop - linearStart));
-        System.out.println("Threaded time: " + format.format(threadedStop - threadedStart));
+        long hashStart = System.nanoTime();
+        HexHashLibrary.find(testGrid);
+        long hashStop = System.nanoTime();
+
+        System.out.println("Old Linear Time: " + format.format(linearStop - linearStart));
+        System.out.println("New Linear time: " + format.format(threadedStop - threadedStart));
+        System.out.println("New Linear time: " + format.format(hashStop - hashStart));
     }
 }

@@ -90,6 +90,16 @@ public class HexGrid extends AbstractHexagon{
         return colorRing.toArrayList();
     }
 
+    public void addWallsToHexagon(String wallHash){
+        String[] splits = wallHash.split(":");
+        for (int i = 0; i < Integer.parseInt(splits[1]); i++)
+            rotateColorOrder();
+        List<HexNode> stream = hexagon.exportToList();
+        for (int i = 0; i < stream.size(); i++){
+            stream.get(i).recreateWallsFromHash(splits[0].charAt(i));
+        }
+    }
+
 
     /**
      * Gets the HexNode from a specific set of coordinates
@@ -128,12 +138,13 @@ public class HexGrid extends AbstractHexagon{
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
         BufferedQueue<BufferedQueue<HexNode>> queues = hexagon.exportTo2DQueue();
 
-        for (BufferedQueue<HexNode> queue : queues){
-            for (HexNode node : queue){
-                shapeHash.append(node.getShapeHash());
-                wallHash.append(node.getWallHash());
+        for (int x = 0; x < queues.cap(); x++){
+            for (int y = 0; y < queues.get(x).cap(); y++){
+                shapeHash.append(queues.get(x).get(y).getShapeHash());
+                wallHash.append(queues.get(x).get(y).getWallHash());
             }
         }
+        wallHash.append(":").append(colorRing.findIndex(Color.RED));
 
         outputs.add(shapeHash.toString());
         outputs.add(wallHash.toString());
