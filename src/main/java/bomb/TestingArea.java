@@ -1,12 +1,13 @@
 package bomb;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.OldHexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.ThreadedHexComparator;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
 import bomb.tools.Regex;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -79,11 +80,11 @@ public class TestingArea {
 
     private static void testComparators(Maze fullMaze, HexGrid testGrid){
         long linearStart = System.nanoTime();
-        HexComparator.evaluate(fullMaze, testGrid);
+        OldHexComparator.evaluate(fullMaze, testGrid);
         long linearStop = System.nanoTime();
 
         long threadedStart = System.nanoTime();
-        ThreadedHexComparator.evaluate(fullMaze, testGrid);
+        HexComparator.findSubsection(fullMaze, testGrid);
         long threadedStop = System.nanoTime();
 
         System.out.println("Linear Time: " + format.format(linearStop - linearStart));

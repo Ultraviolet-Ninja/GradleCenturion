@@ -4,7 +4,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.tools.data.structures.FixedArrayQueue;
+import bomb.tools.data.structures.BufferedQueue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,23 +67,23 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
     }
 
     private HexGrid sequentialWork(Maze fullMaze, HexGrid grid, int startColumn){
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> columns =
+        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns =
                 getColumns(fullMaze, grid.hexport().getSpan(), startColumn);
         int[] startPositions = calculateStartPositions(columns);
         return runColumns(columns, grid, startPositions);
     }
 
-    private FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> getColumns(Maze fullMaze,
-                                                                                      int iteratorSize, int startColumn){
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> strippedMaze = fullMaze.exportTo2DQueue();
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> outputColumns = new FixedArrayQueue<>(iteratorSize);
+    private BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> getColumns(Maze fullMaze,
+                                                                                  int iteratorSize, int startColumn){
+        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> strippedMaze = fullMaze.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> outputColumns = new BufferedQueue<>(iteratorSize);
         for (int i = startColumn; i < iteratorSize + startColumn; i++)
-            outputColumns.add(HexComparator.deepCopyList(strippedMaze.get(i)));
+            outputColumns.add(OldHexComparator.deepCopyList(strippedMaze.get(i)));
 
         return outputColumns;
     }
 
-    private int[] calculateStartPositions(FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> columns){
+    private int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns){
         int[] positions = new int[columns.cap()];
 
         for(int i = 0; i < columns.cap(); i++)
@@ -114,7 +114,7 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         return positions;
     }
 
-    private HexGrid runColumns(FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> columns, HexGrid grid, int[] startPositions){
+    private HexGrid runColumns(BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns, HexGrid grid, int[] startPositions){
         final int hexagonalSideLength = (startPositions.length + 1) / 2;
         final int[] travelDistances = AbstractHexagon.calculateColumnLengths(hexagonalSideLength);
         int[] endPositions = addArrays(travelDistances, startPositions);
@@ -122,29 +122,29 @@ class ComparatorThread extends RecursiveTask<HexGrid> {
         while(notDone(columns, endPositions)){
             HexagonDataStructure currentIterator = new HexagonDataStructure(retrieveHexagon(startPositions, travelDistances, endPositions, columns),
                     hexagonalSideLength);
-            int rotations = HexComparator.fullRotationCompare(grid, currentIterator);
+            int rotations = OldHexComparator.fullRotationCompare(grid, currentIterator);
             if (rotations != -1)
                 return new HexGrid(currentIterator, rotations);
 
-            HexComparator.incrementArray(startPositions);
-            HexComparator.incrementArray(endPositions);
+            OldHexComparator.incrementArray(startPositions);
+            OldHexComparator.incrementArray(endPositions);
         }
 
         return null;
     }
 
-    private boolean notDone(FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> columns, int[] endPositions){
+    private boolean notDone(BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns, int[] endPositions){
         for (int i = 0; i < columns.cap(); i++)
             if (endPositions[i] > columns.get(i).cap()) return false;
         return true;
     }
 
-    private FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> retrieveHexagon
+    private BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> retrieveHexagon
             (int[] startPositions, int[] travelDistances,int[] endPositions,
-             FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> columns){
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> hexagon = new FixedArrayQueue<>(travelDistances.length);
+             BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> columns){
+        BufferedQueue<BufferedQueue<HexagonDataStructure.HexNode>> hexagon = new BufferedQueue<>(travelDistances.length);
         for (int i = 0; i < startPositions.length; i++){
-            FixedArrayQueue<HexagonDataStructure.HexNode> inputColumn = new FixedArrayQueue<>(travelDistances[i]);
+            BufferedQueue<HexagonDataStructure.HexNode> inputColumn = new BufferedQueue<>(travelDistances[i]);
             for (int j = startPositions[i]; j < endPositions[i]; j++)
                 inputColumn.add(columns.get(i).get(j));
             hexagon.add(inputColumn);

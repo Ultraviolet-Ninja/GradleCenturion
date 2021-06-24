@@ -1,6 +1,7 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
-import bomb.tools.data.structures.FixedArrayQueue;
+import bomb.tools.data.structures.BufferedQueue;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 
 public abstract class AbstractHexagon {
     protected HexagonDataStructure hexagon;
@@ -23,7 +24,7 @@ public abstract class AbstractHexagon {
         return hexagon;
     }
 
-    public FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> exportTo2DQueue(){
+    public BufferedQueue<BufferedQueue<HexNode>> exportTo2DQueue(){
         return hexagon.exportTo2DQueue();
     }
 

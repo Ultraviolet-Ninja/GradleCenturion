@@ -1,8 +1,7 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.*;
-import bomb.tools.data.structures.FixedArrayQueue;
-
+import bomb.tools.data.structures.BufferedQueue;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -126,7 +125,7 @@ public class HexagonDataStructure {
         }
     }
 
-    private FixedArrayQueue<FixedArrayQueue<HexNode>> hexagon;
+    private BufferedQueue<BufferedQueue<HexNode>> hexagon;
     private final byte sideLength;
     private final int span;
 
@@ -137,7 +136,7 @@ public class HexagonDataStructure {
      * @throws IllegalArgumentException - Signals that the specified length is too short
      */
     public HexagonDataStructure(int sideLength) throws IllegalArgumentException {
-        if (sideLength < 128) {
+        if (sideLength < Byte.MAX_VALUE) {
             hexagon = listHexagon((byte) sideLength);
             this.sideLength = (byte) sideLength;
             span = calculateHexagonalSpan();
@@ -151,7 +150,7 @@ public class HexagonDataStructure {
      * @param imports    The List of Lists backing structure
      * @param sideLength The matching side length
      */
-    public HexagonDataStructure(FixedArrayQueue<FixedArrayQueue<HexNode>> imports, int sideLength) {
+    public HexagonDataStructure(BufferedQueue<BufferedQueue<HexNode>> imports, int sideLength) {
         hexagon = imports;
         this.sideLength = (byte) sideLength;
         span = calculateHexagonalSpan();
@@ -167,7 +166,7 @@ public class HexagonDataStructure {
     public HexagonDataStructure(ArrayList<HexNode> imports) throws IllegalArgumentException {
         sideLength = nodalSideLength(imports.size());
         if (sideLength == 0)
-            throw new IllegalArgumentException("Area given did not return an integer");
+            throw new IllegalArgumentException("Given List would not create a complete Hexagon");
         readInNodeList(imports);
         span = calculateHexagonalSpan();
     }
@@ -178,19 +177,19 @@ public class HexagonDataStructure {
      * @param sideLength The given side length of a hexagon
      * @return The FinalList of FinalLists
      */
-    private FixedArrayQueue<FixedArrayQueue<HexNode>> listHexagon(byte sideLength) {
-        FixedArrayQueue<FixedArrayQueue<HexNode>> hex;
+    private BufferedQueue<BufferedQueue<HexNode>> listHexagon(byte sideLength) {
+        BufferedQueue<BufferedQueue<HexNode>> hex;
         if (sideLength > 2) {
             //Initializing the horizontal size of the hex to be 2n-1
-            hex = new FixedArrayQueue<>(2 * sideLength - 1);
+            hex = new BufferedQueue<>(2 * sideLength - 1);
 
             //Adding lists from the starting length to 2n-1
             for (int i = sideLength; i < sideLength * 2; i++)
-                hex.add(new FixedArrayQueue<>(i));
+                hex.add(new BufferedQueue<>(i));
 
             //Adding lists from 2n-2 to starting length
             for (int i = sideLength * 2 - 2; i >= sideLength; i--)
-                hex.add(new FixedArrayQueue<>(i));
+                hex.add(new BufferedQueue<>(i));
             return hex;
         } else throw new IllegalArgumentException("Size is too small");
     }
@@ -212,11 +211,11 @@ public class HexagonDataStructure {
      * @return A successfully streamed FinalList of FinalLists
      * @throws IllegalArgumentException Too few or too many HexNodes were given
      */
-    private FixedArrayQueue<FixedArrayQueue<HexNode>> interpretList(ArrayList<HexNode> newStream)
+    private BufferedQueue<BufferedQueue<HexNode>> interpretList(ArrayList<HexNode> newStream)
             throws IllegalArgumentException {
         if (nodalSideLength(newStream.size()) == 0)
             throw new IllegalArgumentException("Too few nodes were sent: " + newStream.size());
-        FixedArrayQueue<FixedArrayQueue<HexNode>> temp = listHexagon(sideLength);
+        BufferedQueue<BufferedQueue<HexNode>> temp = listHexagon(sideLength);
         for (HexNode hexNode : newStream)
             if (!add(temp, hexNode)) throw new IllegalArgumentException("We have extra nodes being added");
         return temp;
@@ -229,7 +228,7 @@ public class HexagonDataStructure {
      * @param toAdd  The hexNode to add
      * @return False if full
      */
-    private boolean add(FixedArrayQueue<FixedArrayQueue<HexNode>> toFill, HexNode toAdd) {
+    private boolean add(BufferedQueue<BufferedQueue<HexNode>> toFill, HexNode toAdd) {
         for (int i = 0; i < toFill.cap(); i++) {
             if (!toFill.get(i).full()) {
                 toFill.get(i).add(toAdd);
@@ -376,7 +375,7 @@ public class HexagonDataStructure {
      *
      * @return The FinalList of FinalLists of HexNodes
      */
-    public FixedArrayQueue<FixedArrayQueue<HexNode>> exportTo2DQueue() {
+    public BufferedQueue<BufferedQueue<HexNode>> exportTo2DQueue() {
         return hexagon;
     }
 
@@ -461,14 +460,13 @@ public class HexagonDataStructure {
         return (2 * sideLength) - 1;
     }
 
-    @Override
-    public int hashCode() {
+    public String hashString(){
         StringBuilder sb = new StringBuilder();
         for (int x = 0; x < hexagon.cap(); x++){
             for (int y = 0; y < hexagon.get(x).cap(); y++){
                 sb.append(hexagon.get(x).get(y).getShapeHash());
             }
         }
-        return sb.hashCode();
+        return sb.toString();
     }
 }

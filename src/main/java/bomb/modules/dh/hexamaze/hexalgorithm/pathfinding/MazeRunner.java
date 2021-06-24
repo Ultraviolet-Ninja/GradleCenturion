@@ -2,10 +2,10 @@ package bomb.modules.dh.hexamaze.hexalgorithm.pathfinding;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
 import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.FixedArrayQueue;
+import bomb.tools.data.structures.BufferedQueue;
 import javafx.scene.paint.Color;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -117,7 +117,7 @@ public class MazeRunner {
 
     private static List<Coordinates> getRightSide(HexGrid grid){
         ArrayList<Coordinates> output = new ArrayList<>();
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> internals = grid.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         int lastIndex = internals.cap() - 1;
         for (int i = 0; i < internals.get(lastIndex).cap(); i++){
             output.add(new Coordinates(lastIndex, i));
@@ -127,7 +127,7 @@ public class MazeRunner {
 
     private static List<Coordinates> getBottomRightSide(HexGrid grid){
         ArrayList<Coordinates> output = new ArrayList<>();
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> internals = grid.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++){
             output.add(new Coordinates(i, internals.get(i).cap()-1));
         }
@@ -136,7 +136,7 @@ public class MazeRunner {
 
     private static List<Coordinates> getBottomLeftSide(HexGrid grid){
         ArrayList<Coordinates> output = new ArrayList<>();
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> internals = grid.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = 0; i < grid.sideLength(); i++){
             output.add(new Coordinates(i, internals.get(i).cap()-1));
         }
@@ -178,7 +178,7 @@ public class MazeRunner {
     }
 
     private static Graph<Coordinates, DefaultEdge> mapToGraph(HexGrid grid){
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> internals = grid.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         Graph<Coordinates, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
         for (int x = 0; x < internals.cap(); x++){
             for (int y = 0; y < internals.get(x).cap(); y++){
@@ -199,8 +199,8 @@ public class MazeRunner {
 
     private static void mapSingleNode(HexGrid grid, Graph<Coordinates, DefaultEdge> graph,
                                       HexWall correspondingWall, Coordinates from, Coordinates to){
-        HexagonDataStructure.HexNode currentNode = grid.retrieveNode(from);
-        HexagonDataStructure.HexNode checkExists = grid.retrieveNode(to);
+        HexNode currentNode = grid.retrieveNode(from);
+        HexNode checkExists = grid.retrieveNode(to);
 
         if (currentNode.isPathClear(correspondingWall.ordinal()) && checkExists != null) {
             graph.addVertex(from);

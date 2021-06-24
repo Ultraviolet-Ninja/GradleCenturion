@@ -12,7 +12,7 @@ import java.util.ListIterator;
  * to contain a specified set of objects.
  * @param <E> Any object
  */
-public class FixedArrayQueue<E> implements Collection<E>, List<E> {
+public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
     private final LinkedList<E> linkedData;
     private final Object[] data;
     private int size;
@@ -23,7 +23,7 @@ public class FixedArrayQueue<E> implements Collection<E>, List<E> {
      *
      * @param capacity How many objects this can hold
      */
-    public FixedArrayQueue(int capacity){
+    public BufferedQueue(int capacity){
         this.capacity = capacity;
         data = new Object[capacity];
         linkedData = new LinkedList<>();

@@ -1,7 +1,8 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.FixedArrayQueue;
+import bomb.tools.data.structures.BufferedQueue;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.scene.paint.Color;
 
@@ -57,9 +58,9 @@ public class HexGrid extends AbstractHexagon{
      * @param shapeList The ArrayList of shapes to fill the HexGrid
      */
     public void fillWithShapes(ArrayList<HexNodeProperties.HexShape> shapeList){
-        ArrayList<HexagonDataStructure.HexNode> nodeList = new ArrayList<>();
+        ArrayList<HexNode> nodeList = new ArrayList<>();
         for (HexNodeProperties.HexShape shape : shapeList)
-            nodeList.add(new HexagonDataStructure.HexNode(shape, null));
+            nodeList.add(new HexNode(shape, null));
         hexagon.readInNodeList(nodeList);
     }
 
@@ -89,19 +90,19 @@ public class HexGrid extends AbstractHexagon{
      * @param pair The (x,y) combination to get the HexNode at
      * @return The result HexNode
      */
-    public HexagonDataStructure.HexNode retrieveNode(Coordinates pair){
+    public HexNode retrieveNode(Coordinates pair){
         int[] values = pair.getCoords();
         if (values[0] < 0 || values[0] >= hexagon.getSpan()) return null;
-        FixedArrayQueue<HexagonDataStructure.HexNode> column = exportTo2DQueue().get(values[0]);
+        BufferedQueue<HexNode> column = exportTo2DQueue().get(values[0]);
 
         if (values[1] < 0 || values[1] >= column.cap()) return null;
         return column.get(values[1]);
     }
 
-    private ArrayList<HexagonDataStructure.HexNode> copyNodes(HexagonDataStructure hexagonDataStructure){
-        ArrayList<HexagonDataStructure.HexNode> toNewHex = new ArrayList<>(),
+    private ArrayList<HexNode> copyNodes(HexagonDataStructure hexagonDataStructure){
+        ArrayList<HexNode> toNewHex = new ArrayList<>(),
                 old = hexagonDataStructure.exportToList();
-        for (HexagonDataStructure.HexNode hexNode : old)
+        for (HexNode hexNode : old)
             toNewHex.add(new HexagonDataStructure.HexNode(hexNode));
         return toNewHex;
     }
@@ -118,10 +119,10 @@ public class HexGrid extends AbstractHexagon{
     public ArrayList<String> hashStrings(){
         ArrayList<String> outputs = new ArrayList<>(2);
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
-        FixedArrayQueue<FixedArrayQueue<HexagonDataStructure.HexNode>> queues = hexagon.exportTo2DQueue();
+        BufferedQueue<BufferedQueue<HexNode>> queues = hexagon.exportTo2DQueue();
 
-        for (FixedArrayQueue<HexagonDataStructure.HexNode> queue : queues){
-            for (HexagonDataStructure.HexNode node : queue){
+        for (BufferedQueue<HexNode> queue : queues){
+            for (HexNode node : queue){
                 shapeHash.append(node.getShapeHash());
                 wallHash.append(node.getWallHash());
             }

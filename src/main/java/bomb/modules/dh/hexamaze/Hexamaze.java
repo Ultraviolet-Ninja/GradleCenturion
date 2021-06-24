@@ -3,7 +3,7 @@ package bomb.modules.dh.hexamaze;
 import bomb.Widget;
 import bomb.components.hex.HexMazePanel;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.HexPanelFiller;
@@ -111,7 +111,7 @@ public class Hexamaze extends Widget{
      * @param index Where it'll show up in array representation
      */
     private static void toFill(HexMazePanel panel, int index) {
-        panel.setup(new HexagonDataStructure.HexNode(currentSelector, null));
+        panel.setup(new HexNode(currentSelector, null));
         hexShapeTracker.set(index, currentSelector);
     }
 
@@ -142,7 +142,7 @@ public class Hexamaze extends Widget{
     public static void compareToFullMaze() throws IllegalArgumentException{
         grid.fillWithShapes(hexShapeTracker);
         MazeRunner.getPegInformation(currentPegColor, currentPegLocation, grid.sideLength());
-        HexGrid result = HexComparator.evaluate(maze, grid);
+        HexGrid result = HexComparator.findSubsection(maze, grid);
         if(result != null) decipherResults(result);
         else throw new IllegalArgumentException("No resulting maze was found");
     }
@@ -155,7 +155,7 @@ public class Hexamaze extends Widget{
     private static void decipherResults(HexGrid hexGrid){
         clearPreviousLines();
         List<Coordinates> exitOrder = MazeRunner.runMaze(hexGrid);
-        ArrayList<HexagonDataStructure.HexNode> stream = hexGrid.hexport().exportToList();
+        ArrayList<HexNode> stream = hexGrid.hexport().exportToList();
         for (int i = 0; i < stream.size(); i++) panelList.get(i).setup(stream.get(i));
         if (exitOrder != null) HexPanelFiller.fillPanels(exitOrder, panelList, currentPegColor, grid.sideLength());
     }
