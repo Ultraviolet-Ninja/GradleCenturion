@@ -133,6 +133,11 @@ public class HexGrid extends AbstractHexagon{
         colorRing.add(Color.PINK);
     }
 
+    public void resetColorRing(){
+        while (colorRing.getHeadData() != Color.RED)
+            rotateColorOrder();
+    }
+
     public ArrayList<String> hashStrings(){
         ArrayList<String> outputs = new ArrayList<>(2);
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();

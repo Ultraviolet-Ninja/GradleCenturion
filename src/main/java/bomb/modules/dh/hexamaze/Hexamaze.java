@@ -4,8 +4,8 @@ import bomb.Widget;
 import bomb.components.hex.HexMazePanel;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexHashLibrary;
 import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.HexPanelFiller;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeRunner;
@@ -31,16 +31,23 @@ public class Hexamaze extends Widget{
     private static Color pegFillSelector = null, currentPegColor = null;
     private static HexShape currentSelector = null;
     private static int currentPegLocation = -1;
-    private static Maze maze;
     private static HexGrid grid;
 
     static {
         setToNull();
         try{
-            maze = new Maze();
+            HexHashLibrary.initialize(new Maze(), (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
         } catch (IOException ioex){
             ioex.printStackTrace();
         }
+    }
+
+    /**
+     * Sets all elements of the representation to null
+     */
+    private static void setToNull(){
+        for (int i = 0; i < nodalArea(HexGrid.STANDARD_SIDE_LENGTH); i++)
+            HEX_SHAPE_TRACKER.add(null);
     }
 
     /**
@@ -50,14 +57,6 @@ public class Hexamaze extends Widget{
     public static void setupVariables(ArrayList<HexMazePanel> panelArray){
         grid = new HexGrid();
         panelList = panelArray;
-    }
-
-    /**
-     * Sets all elements of the representation to null
-     */
-    private static void setToNull(){
-        for (int i = 0; i < nodalArea(HexGrid.STANDARD_SIDE_LENGTH); i++)
-            HEX_SHAPE_TRACKER.add(null);
     }
 
     /**
@@ -142,8 +141,9 @@ public class Hexamaze extends Widget{
      */
     public static void compareToFullMaze() throws IllegalArgumentException{
         grid.fillWithShapes(HEX_SHAPE_TRACKER);
+        grid.resetColorRing();
         MazeRunner.getPegInformation(currentPegColor, currentPegLocation, grid.sideLength());
-        HexGrid result = HexComparator.findSubsection(maze, grid);
+        HexGrid result = HexHashLibrary.find(grid);
         if(result != null) decipherResults(result);
         else throw new IllegalArgumentException("No resulting maze was found");
     }

@@ -15,19 +15,19 @@ public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
 
     public static void main(String[] args) {
-        Maze maze;
-        HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
-        HexGrid worstCase = fromLine("n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
-        HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
-        try{
-            maze = new Maze();
-            HexHashLibrary.initialize(maze, bestCase.getSpan());
-            testComparators(maze, bestCase);
-            testComparators(maze, worstCase);
-            testComparators(maze, nullCase);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+//        Maze maze;
+//        HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
+//        HexGrid worstCase = fromLine("n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+//        HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+//        try{
+//            maze = new Maze();
+//            HexHashLibrary.initialize(maze, bestCase.getSpan());
+//            testComparators(maze, bestCase);
+//            testComparators(maze, worstCase);
+//            testComparators(maze, nullCase);
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
 
 //        try{
 //            HexGrid bestCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n");
@@ -77,21 +77,21 @@ public class TestingArea {
         return new HexGrid(new HexagonDataStructure(list));
     }
 
-    private static void testComparators(Maze fullMaze, HexGrid testGrid){
-        long linearStart = System.nanoTime();
-        OldHexComparator.evaluate(fullMaze, testGrid);
-        long linearStop = System.nanoTime();
-
-        long threadedStart = System.nanoTime();
-        HexComparator.findSubsection(fullMaze, testGrid);
-        long threadedStop = System.nanoTime();
-
-        long hashStart = System.nanoTime();
-        HexHashLibrary.find(testGrid);
-        long hashStop = System.nanoTime();
-
-        System.out.println("Old Linear Time: " + format.format(linearStop - linearStart));
-        System.out.println("New Linear time: " + format.format(threadedStop - threadedStart));
-        System.out.println("Hash time: " + format.format(hashStop - hashStart));
-    }
+//    private static void testComparators(Maze fullMaze, HexGrid testGrid){
+//        long linearStart = System.nanoTime();
+//        OldHexComparator.evaluate(fullMaze, testGrid);
+//        long linearStop = System.nanoTime();
+//
+//        long threadedStart = System.nanoTime();
+//        HexComparator.findSubsection(fullMaze, testGrid);
+//        long threadedStop = System.nanoTime();
+//
+//        long hashStart = System.nanoTime();
+//        HexHashLibrary.find(testGrid);
+//        long hashStop = System.nanoTime();
+//
+//        System.out.println("Old Linear Time: " + format.format(linearStop - linearStart));
+//        System.out.println("New Linear time: " + format.format(threadedStop - threadedStart));
+//        System.out.println("Hash time: " + format.format(hashStop - hashStart));
+//    }
 }

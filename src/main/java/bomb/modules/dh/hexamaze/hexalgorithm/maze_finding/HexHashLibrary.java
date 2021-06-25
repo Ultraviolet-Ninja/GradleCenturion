@@ -8,7 +8,6 @@ import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.tools.data.structures.BufferedQueue;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ForkJoinPool;
@@ -34,9 +33,7 @@ public class HexHashLibrary {
     }
 
     public static HexGrid find(HexGrid userGrid){
-//        String shapeHash = userGrid.hashStrings().get(HexHashLibrary.HASH_STRING_SHAPES);
         String wallHash = HashingThread.library().get(userGrid.hexport().hashString());
-//        return null;
 
         if (wallHash == null) return null;
         else {
@@ -92,39 +89,57 @@ class HashingThread extends RecursiveAction {
         BufferedQueue<BufferedQueue<HexNode>> strippedMaze = maze.exportTo2DQueue();
         BufferedQueue<BufferedQueue<HexNode>> outputColumns = new BufferedQueue<>(iteratorSize);
         for (int i = startColumn; i < iteratorSize + startColumn; i++)
-            outputColumns.add(OldHexComparator.deepCopyList(strippedMaze.get(i)));
+            outputColumns.add(deepCopyList(strippedMaze.get(i)));
 
         return outputColumns;
     }
 
-    private int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns){
+    private static BufferedQueue<HexNode> deepCopyList(BufferedQueue<HexNode> input) {
+        BufferedQueue<HexNode> output = new BufferedQueue<>(input.cap());
+        for (int i = 0; i < output.cap(); i++)
+            output.add(new HexNode(input.get(i)));
+        return output;
+    }
+
+    private static int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns){
         int[] positions = new int[columns.cap()];
+        int middleValue = columns.get(columns.cap()/2).cap();
+        for(int i = 0; i < columns.cap(); i++){
+            int placeholderValue = columns.get(i).cap() - middleValue;
+            positions[i] = Math.max(placeholderValue, 0);
+        }
 
-        for(int i = 0; i < columns.cap(); i++)
-            positions[i] = columns.get(i).cap();
+        if (arrayIsAllZero(positions))
+            return positions;
 
-        int lastIndex = positions.length - 1,
-                middleIndex = positions.length/2;
+        return verifyPositiveValues(positions, leftHalfHasValues(positions));
+    }
 
-        if (positions[0] < positions[lastIndex]){//We're in the first half of the maze
-            //Alters the second half
-            for (int i = lastIndex; i > middleIndex; i--)
-                positions[i] -= positions[lastIndex - i];
-            //Zeroes out the first half
-            for (int j = 0; j <= middleIndex; j++)
-                positions[j] = 0;
-        } else if (positions[0] > positions[lastIndex]) {//We're in the second half of the maze
-            //Alters the first half
-            for (int i = 0; i < middleIndex; i++)
-                positions[i] -= positions[lastIndex - i];
-            //Zeroes out the second half
-            for (int j = middleIndex; j <= lastIndex; j++)
-                positions[j] = 0;
-        } else Arrays.fill(positions, 0); //We're in the middle columns of the maze
+    private static boolean arrayIsAllZero(int[] array){
+        for (int val : array) {
+            if (val != 0) return false;
+        }
+        return true;
+    }
 
-        for (int i = 0; i < positions.length; i++)
-            positions[i] /= 2;
+    private static boolean leftHalfHasValues(int[] array){
+        for (int i = 0; i < array.length/2; i++){
+            if (array[i] != 0) return true;
+        }
+        return false;
+    }
 
+    private static int[] verifyPositiveValues(int[] positions, boolean leftSideHasValues){
+        if (leftSideHasValues){
+            for (int i = positions.length/2 - 1; i > 0; i--){
+                if (positions[i - 1] < positions[i]) positions[i - 1] = positions[i];
+            }
+            return positions;
+        }
+
+        for (int i = positions.length/2 + 1; i < positions.length - 1; i++){
+            if (positions[i] > positions[i + 1]) positions[i + 1] = positions[i];
+        }
         return positions;
     }
 
@@ -134,7 +149,8 @@ class HashingThread extends RecursiveAction {
         int[] endPositions = addArrays(travelDistances, startPositions);
 
         while(notDone(columns, endPositions)){
-            HexagonDataStructure currentIterator = new HexagonDataStructure(retrieveHexagon(startPositions, travelDistances, endPositions, columns),
+            HexagonDataStructure currentIterator = new HexagonDataStructure(
+                    retrieveHexagon(startPositions, travelDistances, endPositions, columns),
                     hexagonalSideLength);
             HexGrid current = new HexGrid(currentIterator);
             for (int i = 0; i < 6; i++){
@@ -143,9 +159,13 @@ class HashingThread extends RecursiveAction {
                 current.rotate();
             }
 
-            OldHexComparator.incrementArray(startPositions);
-            OldHexComparator.incrementArray(endPositions);
+            incrementArray(startPositions);
+            incrementArray(endPositions);
         }
+    }
+
+    private static void incrementArray(int[] array) {
+        for (int idx = 0; idx < array.length; idx++) array[idx] += 1;
     }
 
     private boolean notDone(BufferedQueue<BufferedQueue<HexNode>> columns, int[] endPositions){
