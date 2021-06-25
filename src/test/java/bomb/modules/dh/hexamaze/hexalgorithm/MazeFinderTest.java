@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import static org.testng.Assert.fail;
 
 public class MazeFinderTest {
@@ -22,13 +23,18 @@ public class MazeFinderTest {
         }
     }
 
+    @Test
+    public void nullTest(){
+        HexGrid nullState =
+                hexagonFromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+        assertNull(HexHashLibrary.find(nullState));
+    }
+
     @DataProvider
     public Object[][] comparatorProvider(){
         return new Object[][]{
                 {"n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n"},
                 {"n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n"}
-//                ,
-//                {"n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n"}
         };
     }
 
