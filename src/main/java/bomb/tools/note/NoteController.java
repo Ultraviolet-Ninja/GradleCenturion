@@ -5,13 +5,13 @@ import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class NoteController implements Resettable {
     private static final int SIZE_LIMIT = 5;
 
-    private final Set<NotePageController> extraNotes = new HashSet<>(SIZE_LIMIT);
+    private final List<NotePageController> extraNotes = new ArrayList<>(SIZE_LIMIT);
 
     @FXML
     private void addNoteWindow() {
@@ -24,8 +24,9 @@ public class NoteController implements Resettable {
 
     @Override
     public void reset() {
-        for (NotePageController page : extraNotes)
-            page.close();
+        for (int i = extraNotes.size() - 1; i >= 0; i--){
+            extraNotes.get(i).close();
+        }
         extraNotes.clear();
     }
 }

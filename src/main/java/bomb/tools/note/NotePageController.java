@@ -5,14 +5,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.List;
 
 public class NotePageController extends Stage {
     private static final int HEIGHT = 400, WIDTH = 600;
 
-    private final Set<NotePageController> internalReference;
+    private final List<NotePageController> internalReference;
 
-    public NotePageController(Set<NotePageController> internalReference){
+    public NotePageController(List<NotePageController> internalReference){
         super();
         this.internalReference = internalReference;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("note.fxml"));
