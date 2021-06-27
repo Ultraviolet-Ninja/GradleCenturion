@@ -1,15 +1,8 @@
 package bomb;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.Hex;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexComparator;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
-import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.MazeRunner;
-import bomb.modules.dh.hexamaze.hexalgorithm.ThreadedHexComparator;
-import bomb.tools.Regex;
-import javafx.scene.paint.Color;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -23,6 +16,7 @@ public class TestingArea {
 //        HexGrid nullCase = fromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
 //        try{
 //            maze = new Maze();
+//            HexHashLibrary.initialize(maze, bestCase.getSpan());
 //            testComparators(maze, bestCase);
 //            testComparators(maze, worstCase);
 //            testComparators(maze, nullCase);
@@ -69,27 +63,30 @@ public class TestingArea {
 //        } catch (IOException e){
 //            e.printStackTrace();
 //        }
-        Regex regex = new Regex("(s)", "Astrology");
-        System.out.println(regex.hasMatch());
     }
 
     private static HexGrid fromLine(String line){
-        ArrayList<Hex.HexNode> list = new ArrayList<>();
+        ArrayList<HexagonDataStructure.HexNode> list = new ArrayList<>();
         for (String shape : line.split(","))
-            list.add(new Hex.HexNode(Hex.decodeShape(shape), null));
-        return new HexGrid(new Hex(list));
+            list.add(new HexagonDataStructure.HexNode(HexagonDataStructure.decodeShape(shape), null));
+        return new HexGrid(new HexagonDataStructure(list));
     }
 
-    private static void testComparators(Maze fullMaze, HexGrid testGrid){
-        long linearStart = System.nanoTime();
-        HexComparator.evaluate(fullMaze, testGrid);
-        long linearStop = System.nanoTime();
-
-        long threadedStart = System.nanoTime();
-        ThreadedHexComparator.evaluate(fullMaze, testGrid);
-        long threadedStop = System.nanoTime();
-
-        System.out.println("Linear Time: " + format.format(linearStop - linearStart));
-        System.out.println("Threaded time: " + format.format(threadedStop - threadedStart));
-    }
+//    private static void testComparators(Maze fullMaze, HexGrid testGrid){
+//        long linearStart = System.nanoTime();
+//        OldHexComparator.evaluate(fullMaze, testGrid);
+//        long linearStop = System.nanoTime();
+//
+//        long threadedStart = System.nanoTime();
+//        HexComparator.findSubsection(fullMaze, testGrid);
+//        long threadedStop = System.nanoTime();
+//
+//        long hashStart = System.nanoTime();
+//        HexHashLibrary.find(testGrid);
+//        long hashStop = System.nanoTime();
+//
+//        System.out.println("Old Linear Time: " + format.format(linearStop - linearStart));
+//        System.out.println("New Linear time: " + format.format(threadedStop - threadedStart));
+//        System.out.println("Hash time: " + format.format(hashStop - hashStart));
+//    }
 }

@@ -1,30 +1,35 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
-import bomb.tools.data.structures.FixedArrayQueue;
+import bomb.tools.data.structures.BufferedQueue;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 
 public abstract class AbstractHexagon {
-    protected Hex hexagon;
+    protected HexagonDataStructure hexagon;
 
     public AbstractHexagon(){hexagon = null;}
 
-    public AbstractHexagon(Hex hexagon){
+    public AbstractHexagon(HexagonDataStructure hexagon){
         this.hexagon = hexagon;
     }
 
     public int sideLength() {
-        return hexagon.sideLength();
+        return hexagon.getSideLength();
     }
 
     public int getSpan(){
         return hexagon.getSpan();
     }
 
-    public Hex hexport(){
+    public HexagonDataStructure hexport(){
         return hexagon;
     }
 
-    public FixedArrayQueue<FixedArrayQueue<Hex.HexNode>> exportTo2DQueue(){
+    public BufferedQueue<BufferedQueue<HexNode>> exportTo2DQueue(){
         return hexagon.exportTo2DQueue();
+    }
+
+    public void rotate(){
+        hexagon.rotate();
     }
 
     public static int[] calculateColumnLengths(int sideLength){

@@ -3,6 +3,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.modules.dh.hexamaze.HexTraits;
 import bomb.tools.data.structures.FixedArrayQueue;
 
+@Deprecated
 public class MazeFencer {
     private MazeFencer(){}
 
