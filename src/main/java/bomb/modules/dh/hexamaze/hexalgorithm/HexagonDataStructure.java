@@ -101,6 +101,11 @@ public class HexagonDataStructure {
             return ((HexNode)obj).fill == this.fill && hasMatchingWalls(((HexNode)obj).walls);
         }
 
+        @Override
+        public int hashCode() {
+            return getWallHash().hashCode() + 31 * getShapeHash();
+        }
+
         private boolean hasMatchingWalls(ArrayList<HexWall> toCompare){
             if (this.walls.size() != toCompare.size()) return false;
             for (HexWall wall : toCompare){
