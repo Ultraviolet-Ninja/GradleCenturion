@@ -6,9 +6,7 @@ import javafx.scene.paint.Color;
 
 import java.util.LinkedList;
 
-/**
- *
- */
+@Deprecated
 public class OldMazeRunner {
     private static Color currentPegColor;
     private static Coordinates currentLocation;

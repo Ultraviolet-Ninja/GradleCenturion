@@ -2,12 +2,7 @@ package bomb;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
-import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexComparator;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexHashLibrary;
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.OldHexComparator;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 

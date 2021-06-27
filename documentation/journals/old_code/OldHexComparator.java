@@ -14,6 +14,7 @@ import java.util.List;
  * The methods use for loops to simulate the stencil from the interactive Hexamaze site assuming the
  * stencil starts in the top left, iterates down the first set of columns, moves over a row and repeats.
  */
+@Deprecated
 public class OldHexComparator {
     /**
      * Don't let anyone instantiate this class

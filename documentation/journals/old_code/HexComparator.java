@@ -7,6 +7,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import bomb.tools.data.structures.BufferedQueue;
 
+@Deprecated
 public class HexComparator {
 
     private HexComparator(){}
