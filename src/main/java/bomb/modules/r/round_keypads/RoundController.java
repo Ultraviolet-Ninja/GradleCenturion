@@ -1,6 +1,6 @@
 package bomb.modules.r.round_keypads;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;

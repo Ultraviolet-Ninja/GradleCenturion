@@ -1,6 +1,6 @@
 package bomb.modules.s.semaphore;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class SemaphoreController implements Resettable {
     @Override

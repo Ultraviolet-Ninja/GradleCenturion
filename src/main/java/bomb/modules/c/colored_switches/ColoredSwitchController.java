@@ -1,6 +1,6 @@
 package bomb.modules.c.colored_switches;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class ColoredSwitchController implements Resettable {
     @Override

@@ -1,6 +1,6 @@
 package bomb.enumerations;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 /**
  * TriState deals with anything that needs to have 3 states of existence: On, Off or Unknown.

@@ -1,6 +1,6 @@
 package bomb.modules.wz.zoo;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class ZooController implements Resettable {
     @Override

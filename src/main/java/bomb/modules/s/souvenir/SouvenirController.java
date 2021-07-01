@@ -1,6 +1,6 @@
 package bomb.modules.s.souvenir;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;

@@ -1,6 +1,6 @@
 package bomb.modules.c.caesar;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class CaesarController implements Resettable {
     @Override
