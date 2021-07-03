@@ -2,3 +2,11 @@
     -fx-base: #0B234C;
     -fx-font-weight: bold;
 }
+
+.submit-button{
+    -fx-base: #FFCD99;
+    -fx-text-fill: #221b18;
+    -fx-font-weight: lighter;
+    -fx-font-family: Tahoma;
+    -fx-font-size: 20;
+}

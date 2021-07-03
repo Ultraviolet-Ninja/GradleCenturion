@@ -1,6 +1,6 @@
 package bomb;
 
-import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import eu.hansolo.medusa.Gauge;
 import eu.hansolo.medusa.skins.LinearSkin;
 import javafx.application.Application;
@@ -20,7 +20,14 @@ public class TestAreaFX extends Application {
         gauge.setSkin(new LinearSkin(gauge));
         Pane display = new Pane();
 //        display.getChildren().add(gauge);
-        display.getChildren().add(new JFXButton("Test"));
+        JFXTextField field = new JFXTextField();
+        field.setLabelFloat(true);
+        field.setPromptText("Floating prompt");
+        JFXTextField field2 = new JFXTextField();
+        field2.setLabelFloat(true);
+        field2.setPromptText("Floating prompt");
+        display.getChildren().add(field);
+        display.getChildren().add(field2);
         Scene scene = new Scene(display, 300, 250);
         primaryStage.setTitle("Gauge Example");
         primaryStage.setScene(scene);
