@@ -1,6 +1,6 @@
 package bomb.enumerations;
 
-import bomb.interfaces.Ternary;
+import bomb.abstractions.Ternary;
 
 public enum Indicator implements Ternary {
     BOB(TriState.UNKNOWN), CAR(TriState.UNKNOWN), CLR(TriState.UNKNOWN),

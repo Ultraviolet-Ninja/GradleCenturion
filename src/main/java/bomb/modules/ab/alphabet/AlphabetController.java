@@ -1,6 +1,6 @@
 package bomb.modules.ab.alphabet;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;

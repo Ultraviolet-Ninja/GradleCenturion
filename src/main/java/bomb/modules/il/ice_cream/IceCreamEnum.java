@@ -1,6 +1,6 @@
 package bomb.modules.il.ice_cream;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 public enum IceCreamEnum {
     ;

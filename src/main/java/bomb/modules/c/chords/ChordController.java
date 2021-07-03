@@ -1,6 +1,6 @@
 package bomb.modules.c.chords;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;

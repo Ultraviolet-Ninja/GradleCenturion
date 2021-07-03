@@ -83,13 +83,6 @@ public class HexGrid extends AbstractHexagon{
         return colorRing;
     }
 
-    /**
-     * @return The ReadOnlyRing in its current rotational order
-     */
-    public ArrayList<Color> getOrder() {
-        return colorRing.toArrayList();
-    }
-
     public void addWallsToHexagon(String wallHash){
         String[] splits = wallHash.split(":");
         for (int i = 0; i < Integer.parseInt(splits[1]); i++)

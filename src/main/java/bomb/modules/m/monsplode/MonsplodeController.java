@@ -1,6 +1,6 @@
 package bomb.modules.m.monsplode;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class MonsplodeController implements Resettable {
     @Override

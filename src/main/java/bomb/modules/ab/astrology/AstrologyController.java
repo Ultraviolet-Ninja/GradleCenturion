@@ -1,6 +1,6 @@
 package bomb.modules.ab.astrology;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

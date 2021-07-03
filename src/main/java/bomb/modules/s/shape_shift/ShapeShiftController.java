@@ -1,6 +1,6 @@
 package bomb.modules.s.shape_shift;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.fxml.FXML;
 

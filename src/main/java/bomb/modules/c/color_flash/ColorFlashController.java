@@ -1,6 +1,6 @@
 package bomb.modules.c.color_flash;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class ColorFlashController implements Resettable {
     @Override

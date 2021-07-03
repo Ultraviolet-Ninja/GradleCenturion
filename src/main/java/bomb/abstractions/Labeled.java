@@ -1,4 +1,4 @@
-package bomb.interfaces;
+package bomb.abstractions;
 
 public interface Labeled {
     String getLabel();

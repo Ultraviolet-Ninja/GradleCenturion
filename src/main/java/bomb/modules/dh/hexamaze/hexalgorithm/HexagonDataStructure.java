@@ -16,7 +16,7 @@ public class HexagonDataStructure {
     /**
      * This class is the backing node to a given hexagon data structure.
      */
-    public static final class HexNode {
+    public static final class HexNode extends EquatableObject {
         public ArrayList<HexWall> walls;
         public HexShape fill;
 
@@ -103,7 +103,7 @@ public class HexagonDataStructure {
 
         @Override
         public int hashCode() {
-            return getWallHash().hashCode() + 31 * getShapeHash();
+            return HASHING_NUMBER * getShapeHash() + ((walls != null) ? getWallHash().hashCode() : 0);
         }
 
         private boolean hasMatchingWalls(ArrayList<HexWall> toCompare){

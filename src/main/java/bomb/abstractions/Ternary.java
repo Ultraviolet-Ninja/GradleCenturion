@@ -1,4 +1,4 @@
-package bomb.interfaces;
+package bomb.abstractions;
 
 import bomb.enumerations.TriState;
 
