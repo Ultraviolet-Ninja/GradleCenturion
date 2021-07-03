@@ -1,5 +1,6 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
+import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
 import bomb.tools.data.structures.BufferedQueue;

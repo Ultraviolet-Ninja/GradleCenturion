@@ -1,6 +1,8 @@
-package bomb.modules.dh.hexamaze.hexalgorithm;
+package bomb.modules.dh.hexamaze.hexalgorithm.maze_finding;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.HexHashLibrary;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
