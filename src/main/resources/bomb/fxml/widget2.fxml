@@ -1,10 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
-      prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
-<!--      fx:controller="bomb.WidgetController">-->
-    <JFXTextField labelFloat="true" >
-
-    </JFXTextField>
-</Pane>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+          prefWidth="1160.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.202-ea">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="573.0" minWidth="10.0" prefWidth="430.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="730.0" minWidth="10.0" prefWidth="730.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox prefHeight="770.0" prefWidth="392.0">
+         <children>
+            <JFXTextField />
+         </children>
+      </VBox>
+   </children>
+</GridPane>

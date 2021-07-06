@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-            prefWidth="1400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="bomb.ManualController" stylesheets="@css/manual.css" id="background">
     <center>
         <Pane fx:id="displayPane" prefHeight="760.0" prefWidth="1160.0" BorderPane.alignment="CENTER"/>

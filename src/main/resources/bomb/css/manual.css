@@ -1,9 +1,14 @@
 #background {
     -fx-base: #0B234C;
-    -fx-font-weight: bold;
 }
 
-.submit-button{
+#puzzle-radio-button{
+    -jfx-unselected-color: #8d8d8d;
+    -jfx-selected-color: white;
+    -fx-font-size: 19;
+}
+
+#submit-button{
     -fx-base: #FFCD99;
     -fx-text-fill: #221b18;
     -fx-font-weight: lighter;

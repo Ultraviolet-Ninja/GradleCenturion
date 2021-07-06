@@ -23,13 +23,8 @@ public class TestAreaFX extends Application {
         JFXTextField field = new JFXTextField();
         field.setLabelFloat(true);
         field.setPromptText("Floating prompt");
-        JFXTextField field2 = new JFXTextField();
-        field2.setLabelFloat(true);
-        field2.setPromptText("Floating prompt");
         display.getChildren().add(field);
-        display.getChildren().add(field2);
         Scene scene = new Scene(display, 300, 250);
-        primaryStage.setTitle("Gauge Example");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
