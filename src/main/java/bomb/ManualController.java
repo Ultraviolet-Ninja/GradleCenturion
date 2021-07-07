@@ -7,7 +7,6 @@ import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
 import bomb.tools.observer.ResetObserver;
 import bomb.tools.observer.SouvenirObserver;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -26,6 +25,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -36,15 +36,15 @@ import static bomb.tools.observer.ObserverHub.ObserverIndex.BLIND_ALLEY;
 
 public class ManualController {
     private Map<String, Region> regionMap;
-    private ArrayList<Node> allRadioButtons;
+    private List<Node> allRadioButtons;
 
-    @FXML private Pane displayPane;
+    @FXML private Pane solutionDisplay;
 
     @FXML private RadioButton forgetMeNot, souvenir;
 
     @FXML private TextField searchBar;
 
-    @FXML private ToggleGroup group;
+    @FXML private ToggleGroup options;
 
     @FXML private VBox radioButtonHouse;
 
@@ -57,14 +57,14 @@ public class ManualController {
 
     @FXML
     public void buttonPress() {
-        String selected = FacadeFX.getToggleName(group);
+        String selected = FacadeFX.getToggleName(options);
         if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY);
         paneSwitch(regionMap.get(selected));
     }
 
     private void paneSwitch(final Region pane) {
-        displayPane.getChildren().clear();
-        displayPane.getChildren().add(pane);
+        solutionDisplay.getChildren().clear();
+        solutionDisplay.getChildren().add(pane);
     }
 
     @FXML
@@ -86,11 +86,11 @@ public class ManualController {
 
     private void setupMap() throws IllegalArgumentException{
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
-        ArrayList<Toggle> nameList = new ArrayList<>(group.getToggles());
-        ArrayList<String> formattedNameList = formatWords(nameList.iterator()),
+        List<Toggle> nameList = new ArrayList<>(options.getToggles());
+        List<String> formattedNameList = formatWords(nameList.iterator()),
                 paneLocations = filesFromFolder(new File(path)),
                 filteredLocations = filterLocations(paneLocations);
-        ArrayList<Pane> paneList = panesFromFolder(paneLocations);
+        List<Pane> paneList = panesFromFolder(paneLocations);
         setPairs(nameList, formattedNameList, paneList, filteredLocations);
     }
 
@@ -104,7 +104,7 @@ public class ManualController {
         return list;
     }
 
-    private ArrayList<Pane> panesFromFolder(ArrayList<String> fileLocations) {
+    private ArrayList<Pane> panesFromFolder(List<String> fileLocations) {
         ArrayList<Pane> paneList = new ArrayList<>();
         ResetObserver observer = new ResetObserver();
         try {
@@ -136,7 +136,7 @@ public class ManualController {
         return list;
     }
 
-    private ArrayList<String> filterLocations(ArrayList<String> originalLocations){
+    private ArrayList<String> filterLocations(List<String> originalLocations){
         ArrayList<String> outputList = new ArrayList<>();
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);
@@ -144,8 +144,8 @@ public class ManualController {
         return outputList;
     }
 
-    private void setPairs(ArrayList<Toggle> toggleList, ArrayList<String> toggleListFormatted,
-                          ArrayList<Pane> paneList, ArrayList<String> paneLocationsFormatted){
+    private void setPairs(List<Toggle> toggleList, List<String> toggleListFormatted,
+                          List<Pane> paneList, List<String> paneLocationsFormatted){
         regionMap = new HashMap<>();
         for (int i = 0; i < toggleList.size(); i++){
             String keyText = ((ToggleButton)toggleList.get(i)).getText();
