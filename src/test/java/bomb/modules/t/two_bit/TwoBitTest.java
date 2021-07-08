@@ -59,10 +59,9 @@ public class TwoBitTest {
 
     private void widgetSetupOne(){
         Widget.setPlates(2);
-        Widget.addPort(Port.RJ45);
-        Widget.addPort(Port.PS2);
-        Widget.addPort(Port.PS2);
-        Widget.addPort(Port.RCA);
+        Widget.setPortValue(Port.RJ45,1);
+        Widget.setPortValue(Port.PS2, 2);
+        Widget.setPortValue(Port.RCA,1);
         Widget.setSerialCode("AI3ZC1");
     }
 

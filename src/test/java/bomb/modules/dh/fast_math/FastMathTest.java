@@ -42,8 +42,8 @@ public class FastMathTest {
 
     @Test(dataProvider = "allPreconditionProvider")
     public void allPreconditionTest(String expected, String input){
-        Widget.addPort(Port.SERIAL);
-        Widget.addPort(Port.RJ45);
+        Widget.setPortValue(Port.SERIAL,1);
+        Widget.setPortValue(Port.RJ45,1);
         Widget.setIndicator(TriState.ON, Indicator.MSA);
         Widget.setDBatteries(4);
         Widget.setSerialCode("fr4op2"); //In total, adds 41 to the count

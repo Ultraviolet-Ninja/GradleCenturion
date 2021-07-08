@@ -3,13 +3,13 @@ package bomb.modules.ab.bitwise;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.enumerations.Port.PARALLEL;
 import static bomb.modules.ab.bitwise.BitwiseOps.AND;
 import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
 import static bomb.modules.ab.bitwise.BitwiseOps.OR;
@@ -88,7 +88,7 @@ public class BitwiseTest {
     }
 
     private void maximizeConditions(){
-        for (int i = 2; i >= 0; i--) Widget.addPort(Port.PARALLEL);
+        Widget.setPortValue(PARALLEL, 3);
         Widget.setIndicator(TriState.ON, Indicator.BOB);
         Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.setIndicator(TriState.OFF, Indicator.CLR);

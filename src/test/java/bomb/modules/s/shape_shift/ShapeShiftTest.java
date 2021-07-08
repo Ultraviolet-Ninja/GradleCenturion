@@ -63,9 +63,8 @@ public class ShapeShiftTest {
         Widget.setSerialCode("ee3eu3");
         Widget.setDBatteries(3);
         Widget.setNumHolders(3);
-        Widget.addPort(Port.PARALLEL);
-        Widget.addPort(Port.PARALLEL);
-        Widget.addPort(Port.SERIAL);
+        Widget.setPortValue(Port.PARALLEL,2);
+        Widget.setPortValue(Port.SERIAL,1);
     }
 
     private void testTwoSetup(){

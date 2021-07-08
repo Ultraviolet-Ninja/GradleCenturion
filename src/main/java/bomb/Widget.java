@@ -15,7 +15,7 @@ import static bomb.tools.Filter.*;
  * as well as the MainController to add/subtract to the widgets.
  */
 public class Widget {
-    private static final int LOWER_PORT_LIMIT = 0, UPPER_PORT_LIMIT = 10;
+    private static final int UPPER_PORT_LIMIT = 10;
 
     protected static boolean souvenir = false, forgetMeNot = false;
     protected static int numDoubleAs = 0,
@@ -154,29 +154,9 @@ public class Widget {
     }
 
     /**
-     * Adds to the count a specified port, with a max of 9
-     *
-     * @param which The port to add on
+     * @param which The port to add to
+     * @param newValue The value that will overwrite the array location
      */
-    public static void addPort(Port which){
-        if (ports[which.ordinal()] < UPPER_PORT_LIMIT){
-            ports[which.ordinal()]++;
-            BlindAlley.alleyUpdate();
-        }
-    }
-
-    /**
-     * Subtracts from the count of a specified port, with a minimum of 0
-     *
-     * @param which The port to subtract
-     */
-    public static void subPort(Port which){
-        if (ports[which.ordinal()] > LOWER_PORT_LIMIT){
-            ports[which.ordinal()]--;
-            BlindAlley.alleyUpdate();
-        }
-    }
-
     public static void setPortValue(Port which, int newValue){
         ports[which.ordinal()] = newValue;
         BlindAlley.alleyUpdate();

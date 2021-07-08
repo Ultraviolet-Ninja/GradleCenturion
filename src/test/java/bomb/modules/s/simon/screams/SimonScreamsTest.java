@@ -71,10 +71,10 @@ public class SimonScreamsTest {
         Widget.setIndicator(TriState.OFF, Indicator.TRN);
         Widget.setSerialCode("zr6dt6");
         Widget.setPlates(1);
-        Widget.addPort(Port.RCA);
-        Widget.addPort(Port.RJ45);
-        Widget.addPort(Port.DVI);
-        Widget.addPort(Port.PS2);
+        Widget.setPortValue(Port.RCA,1);
+        Widget.setPortValue(Port.RJ45,1);
+        Widget.setPortValue(Port.DVI,1);
+        Widget.setPortValue(Port.PS2,1);
         SimonScreams.init(new Screams[]{PURPLE, ORANGE, RED, GREEN, BLUE, YELLOW});
     }
 

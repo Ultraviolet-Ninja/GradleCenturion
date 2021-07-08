@@ -55,7 +55,7 @@ public class LaundryTest {
     private void setupOne(){
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
-        Widget.addPort(Port.SERIAL);
+        Widget.setPortValue(Port.SERIAL,1);
         Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.setNumHolders(2);
         Widget.setSerialCode("g64dv1");
@@ -70,7 +70,7 @@ public class LaundryTest {
         Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.setIndicator(TriState.OFF, Indicator.FRQ);
         Widget.setPlates(1);
-        Widget.addPort(Port.PARALLEL);
+        Widget.setPortValue(Port.PARALLEL,1);
     }
 
     @DataProvider

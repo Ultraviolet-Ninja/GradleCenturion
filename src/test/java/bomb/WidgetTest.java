@@ -1,7 +1,6 @@
 package bomb;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -93,36 +92,6 @@ public class WidgetTest {
 
         assertEquals(Widget.getAllBatteries(), expected);
         assertEquals(Widget.numDoubleAs, expected);
-    }
-
-    @Test
-    public void addPortTest(){
-        for (int i = 0; i < 11; i++){
-            Widget.addPort(Port.PARALLEL);
-        }
-
-        assertEquals(Widget.getPort(Port.PARALLEL), 10);
-    }
-
-    @DataProvider
-    public Object[][] subtractPortProvider(){
-        ConditionSetter subOnly = () -> Widget.subPort(Port.PARALLEL);
-        ConditionSetter addThenSubtract = () -> {
-            Widget.addPort(Port.PARALLEL);
-            Widget.addPort(Port.PARALLEL);
-            Widget.addPort(Port.PARALLEL);
-            Widget.subPort(Port.PARALLEL);
-        };
-        return new Object[][]{
-                {subOnly, 0}, {addThenSubtract, 2}
-        };
-    }
-
-    @Test(dataProvider = "subtractPortProvider")
-    public void subtractPortTest(ConditionSetter conditions, int expected){
-        conditions.setCondition();
-
-        assertEquals(Widget.getPort(Port.PARALLEL), expected);
     }
 
     @DataProvider

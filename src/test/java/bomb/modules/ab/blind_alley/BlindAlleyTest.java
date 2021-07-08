@@ -36,11 +36,11 @@ public class BlindAlleyTest {
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
         Widget.setIndicator(TriState.ON, Indicator.CAR);
-        Widget.addPort(Port.DVI);
-        Widget.addPort(Port.RJ45);
-        Widget.addPort(Port.PS2);
-        Widget.addPort(Port.PARALLEL);
-        Widget.addPort(Port.SERIAL);
+        Widget.setPortValue(Port.DVI,1);
+        Widget.setPortValue(Port.RJ45,1);
+        Widget.setPortValue(Port.PS2,1);
+        Widget.setPortValue(Port.PARALLEL,1);
+        Widget.setPortValue(Port.SERIAL,1);
         Widget.setPlates(2);
     }
 
@@ -54,11 +54,11 @@ public class BlindAlleyTest {
         Widget.setNumHolders(1);
         Widget.setDoubleAs(2);
         Widget.setPlates(2);
-        Widget.addPort(Port.DVI);
-        Widget.addPort(Port.RJ45);
-        Widget.addPort(Port.PS2);
-        Widget.addPort(Port.PARALLEL);
-        Widget.addPort(Port.RCA);
+        Widget.setPortValue(Port.DVI,1);
+        Widget.setPortValue(Port.RJ45,1);
+        Widget.setPortValue(Port.PS2,1);
+        Widget.setPortValue(Port.PARALLEL,1);
+        Widget.setPortValue(Port.RCA,1);
         Widget.setSerialCode("718pz5");
         Widget.setIndicator(TriState.ON, Indicator.SND);
         Widget.setIndicator(TriState.OFF, Indicator.FRQ);
