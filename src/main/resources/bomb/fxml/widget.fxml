@@ -171,13 +171,13 @@
                             <children>
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                     <children>
-                                        <Label text="Double A Batteries" />
-                                        <JFXSlider id="battery-slider" fx:id="doubleABatteries" blockIncrement="2.0" majorTickUnit="2.0" max="20.0" minorTickCount="0" onMouseClicked="#doubleABatterySliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                        <Label id="everything-else-label" text="Double A Batteries" />
+                                        <JFXSlider id="battery-slider" fx:id="doubleABatteries" blockIncrement="2.0" majorTickUnit="2.0" max="10.0" minorTickCount="0" onMouseClicked="#doubleABatterySliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                             <VBox.margin>
                                                 <Insets bottom="30.0" />
                                             </VBox.margin>
                                         </JFXSlider>
-                                        <Label layoutX="114.0" layoutY="144.0" text="D Batteries">
+                                        <Label id="everything-else-label" layoutX="114.0" layoutY="144.0" text="D Batteries">
                                             <VBox.margin>
                                                 <Insets top="30.0" />
                                             </VBox.margin>
@@ -187,13 +187,13 @@
                                 </VBox>
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                     <children>
-                                        <Label text="Port Plates" />
+                                        <Label id="everything-else-label" text="Port Plates" />
                                         <JFXSlider id="holder-slider" fx:id="portPlates" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#portPlateSliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                             <VBox.margin>
                                                 <Insets bottom="30.0" />
                                             </VBox.margin>
                                         </JFXSlider>
-                                        <Label text="Battery Holders">
+                                        <Label id="everything-else-label" text="Battery Holders">
                                             <VBox.margin>
                                                 <Insets top="30.0" />
                                             </VBox.margin>

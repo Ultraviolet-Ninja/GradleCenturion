@@ -15,8 +15,6 @@ import static bomb.tools.Filter.*;
  * as well as the MainController to add/subtract to the widgets.
  */
 public class Widget {
-    private static final int UPPER_PORT_LIMIT = 10;
-
     protected static boolean souvenir = false, forgetMeNot = false;
     protected static int numDoubleAs = 0,
             numDBatteries = 0,

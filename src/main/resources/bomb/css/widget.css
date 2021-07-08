@@ -1,5 +1,5 @@
 #major-title {
-    -fx-font-size: 22;
+    -fx-font-size: 24;
     -fx-underline: true;
 }
 
@@ -9,6 +9,10 @@
     -jfx-unfocus-color: #0B234C;
     -fx-font-size: 15;
     -fx-prompt-text-fill: white;
+}
+
+#everything-else-label {
+    -fx-font-size: 17;
 }
 
 #lit-label-toggle-button {
@@ -70,7 +74,7 @@
 
 #battery-slider {
     -jfx-default-track: #0B234C;
-    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #f15249, #d9ae07, #f9cd35)
+    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #bc2a23, #d9ae07, #f9cd35)
 }
 
 #holder-slider {

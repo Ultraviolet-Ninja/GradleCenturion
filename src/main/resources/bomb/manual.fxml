@@ -13,8 +13,9 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1500.0" stylesheets="@css/manual.css" xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.ManualController">
+            prefHeight="800.0" prefWidth="1500.0" stylesheets="@css/manual.css"
+            xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="bomb.ManualController">
     <center>
         <Pane fx:id="solutionDisplay" prefHeight="800.0" prefWidth="1302.0" BorderPane.alignment="CENTER"/>
     </center>
