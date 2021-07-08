@@ -1,12 +1,12 @@
 #major-title {
-    -fx-font-size: 24;
+    -fx-font-size: 26;
     -fx-underline: true;
 }
 
 .jfx-text-area {
     -fx-padding: 0 50 0 50;
     -jfx-focus-color: white;
-    -jfx-unfocus-color: #0B234C;
+    -jfx-unfocus-color: #0b234c;
     -fx-font-size: 15;
     -fx-prompt-text-fill: white;
 }
@@ -20,19 +20,23 @@
     -jfx-untoggle-line-color: #172b58;
     -jfx-toggle-color: #dedee0;
     -jfx-toggle-line-color: #2b4cff;
+    -fx-font-size: 17;
 }
 
 #unlit-label-toggle-button {
     -jfx-untoggle-color: #354558;
     -jfx-untoggle-line-color: #172b58;
-    -jfx-toggle-color: #000000;
-    -jfx-toggle-line-color: #031330;
+    -jfx-toggle-color: #00033b;
+    -jfx-toggle-line-color: #041c48;
+    -fx-font-size: 17;
 }
 
 #indicator-label {
-    -fx-text-fill: white;
-    -fx-font-size: 15;
-    -fx-underline: true;
+    -fx-text-fill: linear-gradient(to bottom right, white, #d4d4d4);
+    -fx-font-size: 22;
+    -fx-background-color: #230c0c;
+    -fx-border-color: linear-gradient(to bottom right, #963330, #301110);
+    -fx-border-width: 4;
 }
 
 #boss-module-toggle-button {
@@ -44,29 +48,33 @@
 }
 
 #dvi-slider {
-    -jfx-default-track: #0B234C;
+    -jfx-default-track: #0b234c;
+    -jfx-default-thumb: #983136;
 }
 
 #parallel-slider {
-    -jfx-default-track: #0B234C;
+    -jfx-default-track: #0b234c;
     -jfx-default-thumb: #d76793;
 }
 
 #ps-slider {
-    -jfx-default-track: #0B234C;
-    -jfx-default-thumb: #2d8a5f;
+    -jfx-default-track: #0b234c;
+    -jfx-default-thumb: #56a46a;
 }
 
 #rj-slider {
-    -jfx-default-track: #0B234C;
+    -jfx-default-track: #0b234c;
+    -jfx-default-thumb: #2a2b3a;
 }
 
 #serial-slider {
-    -jfx-default-track: #0B234C;
+    -jfx-default-track: #0b234c;
+    -jfx-default-thumb: #37799f;
 }
 
 #rca-slider {
-    -jfx-default-track: #0B234C;
+    -jfx-default-track: #0b234c;
+    -jfx-default-thumb: linear-gradient(to right, #f7eadc, #c7200d)
 }
 
 #port-label {
@@ -74,12 +82,23 @@
 }
 
 #battery-slider {
-    -jfx-default-track: #0B234C;
-    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #bc2a23, #d9ae07, #f9cd35)
+    -jfx-default-track: #0b234c;
+    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #bc2a23, #d9ae07, #f9cd35);
+    -fx-padding: 0 10 0 10;
 }
 
 #holder-slider {
-    -jfx-default-track: #0B234C;
+    -jfx-default-track: #0b234c;
     -jfx-default-thumb: #3a4e77;
     -fx-padding: 0 20 0 20;
+}
+
+#right-border-line-separator {
+    -fx-border-color: white;
+    -fx-border-width: 0 1 0 0;
+}
+
+#bottom-border-line-separator {
+    -fx-border-color: white;
+    -fx-border-width: 0 0 1 0;
 }
