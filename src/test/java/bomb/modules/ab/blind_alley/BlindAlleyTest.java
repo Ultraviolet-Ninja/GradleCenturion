@@ -4,7 +4,7 @@ import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -36,11 +36,11 @@ public class BlindAlleyTest {
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
         Widget.setIndicator(TriState.ON, Indicator.CAR);
-        Widget.addPort(Ports.DVI);
-        Widget.addPort(Ports.RJ45);
-        Widget.addPort(Ports.PS2);
-        Widget.addPort(Ports.PARALLEL);
-        Widget.addPort(Ports.SERIAL);
+        Widget.addPort(Port.DVI);
+        Widget.addPort(Port.RJ45);
+        Widget.addPort(Port.PS2);
+        Widget.addPort(Port.PARALLEL);
+        Widget.addPort(Port.SERIAL);
         Widget.setPlates(2);
     }
 
@@ -54,11 +54,11 @@ public class BlindAlleyTest {
         Widget.setNumHolders(1);
         Widget.setDoubleAs(2);
         Widget.setPlates(2);
-        Widget.addPort(Ports.DVI);
-        Widget.addPort(Ports.RJ45);
-        Widget.addPort(Ports.PS2);
-        Widget.addPort(Ports.PARALLEL);
-        Widget.addPort(Ports.RCA);
+        Widget.addPort(Port.DVI);
+        Widget.addPort(Port.RJ45);
+        Widget.addPort(Port.PS2);
+        Widget.addPort(Port.PARALLEL);
+        Widget.addPort(Port.RCA);
         Widget.setSerialCode("718pz5");
         Widget.setIndicator(TriState.ON, Indicator.SND);
         Widget.setIndicator(TriState.OFF, Indicator.FRQ);

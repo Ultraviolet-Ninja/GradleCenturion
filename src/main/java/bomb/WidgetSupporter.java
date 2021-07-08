@@ -1,6 +1,6 @@
 package bomb;
 
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,14 +18,14 @@ public class WidgetSupporter {
     public Consumer<ActionEvent> portAction(){
         return event -> {
             String title = ((Button) event.getSource()).getText();
-            Ports temp;
+            Port temp;
             if (title.charAt(0) == '+'){
                 title = trimTitle(title);
-                temp = Objects.requireNonNull(Ports.fromString(title));
+                temp = Objects.requireNonNull(Port.fromString(title));
                 Widget.addPort(temp);
             } else {
                 title = trimTitle(title);
-                temp = Objects.requireNonNull(Ports.fromString(title));
+                temp = Objects.requireNonNull(Port.fromString(title));
                 Widget.subPort(temp);
             }
             updateField(portFields[temp.ordinal()], Widget.getPort(temp));

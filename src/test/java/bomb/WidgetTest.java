@@ -1,7 +1,7 @@
 package bomb;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -98,20 +98,20 @@ public class WidgetTest {
     @Test
     public void addPortTest(){
         for (int i = 0; i < 11; i++){
-            Widget.addPort(Ports.PARALLEL);
+            Widget.addPort(Port.PARALLEL);
         }
 
-        assertEquals(Widget.getPort(Ports.PARALLEL), 10);
+        assertEquals(Widget.getPort(Port.PARALLEL), 10);
     }
 
     @DataProvider
     public Object[][] subtractPortProvider(){
-        ConditionSetter subOnly = () -> Widget.subPort(Ports.PARALLEL);
+        ConditionSetter subOnly = () -> Widget.subPort(Port.PARALLEL);
         ConditionSetter addThenSubtract = () -> {
-            Widget.addPort(Ports.PARALLEL);
-            Widget.addPort(Ports.PARALLEL);
-            Widget.addPort(Ports.PARALLEL);
-            Widget.subPort(Ports.PARALLEL);
+            Widget.addPort(Port.PARALLEL);
+            Widget.addPort(Port.PARALLEL);
+            Widget.addPort(Port.PARALLEL);
+            Widget.subPort(Port.PARALLEL);
         };
         return new Object[][]{
                 {subOnly, 0}, {addThenSubtract, 2}
@@ -122,7 +122,7 @@ public class WidgetTest {
     public void subtractPortTest(ConditionSetter conditions, int expected){
         conditions.setCondition();
 
-        assertEquals(Widget.getPort(Ports.PARALLEL), expected);
+        assertEquals(Widget.getPort(Port.PARALLEL), expected);
     }
 
     @DataProvider

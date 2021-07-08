@@ -8,7 +8,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -72,6 +74,11 @@ public class FacadeFX {
         return ((ToggleButton) group.getSelectedToggle()).getText();
     }
 
+    public static void resetSliderValues(Slider ... sliders){
+        for (Slider slider : sliders)
+            slider.setValue(0.0);
+    }
+
     public static void setAlert(Alert.AlertType type, String context){
         setAlert(type, context, "", "");
     }
@@ -91,5 +98,16 @@ public class FacadeFX {
     public static void setToggleButtonsUnselected(ToggleButton ... toggleButtons){
         for (ToggleButton button : toggleButtons)
             button.setSelected(false);
+    }
+
+    public static void unselectFromToggleGroup(ToggleGroup group){
+        Toggle temp = group.getSelectedToggle();
+        if (temp != null)
+            temp.setSelected(false);
+    }
+
+    public static void unselectFromMultipleToggleGroup(ToggleGroup ... groups){
+        for (ToggleGroup group : groups)
+            unselectFromToggleGroup(group);
     }
 }

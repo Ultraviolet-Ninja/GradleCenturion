@@ -1,6 +1,6 @@
 package bomb;
 
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 
 import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.FRK;
@@ -8,7 +8,7 @@ import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Indicator.SND;
 import static bomb.enumerations.TriState.OFF;
 import static bomb.enumerations.TriState.ON;
-import static bomb.enumerations.Ports.*;
+import static bomb.enumerations.Port.*;
 
 public class WidgetSimulations {
     public static final int CENTURION_MODULE_NUM = 101, CENTURION_START_TIME = 100,
@@ -31,7 +31,7 @@ public class WidgetSimulations {
     public static void theGreatBerate(){
         Widget.resetProperties();
         Widget.setSerialCode("th8zk9");
-        Widget.addPort(Ports.PARALLEL);
+        Widget.addPort(Port.PARALLEL);
         Widget.setPlates(1);
         Widget.setDoubleAs(4);
         Widget.setDBatteries(1);

@@ -2,7 +2,7 @@ package bomb.modules.s.shape_shift;
 
 import bomb.Widget;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.tools.data.structures.graph.list.OldListGraph;
 
 import java.util.AbstractMap;
@@ -122,7 +122,7 @@ public class ShapeShift extends Widget {
     private static boolean rectangularOptions(ShapeEnd right){
         switch (right){
             case ROUND:
-                return hasMoreThan(Ports.DVI, 0);
+                return hasMoreThan(Port.DVI, 0);
             case FLAT:
                 return lastDigit() % 2 == 1;
             case POINT:
@@ -135,24 +135,24 @@ public class ShapeShift extends Widget {
     private static boolean triangularOptions(ShapeEnd right){
         switch (right){
             case ROUND:
-                return hasMoreThan(Ports.PARALLEL, 0);
+                return hasMoreThan(Port.PARALLEL, 0);
             case FLAT:
                 return hasUnlitIndicator(Indicator.CAR);
             case POINT:
                 return hasLitIndicator(Indicator.IND);
             default:
-                return hasMoreThan(Ports.RJ45, 0);
+                return hasMoreThan(Port.RJ45, 0);
         }
     }
 
     private static boolean ticketOptions(ShapeEnd right){
         switch (right){
             case ROUND:
-                return hasMoreThan(Ports.RCA, 0);
+                return hasMoreThan(Port.RCA, 0);
             case FLAT:
                 return hasUnlitIndicator(Indicator.FRQ);
             case POINT:
-                return hasMoreThan(Ports.PS2, 0);
+                return hasMoreThan(Port.PS2, 0);
             default:
                 return getAllBatteries() >= 3;
         }

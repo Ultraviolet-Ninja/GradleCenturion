@@ -3,7 +3,7 @@ package bomb.modules.s.simon.screams;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.enumerations.TriState;
 import bomb.modules.s.simon.Simon.Screams;
 import org.testng.annotations.AfterClass;
@@ -71,10 +71,10 @@ public class SimonScreamsTest {
         Widget.setIndicator(TriState.OFF, Indicator.TRN);
         Widget.setSerialCode("zr6dt6");
         Widget.setPlates(1);
-        Widget.addPort(Ports.RCA);
-        Widget.addPort(Ports.RJ45);
-        Widget.addPort(Ports.DVI);
-        Widget.addPort(Ports.PS2);
+        Widget.addPort(Port.RCA);
+        Widget.addPort(Port.RJ45);
+        Widget.addPort(Port.DVI);
+        Widget.addPort(Port.PS2);
         SimonScreams.init(new Screams[]{PURPLE, ORANGE, RED, GREEN, BLUE, YELLOW});
     }
 

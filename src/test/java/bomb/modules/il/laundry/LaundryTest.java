@@ -4,7 +4,7 @@ import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.enumerations.TriState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -55,7 +55,7 @@ public class LaundryTest {
     private void setupOne(){
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
-        Widget.addPort(Ports.SERIAL);
+        Widget.addPort(Port.SERIAL);
         Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.setNumHolders(2);
         Widget.setSerialCode("g64dv1");
@@ -70,7 +70,7 @@ public class LaundryTest {
         Widget.setIndicator(TriState.ON, Indicator.NSA);
         Widget.setIndicator(TriState.OFF, Indicator.FRQ);
         Widget.setPlates(1);
-        Widget.addPort(Ports.PARALLEL);
+        Widget.addPort(Port.PARALLEL);
     }
 
     @DataProvider

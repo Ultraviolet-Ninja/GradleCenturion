@@ -1,10 +1,10 @@
 package bomb.enumerations;
 
-public enum Ports {
+public enum Port {
     DVI, PARALLEL, PS2, RJ45, SERIAL, RCA;
 
-    public static Ports fromString(String string){
-        for(Ports port : Ports.values()){
+    public static Port fromString(String string){
+        for(Port port : Port.values()){
             if (string.equalsIgnoreCase(port.name()))return port;
         }
         return null;

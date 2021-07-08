@@ -1,4 +1,4 @@
-package bomb;
+package bomb.fxml;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import java.util.Objects;
 public class TempMain extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("manual.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("widget.fxml")));
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(new Scene(root));
         primaryStage.getIcons().add(new Image("bomb\\KTANE logo.png"));

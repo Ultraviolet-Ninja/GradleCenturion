@@ -1,18 +1,13 @@
 package bomb;
 
+import bomb.enumerations.Indicator;
+import bomb.enumerations.Port;
+import bomb.enumerations.TriState;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
-import bomb.enumerations.TriState;
 
 import static bomb.enumerations.TriState.*;
-import static bomb.tools.Filter.ALL_CHAR_FILTER;
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Filter.SERIAL_CODE_PATTERN;
-import static bomb.tools.Filter.VOWEL_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.Filter.*;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -62,7 +57,7 @@ public class Widget {
      * @param serialCode The given code
      */
     public static void setSerialCode(String serialCode) {
-        Widget.serialCode = ultimateFilter(serialCode, ALL_CHAR_FILTER);
+        Widget.serialCode = serialCode;
         updates();
     }
 
@@ -163,7 +158,7 @@ public class Widget {
      *
      * @param which The port to add on
      */
-    public static void addPort(Ports which){
+    public static void addPort(Port which){
         if (ports[which.ordinal()] < UPPER_PORT_LIMIT){
             ports[which.ordinal()]++;
             BlindAlley.alleyUpdate();
@@ -175,11 +170,16 @@ public class Widget {
      *
      * @param which The port to subtract
      */
-    public static void subPort(Ports which){
+    public static void subPort(Port which){
         if (ports[which.ordinal()] > LOWER_PORT_LIMIT){
             ports[which.ordinal()]--;
             BlindAlley.alleyUpdate();
         }
+    }
+
+    public static void setPortValue(Port which, int newValue){
+        ports[which.ordinal()] = newValue;
+        BlindAlley.alleyUpdate();
     }
 
     /**
@@ -286,7 +286,7 @@ public class Widget {
      * @param howMany The required amount
      * @return True if the bomb contains more the required amount
      */
-    public static boolean hasMoreThan(Ports port, int howMany){
+    public static boolean hasMoreThan(Port port, int howMany){
         return ports[port.ordinal()] > howMany;
     }
 
@@ -309,7 +309,7 @@ public class Widget {
      * @param which The port to check
      * @return The number of that port
      */
-    public static int getPort(Ports which){
+    public static int getPort(Port which){
         return ports[which.ordinal()];
     }
 
@@ -378,7 +378,7 @@ public class Widget {
      * @param port The port to test
      * @return True if the port is present somewhere on the Bomb
      */
-    public static boolean portExists(Ports port){
+    public static boolean portExists(Port port){
         return ports[port.ordinal()] > 0;
     }
 

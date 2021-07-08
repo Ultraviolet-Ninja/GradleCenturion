@@ -1,7 +1,7 @@
 package bomb.modules.c.caesar;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.Widget;
 
 public class Caesar extends Widget {
@@ -27,7 +27,7 @@ public class Caesar extends Widget {
     }
 
     private static int offset(){
-        if (hasLitIndicator(Indicator.NSA) && getPort(Ports.PARALLEL) > 0) return 0;
+        if (hasLitIndicator(Indicator.NSA) && getPort(Port.PARALLEL) > 0) return 0;
         int out = 0;
         out += getAllBatteries();
         if (hasVowel()) out--;

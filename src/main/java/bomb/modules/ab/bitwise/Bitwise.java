@@ -2,7 +2,7 @@ package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 
 import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
@@ -73,7 +73,7 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] secondBits(){
-        return new boolean[]{hasMoreThan(Ports.PARALLEL, 0), getTotalPorts() > 2};
+        return new boolean[]{hasMoreThan(Port.PARALLEL, 0), getTotalPorts() > 2};
     }
 
     private static boolean[] thirdBits(){
