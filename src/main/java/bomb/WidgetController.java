@@ -71,12 +71,12 @@ public class WidgetController {
     private void setTextAreaNumbersOnly(){
         Consumer<JFXTextArea> handler = WidgetEventFactory.createNumbersOnlyTextArea();
         numberOfMinutesArea.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!(newValue && numberOfMinutesArea.getText().isEmpty())){
+            if (!newValue && !numberOfMinutesArea.getText().isEmpty()){
                 handler.accept(numberOfMinutesArea);
             }
         });
         numberOfModulesArea.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!(newValue && numberOfModulesArea.getText().isEmpty())){
+            if (!newValue && !numberOfModulesArea.getText().isEmpty()){
                 handler.accept(numberOfModulesArea);
             }
         });

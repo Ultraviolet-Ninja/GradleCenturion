@@ -13,20 +13,20 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            prefHeight="800.0" prefWidth="1400.0" stylesheets="@css/manual.css" xmlns="http://javafx.com/javafx/16"
+            prefHeight="800.0" prefWidth="1500.0" stylesheets="@css/manual.css" xmlns="http://javafx.com/javafx/15.0.1"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.ManualController">
     <center>
         <Pane fx:id="solutionDisplay" prefHeight="800.0" prefWidth="1302.0" BorderPane.alignment="CENTER"/>
     </center>
     <right>
-        <VBox prefHeight="800.0" prefWidth="314.0">
+        <VBox prefHeight="800.0" prefWidth="300.0">
             <MenuBar>
                 <menus>
                     <Menu mnemonicParsing="false">
                         <graphic>
                             <TextField fx:id="searchBar" onKeyReleased="#search" promptText="Search">
                                 <font>
-                                    <Font size="14.0"/>
+                                    <Font size="15.0"/>
                                 </font>
                             </TextField>
                         </graphic>

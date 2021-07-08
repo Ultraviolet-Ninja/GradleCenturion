@@ -1,0 +1,80 @@
+#major-title {
+    -fx-font-size: 22;
+    -fx-underline: true;
+}
+
+.jfx-text-area {
+    -fx-padding: 0 50 0 50;
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: #0B234C;
+    -fx-font-size: 15;
+    -fx-prompt-text-fill: white;
+}
+
+#lit-label-toggle-button {
+    -jfx-untoggle-color: #354558;
+    -jfx-untoggle-line-color: #172b58;
+    -jfx-toggle-color: #dedee0;
+    -jfx-toggle-line-color: #2b4cff;
+}
+
+#unlit-label-toggle-button {
+    -jfx-untoggle-color: #354558;
+    -jfx-untoggle-line-color: #172b58;
+    -jfx-toggle-color: #000000;
+    -jfx-toggle-line-color: #031330;
+}
+
+#indicator-label {
+    -fx-text-fill: white;
+    -fx-font-size: 15;
+    -fx-underline: true;
+}
+
+#boss-module-toggle-button {
+    -jfx-toggle-line-color: #860e0f;
+    -jfx-toggle-color: #f68484;
+    -jfx-untoggle-color: #354558;
+    -jfx-untoggle-line-color: #172b58;
+    -fx-font-size: 22;
+}
+
+#dvi-slider {
+    -jfx-default-track: #0B234C;
+}
+
+#parallel-slider {
+    -jfx-default-track: #0B234C;
+    -jfx-default-thumb: #d76793;
+}
+
+#ps-slider {
+    -jfx-default-track: #0B234C;
+}
+
+#rj-slider {
+    -jfx-default-track: #0B234C;
+}
+
+#serial-slider {
+    -jfx-default-track: #0B234C;
+}
+
+#rca-slider {
+    -jfx-default-track: #0B234C;
+}
+
+#port-label {
+    -fx-font-size: 18;
+}
+
+#battery-slider {
+    -jfx-default-track: #0B234C;
+    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #f15249, #d9ae07, #f9cd35)
+}
+
+#holder-slider {
+    -jfx-default-track: #0B234C;
+    -jfx-default-thumb: #3a4e77;
+    -fx-padding: 0 20 0 20;
+}

@@ -7,6 +7,7 @@ import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
 import bomb.tools.observer.ResetObserver;
 import bomb.tools.observer.SouvenirObserver;
+import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -40,7 +41,7 @@ public class ManualController {
 
     @FXML private Pane solutionDisplay;
 
-    @FXML private RadioButton forgetMeNot, souvenir;
+    @FXML private JFXRadioButton forgetMeNot, souvenir;
 
     @FXML private TextField searchBar;
 

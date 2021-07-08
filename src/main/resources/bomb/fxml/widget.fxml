@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/widget.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.0" minWidth="10.0" prefWidth="446.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="789.0" minWidth="10.0" prefWidth="754.0" />
@@ -48,67 +48,67 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
-                                <Label text="DVI" />
-                                <JFXSlider fx:id="dviPortSlider" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                <Label id="port-label" text="DVI" />
+                                <JFXSlider id="dvi-slider" fx:id="dviPortSlider" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets left="40.0" />
                                     </HBox.margin>
                                 </JFXSlider>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                             <children>
-                                <Label text="Parallel" />
-                                <JFXSlider fx:id="parallelPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                <Label id="port-label" text="Parallel" />
+                                <JFXSlider id="parallel-slider" fx:id="parallelPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets left="14.0" />
                                     </HBox.margin>
                                 </JFXSlider>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                             <children>
-                                <Label text="PS-2" />
-                                <JFXSlider fx:id="psPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                <Label id="port-label" text="PS-2" />
+                                <JFXSlider id="ps-slider" fx:id="psPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets left="33.0" />
                                     </HBox.margin>
                                 </JFXSlider>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                             <children>
-                                <Label text="RJ-45" />
-                                <JFXSlider fx:id="rjPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                <Label id="port-label" text="RJ-45" />
+                                <JFXSlider id="rj-slider" fx:id="rjPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets left="30.0" />
                                     </HBox.margin>
                                 </JFXSlider>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                             <children>
-                                <Label text="Serial" />
-                                <JFXSlider fx:id="serialPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                <Label id="port-label" text="Serial" />
+                                <JFXSlider id="serial-slider" fx:id="serialPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets left="26.0" />
                                     </HBox.margin>
                                 </JFXSlider>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                             <children>
-                                <Label text="RCA" />
-                                <JFXSlider fx:id="rcaPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                <Label id="port-label" text="RCA" />
+                                <JFXSlider id="rca-slider" fx:id="rcaPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                     <HBox.margin>
-                                        <Insets />
+                                        <Insets left="36.0" />
                                     </HBox.margin>
                                 </JFXSlider>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0">
                             <children>
-                                <Label text="Ports" />
+                                <Label id="major-title" text="Ports" />
                             </children>
                         </HBox>
                     </children>
@@ -124,13 +124,13 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <JFXToggleButton fx:id="forgetMeNot" onAction="#forgetMeToggle" text="Forget Me Not" />
-                                <JFXToggleButton fx:id="souvenir" onAction="#souvenirToggle" text="Souvenir" />
+                                <JFXToggleButton id="boss-module-toggle-button" fx:id="forgetMeNot" onAction="#forgetMeToggle" text="Forget Me Not" />
+                                <JFXToggleButton id="boss-module-toggle-button" fx:id="souvenir" onAction="#souvenirToggle" text="Souvenir" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
-                                <JFXButton buttonType="RAISED" onAction="#fullBombReset" ripplerFill="#b22727" text="Full Bomb Reset">
+                                <JFXButton buttonType="RAISED" onAction="#fullBombReset" ripplerFill="#1a0af2" text="Full Bomb Reset">
                                     <font>
                                         <Font size="24.0" />
                                     </font>
@@ -172,7 +172,7 @@
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                     <children>
                                         <Label text="Double A Batteries" />
-                                        <JFXSlider fx:id="doubleABatteries" blockIncrement="2.0" majorTickUnit="2.0" max="20.0" minorTickCount="0" onMouseClicked="#doubleABatterySliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                        <JFXSlider id="battery-slider" fx:id="doubleABatteries" blockIncrement="2.0" majorTickUnit="2.0" max="20.0" minorTickCount="0" onMouseClicked="#doubleABatterySliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                             <VBox.margin>
                                                 <Insets bottom="30.0" />
                                             </VBox.margin>
@@ -182,13 +182,13 @@
                                                 <Insets top="30.0" />
                                             </VBox.margin>
                                         </Label>
-                                        <JFXSlider fx:id="dBatteries" blockIncrement="1.0" layoutX="10.0" layoutY="161.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#dBatterySliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                                        <JFXSlider id="battery-slider" fx:id="dBatteries" blockIncrement="1.0" layoutX="10.0" layoutY="161.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#dBatterySliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                                     </children>
                                 </VBox>
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                                     <children>
                                         <Label text="Port Plates" />
-                                        <JFXSlider fx:id="portPlates" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#portPlateSliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                        <JFXSlider id="holder-slider" fx:id="portPlates" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#portPlateSliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true">
                                             <VBox.margin>
                                                 <Insets bottom="30.0" />
                                             </VBox.margin>
@@ -198,7 +198,7 @@
                                                 <Insets top="30.0" />
                                             </VBox.margin>
                                         </Label>
-                                        <JFXSlider fx:id="batteryHolders" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#batteryHolderSliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                                        <JFXSlider id="holder-slider" fx:id="batteryHolders" blockIncrement="1.0" majorTickUnit="1.0" max="10.0" minorTickCount="0" onMouseClicked="#batteryHolderSliderChange" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                                     </children>
                                 </VBox>
                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
@@ -218,7 +218,7 @@
                         </GridPane>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label text="Everything Else" />
+                                <Label id="major-title" text="Everything Else" />
                             </children>
                         </HBox>
                     </children>
@@ -256,17 +256,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="BOB" />
+                                                <Label id="indicator-label" text="BOB" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#bobGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#bobGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="bobGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#bobGroup" text="Unlit" toggleGroup="$bobGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#bobGroup" text="Unlit" toggleGroup="$bobGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -282,17 +282,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="FRK" />
+                                                <Label id="indicator-label" text="FRK" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#frkGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#frkGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="frkGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#frkGroup" text="Unlit" toggleGroup="$frkGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#frkGroup" text="Unlit" toggleGroup="$frkGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -308,17 +308,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="MSA" />
+                                                <Label id="indicator-label" text="MSA" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#msaGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#msaGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="msaGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#msaGroup" text="Unlit" toggleGroup="$msaGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#msaGroup" text="Unlit" toggleGroup="$msaGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -334,17 +334,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="FRQ" />
+                                                <Label id="indicator-label" text="FRQ" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#frqGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#frqGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="frqGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#frqGroup" text="Unlit" toggleGroup="$frqGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#frqGroup" text="Unlit" toggleGroup="$frqGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -360,17 +360,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="NSA" />
+                                                <Label id="indicator-label" text="NSA" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#nsaGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#nsaGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="nsaGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#nsaGroup" text="Unlit" toggleGroup="$nsaGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#nsaGroup" text="Unlit" toggleGroup="$nsaGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -386,17 +386,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="CAR" />
+                                                <Label id="indicator-label" text="CAR" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#carGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#carGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="carGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#carGroup" text="Unlit" toggleGroup="$carGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#carGroup" text="Unlit" toggleGroup="$carGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -412,17 +412,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="CLR" />
+                                                <Label id="indicator-label" text="CLR" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#clrGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#clrGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="clrGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#clrGroup" text="Unlit" toggleGroup="$clrGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#clrGroup" text="Unlit" toggleGroup="$clrGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -438,17 +438,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="IND" />
+                                                <Label id="indicator-label" text="IND" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#indGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#indGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="indGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#indGroup" text="Unlit" toggleGroup="$indGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#indGroup" text="Unlit" toggleGroup="$indGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -464,17 +464,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="SIG" />
+                                                <Label id="indicator-label" text="SIG" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#sigGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#sigGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="sigGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#sigGroup" text="Unlit" toggleGroup="$sigGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#sigGroup" text="Unlit" toggleGroup="$sigGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -501,17 +501,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="SND" />
+                                                <Label id="indicator-label" text="SND" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#sndGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#sndGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="sndGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#sndGroup" text="Unlit" toggleGroup="$sndGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#sndGroup" text="Unlit" toggleGroup="$sndGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -527,17 +527,17 @@
                                     <children>
                                         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                                             <children>
-                                                <Label text="TRN" />
+                                                <Label id="indicator-label" text="TRN" />
                                             </children>
                                         </VBox>
                                         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                                             <children>
-                                                <JFXToggleButton onAction="#trnGroup" text="Lit">
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#trnGroup" text="Lit">
                                                     <toggleGroup>
                                                         <ToggleGroup fx:id="trnGroup" />
                                                     </toggleGroup>
                                                 </JFXToggleButton>
-                                                <JFXToggleButton onAction="#trnGroup" text="Unlit" toggleGroup="$trnGroup" />
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#trnGroup" text="Unlit" toggleGroup="$trnGroup" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -546,7 +546,7 @@
                         </GridPane>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                             <children>
-                                <Label text="Indicators" />
+                                <Label id="major-title" text="Indicators" />
                             </children>
                         </HBox>
                     </children>
