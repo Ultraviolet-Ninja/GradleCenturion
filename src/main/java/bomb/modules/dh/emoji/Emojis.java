@@ -1,6 +1,6 @@
 package bomb.modules.dh.emoji;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 public enum Emojis implements Labeled {
     COLON_CLOSE(":)"), EQUAL_OPEN("=("), OPEN_COLON("(:"),

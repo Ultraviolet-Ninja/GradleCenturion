@@ -1,5 +1,6 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
+import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
 import bomb.tools.data.structures.BufferedQueue;
@@ -16,7 +17,7 @@ public class HexagonDataStructure {
     /**
      * This class is the backing node to a given hexagon data structure.
      */
-    public static final class HexNode {
+    public static final class HexNode extends EquatableObject {
         public ArrayList<HexWall> walls;
         public HexShape fill;
 
@@ -99,6 +100,11 @@ public class HexagonDataStructure {
             if (obj == this) return true;
             if (!(obj instanceof HexNode)) return false;
             return ((HexNode)obj).fill == this.fill && hasMatchingWalls(((HexNode)obj).walls);
+        }
+
+        @Override
+        public int hashCode() {
+            return HASHING_NUMBER * getShapeHash() + ((walls != null) ? getWallHash().hashCode() : 0);
         }
 
         private boolean hasMatchingWalls(ArrayList<HexWall> toCompare){

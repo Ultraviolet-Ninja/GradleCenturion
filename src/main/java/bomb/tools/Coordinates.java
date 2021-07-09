@@ -1,8 +1,9 @@
 package bomb.tools;
 
-import bomb.interfaces.Coordinate;
+import bomb.abstractions.Coordinate;
+import bomb.abstractions.EquatableObject;
 
-public class Coordinates implements Coordinate {
+public class Coordinates extends EquatableObject implements Coordinate {
     private int x, y;
 
     public Coordinates(int x, int y){
@@ -39,7 +40,7 @@ public class Coordinates implements Coordinate {
 
     @Override
     public int hashCode() {
-        return x + 1373 * y;
+        return x + HASHING_NUMBER * y;
     }
 
     @Override

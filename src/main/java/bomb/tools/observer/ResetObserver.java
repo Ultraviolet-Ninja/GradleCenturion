@@ -1,6 +1,6 @@
 package bomb.tools.observer;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import javafx.fxml.FXMLLoader;
 
 import java.util.ArrayList;

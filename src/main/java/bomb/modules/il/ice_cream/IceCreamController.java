@@ -1,6 +1,6 @@
 package bomb.modules.il.ice_cream;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 
 public class IceCreamController implements Resettable {
     @Override
