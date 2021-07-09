@@ -1,9 +1,9 @@
 package bomb.tools.data.structures.graph.list;
 
-public abstract class AbstractListGraph<E> {
+public abstract class AbstractGraph<E> {
     protected final boolean biDirectional;
 
-    public AbstractListGraph(boolean biDirectional){
+    public AbstractGraph(boolean biDirectional){
         this.biDirectional = biDirectional;
     }
 
