@@ -41,6 +41,7 @@ public class WidgetController {
             nsaGroup, sigGroup, sndGroup, trnGroup;
 
     public void initialize(){
+        injectTextFormatter();
         portSliderInitialize();
         widgetPageReset();
         setTextAreaNumbersOnly();
@@ -80,6 +81,12 @@ public class WidgetController {
                 handler.accept(numberOfModulesArea);
             }
         });
+    }
+
+    private void injectTextFormatter(){
+        serialCodeArea.setTextFormatter(WidgetEventFactory.createSerialCodeFormatter());
+        numberOfMinutesArea.setTextFormatter(WidgetEventFactory.createNumbersOnlyFormatter());
+        numberOfModulesArea.setTextFormatter(WidgetEventFactory.createNumbersOnlyFormatter());
     }
 
     @FXML
