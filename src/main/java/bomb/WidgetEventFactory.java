@@ -41,7 +41,9 @@ public class WidgetEventFactory {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
 
-            Filter.NUMBER_PATTERN.loadText(change.getControlNewText());
+            String text = change.getControlNewText();
+            Filter.NUMBER_PATTERN.loadText(text);
+            if (text.equals("")) return change;
             return Filter.NUMBER_PATTERN.matchesRegex() ? change : null;
         });
     }
