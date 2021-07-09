@@ -1,14 +1,12 @@
 package bomb;
 
-import bomb.enumerations.Ports;
-
 import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Indicator.SND;
 import static bomb.enumerations.TriState.OFF;
 import static bomb.enumerations.TriState.ON;
-import static bomb.enumerations.Ports.*;
+import static bomb.enumerations.Port.*;
 
 public class WidgetSimulations {
     public static final int CENTURION_MODULE_NUM = 101, CENTURION_START_TIME = 100,
@@ -31,7 +29,7 @@ public class WidgetSimulations {
     public static void theGreatBerate(){
         Widget.resetProperties();
         Widget.setSerialCode("th8zk9");
-        Widget.addPort(Ports.PARALLEL);
+        Widget.setPortValue(PARALLEL, 1);
         Widget.setPlates(1);
         Widget.setDoubleAs(4);
         Widget.setDBatteries(1);
@@ -52,12 +50,12 @@ public class WidgetSimulations {
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
         Widget.setSerialCode("h64gz8");
-        Widget.addPort(SERIAL);
-        Widget.addPort(PARALLEL);
-        Widget.addPort(RCA);
-        Widget.addPort(PS2);
-        Widget.addPort(RJ45);
-        Widget.addPort(DVI);
+        Widget.setPortValue(SERIAL, 1);
+        Widget.setPortValue(PARALLEL, 1);
+        Widget.setPortValue(RCA, 1);
+        Widget.setPortValue(PS2, 1);
+        Widget.setPortValue(RJ45, 1);
+        Widget.setPortValue(DVI, 1);
         centurionDefaults();
     }
 
@@ -68,7 +66,7 @@ public class WidgetSimulations {
         Widget.setIndicator(ON, SND);
         Widget.setIndicator(OFF, FRK);
         Widget.setSerialCode("ah5nj9");
-        Widget.addPort(RCA);
+        Widget.setPortValue(RCA,1);
         Widget.setPlates(1);
         centurionDefaults();
     }

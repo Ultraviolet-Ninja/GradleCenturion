@@ -1,7 +1,7 @@
 package bomb.modules.r.round_keypads;
 
-import bomb.interfaces.Flaggable;
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Flaggable;
+import bomb.abstractions.Labeled;
 import javafx.scene.image.Image;
 
 public enum Keypads implements Labeled, Flaggable {

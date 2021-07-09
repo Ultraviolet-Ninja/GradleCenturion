@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Font?>
 
 <Pane prefHeight="400.0" prefWidth="600.0">
-<!--      stylesheets="@css/Note.css">-->
+<!--      stylesheets="@css/note.css">-->
     <TextArea prefHeight="400.0" prefWidth="600.0" promptText="Le Notes">
       <font>
          <Font size="24.0" />

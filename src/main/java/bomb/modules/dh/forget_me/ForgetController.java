@@ -1,7 +1,7 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;

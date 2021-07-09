@@ -2,7 +2,7 @@ package bomb.modules.t.two_bit;
 
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 
 import static bomb.tools.Filter.CHAR_FILTER;
 import static bomb.tools.Filter.NUMBER_PATTERN;
@@ -43,7 +43,7 @@ public class TwoBit extends Widget {
             String numbers = ultimateFilter(serialCode, NUMBER_PATTERN);
             num += getAllBatteries() * Integer.parseInt(numbers.substring(numbers.length()-1));
 
-            if (getPort(Ports.RCA) > 0 && getPort(Ports.RJ45) == 0) num *= 2;
+            if (getPort(Port.RCA) > 0 && getPort(Port.RJ45) == 0) num *= 2;
             if (num > 99) num -= 100;
 
             int[] bits = translate(String.valueOf(num));

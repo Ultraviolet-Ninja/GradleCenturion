@@ -1,6 +1,8 @@
 # The Gradle Centurion Bomb Manual
 *101 modules, 100 minutes, exponentially more problems.*
 
+[![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
+[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
 ### Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles.<br>
 
@@ -15,6 +17,13 @@ This is the Gradle implementation of the original project, created with the inte
 - Jacoco - Test Coverage Analysis
 - JGraphT ver. 1.0.1 - Graph Library
 - CodeMR Free Trial - Coupling/Cohesion/Code Complexity Analysis
+
+#### Technologies Under Test
+- ControlFX - JavaFX Library
+- JFoenix - JavaFX Library
+- Medusa - Gauge Library
+- FontAwesomeFX - Font Styling
+- RichText - Font Styling
 
 ### Status
 In progress<br>

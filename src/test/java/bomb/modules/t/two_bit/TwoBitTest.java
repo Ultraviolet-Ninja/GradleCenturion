@@ -1,7 +1,7 @@
 package bomb.modules.t.two_bit;
 
 import bomb.Widget;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -59,10 +59,9 @@ public class TwoBitTest {
 
     private void widgetSetupOne(){
         Widget.setPlates(2);
-        Widget.addPort(Ports.RJ45);
-        Widget.addPort(Ports.PS2);
-        Widget.addPort(Ports.PS2);
-        Widget.addPort(Ports.RCA);
+        Widget.setPortValue(Port.RJ45,1);
+        Widget.setPortValue(Port.PS2, 2);
+        Widget.setPortValue(Port.RCA,1);
         Widget.setSerialCode("AI3ZC1");
     }
 

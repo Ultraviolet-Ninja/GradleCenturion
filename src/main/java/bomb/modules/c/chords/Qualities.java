@@ -1,6 +1,6 @@
 package bomb.modules.c.chords;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 public enum Qualities implements Labeled {
     SEVENTH("G"), NEG_SEVETH( "G#"),

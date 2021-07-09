@@ -1,6 +1,6 @@
 package bomb.modules.ab.boolean_venn;
 
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

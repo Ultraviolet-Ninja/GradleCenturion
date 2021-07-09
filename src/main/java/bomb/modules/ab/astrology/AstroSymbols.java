@@ -1,6 +1,6 @@
 package bomb.modules.ab.astrology;
 
-import bomb.interfaces.Index;
+import bomb.abstractions.Index;
 
 /**
  * This enum deals with the symbols from Astrology, each containing an index in arrays

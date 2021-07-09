@@ -4,7 +4,7 @@ import bomb.components.microcontroller.AbstractChip;
 import bomb.components.microcontroller.EightPinController;
 import bomb.components.microcontroller.SixPinController;
 import bomb.components.microcontroller.TenPinController;
-import bomb.interfaces.Resettable;
+import bomb.abstractions.Resettable;
 import bomb.modules.m.microcontroller.chip.AbstractController;
 import bomb.modules.m.microcontroller.chip.CountdownController;
 import bomb.modules.m.microcontroller.chip.DiodeController;

@@ -1,6 +1,6 @@
 package bomb.modules.c.chords;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 public enum Roots implements Labeled {
     A("A", "+3 +5 +3"), A_SHARP("A#","+4 +4 +3"), B("B","+3 +4 +3"),

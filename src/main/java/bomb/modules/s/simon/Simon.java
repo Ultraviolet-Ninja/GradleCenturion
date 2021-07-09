@@ -1,6 +1,6 @@
 package bomb.modules.s.simon;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 public enum Simon {
     ;

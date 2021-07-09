@@ -1,7 +1,7 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.tools.data.structures.ChainList;
 import bomb.Widget;
 
@@ -104,7 +104,7 @@ public class ForgetMeNot extends Widget {
      * @param num
      */
     private static void addSecond(int num){
-        if (portExists(Ports.SERIAL) && serialCodeNumbers() > 2)
+        if (portExists(Port.SERIAL) && serialCodeNumbers() > 2)
             forgot.offer(nextBuffer(leastSigDig(num+3)));
         else if (prev1%2 == 0)forgot.offer(nextBuffer(leastSigDig(prev1+1+num)));
         else forgot.offer(nextBuffer(leastSigDig(num+prev1-1)));

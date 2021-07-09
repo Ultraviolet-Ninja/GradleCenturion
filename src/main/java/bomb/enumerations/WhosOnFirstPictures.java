@@ -1,6 +1,6 @@
 package bomb.enumerations;
 
-import bomb.interfaces.Labeled;
+import bomb.abstractions.Labeled;
 
 public enum WhosOnFirstPictures implements Labeled {
     YES("Yes"), FIRST("First"), DISPLAY("Display"), OKAY("Okay"),

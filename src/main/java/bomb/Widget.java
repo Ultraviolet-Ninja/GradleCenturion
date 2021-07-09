@@ -1,18 +1,13 @@
 package bomb;
 
+import bomb.enumerations.Indicator;
+import bomb.enumerations.Port;
+import bomb.enumerations.TriState;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Ports;
-import bomb.enumerations.TriState;
 
 import static bomb.enumerations.TriState.*;
-import static bomb.tools.Filter.ALL_CHAR_FILTER;
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Filter.SERIAL_CODE_PATTERN;
-import static bomb.tools.Filter.VOWEL_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.Filter.*;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -20,8 +15,6 @@ import static bomb.tools.Filter.ultimateFilter;
  * as well as the MainController to add/subtract to the widgets.
  */
 public class Widget {
-    private static final int LOWER_PORT_LIMIT = 0, UPPER_PORT_LIMIT = 10;
-
     protected static boolean souvenir = false, forgetMeNot = false;
     protected static int numDoubleAs = 0,
             numDBatteries = 0,
@@ -62,7 +55,7 @@ public class Widget {
      * @param serialCode The given code
      */
     public static void setSerialCode(String serialCode) {
-        Widget.serialCode = ultimateFilter(serialCode, ALL_CHAR_FILTER);
+        Widget.serialCode = serialCode;
         updates();
     }
 
@@ -159,27 +152,12 @@ public class Widget {
     }
 
     /**
-     * Adds to the count a specified port, with a max of 9
-     *
-     * @param which The port to add on
+     * @param which The port to add to
+     * @param newValue The value that will overwrite the array location
      */
-    public static void addPort(Ports which){
-        if (ports[which.ordinal()] < UPPER_PORT_LIMIT){
-            ports[which.ordinal()]++;
-            BlindAlley.alleyUpdate();
-        }
-    }
-
-    /**
-     * Subtracts from the count of a specified port, with a minimum of 0
-     *
-     * @param which The port to subtract
-     */
-    public static void subPort(Ports which){
-        if (ports[which.ordinal()] > LOWER_PORT_LIMIT){
-            ports[which.ordinal()]--;
-            BlindAlley.alleyUpdate();
-        }
+    public static void setPortValue(Port which, int newValue){
+        ports[which.ordinal()] = newValue;
+        BlindAlley.alleyUpdate();
     }
 
     /**
@@ -286,7 +264,7 @@ public class Widget {
      * @param howMany The required amount
      * @return True if the bomb contains more the required amount
      */
-    public static boolean hasMoreThan(Ports port, int howMany){
+    public static boolean hasMoreThan(Port port, int howMany){
         return ports[port.ordinal()] > howMany;
     }
 
@@ -309,7 +287,7 @@ public class Widget {
      * @param which The port to check
      * @return The number of that port
      */
-    public static int getPort(Ports which){
+    public static int getPort(Port which){
         return ports[which.ordinal()];
     }
 
@@ -378,7 +356,7 @@ public class Widget {
      * @param port The port to test
      * @return True if the port is present somewhere on the Bomb
      */
-    public static boolean portExists(Ports port){
+    public static boolean portExists(Port port){
         return ports[port.ordinal()] > 0;
     }
 

@@ -1,6 +1,6 @@
 package bomb.modules.ab.blind_alley;
 
-import bomb.enumerations.Ports;
+import bomb.enumerations.Port;
 import bomb.Widget;
 
 import static bomb.enumerations.Indicator.*;
@@ -35,12 +35,12 @@ public class BlindAlley extends Widget {
 
     private static void topMid(){
         alleyCat[0][1] = convertBool(hasUnlitIndicator(NSA)) + convertBool(hasLitIndicator(FRK)) +
-                convertBool(hasUnlitIndicator(CAR)) + convertBool(portExists(Ports.RJ45));
+                convertBool(hasUnlitIndicator(CAR)) + convertBool(portExists(Port.RJ45));
     }
 
     private static void left(){
         alleyCat[1][0] = convertBool(hasUnlitIndicator(FRQ)) + convertBool(hasUnlitIndicator(IND)) +
-                convertBool(hasUnlitIndicator(TRN)) + convertBool(portExists(Ports.DVI));
+                convertBool(hasUnlitIndicator(TRN)) + convertBool(portExists(Port.DVI));
     }
 
     private static void middle(){
@@ -50,7 +50,7 @@ public class BlindAlley extends Widget {
 
     private static void right(){
         alleyCat[1][2] = convertBool(hasLitIndicator(BOB)) + convertBool(hasLitIndicator(CLR)) +
-                convertBool(portExists(Ports.PS2)) + convertBool(portExists(Ports.SERIAL));
+                convertBool(portExists(Port.PS2)) + convertBool(portExists(Port.SERIAL));
     }
 
     private static void bottomLeft(){
@@ -60,12 +60,12 @@ public class BlindAlley extends Widget {
 
     private static void bottomMid(){
         alleyCat[2][1] = convertBool(hasUnlitIndicator(FRK)) + convertBool(hasLitIndicator(MSA)) +
-                convertBool(portExists(Ports.PARALLEL)) + convertBool(hasVowel());
+                convertBool(portExists(Port.PARALLEL)) + convertBool(hasVowel());
     }
 
     private static void bottomRight(){
         alleyCat[2][2] = convertBool(hasUnlitIndicator(CLR)) + convertBool(hasUnlitIndicator(MSA)) +
-                convertBool(hasLitIndicator(SND)) + convertBool(portExists(Ports.RCA));
+                convertBool(hasLitIndicator(SND)) + convertBool(portExists(Port.RCA));
     }
 
     private static int convertBool(boolean bool){

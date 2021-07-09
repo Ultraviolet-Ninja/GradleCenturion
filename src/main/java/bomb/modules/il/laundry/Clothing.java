@@ -1,7 +1,7 @@
 package bomb.modules.il.laundry;
 
-import bomb.interfaces.Labeled;
-import bomb.interfaces.Listed;
+import bomb.abstractions.Labeled;
+import bomb.abstractions.Listed;
 
 public enum Clothing {
     ARTICLE;

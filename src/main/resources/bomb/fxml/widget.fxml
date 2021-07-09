@@ -1,588 +1,653 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.GridPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ToggleButton?>
-<?import javafx.scene.control.ToggleGroup?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
-      prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="bomb.WidgetController">
-    <GridPane>
-        <columnConstraints>
-            <ColumnConstraints/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints/>
-        </rowConstraints>
-        <GridPane prefHeight="741.0" prefWidth="1203.0">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+          prefWidth="1200.0" stylesheets="@../css/widget.css" xmlns="http://javafx.com/javafx/16"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.0" minWidth="10.0" prefWidth="446.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="789.0" minWidth="10.0" prefWidth="754.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <GridPane id="right-border-line-separator">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="480.0" minWidth="10.0" prefWidth="421.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="10.0" prefWidth="60.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="679.0" minWidth="10.0" prefWidth="679.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints maxHeight="433.0" minHeight="10.0" prefHeight="428.0" vgrow="SOMETIMES"/>
-                <RowConstraints maxHeight="355.0" minHeight="10.0" prefHeight="313.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="516.0" minHeight="10.0" prefHeight="504.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="296.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <GridPane>
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"/>
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints maxHeight="174.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES"/>
-                    <RowConstraints maxHeight="351.0" minHeight="10.0" prefHeight="347.0" vgrow="SOMETIMES"/>
-                </rowConstraints>
-                <GridPane GridPane.rowIndex="1">
+            <children>
+                <GridPane id="bottom-border-line-separator" prefHeight="610.0" prefWidth="600.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="245.0" minWidth="10.0" prefWidth="125.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="168.0"/>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="155.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="133.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="97.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES"/>
                     </rowConstraints>
-                    <VBox prefHeight="200.0" prefWidth="100.0">
-                        <TextField fx:id="dvi" alignment="CENTER" editable="false" text="0">
-                            <VBox.margin>
-                                <Insets top="10.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </TextField>
-                        <TextField fx:id="parallel" alignment="CENTER" editable="false" text="0">
-                            <VBox.margin>
-                                <Insets top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </TextField>
-                        <TextField fx:id="ps" alignment="CENTER" editable="false" text="0">
-                            <VBox.margin>
-                                <Insets top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </TextField>
-                        <TextField fx:id="rj" alignment="CENTER" editable="false" text="0">
-                            <VBox.margin>
-                                <Insets top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </TextField>
-                        <TextField fx:id="serial" alignment="CENTER" editable="false" prefHeight="38.0"
-                                   prefWidth="118.0" text="0">
-                            <VBox.margin>
-                                <Insets top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </TextField>
-                        <TextField fx:id="rca" alignment="CENTER" editable="false" prefHeight="37.0" prefWidth="118.0"
-                                   text="0">
-                            <VBox.margin>
-                                <Insets top="15.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </TextField>
-                    </VBox>
-                    <VBox prefHeight="360.0" prefWidth="160.0" GridPane.columnIndex="1">
-                        <Button fx:id="dviUp" mnemonicParsing="false" text="+1 DVI">
-                            <VBox.margin>
-                                <Insets left="40.0" top="10.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                        <Button fx:id="parallelUp" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                                text="+1 Parallel">
-                            <VBox.margin>
-                                <Insets left="30.0" top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                        <Button fx:id="psUp" layoutX="10.0" layoutY="35.0" mnemonicParsing="false"
-                                text="+1 PS2">
-                            <VBox.margin>
-                                <Insets left="40.0" top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                        <Button fx:id="rjUp" layoutX="10.0" layoutY="60.0" mnemonicParsing="false"
-                                text="+1 RJ-45">
-                            <VBox.margin>
-                                <Insets left="35.0" top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                        <Button fx:id="serialUp" layoutX="10.0" layoutY="85.0" mnemonicParsing="false"
-                                text="+1 Serial">
-                            <VBox.margin>
-                                <Insets left="35.0" top="20.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                        <Button fx:id="rcaUp" layoutX="10.0" layoutY="110.0" mnemonicParsing="false"
-                                text="+1 RCA">
-                            <VBox.margin>
-                                <Insets left="40.0" top="15.0"/>
-                            </VBox.margin>
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                        </Button>
-                    </VBox>
-                    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
-                        <Button fx:id="dviDown" mnemonicParsing="false" text="-1 DVI">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets left="40.0" top="10.0"/>
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="parallelDown" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
-                                text="-1 Parallel">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets left="30.0" top="20.0"/>
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="psDown" layoutX="10.0" layoutY="49.0" mnemonicParsing="false" text="-1 PS2">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets left="40.0" top="20.0"/>
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="rjDown" layoutX="10.0" layoutY="88.0" mnemonicParsing="false" text="-1 RJ-45">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets left="35.0" top="20.0"/>
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="serialDown" layoutX="10.0" layoutY="127.0" mnemonicParsing="false"
-                                text="-1 Serial">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets left="35.0" top="20.0"/>
-                            </VBox.margin>
-                        </Button>
-                        <Button fx:id="rcaDown" layoutX="10.0" layoutY="166.0" mnemonicParsing="false" text="-1 RCA">
-                            <font>
-                                <Font size="18.0"/>
-                            </font>
-                            <VBox.margin>
-                                <Insets left="40.0" top="15.0"/>
-                            </VBox.margin>
-                        </Button>
-                    </VBox>
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <children>
+                                <Label id="port-label" text="DVI"/>
+                                <JFXSlider id="dvi-slider" fx:id="dviPortSlider" majorTickUnit="1.0" max="10.0"
+                                           minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true"
+                                           showTickMarks="true" snapToTicks="true">
+                                    <HBox.margin>
+                                        <Insets left="40.0"/>
+                                    </HBox.margin>
+                                </JFXSlider>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                            <children>
+                                <Label id="port-label" text="Parallel"/>
+                                <JFXSlider id="parallel-slider" fx:id="parallelPortSlider" blockIncrement="1.0"
+                                           majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0"
+                                           prefWidth="220.0" showTickLabels="true" showTickMarks="true"
+                                           snapToTicks="true">
+                                    <HBox.margin>
+                                        <Insets left="14.0"/>
+                                    </HBox.margin>
+                                </JFXSlider>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                            <children>
+                                <Label id="port-label" text="PS-2"/>
+                                <JFXSlider id="ps-slider" fx:id="psPortSlider" blockIncrement="1.0" majorTickUnit="1.0"
+                                           max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0"
+                                           showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                    <HBox.margin>
+                                        <Insets left="33.0"/>
+                                    </HBox.margin>
+                                </JFXSlider>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                            <children>
+                                <Label id="port-label" text="RJ-45"/>
+                                <JFXSlider id="rj-slider" fx:id="rjPortSlider" blockIncrement="1.0" majorTickUnit="1.0"
+                                           max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0"
+                                           showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                                    <HBox.margin>
+                                        <Insets left="30.0"/>
+                                    </HBox.margin>
+                                </JFXSlider>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                            <children>
+                                <Label id="port-label" text="Serial"/>
+                                <JFXSlider id="serial-slider" fx:id="serialPortSlider" blockIncrement="1.0"
+                                           majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0"
+                                           prefWidth="220.0" showTickLabels="true" showTickMarks="true"
+                                           snapToTicks="true">
+                                    <HBox.margin>
+                                        <Insets left="26.0"/>
+                                    </HBox.margin>
+                                </JFXSlider>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                            <children>
+                                <Label id="port-label" text="RCA"/>
+                                <JFXSlider id="rca-slider" fx:id="rcaPortSlider" blockIncrement="1.0"
+                                           majorTickUnit="1.0" max="10.0" minorTickCount="0" prefHeight="54.0"
+                                           prefWidth="220.0" showTickLabels="true" showTickMarks="true"
+                                           snapToTicks="true">
+                                    <HBox.margin>
+                                        <Insets left="36.0"/>
+                                    </HBox.margin>
+                                </JFXSlider>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0">
+                            <children>
+                                <Label id="major-title" text="Ports"/>
+                            </children>
+                        </HBox>
+                    </children>
                 </GridPane>
-                <HBox prefHeight="100.0" prefWidth="200.0">
-                    <Label text="Port Counts">
-                        <font>
-                            <Font size="24.0"/>
-                        </font>
-                        <HBox.margin>
-                            <Insets left="150.0" top="15.0"/>
-                        </HBox.margin>
-                    </Label>
-                </HBox>
-            </GridPane>
-            <Pane GridPane.rowIndex="1">
-                <Button layoutX="83.0" layoutY="237.0" mnemonicParsing="false" onAction="#reset" opacity="0.04"
-                        text="Full Bomb Reset">
-                    <font>
-                        <Font size="28.0"/>
-                    </font>
-                </Button>
-                <ToggleButton fx:id="souvenir" layoutX="116.0" layoutY="39.0" mnemonicParsing="false"
-                              onAction="#souvenirToggle" style="-fx-background-color: crimson; -fx-text-fill: seashell;"
-                              text="Souvenir: Disabled">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </ToggleButton>
-                <ToggleButton fx:id="forgetMeNot" layoutX="92.0" layoutY="124.0" mnemonicParsing="false"
-                              onAction="#forgetMeToggle" style="-fx-background-color: crimson; -fx-text-fill: seashell;"
-                              text="Forget Me Not: Disabled">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </ToggleButton>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                <Label fx:id="bob" layoutX="146.0" layoutY="54.0" text="BOB">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="car" layoutX="146.0" layoutY="126.0" text="CAR">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="frq" layoutX="146.0" layoutY="325.0" text="FRQ">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="frk" layoutX="148.0" layoutY="265.0" text="FRK">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="clr" layoutX="148.0" layoutY="197.0" text="CLR">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="nsa" layoutX="437.0" layoutY="194.0" text="NSA">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="msa" layoutX="438.0" layoutY="123.0" text="MSA">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="sig" layoutX="441.0" layoutY="262.0" text="SIG">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="snd" layoutX="436.0" layoutY="328.0" text="SND">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="ind" layoutX="442.0" layoutY="51.0" text="IND">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-                <ToggleButton layoutX="59.0" layoutY="48.0" mnemonicParsing="false" onAction="#bobGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="bobGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="59.0" layoutY="120.0" mnemonicParsing="false" onAction="#carGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="carGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="59.0" layoutY="191.0" mnemonicParsing="false" onAction="#clrGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="clrGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="59.0" layoutY="259.0" mnemonicParsing="false" onAction="#frkGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="frkGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="59.0" layoutY="319.0" mnemonicParsing="false" onAction="#frqGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="frqGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="358.0" layoutY="322.0" mnemonicParsing="false" onAction="#sndGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="sndGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="358.0" layoutY="256.0" mnemonicParsing="false" onAction="#sigGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="sigGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="358.0" layoutY="188.0" mnemonicParsing="false" onAction="#nsaGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="nsaGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="358.0" layoutY="117.0" mnemonicParsing="false" onAction="#msaGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="msaGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="358.0" layoutY="45.0" mnemonicParsing="false" onAction="#indGroup"
-                              prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="indGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="208.0" layoutY="48.0" mnemonicParsing="false"
-                              onAction="#bobGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="bobGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="208.0" layoutY="120.0" mnemonicParsing="false"
-                              onAction="#carGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="carGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="208.0" layoutY="191.0" mnemonicParsing="false"
-                              onAction="#clrGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="clrGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="208.0" layoutY="259.0" mnemonicParsing="false"
-                              onAction="#frkGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="frkGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="208.0" layoutY="319.0" mnemonicParsing="false"
-                              onAction="#frqGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="frqGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="494.0" layoutY="45.0" mnemonicParsing="false"
-                              onAction="#indGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="indGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="494.0" layoutY="117.0" mnemonicParsing="false"
-                              onAction="#msaGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="msaGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="494.0" layoutY="188.0" mnemonicParsing="false"
-                              onAction="#nsaGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="nsaGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="494.0" layoutY="256.0" mnemonicParsing="false"
-                              onAction="#sigGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="sigGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="494.0" layoutY="322.0" mnemonicParsing="false"
-                              onAction="#sndGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="sndGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <Label layoutX="254.0" layoutY="14.0" text="Indicators">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <ToggleButton layoutX="351.0" layoutY="375.0" mnemonicParsing="false"
-                              onAction="#trnGroup" prefHeight="39.0" prefWidth="67.0" text="Unlit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <ToggleGroup fx:id="trnGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <ToggleButton layoutX="216.0" layoutY="375.0" mnemonicParsing="false"
-                              onAction="#trnGroup" prefHeight="39.0" prefWidth="52.0" text="Lit">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                    <toggleGroup>
-                        <fx:reference source="trnGroup"/>
-                    </toggleGroup>
-                </ToggleButton>
-                <Label fx:id="trn" layoutX="288.0" layoutY="381.0" text="TRN">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </Label>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <TextField fx:id="doubleAField" layoutX="47.0" layoutY="45.0" onKeyReleased="#doubleAInfo"
-                           prefHeight="39.0" prefWidth="160.0" promptText="Double A's">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </TextField>
-                <TextField fx:id="dBatField" layoutX="47.0" layoutY="120.0" onKeyReleased="#dBatInfo" prefHeight="39.0"
-                           prefWidth="160.0" promptText="D Batteries">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </TextField>
-                <TextField fx:id="holderField" layoutX="47.0" layoutY="182.0" onKeyReleased="#holderInfo"
-                           prefHeight="39.0" prefWidth="160.0" promptText="Battery Holders">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </TextField>
-                <TextField fx:id="plateField" layoutX="364.0" layoutY="46.0" onKeyReleased="#plateInfo"
-                           prefHeight="39.0" prefWidth="160.0" promptText="Port Plates">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </TextField>
-                <TextField fx:id="minField" layoutX="364.0" layoutY="121.0" onKeyReleased="#minuteInfo"
-                           prefHeight="39.0" prefWidth="160.0" promptText="Number of Min">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </TextField>
-                <TextField fx:id="modField" layoutX="364.0" layoutY="183.0" onKeyReleased="#modInfo" prefHeight="39.0"
-                           prefWidth="160.0" promptText="Module Number">
-                    <font>
-                        <Font size="18.0"/>
-                    </font>
-                </TextField>
-                <TextField fx:id="serialField" layoutX="173.0" layoutY="252.0" onKeyReleased="#serialCode"
-                           promptText="Serial Code">
-                    <font>
-                        <Font size="20.0"/>
-                    </font>
-                </TextField>
-                <Label fx:id="aLabel" layoutX="219.0" layoutY="47.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="dLabel" layoutX="219.0" layoutY="122.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="plateLabel" layoutX="532.0" layoutY="48.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="minuteLabel" layoutX="532.0" layoutY="123.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="moduleLabel" layoutX="532.0" layoutY="185.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <Label fx:id="holderLabel" layoutX="219.0" layoutY="184.0">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="246.0" text="Everything Else">
-                    <font>
-                        <Font size="24.0"/>
-                    </font>
-                </Label>
-            </Pane>
+                <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="199.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="97.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <HBox id="bottom-border-line-separator" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <JFXToggleButton id="boss-module-toggle-button" fx:id="forgetMeNot"
+                                                 onAction="#forgetMeToggle" text="Forget Me Not"/>
+                                <JFXToggleButton id="boss-module-toggle-button" fx:id="souvenir"
+                                                 onAction="#souvenirToggle" text="Souvenir"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <children>
+                                <JFXButton buttonType="RAISED" onAction="#fullBombReset" ripplerFill="#1a0af2"
+                                           text="Full Bomb Reset">
+                                    <font>
+                                        <Font size="24.0"/>
+                                    </font>
+                                </JFXButton>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
         </GridPane>
-    </GridPane>
-</Pane>
+        <GridPane GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="561.0" minHeight="10.0" prefHeight="536.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="378.0" minHeight="10.0" prefHeight="264.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="272.0" minHeight="10.0" prefHeight="248.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <GridPane GridPane.rowIndex="1">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0"
+                                                   prefWidth="221.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0"
+                                                   prefWidth="264.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="348.0" minWidth="10.0"
+                                                   prefWidth="269.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <Label id="everything-else-label" text="Double A Batteries"/>
+                                        <JFXSlider id="battery-slider" fx:id="doubleABatteries" blockIncrement="2.0"
+                                                   majorTickUnit="2.0" max="10.0" minorTickCount="0"
+                                                   onMouseClicked="#doubleABatterySliderChange" showTickLabels="true"
+                                                   showTickMarks="true" snapToTicks="true">
+                                            <VBox.margin>
+                                                <Insets bottom="30.0"/>
+                                            </VBox.margin>
+                                        </JFXSlider>
+                                        <Label id="everything-else-label" layoutX="114.0" layoutY="144.0"
+                                               text="D Batteries">
+                                            <VBox.margin>
+                                                <Insets top="30.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <JFXSlider id="battery-slider" fx:id="dBatteries" blockIncrement="1.0"
+                                                   layoutX="10.0" layoutY="161.0" majorTickUnit="1.0" max="10.0"
+                                                   minorTickCount="0" onMouseClicked="#dBatterySliderChange"
+                                                   showTickLabels="true" showTickMarks="true" snapToTicks="true"/>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                                    <children>
+                                        <Label id="everything-else-label" text="Port Plates"/>
+                                        <JFXSlider id="holder-slider" fx:id="portPlates" blockIncrement="1.0"
+                                                   majorTickUnit="1.0" max="10.0" minorTickCount="0"
+                                                   onMouseClicked="#portPlateSliderChange" showTickLabels="true"
+                                                   showTickMarks="true" snapToTicks="true">
+                                            <VBox.margin>
+                                                <Insets bottom="30.0"/>
+                                            </VBox.margin>
+                                        </JFXSlider>
+                                        <Label id="everything-else-label" text="Battery Holders">
+                                            <VBox.margin>
+                                                <Insets top="30.0"/>
+                                            </VBox.margin>
+                                        </Label>
+                                        <JFXSlider id="holder-slider" fx:id="batteryHolders" blockIncrement="1.0"
+                                                   majorTickUnit="1.0" max="10.0" minorTickCount="0"
+                                                   onMouseClicked="#batteryHolderSliderChange" showTickLabels="true"
+                                                   showTickMarks="true" snapToTicks="true"/>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                                    <children>
+                                        <JFXTextArea fx:id="numberOfMinutesArea" prefHeight="46.0" prefWidth="348.0"
+                                                     promptText="Number of Minutes">
+                                            <VBox.margin>
+                                                <Insets bottom="25.0"/>
+                                            </VBox.margin>
+                                        </JFXTextArea>
+                                        <JFXTextArea fx:id="numberOfModulesArea" prefHeight="47.0" prefWidth="348.0"
+                                                     promptText="Number of Modules"/>
+                                        <JFXTextArea fx:id="serialCodeArea" onKeyReleased="#detectSerialCodeAreaChange"
+                                                     prefHeight="39.0" prefWidth="348.0" promptText="Serial Code">
+                                            <VBox.margin>
+                                                <Insets top="25.0"/>
+                                            </VBox.margin>
+                                        </JFXTextArea>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </GridPane>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label id="major-title" text="Everything Else"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+                <GridPane id="bottom-border-line-separator">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="380.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="411.0" minHeight="10.0" prefHeight="357.0" vgrow="SOMETIMES"/>
+                        <RowConstraints maxHeight="244.0" minHeight="10.0" prefHeight="113.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <GridPane GridPane.rowIndex="1">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="BOB"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#bobGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="bobGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#bobGroup"
+                                                                 text="Unlit" toggleGroup="$bobGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="FRK"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#frkGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="frkGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#frkGroup"
+                                                                 text="Unlit" toggleGroup="$frkGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="2">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="MSA"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#msaGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="msaGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#msaGroup"
+                                                                 text="Unlit" toggleGroup="$msaGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="FRQ"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#frqGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="frqGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#frqGroup"
+                                                                 text="Unlit" toggleGroup="$frqGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="NSA"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#nsaGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="nsaGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#nsaGroup"
+                                                                 text="Unlit" toggleGroup="$nsaGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="CAR"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#carGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="carGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#carGroup"
+                                                                 text="Unlit" toggleGroup="$carGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="CLR"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#clrGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="clrGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#clrGroup"
+                                                                 text="Unlit" toggleGroup="$clrGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="IND"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#indGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="indGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#indGroup"
+                                                                 text="Unlit" toggleGroup="$indGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="SIG"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#sigGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="sigGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#sigGroup"
+                                                                 text="Unlit" toggleGroup="$sigGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </GridPane>
+                        <GridPane GridPane.rowIndex="2">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                            </rowConstraints>
+                            <children>
+                                <GridPane>
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="SND"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#sndGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="sndGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#sndGroup"
+                                                                 text="Unlit" toggleGroup="$sndGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                                <GridPane GridPane.columnIndex="1">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="40.0"
+                                                        vgrow="SOMETIMES"/>
+                                        <RowConstraints maxHeight="82.0" minHeight="10.0" prefHeight="82.0"
+                                                        vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                    <children>
+                                        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                                            <children>
+                                                <Label id="indicator-label" text="TRN"/>
+                                            </children>
+                                        </VBox>
+                                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0"
+                                              GridPane.rowIndex="1">
+                                            <children>
+                                                <JFXToggleButton id="lit-label-toggle-button" onAction="#trnGroup"
+                                                                 text="Lit">
+                                                    <toggleGroup>
+                                                        <ToggleGroup fx:id="trnGroup"/>
+                                                    </toggleGroup>
+                                                </JFXToggleButton>
+                                                <JFXToggleButton id="unlit-label-toggle-button" onAction="#trnGroup"
+                                                                 text="Unlit" toggleGroup="$trnGroup"/>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </GridPane>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label id="major-title" text="Indicators"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+            </children>
+        </GridPane>
+    </children>
+</GridPane>
