@@ -48,6 +48,10 @@
     -fx-background-radius: 10 10 10 10;
 }
 
+#output-area .content {
+    -fx-background-color: black;
+}
+
 #border-divide {
     -fx-border-color: #700404;
     -fx-border-width: 0 0 0 2;
