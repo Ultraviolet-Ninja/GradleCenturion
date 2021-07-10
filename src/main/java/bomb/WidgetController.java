@@ -2,7 +2,7 @@ package bomb;
 
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 import bomb.tools.FacadeFX;
 import bomb.tools.Filter;
 import bomb.tools.observer.ObserverHub;
@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.function.Consumer;
 
 import static bomb.enumerations.Port.*;
-import static bomb.enumerations.TriState.*;
+import static bomb.enumerations.TrinaryState.*;
 import static bomb.tools.observer.ObserverHub.ObserverIndex.*;
 
 public class WidgetController {
@@ -145,11 +145,11 @@ public class WidgetController {
     }
 
     private void indicatorAction(Indicator indicator, ToggleGroup group){
-        TriState state = determineState(group.getSelectedToggle());
+        TrinaryState state = determineState(group.getSelectedToggle());
         Widget.setIndicator(state, indicator);
     }
 
-    private TriState determineState(Toggle selected){
+    private TrinaryState determineState(Toggle selected){
         if (selected == null) return UNKNOWN;
         return ((ToggleButton)selected).getText().equals("Lit") ? ON : OFF;
     }
@@ -171,7 +171,7 @@ public class WidgetController {
 
     @FXML
     private void portPlateSliderChange(){
-        Widget.setPlates((int) portPlates.getValue());
+        Widget.setNumberOfPlates((int) portPlates.getValue());
     }
 
     @FXML

@@ -4,6 +4,8 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 
+import static bomb.Widget.IndicatorFilter.LIT;
+import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.tools.Filter.NUMBER_PATTERN;
 import static bomb.tools.Filter.ultimateFilter;
 
@@ -87,7 +89,7 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] fifthBits(){
-        return new boolean[]{countIndicators(true, false) > 1, countIndicators(false, false) > 1};
+        return new boolean[]{countIndicators(LIT) > 1, countIndicators(UNLIT) > 1};
     }
 
     private static boolean[] sixthBits() throws IllegalArgumentException{

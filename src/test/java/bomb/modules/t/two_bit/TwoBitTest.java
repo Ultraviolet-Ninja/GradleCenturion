@@ -58,7 +58,7 @@ public class TwoBitTest {
     }
 
     private void widgetSetupOne(){
-        Widget.setPlates(2);
+        Widget.setNumberOfPlates(2);
         Widget.setPortValue(Port.RJ45,1);
         Widget.setPortValue(Port.PS2, 2);
         Widget.setPortValue(Port.RCA,1);

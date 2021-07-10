@@ -2,11 +2,14 @@ package bomb;
 
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
+import bomb.modules.dh.forget_me.NewForgetMeNot;
 
-import static bomb.enumerations.TriState.*;
+import java.util.function.Predicate;
+
+import static bomb.enumerations.TrinaryState.*;
 import static bomb.tools.Filter.*;
 
 /**
@@ -64,7 +67,8 @@ public class Widget {
      */
     private static void updates(){
         BlindAlley.alleyUpdate();
-        ForgetMeNot.updateGreatest();
+        if (forgetMeNot) ForgetMeNot.updateGreatest();
+        if (forgetMeNot) NewForgetMeNot.updateLargestValueInSerial();
     }
 
     /**
@@ -97,8 +101,8 @@ public class Widget {
      * @param state The state to give the Indicator
      * @param which The Indicator to change
      */
-    public static void setIndicator(TriState state, Indicator which){
-        list[which.ordinal()].setProp(state);
+    public static void setIndicator(TrinaryState state, Indicator which){
+        list[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
 
@@ -118,7 +122,7 @@ public class Widget {
      *
      * @param plates The given number
      */
-    public static void setPlates(int plates){
+    public static void setNumberOfPlates(int plates){
         if (plates >= 0){
             numPlates = plates;
         }
@@ -149,6 +153,7 @@ public class Widget {
      */
     public static void setForgetMeNot(boolean set){
         forgetMeNot = set;
+        updates();
     }
 
     /**
@@ -217,7 +222,7 @@ public class Widget {
      * @return True if the lit Indicator is found
      */
     public static boolean hasLitIndicator(Indicator ind){
-        return list[ind.ordinal()].getProp() == ON;
+        return list[ind.ordinal()].getState() == ON;
     }
 
     /**
@@ -227,7 +232,7 @@ public class Widget {
      * @return True if the unlit Indicator is found
      */
     public static boolean hasUnlitIndicator(Indicator ind){
-        return list[ind.ordinal()].getProp() == OFF;
+        return list[ind.ordinal()].getState() == OFF;
     }
 
     /**
@@ -333,10 +338,21 @@ public class Widget {
      */
     public static int countIndicators(boolean lit, boolean all){
         int counter = 0;
-        TriState current = lit?ON:OFF;
+        TrinaryState current = lit?ON:OFF;
         for (Indicator ind : list){
-            if (ind.getProp() == current && !all || (ind.getProp() != UNKNOWN && all))
+            if (ind.getState() == current && !all || (ind.getState() != UNKNOWN && all))
                 counter++;
+        }
+        return counter;
+    }
+
+    public static int countIndicators(IndicatorFilter filter){
+        int counter = 0;
+        Predicate<TrinaryState> searchParameter = filter == IndicatorFilter.ALL ?
+                state -> state != UNKNOWN :
+                state -> state == (filter == IndicatorFilter.LIT ? ON : OFF);
+        for (Indicator indicator : list) {
+            if (searchParameter.test(indicator.getState())) counter++;
         }
         return counter;
     }
@@ -380,6 +396,10 @@ public class Widget {
 
     private static void setAllUnknown(){
         for (Indicator ind : list)
-            ind.setProp(UNKNOWN);
+            ind.setState(UNKNOWN);
+    }
+
+    public enum IndicatorFilter {
+        LIT, UNLIT, ALL
     }
 }

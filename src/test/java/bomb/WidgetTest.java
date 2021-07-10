@@ -1,7 +1,7 @@
 package bomb;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -59,7 +59,7 @@ public class WidgetTest {
 
     @Test(dataProvider = "negativeValueProvider")
     public void negativePortPlateTest(int val, int expected){
-        Widget.setPlates(val);
+        Widget.setNumberOfPlates(val);
 
         assertEquals(Widget.numPlates, expected);
     }
@@ -113,8 +113,8 @@ public class WidgetTest {
     public Object[][] indicatorProvider(){
         ConditionSetter empty = () -> {};
         ConditionSetter trueSetter = () -> {
-            Widget.setIndicator(TriState.ON, Indicator.MSA);
-            Widget.setIndicator(TriState.OFF, Indicator.NSA);
+            Widget.setIndicator(TrinaryState.ON, Indicator.MSA);
+            Widget.setIndicator(TrinaryState.OFF, Indicator.NSA);
         };
 
         return new Object[][]{

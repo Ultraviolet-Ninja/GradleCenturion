@@ -3,11 +3,11 @@ package bomb.enumerations;
 import bomb.abstractions.Labeled;
 
 /**
- * TriState deals with anything that needs to have 3 states of existence: On, Off or Unknown.
+ * TrinaryState deals with anything that needs to have 3 states of existence: On, Off or Unknown.
  * This is most prevalent with the Indicators because we need to be able to track ones on the bomb
  * that are lit and unlit.
  */
-public enum TriState implements Labeled {
+public enum TrinaryState implements Labeled {
     /**
      * The off state
      */
@@ -29,11 +29,11 @@ public enum TriState implements Labeled {
     }
 
     /**
-     * TriState constructor
+     * TrinaryState constructor
      *
      * @param label The color given to the state for JavaFX purposes
      */
-    TriState(String label){
+    TrinaryState(String label){
         this.label = label;
     }
 }

@@ -47,8 +47,7 @@ public class ForgetController implements Resettable {
                     FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
                 }
             } else {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work",
-                        "", "");
+                FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work");
             }
         };
     }

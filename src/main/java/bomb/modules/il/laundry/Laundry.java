@@ -101,7 +101,7 @@ public class Laundry extends Widget {
      * @param unsolved The number of unsolved modules
      */
     private static void setItem(int unsolved){
-        switch (balance(unsolved + countIndicators(true, true))){
+        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL))){
             case 0: ARTICLE.setItem(Clothing.Item.CORSET); break;
             case 1: ARTICLE.setItem(Clothing.Item.SHIRT); break;
             case 2: ARTICLE.setItem(Clothing.Item.SKIRT); break;

@@ -1,6 +1,6 @@
 package bomb.abstractions;
 
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 
 /**
  * This interface deals with any enum that has 3 states: On, Off or Unknown
@@ -11,12 +11,12 @@ public interface Ternary {
      *
      * @return The state
      */
-    TriState getProp();
+    TrinaryState getState();
 
     /**
      * Sets the state of the object
      *
      * @param in The state
      */
-    void setProp(TriState in);
+    void setState(TrinaryState in);
 }

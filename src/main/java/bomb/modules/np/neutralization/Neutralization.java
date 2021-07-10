@@ -5,7 +5,8 @@ import bomb.enumerations.Indicator;
 import bomb.Widget;
 import javafx.scene.paint.Color;
 
-import static bomb.enumerations.TriState.UNKNOWN;
+import static bomb.Widget.IndicatorFilter.ALL;
+import static bomb.enumerations.TrinaryState.UNKNOWN;
 import static bomb.tools.Filter.VOWEL_FILTER;
 import static bomb.tools.Filter.ultimateFilter;
 import static javafx.scene.paint.Color.BLUE;
@@ -89,7 +90,7 @@ public class Neutralization extends Widget {
      */
     private static boolean indicatorMatch(){
         for (Indicator ind : list){
-            if (ind.getProp() != UNKNOWN){
+            if (ind.getState() != UNKNOWN){
                 for (char letter : ind.name().toCharArray()){
                     if (charMatch(currentAcid.getFormula().toUpperCase(), letter)){
                         return true;
@@ -130,12 +131,12 @@ public class Neutralization extends Widget {
      */
     private static int baseConcentration(){
         if (!overrule()) {
-            if (numHolders > getPortTypes() && numHolders > countIndicators(true, true))
+            if (numHolders > getPortTypes() && numHolders > countIndicators(ALL))
                 return 5;
-            else if (getPortTypes() > numHolders && getPortTypes() > countIndicators(true, true))
+            else if (getPortTypes() > numHolders && getPortTypes() > countIndicators(ALL))
                 return 10;
-            else if (countIndicators(true, true) > numHolders &&
-                    countIndicators(true, true) > getPortTypes())
+            else if (countIndicators(ALL) > numHolders &&
+                    countIndicators(ALL) > getPortTypes())
                 return 20;
             return closestNum();
         }

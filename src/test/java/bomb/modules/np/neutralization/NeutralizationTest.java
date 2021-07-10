@@ -5,7 +5,7 @@ import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 import javafx.scene.paint.Color;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -47,7 +47,7 @@ public class NeutralizationTest {
     }
 
     private void setupOne(){
-        Widget.setPlates(1);Widget.setIndicator(TriState.ON, Indicator.NSA);
+        Widget.setNumberOfPlates(1);Widget.setIndicator(TrinaryState.ON, Indicator.NSA);
         Widget.setPortValue(Port.PARALLEL,2);
         Widget.setPortValue(Port.SERIAL,1);
         Widget.setPortValue(Port.PS2,1);
@@ -65,12 +65,12 @@ public class NeutralizationTest {
     }
 
     private void setupTwo(){
-        Widget.setPlates(3);
+        Widget.setNumberOfPlates(3);
         Widget.setPortValue(Port.PARALLEL,2);
         Widget.setPortValue(Port.SERIAL,1);
         Widget.setSerialCode("ew7qw5");
-        Widget.setIndicator(TriState.ON, Indicator.MSA);
-        Widget.setIndicator(TriState.ON, Indicator.NSA);
+        Widget.setIndicator(TrinaryState.ON, Indicator.MSA);
+        Widget.setIndicator(TrinaryState.ON, Indicator.NSA);
     }
 
     @DataProvider
