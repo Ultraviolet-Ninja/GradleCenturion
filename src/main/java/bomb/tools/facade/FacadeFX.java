@@ -1,4 +1,4 @@
-package bomb.tools;
+package bomb.tools.facade;
 
 import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;

@@ -2,7 +2,7 @@ package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
 import bomb.abstractions.Resettable;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 
 import java.util.function.Consumer;
 
-public class ForgetController implements Resettable {
+public class OldForgetController implements Resettable {
     private static final double COMPLETION_PERCENTAGE = 0.9;
 
     private int stageCounter = 1;
@@ -60,7 +60,7 @@ public class ForgetController implements Resettable {
 
     private void addTo(Button button) {
         int temp = Integer.parseInt(button.getText());
-        ForgetMeNot.add(stageCounter, temp);
+        OldForgetMeNot.add(stageCounter, temp);
         forgetMeOutput.setText("Stage " + stageCounter + " was a " + temp);
     }
 
@@ -76,7 +76,7 @@ public class ForgetController implements Resettable {
     @FXML
     private void undo() {
         if (stageCounter > 1) {
-            ForgetMeNot.undo();
+            OldForgetMeNot.undo();
             forgetMeOutput.setText("Previous stage undone");
             currentStage.setText(String.valueOf(--stageCounter));
         }
@@ -89,7 +89,7 @@ public class ForgetController implements Resettable {
 
     @FXML
     private void flushOut() {
-        flushArea.setText(ForgetMeNot.flush());
+        flushArea.setText(OldForgetMeNot.flush());
         FacadeFX.toggleNodes(true, undoButton, flush);
         stageCounter = 1;
         reEnable();

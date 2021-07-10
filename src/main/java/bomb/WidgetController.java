@@ -3,7 +3,7 @@ package bomb;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinaryState;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.Filter;
 import bomb.tools.observer.ObserverHub;
 import com.jfoenix.controls.JFXSlider;

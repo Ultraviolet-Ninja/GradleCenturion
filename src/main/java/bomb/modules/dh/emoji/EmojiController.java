@@ -1,7 +1,7 @@
 package bomb.modules.dh.emoji;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

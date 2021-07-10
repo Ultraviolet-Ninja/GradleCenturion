@@ -1,6 +1,6 @@
 package bomb;
 
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.Filter;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.scene.control.Alert;

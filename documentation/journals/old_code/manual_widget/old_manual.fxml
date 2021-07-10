@@ -6,7 +6,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
             prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="bomb.ManualController" stylesheets="@../../../src/main/resources/bomb/css/manual.css" id="background">
+            fx:controller="bomb.ManualController" stylesheets="@../../../../src/main/resources/bomb/css/manual.css" id="background">
     <center>
         <Pane fx:id="solutionDisplay" prefHeight="760.0" prefWidth="1160.0" BorderPane.alignment="CENTER"/>
     </center>

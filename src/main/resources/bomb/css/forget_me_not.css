@@ -1,0 +1,47 @@
+#number-pad-button {
+    -fx-font-size: 30;
+    -fx-background-color: #fff4eb;
+    -fx-text-fill: black;
+}
+
+#control-button {
+    -fx-font-size: 20;
+    -fx-background-color: #fff4eb;
+    -fx-text-fill: black;
+}
+
+#reset-button {
+    -fx-font-size: 14;
+    -fx-background-color: #fff4eb;
+    -fx-text-fill: black;
+}
+
+#background {
+    -fx-background-color: #af0a0e;
+}
+
+#stage-counter {
+    -fx-font-size: 40;
+    -fx-background-color: black;
+    -fx-text-fill: #2eff00;
+    -fx-text-alignment: center;
+    -fx-border-color: #85e0ff;
+    -fx-border-radius: 15;
+}
+
+#confirmation-field {
+    -fx-background-color: black;
+    -fx-text-fill: #2eff00;
+    -fx-font-size: 20;
+    -fx-border-color: #85e0ff;
+    -fx-border-radius: 15;
+    -fx-prompt-text-fill: #38b822;
+}
+
+#output-area {
+    -fx-background-color: black;
+    -fx-text-fill: #2eff00;
+    -fx-font-size: 35;
+    -fx-border-color: #85e0ff;
+    -fx-border-radius: 15;
+}

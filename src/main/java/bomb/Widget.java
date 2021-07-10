@@ -4,8 +4,8 @@ import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinaryState;
 import bomb.modules.ab.blind_alley.BlindAlley;
+import bomb.modules.dh.forget_me.OldForgetMeNot;
 import bomb.modules.dh.forget_me.ForgetMeNot;
-import bomb.modules.dh.forget_me.NewForgetMeNot;
 
 import java.util.function.Predicate;
 
@@ -67,8 +67,8 @@ public class Widget {
      */
     private static void updates(){
         BlindAlley.alleyUpdate();
-        if (forgetMeNot) ForgetMeNot.updateGreatest();
-        if (forgetMeNot) NewForgetMeNot.updateLargestValueInSerial();
+        if (forgetMeNot) OldForgetMeNot.updateGreatest();
+        if (forgetMeNot) ForgetMeNot.updateLargestValueInSerial();
     }
 
     /**

@@ -1,6 +1,6 @@
 package bomb;
 
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.Regex;
 import bomb.tools.observer.BlindAlleyObserver;
 import bomb.tools.observer.ForgetMeNotObserver;

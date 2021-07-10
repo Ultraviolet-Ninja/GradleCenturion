@@ -10,7 +10,7 @@ import bomb.modules.m.microcontroller.chip.CountdownController;
 import bomb.modules.m.microcontroller.chip.DiodeController;
 import bomb.modules.m.microcontroller.chip.ExplodeController;
 import bomb.modules.m.microcontroller.chip.StrikeController;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

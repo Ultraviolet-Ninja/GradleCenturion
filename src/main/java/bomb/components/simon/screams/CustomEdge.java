@@ -1,7 +1,7 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
