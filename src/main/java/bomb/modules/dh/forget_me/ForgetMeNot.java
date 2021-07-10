@@ -88,7 +88,10 @@ public class ForgetMeNot extends Widget {
 
     public static void updateLargestValueInSerial(){
         Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (!Filter.SERIAL_CODE_PATTERN.matchesRegex()) return;
+        if (!Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
+            largestSerialCodeNumber = -1;
+            return;
+        }
 
         Regex singleNumberRegex = new Regex("\\d", serialCode);
         if (!singleNumberRegex.findAllMatches().isEmpty()) {
@@ -122,6 +125,6 @@ public class ForgetMeNot extends Widget {
 
     public static void reset(){
         FINAL_CODE.clear();
-        largestSerialCodeNumber = -1;
+        updateLargestValueInSerial();
     }
 }

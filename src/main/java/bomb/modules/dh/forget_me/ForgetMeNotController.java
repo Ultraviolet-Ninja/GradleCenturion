@@ -22,7 +22,7 @@ public class ForgetMeNotController implements Resettable {
             one, two, three, four, five, six, seven, eight, nine, zero;
 
     @FXML
-    private JFXTextArea outputArea;
+    private JFXTextField outputArea;
 
     @FXML
     private JFXTextField confirmationField;
@@ -82,6 +82,7 @@ public class ForgetMeNotController implements Resettable {
     @FXML
     private void stringifyOutput() {
         outputArea.setText(ForgetMeNot.stringifyFinalCode());
+        FacadeFX.disableMultiple(outputButton, undoButton);
     }
 
     private void synchronizeStageNumber() {

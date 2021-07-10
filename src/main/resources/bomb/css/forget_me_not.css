@@ -1,5 +1,5 @@
 #number-pad-button {
-    -fx-font-size: 30;
+    -fx-font-size: 35;
     -fx-background-color: #fff4eb;
     -fx-text-fill: black;
 }
@@ -21,12 +21,12 @@
 }
 
 #stage-counter {
-    -fx-font-size: 40;
+    -fx-font-size: 45;
     -fx-background-color: black;
     -fx-text-fill: #2eff00;
-    -fx-text-alignment: center;
     -fx-border-color: #85e0ff;
-    -fx-border-radius: 15;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10 10 10 10;
 }
 
 #confirmation-field {
@@ -34,8 +34,9 @@
     -fx-text-fill: #2eff00;
     -fx-font-size: 20;
     -fx-border-color: #85e0ff;
-    -fx-border-radius: 15;
+    -fx-border-radius: 10;
     -fx-prompt-text-fill: #38b822;
+    -fx-background-radius: 10 10 10 10;
 }
 
 #output-area {
@@ -43,5 +44,11 @@
     -fx-text-fill: #2eff00;
     -fx-font-size: 35;
     -fx-border-color: #85e0ff;
-    -fx-border-radius: 15;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10 10 10 10;
+}
+
+#border-divide {
+    -fx-border-color: #700404;
+    -fx-border-width: 0 0 0 2;
 }
