@@ -92,7 +92,7 @@ public class TheBulb extends Widget {
                 return findSet(next, 8, instruction);
             }
             case 4: {
-                if (Widget.hasFollowingInds(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND)){
+                if (Widget.hasFollowingIndicators(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND)){
                     instruction.append("Press I").append(arrow);
                     return findSet(next, 9, instruction);
                 }

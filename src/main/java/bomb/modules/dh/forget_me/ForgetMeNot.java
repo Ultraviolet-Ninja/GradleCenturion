@@ -21,9 +21,16 @@ public class ForgetMeNot extends Widget {
 
     private static byte largestSerialCodeNumber = -1;
 
-    public static void add(int stageNumber){
+    public static void add(int stageNumber) throws IllegalStateException{
+        if (!forgetMeNot)
+            throw new IllegalStateException("Forget Me Not wasn't activated");
+
         if (largestSerialCodeNumber == -1)
-            throw new IllegalStateException();
+            throw new IllegalStateException("The serial code was not set");
+
+        if (numModules == 0)
+            throw new IllegalArgumentException("Need to set the number of modules for this to work");
+
         FINAL_CODE.add(createNextNumber(stageNumber));
     }
 
@@ -51,7 +58,7 @@ public class ForgetMeNot extends Widget {
     }
 
     private static int createSecondNumber(int stageNumber){
-        if (portExists(Port.SERIAL) && serialCodeNumbers() > 2)
+        if (portExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
         return stageNumber + FINAL_CODE.get(0) +
@@ -64,7 +71,7 @@ public class ForgetMeNot extends Widget {
             return stageNumber + largestSerialCodeNumber;
 
         if (bothPreviousNumbersAreEven())
-            return stageNumber + smallestOddDigit();
+            return stageNumber + smallestOddDigitInSerialCode();
 
         return stageNumber + MOST_SIG_DIGIT.applyAsInt(
                 FINAL_CODE.get(length - 1) + FINAL_CODE.get(length - 2)
@@ -73,10 +80,10 @@ public class ForgetMeNot extends Widget {
 
     private static boolean bothPreviousNumbersAreEven(){
         int length = FINAL_CODE.size();
-        return FINAL_CODE.get(length - 1) % 2 == 0 || FINAL_CODE.get(length - 2) % 2 == 0;
+        return FINAL_CODE.get(length - 1) % 2 == 0 && FINAL_CODE.get(length - 2) % 2 == 0;
     }
 
-    private static int smallestOddDigit(){
+    private static int smallestOddDigitInSerialCode(){
         int compare = 10;
         Regex singleNumberRegex = new Regex("\\d", serialCode);
         for (String num : singleNumberRegex){
@@ -113,14 +120,14 @@ public class ForgetMeNot extends Widget {
 
         for (int i = 1; i <= FINAL_CODE.size(); i++){
             sb.append(FINAL_CODE.get(i - 1));
-            if (i % 3 == 0)
+            if (i % 3 == 0 && i != FINAL_CODE.size())
                 sb.append("-");
         }
         return sb.toString();
     }
 
     public static int getStage(){
-        return FINAL_CODE.size() + 1;
+        return FINAL_CODE.size();
     }
 
     public static void reset(){

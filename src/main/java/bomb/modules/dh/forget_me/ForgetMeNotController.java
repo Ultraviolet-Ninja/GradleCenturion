@@ -15,20 +15,14 @@ import javafx.scene.control.Label;
 import java.util.function.Consumer;
 
 public class ForgetMeNotController implements Resettable {
-    private static final double MODULE_COMPLETION_PERCENTAGE = 0.9;
-
-    @FXML
-    private JFXButton outputButton, undoButton, resetButton,
+    @FXML private JFXButton outputButton, undoButton, resetButton,
             one, two, three, four, five, six, seven, eight, nine, zero;
 
-    @FXML
-    private JFXTextField outputArea;
+    @FXML private JFXTextArea outputArea;
 
-    @FXML
-    private JFXTextField confirmationField;
+    @FXML private JFXTextField confirmationField;
 
-    @FXML
-    private Label stageCounter;
+    @FXML private Label stageCounter;
 
     public void initialize() {
         HoverHandler<ActionEvent> handler = new HoverHandler<>(createPressAction());
@@ -37,16 +31,14 @@ public class ForgetMeNotController implements Resettable {
 
     private Consumer<ActionEvent> createPressAction() {
         return event -> {
-            if (Widget.getNumModules() == 0) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, "Need to set the number of modules for this to work");
-                return;
-            }
             try {
                 addNextNumber((JFXButton) event.getSource());
                 if (undoButton.isDisable()) FacadeFX.enable(undoButton);
                 if (resetButton.isDisable()) FacadeFX.enable(resetButton);
                 setButtonPrivileges();
             } catch (IllegalArgumentException illegal) {
+                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            } catch (IllegalStateException illegal) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
             }
         };
@@ -55,15 +47,15 @@ public class ForgetMeNotController implements Resettable {
     private void addNextNumber(JFXButton button) {
         int extractedNumber = Integer.parseInt(button.getText());
         ForgetMeNot.add(extractedNumber);
-        confirmationField.setText("Stage " + (ForgetMeNot.getStage() - 1) + " was a " + extractedNumber);
+        confirmationField.setText("Stage " + ForgetMeNot.getStage() + " was a " + extractedNumber);
         synchronizeStageNumber();
     }
 
     private void setButtonPrivileges() {
-        if (ForgetMeNot.getStage() - 1 >= Widget.getNumModules() * MODULE_COMPLETION_PERCENTAGE)
+        if (ForgetMeNot.getStage() > 2)
             FacadeFX.enable(outputButton);
 
-        if (ForgetMeNot.getStage() - 1 == Widget.getNumModules())
+        if (ForgetMeNot.getStage() >= Widget.getNumModules() - 2)
             FacadeFX.disableMultiple(one, two, three, four, five, six, seven, eight, nine, zero);
     }
 
@@ -75,18 +67,23 @@ public class ForgetMeNotController implements Resettable {
         if (ForgetMeNot.getStage() == 0)
             FacadeFX.disableMultiple(resetButton, undoButton, outputButton);
 
-        if (ForgetMeNot.getStage() - 1 < Widget.getNumModules() * MODULE_COMPLETION_PERCENTAGE)
+        if (ForgetMeNot.getStage() < 2)
             FacadeFX.disable(outputButton);
+
+        if (ForgetMeNot.getStage() < Widget.getNumModules() - 2)
+            FacadeFX.enableMultiple(one, two, three, four, five, six, seven, eight, nine, zero);
     }
 
     @FXML
     private void stringifyOutput() {
         outputArea.setText(ForgetMeNot.stringifyFinalCode());
-        FacadeFX.disableMultiple(outputButton, undoButton);
     }
 
     private void synchronizeStageNumber() {
-        stageCounter.setText(String.valueOf(ForgetMeNot.getStage()));
+        String injectionText = String.valueOf(ForgetMeNot.getStage() + 1);
+        if (ForgetMeNot.getStage() == Widget.getNumModules() - 2)
+            injectionText = "-";
+        stageCounter.setText(injectionText);
     }
 
     @FXML

@@ -193,11 +193,11 @@ public class Widget {
     /**
      * Looks to if any listed Indicators are on the current bomb
      *
-     * @param inds The array of possible Indicators
+     * @param indicators The array of possible Indicators
      * @return True if any Indicator is found
      */
-    public static boolean hasFollowingInds(Indicator...inds){
-        for (Indicator current : inds){
+    public static boolean hasFollowingIndicators(Indicator...indicators){
+        for (Indicator current : indicators){
             if (hasIndicator(current)) return true;
         }
         return false;
@@ -247,7 +247,7 @@ public class Widget {
      *
      * @return The number of letters
      */
-    public static int serialCodeLetters(){
+    public static int countLettersInSerialCode(){
         return ultimateFilter(serialCode, CHAR_FILTER).length();
     }
 
@@ -256,7 +256,7 @@ public class Widget {
      *
      * @return The number of numbers
      */
-    public static int serialCodeNumbers(){
+    public static int countNumbersInSerialCode(){
         return ultimateFilter(serialCode, NUMBER_PATTERN).length();
     }
 
@@ -330,27 +330,13 @@ public class Widget {
     /**
      * Counts all indicators, whether lit, unlit or all if specified
      *
-     * @param lit Whether the lit or unlit indicators should be counted
-     * @param all Whether all indicators should be counted
+     * @param filter Indicates what indicators should be counted, whether ON, OFF or both
      * @return The number of indicators
      */
-    public static int countIndicators(boolean lit, boolean all){
-        int counter = 0;
-        TrinaryState current = lit?ON:OFF;
-        for (Indicator ind : list){
-            if (ind.getState() == current && !all || (ind.getState() != UNKNOWN && all))
-                counter++;
-        }
-        return counter;
-    }
-
     public static int countIndicators(IndicatorFilter filter){
         int counter = 0;
-        Predicate<TrinaryState> searchParameter = filter == IndicatorFilter.ALL ?
-                state -> state != UNKNOWN :
-                state -> state == (filter == IndicatorFilter.LIT ? ON : OFF);
         for (Indicator indicator : list) {
-            if (searchParameter.test(indicator.getState())) counter++;
+            if (filter.test(indicator.getState())) counter++;
         }
         return counter;
     }
@@ -398,6 +384,16 @@ public class Widget {
     }
 
     public enum IndicatorFilter {
-        LIT, UNLIT, ALL
+        LIT(state -> state == ON), UNLIT(state -> state == OFF), ALL(state -> state != UNKNOWN);
+
+        private final Predicate<TrinaryState> condition;
+
+        IndicatorFilter(Predicate<TrinaryState> condition){
+            this.condition = condition;
+        }
+
+        public boolean test(TrinaryState state){
+            return condition.test(state);
+        }
     }
 }

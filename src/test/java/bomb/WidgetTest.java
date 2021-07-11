@@ -105,8 +105,8 @@ public class WidgetTest {
     public void serialCodeLengthTest(String input, int expectedLetterLength, int expectedNumberLength){
         Widget.setSerialCode(input);
 
-        assertEquals(Widget.serialCodeLetters(), expectedLetterLength);
-        assertEquals(Widget.serialCodeNumbers(), expectedNumberLength);
+        assertEquals(Widget.countLettersInSerialCode(), expectedLetterLength);
+        assertEquals(Widget.countNumbersInSerialCode(), expectedNumberLength);
     }
 
     @DataProvider
@@ -127,7 +127,7 @@ public class WidgetTest {
     public void containsIndicatorTest(ConditionSetter setter, Indicator ind, boolean expected){
         setter.setCondition();
 
-        assertEquals(Widget.hasFollowingInds(ind), expected);
+        assertEquals(Widget.hasFollowingIndicators(ind), expected);
     }
 
     @AfterClass
