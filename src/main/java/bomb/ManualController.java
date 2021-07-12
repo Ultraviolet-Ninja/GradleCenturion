@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -39,7 +40,7 @@ public class ManualController {
     private Map<String, Region> regionMap;
     private List<Node> allRadioButtons;
 
-    @FXML private Pane solutionDisplay;
+    @FXML private BorderPane base;
 
     @FXML private JFXRadioButton forgetMeNot, souvenir;
 
@@ -47,7 +48,7 @@ public class ManualController {
 
     @FXML private ToggleGroup options;
 
-    @FXML private VBox radioButtonHouse;
+    @FXML private VBox radioButtonHouse, solutionDisplay;
 
     public void initialize(){
         allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
@@ -64,8 +65,9 @@ public class ManualController {
     }
 
     private void paneSwitch(final Region pane) {
-        solutionDisplay.getChildren().clear();
-        solutionDisplay.getChildren().add(pane);
+//        solutionDisplay.getChildren().clear();
+//        solutionDisplay.getChildren().add(pane);
+        base.setCenter(pane);
     }
 
     @FXML

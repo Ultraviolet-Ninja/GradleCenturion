@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+<GridPane maxHeight="Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
           prefWidth="1200.0" stylesheets="@../css/widget.css" xmlns="http://javafx.com/javafx/16"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
     <columnConstraints>
