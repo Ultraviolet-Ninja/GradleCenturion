@@ -7,17 +7,22 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="background" fx:id="base" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="@css/manual.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.ManualController">
-    <center>
-        <VBox fx:id="solutionDisplay" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0"
-              BorderPane.alignment="CENTER" />
-    </center>
-    <right>
-        <VBox maxWidth="400.0" minHeight="800.0" minWidth="300.0" prefHeight="800.0" prefWidth="300.0">
+<GridPane id="background" fx:id="base" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1500.0" stylesheets="@css/manual.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.ManualController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="1200.0" prefWidth="1200.0" />
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="-Infinity" minWidth="300.0" prefWidth="500.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    </rowConstraints>
+    <children>
+        <VBox fx:id="menuVBox" maxWidth="375.0" minWidth="300.0" GridPane.columnIndex="1">
             <MenuBar>
                 <menus>
                     <Menu mnemonicParsing="false">
@@ -31,9 +36,9 @@
                     </Menu>
                 </menus>
             </MenuBar>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="800.0" prefWidth="250.0" BorderPane.alignment="CENTER">
+            <ScrollPane hbarPolicy="NEVER">
                 <content>
-                    <VBox fx:id="radioButtonHouse" prefHeight="798.0" prefWidth="248.0">
+                    <VBox fx:id="radioButtonHouse">
                         <children>
                             <JFXRadioButton id="puzzle-radio-button" onAction="#buttonPress" prefHeight="25.0" prefWidth="122.0" text="Widget">
                                 <toggleGroup>
@@ -553,5 +558,5 @@
                 </content>
             </ScrollPane>
         </VBox>
-    </right>
-</BorderPane>
+    </children>
+</GridPane>

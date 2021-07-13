@@ -1,7 +1,7 @@
 package bomb;
 
-import bomb.tools.facade.FacadeFX;
 import bomb.tools.Regex;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.observer.BlindAlleyObserver;
 import bomb.tools.observer.ForgetMeNotObserver;
 import bomb.tools.observer.ObserverHub;
@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -40,7 +40,7 @@ public class ManualController {
     private Map<String, Region> regionMap;
     private List<Node> allRadioButtons;
 
-    @FXML private BorderPane base;
+    @FXML private GridPane base;
 
     @FXML private JFXRadioButton forgetMeNot, souvenir;
 
@@ -48,7 +48,7 @@ public class ManualController {
 
     @FXML private ToggleGroup options;
 
-    @FXML private VBox radioButtonHouse, solutionDisplay;
+    @FXML private VBox menuVBox, radioButtonHouse;
 
     public void initialize(){
         allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
@@ -65,9 +65,8 @@ public class ManualController {
     }
 
     private void paneSwitch(final Region pane) {
-//        solutionDisplay.getChildren().clear();
-//        solutionDisplay.getChildren().add(pane);
-        base.setCenter(pane);
+        if (base.getChildren().size() != 1) base.getChildren().retainAll(menuVBox);
+        base.add(pane, 0, 0);
     }
 
     @FXML
