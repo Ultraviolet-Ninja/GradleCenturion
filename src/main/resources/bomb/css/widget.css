@@ -182,11 +182,11 @@
 }
 
 #right-border-line-separator {
-    -fx-border-color: #2b4cff;
-    -fx-border-width: 0 1 0 0;
+    -fx-border-color: #001398;
+    -fx-border-width: 0 2 0 0;
 }
 
 #bottom-border-line-separator {
-    -fx-border-color: #2b4cff;
-    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #001398;
+    -fx-border-width: 0 0 2 0;
 }
