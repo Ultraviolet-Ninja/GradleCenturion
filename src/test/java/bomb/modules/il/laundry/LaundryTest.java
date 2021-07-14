@@ -75,9 +75,9 @@ public class LaundryTest {
 
     @DataProvider
     public Object[][] theGreatBerateProvider(){
-        ConditionSetter setFirst = WidgetSimulations::theGreatBerate;
-        ConditionSetter setSecond = WidgetSimulations::theGreatBerateTwo;
-        ConditionSetter setThird = WidgetSimulations::partTwoTakeTwo;
+        ConditionSetter setFirst = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter setSecond = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter setThird = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {setSecond, new String[]{"105F", "Medium Heat", "110", "Wet Cleaning", "CORDUROY - MALINITE - SCARF"},
                         "0", "1"},

@@ -75,9 +75,9 @@ public class NeutralizationTest {
 
     @DataProvider
     public Object[][] theGreatBerateProvider(){
-        ConditionSetter first = WidgetSimulations::theGreatBerate;
-        ConditionSetter second = WidgetSimulations::theGreatBerateTwo;
-        ConditionSetter third = WidgetSimulations::partTwoTakeTwo;
+        ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {first, 5, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
                         "12", NO_FILTER}},

@@ -2,10 +2,10 @@ package bomb.tools.observer;
 
 import bomb.modules.ab.blind_alley.BlindAlleyController;
 
-public class BlindAlleyObserver implements Observer {
+public class BlindAlleyPaneObserver implements Observer {
     private final BlindAlleyController controller;
 
-    public BlindAlleyObserver(BlindAlleyController controller){
+    public BlindAlleyPaneObserver(BlindAlleyController controller){
         this.controller = controller;
     }
 

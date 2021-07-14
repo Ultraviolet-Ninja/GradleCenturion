@@ -81,9 +81,9 @@ public class AstrologyTest {
 
     @DataProvider
     public Object[][] theGreatBerateProvider(){
-        ConditionSetter first = WidgetSimulations::theGreatBerate;
-        ConditionSetter second = WidgetSimulations::theGreatBerateTwo;
-        ConditionSetter third = WidgetSimulations::partTwoTakeTwo;
+        ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {first, (POOR_OMEN + 1), URANUS, FIRE, ARIES}, {second, (POOR_OMEN + 2), WATER, URANUS, VIRGO},
                 {third, (GOOD_OMEN + 6), JUPITER, EARTH, GEMINI}

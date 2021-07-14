@@ -66,9 +66,9 @@ public class BlindAlleyTest {
 
     @DataProvider
     public Object[][] theGreatBerateProvider(){
-        ConditionSetter partOne = WidgetSimulations::theGreatBerate;
-        ConditionSetter partTwo = WidgetSimulations::theGreatBerateTwo;
-        ConditionSetter partThree = WidgetSimulations::partTwoTakeTwo;
+        ConditionSetter partOne = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter partTwo = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter partThree = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {partOne, new int[][]{{0,0,0}, {0,0,0}, {1,2,0}}}, {partTwo, new int[][]{{1,1,0}, {1,0,2}, {1,2,1}}},
                 {partThree, new int[][]{{1,0,0}, {0,1,0}, {0,2,2}}}

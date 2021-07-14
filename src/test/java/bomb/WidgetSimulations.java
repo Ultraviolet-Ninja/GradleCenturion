@@ -26,7 +26,7 @@ public class WidgetSimulations {
      * The Great Berate's first Centurion widget details
      * https://www.youtube.com/watch?v=ixlWDV0CVmM&t=4537s
      */
-    public static void theGreatBerate(){
+    public static void theGreatBerateVideoOne(){
         Widget.resetProperties();
         Widget.setSerialCode("th8zk9");
         Widget.setPortValue(PARALLEL, 1);
@@ -42,7 +42,7 @@ public class WidgetSimulations {
      * The Great Berate's second Centurion widget details
      * https://www.youtube.com/watch?v=dAJp9nRgIbM
      */
-    public static void theGreatBerateTwo(){
+    public static void theGreatBerateVideoTwo(){
         Widget.resetProperties();
         Widget.setNumberOfPlates(2);
         Widget.setIndicator(ON, MSA);
@@ -59,7 +59,7 @@ public class WidgetSimulations {
         centurionDefaults();
     }
 
-    public static void partTwoTakeTwo(){
+    public static void videoTwoTakeTwo(){
         Widget.resetProperties();
         Widget.setDBatteries(2);
         Widget.setNumHolders(2);
@@ -71,7 +71,7 @@ public class WidgetSimulations {
         centurionDefaults();
     }
 
-    public static void partTwoTakeThree(){
+    public static void videoTwoTakeThree(){
         Widget.resetProperties();
 
         centurionDefaults();

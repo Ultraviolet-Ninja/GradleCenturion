@@ -63,6 +63,6 @@ public class BlindAlleyController implements Resettable {
 
     @Override
     public void reset() {
-        ObserverHub.updateAtIndex(ObserverHub.ObserverIndex.SOUVENIR);
+        ObserverHub.updateAtIndex(ObserverHub.ObserverIndex.SOUVENIR_TOGGLE);
     }
 }

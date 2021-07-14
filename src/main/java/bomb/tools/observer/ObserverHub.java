@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ObserverHub {
     public enum ObserverIndex {
-        FORGET_ME_NOT, SOUVENIR, BLIND_ALLEY, RESET
+        FORGET_ME_NOT_TOGGLE, SOUVENIR_TOGGLE, SOUVENIR_PANE, BLIND_ALLEY_PANE, RESET
     }
 
     private static final List<Observer> OBSERVER_LIST = new ArrayList<>();
