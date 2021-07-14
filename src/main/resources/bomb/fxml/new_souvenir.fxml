@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import org.controlsfx.control.tableview2.TableColumn2?>
+<?import org.controlsfx.control.tableview2.TableView2?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.souvenir.NewSouvenirController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/souvenir.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.souvenir.NewSouvenirController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -22,25 +22,25 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
          <children>
-            <JFXTreeTableView prefHeight="560.0" prefWidth="1200.0">
-               <VBox.margin>
-                  <Insets left="50.0" right="50.0" />
-               </VBox.margin>
+            <TableView2 fx:id="artifactView" prefWidth="1200.0">
                <columns>
-                  <TreeTableColumn editable="false" prefWidth="182.0" text="Key" />
-                  <TreeTableColumn editable="false" prefWidth="916.0" text="Answer" />
+                  <TableColumn2 fx:id="keyColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" text="Key" />
+                  <TableColumn2 fx:id="answerColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="1000.0" prefWidth="-1.0" text="Answer" />
                </columns>
                <columnResizePolicy>
-                  <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
-            </JFXTreeTableView>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" />
+               </VBox.margin>
+            </TableView2>
          </children>
       </VBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <JFXTextArea promptText="Key Search">
+            <JFXTextArea id="key-search-textarea" fx:id="searchArea" onKeyReleased="#keySearch" promptText="Key Search">
                <HBox.margin>
-                  <Insets bottom="17.0" top="84.0" />
+                  <Insets bottom="17.0" right="30.0" top="84.0" />
                </HBox.margin>
             </JFXTextArea>
          </children>

@@ -1,0 +1,6 @@
+#key-search-textarea {
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: #0b234c;
+    -fx-font-size: 15;
+    -fx-prompt-text-fill: white;
+}
