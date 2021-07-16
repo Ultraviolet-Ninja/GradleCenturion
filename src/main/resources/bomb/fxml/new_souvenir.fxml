@@ -38,7 +38,8 @@
       </VBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <JFXTextArea id="key-search-textarea" fx:id="searchArea" onKeyReleased="#keySearch" promptText="Key Search">
+            <JFXTextArea disable="true" id="key-search-textarea" fx:id="searchArea" onKeyReleased="#searchColumns"
+                         promptText="Search">
                <HBox.margin>
                   <Insets bottom="17.0" right="30.0" top="84.0" />
                </HBox.margin>

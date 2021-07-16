@@ -1,6 +1,7 @@
 package bomb.modules.s.souvenir;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextFormatter;
@@ -34,6 +35,8 @@ public class NewSouvenirController implements Resettable {
     }
 
     public void liveUpdate() {
+        if (searchArea.isDisable()) FacadeFX.enable(searchArea);
+
         List<Pair<String, String>> injectionList = NewSouvenir.updateTableView();
         if (!injectionList.isEmpty()){
             for (Pair<String, String> pair : injectionList){
@@ -43,7 +46,7 @@ public class NewSouvenirController implements Resettable {
     }
 
     @FXML
-    private void keySearch() {
+    private void searchColumns() {
 
     }
 
@@ -51,5 +54,7 @@ public class NewSouvenirController implements Resettable {
     public void reset() {
         NewSouvenir.reset();
         //TODO - Reset the columns
+        FacadeFX.clearText(searchArea);
+        FacadeFX.disable(searchArea);
     }
 }
