@@ -115,7 +115,7 @@ public class ManualController {
                 FXMLLoader loader = new FXMLLoader(Paths.get(fxmlFile).toUri().toURL());
                 paneList.add(loader.load());
                 if (!fxmlFile.contains("widget")) observer.addController(loader);
-                if (fxmlFile.contains("souvenir")){}
+                if (fxmlFile.contains("souvenir")) extractSouvenirController(loader);
                 if (fxmlFile.contains("blind_alley")) extractBlindAlleyController(loader);
             }
             ObserverHub.addObserver(observer);

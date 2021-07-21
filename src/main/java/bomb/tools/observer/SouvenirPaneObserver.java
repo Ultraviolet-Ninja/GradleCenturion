@@ -1,11 +1,11 @@
 package bomb.tools.observer;
 
-import bomb.modules.s.souvenir.NewSouvenirController;
+import bomb.modules.s.souvenir.SouvenirController;
 
 public class SouvenirPaneObserver implements Observer{
-    private final NewSouvenirController controller;
+    private final SouvenirController controller;
 
-    public SouvenirPaneObserver(NewSouvenirController controller){
+    public SouvenirPaneObserver(SouvenirController controller){
         this.controller = controller;
     }
 
