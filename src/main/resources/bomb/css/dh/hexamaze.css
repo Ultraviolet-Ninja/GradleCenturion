@@ -3,6 +3,10 @@
     -jfx-unselected-color: #00255b;
 }
 
+.jfx-button {
+    -fx-font-size: 25;
+}
+
 #shape-selector {
     -jfx-selected-color: white;
 }
@@ -29,11 +33,4 @@
 
 #pink-button-selector {
     -jfx-selected-color: pink;
-}
-
-#button {
-    -fx-text-fill: white;
-    -fx-font-weight: lighter;
-    -fx-font-family: Tahoma;
-    -fx-font-size: 25;
 }

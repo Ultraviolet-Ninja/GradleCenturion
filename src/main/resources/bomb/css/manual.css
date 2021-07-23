@@ -9,11 +9,11 @@
 }
 
 #submit-button {
-    -fx-base: #FFCD99;
+    -jfx-rippler-fill: black;
+    -fx-background-color: #FFCD99;
     -fx-text-fill: #221b18;
     -fx-font-weight: lighter;
     -fx-font-family: Tahoma;
-    -fx-font-size: 20;
 }
 
 #search-field{

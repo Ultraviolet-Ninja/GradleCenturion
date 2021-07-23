@@ -8,95 +8,113 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.paint.Color?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.dh.hexamaze.HexamazeController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+          prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.dh.hexamaze.HexamazeController">
     <columnConstraints>
-        <ColumnConstraints />
+        <ColumnConstraints/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints />
+        <RowConstraints/>
     </rowConstraints>
     <GridPane prefHeight="791.0" prefWidth="1266.0">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <Pane prefHeight="200.0" prefWidth="200.0" stylesheets="@../../css/dh/hexamaze.css">
-            <HexMazePanel fx:id="fourOne" layoutX="328.0" layoutY="26.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fourTwo" layoutX="328.0" layoutY="126.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fourThree" layoutX="328.0" layoutY="226.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fourFour" layoutX="328.0" layoutY="326.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fourFive" layoutX="328.0" layoutY="426.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fourSix" layoutX="328.0" layoutY="526.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fourSeven" layoutX="328.0" layoutY="626.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="threeOne" layoutX="248.0" layoutY="77.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="twoOne" layoutX="168.0" layoutY="128.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="oneOne" layoutX="88.0" layoutY="179.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fiveOne" layoutX="408.0" layoutY="76.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="threeTwo" layoutX="248.0" layoutY="177.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="twoTwo" layoutX="168.0" layoutY="228.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="threeThree" layoutX="248.0" layoutY="277.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="threeSix" layoutX="248.0" layoutY="577.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="threeFour" layoutX="248.0" layoutY="377.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="oneTwo" layoutX="88.0" layoutY="279.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="twoThree" layoutX="168.0" layoutY="328.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="oneThree" layoutX="88.0" layoutY="379.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="oneFour" layoutX="88.0" layoutY="479.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="twoFour" layoutX="168.0" layoutY="428.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="threeFive" layoutX="248.0" layoutY="477.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="twoFive" layoutX="168.0" layoutY="528.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fiveTwo" layoutX="408.0" layoutY="176.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fiveThree" layoutX="408.0" layoutY="276.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fiveFour" layoutX="408.0" layoutY="376.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fiveFive" layoutX="408.0" layoutY="476.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="fiveSix" layoutX="408.0" layoutY="576.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sixFive" layoutX="488.0" layoutY="526.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sevenFour" layoutX="568.0" layoutY="476.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sixFour" layoutX="488.0" layoutY="426.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sevenThree" layoutX="568.0" layoutY="376.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sixThree" layoutX="488.0" layoutY="326.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sixTwo" layoutX="488.0" layoutY="226.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sixOne" layoutX="488.0" layoutY="126.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sevenOne" layoutX="568.0" layoutY="176.0" onMouseClicked="#plotShape" />
-            <HexMazePanel fx:id="sevenTwo" layoutX="568.0" layoutY="276.0" onMouseClicked="#plotShape" />
-            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="127.0" mnemonicParsing="false" onAction="#setShape" text="Circle">
+            <HexMazePanel fx:id="fourOne" layoutX="328.0" layoutY="26.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourTwo" layoutX="328.0" layoutY="126.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourThree" layoutX="328.0" layoutY="226.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourFour" layoutX="328.0" layoutY="326.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourFive" layoutX="328.0" layoutY="426.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourSix" layoutX="328.0" layoutY="526.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fourSeven" layoutX="328.0" layoutY="626.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeOne" layoutX="248.0" layoutY="77.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoOne" layoutX="168.0" layoutY="128.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneOne" layoutX="88.0" layoutY="179.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveOne" layoutX="408.0" layoutY="76.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeTwo" layoutX="248.0" layoutY="177.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoTwo" layoutX="168.0" layoutY="228.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeThree" layoutX="248.0" layoutY="277.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeSix" layoutX="248.0" layoutY="577.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeFour" layoutX="248.0" layoutY="377.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneTwo" layoutX="88.0" layoutY="279.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoThree" layoutX="168.0" layoutY="328.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneThree" layoutX="88.0" layoutY="379.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="oneFour" layoutX="88.0" layoutY="479.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoFour" layoutX="168.0" layoutY="428.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="threeFive" layoutX="248.0" layoutY="477.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="twoFive" layoutX="168.0" layoutY="528.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveTwo" layoutX="408.0" layoutY="176.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveThree" layoutX="408.0" layoutY="276.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveFour" layoutX="408.0" layoutY="376.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveFive" layoutX="408.0" layoutY="476.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="fiveSix" layoutX="408.0" layoutY="576.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixFive" layoutX="488.0" layoutY="526.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenFour" layoutX="568.0" layoutY="476.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixFour" layoutX="488.0" layoutY="426.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenThree" layoutX="568.0" layoutY="376.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixThree" layoutX="488.0" layoutY="326.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixTwo" layoutX="488.0" layoutY="226.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sixOne" layoutX="488.0" layoutY="126.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenOne" layoutX="568.0" layoutY="176.0" onMouseClicked="#plotShape"/>
+            <HexMazePanel fx:id="sevenTwo" layoutX="568.0" layoutY="276.0" onMouseClicked="#plotShape"/>
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="127.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Circle">
                 <toggleGroup>
-                    <ToggleGroup fx:id="hexGroup" />
+                    <ToggleGroup fx:id="hexGroup"/>
                 </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="170.0" mnemonicParsing="false" onAction="#setShape" text="Hexagon" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="170.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Hexagon" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="920.0" layoutY="127.0" mnemonicParsing="false" onAction="#setShape" text="Left Triangle" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="920.0" layoutY="127.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Left Triangle" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="921.0" layoutY="170.0" mnemonicParsing="false" onAction="#setShape" text="Right Triangle" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="921.0" layoutY="170.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Right Triangle" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="920.0" layoutY="212.0" mnemonicParsing="false" onAction="#setShape" text="Up Triangle" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="920.0" layoutY="212.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Up Triangle" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="921.0" layoutY="254.0" mnemonicParsing="false" onAction="#setShape" text="Down Triangle" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="921.0" layoutY="254.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Down Triangle" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="254.0" mnemonicParsing="false" onAction="#setShape" text="Erase" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="254.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Erase" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="212.0" mnemonicParsing="false" onAction="#setShape" text="Peg" toggleGroup="$hexGroup">
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="212.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Peg" toggleGroup="$hexGroup">
             </JFXRadioButton>
-            <JFXButton id="button" buttonType="RAISED" layoutX="850.0" layoutY="554.0" mnemonicParsing="false" onAction="#mazeCompare" ripplerFill="WHITE" text="Submit">
+            <JFXButton id="submit-button" buttonType="RAISED" layoutX="850.0" layoutY="554.0" mnemonicParsing="false"
+                       onAction="#mazeCompare" text="Submit">
             </JFXButton>
-            <JFXRadioButton id="red-button-selector" fx:id="redButton" disable="true" layoutX="785.0" layoutY="358.0" mnemonicParsing="false" onAction="#setPegFill" text="Red">
+            <JFXRadioButton id="red-button-selector" fx:id="redButton" disable="true" layoutX="785.0" layoutY="358.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Red">
                 <toggleGroup>
-                    <ToggleGroup fx:id="hexColorGroup" />
+                    <ToggleGroup fx:id="hexColorGroup"/>
                 </toggleGroup>
             </JFXRadioButton>
-            <JFXRadioButton id="yellow-button-selector" fx:id="yellowButton" disable="true" layoutX="786.0" layoutY="413.0" mnemonicParsing="false" onAction="#setPegFill" text="Yellow" toggleGroup="$hexColorGroup">
+            <JFXRadioButton id="yellow-button-selector" fx:id="yellowButton" disable="true" layoutX="786.0"
+                            layoutY="413.0" mnemonicParsing="false" onAction="#setPegFill" text="Yellow"
+                            toggleGroup="$hexColorGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="green-button-selector" fx:id="greenButton" disable="true" layoutX="787.0" layoutY="466.0" mnemonicParsing="false" onAction="#setPegFill" text="Green" toggleGroup="$hexColorGroup">
+            <JFXRadioButton id="green-button-selector" fx:id="greenButton" disable="true" layoutX="787.0"
+                            layoutY="466.0" mnemonicParsing="false" onAction="#setPegFill" text="Green"
+                            toggleGroup="$hexColorGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="cyan-button-selector" fx:id="cyanButton" disable="true" layoutX="918.0" layoutY="358.0" mnemonicParsing="false" onAction="#setPegFill" text="Cyan" toggleGroup="$hexColorGroup">
+            <JFXRadioButton id="cyan-button-selector" fx:id="cyanButton" disable="true" layoutX="918.0" layoutY="358.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Cyan" toggleGroup="$hexColorGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="blue-button-selector" fx:id="blueButton" disable="true" layoutX="917.0" layoutY="413.0" mnemonicParsing="false" onAction="#setPegFill" text="Blue" toggleGroup="$hexColorGroup">
+            <JFXRadioButton id="blue-button-selector" fx:id="blueButton" disable="true" layoutX="917.0" layoutY="413.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Blue" toggleGroup="$hexColorGroup">
             </JFXRadioButton>
-            <JFXRadioButton id="pink-button-selector" fx:id="pinkButton" disable="true" layoutX="918.0" layoutY="466.0" mnemonicParsing="false" onAction="#setPegFill" text="Pink" toggleGroup="$hexColorGroup">
+            <JFXRadioButton id="pink-button-selector" fx:id="pinkButton" disable="true" layoutX="918.0" layoutY="466.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Pink" toggleGroup="$hexColorGroup">
             </JFXRadioButton>
         </Pane>
     </GridPane>
