@@ -5,14 +5,13 @@ import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
 import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HexPanelFiller {
 
     private HexPanelFiller(){}
 
-    public static void fillPanels(List<Coordinates> directionSet, ArrayList<HexMazePanel> panelArray,
+    public static void fillPanels(List<Coordinates> directionSet, List<HexMazePanel> panelArray,
                                   Color toFill, int hexagonSideLength){
         for (HexMazePanel panel : panelArray) panel.resetHexagonalFill();
         for (Coordinates coordinates : directionSet){

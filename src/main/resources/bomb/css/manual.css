@@ -15,3 +15,9 @@
     -fx-font-family: Tahoma;
     -fx-font-size: 20;
 }
+
+#search-field{
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-prompt-text-fill: white;
+}

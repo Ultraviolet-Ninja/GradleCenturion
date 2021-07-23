@@ -25,7 +25,8 @@
                 <menus>
                     <Menu mnemonicParsing="false">
                         <graphic>
-                            <TextField fx:id="searchBar" onKeyReleased="#search" promptText="Search">
+                            <TextField id="search-field" fx:id="searchBar" onKeyReleased="#search" prefHeight="31.0"
+                                       prefWidth="206.0" promptText="Search">
                                 <font>
                                     <Font size="15.0"/>
                                 </font>

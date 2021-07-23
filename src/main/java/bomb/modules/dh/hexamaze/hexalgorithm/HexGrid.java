@@ -15,7 +15,7 @@ import java.util.List;
  * wouldn't be needed for all Hex objects
  */
 public class HexGrid extends AbstractHexagon{
-    public static final int STANDARD_SIDE_LENGTH = 4;
+    public static final byte STANDARD_SIDE_LENGTH = 4;
 
     private final ReadOnlyRing<Color> colorRing;
 
@@ -58,7 +58,7 @@ public class HexGrid extends AbstractHexagon{
      *
      * @param shapeList The ArrayList of shapes to fill the HexGrid
      */
-    public void fillWithShapes(ArrayList<HexNodeProperties.HexShape> shapeList){
+    public void fillWithShapes(List<HexNodeProperties.HexShape> shapeList){
         ArrayList<HexNode> nodeList = new ArrayList<>();
         for (HexNodeProperties.HexShape shape : shapeList)
             nodeList.add(new HexNode(shape, null));

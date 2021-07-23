@@ -25,15 +25,17 @@ import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
 public class Hexamaze extends Widget{
-    private final static ArrayList<HexShape> HEX_SHAPE_TRACKER = new ArrayList<>();
+    private final static List<HexShape> HEX_SHAPE_TRACKER;
 
-    private static ArrayList<HexMazePanel> panelList;
-    private static Color pegFillSelector = null, currentPegColor = null;
-    private static HexShape currentSelector = null;
-    private static int currentPegLocation = -1;
+    private static List<HexMazePanel> panelList;
+    private static Color pegFillSelector, currentPegColor;
+    private static HexShape currentSelector;
+    private static int currentPegLocation;
     private static HexGrid grid;
 
     static {
+        currentPegLocation = -1;
+        HEX_SHAPE_TRACKER = new ArrayList<>();
         setToNull();
         try{
             HexHashLibrary.initialize(new Maze(), (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
@@ -54,7 +56,7 @@ public class Hexamaze extends Widget{
      * Sets up the variables for the Hexamaze. This includes setting up the full maze, the defuser's grid
      * and an ArrayList representation of the grid
      */
-    public static void setupVariables(ArrayList<HexMazePanel> panelArray){
+    public static void setupVariables(List<HexMazePanel> panelArray){
         grid = new HexGrid();
         panelList = panelArray;
     }
@@ -66,7 +68,7 @@ public class Hexamaze extends Widget{
      */
     public static void setShapeSelector(String button){
         switch (button){
-            case "Blank": currentSelector = null; break;
+            case "Erase": currentSelector = null; break;
             case "Circle": currentSelector = HexShape.Circle; break;
             case "Hexagon": currentSelector = HexShape.Hexagon; break;
             case "Left Triangle": currentSelector = HexShape.LeftTriangle; break;
@@ -164,5 +166,9 @@ public class Hexamaze extends Widget{
     private static void clearPreviousLines(){
         for (HexMazePanel hexMazePanel : panelList)
             hexMazePanel.makeWallsTransparent();
+    }
+
+    public static void resetHexPanelList(){
+        for (HexMazePanel hexMazePanel : panelList) hexMazePanel.reset();
     }
 }
