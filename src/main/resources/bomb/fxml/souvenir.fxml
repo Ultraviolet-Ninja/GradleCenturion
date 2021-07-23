@@ -11,7 +11,7 @@
 <?import org.controlsfx.control.tableview2.TableColumn2?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/souvenir.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.souvenir.SouvenirController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/souvenir.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.souvenir.SouvenirController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
   </columnConstraints>
@@ -38,8 +38,7 @@
       </VBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <JFXTextArea disable="true" id="key-search-textarea" fx:id="searchArea" onKeyReleased="#searchColumns"
-                         promptText="Search">
+            <JFXTextArea id="search-textarea" fx:id="searchArea" disable="true" onKeyReleased="#searchColumns" promptText="Search">
                <HBox.margin>
                   <Insets bottom="17.0" right="30.0" top="84.0" />
                </HBox.margin>
