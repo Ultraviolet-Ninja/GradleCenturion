@@ -42,7 +42,7 @@ public class ChordQualities extends Widget {
         int[] traits = originalQuality(combinations(temp));
         outputs[0] = getOriginalRoot(traits[1], input);
         outputs[1] = String.valueOf(traits[0]);
-        if (souvenir) Souvenir.addRelic("Chord Quality (Original)", getChord(traits[0]));
+        if (souvenir) Souvenir.addRelic("Chord Quality Original Chord", getChord(traits[0]));
         return outputs;
     }
 

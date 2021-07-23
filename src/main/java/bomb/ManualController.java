@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
 import static bomb.tools.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 
 public class ManualController {
     private Map<String, Region> regionMap;
@@ -62,6 +63,7 @@ public class ManualController {
     public void buttonPress() {
         String selected = FacadeFX.getToggleName(options);
         if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
+        if (selected.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
         paneSwitch(regionMap.get(selected));
     }
 

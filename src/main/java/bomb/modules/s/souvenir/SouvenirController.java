@@ -9,23 +9,22 @@ import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Pair;
 import org.controlsfx.control.tableview2.TableColumn2;
 import org.controlsfx.control.tableview2.TableView2;
 
-import java.util.Map;
-
 public class SouvenirController implements Resettable {
-    private final ObservableList<Map.Entry<String, String>> souvenirData;
-    private final FilteredList<Map.Entry<String, String>> filteredData;
+    private final ObservableList<Pair<String, String>> souvenirData;
+    private final FilteredList<Pair<String, String>> filteredData;
 
     @FXML
     private JFXTextArea searchArea;
 
     @FXML
-    private TableView2<Map.Entry<String, String>> artifactView;
+    private TableView2<Pair<String, String>> artifactView;
 
     @FXML
-    private TableColumn2<Map.Entry<String, String>, String> keyColumn, answerColumn;
+    private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
 
     public SouvenirController() {
         souvenirData = FXCollections.observableArrayList();
@@ -33,8 +32,8 @@ public class SouvenirController implements Resettable {
     }
 
     public void initialize() {
-        keyColumn.setCellValueFactory(new PropertyValueFactory<>("key"));
-        answerColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        keyColumn.setCellValueFactory(new PropertyValueFactory<>("Key"));
+        answerColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
         searchArea.setTextFormatter(createNewLineRestrictionFormatter());
         searchArea.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(entry -> {
@@ -59,7 +58,8 @@ public class SouvenirController implements Resettable {
 
     public void liveUpdate() {
         souvenirData.clear();
-        souvenirData.addAll(Souvenir.getPuzzleArtifacts().entrySet());
+        souvenirData.addAll(Souvenir.getPuzzleArtifacts());
+        artifactView.setItems(souvenirData);
 
         if (searchArea.isDisable() && !souvenirData.isEmpty())
             FacadeFX.enable(searchArea);

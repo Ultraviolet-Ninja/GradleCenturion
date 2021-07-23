@@ -33,7 +33,7 @@ public class Neutralization extends Widget {
      */
     public static String titrate(int acidVol, Color solColor) throws IllegalArgumentException{
         if (souvenir)
-            Souvenir.addRelic("(Neutralization)Acid volume", String.valueOf(acidVol));
+            Souvenir.addRelic("Neutralization Acid volume", String.valueOf(acidVol));
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Need to set the serial code");
         getAcid(solColor);
         getBase();
@@ -60,7 +60,7 @@ public class Neutralization extends Widget {
         else
             throw new IllegalArgumentException("Incorrect Color was inserted");
         if (souvenir)
-            Souvenir.addRelic("(Neutralization)Acid color", getColorName(color));
+            Souvenir.addRelic("Neutralization Acid color", getColorName(color));
     }
 
     /**
