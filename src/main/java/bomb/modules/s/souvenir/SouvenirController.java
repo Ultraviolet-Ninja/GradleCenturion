@@ -17,14 +17,11 @@ public class SouvenirController implements Resettable {
     private final ObservableList<Pair<String, String>> souvenirData;
     private final FilteredList<Pair<String, String>> filteredData;
 
-    @FXML
-    private JFXTextArea searchArea;
+    @FXML private JFXTextArea searchArea;
 
-    @FXML
-    private TableView2<Pair<String, String>> artifactView;
+    @FXML private TableView2<Pair<String, String>> artifactView;
 
-    @FXML
-    private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
+    @FXML private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
 
     public SouvenirController() {
         souvenirData = FXCollections.observableArrayList();
@@ -65,18 +62,12 @@ public class SouvenirController implements Resettable {
             FacadeFX.enable(searchArea);
     }
 
-    @FXML
-    private void searchColumns() {
-//        artifactView.setItems(filteredData);
-    }
-
     @Override
     public void reset() {
         Souvenir.reset();
-        //TODO - Reset the columns
         FacadeFX.clearText(searchArea);
         FacadeFX.disable(searchArea);
         souvenirData.clear();
-        artifactView.setItems(souvenirData);
+        artifactView.setItems(filteredData);
     }
 }
