@@ -3,8 +3,53 @@
     -jfx-unfocus-color: #0b234c;
     -fx-font-size: 15;
     -fx-prompt-text-fill: white;
+    -jfx-label-float: true;
 }
 
 .table-view {
     -fx-background-color: black;
 }
+
+.table-view .column-header,
+.table-view .column-header-background .filler {
+    -fx-background-color: #5a5a5a;
+}
+.table-view .column-header .label{
+    -fx-text-fill: white;
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:even {
+    -fx-background-color: black;
+}
+
+.table-row-cell:odd {
+     -fx-background-color: #343434;
+}
+
+.table-view .cell{
+    -fx-font-size: 20;
+    -fx-cell-size: 35;
+    -fx-alignment: center-left;
+    -fx-background-color: transparent;
+    -fx-border-color: #5a5a5a;
+    -fx-text-fill: white;
+}
+
+.table-view .scroll-bar:horizontal .thumb,
+.table-view .scroll-bar:vertical .thumb {
+    -fx-background-color: lightgray;
+}
+
+.table-view .scroll-bar:horizontal .track,
+.table-view .scroll-bar:vertical .track {
+    -fx-background-color: #515151;
+}
+
+.table-view .scroll-bar:horizontal .increment-button,
+ .table-view .scroll-bar:vertical .increment-button,
+ .table-view .scroll-bar:horizontal .decrement-button,
+ .table-view .scroll-bar:vertical .decrement-button {
+     -fx-background-color: lightgray;
+ }

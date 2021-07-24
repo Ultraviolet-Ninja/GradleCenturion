@@ -11,39 +11,44 @@
 <?import org.controlsfx.control.tableview2.TableColumn2?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/souvenir.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.souvenir.SouvenirController">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <rowConstraints>
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="516.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-   <children>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-         <children>
-            <TableView2 fx:id="artifactView" prefWidth="1200.0">
-               <columns>
-                  <TableColumn2 fx:id="keyColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" text="Key" />
-                  <TableColumn2 fx:id="answerColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="1000.0" prefWidth="-1.0" text="Answer" />
-               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-               <VBox.margin>
-                  <Insets left="30.0" right="30.0" />
-               </VBox.margin>
-            </TableView2>
-         </children>
-      </VBox>
-      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <JFXTextArea id="search-textarea" fx:id="searchArea" disable="true" onKeyReleased="#searchColumns" promptText="Search">
-               <HBox.margin>
-                  <Insets bottom="17.0" right="30.0" top="84.0" />
-               </HBox.margin>
-            </JFXTextArea>
-         </children>
-      </HBox>
-   </children>
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
+          prefWidth="1200.0" stylesheets="@../css/souvenir.css" xmlns="http://javafx.com/javafx/8.0.202-ea"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.souvenir.SouvenirController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="516.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <children>
+                <TableView2 fx:id="artifactView" prefWidth="1200.0">
+                    <columns>
+                        <TableColumn2 fx:id="keyColumn" editable="false" maxWidth="1.7976931348623157E308"
+                                      minWidth="350.0" prefWidth="-1.0" text="Key"/>
+                        <TableColumn2 fx:id="answerColumn" editable="false" maxWidth="1.7976931348623157E308"
+                                      minWidth="1000.0" prefWidth="-1.0" text="Answer"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0"/>
+                    </VBox.margin>
+                </TableView2>
+            </children>
+        </VBox>
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <JFXTextArea id="search-textarea" fx:id="searchArea" disable="true" onKeyReleased="#searchColumns"
+                             promptText="Search">
+                    <HBox.margin>
+                        <Insets bottom="17.0" right="30.0" top="84.0"/>
+                    </HBox.margin>
+                </JFXTextArea>
+            </children>
+        </HBox>
+    </children>
 </GridPane>
