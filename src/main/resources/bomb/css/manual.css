@@ -19,13 +19,15 @@
 }
 
 #submit-button {
-    -fx-base: #FFCD99;
+    -jfx-rippler-fill: black;
+    -fx-background-color: #FFCD99;
     -fx-text-fill: #221b18;
     -fx-font-weight: lighter;
     -fx-font-family: Tahoma;
-    -fx-font-size: 20;
 }
 
-#search-field {
+#search-field{
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
     -fx-prompt-text-fill: lightgray;
 }

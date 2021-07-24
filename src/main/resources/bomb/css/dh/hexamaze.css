@@ -1,0 +1,36 @@
+.jfx-radio-button {
+    -fx-font-size: 25;
+    -jfx-unselected-color: #00255b;
+}
+
+.jfx-button {
+    -fx-font-size: 25;
+}
+
+#shape-selector {
+    -jfx-selected-color: white;
+}
+
+#red-button-selector {
+    -jfx-selected-color: red;
+}
+
+#yellow-button-selector {
+    -jfx-selected-color: yellow;
+}
+
+#green-button-selector {
+    -jfx-selected-color: green;
+}
+
+#cyan-button-selector {
+    -jfx-selected-color: cyan;
+}
+
+#blue-button-selector {
+    -jfx-selected-color: blue;
+}
+
+#pink-button-selector {
+    -jfx-selected-color: pink;
+}

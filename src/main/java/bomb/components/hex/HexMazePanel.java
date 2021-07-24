@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HexMazePanel extends Pane {
+    public static final Color DEFAULT_PEG_COLOR = new Color(0.65,0.65,0.65, 1.0);
+
+    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195,0.0195,0.0195,1.0);
+
     @FXML
     private Line northWest, north, northEast, southEast, south, southWest;
 
@@ -32,7 +36,7 @@ public class HexMazePanel extends Pane {
             loader.setController(this);
             loader.load();
             makeWallsTransparent();
-            peg.setFill(new Color(0.776,0.776,0.776,1.0));
+            peg.setFill(DEFAULT_PEG_COLOR);
         } catch (IOException ioex){
             ioex.printStackTrace();
         }
@@ -64,40 +68,40 @@ public class HexMazePanel extends Pane {
                     break;
             }
         } else {
-            disappear(circle);
-            disappear(hexagon);
-            disappear(leftTriangle);
-            disappear(rightTriangle);
-            disappear(upTriangle);
-            disappear(downTriangle);
+            setInvisible(circle);
+            setInvisible(hexagon);
+            setInvisible(leftTriangle);
+            setInvisible(rightTriangle);
+            setInvisible(upTriangle);
+            setInvisible(downTriangle);
         }
     }
 
     private void exclusiveShapeSet(Shape shape){
-        xorAppear(shape);
-        xorDisappear(shape);
+        setExclusiveVisibility(shape);
+        setExclusiveInvisibility(shape);
     }
 
-    private void xorAppear(Shape shape){
+    private void setExclusiveVisibility(Shape shape){
         if (shape == circle)
-            appear(circle);
+            setVisible(circle);
         else if (shape == hexagon)
-            appear(hexagon);
+            setVisible(hexagon);
         else if (shape == leftTriangle)
-            appear(leftTriangle);
+            setVisible(leftTriangle);
         else if (shape == rightTriangle)
-            appear(rightTriangle);
+            setVisible(rightTriangle);
         else if (shape == upTriangle)
-            appear(upTriangle);
+            setVisible(upTriangle);
         else if (shape == downTriangle)
-            appear(downTriangle);
+            setVisible(downTriangle);
     }
 
-    private void xorDisappear(Shape shape){
+    private void setExclusiveInvisibility(Shape shape){
         Shape[] array = createShapeArray();
         for (Shape current : array){
             if (current != shape)
-                disappear(current);
+                setInvisible(current);
         }
     }
 
@@ -119,34 +123,34 @@ public class HexMazePanel extends Pane {
     }
 
     private String setLine(Line line, String string, String remove){
-        appear(line);
+        setVisible(line);
         return string.replace(remove, "");
     }
 
     private void removeLines(String string){
-        if (string.contains("1")) disappear(northWest);
-        if (string.contains("2")) disappear(north);
-        if (string.contains("3")) disappear(northEast);
-        if (string.contains("4")) disappear(southWest);
-        if (string.contains("5")) disappear(south);
-        if (string.contains("6")) disappear(southEast);
+        if (string.contains("1")) setInvisible(northWest);
+        if (string.contains("2")) setInvisible(north);
+        if (string.contains("3")) setInvisible(northEast);
+        if (string.contains("4")) setInvisible(southWest);
+        if (string.contains("5")) setInvisible(south);
+        if (string.contains("6")) setInvisible(southEast);
     }
 
-    private void appear(Shape shape){
+    private void setVisible(Shape shape){
         shape.setOpacity(1);
     }
 
-    private void disappear(Shape shape){
+    private void setInvisible(Shape shape){
         shape.setOpacity(0);
     }
 
     public void makeWallsTransparent(){
-        disappear(northWest);
-        disappear(north);
-        disappear(northEast);
-        disappear(southEast);
-        disappear(south);
-        disappear(southWest);
+        setInvisible(northWest);
+        setInvisible(north);
+        setInvisible(northEast);
+        setInvisible(southEast);
+        setInvisible(south);
+        setInvisible(southWest);
     }
 
     private Shape[] createShapeArray(){
@@ -154,10 +158,20 @@ public class HexMazePanel extends Pane {
     }
 
     public void setHexagonalFill(Color color){
-        hexagonalFill.setFill(color);
+        double newRed = (color.getRed() + DEFAULT_BACKGROUND_COLOR.getRed()) / 2;
+        double newGreen = (color.getGreen() + DEFAULT_BACKGROUND_COLOR.getGreen()) / 2;
+        double newBlue = (color.getBlue() + DEFAULT_BACKGROUND_COLOR.getBlue()) / 2;
+        Color colorAverage = new Color(newRed, newGreen, newBlue, 1.0);
+        hexagonalFill.setFill(colorAverage);
     }
 
     public void resetHexagonalFill(){
-        hexagonalFill.setFill(new Color(0, 0, 0, 0));
+        hexagonalFill.setFill(DEFAULT_BACKGROUND_COLOR);
+    }
+
+    public void reset(){
+        resetHexagonalFill();
+        makeWallsTransparent();
+        setExclusiveInvisibility(null);
     }
 }

@@ -1,0 +1,8 @@
+#panel-shape {
+    -fx-stroke: #bebebe;
+    -fx-stroke-width: 3;
+}
+
+#background {
+    -fx-fill: #050505;
+}

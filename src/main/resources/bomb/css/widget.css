@@ -3,6 +3,10 @@
     -fx-underline: true;
 }
 
+.jfx-button {
+    -fx-font-size: 24;
+}
+
 .jfx-text-area {
     -fx-padding: 0 50 0 50;
     -jfx-focus-color: white;
@@ -101,11 +105,11 @@
 }
 
 #right-border-line-separator {
-    -fx-border-color: #001398;
-    -fx-border-width: 0 2 0 0;
+    -fx-border-color: #001439;
+    -fx-border-width: 0 1 0 0;
 }
 
 #bottom-border-line-separator {
-    -fx-border-color: #001398;
-    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #001439;
+    -fx-border-width: 0 0 1 0;
 }

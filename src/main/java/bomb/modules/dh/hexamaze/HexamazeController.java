@@ -1,8 +1,8 @@
 package bomb.modules.dh.hexamaze;
 
-import bomb.components.hex.HexMazePanel;
 import bomb.abstractions.Resettable;
 import bomb.tools.facade.FacadeFX;
+import bomb.components.hex.HexMazePanel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
@@ -10,6 +10,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HexamazeController implements Resettable {
     @FXML
@@ -27,63 +28,67 @@ public class HexamazeController implements Resettable {
     @FXML
     private RadioButton redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton;
 
-    public void initialize(){
+    public void initialize() {
         Hexamaze.setupVariables(transportPanels());
     }
 
-
     @FXML
-    private void setShape(){
+    private void setShape() {
         toggleColorControl();
         if (!FacadeFX.getToggleName(hexGroup).equals("Peg"))
             Hexamaze.setShapeSelector(FacadeFX.getToggleName(hexGroup));
     }
 
-    private void toggleColorControl(){
+    private void toggleColorControl() {
         boolean toggle = !FacadeFX.getToggleName(hexGroup).equals("Peg");
         FacadeFX.toggleNodes(toggle, redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
     }
 
     @FXML
-    private void setPegFill(){
+    private void setPegFill() {
         Hexamaze.setPegFillSelector(colorPicker(FacadeFX.getToggleName(hexColorGroup)));
     }
 
-    private Color colorPicker(String strColor){
-        switch(strColor){
-            case "Red": return Color.RED;
-            case "Yellow": return Color.YELLOW;
-            case "Green": return Color.GREEN;
-            case "Cyan": return Color.CYAN;
-            case "Blue": return Color.BLUE;
-            case "Pink": return Color.PINK;
-            default: return new Color(0.776, 0.766, 0.776, 1.0);
+    private Color colorPicker(String strColor) {
+        switch (strColor) {
+            case "Red":
+                return Color.RED;
+            case "Yellow":
+                return Color.YELLOW;
+            case "Green":
+                return Color.GREEN;
+            case "Cyan":
+                return Color.CYAN;
+            case "Blue":
+                return Color.BLUE;
+            case "Pink":
+                return Color.PINK;
+            default:
+                return HexMazePanel.DEFAULT_PEG_COLOR;
         }
     }
 
     @FXML
-    private void plotShape(){
-        if (FacadeFX.getToggleName(hexGroup).equals("Peg")) {
-            if (FacadeFX.getToggleName(hexColorGroup)!= null)
-                Hexamaze.setPegFillSelector();
-        }
+    private void plotShape() {
+        if (FacadeFX.getToggleName(hexGroup).equals("Peg") && FacadeFX.getToggleName(hexColorGroup) != null)
+            Hexamaze.setPegFillSelector();
         else
             Hexamaze.setShapeFill();
     }
 
     @FXML
-    private void mazeCompare(){
+    private void mazeCompare() {
         try {
             Hexamaze.compareToFullMaze();
-        } catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText(ex.getMessage());
             alert.showAndWait();
         }
     }
 
-    private ArrayList<HexMazePanel> transportPanels(){
-        ArrayList<HexMazePanel> output = new ArrayList<>();
+    private List<HexMazePanel> transportPanels() {
+        List<HexMazePanel> output = new ArrayList<>();
         fillOne(output);
         fillTwo(output);
         fillThree(output);
@@ -94,14 +99,14 @@ public class HexamazeController implements Resettable {
         return output;
     }
 
-    private void fillOne(ArrayList<HexMazePanel> out){
+    private void fillOne(List<HexMazePanel> out) {
         out.add(oneOne);
         out.add(oneTwo);
         out.add(oneThree);
         out.add(oneFour);
     }
 
-    private void fillTwo(ArrayList<HexMazePanel> out){
+    private void fillTwo(List<HexMazePanel> out) {
         out.add(twoOne);
         out.add(twoTwo);
         out.add(twoThree);
@@ -109,7 +114,7 @@ public class HexamazeController implements Resettable {
         out.add(twoFive);
     }
 
-    private void fillThree(ArrayList<HexMazePanel> out){
+    private void fillThree(List<HexMazePanel> out) {
         out.add(threeOne);
         out.add(threeTwo);
         out.add(threeThree);
@@ -118,7 +123,7 @@ public class HexamazeController implements Resettable {
         out.add(threeSix);
     }
 
-    private void fillFour(ArrayList<HexMazePanel> out){
+    private void fillFour(List<HexMazePanel> out) {
         out.add(fourOne);
         out.add(fourTwo);
         out.add(fourThree);
@@ -128,7 +133,7 @@ public class HexamazeController implements Resettable {
         out.add(fourSeven);
     }
 
-    private void fillFive(ArrayList<HexMazePanel> out){
+    private void fillFive(List<HexMazePanel> out) {
         out.add(fiveOne);
         out.add(fiveTwo);
         out.add(fiveThree);
@@ -137,7 +142,7 @@ public class HexamazeController implements Resettable {
         out.add(fiveSix);
     }
 
-    private void fillSix(ArrayList<HexMazePanel> out){
+    private void fillSix(List<HexMazePanel> out) {
         out.add(sixOne);
         out.add(sixTwo);
         out.add(sixThree);
@@ -145,7 +150,7 @@ public class HexamazeController implements Resettable {
         out.add(sixFive);
     }
 
-    private void fillSeven(ArrayList<HexMazePanel> out){
+    private void fillSeven(List<HexMazePanel> out) {
         out.add(sevenOne);
         out.add(sevenTwo);
         out.add(sevenThree);
@@ -154,6 +159,8 @@ public class HexamazeController implements Resettable {
 
     @Override
     public void reset() {
-
+        Hexamaze.resetHexPanelList();
+        FacadeFX.unselectFromMultipleToggleGroup(hexGroup, hexColorGroup);
+        FacadeFX.disableMultiple(redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
     }
 }
