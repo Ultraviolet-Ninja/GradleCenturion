@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0"
-          prefWidth="1200.0" stylesheets="@../css/widget.css" xmlns="http://javafx.com/javafx/16"
+          prefWidth="1200.0" stylesheets="@../css/widget.css" xmlns="http://javafx.com/javafx/8.0.202-ea"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="595.0" minWidth="10.0" prefWidth="446.0"/>
@@ -149,8 +149,8 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
-                                <JFXButton buttonType="RAISED" onAction="#fullBombReset" ripplerFill="#1a0af2"
-                                           text="Full Bomb Reset">
+                                <JFXButton id="submit-button" buttonType="RAISED" onAction="#fullBombReset"
+                                           ripplerFill="#1a0af2" text="Full Bomb Reset">
                                     <font>
                                         <Font size="24.0"/>
                                     </font>
