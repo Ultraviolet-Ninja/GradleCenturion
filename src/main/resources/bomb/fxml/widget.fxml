@@ -130,8 +130,7 @@
                                  onAction="#souvenirToggle" text="Souvenir"/>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                <JFXButton buttonType="RAISED" onAction="#fullBombReset" ripplerFill="#1a0af2"
-                           text="Full Bomb Reset">
+                <JFXButton id="submit-button" buttonType="RAISED" onAction="#fullBombReset" text="Full Bomb Reset">
                     <font>
                         <Font size="24.0"/>
                     </font>

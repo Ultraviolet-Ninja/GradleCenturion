@@ -48,9 +48,9 @@
 }
 
 .table-view .scroll-bar:horizontal .increment-button,
- .table-view .scroll-bar:vertical .increment-button,
- .table-view .scroll-bar:horizontal .decrement-button,
- .table-view .scroll-bar:vertical .decrement-button {
+.table-view .scroll-bar:vertical .increment-button,
+.table-view .scroll-bar:horizontal .decrement-button,
+.table-view .scroll-bar:vertical .decrement-button {
     -fx-background-color: lightgray;
     -fx-border-color: black;
  }

@@ -13,9 +13,13 @@
 }
 
 #puzzle-radio-button {
-    -jfx-unselected-color: #8d8d8d;
+    -jfx-unselected-color: #00255b;
     -jfx-selected-color: white;
     -fx-font-size: 19;
+}
+
+#puzzle-radio-button:hover {
+    -jfx-unselected-color: #0065de;
 }
 
 #submit-button {
@@ -30,4 +34,14 @@
     -fx-border-radius: 20;
     -fx-background-radius: 20;
     -fx-prompt-text-fill: lightgray;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
+}
+
+#search-field:hover {
+    /*-fx-accent: white;*/
+    /*-fx-highlight-fill: white;*/
+    /*-fx-focus-color: white;*/
+    /*-fx-background-color: white;*/
+
 }

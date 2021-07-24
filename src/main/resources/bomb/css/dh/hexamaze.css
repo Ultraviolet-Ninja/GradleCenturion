@@ -11,26 +11,54 @@
     -jfx-selected-color: white;
 }
 
+#shape-selector:hover {
+    -jfx-unselected-color: #0065de;
+}
+
 #red-button-selector {
     -jfx-selected-color: red;
+}
+
+#red-button-selector:hover {
+    -jfx-unselected-color: #830000;
 }
 
 #yellow-button-selector {
     -jfx-selected-color: yellow;
 }
 
+#yellow-button-selector:hover {
+    -jfx-unselected-color: #a2a200;
+}
+
 #green-button-selector {
     -jfx-selected-color: green;
+}
+
+#green-button-selector:hover {
+    -jfx-unselected-color: #004c00;
 }
 
 #cyan-button-selector {
     -jfx-selected-color: cyan;
 }
 
+#cyan-button-selector:hover {
+    -jfx-unselected-color: #009999;
+}
+
 #blue-button-selector {
     -jfx-selected-color: blue;
+}
+
+#blue-button-selector:hover {
+    -jfx-unselected-color: #0000bc;
 }
 
 #pink-button-selector {
     -jfx-selected-color: pink;
 }
+
+#pink-button-selector:hover {
+    -jfx-unselected-color: #cf6876;
+ }
