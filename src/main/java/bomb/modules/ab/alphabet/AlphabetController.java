@@ -1,40 +1,96 @@
 package bomb.modules.ab.alphabet;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.facade.FacadeFX;
+import com.jfoenix.controls.JFXTextField;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.scene.input.KeyEvent;
 
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import java.util.HashMap;
+import java.util.Map;
 
+import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class AlphabetController implements Resettable {
-    @FXML
-    private TextField alphabetOut;
+    private final Map<JFXTextField, JFXTextField> stateMap;
 
     @FXML
-    private void getAlphaField(){
-        if (!alphabetOut.getText().isEmpty()){
-            String text = ultimateFilter(alphabetOut.getText(), CHAR_FILTER);
-            if (text.length() == 4){
-                alphabetOut.setText(Alphabet.order(text));
-            } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("That wasn't 4 valid characters there, bud");
-                alert.show();
-                alphabetOut.setText("");
-            }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("That field is empty there, bud");
-            alert.show();
+    private JFXTextField firstInput, secondInput, thirdInput, forthInput,
+            firstOutput, secondOutput, thirdOutput, forthOutput;
+
+    public AlphabetController(){
+        stateMap = new HashMap<>();
+    }
+
+    public void initialize() {
+        stateMap.put(firstInput, secondInput);
+        stateMap.put(secondInput, thirdInput);
+        stateMap.put(thirdInput, forthInput);
+        stateMap.put(forthInput, null);
+        for (JFXTextField input : stateMap.keySet()){
+            input.setTextFormatter(createOneLetterFormatter());
+            input.setOnKeyReleased(actionHandler());
         }
+    }
+
+    private TextFormatter<String> createOneLetterFormatter(){
+        return new TextFormatter<>(change -> {
+            if (!change.isContentChange()) return change;
+
+            String text = change.getControlNewText();
+            if (text.isEmpty() || text.matches("\\b[a-zA-Z]\\b")) return change;
+
+            return null;
+        });
+    }
+
+    private EventHandler<KeyEvent> actionHandler(){
+        return event -> {
+            JFXTextField source = (JFXTextField) event.getSource();
+            boolean canGetResults = false;
+            if (!source.getText().isEmpty()) {
+                canGetResults = moveToLastEmptyTextField(source);
+            }
+            if (canGetResults) getResults();
+        };
+    }
+
+    private boolean moveToLastEmptyTextField(JFXTextField source){
+        do {
+            source = stateMap.get(source);
+        } while (source != null && !source.getText().isEmpty());
+
+        if (source != null) {
+            source.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    private void getResults(){
+        String inputText = firstInput.getText() + secondInput.getText() + thirdInput.getText() + forthInput.getText();
+        try {
+            String results = Alphabet.order(inputText);
+            firstOutput.setText(String.valueOf(results.charAt(0)));
+            secondOutput.setText(String.valueOf(results.charAt(1)));
+            thirdOutput.setText(String.valueOf(results.charAt(2)));
+            forthOutput.setText(String.valueOf(results.charAt(3)));
+        } catch (IllegalArgumentException arg){
+            FacadeFX.setAlert(ERROR, arg.getMessage());
+        }
+    }
+
+    @FXML
+    private void resetPuzzle(){
+        reset();
     }
 
     @Override
     public void reset() {
-
+        FacadeFX.clearMultipleTextFields(firstInput, secondInput, thirdInput, forthInput, firstOutput, secondOutput,
+                thirdOutput, forthOutput);
     }
 }
 

@@ -8,11 +8,20 @@
 }
 
 .jfx-text-area {
-    -fx-padding: 0 50 0 50;
+    -fx-padding: 0 30 0 30;
     -jfx-focus-color: white;
-    -jfx-unfocus-color: #0b234c;
+    -jfx-unfocus-color: transparent;
     -fx-font-size: 15;
     -fx-prompt-text-fill: white;
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15 15 15 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+}
+
+.jfx-text-area .content {
+    -fx-background-color: #00407c;
 }
 
 .jfx-slider {

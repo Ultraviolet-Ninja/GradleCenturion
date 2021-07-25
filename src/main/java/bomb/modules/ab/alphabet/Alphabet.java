@@ -4,6 +4,8 @@ import bomb.Widget;
 import bomb.tools.Regex;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import static bomb.tools.Filter.ultimateFilter;
 
@@ -23,7 +25,8 @@ public class Alphabet extends Widget {
      * @param input The given letter order of tiles
      * @return The letters in the way they should be pressed
      */
-    public static String order(String input){
+    public static String order(String input) throws IllegalArgumentException {
+        validateInput(input);
         input = input.toUpperCase();
         StringBuilder output = new StringBuilder();
         Regex filterRegex = new Regex("[^" + input + "]");
@@ -45,5 +48,23 @@ public class Alphabet extends Widget {
         }
 
         return output.toString();
+    }
+
+    private static void validateInput(String input) throws IllegalArgumentException {
+        Regex regex = new Regex("[a-zA-Z]{4}", input);
+        if (!regex.matchesRegex())
+            throw new IllegalArgumentException("Input is not 4 letters");
+        if (hasRepeatedCharacters(input))
+            throw new IllegalArgumentException("Input can't have repeated characters");
+    }
+
+    private static boolean hasRepeatedCharacters(String input){
+        Set<Character> set = new HashSet<>();
+        for(char letter : input.toCharArray()){
+            if (set.contains(letter))
+                return true;
+            set.add(letter);
+        }
+        return false;
     }
 }

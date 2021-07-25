@@ -8,6 +8,7 @@
     -fx-background-radius: 15 15 15 15;
     -fx-border-color: black;
     -fx-border-radius: 15;
+    -fx-border-width: 2;
     -fx-prompt-text-fill: white;
     -fx-alignment: center;
     -jfx-unfocus-color: transparent;
