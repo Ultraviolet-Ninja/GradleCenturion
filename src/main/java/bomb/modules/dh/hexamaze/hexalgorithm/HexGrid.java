@@ -48,11 +48,6 @@ public class HexGrid extends AbstractHexagon{
         this(grid, 0);
     }
 
-    public HexGrid(HexGrid toCopy){
-        hexagon = new HexagonDataStructure(copyNodes(toCopy.hexport()));
-        colorRing = toCopy.colorRing;
-    }
-
     /**
      * Fills an ArrayList of HexNodes from one of HexShapes
      *
@@ -107,14 +102,6 @@ public class HexGrid extends AbstractHexagon{
 
         if (values[1] < 0 || values[1] >= column.cap()) return null;
         return column.get(values[1]);
-    }
-
-    private List<HexNode> copyNodes(HexagonDataStructure hexagonDataStructure){
-        List<HexNode> toNewHex = new ArrayList<>(),
-                old = hexagonDataStructure.exportToList();
-        for (HexNode hexNode : old)
-            toNewHex.add(new HexagonDataStructure.HexNode(hexNode));
-        return toNewHex;
     }
 
     private void fillColorRing(){

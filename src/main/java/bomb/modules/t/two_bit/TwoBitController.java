@@ -2,26 +2,40 @@ package bomb.modules.t.two_bit;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.facade.FacadeFX;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Filter.ultimateFilter;
+import javafx.scene.control.TextFormatter;
 
 public class TwoBitController implements Resettable {
     @FXML
-    private Button next;
+    private JFXButton nextCode;
 
     @FXML
-    private TextField query, numberCode, cmdLine;
+    private JFXTextField query, numberCode, cmdLine;
+
+    public void initialize(){
+        numberCode.setTextFormatter(createTwoBitTextFormatter());
+    }
+
+    private TextFormatter<String> createTwoBitTextFormatter(){
+        return new TextFormatter<>(change -> {
+            if (!change.isContentChange()) return change;
+
+            String text = change.getControlNewText();
+            if (text.isEmpty() || text.matches("\\b\\d{1,2}\\b"))
+                return change;
+
+            return null;
+        });
+    }
 
     @FXML
-    private void initQueue(){
+    private void getInitialCode(){
         try {
             query.setText(TwoBit.initialCode());
-            FacadeFX.toggleNodes(false, numberCode, cmdLine, next);
+            FacadeFX.enableMultiple(numberCode, cmdLine, nextCode);
         } catch (IllegalArgumentException illegal){
             FacadeFX.setAlert(Alert.AlertType.WARNING,"You need to set the Serial Code");
         } catch (StringIndexOutOfBoundsException incomplete){
@@ -30,10 +44,10 @@ public class TwoBitController implements Resettable {
     }
 
     @FXML
-    private void nextCode(){
+    private void getNextCode(){
         try {
-            cmdLine.setText(TwoBit.nextCode(ultimateFilter(numberCode.getText(), NUMBER_PATTERN)));
-            numberCode.setText("");
+            cmdLine.setText(TwoBit.nextCode(numberCode.getText()));
+            FacadeFX.clearText(numberCode);
         } catch (IllegalArgumentException illegal){
             FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits");
         }
@@ -41,6 +55,7 @@ public class TwoBitController implements Resettable {
 
     @Override
     public void reset() {
-
+        FacadeFX.toggleNodes(true, numberCode, cmdLine, nextCode);
+        FacadeFX.clearMultipleTextFields(query, numberCode, cmdLine);
     }
 }

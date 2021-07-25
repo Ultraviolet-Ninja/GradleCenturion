@@ -32,11 +32,11 @@
 }
 
 #green-button-selector {
-    -jfx-selected-color: green;
+    -jfx-selected-color: #00ca00;
 }
 
 #green-button-selector:hover {
-    -jfx-unselected-color: #004c00;
+    -jfx-unselected-color: #009900;
 }
 
 #cyan-button-selector {
@@ -48,11 +48,11 @@
 }
 
 #blue-button-selector {
-    -jfx-selected-color: blue;
+    -jfx-selected-color: #0037ff;
 }
 
 #blue-button-selector:hover {
-    -jfx-unselected-color: #0000bc;
+    -jfx-unselected-color: #1919cf;
 }
 
 #pink-button-selector {
