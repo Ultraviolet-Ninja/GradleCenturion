@@ -1,7 +1,7 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.HoverHandler;
+import bomb.tools.event.HoverHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;

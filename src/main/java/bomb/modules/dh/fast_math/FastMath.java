@@ -3,9 +3,9 @@ package bomb.modules.dh.fast_math;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.tools.Regex;
+import bomb.tools.filter.Regex;
 
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID = new int[][]{

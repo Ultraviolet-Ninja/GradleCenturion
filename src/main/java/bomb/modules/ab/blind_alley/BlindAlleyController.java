@@ -1,7 +1,7 @@
 package bomb.modules.ab.blind_alley;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.observer.ObserverHub;
+import bomb.tools.pattern.observer.ObserverHub;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;

@@ -1,4 +1,4 @@
-package bomb.tools.observer;
+package bomb.tools.pattern.observer;
 
 import java.util.ArrayList;
 import java.util.List;

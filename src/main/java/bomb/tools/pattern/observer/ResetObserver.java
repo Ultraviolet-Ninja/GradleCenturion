@@ -1,4 +1,4 @@
-package bomb.tools.observer;
+package bomb.tools.pattern.observer;
 
 import bomb.abstractions.Resettable;
 import javafx.fxml.FXMLLoader;

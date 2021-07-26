@@ -4,9 +4,9 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 import bomb.enumerations.Port;
 
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.CHAR_FILTER;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 //TODO - Probably change var names, finish Javadocs and break down a few methods
 

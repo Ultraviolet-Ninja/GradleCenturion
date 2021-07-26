@@ -1,4 +1,4 @@
-package bomb.tools;
+package bomb.tools.filter;
 
 import java.util.regex.Pattern;
 

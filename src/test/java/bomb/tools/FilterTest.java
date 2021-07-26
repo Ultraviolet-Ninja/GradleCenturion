@@ -3,8 +3,8 @@ package bomb.tools;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Filter.CHAR_FILTER;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static org.testng.Assert.assertEquals;
 
 public class FilterTest {

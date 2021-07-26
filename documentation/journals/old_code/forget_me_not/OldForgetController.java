@@ -2,7 +2,7 @@ package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

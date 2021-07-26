@@ -1,13 +1,13 @@
 package bomb.modules.t.two_bit;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
-import static bomb.tools.TextFormatterFactory.createTwoBitTextFormatter;
+import static bomb.tools.pattern.factory.TextFormatterFactory.createTwoBitTextFormatter;
 
 public class TwoBitController implements Resettable {
     @FXML private JFXButton nextCode;

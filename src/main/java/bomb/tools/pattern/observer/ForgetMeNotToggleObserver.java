@@ -1,4 +1,4 @@
-package bomb.tools.observer;
+package bomb.tools.pattern.observer;
 
 import bomb.Widget;
 import javafx.scene.control.RadioButton;

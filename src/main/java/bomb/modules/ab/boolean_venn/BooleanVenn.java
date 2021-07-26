@@ -1,11 +1,11 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
-import bomb.tools.Regex;
+import bomb.tools.filter.Regex;
 
-import static bomb.tools.Filter.LOGIC_REGEX;
-import static bomb.tools.Filter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.LOGIC_REGEX;
+import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * This class deals with the Boolean Venn Diagram module.

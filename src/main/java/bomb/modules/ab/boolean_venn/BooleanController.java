@@ -1,15 +1,15 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import static bomb.tools.Filter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class BooleanController implements Resettable {
     private static final String PRESS = "rgba(115,208,115,1)",

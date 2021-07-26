@@ -1,5 +1,6 @@
-package bomb.tools;
+package bomb.tools.pattern.factory;
 
+import bomb.tools.filter.Filter;
 import javafx.scene.control.TextFormatter;
 
 public class TextFormatterFactory {

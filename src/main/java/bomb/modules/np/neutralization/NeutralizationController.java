@@ -1,13 +1,13 @@
 package bomb.modules.np.neutralization;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;

@@ -4,7 +4,7 @@ import bomb.enumerations.Indicator;
 import bomb.enumerations.TriState;
 import bomb.tools.FacadeFX;
 import bomb.tools.HoverHandler;
-import bomb.tools.observer.ObserverHub;
+import bomb.tools.pattern.observer.ObserverHub;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,9 +17,9 @@ import javafx.scene.control.ToggleGroup;
 import static bomb.enumerations.TriState.*;
 import static bomb.tools.Filter.ALL_CHAR_FILTER;
 import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.RESET;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.SOUVENIR;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR;
 
 public class OldWidgetController {
     private static final String ENABLE_STYLE = "-fx-background-color: forestgreen; -fx-text-fill: black",

@@ -3,7 +3,7 @@ package bomb.modules.c.chords;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 //TODO - Probably rename some variables and make the Javadocs
 
 /**

@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Mechanics.ultimateFilter;
 
 public class MicroController extends Widget {
     private static final String[] THIRD_CONDITION = new String[]{"c", "l", "r", "x", "1", "8"};

@@ -1,4 +1,4 @@
-package bomb.tools;
+package bomb.tools.event;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;

@@ -1,13 +1,13 @@
 package bomb.modules.ab.alphabet;
 
 import bomb.Widget;
-import bomb.tools.Regex;
+import bomb.tools.filter.Regex;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * This class deals with the Alphabet module. The module is comprised of a 2x2 square containing 4 tiles

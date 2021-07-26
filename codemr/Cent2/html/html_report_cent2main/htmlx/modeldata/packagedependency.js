@@ -12,7 +12,7 @@ var packages = [{
 "name": " bomb.modules.wz", "color": " #c6dbef"
 }
 ,{
-"name": " bomb.tools.dictionary", "color": " #e6550d"
+"name": " bomb.tools.data.structures.dictionary", "color": " #e6550d"
 }
 ,{
 "name": " bomb.modules.ab", "color": " #fd8d3c"

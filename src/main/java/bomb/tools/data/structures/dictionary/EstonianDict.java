@@ -1,4 +1,4 @@
-package bomb.tools.dictionary;
+package bomb.tools.data.structures.dictionary;
 
 import java.util.HashMap;
 

@@ -2,7 +2,7 @@ package bomb.modules.t.translated;
 
 import bomb.enumerations.TheButton;
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
 
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Mechanics.ultimateFilter;
 
 public class TranslationController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",

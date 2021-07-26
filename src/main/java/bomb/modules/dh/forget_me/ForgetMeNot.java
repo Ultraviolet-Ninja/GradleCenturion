@@ -3,8 +3,8 @@ package bomb.modules.dh.forget_me;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.tools.Filter;
-import bomb.tools.Regex;
+import bomb.tools.filter.Filter;
+import bomb.tools.filter.Regex;
 
 import java.util.ArrayList;
 import java.util.List;
