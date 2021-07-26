@@ -14,7 +14,7 @@ import static bomb.tools.Filter.ultimateFilter;
  * and dry cleaning your clothing.
  */
 public class Laundry extends Widget {
-    public static final String THANKS_BOB = "Thanks, Bob!";
+    public static final String THANKS_BOB = "Thanks, Bob! :)";
 
     private static int needy;
 
@@ -27,7 +27,7 @@ public class Laundry extends Widget {
      * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
      */
     public static String[] clean(String solved, String needy) throws IllegalArgumentException{
-        exceptionSafeguard(solved, needy);
+        validateInput(solved, needy);
         Laundry.needy = Integer.parseInt(needy);
         setClothing(Integer.parseInt(solved));
         return conditions();
@@ -40,13 +40,13 @@ public class Laundry extends Widget {
      * @param needy The number of needy modules on the bomb
      * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
      */
-    private static void exceptionSafeguard(String solved, String needy) throws IllegalArgumentException{
+    private static void validateInput(String solved, String needy) throws IllegalArgumentException{
         if (serialCode.isEmpty()) throw new
                 IllegalArgumentException("Serial Code must be typed in.");
         else if (needy.isEmpty()) throw new
-                IllegalArgumentException("Need to know about the needy modules");
+                IllegalArgumentException("This module needs to know about the number of needy modules");
         else if (solved.isEmpty()) throw new
-                IllegalArgumentException("This needs the number of currently solved modules.");
+                IllegalArgumentException("This module needs the number of currently solved modules.");
     }
 
     /**
@@ -55,11 +55,12 @@ public class Laundry extends Widget {
      * @param solved The number of solved modules
      */
     private static void setClothing(int solved) throws IllegalArgumentException{
-        if (numModules != 0) {
-            setMaterial(solved);
-            setColor();
-            setItem(numModules - solved - needy);
-        } else throw new IllegalArgumentException("This needs the number of modules to function.");
+        if (numModules == 0)
+            throw new IllegalArgumentException("This needs the number of modules to function.");
+
+        setMaterial(solved);
+        setColor();
+        setItem(numModules - solved - needy);
     }
 
     /**
@@ -123,10 +124,10 @@ public class Laundry extends Widget {
         fillThird(attributes);
 
         if (ARTICLE.getMat() == Clothing.Material.LEATHER || ARTICLE.getColor() == Clothing.Color.JADE)
-            attributes[0] = "file:src\\Bomb\\Resources\\Laundry\\Wash\\80F.png";
+            attributes[0] = "wash/80F.png";
 
         if (ARTICLE.getMat() == Clothing.Material.WOOL || ARTICLE.getColor() == Clothing.Color.STAR)
-            attributes[1] = "file:src\\Bomb\\Resources\\Laundry\\Dry\\High Heat.png";
+            attributes[1] = "dry/High Heat.png";
 
         attributes[4] = ARTICLE.getMat().name() + " - " + ARTICLE.getColor().name()
                 + " - " + ARTICLE.getItem().name();

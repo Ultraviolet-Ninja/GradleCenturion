@@ -1,13 +1,13 @@
 package bomb.modules.s.souvenir;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.TextFormatterFactory;
 import bomb.tools.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Pair;
 import org.controlsfx.control.tableview2.TableColumn2;
@@ -31,7 +31,7 @@ public class SouvenirController implements Resettable {
     public void initialize() {
         keyColumn.setCellValueFactory(new PropertyValueFactory<>("Key"));
         answerColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
-        searchArea.setTextFormatter(createNewLineRestrictionFormatter());
+        searchArea.setTextFormatter(TextFormatterFactory.createNewLineRestrictionFormatter());
         searchArea.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(entry -> {
                 if (newValue == null || newValue.isEmpty())
@@ -44,13 +44,6 @@ public class SouvenirController implements Resettable {
             });
             artifactView.setItems(filteredData);
         });
-    }
-
-    private TextFormatter<String> createNewLineRestrictionFormatter() {
-        return new TextFormatter<>(change ->
-                (!change.isContentChange() || !change.getControlNewText().contains("\n")) ?
-                        change :
-                        null);
     }
 
     public void liveUpdate() {

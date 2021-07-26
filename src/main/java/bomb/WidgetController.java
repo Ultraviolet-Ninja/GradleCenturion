@@ -3,6 +3,7 @@ package bomb;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinaryState;
+import bomb.tools.TextFormatterFactory;
 import bomb.tools.facade.FacadeFX;
 import bomb.tools.Filter;
 import bomb.tools.observer.ObserverHub;
@@ -84,9 +85,9 @@ public class WidgetController {
     }
 
     private void injectTextFormatter(){
-        serialCodeArea.setTextFormatter(WidgetEventFactory.createSerialCodeFormatter());
-        numberOfMinutesArea.setTextFormatter(WidgetEventFactory.createNumbersOnlyFormatter());
-        numberOfModulesArea.setTextFormatter(WidgetEventFactory.createNumbersOnlyFormatter());
+        serialCodeArea.setTextFormatter(TextFormatterFactory.createSerialCodeFormatter());
+        numberOfMinutesArea.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
+        numberOfModulesArea.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
     }
 
     @FXML

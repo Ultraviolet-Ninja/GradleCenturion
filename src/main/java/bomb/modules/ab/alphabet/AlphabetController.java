@@ -5,12 +5,12 @@ import bomb.tools.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static bomb.tools.TextFormatterFactory.createOneLetterFormatter;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class AlphabetController implements Resettable {
@@ -33,17 +33,6 @@ public class AlphabetController implements Resettable {
             input.setTextFormatter(createOneLetterFormatter());
             input.setOnKeyReleased(actionHandler());
         }
-    }
-
-    private TextFormatter<String> createOneLetterFormatter(){
-        return new TextFormatter<>(change -> {
-            if (!change.isContentChange()) return change;
-
-            String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b[a-zA-Z]\\b")) return change;
-
-            return null;
-        });
     }
 
     private EventHandler<KeyEvent> actionHandler(){

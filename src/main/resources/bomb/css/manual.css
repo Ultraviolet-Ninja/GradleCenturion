@@ -1,5 +1,9 @@
 #background {
-    -fx-base: #0B234C;
+    -fx-base: #0b234c;
+}
+
+.scroll-pane {
+
 }
 
 .scroll-pane .scroll-bar:vertical .thumb {
@@ -25,6 +29,10 @@
 #submit-button {
     -jfx-rippler-fill: black;
     -fx-background-color: #FFCD99;
+    -fx-background-radius: 25;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
     -fx-text-fill: #221b18;
     -fx-font-weight: lighter;
     -fx-font-family: Tahoma;
@@ -36,12 +44,4 @@
     -fx-prompt-text-fill: lightgray;
     -fx-focus-color: -fx-control-inner-background;
     -fx-faint-focus-color: -fx-control-inner-background;
-}
-
-#search-field:hover {
-    /*-fx-accent: white;*/
-    /*-fx-highlight-fill: white;*/
-    /*-fx-focus-color: white;*/
-    /*-fx-background-color: white;*/
-
 }

@@ -1,52 +1,58 @@
 package bomb.modules.il.laundry;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.Regex;
+import bomb.tools.TextFormatterFactory;
+import bomb.tools.facade.FacadeFX;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Filter.ultimateFilter;
-
 public class LaundryController implements Resettable {
-    @FXML
-    private ImageView wash, dry;
+    private static final String WASH_INSTRUCTIONS = "Wash Instructions: ", DRY_INSTRUCTIONS = "Dry Instructions: ",
+            IRONING_INSTRUCTIONS = "Iron Instructions: ", SPECIAL_INSTRUCTIONS = "Special Instructions: ";
+    private static final String MATERIAL_RESET_TEXT = "Material - Color - Item";
 
-    @FXML
-    private Label washText, dryText, ironText, specialText, article, bob;
+    @FXML private ImageView washImage, dryImage;
 
-    @FXML
-    private TextField modNum, needyMods;
+    @FXML private Label washText, dryText, ironText, specialText, article, bob;
+
+    @FXML private JFXTextField solvedModuleNumberField, needyModuleNumberField;
+
+    public void initialize(){
+        solvedModuleNumberField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
+        needyModuleNumberField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
+    }
 
     @FXML
     private void coinInsert(){
         try{
-            String modBuffer = ultimateFilter(modNum.getText(), NUMBER_PATTERN),
-                    needyBuffer = ultimateFilter(needyMods.getText(), NUMBER_PATTERN);
-            String[] outputs = Laundry.clean(modBuffer, needyBuffer);
-            wash.setImage(new Image(outputs[0]));
-            dry.setImage(new Image(outputs[1]));
-            washText.setText(separateText(outputs[0]));
-            dryText.setText(separateText(outputs[1]));
+            String[] outputs = Laundry.clean(
+                    solvedModuleNumberField.getText(),
+                    needyModuleNumberField.getText()
+            );
+            washImage.setImage(new Image(String.valueOf(getClass().getResource(outputs[0]))));
+            dryImage.setImage(new Image(String.valueOf(getClass().getResource(outputs[1]))));
+            washText.setText(WASH_INSTRUCTIONS + separateText(outputs[0]));
+            dryText.setText(DRY_INSTRUCTIONS + separateText(outputs[1]));
 
-            ironText.setText(outputs[2]);
-            specialText.setText(outputs[3]);
+            ironText.setText(IRONING_INSTRUCTIONS + outputs[2]);
+            specialText.setText(SPECIAL_INSTRUCTIONS + outputs[3]);
             article.setText(restructure(outputs[4]));
             if (outputs.length == 6) bob.setText(outputs[5]);
         } catch (IllegalArgumentException illegal){
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText(illegal.getMessage());
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.INFORMATION, illegal.getMessage());
         }
     }
 
     private String separateText(String filename){
-        if (filename.contains("Wash"))
-            return filename.substring(37).replaceAll(".png", "");
-        return filename.substring(36).replaceAll(".png", "");
+        Regex filenamePattern = new Regex("\\w+(?: \\w+)?\\.", filename);
+        return filenamePattern.toNewString()
+                .replace(".", "")
+                .replace("F", "°F");
     }
 
     private String restructure(String in){
@@ -62,6 +68,12 @@ public class LaundryController implements Resettable {
 
     @Override
     public void reset() {
-
+        washText.setText(WASH_INSTRUCTIONS);
+        dryText.setText(DRY_INSTRUCTIONS);
+        ironText.setText(IRONING_INSTRUCTIONS);
+        specialText.setText(SPECIAL_INSTRUCTIONS);
+        article.setText(MATERIAL_RESET_TEXT);
+        FacadeFX.clearText(bob);
+        FacadeFX.clearMultipleTextFields(needyModuleNumberField, solvedModuleNumberField);
     }
 }

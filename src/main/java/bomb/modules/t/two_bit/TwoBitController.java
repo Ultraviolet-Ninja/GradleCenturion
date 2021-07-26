@@ -6,29 +6,16 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextFormatter;
+
+import static bomb.tools.TextFormatterFactory.createTwoBitTextFormatter;
 
 public class TwoBitController implements Resettable {
-    @FXML
-    private JFXButton nextCode;
+    @FXML private JFXButton nextCode;
 
-    @FXML
-    private JFXTextField query, numberCode, cmdLine;
+    @FXML private JFXTextField query, numberCode, cmdLine;
 
     public void initialize(){
         numberCode.setTextFormatter(createTwoBitTextFormatter());
-    }
-
-    private TextFormatter<String> createTwoBitTextFormatter(){
-        return new TextFormatter<>(change -> {
-            if (!change.isContentChange()) return change;
-
-            String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b\\d{1,2}\\b"))
-                return change;
-
-            return null;
-        });
     }
 
     @FXML

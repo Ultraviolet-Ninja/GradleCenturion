@@ -9,72 +9,77 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../css/ab/alphabet.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.ab.alphabet.AlphabetController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../css/ab/alphabet.css"
+          xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.ab.alphabet.AlphabetController">
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="304.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="448.0" minHeight="10.0" prefHeight="245.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="304.0" minHeight="10.0" prefHeight="304.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="448.0" minHeight="10.0" prefHeight="245.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-   <children>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Label text="Input Keys">
-               <HBox.margin>
-                  <Insets right="30.0" />
-               </HBox.margin></Label>
-            <JFXTextField fx:id="firstInput" prefWidth="85.0" />
-            <JFXTextField fx:id="secondInput" prefWidth="85.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </JFXTextField>
-            <JFXTextField fx:id="thirdInput" prefWidth="85.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </JFXTextField>
-            <JFXTextField fx:id="forthInput" prefWidth="85.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </JFXTextField>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-         <children>
-            <Label text="Output Keys">
-               <HBox.margin>
-                  <Insets right="30.0" />
-               </HBox.margin></Label>
-            <JFXTextField fx:id="firstOutput" editable="false" prefWidth="85.0" />
-            <JFXTextField fx:id="secondOutput" editable="false" layoutX="611.0" layoutY="148.0" prefWidth="85.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </JFXTextField>
-            <JFXTextField fx:id="thirdOutput" editable="false" layoutX="678.0" layoutY="148.0" prefWidth="85.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </JFXTextField>
-            <JFXTextField fx:id="forthOutput" editable="false" layoutX="746.0" layoutY="148.0" prefWidth="85.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </JFXTextField>
-         </children>
-      </HBox>
-      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-         <children>
-            <JFXButton id="submit-button" onAction="#resetPuzzle" text="Reset">
-               <HBox.margin>
-                  <Insets right="65.0" />
-               </HBox.margin>
-            </JFXButton>
-         </children>
-      </HBox>
-   </children>
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <Label text="Input Keys">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </Label>
+                <JFXTextField fx:id="firstInput" prefWidth="85.0"/>
+                <JFXTextField fx:id="secondInput" prefWidth="85.0">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </JFXTextField>
+                <JFXTextField fx:id="thirdInput" prefWidth="85.0">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </JFXTextField>
+                <JFXTextField fx:id="forthInput" prefWidth="85.0">
+                    <HBox.margin>
+                        <Insets left="10.0" right="40.0"/>
+                    </HBox.margin>
+                </JFXTextField>
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <children>
+                <Label text="Output Keys">
+                    <HBox.margin>
+                        <Insets right="30.0"/>
+                    </HBox.margin>
+                </Label>
+                <JFXTextField fx:id="firstOutput" editable="false" prefWidth="85.0"/>
+                <JFXTextField fx:id="secondOutput" editable="false" layoutX="611.0" layoutY="148.0" prefWidth="85.0">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </JFXTextField>
+                <JFXTextField fx:id="thirdOutput" editable="false" layoutX="678.0" layoutY="148.0" prefWidth="85.0">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                </JFXTextField>
+                <JFXTextField fx:id="forthOutput" editable="false" layoutX="746.0" layoutY="148.0" prefWidth="85.0">
+                    <HBox.margin>
+                        <Insets left="10.0" right="40.0"/>
+                    </HBox.margin>
+                </JFXTextField>
+            </children>
+        </HBox>
+        <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <children>
+                <JFXButton id="submit-button" onAction="#resetPuzzle" text="Reset">
+                    <HBox.margin>
+                        <Insets right="65.0"/>
+                    </HBox.margin>
+                </JFXButton>
+            </children>
+        </HBox>
+    </children>
 </GridPane>
