@@ -2,11 +2,13 @@ package bomb;
 
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
 
-import static bomb.enumerations.TriState.*;
+import java.util.function.Predicate;
+
+import static bomb.enumerations.TrinaryState.*;
 import static bomb.tools.Filter.*;
 
 /**
@@ -64,7 +66,7 @@ public class Widget {
      */
     private static void updates(){
         BlindAlley.alleyUpdate();
-        ForgetMeNot.updateGreatest();
+        if (forgetMeNot) ForgetMeNot.updateLargestValueInSerial();
     }
 
     /**
@@ -97,8 +99,8 @@ public class Widget {
      * @param state The state to give the Indicator
      * @param which The Indicator to change
      */
-    public static void setIndicator(TriState state, Indicator which){
-        list[which.ordinal()].setProp(state);
+    public static void setIndicator(TrinaryState state, Indicator which){
+        list[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
 
@@ -118,7 +120,7 @@ public class Widget {
      *
      * @param plates The given number
      */
-    public static void setPlates(int plates){
+    public static void setNumberOfPlates(int plates){
         if (plates >= 0){
             numPlates = plates;
         }
@@ -149,6 +151,7 @@ public class Widget {
      */
     public static void setForgetMeNot(boolean set){
         forgetMeNot = set;
+        updates();
     }
 
     /**
@@ -190,11 +193,11 @@ public class Widget {
     /**
      * Looks to if any listed Indicators are on the current bomb
      *
-     * @param inds The array of possible Indicators
+     * @param indicators The array of possible Indicators
      * @return True if any Indicator is found
      */
-    public static boolean hasFollowingInds(Indicator...inds){
-        for (Indicator current : inds){
+    public static boolean hasFollowingIndicators(Indicator...indicators){
+        for (Indicator current : indicators){
             if (hasIndicator(current)) return true;
         }
         return false;
@@ -217,7 +220,7 @@ public class Widget {
      * @return True if the lit Indicator is found
      */
     public static boolean hasLitIndicator(Indicator ind){
-        return list[ind.ordinal()].getProp() == ON;
+        return list[ind.ordinal()].getState() == ON;
     }
 
     /**
@@ -227,7 +230,7 @@ public class Widget {
      * @return True if the unlit Indicator is found
      */
     public static boolean hasUnlitIndicator(Indicator ind){
-        return list[ind.ordinal()].getProp() == OFF;
+        return list[ind.ordinal()].getState() == OFF;
     }
 
     /**
@@ -244,7 +247,7 @@ public class Widget {
      *
      * @return The number of letters
      */
-    public static int serialCodeLetters(){
+    public static int countLettersInSerialCode(){
         return ultimateFilter(serialCode, CHAR_FILTER).length();
     }
 
@@ -253,7 +256,7 @@ public class Widget {
      *
      * @return The number of numbers
      */
-    public static int serialCodeNumbers(){
+    public static int countNumbersInSerialCode(){
         return ultimateFilter(serialCode, NUMBER_PATTERN).length();
     }
 
@@ -327,16 +330,13 @@ public class Widget {
     /**
      * Counts all indicators, whether lit, unlit or all if specified
      *
-     * @param lit Whether the lit or unlit indicators should be counted
-     * @param all Whether all indicators should be counted
+     * @param filter Indicates what indicators should be counted, whether ON, OFF or both
      * @return The number of indicators
      */
-    public static int countIndicators(boolean lit, boolean all){
+    public static int countIndicators(IndicatorFilter filter){
         int counter = 0;
-        TriState current = lit?ON:OFF;
-        for (Indicator ind : list){
-            if (ind.getProp() == current && !all || (ind.getProp() != UNKNOWN && all))
-                counter++;
+        for (Indicator indicator : list) {
+            if (filter.test(indicator.getState())) counter++;
         }
         return counter;
     }
@@ -380,6 +380,20 @@ public class Widget {
 
     private static void setAllUnknown(){
         for (Indicator ind : list)
-            ind.setProp(UNKNOWN);
+            ind.setState(UNKNOWN);
+    }
+
+    public enum IndicatorFilter {
+        LIT(state -> state == ON), UNLIT(state -> state == OFF), ALL(state -> state != UNKNOWN);
+
+        private final Predicate<TrinaryState> condition;
+
+        IndicatorFilter(Predicate<TrinaryState> condition){
+            this.condition = condition;
+        }
+
+        public boolean test(TrinaryState state){
+            return condition.test(state);
+        }
     }
 }

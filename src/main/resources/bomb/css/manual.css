@@ -1,16 +1,38 @@
 #background {
-    -fx-base: #0B234C;
+    -fx-base: #0b234c;
+}
+
+.scroll-pane {
+
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: #104a96;
+    -fx-background-radius: 2em;
+    -fx-border-radius:2em;
+}
+
+.scroll-pane .scroll-bar:vertical .track {
+    -fx-background-radius: 2em;
 }
 
 #puzzle-radio-button {
-    -jfx-unselected-color: #8d8d8d;
+    -jfx-unselected-color: #00255b;
     -jfx-selected-color: white;
     -fx-font-size: 19;
+}
+
+#puzzle-radio-button:hover {
+    -jfx-unselected-color: #0065de;
 }
 
 #submit-button {
     -jfx-rippler-fill: black;
     -fx-background-color: #FFCD99;
+    -fx-background-radius: 25;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
     -fx-text-fill: #221b18;
     -fx-font-weight: lighter;
     -fx-font-family: Tahoma;
@@ -19,5 +41,7 @@
 #search-field{
     -fx-border-radius: 20;
     -fx-background-radius: 20;
-    -fx-prompt-text-fill: white;
+    -fx-prompt-text-fill: lightgray;
+    -fx-focus-color: -fx-control-inner-background;
+    -fx-faint-focus-color: -fx-control-inner-background;
 }

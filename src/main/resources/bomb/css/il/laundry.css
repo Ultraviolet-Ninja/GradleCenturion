@@ -1,0 +1,26 @@
+.jfx-button {
+    -fx-font-size: 25;
+}
+
+.jfx-text-field {
+    -fx-background-color: #123d80;
+    -fx-background-radius: 10 10 10 10;
+    -fx-text-fill: white;
+    -fx-font-size: 20;
+    -fx-border-color: #071732;
+    -fx-border-radius: 10;
+    -fx-border-width: 2;
+    -fx-prompt-text-fill: lightgray;
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: transparent;
+}
+
+#major-label {
+    -fx-font-size: 25;
+    -fx-border-color: #1a59b5;
+    -fx-border-width: 3;
+}
+
+#bob-label {
+    -fx-font-size: 15;
+}

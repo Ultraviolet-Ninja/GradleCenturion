@@ -1,37 +1,31 @@
 package bomb.modules.s.souvenir;
 
-import bomb.Widget;
+import javafx.util.Pair;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Souvenir extends Widget {
-    //TODO - Check out how Souvenir handles 2+ modules of the same type
-    //TODO - CENTURION SOUVENIR IS DIFFERENT, CHANGE SOME SHITE, M8
-    //TODO - Consider changing how souvenirs are stored
-    private static int prevSize = 0;
-    private static final ArrayList<String> MODULE_ARTIFACTS = new ArrayList<>();
+public class Souvenir {
+    private static final Map<String, String> MODULE_ARTIFACTS;
 
-    /**
-     *
-     *
-     * @param key
-     * @param clue
-     */
-    public static void addRelic(String key, String clue){
-        MODULE_ARTIFACTS.add(key + " - " + clue + "\n");
+    static {
+        MODULE_ARTIFACTS = new LinkedHashMap<>();
     }
 
-    /**
-     *
-     *
-     * @return
-     */
-    public static String flush() {
-        StringBuilder builder = new StringBuilder();
-        if (MODULE_ARTIFACTS.size() != prevSize){
-            prevSize = MODULE_ARTIFACTS.size();
-            for (String key : MODULE_ARTIFACTS) builder.append(key);
-            return builder.toString();
-        } return null;
+    public static void addRelic(String key, String answer){
+        MODULE_ARTIFACTS.put(key, answer);
+    }
+
+    public static List<Pair<String, String>> getPuzzleArtifacts() {
+        List<Pair<String, String>> output = new ArrayList<>();
+        for (String key : MODULE_ARTIFACTS.keySet())
+            output.add(new Pair<>(key, MODULE_ARTIFACTS.get(key)));
+        return output;
+    }
+
+    public static void reset(){
+        MODULE_ARTIFACTS.clear();
     }
 }

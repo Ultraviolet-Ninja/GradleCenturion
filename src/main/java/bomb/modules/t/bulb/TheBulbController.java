@@ -1,7 +1,7 @@
 package bomb.modules.t.bulb;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.HoverHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

@@ -1,0 +1,18 @@
+.label {
+    -fx-font-size: 25;
+}
+
+.jfx-text-field {
+    -fx-alignment: center;
+    -fx-background-color: #eedfc8;
+    -fx-border-color: linear-gradient(to right bottom, #fff4ce, #cec3a4, #9f957b, #726955, #484032);
+    -fx-border-width: 5;
+    -fx-text-fill: #221b18;
+    -fx-font-size: 40;
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: transparent;
+}
+
+.jfx-button {
+    -fx-font-size: 20;
+}

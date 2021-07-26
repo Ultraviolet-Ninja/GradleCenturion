@@ -1,12 +1,13 @@
 package bomb;
 
-import bomb.tools.FacadeFX;
 import bomb.tools.Regex;
-import bomb.tools.observer.BlindAlleyObserver;
-import bomb.tools.observer.ForgetMeNotObserver;
+import bomb.tools.facade.FacadeFX;
+import bomb.tools.observer.BlindAlleyPaneObserver;
+import bomb.tools.observer.ForgetMeNotToggleObserver;
 import bomb.tools.observer.ObserverHub;
 import bomb.tools.observer.ResetObserver;
-import bomb.tools.observer.SouvenirObserver;
+import bomb.tools.observer.SouvenirPaneObserver;
+import bomb.tools.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -33,13 +35,14 @@ import java.util.regex.Pattern;
 
 import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
 import static bomb.tools.Mechanics.ultimateFilter;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.BLIND_ALLEY;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
+import static bomb.tools.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 
 public class ManualController {
     private Map<String, Region> regionMap;
     private List<Node> allRadioButtons;
 
-    @FXML private Pane solutionDisplay;
+    @FXML private GridPane base;
 
     @FXML private JFXRadioButton forgetMeNot, souvenir;
 
@@ -47,25 +50,26 @@ public class ManualController {
 
     @FXML private ToggleGroup options;
 
-    @FXML private VBox radioButtonHouse;
+    @FXML private VBox menuVBox, radioButtonHouse;
 
     public void initialize(){
         allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
-        ObserverHub.addObserver(new ForgetMeNotObserver(forgetMeNot));
-        ObserverHub.addObserver(new SouvenirObserver(souvenir));
+        ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
+        ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
         setupMap();
     }
 
     @FXML
     public void buttonPress() {
         String selected = FacadeFX.getToggleName(options);
-        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY);
+        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
+        if (selected.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
         paneSwitch(regionMap.get(selected));
     }
 
     private void paneSwitch(final Region pane) {
-        solutionDisplay.getChildren().clear();
-        solutionDisplay.getChildren().add(pane);
+        if (base.getChildren().size() != 1) base.getChildren().retainAll(menuVBox);
+        base.add(pane, 0, 0);
     }
 
     @FXML
@@ -113,7 +117,8 @@ public class ManualController {
                 FXMLLoader loader = new FXMLLoader(Paths.get(fxmlFile).toUri().toURL());
                 paneList.add(loader.load());
                 if (!fxmlFile.contains("widget")) observer.addController(loader);
-                if (fxmlFile.contains("blind_alley")) getBlindAlleyController(loader);
+                if (fxmlFile.contains("souvenir")) extractSouvenirController(loader);
+                if (fxmlFile.contains("blind_alley")) extractBlindAlleyController(loader);
             }
             ObserverHub.addObserver(observer);
         } catch (IOException e){
@@ -122,8 +127,12 @@ public class ManualController {
         return paneList;
     }
 
-    private void getBlindAlleyController(FXMLLoader loader){
-        ObserverHub.addObserver(new BlindAlleyObserver(loader.getController()));
+    private void extractBlindAlleyController(FXMLLoader loader){
+        ObserverHub.addObserver(new BlindAlleyPaneObserver(loader.getController()));
+    }
+
+    private void extractSouvenirController(FXMLLoader loader){
+        ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
     private ArrayList<String> filesFromFolder(final File folder) throws IllegalArgumentException{

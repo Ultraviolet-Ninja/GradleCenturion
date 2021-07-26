@@ -1,7 +1,7 @@
 package bomb.modules.np.neutralization;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;

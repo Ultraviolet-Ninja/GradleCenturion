@@ -54,7 +54,7 @@ public class TheNewBulb extends Widget {
     }
 
     private static String stepFour(){
-        if (hasFollowingInds(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND))
+        if (hasFollowingIndicators(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND))
             return PRESS_I + ARROW + stepNine();
         return PRESS_O + ARROW + stepTen();
     }

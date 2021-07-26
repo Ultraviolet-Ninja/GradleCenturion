@@ -4,8 +4,8 @@ import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Indicator.SND;
-import static bomb.enumerations.TriState.OFF;
-import static bomb.enumerations.TriState.ON;
+import static bomb.enumerations.TrinaryState.OFF;
+import static bomb.enumerations.TrinaryState.ON;
 import static bomb.enumerations.Port.*;
 
 public class WidgetSimulations {
@@ -26,11 +26,11 @@ public class WidgetSimulations {
      * The Great Berate's first Centurion widget details
      * https://www.youtube.com/watch?v=ixlWDV0CVmM&t=4537s
      */
-    public static void theGreatBerate(){
+    public static void theGreatBerateVideoOne(){
         Widget.resetProperties();
         Widget.setSerialCode("th8zk9");
         Widget.setPortValue(PARALLEL, 1);
-        Widget.setPlates(1);
+        Widget.setNumberOfPlates(1);
         Widget.setDoubleAs(4);
         Widget.setDBatteries(1);
         Widget.setNumHolders(3);
@@ -42,9 +42,9 @@ public class WidgetSimulations {
      * The Great Berate's second Centurion widget details
      * https://www.youtube.com/watch?v=dAJp9nRgIbM
      */
-    public static void theGreatBerateTwo(){
+    public static void theGreatBerateVideoTwo(){
         Widget.resetProperties();
-        Widget.setPlates(2);
+        Widget.setNumberOfPlates(2);
         Widget.setIndicator(ON, MSA);
         Widget.setNumHolders(2);
         Widget.setDBatteries(1);
@@ -59,7 +59,7 @@ public class WidgetSimulations {
         centurionDefaults();
     }
 
-    public static void partTwoTakeTwo(){
+    public static void videoTwoTakeTwo(){
         Widget.resetProperties();
         Widget.setDBatteries(2);
         Widget.setNumHolders(2);
@@ -67,11 +67,11 @@ public class WidgetSimulations {
         Widget.setIndicator(OFF, FRK);
         Widget.setSerialCode("ah5nj9");
         Widget.setPortValue(RCA,1);
-        Widget.setPlates(1);
+        Widget.setNumberOfPlates(1);
         centurionDefaults();
     }
 
-    public static void partTwoTakeThree(){
+    public static void videoTwoTakeThree(){
         Widget.resetProperties();
 
         centurionDefaults();

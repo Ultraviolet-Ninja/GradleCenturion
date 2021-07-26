@@ -1,7 +1,7 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;

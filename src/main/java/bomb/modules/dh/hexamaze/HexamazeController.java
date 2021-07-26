@@ -1,8 +1,8 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.facade.FacadeFX;
 import bomb.components.hex.HexMazePanel;
-import bomb.tools.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;

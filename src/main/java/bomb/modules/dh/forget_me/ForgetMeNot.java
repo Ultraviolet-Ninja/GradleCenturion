@@ -1,180 +1,137 @@
 package bomb.modules.dh.forget_me;
 
+import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.tools.data.structures.ChainList;
-import bomb.Widget;
+import bomb.tools.Filter;
+import bomb.tools.Regex;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.IntUnaryOperator;
 
-/**
- *
- */
+import static bomb.Widget.IndicatorFilter.LIT;
+import static bomb.Widget.IndicatorFilter.UNLIT;
+
 public class ForgetMeNot extends Widget {
-    private static int prev1 = 0, prev2;
-    private static int greatestNum = 0;
-    private static ChainList<Integer> forgot = new ChainList<>();
+    private static final IntUnaryOperator LEAST_SIG_DIGIT = num -> num % 10;
+    private static final IntUnaryOperator MOST_SIG_DIGIT =
+            num -> (int) (num/Math.pow(10, Math.floor(Math.log10(num))));
+    private static final List<Byte> FINAL_CODE = new ArrayList<>();
 
-    //TODO - Probably rename some variables and complete the Javadocs
-    /**
-     *
-     */
-    public static void reset(){
-        forgot = new ChainList<>();
-        prev1 = 0;
-        prev2 = 0;
-        greatestNum = 0;
+    private static byte largestSerialCodeNumber = -1;
+
+    public static void add(int stageNumber) throws IllegalStateException{
+        if (!forgetMeNot)
+            throw new IllegalStateException("Forget Me Not wasn't activated");
+
+        if (largestSerialCodeNumber == -1)
+            throw new IllegalStateException("The serial code was not set");
+
+        if (numModules == 0)
+            throw new IllegalArgumentException("Need to set the number of modules for this to work");
+
+        FINAL_CODE.add(createNextNumber(stageNumber));
     }
 
-    /**
-     *
-     */
-    public static void updateGreatest(){
-        NUMBER_PATTERN.loadText(serialCode);
-        if (!NUMBER_PATTERN.findAllMatches().isEmpty()) {
-            for (String num : NUMBER_PATTERN) {
-                if (Integer.parseInt(num) > greatestNum)
-                    greatestNum = Integer.parseInt(num);
+    private static byte createNextNumber(int stageNumber){
+        if (FINAL_CODE.isEmpty())
+            return (byte) LEAST_SIG_DIGIT.applyAsInt(createFirstNumber(stageNumber));
+
+        if (FINAL_CODE.size() == 1)
+            return (byte) LEAST_SIG_DIGIT.applyAsInt(createSecondNumber(stageNumber));
+
+        return (byte) LEAST_SIG_DIGIT.applyAsInt(createSucceedingNumber(stageNumber));
+    }
+
+    private static int createFirstNumber(int stageNumber){
+        if (hasUnlitIndicator(Indicator.CAR))
+            return stageNumber + 2;
+
+        if (countIndicators(UNLIT) > countIndicators(LIT))
+            return stageNumber + 7;
+
+        if (countIndicators(UNLIT) == 0)
+            return stageNumber + countIndicators(LIT);
+
+        return stageNumber + lastDigit();
+    }
+
+    private static int createSecondNumber(int stageNumber){
+        if (portExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
+            return stageNumber + largestSerialCodeNumber;
+
+        return stageNumber + FINAL_CODE.get(0) +
+                ((FINAL_CODE.get(0) % 2 == 0) ? 1 : -1);
+    }
+
+    private static int createSucceedingNumber(int stageNumber){
+        int length = FINAL_CODE.size();
+        if (FINAL_CODE.get(length - 1) == 0 || FINAL_CODE.get(length - 2) == 0)
+            return stageNumber + largestSerialCodeNumber;
+
+        if (bothPreviousNumbersAreEven())
+            return stageNumber + smallestOddDigitInSerialCode();
+
+        return stageNumber + MOST_SIG_DIGIT.applyAsInt(
+                FINAL_CODE.get(length - 1) + FINAL_CODE.get(length - 2)
+        );
+    }
+
+    private static boolean bothPreviousNumbersAreEven(){
+        int length = FINAL_CODE.size();
+        return FINAL_CODE.get(length - 1) % 2 == 0 && FINAL_CODE.get(length - 2) % 2 == 0;
+    }
+
+    private static int smallestOddDigitInSerialCode(){
+        int compare = 10;
+        Regex singleNumberRegex = new Regex("\\d", serialCode);
+        for (String num : singleNumberRegex){
+            if (Integer.parseInt(num) < compare)
+                compare = Integer.parseInt(num);
+        }
+        return (compare % 2 == 1) ? compare : 9;
+    }
+
+    public static void updateLargestValueInSerial(){
+        Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
+        if (!Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
+            largestSerialCodeNumber = -1;
+            return;
+        }
+
+        Regex singleNumberRegex = new Regex("\\d", serialCode);
+        if (!singleNumberRegex.findAllMatches().isEmpty()) {
+            for (String num : singleNumberRegex) {
+                if (Integer.parseInt(num) > largestSerialCodeNumber)
+                    largestSerialCodeNumber = Byte.parseByte(num);
             }
         }
     }
 
-    /**
-     *
-     *
-     * @return
-     */
-    public static String flush(){
-        StringBuilder builder = new StringBuilder();
-
-        int iter = 0;
-        while (forgot.peek() != null){
-            builder.append(forgot.poll());
-            iter++;
-            if (iter%24==0) builder.append("\n");
-            else if (iter%3==0) builder.append("-");
-        }
-
-        return builder.toString();
-    }
-
-    /**
-     *
-     */
-    public static void undo(){
-        if (forgot.peek() != null) {
-            forgot.poll();
-            prev1 = prev2;
-            prev2 = forgot.peek();
+    public static void undoLastStage(){
+        if (FINAL_CODE.size() != 0){
+            FINAL_CODE.remove(FINAL_CODE.size() - 1);
         }
     }
 
-    /**
-     *
-     *
-     * @param iterator
-     * @param number
-     * @throws IllegalArgumentException
-     */
-    public static void add(int iterator, int number) throws IllegalArgumentException{
-        if (!serialCode.isEmpty()) {
-            if (iterator == 1) addFirst(number);
-            else if (iterator == 2) addSecond(number);
-            else addNext(number);
-        } else throw new IllegalArgumentException("Type in the serial code");
-    }
+    public static String stringifyFinalCode(){
+        StringBuilder sb = new StringBuilder();
 
-    /**
-     *
-     *
-     * @param num
-     */
-    private static void addFirst(int num){
-        if (hasUnlitIndicator(Indicator.CAR)) forgot.offer(nextBuffer(leastSigDig(num+2)));
-        else if (countIndicators(false, false) > countIndicators(true, false))
-            forgot.offer(nextBuffer(leastSigDig(num+7)));
-        else if (countIndicators(false, false) == 0)
-            forgot.offer(nextBuffer(leastSigDig(num+countIndicators(true, false))));
-        else forgot.offer(nextBuffer(leastSigDig(num+lastDigit())));
-    }
-
-    /**
-     *
-     *
-     * @param num
-     */
-    private static void addSecond(int num){
-        if (portExists(Port.SERIAL) && serialCodeNumbers() > 2)
-            forgot.offer(nextBuffer(leastSigDig(num+3)));
-        else if (prev1%2 == 0)forgot.offer(nextBuffer(leastSigDig(prev1+1+num)));
-        else forgot.offer(nextBuffer(leastSigDig(num+prev1-1)));
-    }
-
-    /**
-     *
-     *
-     * @param num
-     */
-    private static void addNext(int num){
-        if (prev1 == 0 || prev2 == 0)
-            forgot.offer(nextBuffer(leastSigDig(num+greatestNum)));
-        else if(bothEven()) forgot.offer(nextBuffer(leastSigDig(num + smallestOddDigit())));
-        else forgot.offer(nextBuffer(leastSigDig(mostSigDig() + num)));
-    }
-
-    /**
-     *
-     *
-     * @return
-     */
-    private static boolean bothEven(){
-        return prev2%2==0 && prev1%2==0;
-    }
-
-    /**
-     *
-     *
-     * @param num
-     * @return
-     */
-    private static int nextBuffer(int num) {
-        prev2 = prev1;
-        prev1 = num;
-        return num;
-    }
-
-    /**
-     *
-     *
-     * @return
-     */
-    private static int mostSigDig(){
-        int sum = prev1 + prev2;
-        return sum >= 10 ? sum / 10 : sum;
-    }
-
-    /**
-     *
-     *
-     * @param num
-     * @return
-     */
-    private static int leastSigDig(int num){
-        return num%10;
-    }
-
-    /**
-     *
-     *
-     * @return
-     */
-    private static int smallestOddDigit(){
-        int compare = 10;
-        NUMBER_PATTERN.loadText(serialCode);
-        for (String num : NUMBER_PATTERN){
-            if (Integer.parseInt(num) < compare)
-                compare = Integer.parseInt(num);
+        for (int i = 1; i <= FINAL_CODE.size(); i++){
+            sb.append(FINAL_CODE.get(i - 1));
+            if (i % 3 == 0 && i != FINAL_CODE.size())
+                sb.append("-");
         }
-        return (compare%2==1)?compare:9;
+        return sb.toString();
+    }
+
+    public static int getStage(){
+        return FINAL_CODE.size();
+    }
+
+    public static void reset(){
+        FINAL_CODE.clear();
+        updateLargestValueInSerial();
     }
 }

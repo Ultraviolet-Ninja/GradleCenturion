@@ -5,7 +5,7 @@ import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TriState;
+import bomb.enumerations.TrinaryState;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -35,13 +35,13 @@ public class BlindAlleyTest {
         Widget.setSerialCode("bu7we6");
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TriState.ON, Indicator.CAR);
+        Widget.setIndicator(TrinaryState.ON, Indicator.CAR);
         Widget.setPortValue(Port.DVI,1);
         Widget.setPortValue(Port.RJ45,1);
         Widget.setPortValue(Port.PS2,1);
         Widget.setPortValue(Port.PARALLEL,1);
         Widget.setPortValue(Port.SERIAL,1);
-        Widget.setPlates(2);
+        Widget.setNumberOfPlates(2);
     }
 
     @Test
@@ -53,22 +53,22 @@ public class BlindAlleyTest {
     private void widgetSetupTwo(){
         Widget.setNumHolders(1);
         Widget.setDoubleAs(2);
-        Widget.setPlates(2);
+        Widget.setNumberOfPlates(2);
         Widget.setPortValue(Port.DVI,1);
         Widget.setPortValue(Port.RJ45,1);
         Widget.setPortValue(Port.PS2,1);
         Widget.setPortValue(Port.PARALLEL,1);
         Widget.setPortValue(Port.RCA,1);
         Widget.setSerialCode("718pz5");
-        Widget.setIndicator(TriState.ON, Indicator.SND);
-        Widget.setIndicator(TriState.OFF, Indicator.FRQ);
+        Widget.setIndicator(TrinaryState.ON, Indicator.SND);
+        Widget.setIndicator(TrinaryState.OFF, Indicator.FRQ);
     }
 
     @DataProvider
     public Object[][] theGreatBerateProvider(){
-        ConditionSetter partOne = WidgetSimulations::theGreatBerate;
-        ConditionSetter partTwo = WidgetSimulations::theGreatBerateTwo;
-        ConditionSetter partThree = WidgetSimulations::partTwoTakeTwo;
+        ConditionSetter partOne = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter partTwo = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter partThree = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {partOne, new int[][]{{0,0,0}, {0,0,0}, {1,2,0}}}, {partTwo, new int[][]{{1,1,0}, {1,0,2}, {1,2,1}}},
                 {partThree, new int[][]{{1,0,0}, {0,1,0}, {0,2,2}}}

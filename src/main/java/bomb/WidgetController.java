@@ -2,8 +2,9 @@ package bomb;
 
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TriState;
-import bomb.tools.FacadeFX;
+import bomb.enumerations.TrinaryState;
+import bomb.tools.TextFormatterFactory;
+import bomb.tools.facade.FacadeFX;
 import bomb.tools.Filter;
 import bomb.tools.observer.ObserverHub;
 import com.jfoenix.controls.JFXSlider;
@@ -19,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.function.Consumer;
 
 import static bomb.enumerations.Port.*;
-import static bomb.enumerations.TriState.*;
+import static bomb.enumerations.TrinaryState.*;
 import static bomb.tools.observer.ObserverHub.ObserverIndex.*;
 
 public class WidgetController {
@@ -84,9 +85,9 @@ public class WidgetController {
     }
 
     private void injectTextFormatter(){
-        serialCodeArea.setTextFormatter(WidgetEventFactory.createSerialCodeFormatter());
-        numberOfMinutesArea.setTextFormatter(WidgetEventFactory.createNumbersOnlyFormatter());
-        numberOfModulesArea.setTextFormatter(WidgetEventFactory.createNumbersOnlyFormatter());
+        serialCodeArea.setTextFormatter(TextFormatterFactory.createSerialCodeFormatter());
+        numberOfMinutesArea.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
+        numberOfModulesArea.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
     }
 
     @FXML
@@ -145,11 +146,11 @@ public class WidgetController {
     }
 
     private void indicatorAction(Indicator indicator, ToggleGroup group){
-        TriState state = determineState(group.getSelectedToggle());
+        TrinaryState state = determineState(group.getSelectedToggle());
         Widget.setIndicator(state, indicator);
     }
 
-    private TriState determineState(Toggle selected){
+    private TrinaryState determineState(Toggle selected){
         if (selected == null) return UNKNOWN;
         return ((ToggleButton)selected).getText().equals("Lit") ? ON : OFF;
     }
@@ -171,7 +172,7 @@ public class WidgetController {
 
     @FXML
     private void portPlateSliderChange(){
-        Widget.setPlates((int) portPlates.getValue());
+        Widget.setNumberOfPlates((int) portPlates.getValue());
     }
 
     @FXML
@@ -187,13 +188,13 @@ public class WidgetController {
     @FXML
     private void souvenirToggle() {
         Widget.setSouvenir(souvenir.isSelected());
-        ObserverHub.updateAtIndex(SOUVENIR);
+        ObserverHub.updateAtIndex(SOUVENIR_TOGGLE);
     }
 
     @FXML
     private void forgetMeToggle() {
         Widget.setForgetMeNot(forgetMeNot.isSelected());
-        ObserverHub.updateAtIndex(FORGET_ME_NOT);
+        ObserverHub.updateAtIndex(FORGET_ME_NOT_TOGGLE);
     }
 
     @FXML

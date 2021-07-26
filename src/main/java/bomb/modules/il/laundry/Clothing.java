@@ -59,7 +59,7 @@ public enum Clothing {
         private final String picLocation, specialInstr;
 
         Material(String pic, String instr){
-            picLocation = "file:src\\bomb\\resources\\laundry\\wash\\" + pic;
+            picLocation = "wash/" + pic;
             specialInstr = instr;
         }
 
@@ -81,7 +81,7 @@ public enum Clothing {
         private final String picLocation, specialInstr;
 
         Color(String pic, String instr){
-            picLocation = "file:src\\bomb\\resources\\laundry\\dry\\" + pic;
+            picLocation = "dry/" + pic;
             specialInstr = instr;
         }
 

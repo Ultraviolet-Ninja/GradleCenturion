@@ -12,16 +12,16 @@ This is the Gradle implementation of the original project, created with the inte
 ### Technologies
 - JDK 8
 - Java FX - GUI
+- ControlFX - JavaFX Library
+- JFoenix - JavaFX Library
+- Medusa - Gauge Library
 - Gradle - Automation Tool
 - Circle CI - Test Automation
 - Jacoco - Test Coverage Analysis
 - JGraphT ver. 1.0.1 - Graph Library
 - CodeMR Free Trial - Coupling/Cohesion/Code Complexity Analysis
 
-#### Technologies Under Test
-- ControlFX - JavaFX Library
-- JFoenix - JavaFX Library
-- Medusa - Gauge Library
+#### Technologies That I'm Trying out
 - FontAwesomeFX - Font Styling
 - RichText - Font Styling
 

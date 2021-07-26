@@ -2,7 +2,7 @@ package bomb.modules.s.simon.screams;
 
 import bomb.components.simon.screams.CustomStar;
 import bomb.abstractions.Resettable;
-import bomb.tools.FacadeFX;
+import bomb.tools.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;

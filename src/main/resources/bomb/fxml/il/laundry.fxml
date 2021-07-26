@@ -1,103 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.GridPane?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.text.Font?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.image.ImageView?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
-          prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/il/laundry.css"
+          xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.il.laundry.LaundryController">
     <columnConstraints>
-        <ColumnConstraints/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="432.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="768.0" minWidth="10.0" prefWidth="768.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <GridPane prefHeight="749.0" prefWidth="1212.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="769.0" minWidth="10.0" prefWidth="769.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="572.0" minWidth="10.0" prefWidth="389.0"/>
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
-        </rowConstraints>
-        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-            <TextField fx:id="modNum" promptText="Number of Solved Modules">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="75.0"/>
-                </VBox.margin>
-            </TextField>
-            <TextField fx:id="needyMods" promptText="Number of Needies">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="50.0"/>
-                </VBox.margin>
-            </TextField>
-            <Button mnemonicParsing="false" onAction="#coinInsert" text="Submit">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets left="135.0" top="50.0"/>
-                </VBox.margin>
-            </Button>
-            <Label fx:id="bob">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-                <VBox.margin>
-                    <Insets top="325.0"/>
-                </VBox.margin>
-            </Label>
+    <children>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <children>
+                <JFXTextField fx:id="solvedModuleNumberField" promptText="Number of Solved Modules">
+                    <VBox.margin>
+                        <Insets bottom="15.0" left="90.0" right="90.0"/>
+                    </VBox.margin>
+                </JFXTextField>
+                <JFXTextField fx:id="needyModuleNumberField" promptText="Number of Needy Modules">
+                    <VBox.margin>
+                        <Insets left="90.0" right="90.0"/>
+                    </VBox.margin>
+                </JFXTextField>
+                <JFXButton id="submit-button" onAction="#coinInsert" text="Clean Laundry">
+                    <VBox.margin>
+                        <Insets bottom="150.0" top="70.0"/>
+                    </VBox.margin>
+                </JFXButton>
+            </children>
         </VBox>
-        <Pane prefHeight="200.0" prefWidth="200.0">
-            <Label fx:id="washText" layoutX="73.0" layoutY="323.0" prefHeight="35.0" prefWidth="241.0"
-                   textAlignment="CENTER">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-            </Label>
-            <Label fx:id="dryText" layoutX="438.0" layoutY="323.0" prefHeight="35.0" prefWidth="250.0"
-                   textAlignment="CENTER">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-            </Label>
-            <Label fx:id="ironText" layoutX="282.0" layoutY="493.0" prefHeight="35.0" prefWidth="204.0"
-                   textAlignment="CENTER">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-            </Label>
-            <Label fx:id="specialText" layoutX="197.0" layoutY="555.0" prefHeight="35.0" prefWidth="374.0"
-                   textAlignment="CENTER">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-            </Label>
-            <ImageView fx:id="wash" fitHeight="150.0" fitWidth="200.0" layoutX="122.0" layoutY="162.0"
-                       pickOnBounds="true" preserveRatio="true"/>
-            <ImageView fx:id="dry" fitHeight="150.0" fitWidth="200.0" layoutX="488.0" layoutY="162.0"
-                       pickOnBounds="true" preserveRatio="true"/>
-            <Label fx:id="article" layoutX="168.0" layoutY="14.0" prefHeight="45.0" prefWidth="336.0"
-                   textAlignment="CENTER">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-        </Pane>
-    </GridPane>
+        <GridPane GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="393.0" minHeight="10.0" prefHeight="329.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="581.0" minHeight="10.0" prefHeight="416.0" vgrow="SOMETIMES"/>
+                <RowConstraints maxHeight="484.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <children>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                            <children>
+                                <Label id="major-label" fx:id="washText" text="Wash Instructions: "/>
+                                <ImageView fx:id="washImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                                           preserveRatio="true"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                            <children>
+                                <Label id="major-label" fx:id="dryText" text="Dry Instructions: "/>
+                                <ImageView fx:id="dryImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                                           preserveRatio="true"/>
+                            </children>
+                        </HBox>
+                    </children>
+                </GridPane>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                    <children>
+                        <Label id="major-label" fx:id="ironText" text="Iron Instructions: ">
+                            <VBox.margin>
+                                <Insets right="205.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Label id="major-label" fx:id="specialText" text="Special Instructions: ">
+                            <VBox.margin>
+                                <Insets right="205.0" top="35.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <Label id="major-label" fx:id="article" text="Material - Color - Item">
+                            <VBox.margin>
+                                <Insets right="205.0" top="35.0"/>
+                            </VBox.margin>
+                        </Label>
+                    </children>
+                </VBox>
+                <GridPane GridPane.rowIndex="2">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="634.0" minWidth="10.0" prefWidth="616.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="379.0" minWidth="10.0" prefWidth="152.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                    <HBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="0">
+                        <children>
+                            <Label id="bob-label" fx:id="bob"/>
+                        </children>
+                    </HBox>
+                    <JFXButton id="submit-button" onAction="#reset" text="Reset" GridPane.columnIndex="1"/>
+                </GridPane>
+            </children>
+        </GridPane>
+    </children>
 </GridPane>

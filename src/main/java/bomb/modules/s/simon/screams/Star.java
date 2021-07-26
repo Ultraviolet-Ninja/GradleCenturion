@@ -85,9 +85,10 @@ public class Star {
     }
 
     public boolean twoAdjacencyRule(Screams[] flashOrder){
-        for (int i = 0; i < flashOrder.length-1; i++)
-            if (twoAdjacencyRule(flashOrder[i], flashOrder[i+1])) return true;
-            return false;
+        for (int i = 0; i < flashOrder.length-1; i++) {
+            if (twoAdjacencyRule(flashOrder[i], flashOrder[i + 1])) return true;
+        }
+        return false;
     }
 
     //Two that are adjacent in clockwise order

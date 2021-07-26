@@ -3,24 +3,24 @@ package bomb.enumerations;
 import bomb.abstractions.Ternary;
 
 public enum Indicator implements Ternary {
-    BOB(TriState.UNKNOWN), CAR(TriState.UNKNOWN), CLR(TriState.UNKNOWN),
-    FRK(TriState.UNKNOWN), FRQ(TriState.UNKNOWN), IND(TriState.UNKNOWN),
-    MSA(TriState.UNKNOWN), NSA(TriState.UNKNOWN), SIG(TriState.UNKNOWN),
-    SND(TriState.UNKNOWN), TRN(TriState.UNKNOWN);
+    BOB(TrinaryState.UNKNOWN), CAR(TrinaryState.UNKNOWN), CLR(TrinaryState.UNKNOWN),
+    FRK(TrinaryState.UNKNOWN), FRQ(TrinaryState.UNKNOWN), IND(TrinaryState.UNKNOWN),
+    MSA(TrinaryState.UNKNOWN), NSA(TrinaryState.UNKNOWN), SIG(TrinaryState.UNKNOWN),
+    SND(TrinaryState.UNKNOWN), TRN(TrinaryState.UNKNOWN);
 
-    private TriState property;
+    private TrinaryState state;
 
     @Override
-    public TriState getProp() {
-        return property;
+    public TrinaryState getState() {
+        return state;
     }
 
     @Override
-    public void setProp(TriState in){
-        property = in;
+    public void setState(TrinaryState in){
+        state = in;
     }
 
-    Indicator(TriState in){
-        property = in;
+    Indicator(TrinaryState in){
+        state = in;
     }
 }

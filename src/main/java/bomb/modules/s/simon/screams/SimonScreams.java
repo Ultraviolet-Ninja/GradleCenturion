@@ -102,10 +102,10 @@ public class SimonScreams extends Widget {
      * Keeps track of the edgework that applies to the output colors
      */
     private static void setOutputRules(){
-        if (countIndicators(true, true) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
+        if (countIndicators(IndicatorFilter.ALL) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
         if (getTotalPorts() >= 3) CURRENT_OUTPUT_NUMBERS.add(1);
-        if (serialCodeNumbers() >= 3) CURRENT_OUTPUT_NUMBERS.add(2);
-        if (serialCodeLetters() >= 3) CURRENT_OUTPUT_NUMBERS.add(3);
+        if (countNumbersInSerialCode() >= 3) CURRENT_OUTPUT_NUMBERS.add(2);
+        if (countLettersInSerialCode() >= 3) CURRENT_OUTPUT_NUMBERS.add(3);
         if (getAllBatteries() >= 3) CURRENT_OUTPUT_NUMBERS.add(4);
         if (getNumHolders() >= 3) CURRENT_OUTPUT_NUMBERS.add(5);
     }

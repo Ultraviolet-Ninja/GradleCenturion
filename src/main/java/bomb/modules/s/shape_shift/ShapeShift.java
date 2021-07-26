@@ -3,15 +3,18 @@ package bomb.modules.s.shape_shift;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.tools.data.structures.graph.list.OldListGraph;
+import bomb.tools.data.structures.graph.list.ListGraph;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.function.ToIntFunction;
 
 //TODO Eventually document the code
 public class ShapeShift extends Widget {
-    private static final int[][] countTracker = new int[4][4];
-    private static OldListGraph<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> graph;
+    private static final int[][] COUNT_TRACKER = new int[4][4];
+    private static final ToIntFunction<Boolean> CONVERTER = bool -> bool ? 1 : 0;
+
+    private static ListGraph<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> graph;
 
     //<editor-fold desc="Init methods">
     static {
@@ -22,12 +25,12 @@ public class ShapeShift extends Widget {
     private static void zeroOutArray(){
         for (ShapeEnd leftSide : ShapeEnd.values()){
             for (ShapeEnd rightSide : ShapeEnd.values())
-                countTracker[leftSide.ordinal()][rightSide.ordinal()] = 0;
+                COUNT_TRACKER[leftSide.ordinal()][rightSide.ordinal()] = 0;
         }
     }
 
     private static void initializeGraph(){
-        graph = new OldListGraph<>(false);
+        graph = new ListGraph<>(false);
         initializeTriples();
     }
 
@@ -73,7 +76,7 @@ public class ShapeShift extends Widget {
         if (checkIfVisitedTwice(left, right)) {
             AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd> pair = graph.get(
                     new AbstractMap.SimpleEntry<>(left, right))
-                    .get(booleanIntConversion(conditionMap(left, right)));
+                    .get(CONVERTER.applyAsInt(conditionMap(left, right)));
             return solve(pair.getKey(), pair.getValue());
         }
         resetMod();
@@ -85,11 +88,11 @@ public class ShapeShift extends Widget {
     }
 
     private static void increment(ShapeEnd left, ShapeEnd right){
-        countTracker[left.ordinal()][right.ordinal()] += 1;
+        COUNT_TRACKER[left.ordinal()][right.ordinal()] += 1;
     }
 
     private static boolean checkIfVisitedTwice(ShapeEnd left, ShapeEnd right){
-        return countTracker[left.ordinal()][right.ordinal()] < 2;
+        return COUNT_TRACKER[left.ordinal()][right.ordinal()] < 2;
     }
 
     //<editor-fold desc="Boolean Methods">
@@ -158,8 +161,4 @@ public class ShapeShift extends Widget {
         }
     }
     //</editor-fold>
-
-    private static int booleanIntConversion(boolean bool){
-        return bool ? 1 : 0;
-    }
 }
