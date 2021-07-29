@@ -1,8 +1,8 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
+import bomb.tools.data.structures.ring.NewReadOnlyRing;
 import bomb.tools.pattern.facade.FacadeFX;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
 import javafx.fxml.FXMLLoader;
@@ -11,20 +11,20 @@ import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import static javafx.scene.paint.Color.WHITE;
 
 public class CustomEdge extends Polygon {
     private boolean selectorMode;
-    private ArrayList<CustomEdge> internalReference;
+    private List<CustomEdge> internalReference;
 
-    private final ReadOnlyRing<Screams> colors;
+    private final NewReadOnlyRing<Screams> colors;
 
     public CustomEdge(){
         super();
         selectorMode = false;
-        colors = new ReadOnlyRing<>(6);
+        colors = new NewReadOnlyRing<>(6);
         fill();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("edge.fxml"));
         loader.setRoot(this);
@@ -39,7 +39,7 @@ public class CustomEdge extends Polygon {
     private void fill(){
         for (Screams scream : Screams.values())
             colors.add(scream);
-        colors.rotateHeadCounter();
+        colors.rotateCounterClockwise();
     }
 
     public void setSelectorMode(boolean nextBool){
@@ -48,7 +48,7 @@ public class CustomEdge extends Polygon {
 
     public void clickAction(){
         if (selectorMode){
-            colors.rotateHeadClockwise();
+            colors.rotateClockwise();
             setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
         } else {
             if (getFill() == WHITE) return;
@@ -91,13 +91,13 @@ public class CustomEdge extends Polygon {
         return colors.getHeadData();
     }
 
-    public void getListReference(ArrayList<CustomEdge> list){
+    public void getListReference(List<CustomEdge> list){
         internalReference = list;
     }
 
     public void resetEdge(){
         setFill(WHITE);
-        while (colors.getHeadData() != Screams.PURPLE) colors.rotateHeadClockwise();
+        while (colors.getHeadData() != Screams.PURPLE) colors.rotateClockwise();
         selectorMode = false;
     }
 }

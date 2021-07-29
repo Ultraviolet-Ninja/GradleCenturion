@@ -1,7 +1,7 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.ring.NewReadOnlyRing;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,11 +11,11 @@ import java.util.Set;
 public class Star {
     private static final byte LIMIT = 6;
 
-    private final ReadOnlyRing<Screams> colorOrder;
+    private final NewReadOnlyRing<Screams> colorOrder;
 
     public Star(Screams[] order){
         checkUniqueColors(order);
-        colorOrder = new ReadOnlyRing<>(LIMIT);
+        colorOrder = new NewReadOnlyRing<>(LIMIT);
         for (Screams instance : order) colorOrder.add(instance);
     }
 
