@@ -40,9 +40,9 @@ jacocoTestReport {
     }
 }
 
-jar {
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    manifest {
-        attributes "Main-Class": "$mainClassName"
-    }
-}
+//jar {
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+//    manifest {
+//        attributes "Main-Class": "$mainClassName"
+//    }
+//}
