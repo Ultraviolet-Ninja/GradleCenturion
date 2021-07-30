@@ -36,7 +36,7 @@ public class ScreamsController implements Resettable {
         star.setSelectorMode(colorSelectorToggle.isSelected());
         if (!colorSelectorToggle.isSelected()){
             try{
-                SimonScreams.init(star.collectOrder());
+                SimonScreams.initialize(star.collectOrder());
                 FacadeFX.disable(colorSelectorToggle);
                 FacadeFX.enable(solve);
             } catch(IllegalArgumentException ex){

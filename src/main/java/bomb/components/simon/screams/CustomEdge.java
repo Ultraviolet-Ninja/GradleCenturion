@@ -1,7 +1,7 @@
 package bomb.components.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.data.structures.ring.NewReadOnlyRing;
+import bomb.tools.data.structures.ring.ReadOnlyRing;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -19,12 +19,12 @@ public class CustomEdge extends Polygon {
     private boolean selectorMode;
     private List<CustomEdge> internalReference;
 
-    private final NewReadOnlyRing<Screams> colors;
+    private final ReadOnlyRing<Screams> colors;
 
     public CustomEdge(){
         super();
         selectorMode = false;
-        colors = new NewReadOnlyRing<>(6);
+        colors = new ReadOnlyRing<>(6);
         fill();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("edge.fxml"));
         loader.setRoot(this);

@@ -1,7 +1,7 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.modules.s.simon.Simon.Screams;
-import bomb.tools.data.structures.ring.NewReadOnlyRing;
+import bomb.tools.data.structures.ring.ReadOnlyRing;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,11 +11,11 @@ import java.util.Set;
 public class Star {
     private static final byte LIMIT = 6;
 
-    private final NewReadOnlyRing<Screams> colorOrder;
+    private final ReadOnlyRing<Screams> colorOrder;
 
     public Star(Screams[] order){
         checkUniqueColors(order);
-        colorOrder = new NewReadOnlyRing<>(LIMIT);
+        colorOrder = new ReadOnlyRing<>(LIMIT);
         for (Screams instance : order) colorOrder.add(instance);
     }
 
@@ -33,9 +33,9 @@ public class Star {
 
     //Three that are adjacent in clockwise order
     public boolean threeAdjacencyRule(Screams first, Screams second, Screams third){
-        int firstIdx = colorOrder.findIndex(first);
-        int secondIdx = colorOrder.findIndex(second);
-        int thirdIdx = colorOrder.findIndex(third);
+        int firstIdx = colorOrder.findAbsoluteIndex(first);
+        int secondIdx = colorOrder.findAbsoluteIndex(second);
+        int thirdIdx = colorOrder.findAbsoluteIndex(third);
         return thirdIdx - secondIdx == 1 && secondIdx - firstIdx == 1;
     }
 
@@ -76,7 +76,7 @@ public class Star {
         int counter  = 0;
         for (int i = 0; i < LIMIT/2; i++){
             for (Screams flashColor : flashOrder) {
-                int index = colorOrder.findIndex(flashColor);
+                int index = colorOrder.findRelativeIndex(flashColor);
                 if (index == i || index == i + LIMIT/2)
                     counter++;
             }
@@ -93,8 +93,8 @@ public class Star {
 
     //Two that are adjacent in clockwise order
     public boolean twoAdjacencyRule(Screams first, Screams second){
-        int firstIdx = colorOrder.findIndex(first);
-        int secondIdx = colorOrder.findIndex(second);
+        int firstIdx = colorOrder.findAbsoluteIndex(first);
+        int secondIdx = colorOrder.findAbsoluteIndex(second);
         return secondIdx - firstIdx == 1;
     }
 }

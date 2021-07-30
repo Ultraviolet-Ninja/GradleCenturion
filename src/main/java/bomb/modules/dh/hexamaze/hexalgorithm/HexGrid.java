@@ -3,7 +3,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.BufferedQueue;
-import bomb.tools.data.structures.ring.NewReadOnlyRing;
+import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ import java.util.List;
 public class HexGrid extends AbstractHexagon{
     public static final byte STANDARD_SIDE_LENGTH = 4;
 
-    private final NewReadOnlyRing<Color> colorRing;
+    private final ReadOnlyRing<Color> colorRing;
 
     /**
      * Initializes a Hex object with a side length of 4, representing what the defuser sees on thr bomb
      */
     public HexGrid(){
         super(new HexagonDataStructure(STANDARD_SIDE_LENGTH));
-        colorRing = new NewReadOnlyRing<>(6);
+        colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
     }
 
@@ -39,7 +39,7 @@ public class HexGrid extends AbstractHexagon{
         if (grid.getSideLength() != STANDARD_SIDE_LENGTH)
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
         hexagon = grid;
-        colorRing = new NewReadOnlyRing<>(6);
+        colorRing = new ReadOnlyRing<>(6);
         fillColorRing();
         for (int i = 0; i < neededRotations; i++) rotateColorOrder();
     }
@@ -74,7 +74,7 @@ public class HexGrid extends AbstractHexagon{
         colorRing.rotateCounterClockwise();
     }
 
-    public NewReadOnlyRing<Color> getRing(){
+    public ReadOnlyRing<Color> getRing(){
         return colorRing;
     }
 
@@ -129,7 +129,7 @@ public class HexGrid extends AbstractHexagon{
                 wallHash.append(queues.get(x).get(y).getWallHash());
             }
         }
-        wallHash.append(":").append(colorRing.findIndex(Color.RED));
+        wallHash.append(":").append(colorRing.findRelativeIndex(Color.RED));
 
         outputs.add(shapeHash.toString());
         outputs.add(wallHash.toString());

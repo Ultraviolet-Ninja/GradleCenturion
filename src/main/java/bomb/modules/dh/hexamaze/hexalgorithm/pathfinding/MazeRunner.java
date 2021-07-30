@@ -60,7 +60,7 @@ public class MazeRunner {
     public static List<Coordinates> runMaze(HexGrid grid){
         if (currentPegColor == null || currentLocation == null) return null;
 
-        List<Coordinates> possibleExits = getPossibleExits(grid, grid.getRing().findIndex(currentPegColor));
+        List<Coordinates> possibleExits = getPossibleExits(grid, grid.getRing().findRelativeIndex(currentPegColor));
 
         Graph<Coordinates, DefaultEdge> mappedGraph = mapToGraph(grid);
         List<List<Coordinates>> options = new ArrayList<>();

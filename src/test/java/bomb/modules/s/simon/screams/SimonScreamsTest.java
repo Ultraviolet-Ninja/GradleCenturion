@@ -37,7 +37,7 @@ public class SimonScreamsTest {
     public void initMethodExceptionTest(ConditionSetter setter, Screams[] arr){
         setter.setCondition();
 
-        SimonScreams.init(arr);
+        SimonScreams.initialize(arr);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
@@ -52,9 +52,9 @@ public class SimonScreamsTest {
         testReset();
         setUpOne();
         return new Object[][] {
-                {new Screams[]{BLUE, ORANGE, BLUE}, "Purple,Green"},
-                {new Screams[]{BLUE, ORANGE, BLUE, GREEN}, "Yellow,Blue"},
-                {new Screams[]{BLUE, ORANGE, BLUE, GREEN, RED}, "Red,Orange"}
+                {new Screams[]{BLUE, ORANGE, BLUE}, "Purple,Green"}, //Primary Rule
+                {new Screams[]{BLUE, ORANGE, BLUE, GREEN}, "Yellow,Blue"}, //Primary Rule
+                {new Screams[]{BLUE, ORANGE, BLUE, GREEN, RED}, "Red,Orange"} //Otherwise Rule
         };
     }
 
@@ -75,7 +75,7 @@ public class SimonScreamsTest {
         Widget.setPortValue(Port.RJ45,1);
         Widget.setPortValue(Port.DVI,1);
         Widget.setPortValue(Port.PS2,1);
-        SimonScreams.init(new Screams[]{PURPLE, ORANGE, RED, GREEN, BLUE, YELLOW});
+        SimonScreams.initialize(new Screams[]{PURPLE, ORANGE, RED, GREEN, BLUE, YELLOW});
     }
 
     @DataProvider
@@ -83,9 +83,9 @@ public class SimonScreamsTest {
         testReset();
         setUpTwo();
         return new Object[][] {
-                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE}, "Blue,Purple"},
-                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN}, "Blue,Purple"},
-                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN, BLUE, ORANGE}, "Green,Orange"}
+                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE}, "Blue,Purple"}, //One Two One Rule
+                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN}, "Blue,Purple"}, //One Two One Rule
+                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN, BLUE, ORANGE}, "Green,Orange"}//One Two One Rule
         };
     }
 
@@ -101,7 +101,7 @@ public class SimonScreamsTest {
         Widget.setIndicator(TrinaryState.OFF, Indicator.TRN);
         Widget.setIndicator(TrinaryState.OFF, Indicator.FRK);
         Widget.setSerialCode("kn8rx2");
-        SimonScreams.init(new Screams[]{YELLOW, BLUE, GREEN, RED, PURPLE, ORANGE});
+        SimonScreams.initialize(new Screams[]{YELLOW, BLUE, GREEN, RED, PURPLE, ORANGE});
     }
 
     @AfterClass
