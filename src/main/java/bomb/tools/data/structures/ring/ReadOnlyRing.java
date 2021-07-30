@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ReadOnlyRing<E> implements Iterable<E> {
     private final List<E> internalStructure;
@@ -68,6 +70,12 @@ public class ReadOnlyRing<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return internalStructure.iterator();
+        if (headIndex == 0)
+            return internalStructure.iterator();
+        List<E> rotatedOutput = IntStream
+                .range(0, capacity)
+                .mapToObj(i -> internalStructure.get((headIndex + i) % capacity))
+                .collect(Collectors.toList());
+        return rotatedOutput.iterator();
     }
 }
