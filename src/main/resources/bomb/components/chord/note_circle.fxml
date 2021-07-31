@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
+         prefWidth="300.0" stylesheets="@../../css/components/note_circle.css" type="Pane"
+         xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Circle id="background-circle" fill="DODGERBLUE" layoutX="150.0" layoutY="150.0" radius="150.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <JFXButton id="note-button" fx:id="a" layoutX="131.0" layoutY="14.0" prefHeight="39.0" prefWidth="39.0"
+                   text="A"/>
+        <JFXButton id="note-button" fx:id="b" layoutX="234.0" layoutY="75.0" prefHeight="39.0" prefWidth="39.0"
+                   text="B"/>
+        <JFXButton id="note-button" fx:id="c" layoutX="247.0" layoutY="131.0" prefHeight="39.0" prefWidth="39.0"
+                   text="C"/>
+        <JFXButton id="note-button" fx:id="g" layoutX="31.0" layoutY="75.0" prefHeight="39.0" prefWidth="39.0"
+                   text="G"/>
+        <JFXButton id="note-button" fx:id="f" layoutX="31.0" layoutY="186.0" prefHeight="39.0" prefWidth="39.0"
+                   text="F"/>
+        <JFXButton id="note-button" fx:id="e" layoutX="75.0" layoutY="228.0" prefHeight="39.0" prefWidth="39.0"
+                   text="E"/>
+        <JFXButton id="note-button" fx:id="d" layoutX="189.0" layoutY="228.0" prefHeight="39.0" prefWidth="39.0"
+                   text="D"/>
+        <JFXButton id="half-step-button" fx:id="dSharp" layoutX="129.0" layoutY="242.0" prefHeight="43.0"
+                   prefWidth="43.0" text="D#"/>
+        <JFXButton id="half-step-button" fx:id="gSharp" layoutX="73.0" layoutY="32.0" prefHeight="43.0" prefWidth="43.0"
+                   text="G#"/>
+        <JFXButton id="half-step-button" fx:id="aSharp" layoutX="187.0" layoutY="32.0" prefHeight="43.0"
+                   prefWidth="43.0" text="A#"/>
+        <JFXButton id="half-step-button" fx:id="cSharp" layoutX="226.0" layoutY="184.0" prefHeight="43.0"
+                   prefWidth="43.0" text="C#"/>
+        <JFXButton id="half-step-button" fx:id="fSharp" layoutX="13.0" layoutY="129.0" prefHeight="43.0"
+                   prefWidth="43.0" text="F#"/>
+        <Circle id="gray-circle" fill="DODGERBLUE" layoutX="150.0" layoutY="150.0" radius="84.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="dark-circle" fill="DODGERBLUE" layoutX="151.0" layoutY="151.0" radius="50.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="gray-circle" fill="DODGERBLUE" layoutX="151.0" layoutY="151.0" radius="30.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="217.0" layoutY="151.0" radius="15.0"
+                stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="208.0" layoutY="117.0" radius="15.0"
+                stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="208.0" layoutY="184.0" radius="15.0"
+                stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="184.0" layoutY="208.0" radius="15.0"
+                stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="151.0" layoutY="216.0" radius="15.0"
+                stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="151.0" layoutY="83.0" radius="15.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="84.0" layoutY="150.0" radius="15.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="118.0" layoutY="208.0" radius="15.0"
+                stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="93.0" layoutY="184.0" radius="15.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="92.0" layoutY="116.0" radius="15.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="117.0" layoutY="92.0" radius="15.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="outer-selector-circle" fill="DODGERBLUE" layoutX="184.0" layoutY="92.0" radius="15.0" stroke="BLACK"
+                strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteGSharpLight" fill="DODGERBLUE" layoutX="117.0" layoutY="92.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteGLight" fill="DODGERBLUE" layoutX="92.0" layoutY="116.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteASharpLight" fill="DODGERBLUE" layoutX="184.0" layoutY="92.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteALight" fill="DODGERBLUE" layoutX="151.0" layoutY="83.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteFSharpLight" fill="DODGERBLUE" layoutX="84.0" layoutY="150.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteFLight" fill="DODGERBLUE" layoutX="93.0" layoutY="184.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteELight" fill="DODGERBLUE" layoutX="118.0" layoutY="208.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteDSharpLight" fill="DODGERBLUE" layoutX="151.0" layoutY="216.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteCLight" fill="DODGERBLUE" layoutX="217.0" layoutY="151.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteCSharpLight" fill="DODGERBLUE" layoutX="208.0" layoutY="184.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteDLight" fill="DODGERBLUE" layoutX="184.0" layoutY="208.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+        <Circle id="disabled-light-circle" fx:id="noteBLight" fill="DODGERBLUE" layoutX="208.0" layoutY="117.0"
+                radius="12.0" stroke="BLACK" strokeType="INSIDE"/>
+    </children>
+</fx:root>
