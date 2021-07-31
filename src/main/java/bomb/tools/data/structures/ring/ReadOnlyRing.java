@@ -51,6 +51,8 @@ public class ReadOnlyRing<E> implements Iterable<E> {
         int foundIndex = internalStructure.indexOf(element);
         if (foundIndex == -1)
             return foundIndex;
+        if (foundIndex >= headIndex)
+            return foundIndex - headIndex;
         return (capacity - Math.abs(foundIndex - headIndex)) % capacity;
     }
 
@@ -58,14 +60,28 @@ public class ReadOnlyRing<E> implements Iterable<E> {
         return internalStructure.get(headIndex);
     }
 
+    public int getCapacity(){
+        return capacity;
+    }
+
     public void rotateClockwise(){
         headIndex++;
+        headIndex %= capacity;
+    }
+
+    public void rotateClockwise(int rotations){
+        headIndex += rotations;
         headIndex %= capacity;
     }
 
     public void rotateCounterClockwise(){
         headIndex--;
         if (headIndex < 0) headIndex += capacity;
+    }
+
+    public void rotateCounterClockwise(int rotations){
+        headIndex -= rotations;
+        while (headIndex < 0) headIndex += capacity;
     }
 
     @Override

@@ -28,7 +28,7 @@
             <RowConstraints maxHeight="426.0" minHeight="10.0" prefHeight="239.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <HBox prefHeight="100.0" prefWidth="200.0">
-            <TextField fx:id="inputChord" editable="false" promptText="Input Chord">
+            <TextField fx:id="inputChordField" editable="false" promptText="Input Chord">
                 <font>
                     <Font size="36.0"/>
                 </font>
@@ -36,7 +36,7 @@
                     <Insets left="50.0" top="80.0"/>
                 </HBox.margin>
             </TextField>
-            <TextField fx:id="outputChord" editable="false" promptText="New Chord">
+            <TextField fx:id="outputChordField" editable="false" promptText="New Chord">
                 <font>
                     <Font size="36.0"/>
                 </font>

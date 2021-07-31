@@ -12,15 +12,15 @@ import javafx.scene.control.TextField;
 import java.util.function.Consumer;
 
 public class ChordController implements Resettable {
-    private int counter = 0;
-    private final String[] notes = new String[4];
-    private StringBuilder track = new StringBuilder();
+    private final StringBuilder userNoteFeedback;
 
-    @FXML
-    private Button a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
+    @FXML private Button a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
 
-    @FXML
-    private TextField inputChord, outputChord;
+    @FXML private TextField inputChordField, outputChordField;
+
+    public ChordController(){
+        userNoteFeedback = new StringBuilder();
+    }
 
     public void initialize() {
         HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
@@ -32,33 +32,26 @@ public class ChordController implements Resettable {
     }
 
     private void add(String note) {
-        notes[counter++] = note;
-        track.append(note);
-        if (counter == 4) {
+        userNoteFeedback.append(note);
+        if (userNoteFeedback.toString().split(", ").length == 4) {
             try {
                 solve();
             } catch (IllegalArgumentException illegal) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
             }
-            counter = 0;
-            track = new StringBuilder();
+            userNoteFeedback.setLength(0);
         } else
-            track.append(", ");
-        inputChord.setText(track.toString());
+            userNoteFeedback.append(", ");
+        inputChordField.setText(userNoteFeedback.toString());
     }
 
     private void solve() {
-        StringBuilder temp = new StringBuilder();
-        for (int i = 0; i < notes.length; i++) {
-            temp.append(notes[i]);
-            if (i != 3)
-                temp.append(" ");
-        }
-        outputChord.setText(ChordQualities.solve(temp.toString()));
+        outputChordField.setText(ChordQualities.solve(userNoteFeedback.toString().replace(", ", " ")));
     }
 
     @Override
     public void reset() {
-
+        userNoteFeedback.setLength(0);
+        FacadeFX.clearMultipleTextFields(inputChordField, outputChordField);
     }
 }

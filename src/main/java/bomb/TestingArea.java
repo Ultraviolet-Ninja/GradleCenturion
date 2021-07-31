@@ -1,5 +1,6 @@
 package bomb;
 
+import bomb.modules.c.chords.ChordQualities;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 
@@ -63,6 +64,8 @@ public class TestingArea {
 //        } catch (IOException e){
 //            e.printStackTrace();
 //        }
+
+        System.out.println(ChordQualities.solve("D# F G# A"));
     }
 
     private static HexGrid fromLine(String line){
