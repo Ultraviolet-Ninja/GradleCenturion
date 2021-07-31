@@ -76,7 +76,7 @@ public class ScreamsController implements Resettable {
 
     @FXML
     private void resetStar(){
-        star.resetStar();
+        star.reset();
         FacadeFX.setToggleButtonsUnselected(colorSelectorToggle);
         FacadeFX.enable(colorSelectorToggle);
         FacadeFX.disable(solve);

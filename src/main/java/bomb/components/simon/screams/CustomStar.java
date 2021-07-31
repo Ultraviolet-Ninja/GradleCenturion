@@ -1,5 +1,6 @@
 package bomb.components.simon.screams;
 
+import bomb.abstractions.Resettable;
 import bomb.modules.s.simon.Simon.Screams;
 import bomb.tools.event.HoverHandler;
 import javafx.fxml.FXML;
@@ -13,11 +14,10 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CustomStar extends Pane {
+public class CustomStar extends Pane implements Resettable {
     private final ArrayList<CustomEdge> clicks = new ArrayList<>();
 
-    @FXML
-    private CustomEdge first, second, third, forth, fifth, sixth;
+    @FXML private CustomEdge first, second, third, forth, fifth, sixth;
 
     public CustomStar(){
         super();
@@ -59,13 +59,14 @@ public class CustomStar extends Pane {
         sixth.setSelectorMode(nextBool);
     }
 
-    public void resetStar(){
-        first.resetEdge();
-        second.resetEdge();
-        third.resetEdge();
-        forth.resetEdge();
-        fifth.resetEdge();
-        sixth.resetEdge();
+    @Override
+    public void reset(){
+        first.reset();
+        second.reset();
+        third.reset();
+        forth.reset();
+        fifth.reset();
+        sixth.reset();
     }
 
     public Screams[] collectFlashOrder(){

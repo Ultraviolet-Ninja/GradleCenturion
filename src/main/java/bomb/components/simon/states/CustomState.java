@@ -1,5 +1,6 @@
 package bomb.components.simon.states;
 
+import bomb.abstractions.Resettable;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +10,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 
-public class CustomState extends Pane {
-    @FXML
-    private Arc button;
+public class CustomState extends Pane implements Resettable {
+    @FXML private Arc button;
 
     public CustomState(){
         super();
@@ -34,5 +34,10 @@ public class CustomState extends Pane {
         fade.setCycleCount(1);
         fade.setAutoReverse(true);
         fade.play();
+    }
+
+    @Override
+    public void reset() {
+
     }
 }

@@ -1,5 +1,6 @@
 package bomb.components.simon.screams;
 
+import bomb.abstractions.Resettable;
 import bomb.modules.s.simon.Simon.Screams;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import bomb.tools.pattern.facade.FacadeFX;
@@ -15,7 +16,7 @@ import java.util.List;
 
 import static javafx.scene.paint.Color.WHITE;
 
-public class CustomEdge extends Polygon {
+public class CustomEdge extends Polygon implements Resettable {
     private boolean selectorMode;
     private List<CustomEdge> internalReference;
 
@@ -95,7 +96,8 @@ public class CustomEdge extends Polygon {
         internalReference = list;
     }
 
-    public void resetEdge(){
+    @Override
+    public void reset(){
         setFill(WHITE);
         while (colors.getHeadData() != Screams.PURPLE) colors.rotateClockwise();
         selectorMode = false;

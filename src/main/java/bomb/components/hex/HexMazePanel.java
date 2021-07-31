@@ -1,5 +1,6 @@
 package bomb.components.hex;
 
+import bomb.abstractions.Resettable;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties;
 import javafx.fxml.FXML;
@@ -14,7 +15,7 @@ import javafx.scene.shape.Shape;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HexMazePanel extends Pane {
+public class HexMazePanel extends Pane implements Resettable {
     public static final Color DEFAULT_PEG_COLOR = new Color(0.65,0.65,0.65, 1.0);
 
     private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195,0.0195,0.0195,1.0);
@@ -169,6 +170,7 @@ public class HexMazePanel extends Pane {
         hexagonalFill.setFill(DEFAULT_BACKGROUND_COLOR);
     }
 
+    @Override
     public void reset(){
         resetHexagonalFill();
         makeWallsTransparent();
