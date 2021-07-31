@@ -16,10 +16,10 @@ public class SixPinController extends AbstractChip{
 
     public SixPinController(){
         super();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("six_pin.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("six_pin.fxml"));
-            loader.setRoot(this);
-            loader.setController(this);
             loader.load();
         } catch(IOException ioe){
             ioe.printStackTrace();

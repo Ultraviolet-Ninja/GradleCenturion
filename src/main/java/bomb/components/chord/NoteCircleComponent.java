@@ -17,8 +17,9 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class NoteCircleComponent extends Pane implements Resettable {
+    public static final byte NOTE_LIMIT = 4;
+
     private static final String ENABLED_ID = "enabled-light-circle", DISABLED_ID = "disabled-light-circle";
-    private static final byte NOTE_LIMIT = 4;
 
     private final Map<JFXButton, Circle> stateMap;
     private final Set<String> selectedNoteSet;
@@ -32,17 +33,17 @@ public class NoteCircleComponent extends Pane implements Resettable {
 
     public NoteCircleComponent() {
         super();
+        stateMap = new HashMap<>();
+        selectedNoteSet = new HashSet<>();
+        externalAction = null;
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("wheel.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("note_circle.fxml"));
-            loader.setRoot(this);
-            loader.setController(this);
             loader.load();
         } catch (IOException ioex){
             ioex.printStackTrace();
         }
-        stateMap = new HashMap<>();
-        selectedNoteSet = new HashSet<>();
-        externalAction = null;
     }
 
     public void initialize(){
@@ -68,13 +69,12 @@ public class NoteCircleComponent extends Pane implements Resettable {
             if (currentlyDisabled && selectedNoteSet.size() < NOTE_LIMIT) {
                 current.setId(ENABLED_ID);
                 selectedNoteSet.add(source.getText());
-                return;
-            }
-            if (!currentlyDisabled) {
-                current.setId(ENABLED_ID);
+                echoChanges();
+            } else if (!currentlyDisabled) {
+                current.setId(DISABLED_ID);
                 selectedNoteSet.remove(source.getText());
+                echoChanges();
             }
-            echoChanges();
         };
     }
 

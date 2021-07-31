@@ -16,34 +16,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class HexMazePanel extends Pane implements Resettable {
-    public static final Color DEFAULT_PEG_COLOR = new Color(0.65,0.65,0.65, 1.0);
+    public static final Color DEFAULT_PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
 
-    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195,0.0195,0.0195,1.0);
+    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
 
-    @FXML
-    private Line northWest, north, northEast, southEast, south, southWest;
+    @FXML private Line northWest, north, northEast, southEast, south, southWest;
 
-    @FXML
-    private Circle circle, peg;
+    @FXML private Circle circle, peg;
 
-    @FXML
-    private Polygon hexagon, hexagonalFill, upTriangle, downTriangle, leftTriangle, rightTriangle;
+    @FXML private Polygon hexagon, hexagonalFill, upTriangle, downTriangle, leftTriangle, rightTriangle;
 
-    public HexMazePanel(){
+    public HexMazePanel() {
         super();
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("panel.fxml"));
-            loader.setRoot(this);
-            loader.setController(this);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("panel.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
+        try {
             loader.load();
             makeWallsTransparent();
             peg.setFill(DEFAULT_PEG_COLOR);
-        } catch (IOException ioex){
+        } catch (IOException ioex) {
             ioex.printStackTrace();
         }
     }
 
-    public void fillPeg(Color toFill){
+    public void fillPeg(Color toFill) {
         peg.setFill(toFill);
     }
 
@@ -52,8 +49,8 @@ public class HexMazePanel extends Pane implements Resettable {
         setupShape(currentNode.fill);
     }
 
-    private void setupShape(HexNodeProperties.HexShape shape){
-        if(shape != null){
+    private void setupShape(HexNodeProperties.HexShape shape) {
+        if (shape != null) {
             switch (shape) {
                 case Circle: exclusiveShapeSet(circle);
                     break;
@@ -78,12 +75,12 @@ public class HexMazePanel extends Pane implements Resettable {
         }
     }
 
-    private void exclusiveShapeSet(Shape shape){
+    private void exclusiveShapeSet(Shape shape) {
         setExclusiveVisibility(shape);
         setExclusiveInvisibility(shape);
     }
 
-    private void setExclusiveVisibility(Shape shape){
+    private void setExclusiveVisibility(Shape shape) {
         if (shape == circle)
             setVisible(circle);
         else if (shape == hexagon)
@@ -98,15 +95,15 @@ public class HexMazePanel extends Pane implements Resettable {
             setVisible(downTriangle);
     }
 
-    private void setExclusiveInvisibility(Shape shape){
+    private void setExclusiveInvisibility(Shape shape) {
         Shape[] array = createShapeArray();
-        for (Shape current : array){
+        for (Shape current : array) {
             if (current != shape)
                 setInvisible(current);
         }
     }
 
-    private void setupLines(ArrayList<HexNodeProperties.HexWall> walls){
+    private void setupLines(ArrayList<HexNodeProperties.HexWall> walls) {
         String remove = "123456";
         if (walls != null) {
             for (HexNodeProperties.HexWall wall : walls) {
@@ -116,19 +113,19 @@ public class HexMazePanel extends Pane implements Resettable {
                     case 2: remove = setLine(northEast, remove, "3"); break;
                     case 3: remove = setLine(southWest, remove, "4"); break;
                     case 4: remove = setLine(south, remove, "5"); break;
-                    default: remove = setLine(southEast, remove, "6"); break;
+                    default: remove = setLine(southEast, remove, "6");
                 }
             }
             removeLines(remove);
         }
     }
 
-    private String setLine(Line line, String string, String remove){
+    private String setLine(Line line, String string, String remove) {
         setVisible(line);
         return string.replace(remove, "");
     }
 
-    private void removeLines(String string){
+    private void removeLines(String string) {
         if (string.contains("1")) setInvisible(northWest);
         if (string.contains("2")) setInvisible(north);
         if (string.contains("3")) setInvisible(northEast);
@@ -137,15 +134,15 @@ public class HexMazePanel extends Pane implements Resettable {
         if (string.contains("6")) setInvisible(southEast);
     }
 
-    private void setVisible(Shape shape){
+    private void setVisible(Shape shape) {
         shape.setOpacity(1);
     }
 
-    private void setInvisible(Shape shape){
+    private void setInvisible(Shape shape) {
         shape.setOpacity(0);
     }
 
-    public void makeWallsTransparent(){
+    public void makeWallsTransparent() {
         setInvisible(northWest);
         setInvisible(north);
         setInvisible(northEast);
@@ -154,11 +151,11 @@ public class HexMazePanel extends Pane implements Resettable {
         setInvisible(southWest);
     }
 
-    private Shape[] createShapeArray(){
+    private Shape[] createShapeArray() {
         return new Shape[]{circle, hexagon, leftTriangle, rightTriangle, upTriangle, downTriangle};
     }
 
-    public void setHexagonalFill(Color color){
+    public void setHexagonalFill(Color color) {
         double newRed = (color.getRed() + DEFAULT_BACKGROUND_COLOR.getRed()) / 2;
         double newGreen = (color.getGreen() + DEFAULT_BACKGROUND_COLOR.getGreen()) / 2;
         double newBlue = (color.getBlue() + DEFAULT_BACKGROUND_COLOR.getBlue()) / 2;
@@ -166,12 +163,12 @@ public class HexMazePanel extends Pane implements Resettable {
         hexagonalFill.setFill(colorAverage);
     }
 
-    public void resetHexagonalFill(){
+    public void resetHexagonalFill() {
         hexagonalFill.setFill(DEFAULT_BACKGROUND_COLOR);
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         resetHexagonalFill();
         makeWallsTransparent();
         setExclusiveInvisibility(null);
