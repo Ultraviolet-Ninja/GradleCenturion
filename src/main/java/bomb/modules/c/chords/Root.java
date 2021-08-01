@@ -8,28 +8,24 @@ public enum Root implements Labeled {
     D_SHARP("D#","+3 +1 +6"), E("E","+5 +2 +3"), F("F","+2 +2 +3"),
     F_SHARP("F#","+4 +3 +3"), G("G","+3 +4 +4"), G_SHARP("G#","+4 +4 +2");
 
-    private final String note, label;
+    private final String note, newDistances;
 
     @Override
     public String getLabel() {
-        return label;
-    }
-
-    public String getNote() {
-        return note;
+        return newDistances;
     }
 
     public static String getNewDistances(String note){
         String distances = null;
-        for (Root root : Root.values()){
+        for (Root root : Root.values()) {
             if (root.note.equals(note))
-                distances = root.label;
+                distances = root.newDistances;
         }
         return distances;
     }
 
-    Root(String note, String label){
+    Root(String note, String newDistances){
         this.note = note;
-        this.label = label;
+        this.newDistances = newDistances;
     }
 }
