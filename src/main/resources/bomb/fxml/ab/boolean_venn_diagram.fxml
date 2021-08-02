@@ -14,7 +14,7 @@
 
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0"
-          stylesheets="@../../css/ab/boolean_venn_diagram.css" xmlns="http://javafx.com/javafx/15.0.1"
+          stylesheets="@../../css/ab/boolean_venn_diagram.css" xmlns="http://javafx.com/javafx/8.0.202-ea"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.ab.boolean_venn.BooleanController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
