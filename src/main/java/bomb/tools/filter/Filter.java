@@ -15,6 +15,6 @@ public class Filter {
 
     public static String ultimateFilter(String input, Regex pattern){
         pattern.loadText(input);
-        return pattern.toNewString();
+        return pattern.createFilteredString();
     }
 }

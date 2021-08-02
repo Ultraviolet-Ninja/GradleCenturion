@@ -86,7 +86,11 @@ public class Regex implements Iterable<String>{
         return output;
     }
 
-    public String toNewString(){
+    public String getOriginalPattern(){
+        return regPattern.pattern();
+    }
+
+    public String createFilteredString(){
         reset();
         StringBuilder result = new StringBuilder();
         for (String sample : findAllMatches()){
@@ -101,6 +105,11 @@ public class Regex implements Iterable<String>{
 
     public void reset(){
         textMatcher.reset();
+    }
+
+    @Override
+    public String toString(){
+        return "Regex: " + regPattern.pattern() + " Text: " + textMatcher.toString();
     }
 
     @Override

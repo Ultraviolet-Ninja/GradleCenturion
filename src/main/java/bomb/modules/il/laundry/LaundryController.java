@@ -50,7 +50,7 @@ public class LaundryController implements Resettable {
 
     private String separateText(String filename){
         Regex filenamePattern = new Regex("\\w+(?: \\w+)?\\.", filename);
-        return filenamePattern.toNewString()
+        return filenamePattern.createFilteredString()
                 .replace(".", "")
                 .replace("F", "°F");
     }

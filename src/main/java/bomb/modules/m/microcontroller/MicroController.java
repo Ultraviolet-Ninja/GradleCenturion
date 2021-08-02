@@ -34,7 +34,7 @@ public class MicroController extends Widget {
 
     private static boolean containsRequiredNumbers(String serialNumbers){
         NUMBER_PATTERN.loadText(serialNumbers);
-        String numbers = NUMBER_PATTERN.toNewString();
+        String numbers = NUMBER_PATTERN.createFilteredString();
         return numbers.contains("1") || numbers.contains("4");
     }
 

@@ -20,7 +20,7 @@ public class FilterTest {
     @Test(dataProvider = "letterProvider")
     public void letterTest(String filter, String expected){
         CHAR_FILTER.loadText(filter);
-        assertEquals(expected, CHAR_FILTER.toNewString());
+        assertEquals(expected, CHAR_FILTER.createFilteredString());
     }
 
     @DataProvider
@@ -33,6 +33,6 @@ public class FilterTest {
     @Test(dataProvider = "numberProvider")
     public void numberTest(String filter, String expected){
         NUMBER_PATTERN.loadText(filter);
-        assertEquals(expected, NUMBER_PATTERN.toNewString());
+        assertEquals(expected, NUMBER_PATTERN.createFilteredString());
     }
 }
