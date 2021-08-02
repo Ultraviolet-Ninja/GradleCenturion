@@ -1,6 +1,6 @@
 package bomb.modules.t.translated;
 
-import bomb.tools.dictionary.*;
+import bomb.tools.data.structures.dictionary.*;
 import bomb.Widget;
 
 import java.util.HashMap;

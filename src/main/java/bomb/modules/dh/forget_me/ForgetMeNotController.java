@@ -2,8 +2,8 @@ package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
 import bomb.abstractions.Resettable;
-import bomb.tools.HoverHandler;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.event.HoverHandler;
+import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;

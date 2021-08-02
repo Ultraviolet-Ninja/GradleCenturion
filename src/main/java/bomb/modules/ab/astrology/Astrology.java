@@ -1,12 +1,12 @@
 package bomb.modules.ab.astrology;
 
 import bomb.Widget;
-import bomb.tools.Regex;
+import bomb.tools.filter.Regex;
 
 import java.util.regex.Pattern;
 
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.CHAR_FILTER;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * This class deals with the Astrology module. This module displays three different astrological symbols

@@ -12,15 +12,14 @@ public class EightPinController extends AbstractChip{
     public static final int PIN_COUNT = 8;
 
     @FXML
-    private Circle pinOne, pinTwo, pinThree, pinFour, pinFive,
-            pinSix, pinSeven, pinEight;
+    private Circle pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight;
 
     public EightPinController(){
         super();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("eight_pin.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("eight_pin.fxml"));
-            loader.setRoot(this);
-            loader.setController(this);
             loader.load();
         } catch(IOException ioe){
             ioe.printStackTrace();
@@ -29,8 +28,7 @@ public class EightPinController extends AbstractChip{
 
     @Override
     public void setColors(ArrayList<Color> results) {
-        Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive,
-                pinSix, pinSeven, pinEight};
+        Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight};
         if (results.size() == PIN_COUNT)
             for (int i = 0; i < array.length; i++)
                 array[i].setFill(results.get(i));

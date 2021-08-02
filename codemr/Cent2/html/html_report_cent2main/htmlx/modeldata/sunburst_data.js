@@ -68,7 +68,7 @@ function EQ_GET_DATA(){
 }
 ]
 },{
-"name": "bomb.tools.dictionary", "key": "B", "value":803, 
+"name": "bomb.tools.data.structures.dictionary", "key": "B", "value":803,
 "pmetrics":{"4":2,"12":1,"13":1,"14":2,"3":1,"1":2,"0":2,"6":2,"8":2,"2":1,"15":1,"16":2},
 "pmetricvalues":{"4":2,"12":0,"13":0,"14":10,"3":1,"1":2,"0":2,"17":0.9,"6":10,"18":0.1,"8":803,"19":0.0,"2":1,"15":1,"16":474},
 "children":[

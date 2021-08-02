@@ -4,12 +4,18 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertThrows;
 
 public class ChordQualitiesTest {
-    @Test
-    public void exceptionTest(){
-        assertThrows(IllegalArgumentException.class, () -> ChordQualities.solve("A A A A"));
+    @DataProvider
+    public Object[][] exceptionProvider(){
+        return new Object[][]{
+                {"A A A A"}, {"A B C"}, {"A B C H"}, {"A B C D"}
+        };
+    }
+
+    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    public void exceptionTest(String invalidInput){
+        ChordQualities.solve(invalidInput);
     }
 
     @DataProvider

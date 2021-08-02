@@ -1,64 +1,43 @@
 package bomb.modules.c.chords;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
-import bomb.tools.HoverHandler;
-import javafx.event.ActionEvent;
+import bomb.components.chord.NoteCircleComponent;
+import bomb.tools.pattern.facade.FacadeFX;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class ChordController implements Resettable {
-    private int counter = 0;
-    private final String[] notes = new String[4];
-    private StringBuilder track = new StringBuilder();
+    @FXML private JFXTextField outputField;
 
-    @FXML
-    private Button a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
+    @FXML private NoteCircleComponent noteCircleComponent;
 
-    @FXML
-    private TextField inputChord, outputChord;
-
-    public void initialize() {
-        HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
-        FacadeFX.bindHandlerToButtons(handler, a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp);
+    public void initialize(){
+        noteCircleComponent.addListenerAction(createListener());
     }
 
-    private Consumer<ActionEvent> createAction() {
-        return event -> add(((Button) event.getSource()).getText());
-    }
+    private Consumer<Set<String>> createListener(){
+        return set -> {
+            if (set.size() == NoteCircleComponent.NOTE_LIMIT) {
+                StringBuilder sb = new StringBuilder();
+                for (String note : set) sb.append(note).append(" ");
 
-    private void add(String note) {
-        notes[counter++] = note;
-        track.append(note);
-        if (counter == 4) {
-            try {
-                solve();
-            } catch (IllegalArgumentException illegal) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+                try {
+                    outputField.setText(ChordQualities.solve(sb.toString().trim()));
+                } catch (IllegalArgumentException illegal) {
+                    FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+                    FacadeFX.clearText(outputField);
+                }
             }
-            counter = 0;
-            track = new StringBuilder();
-        } else
-            track.append(", ");
-        inputChord.setText(track.toString());
-    }
-
-    private void solve() {
-        StringBuilder temp = new StringBuilder();
-        for (int i = 0; i < notes.length; i++) {
-            temp.append(notes[i]);
-            if (i != 3)
-                temp.append(" ");
-        }
-        outputChord.setText(ChordQualities.solve(temp.toString()));
+        };
     }
 
     @Override
     public void reset() {
-
+        FacadeFX.clearText(outputField);
+        noteCircleComponent.reset();
     }
 }

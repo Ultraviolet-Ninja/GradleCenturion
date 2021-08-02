@@ -1,7 +1,7 @@
 package bomb.abstractions;
 
 public abstract class EquatableObject {
-    protected int HASHING_NUMBER = 1337;
+    protected static final short HASHING_NUMBER = 5501;
 
     public abstract boolean equals(Object o);
     public abstract int hashCode();

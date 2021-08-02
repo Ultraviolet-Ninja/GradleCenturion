@@ -14,11 +14,11 @@ This is the Gradle implementation of the original project, created with the inte
 - Java FX - GUI
 - ControlFX - JavaFX Library
 - JFoenix - JavaFX Library
-- Medusa - Gauge Library
+- Medusa ver. 8.3 - Gauge Library
 - Gradle - Automation Tool
 - Circle CI - Test Automation
 - Jacoco - Test Coverage Analysis
-- JGraphT ver. 1.0.1 - Graph Library
+- JGraphT ver. 1.4 - Graph Library
 - CodeMR Free Trial - Coupling/Cohesion/Code Complexity Analysis
 
 #### Technologies That I'm Trying out

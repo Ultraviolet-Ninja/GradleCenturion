@@ -21,13 +21,12 @@ repositories {
 }
 
 dependencies {
-    implementation group: 'org.testng', name: 'testng', version: '6.14.3'
-    implementation 'org.testng:testng:7.1.0'
-    implementation group: 'org.jgrapht', name: 'jgrapht-ext', version: '1.0.1'
+    implementation group: 'org.testng', name: 'testng', version: '7.4.0'
+    implementation group: 'org.jgrapht', name: 'jgrapht-ext', version: '1.4.0'
     implementation 'com.jfoenix:jfoenix:8.0.10'
     implementation group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.6'
     implementation 'org.controlsfx:controlsfx:8.40.18'
-    implementation group: 'eu.hansolo', name: 'Medusa', version: '5.7'
+    implementation group: 'eu.hansolo', name: 'Medusa', version: '8.3'
 }
 
 test {
@@ -41,9 +40,9 @@ jacocoTestReport {
     }
 }
 
-jar {
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    manifest {
-        attributes "Main-Class": "$mainClassName"
-    }
-}
+//jar {
+//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+//    manifest {
+//        attributes "Main-Class": "$mainClassName"
+//    }
+//}

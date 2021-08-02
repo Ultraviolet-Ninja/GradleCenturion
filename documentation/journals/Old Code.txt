@@ -552,8 +552,8 @@ package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
 
-import static bomb.tools.Mechanics.LOGIC_SYMBOL_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Mechanics.LOGIC_SYMBOL_REGEX;
+import static bomb.tools.filter.Mechanics.ultimateFilter;
 
 /**
  * This class deals with the Boolean Venn Diagram module.

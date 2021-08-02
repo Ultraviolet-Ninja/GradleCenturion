@@ -3,10 +3,10 @@ package bomb;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinaryState;
-import bomb.tools.TextFormatterFactory;
-import bomb.tools.facade.FacadeFX;
-import bomb.tools.Filter;
-import bomb.tools.observer.ObserverHub;
+import bomb.tools.pattern.factory.TextFormatterFactory;
+import bomb.tools.pattern.facade.FacadeFX;
+import bomb.tools.filter.Filter;
+import bomb.tools.pattern.observer.ObserverHub;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXToggleButton;
@@ -21,7 +21,7 @@ import java.util.function.Consumer;
 
 import static bomb.enumerations.Port.*;
 import static bomb.enumerations.TrinaryState.*;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.*;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.*;
 
 public class WidgetController {
     @FXML

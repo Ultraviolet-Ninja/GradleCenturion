@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
 
 import static bomb.Widget.IndicatorFilter.ALL;
 import static bomb.enumerations.TrinaryState.UNKNOWN;
-import static bomb.tools.Filter.VOWEL_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.VOWEL_FILTER;
+import static bomb.tools.filter.Filter.ultimateFilter;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;

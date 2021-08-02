@@ -12,15 +12,14 @@ public class TenPinController extends AbstractChip{
     public static final int PIN_COUNT = 10;
 
     @FXML
-    private Circle pinOne, pinTwo, pinThree, pinFour, pinFive,
-            pinSix, pinSeven, pinEight, pinNine, pinTen;
+    private Circle pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight, pinNine, pinTen;
 
     public TenPinController(){
         super();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("ten_pin.fxml"));
+        loader.setRoot(this);
+        loader.setController(this);
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ten_pin.fxml"));
-            loader.setRoot(this);
-            loader.setController(this);
             loader.load();
         } catch(IOException ioe){
             ioe.printStackTrace();

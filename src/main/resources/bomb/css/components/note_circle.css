@@ -1,0 +1,51 @@
+#background-circle {
+    -fx-fill: linear-gradient(to right bottom, #995552, #975451, #94524f, #92514e, #90504d);
+    -fx-stroke: linear-gradient(to right bottom, #b7696a, #aa6060, #884d4c, #7a4443, #6d3c3a);;
+    -fx-stroke-width: 10;
+}
+
+#gray-circle {
+    -fx-fill: #8e9397;
+    -fx-stroke-width: 0;
+}
+
+#dark-circle {
+    -fx-fill: #181a19;
+    -fx-stroke-width: 0;
+}
+
+#outer-selector-circle {
+    -fx-fill: white;
+    -fx-stroke-width: 0;
+}
+
+.jfx-button {
+    -fx-background-color: #ffe3c8;
+    -fx-background-radius: 50;
+    -fx-border-radius: 50;
+    -fx-text-fill: #0e0e0e;
+    -jfx-button-type: RAISED;
+    -jfx-rippler-fill: black;
+}
+
+.jfx-button:hover {
+    -fx-background-color: #f9fe87;
+}
+
+#note-button {
+    -fx-font-size: 18;
+}
+
+#half-step-button {
+    -fx-font-size: 16;
+}
+
+#disabled-light-circle {
+    -fx-fill: black;
+    -fx-stroke-width: 0;
+}
+
+#enabled-light-circle {
+    -fx-fill: #90e355;
+    -fx-stroke-width: 0;
+}

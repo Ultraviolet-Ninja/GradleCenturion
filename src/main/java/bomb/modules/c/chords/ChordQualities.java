@@ -1,189 +1,93 @@
 package bomb.modules.c.chords;
 
-import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
+import bomb.modules.s.souvenir.Souvenir;
+import bomb.tools.data.structures.ring.ReadOnlyRing;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
-//TODO - Probably rename some variables and make the Javadocs
+import java.util.HashSet;
+import java.util.Set;
 
-/**
- * This class deals with the Chord Qualities module.
- */
 public class ChordQualities extends Widget {
     public static final String NEW_CHORD = "New Chord: ";
 
-    private static final String[]
-            ALL_NOTES = new String[]{"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"},
+    private static final ReadOnlyRing<String> ALL_NOTES;
 
-    DISTANCES = new String[]{"4,3,3", "3,4,3", "4,3,4", "3,4,4",
-            "3,1,6", "3,3,4", "2,2,3", "2,1,4", "4,4,2", "4,4,3", "5,2,3", "3,5,3"};
+    static {
+        ALL_NOTES = new ReadOnlyRing<>("A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#");
+    }
 
-    /**
-     *
-     * @param input
-     * @return
-     * @throws IllegalArgumentException
-     */
     public static String solve(String input) throws IllegalArgumentException {
-        String[] og = originalInfo(input);
-        return NEW_CHORD + getNextRoot(Integer.parseInt(og[1])) + " " + getNextQuality(og[0]);
+        validateInput(input);
+        String[] chordQuality = getNextChordQuality(input);
+        if (chordQuality == null || chordQuality[1] == null)
+            throw new IllegalArgumentException("The received notes didn't make a new chord quality");
+        return NEW_CHORD + chordQuality[0] + " " + chordQuality[1];
     }
 
-    /**
-     * @param input
-     * @return
-     * @throws IllegalArgumentException
-     */
-    private static String[] originalInfo(String input) throws IllegalArgumentException {
-        if (souvenir) Souvenir.addRelic("Chord Quality Notes", input);
-
-        String temp = noteConvert(input);
-        String[] outputs = new String[2];
-        int[] traits = originalQuality(combinations(temp));
-        outputs[0] = getOriginalRoot(traits[1], input);
-        outputs[1] = String.valueOf(traits[0]);
-        if (souvenir) Souvenir.addRelic("Chord Quality Original Chord", getChord(traits[0]));
-        return outputs;
+    private static void validateInput(String input) throws IllegalArgumentException {
+        Set<String> repeatDetector = new HashSet<>();
+        for (String note : input.split(" ")) {
+            if (repeatDetector.contains(note))
+                throw new IllegalArgumentException("The input can't contain repeated notes");
+            if (ALL_NOTES.findAbsoluteIndex(note) == -1)
+                throw new IllegalArgumentException("Invalid note was in the input");
+            repeatDetector.add(note);
+        }
+        if (repeatDetector.size() != 4)
+            throw new IllegalArgumentException("There weren't 4 notes in the input");
     }
 
-    /**
-     * @param notes
-     * @return
-     * @throws IllegalArgumentException
-     */
-    private static String noteConvert(String notes) throws IllegalArgumentException {
-        //TODO - Break down
-        StringBuilder output = new StringBuilder();
-        String[] noteArray = notes.split(" "),
-                order = newOrder(findFirst(noteArray[0]));
+    private static String[] getNextChordQuality(String input) {
+        if (souvenir) Souvenir.addRelic("Chord Quality Original Notes", input);
+        ReadOnlyRing<String> inputNoteRing = new ReadOnlyRing<>(input.split(" "));
+        ReadOnlyRing<String> noteDistanceRing = createNoteDistanceRing(inputNoteRing);
+        return generateNewChord(inputNoteRing, noteDistanceRing);
+    }
 
-        int distance = 1, noteCount = 1, totalDistance = 0;
-        for (int i = 1; i < order.length; i++) {
-            if (noteArray[noteCount].equals(order[i])) {
-                output.append(distance).append(",");
-                totalDistance += distance;
-                distance = 1;
-                noteCount++;
-            } else
-                distance++;
+    private static ReadOnlyRing<String> createNoteDistanceRing(ReadOnlyRing<String> inputNoteRing) {
+        ReadOnlyRing<String> output = new ReadOnlyRing<>(inputNoteRing.getCapacity());
+        ALL_NOTES.rotateClockwise(ALL_NOTES.findRelativeIndex(inputNoteRing.getHeadData()));
+        inputNoteRing.rotateClockwise();
 
-            if (noteCount == 4) {
-                i = order.length;
-                output.append(order.length - totalDistance);
+        for (int i = 0; i < inputNoteRing.getCapacity(); i++) {
+            int distance = ALL_NOTES.findRelativeIndex(inputNoteRing.getHeadData());
+            output.add(String.valueOf(distance));
+            ALL_NOTES.rotateClockwise(distance);
+            inputNoteRing.rotateClockwise();
+        }
+        inputNoteRing.rotateCounterClockwise();
+        return output;
+    }
+
+    private static String[] generateNewChord(ReadOnlyRing<String> inputNoteRing, ReadOnlyRing<String> noteDistanceRing) {
+        for (int i = 0; i < inputNoteRing.getCapacity(); i++) {
+            String[] results = runOneRotation(inputNoteRing, noteDistanceRing);
+            if (results != null)
+                return results;
+            noteDistanceRing.rotateCounterClockwise(noteDistanceRing.getCapacity() - 2);
+            inputNoteRing.rotateClockwise();
+        }
+        return null;
+    }
+
+    private static String[] runOneRotation(ReadOnlyRing<String> inputNoteRing, ReadOnlyRing<String> noteDistanceRing) {
+        StringBuilder attemptedDistances = new StringBuilder();
+
+        for (int distanceRingCount = 0; distanceRingCount < noteDistanceRing.getCapacity() - 1; distanceRingCount++) {
+            attemptedDistances.append(noteDistanceRing.getHeadData());
+            noteDistanceRing.rotateClockwise();
+            if (distanceRingCount < noteDistanceRing.getCapacity() - 2)
+                attemptedDistances.append(",");
+        }
+
+        String resultingDistanceString = attemptedDistances.toString();
+
+        for (Quality quality : Quality.values()) {
+            if (quality.getRelatedDistance().equals(resultingDistanceString)) {
+                if (souvenir) Souvenir.addRelic("Chord Quality Original Chord", quality.getLabel());
+                return new String[]{quality.getNextNote(), Root.getNewDistances(inputNoteRing.getHeadData())};
             }
         }
-
-        NUMBER_PATTERN.loadText(output.toString());
-        if (NUMBER_PATTERN.toNewString().length() != 4)
-            throw new IllegalArgumentException("There shouldn't be any duplicate notes");
-        return output.toString();
-    }
-
-    /**
-     * @param given
-     * @return
-     * @throws IllegalArgumentException
-     */
-    private static int findFirst(String given) throws IllegalArgumentException {
-        for (int i = 0; i < ALL_NOTES.length; i++) {
-            if (given.equals(ALL_NOTES[i]))
-                return i;
-        }
-        throw new IllegalArgumentException();
-    }
-
-    /**
-     * @param first
-     * @return
-     */
-    private static String[] newOrder(int first) {
-        String[] order = new String[ALL_NOTES.length];
-        for (int i = 0; i < order.length; i++) {
-            order[i] = ALL_NOTES[first++];
-            if (first == ALL_NOTES.length)
-                first = 0;
-        }
-        return order;
-    }
-
-    /**
-     * @param distances
-     * @return
-     */
-    private static String[] combinations(String distances) {
-        String[] outputs = new String[4];
-        outputs[0] = distances;
-        outputs[1] = reorder(distances);
-        outputs[2] = reorder(outputs[1]);
-        outputs[3] = reorder(outputs[2]);
-        return outputs;
-    }
-
-    /**
-     * @param sample
-     * @return
-     */
-    private static String reorder(String sample) {
-        return sample.substring(2) + "," + sample.charAt(0);
-    }
-
-    /**
-     * @param combos
-     * @return
-     * @throws IllegalArgumentException
-     */
-    private static int[] originalQuality(String[] combos) throws IllegalArgumentException {
-        for (int idx = 0; idx < DISTANCES.length; idx++) {
-            for (int jdx = 0; jdx < combos.length; jdx++)
-                if (combos[jdx].startsWith(DISTANCES[idx]))
-                    return new int[]{idx, jdx};
-        }
-        throw new IllegalArgumentException("This shouldn't occur in originalQuality()");
-    }
-
-    private static String getOriginalRoot(int which, String notes) {
-        return notes.split(" ")[which];
-    }
-
-    /**
-     * @param note
-     * @return
-     * @throws IllegalArgumentException
-     */
-    private static String getNextQuality(String note) throws IllegalArgumentException {
-        for (Roots current : Roots.values()) {
-            if (note.equals(current.getNote()))
-                return current.getLabel();
-        }
-        throw new IllegalArgumentException("This shouldn't reach this exception");
-    }
-
-    /**
-     * @param quality
-     * @return
-     */
-    private static String getNextRoot(int quality) {
-        return Qualities.values()[quality].getLabel();
-    }
-
-    /**
-     * @param position
-     * @return
-     */
-    private static String getChord(int position) {
-        switch (position) {
-            case 0: return "7";
-            case 1: return "-7";
-            case 2: return "Δ7";
-            case 3: return "-Δ7";
-            case 4: return "7#9";
-            case 5: return "Ø";
-            case 6: return "add9";
-            case 7: return "-add9";
-            case 8: return "7#5";
-            case 9: return "Δ7#5";
-            case 10: return "7sus";
-            default: return "-Δ7#5";
-        }
+        return null;
     }
 }

@@ -1,13 +1,13 @@
 package bomb;
 
-import bomb.tools.Regex;
-import bomb.tools.facade.FacadeFX;
-import bomb.tools.observer.BlindAlleyPaneObserver;
-import bomb.tools.observer.ForgetMeNotToggleObserver;
-import bomb.tools.observer.ObserverHub;
-import bomb.tools.observer.ResetObserver;
-import bomb.tools.observer.SouvenirPaneObserver;
-import bomb.tools.observer.SouvenirToggleObserver;
+import bomb.tools.filter.Regex;
+import bomb.tools.pattern.facade.FacadeFX;
+import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
+import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
+import bomb.tools.pattern.observer.ObserverHub;
+import bomb.tools.pattern.observer.ResetObserver;
+import bomb.tools.pattern.observer.SouvenirPaneObserver;
+import bomb.tools.pattern.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,10 +33,10 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static bomb.tools.Mechanics.NORMAL_CHAR_REGEX;
-import static bomb.tools.Mechanics.ultimateFilter;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
-import static bomb.tools.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
+import static bomb.tools.filter.Mechanics.NORMAL_CHAR_REGEX;
+import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 
 public class ManualController {
     private Map<String, Region> regionMap;

@@ -22,8 +22,8 @@ public class TestAreaFX extends Application {
 //        field.setLabelFloat(true);
 //        field.setPromptText("Floating prompt");
 //        display.getChildren().add(field);
-        JFXDialog dialog = new JFXDialog();
-        dialog.show();
+//        JFXDialog dialog = new JFXDialog();
+//        dialog.show();
         Scene scene = new Scene(display, 300, 250);
         primaryStage.setScene(scene);
         primaryStage.show();

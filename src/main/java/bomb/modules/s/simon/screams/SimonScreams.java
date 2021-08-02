@@ -4,16 +4,13 @@ import bomb.Widget;
 import bomb.modules.s.simon.Simon.Screams;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 public class SimonScreams extends Widget {
-    private static boolean initialized = false;
-    private static int stage = 0;
-    private static Star currentScreams;
-
-    private static final ArrayList<Integer> CURRENT_OUTPUT_NUMBERS = new ArrayList<>();
+    private static final List<Integer> CURRENT_OUTPUT_NUMBERS;
     private static final String[][]
             // The output colors that depend on the edgework conditions and enum Letter
             RESULTING_COLORS = {{"Yellow", "Orange", "Green", "Red", "Blue", "Purple"},
@@ -28,6 +25,16 @@ public class SimonScreams extends Widget {
                     {"DED", "ECF", "FHE", "HAA", "AFH", "CDC"}, {"HCE", "ADA", "CFD", "DHH", "EAC", "FEF"},
                     {"CAH", "FHD", "DDA", "AEC", "HCF", "EFE"}, {"EDA", "HAE", "AEC", "FFF", "CHD", "DCH"}};
 
+    private static boolean initialized;
+    private static int stage;
+    private static Star lightOrder;
+
+    static {
+        initialized = false;
+        stage = 0;
+        CURRENT_OUTPUT_NUMBERS = new ArrayList<>();
+    }
+
     /**
      * Sets up the Star object and the output conditions for all stages of Simon Screams
      *
@@ -35,11 +42,11 @@ public class SimonScreams extends Widget {
      * @throws IllegalArgumentException - The serial code isn't 6 characters long OR
      *                                      The array is not 6 elements long
      */
-    public static void init(Screams[] order) throws IllegalArgumentException{
+    public static void initialize(Screams[] order) throws IllegalArgumentException{
         serialCodeChecker();
         initialized = true;
         setOutputRules();
-        currentScreams = new Star(order);
+        lightOrder = new Star(order);
     }
 
     /**
@@ -52,9 +59,8 @@ public class SimonScreams extends Widget {
     public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException{
         if (flashingOrder == null || flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
-        if (initialized) {
-            return findColors(Letters.getFromChar(getStringLetter(flashingOrder)));
-        } else throw new IllegalArgumentException("Initialization wasn't started");
+        if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
+        return findColors(Letters.getFromChar(getStringLetter(flashingOrder)));
     }
 
     /**
@@ -64,12 +70,12 @@ public class SimonScreams extends Widget {
      * @return - The letter determined by the correct array index and correct stage
      */
     private static char getStringLetter(Screams[] flashingOrder){
-        if (currentScreams.threeAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
-        else if (currentScreams.oneTwoOneRule(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
-        else if (currentScreams.primaryRule(flashingOrder)) return extractCategory(flashingOrder[stage], 2);
-        else if (currentScreams.complementRule(flashingOrder)) return extractCategory(flashingOrder[stage], 3);
-        else if (currentScreams.twoAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 4);
-        else return extractCategory(flashingOrder[stage], 5);
+        if (lightOrder.threeAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
+        if (lightOrder.oneTwoOneRule(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
+        if (lightOrder.primaryRule(flashingOrder)) return extractCategory(flashingOrder[stage], 2);
+        if (lightOrder.complementRule(flashingOrder)) return extractCategory(flashingOrder[stage], 3);
+        if (lightOrder.twoAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 4);
+        return extractCategory(flashingOrder[stage], 5);
     }
 
     /**
@@ -118,20 +124,10 @@ public class SimonScreams extends Widget {
         if (stage != 0) stage--;
     }
 
-    /**
-     * Will disable the module if it's finished the 3rd stage
-     *
-     * @return - if the current stage is 2 or not
-     */
-    public static boolean disableMod(){
-        if (stage==2) initialized = false;
-        return stage==2;
-    }
-
     public static void reset(){
         stage = 0;
         initialized = false;
-        currentScreams = null;
+        lightOrder = null;
         CURRENT_OUTPUT_NUMBERS.clear();
     }
 

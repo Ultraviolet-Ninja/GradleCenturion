@@ -33,9 +33,9 @@ public class Star {
 
     //Three that are adjacent in clockwise order
     public boolean threeAdjacencyRule(Screams first, Screams second, Screams third){
-        int firstIdx = colorOrder.findIndex(first);
-        int secondIdx = colorOrder.findIndex(second);
-        int thirdIdx = colorOrder.findIndex(third);
+        int firstIdx = colorOrder.findAbsoluteIndex(first);
+        int secondIdx = colorOrder.findAbsoluteIndex(second);
+        int thirdIdx = colorOrder.findAbsoluteIndex(third);
         return thirdIdx - secondIdx == 1 && secondIdx - firstIdx == 1;
     }
 
@@ -76,7 +76,7 @@ public class Star {
         int counter  = 0;
         for (int i = 0; i < LIMIT/2; i++){
             for (Screams flashColor : flashOrder) {
-                int index = colorOrder.findIndex(flashColor);
+                int index = colorOrder.findRelativeIndex(flashColor);
                 if (index == i || index == i + LIMIT/2)
                     counter++;
             }
@@ -93,8 +93,8 @@ public class Star {
 
     //Two that are adjacent in clockwise order
     public boolean twoAdjacencyRule(Screams first, Screams second){
-        int firstIdx = colorOrder.findIndex(first);
-        int secondIdx = colorOrder.findIndex(second);
+        int firstIdx = colorOrder.findAbsoluteIndex(first);
+        int secondIdx = colorOrder.findAbsoluteIndex(second);
         return secondIdx - firstIdx == 1;
     }
 }

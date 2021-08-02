@@ -9,7 +9,7 @@ import bomb.modules.dh.forget_me.ForgetMeNot;
 import java.util.function.Predicate;
 
 import static bomb.enumerations.TrinaryState.*;
-import static bomb.tools.Filter.*;
+import static bomb.tools.filter.Filter.*;
 
 /**
  * Widget class carries all the important widgets of the current bomb.

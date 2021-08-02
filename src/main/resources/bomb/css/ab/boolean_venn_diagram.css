@@ -1,0 +1,39 @@
+.jfx-text-field {
+    -fx-font-size: 36;
+    -fx-text-fill: white;
+    -fx-background-color: #00407c;
+    -fx-border-color: black;
+    -fx-border-width: 4;
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+}
+
+.jfx-toggle-button {
+    -jfx-toggle-color: #dedee0;
+    -jfx-toggle-line-color: #2b4cff;
+    -jfx-untoggle-color: #354558;
+    -jfx-untoggle-line-color: #172b58;
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+}
+
+.jfx-button {
+    -jfx-button-type: RAISED;
+    -jfx-rippler-fill: black;
+    -fx-background-color: #ffcd99;
+    -fx-background-radius: 25;
+    -fx-border-color: black;
+    -fx-border-radius: 20;
+    -fx-border-width: 2;
+    -fx-text-fill: #221b18;
+    -fx-font-weight: lighter;
+    -fx-font-family: Tahoma;
+}
+
+#boolean-operation-button {
+    -fx-font-size: 30;
+}
+
+#reset-button {
+    -fx-font-size: 24;
+}

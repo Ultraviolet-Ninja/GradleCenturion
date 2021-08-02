@@ -8,8 +8,8 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-import static bomb.tools.Filter.NUMBER_PATTERN;
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Mechanics.ultimateFilter;
 
 public class MicroController extends Widget {
     private static final String[] THIRD_CONDITION = new String[]{"c", "l", "r", "x", "1", "8"};
@@ -34,7 +34,7 @@ public class MicroController extends Widget {
 
     private static boolean containsRequiredNumbers(String serialNumbers){
         NUMBER_PATTERN.loadText(serialNumbers);
-        String numbers = NUMBER_PATTERN.toNewString();
+        String numbers = NUMBER_PATTERN.createFilteredString();
         return numbers.contains("1") || numbers.contains("4");
     }
 

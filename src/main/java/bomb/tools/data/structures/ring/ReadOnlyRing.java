@@ -2,97 +2,96 @@ package bomb.tools.data.structures.ring;
 
 import java.nio.BufferOverflowException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ReadOnlyRing<E> implements Iterable<E> {
-    private static class Node<E> {
-        private final E data;
-        private Node<E> prev, next;
-
-        private Node(E data) {
-            this.data = data;
-            prev = next = null;
-        }
-    }
-
+    private final List<E> internalStructure;
     private final int capacity;
-    private boolean isCompletedRing;
-    private int size;
-    private Node<E> head;
 
-    public ReadOnlyRing(int capacity) {
+    private int headIndex;
+
+    public ReadOnlyRing(int capacity){
+        if (capacity < 1)
+            throw new IllegalArgumentException();
+        internalStructure = new ArrayList<>(capacity);
         this.capacity = capacity;
-        size = 0;
-        head = null;
-        isCompletedRing = false;
+        headIndex = 0;
     }
 
-    public boolean add(E element) throws BufferOverflowException {
-        if (size <= capacity) {
-            if (size == 0)
-                head = new Node<>(element);
-            else if (size == capacity - 1)
-                addLast(element);
-            else if (size != capacity)
-                addNext(element);
-            else throw new BufferOverflowException();
-            size++;
-        }
-        return size != capacity;
+    @SafeVarargs
+    public ReadOnlyRing(E ... elements){
+        this(elements.length);
+        for (int i = 0; i < capacity; i++)
+            add(elements[i]);
     }
 
-    private void addNext(E element) {
-        Node<E> temp = head;
-        while (temp.next != null) temp = temp.next;
-        temp.next = new Node<>(element);
-        temp.next.prev = temp;
+    public ReadOnlyRing(Collection<E> c){
+        if (c.size() < 1)
+            throw new IllegalArgumentException();
+        internalStructure = new ArrayList<>(c);
+        capacity = c.size();
+        headIndex = 0;
     }
 
-    private void addLast(E element) {
-        Node<E> temp = head;
-        while (temp.next != null) temp = temp.next;
-        temp.next = new Node<>(element);
-        temp.next.prev = temp;
-        temp.next.next = head;
-        head.prev = temp.next;
-        isCompletedRing = true;
+    public void add(E element){
+        if (internalStructure.size() == capacity)
+            throw new BufferOverflowException();
+        internalStructure.add(element);
     }
 
-    public int findIndex(E element) {
-        Node<E> temp = head;
-        for (int i = 0; i < capacity; i++) {
-            if (element.equals(temp.data))
-                return i;
-            temp = temp.next;
-        }
-        return -1;
+    public int findAbsoluteIndex(E element){
+        return internalStructure.indexOf(element);
     }
 
-    public E getHeadData() {
-        return head.data;
+    public int findRelativeIndex(E element){
+        int foundIndex = internalStructure.indexOf(element);
+        if (foundIndex == -1)
+            return foundIndex;
+        if (foundIndex >= headIndex)
+            return foundIndex - headIndex;
+        return (capacity - Math.abs(foundIndex - headIndex)) % capacity;
     }
 
-    public void rotateHeadClockwise() {
-        head = head.next;
+    public E getHeadData(){
+        return internalStructure.get(headIndex);
     }
 
-    public void rotateHeadCounter() {
-        head = head.prev;
+    public int getCapacity(){
+        return capacity;
     }
 
-    public List<E> toList() {
-        ArrayList<E> outputList = new ArrayList<>();
-        Node<E> temp = head;
-        while (temp.next != head) {
-            outputList.add(temp.data);
-            temp = temp.next;
-        }
-        return outputList;
+    public void rotateClockwise(){
+        headIndex++;
+        headIndex %= capacity;
+    }
+
+    public void rotateClockwise(int rotations){
+        headIndex += rotations;
+        headIndex %= capacity;
+    }
+
+    public void rotateCounterClockwise(){
+        headIndex--;
+        if (headIndex < 0) headIndex += capacity;
+    }
+
+    public void rotateCounterClockwise(int rotations){
+        headIndex -= rotations;
+        while (headIndex < 0) headIndex += capacity;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return toList().iterator();
+        if (headIndex == 0)
+            return internalStructure.iterator();
+        List<E> rotatedOutput = IntStream
+                .range(0, capacity)
+                .mapToObj(i -> internalStructure.get((headIndex + i) % capacity))
+                .collect(Collectors.toList());
+        return rotatedOutput.iterator();
     }
 }

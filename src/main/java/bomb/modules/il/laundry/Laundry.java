@@ -4,8 +4,8 @@ import bomb.enumerations.Indicator;
 import bomb.Widget;
 
 import static bomb.modules.il.laundry.Clothing.ARTICLE;
-import static bomb.tools.Filter.CHAR_FILTER;
-import static bomb.tools.Filter.ultimateFilter;
+import static bomb.tools.filter.Filter.CHAR_FILTER;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * This class deals with the Laundry module. The module requires a plethora of conditions that involve the

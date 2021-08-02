@@ -1,7 +1,7 @@
 package bomb.modules.ab.alphabet;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.scene.input.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
 
-import static bomb.tools.TextFormatterFactory.createOneLetterFormatter;
+import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFormatter;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class AlphabetController implements Resettable {

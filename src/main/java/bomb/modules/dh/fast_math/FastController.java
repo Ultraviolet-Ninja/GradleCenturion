@@ -1,7 +1,7 @@
 package bomb.modules.dh.fast_math;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

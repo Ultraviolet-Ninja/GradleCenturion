@@ -9,7 +9,7 @@ import javafx.scene.control.ButtonType;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import static bomb.tools.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Mechanics.ultimateFilter;
 
 //TODO - Finish Javadocs
 public class TheBulb extends Widget {

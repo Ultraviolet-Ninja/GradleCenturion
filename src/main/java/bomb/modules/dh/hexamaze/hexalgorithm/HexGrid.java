@@ -49,7 +49,7 @@ public class HexGrid extends AbstractHexagon{
     }
 
     /**
-     * Fills an ArrayList of HexNodes from one of HexShapes
+     * Fills an ArrayList with HexNodes from one of HexShapes
      *
      * @param shapeList The ArrayList of shapes to fill the HexGrid
      */
@@ -71,7 +71,7 @@ public class HexGrid extends AbstractHexagon{
      * which one is in the top left edge
      */
     public void rotateColorOrder(){
-        colorRing.rotateHeadCounter();
+        colorRing.rotateCounterClockwise();
     }
 
     public ReadOnlyRing<Color> getRing(){
@@ -129,7 +129,7 @@ public class HexGrid extends AbstractHexagon{
                 wallHash.append(queues.get(x).get(y).getWallHash());
             }
         }
-        wallHash.append(":").append(colorRing.findIndex(Color.RED));
+        wallHash.append(":").append(colorRing.findRelativeIndex(Color.RED));
 
         outputs.add(shapeHash.toString());
         outputs.add(wallHash.toString());

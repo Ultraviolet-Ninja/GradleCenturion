@@ -1,8 +1,8 @@
 package bomb.modules.s.souvenir;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.TextFormatterFactory;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.factory.TextFormatterFactory;
+import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

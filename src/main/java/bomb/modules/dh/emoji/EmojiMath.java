@@ -1,7 +1,7 @@
 package bomb.modules.dh.emoji;
 
 import bomb.Widget;
-import bomb.tools.Regex;
+import bomb.tools.filter.Regex;
 
 /**
  * This class deals with the Emoji Math module.

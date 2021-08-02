@@ -2,7 +2,7 @@ package bomb.modules.s.simon.screams;
 
 import bomb.components.simon.screams.CustomStar;
 import bomb.abstractions.Resettable;
-import bomb.tools.facade.FacadeFX;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -36,7 +36,7 @@ public class ScreamsController implements Resettable {
         star.setSelectorMode(colorSelectorToggle.isSelected());
         if (!colorSelectorToggle.isSelected()){
             try{
-                SimonScreams.init(star.collectOrder());
+                SimonScreams.initialize(star.collectOrder());
                 FacadeFX.disable(colorSelectorToggle);
                 FacadeFX.enable(solve);
             } catch(IllegalArgumentException ex){
@@ -76,7 +76,7 @@ public class ScreamsController implements Resettable {
 
     @FXML
     private void resetStar(){
-        star.resetStar();
+        star.reset();
         FacadeFX.setToggleButtonsUnselected(colorSelectorToggle);
         FacadeFX.enable(colorSelectorToggle);
         FacadeFX.disable(solve);
