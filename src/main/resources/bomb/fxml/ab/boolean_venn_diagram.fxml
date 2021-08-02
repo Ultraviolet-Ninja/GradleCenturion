@@ -31,41 +31,37 @@
         <rowConstraints>
             <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-        <children>
-            <Pane prefHeight="400.0" prefWidth="801.0">
-                <Circle fill="#1f93ff00" layoutX="523.0" layoutY="231.0" radius="100.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="3.0"/>
-                <Circle fill="#1f93ff00" layoutX="578.0" layoutY="134.0" radius="100.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="3.0"/>
-                <Circle fill="#1f93ff00" layoutX="638.0" layoutY="231.0" radius="100.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="3.0"/>
-                <Circle fx:id="not" fill="#1f93ff00" layoutX="746.0" layoutY="74.0" radius="42.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="3.0"/>
-                <Circle fx:id="bc" fill="#1f93ff00" layoutX="580.0" layoutY="264.0" radius="22.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-                <Circle fx:id="ac" fill="#1f93ff00" layoutX="638.0" layoutY="166.0" radius="22.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-                <Circle fx:id="ab" fill="#1f93ff00" layoutX="523.0" layoutY="166.0" radius="22.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-                <Circle fx:id="all" fill="#1f93ff00" layoutX="578.0" layoutY="198.0" radius="22.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-                <Circle fx:id="b" fill="#1f93ff00" layoutX="484.0" layoutY="257.0" radius="41.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-                <Circle fx:id="c" fill="#1f93ff00" layoutX="678.0" layoutY="257.0" radius="41.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-                <Circle fx:id="a" fill="#1f93ff00" layoutX="578.0" layoutY="90.0" radius="41.0" stroke="BLACK"
-                        strokeType="INSIDE" strokeWidth="0.0"/>
-            </Pane>
-            <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-                <children>
-                    <JFXButton id="reset-button" onAction="#resetModule" text="Reset">
-                        <VBox.margin>
-                            <Insets bottom="30.0"/>
-                        </VBox.margin>
-                    </JFXButton>
-                </children>
-            </VBox>
-        </children>
+        <Pane prefHeight="400.0" prefWidth="801.0">
+            <Circle fill="#1f93ff00" layoutX="523.0" layoutY="231.0" radius="100.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="3.0"/>
+            <Circle fill="#1f93ff00" layoutX="578.0" layoutY="134.0" radius="100.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="3.0"/>
+            <Circle fill="#1f93ff00" layoutX="638.0" layoutY="231.0" radius="100.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="3.0"/>
+            <Circle fx:id="not" fill="#1f93ff00" layoutX="746.0" layoutY="74.0" radius="42.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="3.0"/>
+            <Circle fx:id="bc" fill="#1f93ff00" layoutX="580.0" layoutY="264.0" radius="22.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+            <Circle fx:id="ac" fill="#1f93ff00" layoutX="638.0" layoutY="166.0" radius="22.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+            <Circle fx:id="ab" fill="#1f93ff00" layoutX="523.0" layoutY="166.0" radius="22.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+            <Circle fx:id="all" fill="#1f93ff00" layoutX="578.0" layoutY="198.0" radius="22.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+            <Circle fx:id="b" fill="#1f93ff00" layoutX="484.0" layoutY="257.0" radius="41.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+            <Circle fx:id="c" fill="#1f93ff00" layoutX="678.0" layoutY="257.0" radius="41.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+            <Circle fx:id="a" fill="#1f93ff00" layoutX="578.0" layoutY="90.0" radius="41.0" stroke="BLACK"
+                    strokeType="INSIDE" strokeWidth="0.0"/>
+        </Pane>
+        <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+            <JFXButton id="reset-button" onAction="#resetModule" text="Reset">
+                <VBox.margin>
+                    <Insets bottom="30.0"/>
+                </VBox.margin>
+            </JFXButton>
+        </VBox>
     </GridPane>
     <GridPane>
         <columnConstraints>
@@ -117,15 +113,13 @@
             </JFXButton>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <children>
-                <JFXToggleButton fx:id="priorityToggle" onAction="#switchEquationPriority" text="(AB) Priority"/>
-                <JFXTextField fx:id="booleanMathOperation" alignment="CENTER" prefHeight="80.0" prefWidth="600.0"
-                              text="(AB)C">
-                    <HBox.margin>
-                        <Insets left="60.0" right="241.0"/>
-                    </HBox.margin>
-                </JFXTextField>
-            </children>
+            <JFXToggleButton fx:id="priorityToggle" onAction="#switchEquationPriority" text="(AB) Priority"/>
+            <JFXTextField fx:id="booleanMathOperation" alignment="CENTER" prefHeight="80.0" prefWidth="600.0"
+                          text="(AB)C">
+                <HBox.margin>
+                    <Insets left="60.0" right="241.0"/>
+                </HBox.margin>
+            </JFXTextField>
         </HBox>
     </GridPane>
 </GridPane>

@@ -19,32 +19,26 @@
     <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <children>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-            <children>
-                <JFXTextField fx:id="query" alignment="CENTER" editable="false" promptText="Initial Code">
-                    <VBox.margin>
-                        <Insets bottom="45.0" left="50.0" right="50.0"/>
-                    </VBox.margin>
-                </JFXTextField>
-                <JFXButton id="submit-button" buttonType="RAISED" onAction="#getInitialCode" text="First Query"/>
-            </children>
-        </VBox>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-            <children>
-                <JFXTextField fx:id="numberCode" disable="true" promptText="Next Two Bit">
-                    <VBox.margin>
-                        <Insets bottom="45.0" left="50.0" right="50.0"/>
-                    </VBox.margin>
-                </JFXTextField>
-                <JFXButton id="submit-button" fx:id="nextCode" buttonType="RAISED" disable="true"
-                           onAction="#getNextCode" text="Next Code"/>
-                <JFXTextField fx:id="cmdLine" disable="true" editable="false" promptText="Query/Submit">
-                    <VBox.margin>
-                        <Insets left="50.0" right="50.0" top="45.0"/>
-                    </VBox.margin>
-                </JFXTextField>
-            </children>
-        </VBox>
-    </children>
+    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <JFXTextField fx:id="query" alignment="CENTER" editable="false" promptText="Initial Code">
+            <VBox.margin>
+                <Insets bottom="45.0" left="50.0" right="50.0"/>
+            </VBox.margin>
+        </JFXTextField>
+        <JFXButton id="submit-button" buttonType="RAISED" onAction="#getInitialCode" text="First Query"/>
+    </VBox>
+    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+        <JFXTextField fx:id="numberCode" disable="true" promptText="Next Two Bit">
+            <VBox.margin>
+                <Insets bottom="45.0" left="50.0" right="50.0"/>
+            </VBox.margin>
+        </JFXTextField>
+        <JFXButton id="submit-button" fx:id="nextCode" buttonType="RAISED" disable="true"
+                   onAction="#getNextCode" text="Next Code"/>
+        <JFXTextField fx:id="cmdLine" disable="true" editable="false" promptText="Query/Submit">
+            <VBox.margin>
+                <Insets left="50.0" right="50.0" top="45.0"/>
+            </VBox.margin>
+        </JFXTextField>
+    </VBox>
 </GridPane>
