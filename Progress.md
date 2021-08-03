@@ -6,26 +6,26 @@
 - Boolean Venn Diagram
 - Chord Qualities
 - Emoji Math
+- Forget Me Not
 - Hexamaze
 - Laundry
 - Neutralization
 - Round Keypads
 - Simon Screams
+- Souvenir
 - TwoBit
 
-13/100
+15/100
 
 ### Incomplete Modules
 - FastMath
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
-- Forget Me Not
-- Souvenir
 - Shape Shift
 - The Bulb
 
-8/100
+6/100
 
 ### Untouched Modules
 - 3D Maze
