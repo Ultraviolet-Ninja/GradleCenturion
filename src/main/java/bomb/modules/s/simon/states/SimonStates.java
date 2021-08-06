@@ -44,7 +44,7 @@ public class SimonStates extends Widget {
      * @return
      */
     public static String add(Simon.States[] colors, int stage){
-        if (souvenir)
+        if (isSouvenirActive)
             Souvenir.addRelic("Simon States - Stage " + stage, writeOut(colors));
 
         if (stage == 1)

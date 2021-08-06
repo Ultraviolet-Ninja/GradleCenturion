@@ -187,13 +187,13 @@ public class WidgetController {
 
     @FXML
     private void souvenirToggle() {
-        Widget.setSouvenir(souvenir.isSelected());
+        Widget.setIsSouvenirActive(souvenir.isSelected());
         ObserverHub.updateAtIndex(SOUVENIR_TOGGLE);
     }
 
     @FXML
     private void forgetMeToggle() {
-        Widget.setForgetMeNot(forgetMeNot.isSelected());
+        Widget.setIsForgetMeNotActive(forgetMeNot.isSelected());
         ObserverHub.updateAtIndex(FORGET_ME_NOT_TOGGLE);
     }
 

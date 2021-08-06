@@ -13,10 +13,11 @@ import java.util.ListIterator;
  * @param <E> Any object
  */
 public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
+    private final int capacity;
     private final LinkedList<E> linkedData;
     private final Object[] data;
+
     private int size;
-    private final int capacity;
 
     /**
      * Initializes the FinalList with a permanent capacity

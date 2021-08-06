@@ -63,7 +63,6 @@ public class HexMazePanel extends Pane implements Resettable {
                 case UpTriangle:exclusiveShapeSet(upTriangle);
                     break;
                 default: exclusiveShapeSet(downTriangle);
-                    break;
             }
         } else {
             setInvisible(circle);

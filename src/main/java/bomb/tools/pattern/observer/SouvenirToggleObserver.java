@@ -12,6 +12,6 @@ public class SouvenirToggleObserver implements Observer{
 
     @Override
     public void update() {
-        souvenir.setDisable(!Widget.getSouvenir());
+        souvenir.setDisable(!Widget.getIsSouvenirActive());
     }
 }

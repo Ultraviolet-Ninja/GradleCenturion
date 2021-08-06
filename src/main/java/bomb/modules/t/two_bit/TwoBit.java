@@ -46,7 +46,7 @@ public class TwoBit extends Widget {
         alphabetBaseValue %= 100;
 
         int[] bits = translate(String.valueOf(alphabetBaseValue));
-        if (souvenir)
+        if (isSouvenirActive)
             Souvenir.addRelic("TwoBit Initial Query", CODE_GRID[bits[0]][bits[1]]);
         return CODE_GRID[bits[0]][bits[1]];
     }
@@ -64,7 +64,7 @@ public class TwoBit extends Widget {
         }
         int[] coords = translate(newCode);
         if (stage != 4) {
-            if (souvenir)
+            if (isSouvenirActive)
                 Souvenir.addRelic("TwoBit" + ordinal(stage) + " Query", newCode + " - "
                         + CODE_GRID[coords[0]][coords[1]]);
             stage++;

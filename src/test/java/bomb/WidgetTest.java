@@ -38,16 +38,16 @@ public class WidgetTest {
 
     @Test(dataProvider = "booleanProvider")
     public void forgetMeNotTest(boolean val, boolean expected){
-        Widget.setForgetMeNot(val);
+        Widget.setIsForgetMeNotActive(val);
 
-        assertEquals(Widget.getForgetMeNot(), expected);
+        assertEquals(Widget.getIsForgetMeNotActive(), expected);
     }
 
     @Test(dataProvider = "booleanProvider")
     public void souvenirTest(boolean val, boolean expected){
-        Widget.setSouvenir(val);
+        Widget.setIsSouvenirActive(val);
 
-        assertEquals(Widget.getSouvenir(), expected);
+        assertEquals(Widget.getIsSouvenirActive(), expected);
     }
 
     @DataProvider
