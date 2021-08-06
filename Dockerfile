@@ -1,4 +1,4 @@
-FROM gradle:7.1.1-jdk8-alpine AS build
+FROM gradle:7.1.1-jdk8-hotspot AS build
 ENV APP_HOME=/usr/app
 WORKDIR $APP_HOME
 
