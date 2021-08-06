@@ -8,5 +8,5 @@ COPY src $APP_HOME/src
 #COPY build $APP_HOME/build
 
 RUN ["chmod", "+x", "gradlew"]
-RUN [".\gradlew", "build"]
-ENTRYPOINT [".\gradlew", "run"]
+RUN ["gradlew", "build"]
+ENTRYPOINT ["gradlew", "run"]
