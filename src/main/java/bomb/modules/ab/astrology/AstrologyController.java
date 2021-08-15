@@ -8,8 +8,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.util.Arrays;
+
 public class AstrologyController implements Resettable {
-    private AstroSymbols[] set = new AstroSymbols[3];
+    private final AstroSymbols[] set;
+
     @FXML
     private ImageView fire, water, earth, air,
             mercury, venus, mars, jupiter, saturn, uranus, neptune, pluto, sun, moon,
@@ -20,6 +23,10 @@ public class AstrologyController implements Resettable {
 
     @FXML
     private Button astroReset;
+
+    public AstrologyController() {
+        set = new AstroSymbols[3];
+    }
 
     @FXML
     private void getElement(){
@@ -100,8 +107,8 @@ public class AstrologyController implements Resettable {
         elementDisable(false);
         celesteDisable(false);
         zodiacDisable(false);
-        set = new AstroSymbols[3];
         astroReset.setDisable(true);
+        Arrays.fill(set, null);
     }
 
     private void elementDisable(boolean set){
@@ -137,6 +144,6 @@ public class AstrologyController implements Resettable {
 
     @Override
     public void reset() {
-
+        astroReset();
     }
 }
