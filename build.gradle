@@ -74,10 +74,16 @@ distZip {
     from projectDir
     include 'src/main/**/*'
     include 'documentation/distributions/**/*'
+    include 'gradle/wrapper/**/*'
+    include 'markdown/*'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
 }
 
 distTar {
     from projectDir
     include 'src/main/**/*'
     include 'documentation/distributions/**/*'
+    include 'gradle/wrapper/**/*'
+    include 'markdown/*'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
 }
