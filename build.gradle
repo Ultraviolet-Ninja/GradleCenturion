@@ -3,10 +3,11 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'com.palantir.docker' version '0.28.0'
+    id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
 
 group 'jasmine.jragon'
-version '0.15.1'
+version '0.15.0'
 
 mainClassName = 'bomb.Main'
 
@@ -15,6 +16,10 @@ compileJava {
 }
 
 compileTestJava {
+    options.encoding("UTF-8")
+}
+
+javadoc {
     options.encoding("UTF-8")
 }
 
@@ -73,8 +78,7 @@ dockerfileZip {
 distZip {
     from projectDir
     include 'src/main/**/*'
-    include 'documentation/distributions/**/*'
-    include 'gradle/wrapper/**/*'
+    include 'gradle/wrapper/*'
     include 'markdown/*'
     include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
 }
@@ -82,8 +86,16 @@ distZip {
 distTar {
     from projectDir
     include 'src/main/**/*'
-    include 'documentation/distributions/**/*'
-    include 'gradle/wrapper/**/*'
+    include 'gradle/wrapper/*'
     include 'markdown/*'
     include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+}
+
+githubRelease {
+    String fileName = "${project.name}-${project.version}"
+    releaseAssets = files("${buildDir}/distributions/${fileName}.zip", "${buildDir}/distributions/${fileName}.tar")
+    tagName = "${project.version}"
+    targetCommitish = 'main'
+    owner = 'Ultraviolet-Ninja'
+    overwrite = true
 }

@@ -3,27 +3,28 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
+![Project Version](https://img.shields.io/badge/version-0.15.0-blueviolet)
 ### Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles.<br>
-
 
 This is the Gradle implementation of the original project, created with the intention of using Continuous Integration to test module solutions and data structures as the project progresses. This also has helped me understand how JavaFX, Gradle and Circle CI interact with each other.
 
 ### Technologies
-- JDK 8
-- Java FX - GUI
-- ControlFX - JavaFX Library
-- JFoenix - JavaFX Library
-- Medusa ver. 8.3 - Gauge Library
-- Gradle - Automation Tool
-- Circle CI - Test Automation
-- Jacoco - Test Coverage Analysis
-- JGraphT ver. 1.4 - Graph Library
-- CodeMR Free Trial - Coupling/Cohesion/Code Complexity Analysis
-
-#### Technologies That I'm Trying out
-- FontAwesomeFX - Font Styling
-- RichText - Font Styling
+- Java 8 with FX
+- Gradle 6.8.1
+#### Plugins
+- Jacoco
+- Palantir Docker
+- Breadmoirai GitHub Release
+#### Dependencies
+- ControlFX ver 8.40.18
+- JFoenix ver 8.0.10
+- Medusa ver. 8.3
+- JGraphT ver. 1.4
+#### Other Technologies
+- Circle CI
+- LGTM Code Quality
+- CodeMR Free Trial
 
 ### Status
 In progress<br>
@@ -34,13 +35,13 @@ After my first manual turning out to be successful in solving the main-game bomb
 I started creating this project working on the auto-solver for the vanilla game, which was, by comparison, much easier. 
 
 ### Example Bomb
-##### Front view
+#### Front view
 ![Front](markdown/Front.jpg)
 
-##### Back view
+#### Back view
 ![Back](markdown/Back.jpg)
 
-##### Example Widgets
+#### Example Widgets
 Widgets are important details about the bomb such that many modules depend on whether particular features are present or
 not. The list of details includes Port Types, Number of Port Plates, Lit and Unlit Indicators, Number of Batteries,
 Number of Battery Holders, Two-Factor Authentication, and the Serial Code.

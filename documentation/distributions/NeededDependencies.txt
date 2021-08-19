@@ -1,4 +1,0 @@
-JFoenix version 8.10.0
-ControlsFX version 8.40.18
-Medusa Gauges version 8.3
-JGraphT version 1.4
