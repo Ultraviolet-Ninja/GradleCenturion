@@ -92,10 +92,20 @@ distTar {
 }
 
 githubRelease {
-    String fileName = "${project.name}-${project.version}"
-    releaseAssets = files("${buildDir}/distributions/${fileName}.zip", "${buildDir}/distributions/${fileName}.tar")
+    releaseAssets.from("${buildDir}/distributions")
+//    String baseFileName = "${project.name}-${project.version}"
+    releaseAssets.filter {
+        releaseFile -> (releaseFile.getName().endsWith(".zip") || releaseFile.getName().endsWith(".tar"))
+    }
     tagName = "${project.version}"
     targetCommitish = 'main'
     owner = 'Ultraviolet-Ninja'
     overwrite = true
+}
+
+task releaseToGitHub {
+    doFirst {
+        githubRelease.token = "${authToken}"
+    }
+    finalizedBy(tasks.getByName('githubRelease'))
 }
