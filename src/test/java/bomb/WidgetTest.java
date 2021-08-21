@@ -1,7 +1,7 @@
 package bomb;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -113,8 +113,8 @@ public class WidgetTest {
     public Object[][] indicatorProvider(){
         ConditionSetter empty = () -> {};
         ConditionSetter trueSetter = () -> {
-            Widget.setIndicator(TrinaryState.ON, Indicator.MSA);
-            Widget.setIndicator(TrinaryState.OFF, Indicator.NSA);
+            Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.NSA);
         };
 
         return new Object[][]{

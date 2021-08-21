@@ -2,13 +2,13 @@ package bomb;
 
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
 
 import java.util.function.Predicate;
 
-import static bomb.enumerations.TrinaryState.*;
+import static bomb.enumerations.TrinarySwitch.*;
 import static bomb.tools.filter.Filter.*;
 
 /**
@@ -99,7 +99,7 @@ public class Widget {
      * @param state The state to give the Indicator
      * @param which The Indicator to change
      */
-    public static void setIndicator(TrinaryState state, Indicator which){
+    public static void setIndicator(TrinarySwitch state, Indicator which){
         indicatorArray[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
@@ -290,7 +290,7 @@ public class Widget {
      * @param which The port to check
      * @return The number of that port
      */
-    public static int getPort(Port which){
+    public static int getPortQuantity(Port which){
         return portArray[which.ordinal()];
     }
 
@@ -386,13 +386,13 @@ public class Widget {
     public enum IndicatorFilter {
         LIT(state -> state == ON), UNLIT(state -> state == OFF), ALL(state -> state != UNKNOWN);
 
-        private final Predicate<TrinaryState> condition;
+        private final Predicate<TrinarySwitch> condition;
 
-        IndicatorFilter(Predicate<TrinaryState> condition){
+        IndicatorFilter(Predicate<TrinarySwitch> condition){
             this.condition = condition;
         }
 
-        public boolean test(TrinaryState state){
+        public boolean test(TrinarySwitch state){
             return condition.test(state);
         }
     }

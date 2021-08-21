@@ -3,7 +3,14 @@
 }
 
 .jfx-text-field {
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
     -fx-alignment: CENTER;
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
     -fx-font-size: 36;
     -fx-prompt-text-fill: white;
 }
