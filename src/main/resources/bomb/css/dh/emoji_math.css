@@ -1,0 +1,9 @@
+.jfx-button {
+    -fx-font-size: 24;
+}
+
+.jfx-text-field {
+    -fx-alignment: CENTER;
+    -fx-font-size: 36;
+    -fx-prompt-text-fill: white;
+}

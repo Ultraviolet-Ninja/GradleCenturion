@@ -8,31 +8,28 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class EmojiController implements Resettable {
     private int eqCount = 0;
     private StringBuilder equation = new StringBuilder();
 
-    @FXML
-    private Button first, second, third, forth, fifth,
-            sixth, seventh, eighth, ninth, tenth,
+    @FXML private Button first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth,
             add, minus, equal, clear;
 
-    @FXML
-    private TextField equationBar;
+    @FXML private TextField equationBar;
 
     public void initialize() {
-        HoverHandler<ActionEvent> handler = new HoverHandler<>(createAction());
+        HoverHandler<ActionEvent> handler = new HoverHandler<>(createButtonAction());
         FacadeFX.bindHandlerToButtons(handler, first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth);
     }
 
-    private Consumer<ActionEvent> createAction() {
+    private Consumer<ActionEvent> createButtonAction() {
         return event -> {
             eqCount++;
             Emojis current = Emojis.getEmojiFromText(((Button) event.getSource()).getText());
-            assert current != null;
-            equation.append(current.getLabel());
+            equation.append(Objects.requireNonNull(current).getLabel());
             equationBar.setText(equation.toString());
             disableControl();
         };
