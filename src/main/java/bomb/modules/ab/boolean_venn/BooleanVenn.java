@@ -22,7 +22,7 @@ public class BooleanVenn extends Widget {
             {true, false, true},
             {true, true, false},
             {true, true, true}};
-    private static final int A = 0, B = 1, C = 2;
+    private static final byte A = 0, B = 1, C = 2;
 
     private static final Regex AB_PRIORITY = new Regex("\\(A" + LOGIC_REGEX + "B\\)" + LOGIC_REGEX + "C"),
             BC_PRIORITY = new Regex("A" + LOGIC_REGEX + "\\(B" + LOGIC_REGEX + "C\\)");
