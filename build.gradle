@@ -29,6 +29,7 @@ repositories {
 
 dependencies {
     implementation 'com.jfoenix:jfoenix:8.0.10'
+    implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.controlsfx:controlsfx:8.40.18'
     implementation group: 'eu.hansolo', name: 'Medusa', version: '8.3'
     implementation group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.6'
@@ -92,18 +93,15 @@ distTar {
 }
 
 githubRelease {
-    releaseAssets.from("${buildDir}/distributions")
-//    String baseFileName = "${project.name}-${project.version}"
-    releaseAssets.filter {
-        releaseFile -> (releaseFile.getName().endsWith(".zip") || releaseFile.getName().endsWith(".tar"))
-    }
+    String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
+    releaseAssets = files("${baseFileName}.zip", "${baseFileName}.tar")
     tagName = "${project.version}"
     targetCommitish = 'main'
     owner = 'Ultraviolet-Ninja'
     overwrite = true
 }
 
-task releaseToGitHub {
+task releaseToGitHub() {
     doFirst {
         githubRelease.token = "${authToken}"
     }
