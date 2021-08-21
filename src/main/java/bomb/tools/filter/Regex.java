@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Regex implements Iterable<String>{
+@SuppressWarnings("MagicConstant")
+public class Regex implements Iterable<String> {
     private static final int MAX_FLAG_SIZE = 0x1ff;
 
     private final Pattern regPattern;
@@ -18,13 +19,12 @@ public class Regex implements Iterable<String>{
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int flags){
-        maxFlagCheck(flags);
-        regPattern = Pattern.compile(regex, flags);
+    public Regex(String regex, int flag){
+        maxFlagCheck(flag);
+        regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher("");
     }
 
-    @SuppressWarnings("MagicConstant")
     public Regex(String regex, int ... flags){
         int value = orMask(flags);
         maxFlagCheck(value);
@@ -33,18 +33,21 @@ public class Regex implements Iterable<String>{
     }
 
     public Regex(String regex, String matchText){
-        this(regex);
-        loadText(matchText);
+        regPattern = Pattern.compile(regex);
+        textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int flags){
-        this(regex, flags);
-        loadText(matchText);
+    public Regex(String regex, String matchText, int flag){
+        maxFlagCheck(flag);
+        regPattern = Pattern.compile(regex, flag);
+        textMatcher = regPattern.matcher(matchText);
     }
 
     public Regex(String regex, String matchText, int ... flags){
-        this(regex, flags);
-        loadText(matchText);
+        int value = orMask(flags);
+        maxFlagCheck(value);
+        regPattern = Pattern.compile(regex, value);
+        textMatcher = regPattern.matcher(matchText);
     }
 
     public void loadText(String text){
@@ -118,7 +121,8 @@ public class Regex implements Iterable<String>{
     }
 
     private static void maxFlagCheck(int flags){
-        if (flags > MAX_FLAG_SIZE || flags < 0) throw new IllegalArgumentException("Invalid flag number");
+        if (flags > MAX_FLAG_SIZE || flags < 0)
+            throw new IllegalArgumentException("Invalid flag number");
     }
 
     private static int orMask(int[] flags){

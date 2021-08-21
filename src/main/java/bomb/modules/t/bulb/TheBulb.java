@@ -27,7 +27,7 @@ public class TheBulb extends Widget {
     public static String entry(BulbProperties next){
         StringBuilder script = new StringBuilder();
         String scriptOut = findSet(next, 1, script);
-        if (souvenir)
+        if (isSouvenirActive)
             Souvenir.addRelic("The Bulb", ultimateFilter(scriptOut
                             .replaceAll("Screw it back in", ""), "i", "o", " ")
                     .toUpperCase());

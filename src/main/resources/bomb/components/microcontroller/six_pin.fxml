@@ -7,210 +7,212 @@
 <?import javafx.scene.text.*?>
 
 <fx:root prefHeight="494.0" prefWidth="316.0" style="-fx-background-color: green;" type="javafx.scene.layout.Pane"
-         xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <Line endX="100.0" layoutX="-22.0" layoutY="90.0" startX="65.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="64.0" layoutY="90.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="138.0" layoutY="91.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="33.0" layoutY="103.0" rotate="-45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="-53.0" layoutY="103.0" rotate="-45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-84.0" layoutY="160.0" rotate="103.0"
-         startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="-67.0" layoutY="226.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="-65.0" layoutY="236.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="-63.0" layoutY="262.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-117.0" layoutY="213.0" rotate="135.0"
-         startX="112.0" startY="-14.75360107421875" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="106.0" layoutY="104.0" rotate="-45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="67.0" layoutY="162.0" rotate="-90.0" startX="64.0" stroke="#61f23c"
-         strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="-63.0" layoutY="275.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="-22.0" layoutY="406.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="-6.0" layoutY="161.0" rotate="90.0" startX="64.0" stroke="#61f23c"
-         strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="60.0" layoutY="405.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="-10.0" layoutY="335.0" rotate="90.0" startX="64.0" stroke="#61f23c"
-         strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="140.0" layoutY="405.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="151.4915313720703" layoutX="70.0" layoutY="335.0" rotate="90.0" startX="64.0" stroke="#61f23c"
-         strokeWidth="2.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="53.0" layoutY="72.0" stroke="BLACK"
-              strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="135.0" layoutY="72.0" stroke="BLACK"
-              strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="215.0" layoutY="72.0" stroke="BLACK"
-              strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="53.0" layoutY="388.0" stroke="BLACK"
-              strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="135.0" layoutY="388.0" stroke="BLACK"
-              strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="215.0" layoutY="388.0" stroke="BLACK"
-              strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="60.0" layoutY="82.0"
-              strokeType="INSIDE" strokeWidth="2.0" width="22.0">
-      <stroke>
-         <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="222.0" layoutY="307.0"
-              strokeType="INSIDE" strokeWidth="2.0" width="22.0">
-      <stroke>
-         <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="141.0" layoutY="307.0"
-              strokeType="INSIDE" strokeWidth="2.0" width="22.0">
-      <stroke>
-         <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="60.0" layoutY="306.0"
-              strokeType="INSIDE" strokeWidth="2.0" width="22.0">
-      <stroke>
-         <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="222.0" layoutY="82.0"
-              strokeType="INSIDE" strokeWidth="2.0" width="22.0">
-      <stroke>
-         <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="142.0" layoutY="82.0"
-              strokeType="INSIDE" strokeWidth="2.0" width="22.0">
-      <stroke>
-         <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#141414" height="172.0" layoutX="37.0" layoutY="164.0"
-              strokeType="INSIDE" strokeWidth="5.0" width="230.0">
-      <stroke>
-         <LinearGradient endX="0.5285714285714286" startX="0.21904761904761905" startY="0.46190476190476193">
-            <stops>
-               <Stop>
-                  <color>
-                     <Color red="0.1184210553765297" green="0.1184210553765297" blue="0.1184210553765297"/>
-                  </color>
-               </Stop>
-               <Stop offset="0.007662835249042145">
-                  <color>
-                     <Color red="0.1184210553765297" green="0.1184210553765297" blue="0.1184210553765297"/>
-                  </color>
-               </Stop>
-               <Stop offset="1.0">
-                  <color>
-                     <Color/>
-                  </color>
-               </Stop>
-            </stops>
-         </LinearGradient>
-      </stroke>
-   </Rectangle>
-   <Circle fx:id="pinSix" fill="WHITE" layoutX="71.0" layoutY="40.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
-           strokeWidth="0.0"/>
-   <Circle fx:id="pinThree" fill="WHITE" layoutX="233.0" layoutY="454.0" radius="26.0" stroke="BLACK"
-           strokeType="INSIDE" strokeWidth="0.0"/>
-   <Circle fx:id="pinTwo" fill="WHITE" layoutX="153.0" layoutY="454.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
-           strokeWidth="0.0"/>
-   <Circle fx:id="pinFour" fill="WHITE" layoutX="233.0" layoutY="40.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
-           strokeWidth="0.0"/>
-   <Circle fx:id="pinOne" fill="WHITE" layoutX="71.0" layoutY="454.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
-           strokeWidth="0.0"/>
-   <Circle fx:id="pinFive" fill="WHITE" layoutX="153.0" layoutY="40.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
-           strokeWidth="0.0"/>
-   <Label layoutX="50.0" layoutY="177.0" prefHeight="98.0" prefWidth="155.0" textFill="WHITE">
-      <font>
-         <Font size="60.0"/>
-      </font>
-   </Label>
-   <Label layoutX="57.0" layoutY="275.0" textFill="WHITE">
-      <font>
-         <Font size="18.0"/>
-      </font>
-   </Label>
-   <Circle fill="WHITE" layoutX="50.0" layoutY="321.0" radius="7.0" stroke="BLACK" strokeType="INSIDE"/>
-   <Line endX="100.0" layoutX="-54.0" layoutY="393.0" rotate="45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="29.0" layoutY="392.0" rotate="45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="100.0" layoutX="109.0" layoutY="392.0" rotate="45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-84.0" layoutY="350.0" rotate="102.0"
-         startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
-   <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-116.0" layoutY="311.0" rotate="45.0"
-         startX="112.0" startY="-14.75360107421875" stroke="#61f23c" strokeWidth="2.0"/>
+         xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <Line endX="100.0" layoutX="-22.0" layoutY="90.0" startX="65.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="64.0" layoutY="90.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="138.0" layoutY="91.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="33.0" layoutY="103.0" rotate="-45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="-53.0" layoutY="103.0" rotate="-45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-84.0" layoutY="160.0" rotate="103.0"
+          startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="-67.0" layoutY="226.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="-65.0" layoutY="236.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="-63.0" layoutY="262.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-117.0" layoutY="213.0" rotate="135.0"
+          startX="112.0" startY="-14.75360107421875" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="106.0" layoutY="104.0" rotate="-45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="67.0" layoutY="162.0" rotate="-90.0" startX="64.0" stroke="#61f23c"
+          strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="-63.0" layoutY="275.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="-22.0" layoutY="406.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="-6.0" layoutY="161.0" rotate="90.0" startX="64.0" stroke="#61f23c"
+          strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="60.0" layoutY="405.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="-10.0" layoutY="335.0" rotate="90.0" startX="64.0" stroke="#61f23c"
+          strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="140.0" layoutY="405.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="151.4915313720703" layoutX="70.0" layoutY="335.0" rotate="90.0" startX="64.0" stroke="#61f23c"
+          strokeWidth="2.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="53.0" layoutY="72.0" stroke="BLACK"
+               strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="135.0" layoutY="72.0" stroke="BLACK"
+               strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="215.0" layoutY="72.0" stroke="BLACK"
+               strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="53.0" layoutY="388.0" stroke="BLACK"
+               strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="135.0" layoutY="388.0"
+               stroke="BLACK"
+               strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="215.0" layoutY="388.0"
+               stroke="BLACK"
+               strokeType="INSIDE" strokeWidth="0.0" width="35.0"/>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="60.0" layoutY="82.0"
+               strokeType="INSIDE" strokeWidth="2.0" width="22.0">
+        <stroke>
+            <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="222.0" layoutY="307.0"
+               strokeType="INSIDE" strokeWidth="2.0" width="22.0">
+        <stroke>
+            <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="141.0" layoutY="307.0"
+               strokeType="INSIDE" strokeWidth="2.0" width="22.0">
+        <stroke>
+            <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="60.0" layoutY="306.0"
+               strokeType="INSIDE" strokeWidth="2.0" width="22.0">
+        <stroke>
+            <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="222.0" layoutY="82.0"
+               strokeType="INSIDE" strokeWidth="2.0" width="22.0">
+        <stroke>
+            <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="142.0" layoutY="82.0"
+               strokeType="INSIDE" strokeWidth="2.0" width="22.0">
+        <stroke>
+            <LinearGradient endY="0.43333333333333335" startX="0.21904761904761905" startY="0.3428571428571429">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.6973684430122375" green="0.6973684430122375" blue="0.6973684430122375"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color red="0.40789473056793213" green="0.40789473056793213" blue="0.40789473056793213"/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#141414" height="172.0" layoutX="37.0" layoutY="164.0"
+               strokeType="INSIDE" strokeWidth="5.0" width="230.0">
+        <stroke>
+            <LinearGradient endX="0.5285714285714286" startX="0.21904761904761905" startY="0.46190476190476193">
+                <stops>
+                    <Stop>
+                        <color>
+                            <Color red="0.1184210553765297" green="0.1184210553765297" blue="0.1184210553765297"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="0.007662835249042145">
+                        <color>
+                            <Color red="0.1184210553765297" green="0.1184210553765297" blue="0.1184210553765297"/>
+                        </color>
+                    </Stop>
+                    <Stop offset="1.0">
+                        <color>
+                            <Color/>
+                        </color>
+                    </Stop>
+                </stops>
+            </LinearGradient>
+        </stroke>
+    </Rectangle>
+    <Circle fx:id="pinSix" fill="WHITE" layoutX="71.0" layoutY="40.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
+            strokeWidth="0.0"/>
+    <Circle fx:id="pinThree" fill="WHITE" layoutX="233.0" layoutY="454.0" radius="26.0" stroke="BLACK"
+            strokeType="INSIDE" strokeWidth="0.0"/>
+    <Circle fx:id="pinTwo" fill="WHITE" layoutX="153.0" layoutY="454.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
+            strokeWidth="0.0"/>
+    <Circle fx:id="pinFour" fill="WHITE" layoutX="233.0" layoutY="40.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
+            strokeWidth="0.0"/>
+    <Circle fx:id="pinOne" fill="WHITE" layoutX="71.0" layoutY="454.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
+            strokeWidth="0.0"/>
+    <Circle fx:id="pinFive" fill="WHITE" layoutX="153.0" layoutY="40.0" radius="26.0" stroke="BLACK" strokeType="INSIDE"
+            strokeWidth="0.0"/>
+    <Label layoutX="50.0" layoutY="177.0" prefHeight="98.0" prefWidth="155.0" textFill="WHITE">
+        <font>
+            <Font size="60.0"/>
+        </font>
+    </Label>
+    <Label layoutX="57.0" layoutY="275.0" textFill="WHITE">
+        <font>
+            <Font size="18.0"/>
+        </font>
+    </Label>
+    <Circle fill="WHITE" layoutX="50.0" layoutY="321.0" radius="7.0" stroke="BLACK" strokeType="INSIDE"/>
+    <Line endX="100.0" layoutX="-54.0" layoutY="393.0" rotate="45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="29.0" layoutY="392.0" rotate="45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="100.0" layoutX="109.0" layoutY="392.0" rotate="45.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-84.0" layoutY="350.0" rotate="102.0"
+          startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
+    <Line endX="134.75161743164062" endY="-14.753600120544434" layoutX="-116.0" layoutY="311.0" rotate="45.0"
+          startX="112.0" startY="-14.75360107421875" stroke="#61f23c" strokeWidth="2.0"/>
 </fx:root>

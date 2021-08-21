@@ -23,7 +23,7 @@ public enum AstroSymbols implements Index {
     LIBRA(6), SCORPIO(7), SAGITTARIUS(8), CAPRICORN(9),
     AQUARIUS(10), PISCES(11);
 
-    private final int index;
+    private final byte index;
 
     @Override
     public int getIdx() {
@@ -36,6 +36,6 @@ public enum AstroSymbols implements Index {
      * @param index Its index number found in the bomb manual page for Astrology
      */
     AstroSymbols(int index){
-        this.index = index;
+        this.index = (byte) index;
     }
 }

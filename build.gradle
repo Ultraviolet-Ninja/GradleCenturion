@@ -2,9 +2,12 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
+    id 'com.palantir.docker' version '0.28.0'
+    id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
 
 group 'jasmine.jragon'
+version '0.15.0'
 
 mainClassName = 'bomb.Main'
 
@@ -16,17 +19,23 @@ compileTestJava {
     options.encoding("UTF-8")
 }
 
+javadoc {
+    options.encoding("UTF-8")
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation group: 'org.testng', name: 'testng', version: '7.4.0'
-    implementation group: 'org.jgrapht', name: 'jgrapht-ext', version: '1.4.0'
     implementation 'com.jfoenix:jfoenix:8.0.10'
-    implementation group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.6'
+    implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.controlsfx:controlsfx:8.40.18'
     implementation group: 'eu.hansolo', name: 'Medusa', version: '8.3'
+    implementation group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.6'
+    implementation group: 'org.jgrapht', name: 'jgrapht-ext', version: '1.4.0'
+
+    testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
 }
 
 test {
@@ -35,14 +44,66 @@ test {
 }
 
 jacocoTestReport {
-    reports {
-        xml.enabled(true)
+    reports.xml.enabled(true)
+}
+
+jar.manifest.attributes(['Main-Class': "${mainClassName}"])
+
+task fatJar(type: Jar) {
+    manifest.from jar.manifest
+    from {
+        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+    } {
+        exclude "META-INF/*.SF"
+        exclude "META-INF/*.DSA"
+        exclude "META-INF/*.RSA"
     }
 }
 
-//jar {
-//    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-//    manifest {
-//        attributes "Main-Class": "$mainClassName"
-//    }
-//}
+artifacts {
+    archives fatJar
+}
+
+docker {
+    dependsOn(jar)
+    name "${project.name.toLowerCase()}:${project.version}"
+    files "${buildDir}/libs/${project.name}-${project.version}.jar"
+    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar"])
+    tag('DockerHub', "jasminejragon/${project.name.replace("C", "-c").toLowerCase()}:${project.version}")
+}
+
+dockerfileZip {
+    destinationDirectory = file("${buildDir}/zip/docker")
+}
+
+distZip {
+    from projectDir
+    include 'src/main/**/*'
+    include 'gradle/wrapper/*'
+    include 'markdown/*'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+}
+
+distTar {
+    from projectDir
+    include 'src/main/**/*'
+    include 'gradle/wrapper/*'
+    include 'markdown/*'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+}
+
+githubRelease {
+    String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
+    releaseAssets = files("${baseFileName}.zip", "${baseFileName}.tar")
+    tagName = "${project.version}"
+    targetCommitish = 'main'
+    owner = 'Ultraviolet-Ninja'
+    overwrite = true
+}
+
+task releaseToGitHub() {
+    doFirst {
+        githubRelease.token = "${authToken}"
+    }
+    finalizedBy(tasks.getByName('githubRelease'))
+}

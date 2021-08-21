@@ -1,6 +1,6 @@
 package bomb.modules.s.simon.screams;
 
-import bomb.modules.s.simon.Simon.Screams;
+import bomb.modules.s.simon.SimonColors.Screams;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 
 import java.util.Arrays;

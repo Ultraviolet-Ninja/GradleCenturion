@@ -29,8 +29,9 @@ public class EightPinController extends AbstractChip{
     @Override
     public void setColors(ArrayList<Color> results) {
         Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight};
-        if (results.size() == PIN_COUNT)
+        if (results.size() == PIN_COUNT) {
             for (int i = 0; i < array.length; i++)
                 array[i].setFill(results.get(i));
+        }
     }
 }

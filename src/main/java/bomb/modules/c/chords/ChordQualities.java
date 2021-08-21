@@ -38,7 +38,7 @@ public class ChordQualities extends Widget {
     }
 
     private static String[] getNextChordQuality(String input) {
-        if (souvenir) Souvenir.addRelic("Chord Quality Original Notes", input);
+        if (isSouvenirActive) Souvenir.addRelic("Chord Quality Original Notes", input);
         ReadOnlyRing<String> inputNoteRing = new ReadOnlyRing<>(input.split(" "));
         ReadOnlyRing<String> noteDistanceRing = createNoteDistanceRing(inputNoteRing);
         return generateNewChord(inputNoteRing, noteDistanceRing);
@@ -84,7 +84,7 @@ public class ChordQualities extends Widget {
 
         for (Quality quality : Quality.values()) {
             if (quality.getRelatedDistance().equals(resultingDistanceString)) {
-                if (souvenir) Souvenir.addRelic("Chord Quality Original Chord", quality.getLabel());
+                if (isSouvenirActive) Souvenir.addRelic("Chord Quality Original Chord", quality.getLabel());
                 return new String[]{quality.getNextNote(), Root.getNewDistances(inputNoteRing.getHeadData())};
             }
         }

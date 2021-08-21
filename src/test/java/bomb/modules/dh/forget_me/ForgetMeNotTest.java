@@ -24,9 +24,9 @@ public class ForgetMeNotTest {
     @DataProvider
     public Object[][] exceptionProvider(){
         ConditionSetter blank = () -> {};
-        ConditionSetter activatedForgetMeNot = () -> Widget.setForgetMeNot(true);
+        ConditionSetter activatedForgetMeNot = () -> Widget.setIsForgetMeNotActive(true);
         ConditionSetter triggerNoModule = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode("12sk23");
         };
         return new Object[][]{
@@ -44,7 +44,7 @@ public class ForgetMeNotTest {
     @DataProvider
     public Object[][] trainingVideoProvider(){
         ConditionSetter widgetSetup = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode("QS1LN4");
             Widget.setDoubleAs(4);
             Widget.setNumHolders(2);
@@ -80,19 +80,19 @@ public class ForgetMeNotTest {
     public Object[][] createFirstNumberBranchProvider(){
         String serialCode = "12jaw3";
         ConditionSetter setupCarIndicatorUnlit = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
             Widget.setIndicator(TrinaryState.OFF, Indicator.CAR);
         };
         ConditionSetter setupSigIndicatorUnlit = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
             Widget.setIndicator(TrinaryState.OFF, Indicator.SIG);
         };
         ConditionSetter setupNoIndicators = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
         };
@@ -113,13 +113,13 @@ public class ForgetMeNotTest {
     public Object[][] createSecondNumberBranchProvider(){
         String serialCode = "00iu00";
         ConditionSetter setupFirstBranch = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
             Widget.setPortValue(Port.SERIAL, 1);
         };
         ConditionSetter setupSecondBranch = () -> {
-            Widget.setForgetMeNot(true);
+            Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
         };
@@ -139,7 +139,7 @@ public class ForgetMeNotTest {
 
     @Test
     public void undoLastStageTest(){
-        Widget.setForgetMeNot(true);
+        Widget.setIsForgetMeNotActive(true);
         Widget.setSerialCode("12lak2");
         Widget.setNumModules(NUMBER_OF_MODULES);
 

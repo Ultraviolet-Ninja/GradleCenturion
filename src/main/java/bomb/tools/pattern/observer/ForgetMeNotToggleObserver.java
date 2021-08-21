@@ -12,6 +12,6 @@ public class ForgetMeNotToggleObserver implements Observer{
 
     @Override
     public void update() {
-        forgetMeNot.setDisable(!Widget.getForgetMeNot());
+        forgetMeNot.setDisable(!Widget.getIsForgetMeNotActive());
     }
 }

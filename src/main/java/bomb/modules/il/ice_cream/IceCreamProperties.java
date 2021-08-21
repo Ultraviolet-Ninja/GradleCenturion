@@ -2,8 +2,7 @@ package bomb.modules.il.ice_cream;
 
 import bomb.abstractions.Labeled;
 
-public enum IceCreamEnum {
-    ;
+public class IceCreamProperties {
     public enum Person {
     }
 

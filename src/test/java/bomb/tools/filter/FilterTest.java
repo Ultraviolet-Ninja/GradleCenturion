@@ -1,4 +1,4 @@
-package bomb.tools;
+package bomb.tools.filter;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

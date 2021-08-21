@@ -30,8 +30,9 @@ public class TenPinController extends AbstractChip{
     public void setColors(ArrayList<Color> results) {
         Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive,
                 pinSix, pinSeven, pinEight, pinNine, pinTen};
-        if (results.size() == PIN_COUNT)
+        if (results.size() == PIN_COUNT) {
             for (int i = 0; i < array.length; i++)
                 array[i].setFill(results.get(i));
+        }
     }
 }

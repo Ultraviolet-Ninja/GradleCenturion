@@ -32,7 +32,7 @@ public class Neutralization extends Widget {
      * @return
      */
     public static String titrate(int acidVol, Color solColor) throws IllegalArgumentException{
-        if (souvenir)
+        if (isSouvenirActive)
             Souvenir.addRelic("Neutralization Acid volume", String.valueOf(acidVol));
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Need to set the serial code");
         getAcid(solColor);
@@ -59,7 +59,7 @@ public class Neutralization extends Widget {
             currentAcid = Chemical.Acid.Hydrochoric_Acid;
         else
             throw new IllegalArgumentException("Incorrect Color was inserted");
-        if (souvenir)
+        if (isSouvenirActive)
             Souvenir.addRelic("Neutralization Acid color", getColorName(color));
     }
 
@@ -89,7 +89,7 @@ public class Neutralization extends Widget {
      * @return
      */
     private static boolean indicatorMatch(){
-        for (Indicator ind : list){
+        for (Indicator ind : indicatorArray){
             if (ind.getState() != UNKNOWN){
                 for (char letter : ind.name().toCharArray()){
                     if (charMatch(currentAcid.getFormula().toUpperCase(), letter)){

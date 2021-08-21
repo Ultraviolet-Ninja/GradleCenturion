@@ -17,7 +17,7 @@ import static bomb.tools.filter.Filter.*;
  * as well as the MainController to add/subtract to the widgets.
  */
 public class Widget {
-    protected static boolean souvenir = false, forgetMeNot = false;
+    protected static boolean isSouvenirActive = false, isForgetMeNotActive = false;
     protected static int numDoubleAs = 0,
             numDBatteries = 0,
             numHolders = 0,
@@ -25,9 +25,9 @@ public class Widget {
             numPlates = 0,
             numStartingMin = 0;
     protected static String serialCode = "", twoFactor = "";
-    protected static int[] ports = {0,0,0,0,0,0};
-    protected static Indicator[] list = Indicator.values();
+    protected static Indicator[] indicatorArray = Indicator.values();
 
+    private static int[] portArray = {0,0,0,0,0,0};
     /**
      * Sets the number of battery holders on the bomb
      *
@@ -66,7 +66,7 @@ public class Widget {
      */
     private static void updates(){
         BlindAlley.alleyUpdate();
-        if (forgetMeNot) ForgetMeNot.updateLargestValueInSerial();
+        if (isForgetMeNotActive) ForgetMeNot.updateLargestValueInSerial();
     }
 
     /**
@@ -100,7 +100,7 @@ public class Widget {
      * @param which The Indicator to change
      */
     public static void setIndicator(TrinaryState state, Indicator which){
-        list[which.ordinal()].setState(state);
+        indicatorArray[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
 
@@ -140,17 +140,17 @@ public class Widget {
      *
      * @param set The toggle
      */
-    public static void setSouvenir(boolean set){
-        souvenir = set;
+    public static void setIsSouvenirActive(boolean set){
+        isSouvenirActive = set;
     }
 
     /**
-     * Sets whether the Forget Me Not module is active on the Bomb
+     * Sets whether the 'Forget Me Not' module is active on the Bomb
      *
      * @param set The toggle
      */
-    public static void setForgetMeNot(boolean set){
-        forgetMeNot = set;
+    public static void setIsForgetMeNotActive(boolean set){
+        isForgetMeNotActive = set;
         updates();
     }
 
@@ -159,7 +159,7 @@ public class Widget {
      * @param newValue The value that will overwrite the array location
      */
     public static void setPortValue(Port which, int newValue){
-        ports[which.ordinal()] = newValue;
+        portArray[which.ordinal()] = newValue;
         BlindAlley.alleyUpdate();
     }
 
@@ -220,7 +220,7 @@ public class Widget {
      * @return True if the lit Indicator is found
      */
     public static boolean hasLitIndicator(Indicator ind){
-        return list[ind.ordinal()].getState() == ON;
+        return indicatorArray[ind.ordinal()].getState() == ON;
     }
 
     /**
@@ -230,7 +230,7 @@ public class Widget {
      * @return True if the unlit Indicator is found
      */
     public static boolean hasUnlitIndicator(Indicator ind){
-        return list[ind.ordinal()].getState() == OFF;
+        return indicatorArray[ind.ordinal()].getState() == OFF;
     }
 
     /**
@@ -268,7 +268,7 @@ public class Widget {
      * @return True if the bomb contains more the required amount
      */
     public static boolean hasMoreThan(Port port, int howMany){
-        return ports[port.ordinal()] > howMany;
+        return portArray[port.ordinal()] > howMany;
     }
 
     /**
@@ -291,7 +291,7 @@ public class Widget {
      * @return The number of that port
      */
     public static int getPort(Port which){
-        return ports[which.ordinal()];
+        return portArray[which.ordinal()];
     }
 
     /**
@@ -301,7 +301,7 @@ public class Widget {
      */
     public static int getTotalPorts(){
         int counter = 0;
-        for (int num : ports) counter += num;
+        for (int num : portArray) counter += num;
         return counter;
     }
 
@@ -312,19 +312,19 @@ public class Widget {
      */
     public static int getPortTypes(){
         int counter = 0;
-        for (int type : ports){
+        for (int type : portArray){
             if (type > 0)
                 counter++;
         }
         return counter;
     }
 
-    public static boolean getForgetMeNot(){
-        return forgetMeNot;
+    public static boolean getIsForgetMeNotActive(){
+        return isForgetMeNotActive;
     }
 
-    public static boolean getSouvenir(){
-        return souvenir;
+    public static boolean getIsSouvenirActive(){
+        return isSouvenirActive;
     }
 
     /**
@@ -335,7 +335,7 @@ public class Widget {
      */
     public static int countIndicators(IndicatorFilter filter){
         int counter = 0;
-        for (Indicator indicator : list) {
+        for (Indicator indicator : indicatorArray) {
             if (filter.test(indicator.getState())) counter++;
         }
         return counter;
@@ -357,7 +357,7 @@ public class Widget {
      * @return True if the port is present somewhere on the Bomb
      */
     public static boolean portExists(Port port){
-        return ports[port.ordinal()] > 0;
+        return portArray[port.ordinal()] > 0;
     }
 
     public static void serialCodeChecker(){
@@ -374,12 +374,12 @@ public class Widget {
         numStartingMin = 0;
         serialCode = "";
         twoFactor = "";
-        ports = new int[]{0,0,0,0,0,0};
+        portArray = new int[]{0,0,0,0,0,0};
         setAllUnknown();
     }
 
     private static void setAllUnknown(){
-        for (Indicator ind : list)
+        for (Indicator ind : indicatorArray)
             ind.setState(UNKNOWN);
     }
 
