@@ -6,6 +6,7 @@ import bomb.enumerations.TrinaryState;
 import bomb.tools.pattern.factory.TextFormatterFactory;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.filter.Filter;
+import bomb.tools.pattern.factory.WidgetEventFactory;
 import bomb.tools.pattern.observer.ObserverHub;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
