@@ -19,6 +19,7 @@ This is the Gradle implementation of the original project, created with the inte
 #### Dependencies
 - ControlFX ver 8.40.18
 - JFoenix ver 8.0.10
+- JavaTuple ver 1.2
 - Medusa ver. 8.3
 - JGraphT ver. 1.4
 #### Other Technologies

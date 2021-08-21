@@ -20,10 +20,9 @@ public enum HexNodeProperties {
         }
 
         public static HexShape fromShapeOrdinal(int num){
-            for (HexShape shape : HexShape.values()){
-                if (shape.ordinal() == num) return shape;
-            }
-            return null;
+            if (num < 0 || num > HexShape.values().length)
+                return null;
+            return HexShape.values()[num];
         }
     }
 

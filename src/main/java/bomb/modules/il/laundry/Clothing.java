@@ -41,7 +41,7 @@ public enum Clothing {
 
         private final String[] conditions;
 
-        Item(String ironing, String special){
+        Item(String ironing, String special) {
             conditions = new String[]{ironing, special};
         }
 
@@ -51,14 +51,14 @@ public enum Clothing {
         }
     }
 
-    public enum Material implements Labeled{
+    public enum Material implements Labeled {
         POLYESTER("120F.png", "Petroleum Solvent Only"), COTTON("200F.png", "Do not Dry Clean"),
         WOOL("Hand Wash.png", "Reduced Moisture"), NYLON("80F.png", "Low Heat"),
         CORDUROY("105F.png", "Wet Cleaning"), LEATHER("Don't Wash", "No Tetrachlorethylene");
 
         private final String picLocation, specialInstr;
 
-        Material(String pic, String instr){
+        Material(String pic, String instr) {
             picLocation = "wash/" + pic;
             specialInstr = instr;
         }
@@ -68,19 +68,19 @@ public enum Clothing {
             return picLocation;
         }
 
-        public String getSpecialInstr(){
+        public String getSpecialInstr() {
             return specialInstr;
         }
     }
 
-    public enum Color implements Labeled{
+    public enum Color implements Labeled {
         RUBY("High Heat.png", "Any Solvent"), STAR("Dry Flat.png", "Low Heat"),
         SAPPHIRE("Tumble Dry.png", "Short Cycle"), JADE("Don't Tumble Dry.png", "No Steam Finishing"),
         PEARL("Low Heat.png", "Low Heat"), MALINITE("Medium Heat.png", "Non-Chlorine Bleach");
 
         private final String picLocation, specialInstr;
 
-        Color(String pic, String instr){
+        Color(String pic, String instr) {
             picLocation = "dry/" + pic;
             specialInstr = instr;
         }
@@ -90,7 +90,7 @@ public enum Clothing {
             return picLocation;
         }
 
-        public String getSpecialInstr(){
+        public String getSpecialInstr() {
             return specialInstr;
         }
     }

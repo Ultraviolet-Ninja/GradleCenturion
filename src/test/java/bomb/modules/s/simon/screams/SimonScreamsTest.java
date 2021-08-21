@@ -5,12 +5,12 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinaryState;
-import bomb.modules.s.simon.Simon.Screams;
+import bomb.modules.s.simon.SimonColors.Screams;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.modules.s.simon.Simon.Screams.*;
+import static bomb.modules.s.simon.SimonColors.Screams.*;
 import static org.testng.Assert.assertEquals;
 
 public class SimonScreamsTest {

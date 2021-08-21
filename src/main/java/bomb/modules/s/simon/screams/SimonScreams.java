@@ -1,7 +1,7 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
-import bomb.modules.s.simon.Simon.Screams;
+import bomb.modules.s.simon.SimonColors.Screams;
 
 import java.util.ArrayList;
 import java.util.List;

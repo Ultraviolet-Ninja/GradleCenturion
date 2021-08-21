@@ -1,7 +1,7 @@
 package bomb.components.simon.screams;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.s.simon.Simon.Screams;
+import bomb.modules.s.simon.SimonColors.Screams;
 import bomb.tools.event.HoverHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

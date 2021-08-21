@@ -2,8 +2,7 @@ package bomb.modules.s.simon;
 
 import bomb.abstractions.Labeled;
 
-public enum Simon {
-    ;
+public class SimonColors {
     public enum States {
         RED, YELLOW, GREEN, BLUE
     }
