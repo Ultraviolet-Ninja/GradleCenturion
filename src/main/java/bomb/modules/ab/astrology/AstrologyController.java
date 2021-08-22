@@ -11,9 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import java.util.Arrays;
 
 public class AstrologyController implements Resettable {
-    private enum AstrologyIndex {
-        ELEMENTAL_INDEX, CELESTIAL_INDEX, ZODIAC_INDEX
-    }
+    private static final byte ELEMENTAL_INDEX = 0, CELESTIAL_INDEX = 1, ZODIAC_INDEX = 2;
 
     private final AstroSymbol[] astroSymbolBuffer;
 
@@ -30,19 +28,19 @@ public class AstrologyController implements Resettable {
     @FXML
     private void determineElement() {
         enableResetButton();
-        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), AstrologyIndex.ELEMENTAL_INDEX);
+        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), ELEMENTAL_INDEX);
     }
 
     @FXML
     private void determineCelestial() {
         enableResetButton();
-        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), AstrologyIndex.CELESTIAL_INDEX);
+        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), CELESTIAL_INDEX);
     }
 
     @FXML
     private void determineZodiac() {
         enableResetButton();
-        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), AstrologyIndex.ZODIAC_INDEX);
+        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), ZODIAC_INDEX);
     }
 
     private void enableResetButton() {
@@ -50,9 +48,9 @@ public class AstrologyController implements Resettable {
             FacadeFX.enable(resetButton);
     }
 
-    private void setBufferLocation(ToggleGroup currentGroup, AstroSymbol[] searchArray, AstrologyIndex index) {
+    private void setBufferLocation(ToggleGroup currentGroup, AstroSymbol[] searchArray, int index) {
         if (currentGroup.getSelectedToggle() == null) {
-            astroSymbolBuffer[index.ordinal()] = null;
+            astroSymbolBuffer[index] = null;
             disableResetButton();
             return;
         }
@@ -60,22 +58,20 @@ public class AstrologyController implements Resettable {
         String toggleName = FacadeFX.getToggleName(currentGroup).toUpperCase();
         for (int i = 0; i < searchArray.length; i++) {
             if (toggleName.equals(searchArray[i].name())) {
-                astroSymbolBuffer[index.ordinal()] = searchArray[i];
+                astroSymbolBuffer[index] = searchArray[i];
                 i = searchArray.length;
             }
         }
 
-        if (astroSymbolBuffer[AstrologyIndex.ELEMENTAL_INDEX.ordinal()] != null &&
-                astroSymbolBuffer[AstrologyIndex.CELESTIAL_INDEX.ordinal()] != null &&
-                astroSymbolBuffer[AstrologyIndex.ZODIAC_INDEX.ordinal()] != null)
+        if (astroSymbolBuffer[ELEMENTAL_INDEX] != null && astroSymbolBuffer[CELESTIAL_INDEX] != null &&
+                astroSymbolBuffer[ZODIAC_INDEX] != null)
             processBuffer();
     }
 
     private void disableResetButton() {
         resetButton.setDisable(
-                astroSymbolBuffer[AstrologyIndex.ELEMENTAL_INDEX.ordinal()] == null &&
-                        astroSymbolBuffer[AstrologyIndex.CELESTIAL_INDEX.ordinal()] == null &&
-                        astroSymbolBuffer[AstrologyIndex.ZODIAC_INDEX.ordinal()] == null
+                astroSymbolBuffer[ELEMENTAL_INDEX] == null && astroSymbolBuffer[CELESTIAL_INDEX] == null &&
+                        astroSymbolBuffer[ZODIAC_INDEX] == null
         );
     }
 
