@@ -1,0 +1,10 @@
+#background {
+    -fx-base: #0b234c;
+}
+
+.jfx-text-area {
+    -fx-font-size: 20;
+    -fx-prompt-text-fill: white;
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+}
