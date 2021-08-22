@@ -39,10 +39,10 @@ public class Astrology extends Widget {
      * @throws IllegalArgumentException Serial code is empty or there's an issue with the amount of symbols
      * @return The String command
      */
-    public static String calculate(AstroSymbols ... symbols)
+    public static String calculate(AstroSymbol... symbols)
             throws IllegalArgumentException{
         checkThreeTypes(symbols);
-        AstroSymbols[] sortSymbols = sort(symbols);
+        AstroSymbol[] sortSymbols = sort(symbols);
 
         int first = STAGE_ONE[sortSymbols[ELEMENT_INDEX].getIdx()][sortSymbols[CELESTIAL_INDEX].getIdx()],
                 second = STAGE_TWO[sortSymbols[ELEMENT_INDEX].getIdx()][sortSymbols[ZODIAC_INDEX].getIdx()],
@@ -68,12 +68,12 @@ public class Astrology extends Widget {
      * @return The resulting output value
      * @throws IllegalArgumentException The Serial Code is empty
      */
-    private static int checkMatchingSerialLetters(int initialVal, AstroSymbols[] symbols)
+    private static int checkMatchingSerialLetters(int initialVal, AstroSymbol[] symbols)
             throws IllegalArgumentException{
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Serial Code is required");
 
         String letters = ultimateFilter(serialCode, CHAR_FILTER);
-        for (AstroSymbols symbol : symbols){
+        for (AstroSymbol symbol : symbols){
             Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
             if (checker.findAllMatches().isEmpty()) initialVal--;
             else initialVal++;
@@ -81,42 +81,42 @@ public class Astrology extends Widget {
         return initialVal;
     }
 
-    private static void checkThreeTypes(AstroSymbols[] symbols) throws IllegalArgumentException{
+    private static void checkThreeTypes(AstroSymbol[] symbols) throws IllegalArgumentException{
         if (symbols.length != EXPECTED_SIZE)
             throw new IllegalArgumentException("Astrology input size should be " + EXPECTED_SIZE);
         containsOneOfEach(symbols);
     }
 
-    private static void containsOneOfEach(AstroSymbols[] symbols) throws IllegalArgumentException{
+    private static void containsOneOfEach(AstroSymbol[] symbols) throws IllegalArgumentException{
         containsOneCelestial(symbols);
         containsOneElement(symbols);
         containsOneZodiac(symbols);
     }
 
-    private static void containsOneCelestial(AstroSymbols[] symbols){
+    private static void containsOneCelestial(AstroSymbol[] symbols){
         int count = 0;
-        for (AstroSymbols symbol : symbols)
+        for (AstroSymbol symbol : symbols)
             if (isCelestial(symbol)) count++;
         if (count > 1) throw new IllegalArgumentException("Only one celestial body allowed");
     }
 
-    private static void containsOneElement(AstroSymbols[] symbols){
+    private static void containsOneElement(AstroSymbol[] symbols){
         int count = 0;
-        for (AstroSymbols symbol : symbols)
+        for (AstroSymbol symbol : symbols)
             if (isElemental(symbol)) count++;
         if (count > 1) throw new IllegalArgumentException("Only one element allowed");
     }
 
-    private static void containsOneZodiac(AstroSymbols[] symbols){
+    private static void containsOneZodiac(AstroSymbol[] symbols){
         int count = 0;
-        for (AstroSymbols symbol : symbols)
+        for (AstroSymbol symbol : symbols)
             if (isZodiac(symbol)) count++;
         if (count > 1) throw new IllegalArgumentException("Only one zodiac allowed");
     }
 
-    private static AstroSymbols[] sort(AstroSymbols[] symbols){
-        AstroSymbols[] output = new AstroSymbols[symbols.length];
-        for (AstroSymbols symbol : symbols){
+    private static AstroSymbol[] sort(AstroSymbol[] symbols){
+        AstroSymbol[] output = new AstroSymbol[symbols.length];
+        for (AstroSymbol symbol : symbols){
             if (isElemental(symbol)) output[ELEMENT_INDEX] = symbol;
             else if (isCelestial(symbol)) output[CELESTIAL_INDEX] = symbol;
             else if (isZodiac(symbol)) output[ZODIAC_INDEX] = symbol;
@@ -124,7 +124,7 @@ public class Astrology extends Widget {
         return output;
     }
 
-    private static boolean isZodiac(AstroSymbols symbol){
+    private static boolean isZodiac(AstroSymbol symbol){
         switch (symbol){
             case ARIES:
             case TAURUS:
@@ -143,7 +143,7 @@ public class Astrology extends Widget {
         return false;
     }
 
-    private static boolean isCelestial(AstroSymbols symbol){
+    private static boolean isCelestial(AstroSymbol symbol){
         switch (symbol){
             case SUN:
             case MOON:
@@ -160,7 +160,7 @@ public class Astrology extends Widget {
         return false;
     }
 
-    private static boolean isElemental(AstroSymbols symbol){
+    private static boolean isElemental(AstroSymbol symbol){
         switch (symbol){
             case FIRE:
             case EARTH:

@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import java.util.Arrays;
 
 public class AstrologyController implements Resettable {
-    private final AstroSymbols[] set;
+    private final AstroSymbol[] set;
 
     @FXML
     private ImageView fire, water, earth, air,
@@ -25,19 +25,19 @@ public class AstrologyController implements Resettable {
     private Button astroReset;
 
     public AstrologyController() {
-        set = new AstroSymbols[3];
+        set = new AstroSymbol[3];
     }
 
     @FXML
     private void getElement(){
         if (fire.isHover()){
-            set[0] = AstroSymbols.FIRE;
+            set[0] = AstroSymbol.FIRE;
         } else if (earth.isHover()){
-            set[0] = AstroSymbols.EARTH;
+            set[0] = AstroSymbol.EARTH;
         } else if (air.isHover()){
-            set[0] = AstroSymbols.AIR;
+            set[0] = AstroSymbol.AIR;
         } else if (water.isHover()){
-            set[0] = AstroSymbols.WATER;
+            set[0] = AstroSymbol.WATER;
         }
 
         elementDisable(true);
@@ -47,29 +47,29 @@ public class AstrologyController implements Resettable {
     @FXML
     private void getZodiac(){
         if (aquarius.isHover()){
-            set[2] = AstroSymbols.AQUARIUS;
+            set[2] = AstroSymbol.AQUARIUS;
         } else if (aries.isHover()){
-            set[2] = AstroSymbols.ARIES;
+            set[2] = AstroSymbol.ARIES;
         } else if (cancer.isHover()){
-            set[2] = AstroSymbols.CANCER;
+            set[2] = AstroSymbol.CANCER;
         } else if (capricorn.isHover()){
-            set[2] = AstroSymbols.CAPRICORN;
+            set[2] = AstroSymbol.CAPRICORN;
         } else if (gemini.isHover()){
-            set[2] = AstroSymbols.GEMINI;
+            set[2] = AstroSymbol.GEMINI;
         } else if (leo.isHover()){
-            set[2] = AstroSymbols.LEO;
+            set[2] = AstroSymbol.LEO;
         } else if (libra.isHover()){
-            set[2] = AstroSymbols.LIBRA;
+            set[2] = AstroSymbol.LIBRA;
         } else if (pisces.isHover()){
-            set[2] = AstroSymbols.PISCES;
+            set[2] = AstroSymbol.PISCES;
         } else if (sag.isHover()){
-            set[2] = AstroSymbols.SAGITTARIUS;
+            set[2] = AstroSymbol.SAGITTARIUS;
         } else if (scorpio.isHover()){
-            set[2] = AstroSymbols.SCORPIO;
+            set[2] = AstroSymbol.SCORPIO;
         } else if (taurus.isHover()){
-            set[2] = AstroSymbols.TAURUS;
+            set[2] = AstroSymbol.TAURUS;
         } else if (virgo.isHover()){
-            set[2] = AstroSymbols.VIRGO;
+            set[2] = AstroSymbol.VIRGO;
         }
         zodiacDisable(true);
         getOmen();
@@ -78,25 +78,25 @@ public class AstrologyController implements Resettable {
     @FXML
     private void getCeleste(){
         if (mercury.isHover()){
-            set[1] = AstroSymbols.MERCURY;
+            set[1] = AstroSymbol.MERCURY;
         } else if (venus.isHover()){
-            set[1] = AstroSymbols.VENUS;
+            set[1] = AstroSymbol.VENUS;
         } else if (mars.isHover()){
-            set[1] = AstroSymbols.MARS;
+            set[1] = AstroSymbol.MARS;
         } else if (jupiter.isHover()){
-            set[1] = AstroSymbols.JUPITER;
+            set[1] = AstroSymbol.JUPITER;
         } else if (saturn.isHover()){
-            set[1] = AstroSymbols.SATURN;
+            set[1] = AstroSymbol.SATURN;
         } else if (uranus.isHover()){
-            set[1] = AstroSymbols.URANUS;
+            set[1] = AstroSymbol.URANUS;
         } else if (neptune.isHover()){
-            set[1] = AstroSymbols.NEPTUNE;
+            set[1] = AstroSymbol.NEPTUNE;
         } else if (pluto.isHover()){
-            set[1] = AstroSymbols.PLUTO;
+            set[1] = AstroSymbol.PLUTO;
         } else if (sun.isHover()){
-            set[1] = AstroSymbols.SUN;
+            set[1] = AstroSymbol.SUN;
         } else if (moon.isHover()){
-            set[1] = AstroSymbols.MOON;
+            set[1] = AstroSymbol.MOON;
         }
         celesteDisable(true);
         getOmen();
