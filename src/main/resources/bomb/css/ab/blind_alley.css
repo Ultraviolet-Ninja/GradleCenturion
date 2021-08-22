@@ -1,0 +1,13 @@
+.jfx-text-field {
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+    -fx-alignment: center;
+    -fx-font-size: 72;
+}
+
+.label {
+    -fx-background-color: black;
+    -fx-border-color: black;
+    -fx-border-width: 7;
+    -fx-font-size: 58;
+}
