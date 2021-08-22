@@ -25,12 +25,12 @@
         <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="281.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <HBox id="bottom-hbox" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-        <JFXTextField fx:id="omenTextField" promptText="Omen">
+        <JFXTextField fx:id="omenTextField" editable="false" promptText="Omen">
             <HBox.margin>
                 <Insets top="38.0"/>
             </HBox.margin>
         </JFXTextField>
-        <JFXButton id="submit-button" fx:id="resetButton" onAction="#resetModule" text="Clear">
+        <JFXButton id="submit-button" fx:id="resetButton" disable="true" onAction="#resetModule" text="Clear">
             <HBox.margin>
                 <Insets left="319.0" right="25.0" top="220.0"/>
             </HBox.margin>
@@ -105,7 +105,7 @@
                         <ToggleGroup fx:id="celestialGroup"/>
                     </toggleGroup>
                 </JFXToggleButton>
-                <ImageView fitHeight="81.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="81.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets left="5.0"/>
                     </HBox.margin>
@@ -140,8 +140,11 @@
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                 <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Neptune"
                                  toggleGroup="$celestialGroup"/>
-                <ImageView fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="84.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Neptune.PNG"/>
+                    <HBox.margin>
+                        <Insets left="1.0"/>
+                    </HBox.margin>
                 </ImageView>
             </HBox>
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
@@ -164,7 +167,7 @@
             </HBox>
             <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
                   GridPane.rowIndex="3">
-                <ImageView fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="84.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Pluto.PNG"/>
                 </ImageView>
                 <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Pluto"
