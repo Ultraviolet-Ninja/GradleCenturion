@@ -8,7 +8,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.15.0'
+version '0.16.0'
 
 mainClassName = 'bomb.Main'
 

@@ -5,7 +5,7 @@ import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -72,9 +72,9 @@ public class ShapeShiftTest {
         Widget.setNumHolders(2);
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.BOB);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.IND);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.TRN);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.BOB);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.IND);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.TRN);
     }
 
     private void assertPairEquals(ShapeEnd[] expected, ShapeEnd[] actual){

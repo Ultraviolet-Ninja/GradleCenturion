@@ -27,7 +27,7 @@ public class Caesar extends Widget {
     }
 
     private static int offset(){
-        if (hasLitIndicator(Indicator.NSA) && getPort(Port.PARALLEL) > 0) return 0;
+        if (hasLitIndicator(Indicator.NSA) && getPortQuantity(Port.PARALLEL) > 0) return 0;
         int out = 0;
         out += getAllBatteries();
         if (hasVowel()) out--;

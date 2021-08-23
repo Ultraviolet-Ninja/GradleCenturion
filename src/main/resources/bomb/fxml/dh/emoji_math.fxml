@@ -23,7 +23,7 @@
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-        <JFXTextField editable="false" promptText="Equation" fx:id="equationBar">
+        <JFXTextField fx:id="equationBar" editable="false" promptText="Equation">
             <VBox.margin>
                 <Insets left="150.0" right="150.0"/>
             </VBox.margin>
@@ -78,7 +78,7 @@
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
         <JFXButton id="submit-button" fx:id="add" disable="true" text="+">
             <HBox.margin>
-                <Insets left="417.0"/>
+                <Insets left="403.0"/>
             </HBox.margin>
         </JFXButton>
         <JFXButton id="submit-button" fx:id="minus" disable="true" text="-">
@@ -86,14 +86,14 @@
                 <Insets left="84.0"/>
             </HBox.margin>
         </JFXButton>
-        <JFXButton id="submit-button" fx:id="equal" disable="true" text="=" onAction="#submitEquation">
+        <JFXButton id="submit-button" fx:id="equal" disable="true" onAction="#submitEquation" text="=">
             <HBox.margin>
                 <Insets left="84.0"/>
             </HBox.margin>
         </JFXButton>
-        <JFXButton id="submit-button" fx:id="clear" disable="true" text="Clear" onAction="#resetModule">
+        <JFXButton id="submit-button" fx:id="clear" disable="true" onAction="#resetModule" text="Clear">
             <HBox.margin>
-                <Insets left="325.0" top="60.0"/>
+                <Insets left="280.0" top="60.0"/>
             </HBox.margin>
         </JFXButton>
     </HBox>

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class NotePageController extends Stage {
-    private static final int HEIGHT = 400, WIDTH = 600;
+    private static final short HEIGHT = 400, WIDTH = 600;
 
     private final List<NotePageController> internalReference;
 
