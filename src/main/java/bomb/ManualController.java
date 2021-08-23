@@ -51,7 +51,7 @@ public class ManualController {
 
     @FXML private VBox menuVBox, radioButtonHouse;
 
-    public void initialize(){
+    public void initialize() {
         allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
@@ -72,7 +72,7 @@ public class ManualController {
     }
 
     @FXML
-    public void search(){
+    public void search() {
         String searchTerm = searchBar.getText();
         radioButtonHouse.getChildren().clear();
         if (searchTerm.isEmpty()){
@@ -88,7 +88,7 @@ public class ManualController {
         }
     }
 
-    private void setupMap() throws IllegalArgumentException{
+    private void setupMap() throws IllegalArgumentException {
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
         List<String> formattedNameList = formatWords(radioButtonList.iterator()),
@@ -98,7 +98,7 @@ public class ManualController {
         setPairs(radioButtonList, formattedNameList, paneList, filteredLocations);
     }
 
-    private ArrayList<String> formatWords(Iterator<Toggle> nameIterator){
+    private ArrayList<String> formatWords(Iterator<Toggle> nameIterator) {
         ArrayList<String> list = new ArrayList<>();
         while(nameIterator.hasNext()){
             String line = ((ToggleButton)nameIterator.next()).getText().replace(" ", "_")
@@ -108,8 +108,8 @@ public class ManualController {
         return list;
     }
 
-    private ArrayList<Pane> panesFromFolder(List<String> fileLocations) {
-        ArrayList<Pane> paneList = new ArrayList<>();
+    private List<Region> panesFromFolder(List<String> fileLocations) {
+        List<Region> paneList = new ArrayList<>();
         ResetObserver observer = new ResetObserver();
         try {
             for (String fxmlFile : fileLocations) {
@@ -154,7 +154,7 @@ public class ManualController {
     }
 
     private void setPairs(List<Toggle> toggleList, List<String> toggleListFormatted,
-                          List<Pane> paneList, List<String> paneLocationsFormatted){
+                          List<Region> paneList, List<String> paneLocationsFormatted){
         regionMap = new HashMap<>();
         for (int i = 0; i < toggleList.size(); i++){
             String keyText = ((ToggleButton)toggleList.get(i)).getText();
