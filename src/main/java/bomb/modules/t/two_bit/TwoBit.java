@@ -4,6 +4,8 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 import bomb.enumerations.Port;
 
+import static bomb.modules.t.two_bit.TwoBitState.SECOND_QUERY;
+import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
 import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
