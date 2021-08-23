@@ -18,7 +18,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
@@ -91,12 +90,12 @@ public class ManualController {
 
     private void setupMap() throws IllegalArgumentException{
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
-        List<Toggle> nameList = new ArrayList<>(options.getToggles());
-        List<String> formattedNameList = formatWords(nameList.iterator()),
+        List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
+        List<String> formattedNameList = formatWords(radioButtonList.iterator()),
                 paneLocations = filesFromFolder(new File(path)),
                 filteredLocations = filterLocations(paneLocations);
-        List<Pane> paneList = panesFromFolder(paneLocations);
-        setPairs(nameList, formattedNameList, paneList, filteredLocations);
+        List<Region> paneList = panesFromFolder(paneLocations);
+        setPairs(radioButtonList, formattedNameList, paneList, filteredLocations);
     }
 
     private ArrayList<String> formatWords(Iterator<Toggle> nameIterator){

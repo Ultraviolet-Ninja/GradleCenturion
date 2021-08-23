@@ -3,6 +3,7 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'com.palantir.docker' version '0.28.0'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
 
@@ -11,8 +12,8 @@ version '0.15.0'
 
 mainClassName = 'bomb.Main'
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = 15
+targetCompatibility = 15
 
 compileJava {
     options.encoding("UTF-8")
@@ -31,12 +32,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.jfoenix:jfoenix:8.0.10'
+    implementation 'com.jfoenix:jfoenix:9.0.10'
     implementation 'org.javatuples:javatuples:1.2'
-    implementation 'org.controlsfx:controlsfx:8.40.18'
-    implementation group: 'eu.hansolo', name: 'Medusa', version: '8.3'
+    implementation 'org.controlsfx:controlsfx:11.1.0'
+    implementation group: 'eu.hansolo', name: 'Medusa', version: '11.7'
     implementation group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.6'
-    implementation group: 'org.jgrapht', name: 'jgrapht-ext', version: '1.4.0'
+    implementation group: 'org.jgrapht', name: 'jgrapht-ext', version: '1.5.1'
 
     testImplementation group: 'org.testng', name: 'testng', version: '7.4.0'
 }
@@ -48,6 +49,11 @@ test {
 
 jacocoTestReport {
     reports.xml.enabled(true)
+}
+
+javafx {
+    version = '15'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
 }
 
 jar.manifest.attributes(['Main-Class': "${mainClassName}"])
