@@ -1,5 +1,6 @@
 package bomb;
 
+
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -8,8 +9,14 @@ import bomb.modules.dh.forget_me.ForgetMeNot;
 
 import java.util.function.Predicate;
 
-import static bomb.enumerations.TrinarySwitch.*;
-import static bomb.tools.filter.Filter.*;
+import static bomb.enumerations.TrinarySwitch.OFF;
+import static bomb.enumerations.TrinarySwitch.ON;
+import static bomb.enumerations.TrinarySwitch.UNKNOWN;
+import static bomb.tools.filter.Filter.CHAR_FILTER;
+import static bomb.tools.filter.Filter.NUMBER_PATTERN;
+import static bomb.tools.filter.Filter.SERIAL_CODE_PATTERN;
+import static bomb.tools.filter.Filter.VOWEL_FILTER;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -348,6 +355,14 @@ public class Widget {
      */
     public static int getAllBatteries(){
         return numDBatteries + numDoubleAs;
+    }
+
+    public static int getNumPlates() {
+        return numPlates;
+    }
+
+    public static String getTwoFactor() {
+        return twoFactor;
     }
 
     /**
