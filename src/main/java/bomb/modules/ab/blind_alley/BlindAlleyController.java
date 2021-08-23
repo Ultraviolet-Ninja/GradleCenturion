@@ -2,16 +2,14 @@ package bomb.modules.ab.blind_alley;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.observer.ObserverHub;
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 
 public class BlindAlleyController implements Resettable {
-    @FXML
-    private Label maxAlley;
+    @FXML private Label maxAlley;
 
-    @FXML
-    private TextArea topLeft, topMid, midLeft, trueMid, midRight, bottomLeft, bottomMid, bottomRight;
+    @FXML private JFXTextField topLeft, topMid, midLeft, trueMid, midRight, bottomLeft, bottomMid, bottomRight;
 
     public void liveUpdate() {
         int[][] buffer = BlindAlley.getAlleyCat();
@@ -55,8 +53,10 @@ public class BlindAlleyController implements Resettable {
 
     private void writeMax(int[][] array) {
         int max = 0;
-        for (int[] col : array)
-            for (int num : col) if (num > max) max = num;
+        for (int[] col : array) {
+            for (int num : col)
+                if (num > max) max = num;
+        }
 
         maxAlley.setText("All with " + max);
     }

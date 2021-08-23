@@ -5,7 +5,7 @@ import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -56,7 +56,7 @@ public class LaundryTest {
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
         Widget.setPortValue(Port.SERIAL,1);
-        Widget.setIndicator(TrinaryState.ON, Indicator.NSA);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
         Widget.setNumHolders(2);
         Widget.setSerialCode("g64dv1");
         Widget.setNumModules(11);
@@ -67,8 +67,8 @@ public class LaundryTest {
         Widget.setSerialCode("7h1iv1");
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TrinaryState.ON, Indicator.NSA);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.FRQ);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRQ);
         Widget.setNumberOfPlates(1);
         Widget.setPortValue(Port.PARALLEL,1);
     }

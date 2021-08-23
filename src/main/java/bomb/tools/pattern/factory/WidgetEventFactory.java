@@ -1,5 +1,6 @@
-package bomb;
+package bomb.tools.pattern.factory;
 
+import bomb.Widget;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.filter.Filter;
 import com.jfoenix.controls.JFXTextArea;

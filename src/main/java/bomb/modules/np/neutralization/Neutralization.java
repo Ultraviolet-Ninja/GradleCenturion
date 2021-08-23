@@ -6,7 +6,7 @@ import bomb.Widget;
 import javafx.scene.paint.Color;
 
 import static bomb.Widget.IndicatorFilter.ALL;
-import static bomb.enumerations.TrinaryState.UNKNOWN;
+import static bomb.enumerations.TrinarySwitch.UNKNOWN;
 import static bomb.tools.filter.Filter.VOWEL_FILTER;
 import static bomb.tools.filter.Filter.ultimateFilter;
 import static javafx.scene.paint.Color.BLUE;

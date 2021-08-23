@@ -4,7 +4,7 @@ import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -49,8 +49,8 @@ public class ForgetMeNotTest {
             Widget.setDoubleAs(4);
             Widget.setNumHolders(2);
             Widget.setNumberOfPlates(1);
-            Widget.setIndicator(TrinaryState.ON, Indicator.TRN);
-            Widget.setIndicator(TrinaryState.OFF, Indicator.SIG);
+            Widget.setIndicator(TrinarySwitch.ON, Indicator.TRN);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.SIG);
             Widget.setPortValue(Port.DVI, 1);
             Widget.setNumModules(NUMBER_OF_MODULES);
             Widget.setStartTime(20);
@@ -83,13 +83,13 @@ public class ForgetMeNotTest {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
-            Widget.setIndicator(TrinaryState.OFF, Indicator.CAR);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.CAR);
         };
         ConditionSetter setupSigIndicatorUnlit = () -> {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
-            Widget.setIndicator(TrinaryState.OFF, Indicator.SIG);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.SIG);
         };
         ConditionSetter setupNoIndicators = () -> {
             Widget.setIsForgetMeNotActive(true);

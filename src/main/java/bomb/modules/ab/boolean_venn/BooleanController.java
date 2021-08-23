@@ -16,7 +16,7 @@ import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class BooleanController implements Resettable {
-    private static final String PRESS, DO_NOT_PRESS, DEFAULT_TEXT;
+    private static final String PRESS_COLOR, DO_NOT_PRESS_COLOR, DEFAULT_TEXT;
     private static final Regex FIRST_SYMBOL_CAPTURE, SECOND_SYMBOL_CAPTURE;
 
     private boolean isFirstSymbol;
@@ -32,8 +32,8 @@ public class BooleanController implements Resettable {
     @FXML private JFXTextField booleanMathOperation;
 
     static {
-        PRESS = "rgba(115,208,115,1)";
-        DO_NOT_PRESS = "rgba(255,103,103,1)";
+        PRESS_COLOR = "rgba(115,208,115,1)";
+        DO_NOT_PRESS_COLOR = "rgba(255,103,103,1)";
         DEFAULT_TEXT = "(AB)C";
         FIRST_SYMBOL_CAPTURE = new Regex("(\\(?A[^(B]?)");
         SECOND_SYMBOL_CAPTURE = new Regex("(B\\)?[^)C]?)");
@@ -113,7 +113,7 @@ public class BooleanController implements Resettable {
 
     private void setCircleFill(Circle[] circles, char[] bits){
         for (int i = 0; i < circles.length; i++)
-            circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS : DO_NOT_PRESS));
+            circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }
 
     private String getMathSymbol(JFXButton button){
@@ -131,10 +131,13 @@ public class BooleanController implements Resettable {
 
         if (priorityToggle.isSelected()) {
             temp.append(referenceSplit[0])
-                    .append("(B").append(referenceSplit[1]).append(")");
+                    .append("(B")
+                    .append(referenceSplit[1]).append(")");
         } else {
-            temp.append("(").append(referenceSplit[0])
-                    .append("B)").append(referenceSplit[1]);
+            temp.append("(")
+                    .append(referenceSplit[0])
+                    .append("B)")
+                    .append(referenceSplit[1]);
         }
         return temp;
     }

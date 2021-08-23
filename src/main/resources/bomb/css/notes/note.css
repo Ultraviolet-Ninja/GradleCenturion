@@ -1,0 +1,12 @@
+.jfx-text-area {
+    -fx-border-width : 0 1 1 0;
+    -fx-border-color: black;
+    -fx-font-size: 20;
+    -fx-prompt-text-fill: white;
+    -jfx-focus-color: white;
+    -jfx-unfocus-color: transparent;
+}
+
+.jfx-button {
+    -fx-font-size: 24;
+}

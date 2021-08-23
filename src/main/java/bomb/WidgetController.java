@@ -2,10 +2,11 @@ package bomb;
 
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import bomb.tools.pattern.factory.TextFormatterFactory;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.filter.Filter;
+import bomb.tools.pattern.factory.WidgetEventFactory;
 import bomb.tools.pattern.observer.ObserverHub;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextArea;
@@ -20,7 +21,7 @@ import javafx.scene.input.MouseEvent;
 import java.util.function.Consumer;
 
 import static bomb.enumerations.Port.*;
-import static bomb.enumerations.TrinaryState.*;
+import static bomb.enumerations.TrinarySwitch.*;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.*;
 
 public class WidgetController {
@@ -146,11 +147,11 @@ public class WidgetController {
     }
 
     private void indicatorAction(Indicator indicator, ToggleGroup group){
-        TrinaryState state = determineState(group.getSelectedToggle());
+        TrinarySwitch state = determineState(group.getSelectedToggle());
         Widget.setIndicator(state, indicator);
     }
 
-    private TrinaryState determineState(Toggle selected){
+    private TrinarySwitch determineState(Toggle selected){
         if (selected == null) return UNKNOWN;
         return ((ToggleButton)selected).getText().equals("Lit") ? ON : OFF;
     }

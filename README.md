@@ -3,11 +3,11 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
-![Project Version](https://img.shields.io/badge/version-0.15.0-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.16.0-blueviolet)
 ### Intro
-This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles.<br>
+This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
 
-This is the Gradle implementation of the original project, created with the intention of using Continuous Integration to test module solutions and data structures as the project progresses. This also has helped me understand how JavaFX, Gradle and Circle CI interact with each other.
+This is a huge project for one man to tackle, but it's taught me about the challenges of Java 8 with FX, CI pipelines and working in Gradle.
 
 ### Technologies
 - Java 8 with FX

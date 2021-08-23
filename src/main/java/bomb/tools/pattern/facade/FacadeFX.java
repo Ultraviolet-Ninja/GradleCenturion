@@ -74,6 +74,10 @@ public class FacadeFX {
         return ((ToggleButton) group.getSelectedToggle()).getText();
     }
 
+    public static void resetToggleGroup(ToggleGroup group) {
+        group.selectToggle(null);
+    }
+
     public static void resetSliderValues(Slider ... sliders){
         for (Slider slider : sliders)
             slider.setValue(0.0);
