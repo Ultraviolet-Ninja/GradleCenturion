@@ -3,17 +3,17 @@ package bomb.enumerations;
 public enum Indicator {
     BOB, CAR, CLR, FRK, FRQ, IND, MSA, NSA, SIG, SND, TRN;
 
-    private TrinaryState state;
+    private TrinarySwitch state;
 
-    public TrinaryState getState() {
+    public TrinarySwitch getState() {
         return state;
     }
 
-    public void setState(TrinaryState in){
+    public void setState(TrinarySwitch in){
         state = in;
     }
 
     Indicator(){
-        state = TrinaryState.UNKNOWN;
+        state = TrinarySwitch.UNKNOWN;
     }
 }

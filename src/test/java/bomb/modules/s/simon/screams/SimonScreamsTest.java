@@ -4,7 +4,7 @@ import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import bomb.modules.s.simon.SimonColors.Screams;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
@@ -67,8 +67,8 @@ public class SimonScreamsTest {
     private void setUpOne(){
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TrinaryState.ON, Indicator.SND);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.TRN);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.SND);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.TRN);
         Widget.setSerialCode("zr6dt6");
         Widget.setNumberOfPlates(1);
         Widget.setPortValue(Port.RCA,1);
@@ -97,9 +97,9 @@ public class SimonScreamsTest {
     private void setUpTwo(){
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TrinaryState.ON, Indicator.BOB);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.TRN);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.FRK);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.BOB);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.TRN);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
         Widget.setSerialCode("kn8rx2");
         SimonScreams.initialize(new Screams[]{YELLOW, BLUE, GREEN, RED, PURPLE, ORANGE});
     }

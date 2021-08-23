@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Pair;
+import org.javatuples.Pair;
 import org.controlsfx.control.tableview2.TableColumn2;
 import org.controlsfx.control.tableview2.TableView2;
 
@@ -38,9 +38,9 @@ public class SouvenirController implements Resettable {
                     return true;
                 String lowercaseSearch = newValue.toLowerCase();
 
-                if (entry.getKey().toLowerCase().contains(lowercaseSearch)) {
+                if (entry.getValue0().toLowerCase().contains(lowercaseSearch)) {
                     return true;
-                } else return entry.getValue().toLowerCase().contains(lowercaseSearch);
+                } else return entry.getValue1().toLowerCase().contains(lowercaseSearch);
             });
             artifactView.setItems(filteredData);
         });

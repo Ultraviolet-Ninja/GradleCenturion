@@ -1,253 +1,289 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.TextField?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/8.0.202-ea"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.ab.astrology.AstrologyController">
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/ab/astrology.css"
+          xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.ab.astrology.AstrologyController">
     <columnConstraints>
-        <ColumnConstraints/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
+        <RowConstraints maxHeight="519.0" minHeight="10.0" prefHeight="519.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="281.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <GridPane prefHeight="741.0" prefWidth="1191.0">
+    <HBox id="bottom-hbox" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <JFXTextField fx:id="omenTextField" editable="false" promptText="Omen">
+            <HBox.margin>
+                <Insets top="38.0"/>
+            </HBox.margin>
+        </JFXTextField>
+        <JFXButton id="submit-button" fx:id="resetButton" disable="true" onAction="#resetModule" text="Clear">
+            <HBox.margin>
+                <Insets left="319.0" right="25.0" top="220.0"/>
+            </HBox.margin>
+        </JFXButton>
+    </HBox>
+    <GridPane>
         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="499.0" minHeight="10.0" prefHeight="499.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="242.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-        <GridPane>
+        <GridPane id="divider-grid-pane">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="382.0" minWidth="10.0" prefWidth="369.0"/>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="405.0" minWidth="10.0" prefWidth="405.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
-            <Pane prefHeight="200.0" prefWidth="200.0">
-                <ImageView fx:id="fire" fitHeight="131.0" fitWidth="164.0" layoutX="28.0" layoutY="26.0"
-                           onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Fire.PNG"/>
                 </ImageView>
-                <ImageView fx:id="earth" fitHeight="131.0" fitWidth="164.0" layoutX="215.0" layoutY="26.0"
-                           onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="fire-toggle-button" onAction="#determineElement" text="Fire">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="elementGroup"/>
+                    </toggleGroup>
+                </JFXToggleButton>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Earth.PNG"/>
                 </ImageView>
-                <ImageView fx:id="water" fitHeight="131.0" fitWidth="164.0" layoutX="28.0" layoutY="250.0"
-                           onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/elements/Water.PNG"/>
-                </ImageView>
-                <ImageView fx:id="air" fitHeight="131.0" fitWidth="164.0" layoutX="215.0" layoutY="250.0"
-                           onMouseClicked="#getElement" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="earth-toggle-button" onAction="#determineElement" text="Earth"
+                                 toggleGroup="$elementGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Air.PNG"/>
                 </ImageView>
-                <Label layoutX="80.0" layoutY="171.0" text="Fire">
-                    <font>
-                        <Font size="30.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="258.0" layoutY="171.0" text="Earth">
-                    <font>
-                        <Font size="30.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="64.0" layoutY="397.0" text="Water">
-                    <font>
-                        <Font size="30.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="271.0" layoutY="397.0" text="Air">
-                    <font>
-                        <Font size="30.0"/>
-                    </font>
-                </Label>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-                <ImageView fx:id="mercury" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="14.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="air-toggle-button" onAction="#determineElement" text="Air"
+                                 toggleGroup="$elementGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/elements/Water.PNG"/>
+                </ImageView>
+                <JFXToggleButton id="water-toggle-button" onAction="#determineElement" text="Water"
+                                 toggleGroup="$elementGroup"/>
+            </VBox>
+        </GridPane>
+        <GridPane id="divider-grid-pane" GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                                 prefWidth="161.0" text="Mercury">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="celestialGroup"/>
+                    </toggleGroup>
+                </JFXToggleButton>
+                <ImageView fitHeight="81.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets left="5.0"/>
+                    </HBox.margin>
                     <Image url="@../../astrology/celestials/Mercury.PNG"/>
                 </ImageView>
-                <ImageView fx:id="jupiter" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="106.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/celestials/Jupiter.PNG"/>
-                </ImageView>
-                <ImageView fx:id="saturn" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="189.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/celestials/Saturn.PNG"/>
-                </ImageView>
-                <ImageView fx:id="venus" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="14.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+            </HBox>
+            <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                <ImageView fitHeight="83.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Venus.PNG"/>
                 </ImageView>
-                <ImageView fx:id="mars" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="107.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Venus"
+                                 toggleGroup="$celestialGroup"/>
+            </HBox>
+            <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                                 prefWidth="119.0" text="Mars" toggleGroup="$celestialGroup"/>
+                <ImageView fitHeight="84.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets left="18.0"/>
+                    </HBox.margin>
                     <Image url="@../../astrology/celestials/Mars.PNG"/>
                 </ImageView>
-                <ImageView fx:id="neptune" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="286.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+            </HBox>
+            <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="1">
+                <ImageView fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/celestials/Jupiter.PNG"/>
+                </ImageView>
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Jupiter"
+                                 toggleGroup="$celestialGroup"/>
+            </HBox>
+            <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Neptune"
+                                 toggleGroup="$celestialGroup"/>
+                <ImageView fitHeight="84.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Neptune.PNG"/>
+                    <HBox.margin>
+                        <Insets left="1.0"/>
+                    </HBox.margin>
                 </ImageView>
-                <ImageView fx:id="sun" fitHeight="69.0" fitWidth="75.0" layoutX="81.0" layoutY="381.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/celestials/Sun.PNG"/>
+            </HBox>
+            <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                                 prefWidth="141.0" text="Saturn" toggleGroup="$celestialGroup"/>
+                <ImageView fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets left="10.0"/>
+                    </HBox.margin>
+                    <Image url="@../../astrology/celestials/Saturn.PNG"/>
                 </ImageView>
-                <ImageView fx:id="uranus" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="189.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+            </HBox>
+            <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="2">
+                <ImageView fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Uranus.PNG"/>
                 </ImageView>
-                <ImageView fx:id="pluto" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="286.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Uranus"
+                                 toggleGroup="$celestialGroup"/>
+            </HBox>
+            <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="3">
+                <ImageView fitHeight="84.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Pluto.PNG"/>
                 </ImageView>
-                <ImageView fx:id="moon" fitHeight="69.0" fitWidth="75.0" layoutX="214.0" layoutY="381.0"
-                           onMouseClicked="#getCeleste" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Pluto"
+                                 toggleGroup="$celestialGroup"/>
+            </HBox>
+            <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                                 prefWidth="122.0" text="Sun" toggleGroup="$celestialGroup"/>
+                <ImageView fitHeight="87.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                    <HBox.margin>
+                        <Insets left="22.0"/>
+                    </HBox.margin>
+                    <Image url="@../../astrology/celestials/Sun.PNG"/>
+                </ImageView>
+            </HBox>
+            <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="4">
+                <ImageView fitHeight="82.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Moon.PNG"/>
                 </ImageView>
-                <Label layoutX="14.0" layoutY="34.0" text="Mercury">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="126.0" text="Mars">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="14.0" layoutY="209.0" text="Saturn">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="12.0" layoutY="305.0" text="Neptune">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="12.0" layoutY="401.0" text="Sun">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="321.0" layoutY="34.0" text="Venus">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="319.0" layoutY="126.0" text="Jupiter">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="319.0" layoutY="209.0" text="Uranus">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="319.0" layoutY="305.0" text="Pluto">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="324.0" layoutY="401.0" text="Moon">
-                    <font>
-                        <Font size="16.0"/>
-                    </font>
-                </Label>
-            </Pane>
-            <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
-                <ImageView fx:id="aquarius" fitHeight="78.0" fitWidth="106.0" layoutX="14.0" layoutY="14.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Aquarius.PNG"/>
-                </ImageView>
-                <ImageView fx:id="aries" fitHeight="78.0" fitWidth="106.0" layoutX="134.0" layoutY="14.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Aries.PNG"/>
-                </ImageView>
-                <ImageView fx:id="cancer" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="14.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Cancer.PNG"/>
-                </ImageView>
-                <ImageView fx:id="capricorn" fitHeight="78.0" fitWidth="106.0" layoutX="14.0" layoutY="133.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Capricorn.PNG"/>
-                </ImageView>
-                <ImageView fx:id="libra" fitHeight="78.0" fitWidth="106.0" layoutX="21.0" layoutY="257.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Libra.PNG"/>
-                </ImageView>
-                <ImageView fx:id="gemini" fitHeight="78.0" fitWidth="106.0" layoutX="132.0" layoutY="133.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Moon"
+                                 toggleGroup="$celestialGroup"/>
+            </HBox>
+        </GridPane>
+        <GridPane GridPane.columnIndex="2">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Gemini.PNG"/>
                 </ImageView>
-                <ImageView fx:id="leo" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="133.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Leo.PNG"/>
+                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Gemini">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="zodiacGroup"/>
+                    </toggleGroup>
+                </JFXToggleButton>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Capricorn.PNG"/>
                 </ImageView>
-                <ImageView fx:id="scorpio" fitHeight="78.0" fitWidth="106.0" layoutX="21.0" layoutY="377.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Scorpio.PNG"/>
-                </ImageView>
-                <ImageView fx:id="taurus" fitHeight="78.0" fitWidth="106.0" layoutX="140.0" layoutY="377.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Taurus.PNG"/>
-                </ImageView>
-                <ImageView fx:id="virgo" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="377.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
-                    <Image url="@../../astrology/zodiac/Virgo.PNG"/>
-                </ImageView>
-                <ImageView fx:id="pisces" fitHeight="78.0" fitWidth="106.0" layoutX="132.0" layoutY="257.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Capricorn"
+                                 toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Pisces.PNG"/>
                 </ImageView>
-                <ImageView fx:id="sag" fitHeight="78.0" fitWidth="106.0" layoutX="255.0" layoutY="257.0"
-                           onMouseClicked="#getZodiac" pickOnBounds="true" preserveRatio="true">
+                <JFXToggleButton onAction="#determineZodiac" text="Pisces" toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Libra.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" text="Libra" toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Taurus.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" text="Taurus" toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Scorpio.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" text="Scorpio" toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Aquarius.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Aquarius"
+                                 toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Aries.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Aries"
+                                 toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Cancer.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Cancer"
+                                 toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Leo.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" text="Leo" toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Sag.PNG"/>
                 </ImageView>
-                <Label layoutX="37.0" layoutY="100.0" text="Aquarius"/>
-                <Label layoutX="164.0" layoutY="100.0" text="Aries"/>
-                <Label layoutX="280.0" layoutY="100.0" text="Cancer"/>
-                <Label layoutX="34.0" layoutY="221.0" text="Capricorn"/>
-                <Label layoutX="158.0" layoutY="221.0" text="Gemini"/>
-                <Label layoutX="289.0" layoutY="221.0" text="Leo"/>
-                <Label layoutX="48.0" layoutY="346.0" text="Libra"/>
-                <Label layoutX="166.0" layoutY="346.0" text="Pisces"/>
-                <Label layoutX="276.0" layoutY="346.0" text="Sagittarius"/>
-                <Label layoutX="164.0" layoutY="462.0" text="Taurus"/>
-                <Label layoutX="282.0" layoutY="462.0" text="Virgo"/>
-                <Label layoutX="45.0" layoutY="462.0" text="Scorpio"/>
-            </Pane>
+                <JFXToggleButton onAction="#determineZodiac" text="Sagittarius" toggleGroup="$zodiacGroup"/>
+            </VBox>
+            <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../astrology/zodiac/Virgo.PNG"/>
+                </ImageView>
+                <JFXToggleButton onAction="#determineZodiac" text="Virgo" toggleGroup="$zodiacGroup"/>
+            </VBox>
         </GridPane>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-            <TextField fx:id="omen" alignment="CENTER" promptText="Output" editable="false">
-                <font>
-                    <Font size="36.0"/>
-                </font>
-                <HBox.margin>
-                    <Insets left="350.0"/>
-                </HBox.margin>
-            </TextField>
-            <Button fx:id="astroReset" disable="true" mnemonicParsing="false" onAction="#astroReset" text="Clear">
-                <font>
-                    <Font size="24.0"/>
-                </font>
-                <HBox.margin>
-                    <Insets left="250.0" top="190.0"/>
-                </HBox.margin>
-            </Button>
-        </HBox>
     </GridPane>
 </GridPane>

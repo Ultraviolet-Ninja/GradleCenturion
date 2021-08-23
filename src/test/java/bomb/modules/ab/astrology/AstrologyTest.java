@@ -8,19 +8,19 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.modules.ab.astrology.AstroSymbols.ARIES;
-import static bomb.modules.ab.astrology.AstroSymbols.EARTH;
-import static bomb.modules.ab.astrology.AstroSymbols.FIRE;
-import static bomb.modules.ab.astrology.AstroSymbols.GEMINI;
-import static bomb.modules.ab.astrology.AstroSymbols.JUPITER;
-import static bomb.modules.ab.astrology.AstroSymbols.MARS;
-import static bomb.modules.ab.astrology.AstroSymbols.MERCURY;
-import static bomb.modules.ab.astrology.AstroSymbols.SAGITTARIUS;
-import static bomb.modules.ab.astrology.AstroSymbols.TAURUS;
-import static bomb.modules.ab.astrology.AstroSymbols.URANUS;
-import static bomb.modules.ab.astrology.AstroSymbols.VENUS;
-import static bomb.modules.ab.astrology.AstroSymbols.VIRGO;
-import static bomb.modules.ab.astrology.AstroSymbols.WATER;
+import static bomb.modules.ab.astrology.AstroSymbol.ARIES;
+import static bomb.modules.ab.astrology.AstroSymbol.EARTH;
+import static bomb.modules.ab.astrology.AstroSymbol.FIRE;
+import static bomb.modules.ab.astrology.AstroSymbol.GEMINI;
+import static bomb.modules.ab.astrology.AstroSymbol.JUPITER;
+import static bomb.modules.ab.astrology.AstroSymbol.MARS;
+import static bomb.modules.ab.astrology.AstroSymbol.MERCURY;
+import static bomb.modules.ab.astrology.AstroSymbol.SAGITTARIUS;
+import static bomb.modules.ab.astrology.AstroSymbol.TAURUS;
+import static bomb.modules.ab.astrology.AstroSymbol.URANUS;
+import static bomb.modules.ab.astrology.AstroSymbol.VENUS;
+import static bomb.modules.ab.astrology.AstroSymbol.VIRGO;
+import static bomb.modules.ab.astrology.AstroSymbol.WATER;
 import static bomb.modules.ab.astrology.Astrology.GOOD_OMEN;
 import static bomb.modules.ab.astrology.Astrology.POOR_OMEN;
 import static org.testng.Assert.assertEquals;
@@ -44,7 +44,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(AstroSymbols ... set){
+    public void exceptionTest(AstroSymbol... set){
         Astrology.calculate(set);
     }
 
@@ -57,7 +57,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "trainingVideoProvider")
-    public void trainingVideoTest(String expected, AstroSymbols ... set){
+    public void trainingVideoTest(String expected, AstroSymbol... set){
         Widget.setSerialCode("jt3gu5");
 
         assertEquals(Astrology.calculate(set), expected);
@@ -73,7 +73,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "interchangeabilityProvider")
-    public void interchangeabilityTest(String expected, AstroSymbols ... set){
+    public void interchangeabilityTest(String expected, AstroSymbol... set){
         Widget.setSerialCode("jt3gu5");
 
         assertEquals(Astrology.calculate(set), expected);
@@ -91,7 +91,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "theGreatBerateProvider")
-    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstroSymbols ... set){
+    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstroSymbol... set){
         cond.setCondition();
 
         assertEquals(Astrology.calculate(set), expected);

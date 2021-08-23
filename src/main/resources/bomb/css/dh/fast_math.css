@@ -1,5 +1,5 @@
 .jfx-button {
-    -fx-font-size: 30;
+    -fx-font-size: 32;
 }
 
 .jfx-text-field {
@@ -10,7 +10,7 @@
     -fx-background-radius: 15;
     -fx-border-color: black;
     -fx-border-radius: 15;
-    -fx-border-width: 2;
+    -fx-border-width: 3;
     -fx-font-size: 36;
     -fx-prompt-text-fill: white;
 }

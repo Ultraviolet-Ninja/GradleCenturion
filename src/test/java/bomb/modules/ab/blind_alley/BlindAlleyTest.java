@@ -5,7 +5,7 @@ import bomb.Widget;
 import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -35,7 +35,7 @@ public class BlindAlleyTest {
         Widget.setSerialCode("bu7we6");
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TrinaryState.ON, Indicator.CAR);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.CAR);
         Widget.setPortValue(Port.DVI,1);
         Widget.setPortValue(Port.RJ45,1);
         Widget.setPortValue(Port.PS2,1);
@@ -60,8 +60,8 @@ public class BlindAlleyTest {
         Widget.setPortValue(Port.PARALLEL,1);
         Widget.setPortValue(Port.RCA,1);
         Widget.setSerialCode("718pz5");
-        Widget.setIndicator(TrinaryState.ON, Indicator.SND);
-        Widget.setIndicator(TrinaryState.OFF, Indicator.FRQ);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.SND);
+        Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRQ);
     }
 
     @DataProvider

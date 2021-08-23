@@ -1,7 +1,7 @@
 package bomb;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.TrinaryState;
+import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -26,7 +26,7 @@ public class WidgetTest {
     public void twoFactorTest(String val){
         Widget.setTwoFactor(val);
 
-        assertEquals(val, Widget.twoFactor);
+        assertEquals(val, Widget.getTwoFactor());
     }
 
     @DataProvider
@@ -61,7 +61,7 @@ public class WidgetTest {
     public void negativePortPlateTest(int val, int expected){
         Widget.setNumberOfPlates(val);
 
-        assertEquals(Widget.numPlates, expected);
+        assertEquals(Widget.getNumPlates(), expected);
     }
 
     @Test(dataProvider = "negativeValueProvider")
@@ -83,7 +83,6 @@ public class WidgetTest {
         Widget.setDBatteries(val);
 
         assertEquals(Widget.getAllBatteries(), expected);
-        assertEquals(Widget.numDBatteries, expected);
     }
 
     @Test(dataProvider = "negativeValueProvider")
@@ -91,7 +90,6 @@ public class WidgetTest {
         Widget.setDoubleAs(val);
 
         assertEquals(Widget.getAllBatteries(), expected);
-        assertEquals(Widget.numDoubleAs, expected);
     }
 
     @DataProvider
@@ -113,8 +111,8 @@ public class WidgetTest {
     public Object[][] indicatorProvider(){
         ConditionSetter empty = () -> {};
         ConditionSetter trueSetter = () -> {
-            Widget.setIndicator(TrinaryState.ON, Indicator.MSA);
-            Widget.setIndicator(TrinaryState.OFF, Indicator.NSA);
+            Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.NSA);
         };
 
         return new Object[][]{

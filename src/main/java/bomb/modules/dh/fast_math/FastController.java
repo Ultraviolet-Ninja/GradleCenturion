@@ -1,53 +1,59 @@
 package bomb.modules.dh.fast_math;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 
 import java.util.function.Consumer;
 
 public class FastController implements Resettable {
-    private final StringBuilder appendLetters = new StringBuilder(),
-            textFieldTracker = new StringBuilder();
+    private final StringBuilder buttonPressTracker, outputMathTextTracker;
 
     @FXML
-    private Button alfa, bravo, charlie, delta, echo, golf, kilo, november, papa, sierra, tango, xRay, zulu;
+    private JFXButton alfa, bravo, charlie, delta, echo, golf, kilo, november, papa, sierra, tango, xRay, zulu;
 
     @FXML
-    private TextField outputMath;
+    private JFXTextField outputMath;
 
-    public void initialize(){
-//        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initializeAction()), alfa, bravo, charlie, delta, echo,
-//                golf, kilo, november, papa, sierra, tango, xRay, zulu);
+    public FastController() {
+        buttonPressTracker = new StringBuilder();
+        outputMathTextTracker = new StringBuilder();
     }
 
-    private Consumer<ActionEvent> initializeAction(){
+    public void initialize() {
+        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initializeAction()), alfa, bravo, charlie, delta, echo,
+                golf, kilo, november, papa, sierra, tango, xRay, zulu);
+    }
+
+    private Consumer<ActionEvent> initializeAction() {
         return event -> {
             String temp = ((Button) event.getSource()).getText();
-            appendLetters.append(temp);
-            textFieldTracker.append(temp);
+            buttonPressTracker.append(temp);
+            outputMathTextTracker.append(temp);
             try {
-                if (appendLetters.length() == 2) {
-                    textFieldTracker.append(" - ").append(FastMath.solve(appendLetters.toString()));
-                    appendLetters.setLength(0);
+                if (buttonPressTracker.length() == 2) {
+                    outputMathTextTracker.append(" - ").append(FastMath.solve(buttonPressTracker.toString()));
+                    buttonPressTracker.setLength(0);
                 }
-                outputMath.setText(textFieldTracker.toString());
-                if (textFieldTracker.length() > 2) textFieldTracker.setLength(0);
-            } catch (IllegalArgumentException illegal){
+                outputMath.setText(outputMathTextTracker.toString());
+                if (outputMathTextTracker.length() > 2) outputMathTextTracker.setLength(0);
+            } catch (IllegalArgumentException illegal) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getLocalizedMessage());
             }
         };
     }
 
     @FXML
-    private void clear(){
+    private void clear() {
         FacadeFX.clearText(outputMath);
-        textFieldTracker.setLength(0);
-        appendLetters.setLength(0);
+        outputMathTextTracker.setLength(0);
+        buttonPressTracker.setLength(0);
     }
 
     @Override

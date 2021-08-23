@@ -4,8 +4,8 @@ import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Indicator.SND;
-import static bomb.enumerations.TrinaryState.OFF;
-import static bomb.enumerations.TrinaryState.ON;
+import static bomb.enumerations.TrinarySwitch.OFF;
+import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.Port.*;
 
 public class WidgetSimulations {

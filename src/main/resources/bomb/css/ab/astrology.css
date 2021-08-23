@@ -1,0 +1,66 @@
+.jfx-button {
+    -fx-font-size: 24;
+}
+
+.jfx-text-field {
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+    -fx-alignment: center;
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-font-size: 30;
+    -fx-prompt-text-fill: white;
+}
+
+.jfx-toggle-button {
+    -jfx-untoggle-color: #354558;
+    -jfx-untoggle-line-color: #172b58;
+    -jfx-toggle-color: #dedee0;
+    -jfx-toggle-line-color: #2b4cff;
+}
+/*TODO experiment with color schemes*/
+
+#fire-toggle-button {
+
+}
+
+#earth-toggle-button {
+
+}
+
+#air-toggle-button {
+
+}
+
+#water-toggle-button {
+
+}
+
+#celestial-toggle-button {
+
+}
+
+#vbox {
+    -fx-alignment: center;
+}
+
+#divider-grid-pane {
+    -fx-border-color: black;
+    -fx-border-width: 0 1 0 0;
+}
+
+#left-side-hbox {
+    -fx-alignment: center-right;
+}
+
+#right-side-hbox {
+    -fx-alignment: center-left;
+}
+
+#bottom-hbox {
+    -fx-border-color: black;
+    -fx-border-width: 1 0 0 0;
+}

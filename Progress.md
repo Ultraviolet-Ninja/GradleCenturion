@@ -6,6 +6,7 @@
 - Boolean Venn Diagram
 - Chord Qualities
 - Emoji Math
+- Fast Math
 - Forget Me Not
 - Hexamaze
 - Laundry
@@ -15,17 +16,16 @@
 - Souvenir
 - TwoBit
 
-15/100
+16/100
 
 ### Incomplete Modules
-- FastMath
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 - The Bulb
 
-6/100
+5/100
 
 ### Untouched Modules
 - 3D Maze
