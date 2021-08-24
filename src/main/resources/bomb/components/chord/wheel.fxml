@@ -6,7 +6,7 @@
 
 <fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
          prefWidth="300.0" stylesheets="@../../css/components/note_circle.css" type="javafx.scene.layout.Pane"
-         xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+         xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
     <Circle id="background-circle" fill="DODGERBLUE" layoutX="150.0" layoutY="150.0" radius="150.0" stroke="BLACK"
             strokeType="INSIDE"/>
     <JFXButton id="note-button" fx:id="a" layoutX="131.0" layoutY="14.0" prefHeight="39.0" prefWidth="39.0"

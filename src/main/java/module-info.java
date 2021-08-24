@@ -1,4 +1,5 @@
 module jasmine.jragon.GradleCenturion.main {
+    requires transitive javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
@@ -6,6 +7,7 @@ module jasmine.jragon.GradleCenturion.main {
     requires com.jfoenix;
     requires org.jgrapht.core;
     requires org.controlsfx.controls;
+    requires javatuples;
 
     exports bomb to javafx.fxml;
     exports bomb.components.chord to javafx.fxml;

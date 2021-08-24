@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.Line?>
 
 <fx:root prefHeight="100.0" prefWidth="110.0" stylesheets="@../../css/components/hex_maze_panel.css"
-         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8.0.202-ea"
+         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15"
          xmlns:fx="http://javafx.com/fxml/1">
     <Polygon id="background" fx:id="hexagonalFill" fill="#008cff" layoutX="29.0" layoutY="23.0" opacity="0.51"
              points="1.335784912109375, 77.5, 51.08580017089844, 77.5, 81.70710754394531, 27.0, 51.08580017089844, -23.207107543945312, 1.335784912109375, -23.207107543945312, -29.707107543945312, 27.707107543945312"

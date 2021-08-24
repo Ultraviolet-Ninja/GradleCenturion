@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <fx:root prefHeight="273.0" prefWidth="267.0" type="javafx.scene.layout.Pane"
-         xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+         xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1">
    <CustomEdge fx:id="first" layoutX="82.0" layoutY="58.0" rotate="-48.0"/>
    <CustomEdge fx:id="second" layoutX="147.0" layoutY="36.0" rotate="11.0"/>
    <CustomEdge fx:id="third" layoutX="199.0" layoutY="82.0" rotate="71.0"/>

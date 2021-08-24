@@ -3,7 +3,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Arc?>
 
-<fx:root type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/8.0.202-ea"
+<fx:root type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15"
          xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Arc fx:id="button" fill="WHITE" layoutY="100.0" length="90.0" radiusX="100.0" radiusY="100.0" stroke="BLACK"
