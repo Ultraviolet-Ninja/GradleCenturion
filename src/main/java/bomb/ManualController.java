@@ -81,10 +81,13 @@ public class ManualController {
         }
         Regex searchPattern = new Regex(searchTerm, Pattern.CASE_INSENSITIVE);
 
-        for(Node node : allRadioButtons){
-            searchPattern.loadText(((RadioButton)node).getText());
+        int i = 0;
+        while (i < allRadioButtons.size()) {
+            Node node = allRadioButtons.get(i);
+            searchPattern.loadText(((RadioButton) node).getText());
             if (searchPattern.hasMatch())
                 radioButtonHouse.getChildren().add(node);
+            i++;
         }
     }
 
@@ -110,16 +113,19 @@ public class ManualController {
 
     private List<Region> panesFromFolder(List<String> fileLocations) {
         List<Region> paneList = new ArrayList<>();
-        ResetObserver observer = new ResetObserver();
+        ResetObserver resetObserver = new ResetObserver();
         try {
-            for (String fxmlFile : fileLocations) {
+            int i = 0;
+            while (i < fileLocations.size()) {
+                String fxmlFile = fileLocations.get(i);
                 FXMLLoader loader = new FXMLLoader(Paths.get(fxmlFile).toUri().toURL());
                 paneList.add(loader.load());
-                if (!fxmlFile.contains("widget")) observer.addController(loader);
+                if (!fxmlFile.contains("widget")) resetObserver.addController(loader);
                 if (fxmlFile.contains("souvenir")) extractSouvenirController(loader);
                 if (fxmlFile.contains("blind_alley")) extractBlindAlleyController(loader);
+                i++;
             }
-            ObserverHub.addObserver(observer);
+            ObserverHub.addObserver(resetObserver);
         } catch (IOException e){
             e.printStackTrace();
         }
