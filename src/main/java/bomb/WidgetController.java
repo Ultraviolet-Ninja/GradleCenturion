@@ -3,6 +3,7 @@ package bomb;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
+import bomb.tools.pattern.facade.MaterialFacade;
 import bomb.tools.pattern.factory.TextFormatterFactory;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.filter.Filter;
@@ -30,7 +31,7 @@ public class WidgetController {
             rjPortSlider, serialPortSlider, rcaPortSlider;
 
     @FXML
-    private JFXSlider doubleABatteries, dBatteries, batteryHolders, portPlates;
+    private MFXSlider doubleABatteries, dBatteries, batteryHolders, portPlates;
 
     @FXML
     private JFXToggleButton forgetMeNot, souvenir;
@@ -219,7 +220,7 @@ public class WidgetController {
     }
 
     private void portSliderReset() {
-        FacadeFX.resetSliderValues(
+        MaterialFacade.resetSliderValues(
                 dviPortSlider, parallelPortSlider, psPortSlider,
                 rjPortSlider, serialPortSlider, rcaPortSlider
         );
@@ -237,6 +238,6 @@ public class WidgetController {
     }
 
     private void everythingElseReset() {
-        FacadeFX.resetSliderValues(doubleABatteries, dBatteries, batteryHolders, portPlates);
+        MaterialFacade.resetSliderValues(doubleABatteries, dBatteries, batteryHolders, portPlates);
     }
 }

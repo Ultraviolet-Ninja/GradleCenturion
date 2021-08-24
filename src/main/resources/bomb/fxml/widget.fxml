@@ -53,57 +53,48 @@
                     <HBox.margin>
                         <Insets left="40.0"/>
                     </HBox.margin>
-                </JFXSlider>
+                </MFXSlider>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                 <Label id="port-label" text="Parallel"/>
-                <JFXSlider id="parallel-slider" fx:id="parallelPortSlider" blockIncrement="1.0" majorTickUnit="1.0"
-                           max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true"
-                           showTickMarks="true" snapToTicks="true">
+                <MFXSlider id="parallel-slider" fx:id="parallelPortSlider" max="10.0" prefHeight="54.0"
+                           prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="14.0"/>
                     </HBox.margin>
-                </JFXSlider>
+                </MFXSlider>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                 <Label id="port-label" text="PS-2"/>
-                <JFXSlider id="ps-slider" fx:id="psPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0"
-                           minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true"
-                           showTickMarks="true" snapToTicks="true">
+                <MFXSlider id="ps-slider" fx:id="psPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="33.0"/>
                     </HBox.margin>
-                </JFXSlider>
+                </MFXSlider>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                 <Label id="port-label" text="RJ-45"/>
-                <JFXSlider id="rj-slider" fx:id="rjPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0"
-                           minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true"
-                           showTickMarks="true" snapToTicks="true">
+                <MFXSlider id="rj-slider" fx:id="rjPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0" >
                     <HBox.margin>
                         <Insets left="30.0"/>
                     </HBox.margin>
-                </JFXSlider>
+                </MFXSlider>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                 <Label id="port-label" text="Serial"/>
-                <JFXSlider id="serial-slider" fx:id="serialPortSlider" blockIncrement="1.0" majorTickUnit="1.0"
-                           max="10.0" minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true"
-                           showTickMarks="true" snapToTicks="true">
+                <MFXSlider id="serial-slider" fx:id="serialPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="26.0"/>
                     </HBox.margin>
-                </JFXSlider>
+                </MFXSlider>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                 <Label id="port-label" text="RCA"/>
-                <JFXSlider id="rca-slider" fx:id="rcaPortSlider" blockIncrement="1.0" majorTickUnit="1.0" max="10.0"
-                           minorTickCount="0" prefHeight="54.0" prefWidth="220.0" showTickLabels="true"
-                           showTickMarks="true" snapToTicks="true">
+                <MFXSlider id="rca-slider" fx:id="rcaPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="36.0"/>
                     </HBox.margin>
-                </JFXSlider>
+                </MFXSlider>
             </HBox>
             <HBox alignment="CENTER" prefHeight="61.0" prefWidth="600.0">
                 <Label id="major-title" text="Ports"/>
@@ -165,7 +156,7 @@
                         <VBox.margin>
                             <Insets bottom="30.0"/>
                         </VBox.margin>
-                    </JFXSlider>
+                    </MFXSlider>
                     <Label id="everything-else-label" layoutX="114.0" layoutY="144.0" text="D Batteries">
                         <VBox.margin>
                             <Insets top="30.0"/>
@@ -178,20 +169,17 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                     <Label id="everything-else-label" text="Port Plates"/>
-                    <JFXSlider id="holder-slider" fx:id="portPlates" blockIncrement="1.0" majorTickUnit="1.0" max="10.0"
-                               minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true">
+                    <MFXSlider id="holder-slider" fx:id="portPlates" max="10.0">
                         <VBox.margin>
                             <Insets bottom="30.0"/>
                         </VBox.margin>
-                    </JFXSlider>
+                    </MFXSlider>
                     <Label id="everything-else-label" text="Battery Holders">
                         <VBox.margin>
                             <Insets top="30.0"/>
                         </VBox.margin>
                     </Label>
-                    <JFXSlider id="holder-slider" fx:id="batteryHolders" blockIncrement="1.0" majorTickUnit="1.0"
-                               max="10.0" minorTickCount="0" showTickLabels="true" showTickMarks="true"
-                               snapToTicks="true"/>
+                    <MFXSlider id="holder-slider" fx:id="batteryHolders" max="10.0" />
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                     <MFXTextField fx:id="numberOfMinutesField" prefHeight="46.0" prefWidth="348.0"
