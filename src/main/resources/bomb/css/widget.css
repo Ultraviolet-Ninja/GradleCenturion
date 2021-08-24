@@ -3,6 +3,10 @@
     -fx-underline: true;
 }
 
+.mfx-button {
+    -fx-font-size: 24;
+}
+
 .jfx-button {
     -fx-font-size: 24;
 }

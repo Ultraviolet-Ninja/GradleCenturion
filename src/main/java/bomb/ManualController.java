@@ -98,8 +98,8 @@ public class ManualController {
         setPairs(radioButtonList, formattedNameList, paneList, filteredLocations);
     }
 
-    private ArrayList<String> formatWords(Iterator<Toggle> nameIterator) {
-        ArrayList<String> list = new ArrayList<>();
+    private List<String> formatWords(Iterator<Toggle> nameIterator) {
+        List<String> list = new ArrayList<>();
         while(nameIterator.hasNext()){
             String line = ((ToggleButton)nameIterator.next()).getText().replace(" ", "_")
                     .replace("-", "_");
@@ -134,8 +134,8 @@ public class ManualController {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
-    private ArrayList<String> filesFromFolder(final File folder) throws IllegalArgumentException{
-        ArrayList<String> list = new ArrayList<>();
+    private List<String> filesFromFolder(final File folder) throws IllegalArgumentException{
+        List<String> list = new ArrayList<>();
         for (final File fileEntry : Objects.requireNonNull(folder.listFiles())){
             if (fileEntry.isDirectory())
                 list.addAll(filesFromFolder(fileEntry));
@@ -145,8 +145,8 @@ public class ManualController {
         return list;
     }
 
-    private ArrayList<String> filterLocations(List<String> originalLocations){
-        ArrayList<String> outputList = new ArrayList<>();
+    private List<String> filterLocations(List<String> originalLocations){
+        List<String> outputList = new ArrayList<>();
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);
         for (String result : filenamePattern) outputList.add(result.substring(0, result.length() - 1));

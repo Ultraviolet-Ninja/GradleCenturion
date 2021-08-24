@@ -27,7 +27,7 @@
 }
 
 #submit-button {
-    -jfx-rippler-fill: black;
+    -mfx-rippler-color: black;
     -fx-background-color: #ffcd99;
     -fx-background-radius: 25;
     -fx-border-color: black;

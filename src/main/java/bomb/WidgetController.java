@@ -9,8 +9,8 @@ import bomb.tools.filter.Filter;
 import bomb.tools.pattern.factory.WidgetEventFactory;
 import bomb.tools.pattern.observer.ObserverHub;
 import com.jfoenix.controls.JFXSlider;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXToggleButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Toggle;
@@ -36,59 +36,60 @@ public class WidgetController {
     private JFXToggleButton forgetMeNot, souvenir;
 
     @FXML
-    private JFXTextArea serialCodeArea, numberOfMinutesArea, numberOfModulesArea;
+    private MFXTextField serialCodeField, numberOfMinutesField, numberOfModulesField;
 
     @FXML
     private ToggleGroup bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup, msaGroup,
             nsaGroup, sigGroup, sndGroup, trnGroup;
 
-    public void initialize(){
+    public void initialize() {
         injectTextFormatter();
         portSliderInitialize();
         widgetPageReset();
         setTextAreaNumbersOnly();
     }
 
-    private void portSliderInitialize(){
-        EventHandler<MouseEvent> handler = event -> {
+    private void initializeOtherSliderEvent() {
+        doubleABatteries.setOnMouseClicked(event -> Widget.setDoubleAs((int) doubleABatteries.getValue()));
+        dBatteries.setOnMouseClicked(event -> Widget.setDoubleAs((int) dBatteries.getValue()));
+        batteryHolders.setOnMouseClicked(event -> Widget.setDoubleAs((int) batteryHolders.getValue()));
+        portPlates.setOnMouseClicked(event -> Widget.setDoubleAs((int) portPlates.getValue()));
+    }
+
+    private void initializePortSliderEvent() {
+        dviPortSlider.setOnMouseClicked(createPortSliderEvent(DVI));
+        parallelPortSlider.setOnMouseClicked(createPortSliderEvent(PARALLEL));
+        psPortSlider.setOnMouseClicked(createPortSliderEvent(PS2));
+        rjPortSlider.setOnMouseClicked(createPortSliderEvent(RJ45));
+        serialPortSlider.setOnMouseClicked(createPortSliderEvent(SERIAL));
+        rcaPortSlider.setOnMouseClicked(createPortSliderEvent(RCA));
+    }
+
+    private EventHandler<MouseEvent> createPortSliderEvent(Port port) {
+        return event -> {
             JFXSlider source = (JFXSlider) event.getSource();
-            Widget.setPortValue(determineWhichSliderEvent(source), (int) source.getValue());
+            Widget.setPortValue(port, (int) source.getValue());
         };
-        dviPortSlider.setOnMouseClicked(handler);
-        parallelPortSlider.setOnMouseClicked(handler);
-        psPortSlider.setOnMouseClicked(handler);
-        rjPortSlider.setOnMouseClicked(handler);
-        serialPortSlider.setOnMouseClicked(handler);
-        rcaPortSlider.setOnMouseClicked(handler);
     }
 
-    private Port determineWhichSliderEvent(JFXSlider source){
-        if (source == dviPortSlider) return DVI;
-        if (source == parallelPortSlider) return PARALLEL;
-        if (source == psPortSlider) return PS2;
-        if (source == rjPortSlider) return RJ45;
-        if (source == serialPortSlider) return SERIAL;
-        return RCA;
-    }
-
-    private void setTextAreaNumbersOnly(){
-        Consumer<JFXTextArea> handler = WidgetEventFactory.createNumbersOnlyTextArea();
-        numberOfMinutesArea.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue && !numberOfMinutesArea.getText().isEmpty()){
-                handler.accept(numberOfMinutesArea);
+    private void setTextFieldNumbersOnly() {
+        Consumer<MFXTextField> handler = WidgetEventFactory.createNumbersOnlyTextArea();
+        numberOfMinutesField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue && !numberOfMinutesField.getText().isEmpty()) {
+                handler.accept(numberOfMinutesField);
             }
         });
-        numberOfModulesArea.focusedProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue && !numberOfModulesArea.getText().isEmpty()){
-                handler.accept(numberOfModulesArea);
+        numberOfModulesField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue && !numberOfModulesField.getText().isEmpty()) {
+                handler.accept(numberOfModulesField);
             }
         });
     }
 
-    private void injectTextFormatter(){
-        serialCodeArea.setTextFormatter(TextFormatterFactory.createSerialCodeFormatter());
-        numberOfMinutesArea.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
-        numberOfModulesArea.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
+    private void injectTextFormatter() {
+        serialCodeField.setTextFormatter(TextFormatterFactory.createSerialCodeFormatter());
+        numberOfMinutesField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
+        numberOfModulesField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
     }
 
     @FXML
@@ -177,12 +178,12 @@ public class WidgetController {
     }
 
     @FXML
-    private void detectSerialCodeAreaChange(){
-        String serialCode = serialCodeArea.getText();
+    private void detectSerialCodeAreaChange() {
+        String serialCode = serialCodeField.getText();
         Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (Filter.SERIAL_CODE_PATTERN.matchesRegex()){
+        if (Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
             Widget.setSerialCode(serialCode);
-            FacadeFX.disable(serialCodeArea);
+            FacadeFX.disable(serialCodeField);
         }
     }
 
@@ -199,9 +200,9 @@ public class WidgetController {
     }
 
     @FXML
-    private void fullBombReset(){
+    private void fullBombReset() {
         widgetPageReset();
-        FacadeFX.enable(serialCodeArea);
+        FacadeFX.enable(serialCodeField);
         forgetMeNot.setSelected(false);
         souvenir.setSelected(false);
         forgetMeToggle();
@@ -211,31 +212,31 @@ public class WidgetController {
         ObserverHub.updateAtIndex(RESET);
     }
 
-    private void widgetPageReset(){
+    private void widgetPageReset() {
         portSliderReset();
         everythingElseReset();
         textAreaReset();
     }
 
-    private void portSliderReset(){
+    private void portSliderReset() {
         FacadeFX.resetSliderValues(
                 dviPortSlider, parallelPortSlider, psPortSlider,
                 rjPortSlider, serialPortSlider, rcaPortSlider
         );
     }
 
-    private void textAreaReset(){
-        FacadeFX.clearMultipleTextFields(serialCodeArea, numberOfMinutesArea, numberOfModulesArea);
+    private void textAreaReset() {
+        FacadeFX.clearMultipleTextFields(serialCodeField, numberOfMinutesField, numberOfModulesField);
     }
 
-    private void unselectPortToggles(){
+    private void unselectPortToggles() {
         FacadeFX.unselectFromMultipleToggleGroup(
                 bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup,
                 msaGroup, nsaGroup, sigGroup, sndGroup, trnGroup
         );
     }
 
-    private void everythingElseReset(){
+    private void everythingElseReset() {
         FacadeFX.resetSliderValues(doubleABatteries, dBatteries, batteryHolders, portPlates);
     }
 }
