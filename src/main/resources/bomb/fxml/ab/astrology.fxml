@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -25,16 +25,16 @@
         <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="281.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <HBox id="bottom-hbox" alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-        <JFXTextField fx:id="omenTextField" editable="false" promptText="Omen">
+        <MFXTextField fx:id="omenTextField" editable="false" promptText="Omen">
             <HBox.margin>
                 <Insets top="38.0"/>
             </HBox.margin>
-        </JFXTextField>
-        <JFXButton id="submit-button" fx:id="resetButton" disable="true" onAction="#resetModule" text="Clear">
+        </MFXTextField>
+        <MFXButton id="submit-button" fx:id="resetButton" disable="true" onAction="#resetModule" text="Clear">
             <HBox.margin>
                 <Insets left="319.0" right="25.0" top="220.0"/>
             </HBox.margin>
-        </JFXButton>
+        </MFXButton>
     </HBox>
     <GridPane>
         <columnConstraints>
@@ -58,31 +58,31 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Fire.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="fire-toggle-button" onAction="#determineElement" text="Fire">
+                <MFXToggleButton id="fire-toggle-button" onAction="#determineElement" text="Fire">
                     <toggleGroup>
                         <ToggleGroup fx:id="elementGroup"/>
                     </toggleGroup>
-                </JFXToggleButton>
+                </MFXToggleButton>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Earth.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="earth-toggle-button" onAction="#determineElement" text="Earth"
+                <MFXToggleButton id="earth-toggle-button" onAction="#determineElement" text="Earth"
                                  toggleGroup="$elementGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Air.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="air-toggle-button" onAction="#determineElement" text="Air"
+                <MFXToggleButton id="air-toggle-button" onAction="#determineElement" text="Air"
                                  toggleGroup="$elementGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/elements/Water.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="water-toggle-button" onAction="#determineElement" text="Water"
+                <MFXToggleButton id="water-toggle-button" onAction="#determineElement" text="Water"
                                  toggleGroup="$elementGroup"/>
             </VBox>
         </GridPane>
@@ -99,12 +99,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0">
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
                                  prefWidth="161.0" text="Mercury">
                     <toggleGroup>
                         <ToggleGroup fx:id="celestialGroup"/>
                     </toggleGroup>
-                </JFXToggleButton>
+                </MFXToggleButton>
                 <ImageView fitHeight="81.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
                         <Insets left="5.0"/>
@@ -116,11 +116,11 @@
                 <ImageView fitHeight="83.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Venus.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Venus"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Venus"
                                  toggleGroup="$celestialGroup"/>
             </HBox>
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
                                  prefWidth="119.0" text="Mars" toggleGroup="$celestialGroup"/>
                 <ImageView fitHeight="84.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
@@ -134,11 +134,11 @@
                 <ImageView fitHeight="82.0" fitWidth="82.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Jupiter.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Jupiter"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Jupiter"
                                  toggleGroup="$celestialGroup"/>
             </HBox>
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Neptune"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Neptune"
                                  toggleGroup="$celestialGroup"/>
                 <ImageView fitHeight="84.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Neptune.PNG"/>
@@ -148,7 +148,7 @@
                 </ImageView>
             </HBox>
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
                                  prefWidth="141.0" text="Saturn" toggleGroup="$celestialGroup"/>
                 <ImageView fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
@@ -162,7 +162,7 @@
                 <ImageView fitHeight="84.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Uranus.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Uranus"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Uranus"
                                  toggleGroup="$celestialGroup"/>
             </HBox>
             <HBox id="right-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
@@ -170,11 +170,11 @@
                 <ImageView fitHeight="84.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Pluto.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Pluto"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Pluto"
                                  toggleGroup="$celestialGroup"/>
             </HBox>
             <HBox id="left-side-hbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" prefHeight="58.0"
                                  prefWidth="122.0" text="Sun" toggleGroup="$celestialGroup"/>
                 <ImageView fitHeight="87.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
                     <HBox.margin>
@@ -188,7 +188,7 @@
                 <ImageView fitHeight="82.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/celestials/Moon.PNG"/>
                 </ImageView>
-                <JFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Moon"
+                <MFXToggleButton id="celestial-toggle-button" onAction="#determineCelestial" text="Moon"
                                  toggleGroup="$celestialGroup"/>
             </HBox>
         </GridPane>
@@ -208,81 +208,81 @@
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Gemini.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Gemini">
+                <MFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Gemini">
                     <toggleGroup>
                         <ToggleGroup fx:id="zodiacGroup"/>
                     </toggleGroup>
-                </JFXToggleButton>
+                </MFXToggleButton>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Capricorn.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Capricorn"
+                <MFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Capricorn"
                                  toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Pisces.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Pisces" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Pisces" toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Libra.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Libra" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Libra" toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Taurus.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Taurus" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Taurus" toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="3">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Scorpio.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Scorpio" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Scorpio" toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Aquarius.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Aquarius"
+                <MFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Aquarius"
                                  toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Aries.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Aries"
+                <MFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Aries"
                                  toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Cancer.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Cancer"
+                <MFXToggleButton onAction="#determineZodiac" prefHeight="58.0" prefWidth="143.0" text="Cancer"
                                  toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Leo.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Leo" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Leo" toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Sag.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Sagittarius" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Sagittarius" toggleGroup="$zodiacGroup"/>
             </VBox>
             <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
                 <ImageView fitHeight="77.0" fitWidth="94.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../astrology/zodiac/Virgo.PNG"/>
                 </ImageView>
-                <JFXToggleButton onAction="#determineZodiac" text="Virgo" toggleGroup="$zodiacGroup"/>
+                <MFXToggleButton onAction="#determineZodiac" text="Virgo" toggleGroup="$zodiacGroup"/>
             </VBox>
         </GridPane>
     </GridPane>

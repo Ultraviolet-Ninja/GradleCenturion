@@ -2,8 +2,8 @@ package bomb.modules.ab.astrology;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
@@ -15,9 +15,9 @@ public class AstrologyController implements Resettable {
 
     private final AstroSymbol[] astroSymbolBuffer;
 
-    @FXML private JFXButton resetButton;
+    @FXML private MFXButton resetButton;
 
-    @FXML private JFXTextField omenTextField;
+    @FXML private MFXTextField omenTextField;
 
     @FXML private ToggleGroup elementGroup, celestialGroup, zodiacGroup;
 
