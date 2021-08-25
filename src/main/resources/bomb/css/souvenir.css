@@ -1,9 +1,13 @@
-#search-textarea {
-    -jfx-focus-color: white;
-    -jfx-unfocus-color: #0b234c;
+#search-text-field {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
     -fx-font-size: 15;
+    -fx-padding: 0 0 0 7;
     -fx-prompt-text-fill: white;
-    -jfx-label-float: true;
+    -mfx-line-stroke-width: 0;
 }
 
 .table-view {

@@ -16,8 +16,6 @@
     -fx-font-size: 18;
     -fx-padding: 0 0 0 10;
     -fx-prompt-text-fill: white;
-    -mfx-line-color: white;
-    -mfx-unfocused-line-color: #00407c;
     -mfx-line-stroke-width: 0;
 }
 

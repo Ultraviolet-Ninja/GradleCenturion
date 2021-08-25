@@ -3,8 +3,8 @@ package bomb.modules.ab.bitwise;
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.event.HoverHandler;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -12,9 +12,9 @@ import javafx.scene.control.Button;
 import java.util.function.Consumer;
 
 public class BitwiseController implements Resettable {
-    @FXML private JFXButton bitAnd, bitOr, bitXor, bitNot;
+    @FXML private MFXButton bitAnd, bitOr, bitXor, bitNot;
 
-    @FXML private JFXTextField byteTextField;
+    @FXML private MFXTextField byteTextField;
 
     public void initialize(){
         FacadeFX.bindHandlerToButtons(new HoverHandler<>(initAction()), bitAnd, bitNot, bitXor, bitOr);

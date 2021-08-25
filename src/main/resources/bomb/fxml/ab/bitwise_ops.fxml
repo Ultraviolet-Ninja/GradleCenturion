@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -12,32 +12,33 @@
             xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="bomb.modules.ab.bitwise.BitwiseController">
     <center>
-        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-            <JFXTextField alignment="CENTER" editable="false" fx:id="byteTextField" promptText="Output Binary">
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <MFXTextField fx:id="byteTextField" alignment="CENTER" editable="false" prefHeight="94.0" prefWidth="705.0"
+                          promptText="Output Binary">
                 <VBox.margin>
                     <Insets left="100.0" right="100.0"/>
                 </VBox.margin>
-            </JFXTextField>
+            </MFXTextField>
         </VBox>
     </center>
     <top>
         <HBox alignment="CENTER" prefHeight="315.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
-            <JFXButton id="submit-button" fx:id="bitAnd" text="And"/>
-            <JFXButton id="submit-button" fx:id="bitOr" text="Or">
+            <MFXButton id="submit-button" fx:id="bitAnd" text="And"/>
+            <MFXButton id="submit-button" fx:id="bitOr" text="Or">
                 <HBox.margin>
                     <Insets left="35.0"/>
                 </HBox.margin>
-            </JFXButton>
-            <JFXButton id="submit-button" fx:id="bitXor" text="Xor">
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="bitXor" text="Xor">
                 <HBox.margin>
                     <Insets left="35.0"/>
                 </HBox.margin>
-            </JFXButton>
-            <JFXButton id="submit-button" fx:id="bitNot" text="Not">
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="bitNot" text="Not">
                 <HBox.margin>
                     <Insets left="35.0"/>
                 </HBox.margin>
-            </JFXButton>
+            </MFXButton>
         </HBox>
     </top>
 </BorderPane>

@@ -1,15 +1,13 @@
-.jfx-button {
+.mfx-button {
     -fx-font-size: 40;
 }
 
-.jfx-text-field {
-    -fx-padding: 0 30 0 30;
-    -jfx-focus-color: transparent;
-    -jfx-unfocus-color: transparent;
+.mfx-text-field {
     -fx-font-size: 40;
     -fx-prompt-text-fill: #020800;
     -fx-text-fill: #020800;
     -fx-background-color: #90ae46;
     -fx-border-color: #5d6851;
     -fx-border-width: 5;
+    -mfx-line-stroke-width: 0;
 }
