@@ -2,7 +2,7 @@ package bomb.modules.ab.alphabet;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
@@ -14,10 +14,10 @@ import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFor
 import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class AlphabetController implements Resettable {
-    private final Map<JFXTextField, JFXTextField> stateMap;
+    private final Map<MFXTextField, MFXTextField> stateMap;
 
     @FXML
-    private JFXTextField firstInput, secondInput, thirdInput, forthInput,
+    private MFXTextField firstInput, secondInput, thirdInput, forthInput,
             firstOutput, secondOutput, thirdOutput, forthOutput;
 
     public AlphabetController(){
@@ -29,7 +29,7 @@ public class AlphabetController implements Resettable {
         stateMap.put(secondInput, thirdInput);
         stateMap.put(thirdInput, forthInput);
         stateMap.put(forthInput, null);
-        for (JFXTextField input : stateMap.keySet()){
+        for (MFXTextField input : stateMap.keySet()){
             input.setTextFormatter(createOneLetterFormatter());
             input.setOnKeyReleased(actionHandler());
         }
@@ -37,7 +37,7 @@ public class AlphabetController implements Resettable {
 
     private EventHandler<KeyEvent> actionHandler(){
         return event -> {
-            JFXTextField source = (JFXTextField) event.getSource();
+            MFXTextField source = (MFXTextField) event.getSource();
             boolean canGetResults = false;
             if (!source.getText().isEmpty()) {
                 canGetResults = moveToLastEmptyTextField(source);
@@ -46,7 +46,7 @@ public class AlphabetController implements Resettable {
         };
     }
 
-    private boolean moveToLastEmptyTextField(JFXTextField source){
+    private boolean moveToLastEmptyTextField(MFXTextField source){
         do {
             source = stateMap.get(source);
         } while (source != null && !source.getText().isEmpty());
