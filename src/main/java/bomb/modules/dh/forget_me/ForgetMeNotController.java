@@ -4,9 +4,9 @@ import bomb.Widget;
 import bomb.abstractions.Resettable;
 import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,12 +15,12 @@ import javafx.scene.control.Label;
 import java.util.function.Consumer;
 
 public class ForgetMeNotController implements Resettable {
-    @FXML private JFXButton outputButton, undoButton, resetButton,
+    @FXML private MFXButton outputButton, undoButton, resetButton,
             one, two, three, four, five, six, seven, eight, nine, zero;
 
     @FXML private JFXTextArea outputArea;
 
-    @FXML private JFXTextField confirmationField;
+    @FXML private MFXTextField confirmationField;
 
     @FXML private Label stageCounter;
 
@@ -32,7 +32,7 @@ public class ForgetMeNotController implements Resettable {
     private Consumer<ActionEvent> createPressAction() {
         return event -> {
             try {
-                addNextNumber((JFXButton) event.getSource());
+                addNextNumber((MFXButton) event.getSource());
                 if (undoButton.isDisable()) FacadeFX.enable(undoButton);
                 if (resetButton.isDisable()) FacadeFX.enable(resetButton);
                 setButtonPrivileges();
@@ -44,7 +44,7 @@ public class ForgetMeNotController implements Resettable {
         };
     }
 
-    private void addNextNumber(JFXButton button) {
+    private void addNextNumber(MFXButton button) {
         int extractedNumber = Integer.parseInt(button.getText());
         ForgetMeNot.add(extractedNumber);
         confirmationField.setText("Stage " + ForgetMeNot.getStage() + " was a " + extractedNumber);

@@ -7,25 +7,18 @@
     -fx-font-size: 24;
 }
 
-.jfx-button {
-    -fx-font-size: 24;
-}
-
-.jfx-text-area {
-    -jfx-focus-color: white;
-    -jfx-unfocus-color: transparent;
-    -fx-font-size: 18;
-    -fx-padding: 0 30 0 30;
-    -fx-prompt-text-fill: white;
+.mfx-text-field {
     -fx-background-color: #00407c;
     -fx-background-radius: 15;
     -fx-border-color: black;
     -fx-border-radius: 15;
     -fx-border-width: 2;
-}
-
-.jfx-text-area .content {
-    -fx-background-color: #00407c;
+    -fx-font-size: 18;
+    -fx-padding: 0 0 0 10;
+    -fx-prompt-text-fill: white;
+    -mfx-line-color: white;
+    -mfx-unfocused-line-color: #00407c;
+    -mfx-line-stroke-width: 0;
 }
 
 .jfx-slider {
@@ -47,20 +40,20 @@
     -fx-font-size: 19;
 }
 
-.jfx-toggle-button {
-    -jfx-untoggle-color: #354558;
-    -jfx-untoggle-line-color: #172b58;
+.mfx-toggle-button {
+    -mfx-untoggle-color: #354558;
+    -mfx-untoggle-line-color: #172b58;
 }
 
 #lit-label-toggle-button {
-    -jfx-toggle-color: #dedee0;
-    -jfx-toggle-line-color: #2b4cff;
+    -mfx-toggle-color: #dedee0;
+    -mfx-toggle-line-color: #2b4cff;
     -fx-font-size: 18;
 }
 
 #unlit-label-toggle-button {
-    -jfx-toggle-color: #00033b;
-    -jfx-toggle-line-color: #041c48;
+    -mfx-toggle-color: #00033b;
+    -mfx-toggle-line-color: #041c48;
     -fx-font-size: 18;
 }
 
@@ -73,8 +66,8 @@
 }
 
 #boss-module-toggle-button {
-    -jfx-toggle-line-color: #860e0f;
-    -jfx-toggle-color: #f68484;
+    -mfx-toggle-line-color: #860e0f;
+    -mfx-toggle-color: #f68484;
     -fx-font-size: 25;
 }
 

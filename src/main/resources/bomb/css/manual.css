@@ -27,15 +27,23 @@
 }
 
 #submit-button {
-    -mfx-rippler-color: black;
     -fx-background-color: #ffcd99;
     -fx-background-radius: 25;
     -fx-border-color: black;
     -fx-border-radius: 20;
     -fx-border-width: 2;
     -fx-text-fill: #221b18;
+    -mfx-button-type: raised;
+}
+
+#submit-button .text {
     -fx-font-weight: lighter;
     -fx-font-family: Tahoma;
+}
+
+#submit-button .mfx-ripple-generator {
+    -mfx-ripple-color: black;
+    -mfx-ripple-radius: 15;
 }
 
 #submit-button:pressed {

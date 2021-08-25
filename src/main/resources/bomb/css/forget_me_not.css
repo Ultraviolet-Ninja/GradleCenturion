@@ -1,4 +1,4 @@
-.jfx-button:pressed {
+.mfx-button:pressed {
     -fx-scale-x: 0.9;
     -fx-scale-y: 0.9;
 }

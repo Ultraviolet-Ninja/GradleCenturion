@@ -9,7 +9,7 @@ import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.filter.Filter;
 import bomb.tools.pattern.factory.WidgetEventFactory;
 import bomb.tools.pattern.observer.ObserverHub;
-import com.jfoenix.controls.JFXSlider;
+import io.github.palexdev.materialfx.controls.MFXSlider;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.EventHandler;
@@ -23,31 +23,34 @@ import java.util.function.Consumer;
 
 import static bomb.enumerations.Port.*;
 import static bomb.enumerations.TrinarySwitch.*;
-import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.*;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT_TOGGLE;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOGGLE;
 
 public class WidgetController {
     @FXML
-    private JFXSlider dviPortSlider, parallelPortSlider, psPortSlider,
-            rjPortSlider, serialPortSlider, rcaPortSlider;
+    private MFXSlider dviPortSlider, parallelPortSlider, psPortSlider, rjPortSlider, serialPortSlider, rcaPortSlider;
 
     @FXML
     private MFXSlider doubleABatteries, dBatteries, batteryHolders, portPlates;
 
     @FXML
-    private JFXToggleButton forgetMeNot, souvenir;
+    private MFXToggleButton forgetMeNot, souvenir;
 
     @FXML
     private MFXTextField serialCodeField, numberOfMinutesField, numberOfModulesField;
 
     @FXML
-    private ToggleGroup bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup, msaGroup,
-            nsaGroup, sigGroup, sndGroup, trnGroup;
+    private ToggleGroup bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup, msaGroup, nsaGroup, sigGroup,
+            sndGroup, trnGroup;
 
     public void initialize() {
         injectTextFormatter();
-        portSliderInitialize();
+        initializePortSliderEvent();
+        initializeOtherSliderEvent();
         widgetPageReset();
-        setTextAreaNumbersOnly();
+        setTextFieldNumbersOnly();
+        createIndicatorToggleButtonEvent();
     }
 
     private void initializeOtherSliderEvent() {
@@ -68,7 +71,7 @@ public class WidgetController {
 
     private EventHandler<MouseEvent> createPortSliderEvent(Port port) {
         return event -> {
-            JFXSlider source = (JFXSlider) event.getSource();
+            MFXSlider source = (MFXSlider) event.getSource();
             Widget.setPortValue(port, (int) source.getValue());
         };
     }
@@ -93,89 +96,28 @@ public class WidgetController {
         numberOfModulesField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
     }
 
-    @FXML
-    private void bobGroup(){
-        indicatorAction(Indicator.BOB, bobGroup);
+    private void createIndicatorToggleButtonEvent() {
+        Indicator[] indicatorArray = Indicator.values();
+        ToggleGroup[] groupArray = {bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup, msaGroup, nsaGroup,
+                sigGroup, sndGroup, trnGroup};
+        for (int i = 0; i < indicatorArray.length; i++) {
+            Indicator currentIndicator = indicatorArray[i];
+            ToggleGroup currentGroup = groupArray[i];
+            groupArray[i].getToggles()
+                    .forEach(toggle -> ((ToggleButton) toggle).setOnAction(
+                            event -> indicatorAction(currentIndicator, currentGroup)
+                    ));
+        }
     }
 
-    @FXML
-    private void carGroup(){
-        indicatorAction(Indicator.CAR, carGroup);
-    }
-
-    @FXML
-    private void clrGroup(){
-        indicatorAction(Indicator.CLR, clrGroup);
-    }
-
-    @FXML
-    private void frkGroup(){
-        indicatorAction(Indicator.FRK, frkGroup);
-    }
-
-    @FXML
-    private void frqGroup(){
-        indicatorAction(Indicator.FRQ, frqGroup);
-    }
-
-    @FXML
-    private void indGroup(){
-        indicatorAction(Indicator.IND, indGroup);
-    }
-
-    @FXML
-    private void msaGroup(){
-        indicatorAction(Indicator.MSA, msaGroup);
-    }
-
-    @FXML
-    private void nsaGroup(){
-        indicatorAction(Indicator.NSA, nsaGroup);
-    }
-
-    @FXML
-    private void sigGroup(){
-        indicatorAction(Indicator.SIG, sigGroup);
-    }
-
-    @FXML
-    private void sndGroup(){
-        indicatorAction(Indicator.SND, sndGroup);
-    }
-
-    @FXML
-    private void trnGroup(){
-        indicatorAction(Indicator.TRN, trnGroup);
-    }
-
-    private void indicatorAction(Indicator indicator, ToggleGroup group){
+    private void indicatorAction(Indicator indicator, ToggleGroup group) {
         TrinarySwitch state = determineState(group.getSelectedToggle());
         Widget.setIndicator(state, indicator);
     }
 
-    private TrinarySwitch determineState(Toggle selected){
+    private TrinarySwitch determineState(Toggle selected) {
         if (selected == null) return UNKNOWN;
-        return ((ToggleButton)selected).getText().equals("Lit") ? ON : OFF;
-    }
-
-    @FXML
-    private void doubleABatterySliderChange(){
-        Widget.setDoubleAs((int) doubleABatteries.getValue());
-    }
-
-    @FXML
-    private void dBatterySliderChange(){
-        Widget.setDBatteries((int) dBatteries.getValue());
-    }
-
-    @FXML
-    private void batteryHolderSliderChange(){
-        Widget.setNumHolders((int) batteryHolders.getValue());
-    }
-
-    @FXML
-    private void portPlateSliderChange(){
-        Widget.setNumberOfPlates((int) portPlates.getValue());
+        return ((ToggleButton) selected).getText().equals("Lit") ? ON : OFF;
     }
 
     @FXML

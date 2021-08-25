@@ -11,6 +11,7 @@
 <?import org.controlsfx.control.tableview2.TableColumn2?>
 <?import org.controlsfx.control.tableview2.TableView2?>
 
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/souvenir.css"
           xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1"
@@ -39,10 +40,10 @@
         </TableView2>
     </VBox>
     <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
-        <JFXTextArea id="search-textarea" fx:id="searchArea" disable="true" promptText="Search">
+        <MFXTextField id="search-textarea" fx:id="searchField" disable="true" promptText="Search">
             <HBox.margin>
                 <Insets bottom="17.0" right="30.0" top="84.0"/>
             </HBox.margin>
-        </JFXTextArea>
+        </MFXTextField>
     </HBox>
 </GridPane>

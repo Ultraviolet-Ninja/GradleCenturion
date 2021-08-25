@@ -3,25 +3,27 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
-![Project Version](https://img.shields.io/badge/version-0.16.0-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.16.1-blueviolet)
 ### Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
 
 This is a huge project for one man to tackle, but it's taught me about the challenges of Java 8 with FX, CI pipelines and working in Gradle.
 
 ### Technologies
-- Java 8 with FX
+- Java 15
 - Gradle 6.8.1
 #### Plugins
 - Jacoco
+- JavaFX
 - Palantir Docker
 - Breadmoirai GitHub Release
 #### Dependencies
-- ControlFX ver 8.40.18
-- JFoenix ver 8.0.10
+- MaterialFX ver 11.12.0
+- ControlFX ver 11.1.0
+- JFoenix ver 9.0.10
 - JavaTuple ver 1.2
-- Medusa ver. 8.3
-- JGraphT ver. 1.4
+- Medusa ver. 11.7
+- JGraphT ver. 1.5.1
 #### Other Technologies
 - Circle CI
 - LGTM Code Quality
