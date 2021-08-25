@@ -33,7 +33,7 @@
     -fx-border-radius: 20;
     -fx-border-width: 2;
     -fx-text-fill: #221b18;
-    -mfx-button-type: raised;
+    -mfx-button-type: RAISED;
 }
 
 #submit-button .text {

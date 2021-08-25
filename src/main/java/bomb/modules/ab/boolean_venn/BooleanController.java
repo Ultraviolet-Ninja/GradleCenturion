@@ -3,9 +3,9 @@ package bomb.modules.ab.boolean_venn;
 import bomb.abstractions.Resettable;
 import bomb.tools.filter.Regex;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXToggleButton;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
+import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,14 +22,14 @@ public class BooleanController implements Resettable {
     private boolean isFirstSymbol;
     private StringBuilder currentOperation;
 
-    @FXML private JFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor, booleanXnor,
+    @FXML private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor, booleanXnor,
             booleanImpliedBy;
 
     @FXML private Circle a, b, c, ab, bc, ac, all, not;
 
-    @FXML private JFXToggleButton priorityToggle;
+    @FXML private MFXTextField booleanMathOperation;
 
-    @FXML private JFXTextField booleanMathOperation;
+    @FXML private MFXToggleButton priorityToggle;
 
     static {
         PRESS_COLOR = "rgba(115,208,115,1)";
@@ -45,7 +45,7 @@ public class BooleanController implements Resettable {
     }
 
     public void initialize() {
-        JFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
+        MFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
                 booleanXnor, booleanImpliedBy};
         int i = 0;
         EventHandler<ActionEvent> onActionEvent = createButtonAction();
@@ -57,7 +57,7 @@ public class BooleanController implements Resettable {
 
     private EventHandler<ActionEvent> createButtonAction(){
         return event -> {
-            addSymbolToEquation((JFXButton) event.getSource());
+            addSymbolToEquation((MFXButton) event.getSource());
             solveEquation();
             isFirstSymbol = !isFirstSymbol;
         };
@@ -75,7 +75,7 @@ public class BooleanController implements Resettable {
         writeOutToTextField();
     }
 
-    private void addSymbolToEquation(JFXButton button) {
+    private void addSymbolToEquation(MFXButton button) {
         String tempCurrentOperation = currentOperation.toString();
         Regex letterCapture = isFirstSymbol ? FIRST_SYMBOL_CAPTURE : SECOND_SYMBOL_CAPTURE;
 
@@ -116,7 +116,7 @@ public class BooleanController implements Resettable {
             circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }
 
-    private String getMathSymbol(JFXButton button){
+    private String getMathSymbol(MFXButton button){
         return String.valueOf(button.getText().charAt(0));
     }
 

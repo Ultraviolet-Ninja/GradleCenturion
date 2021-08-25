@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -56,11 +56,11 @@
                     strokeType="INSIDE" strokeWidth="0.0"/>
         </Pane>
         <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-            <JFXButton id="reset-button" onAction="#resetModule" text="Reset">
+            <MFXButton id="reset-button" onAction="#resetModule" text="Reset">
                 <VBox.margin>
                     <Insets bottom="30.0"/>
                 </VBox.margin>
-            </JFXButton>
+            </MFXButton>
         </VBox>
     </GridPane>
     <GridPane>
@@ -73,53 +73,53 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
         </rowConstraints>
         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-            <JFXButton id="boolean-operation-button" fx:id="booleanAnd" mnemonicParsing="false" text="∧ - AND">
-            </JFXButton>
-            <JFXButton id="boolean-operation-button" fx:id="booleanOr" mnemonicParsing="false" text="∨ - OR">
+            <MFXButton id="boolean-operation-button" fx:id="booleanAnd" mnemonicParsing="false" text="∧ - AND">
+            </MFXButton>
+            <MFXButton id="boolean-operation-button" fx:id="booleanOr" mnemonicParsing="false" text="∨ - OR">
                 <HBox.margin>
                     <Insets left="25.0"/>
                 </HBox.margin>
-            </JFXButton>
-            <JFXButton id="boolean-operation-button" fx:id="booleanXor" mnemonicParsing="false" text="⊻ - XOR">
+            </MFXButton>
+            <MFXButton id="boolean-operation-button" fx:id="booleanXor" mnemonicParsing="false" text="⊻ - XOR">
                 <HBox.margin>
                     <Insets left="25.0"/>
                 </HBox.margin>
-            </JFXButton>
-            <JFXButton id="boolean-operation-button" fx:id="booleanImplies" mnemonicParsing="false" text="→ - Implies">
+            </MFXButton>
+            <MFXButton id="boolean-operation-button" fx:id="booleanImplies" mnemonicParsing="false" text="→ - Implies">
                 <HBox.margin>
                     <Insets left="25.0"/>
                 </HBox.margin>
-            </JFXButton>
+            </MFXButton>
         </HBox>
         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-            <JFXButton id="boolean-operation-button" fx:id="booleanNand" mnemonicParsing="false" text="| - NAND">
-            </JFXButton>
-            <JFXButton id="boolean-operation-button" fx:id="booleanNor" mnemonicParsing="false"
+            <MFXButton id="boolean-operation-button" fx:id="booleanNand" mnemonicParsing="false" text="| - NAND">
+            </MFXButton>
+            <MFXButton id="boolean-operation-button" fx:id="booleanNor" mnemonicParsing="false"
                        text="↓ - NOR">
                 <HBox.margin>
                     <Insets left="25.0"/>
                 </HBox.margin>
-            </JFXButton>
-            <JFXButton id="boolean-operation-button" fx:id="booleanXnor" mnemonicParsing="false" text="↔ - XNOR">
+            </MFXButton>
+            <MFXButton id="boolean-operation-button" fx:id="booleanXnor" mnemonicParsing="false" text="↔ - XNOR">
                 <HBox.margin>
                     <Insets left="25.0"/>
                 </HBox.margin>
-            </JFXButton>
-            <JFXButton id="boolean-operation-button" fx:id="booleanImpliedBy" mnemonicParsing="false"
+            </MFXButton>
+            <MFXButton id="boolean-operation-button" fx:id="booleanImpliedBy" mnemonicParsing="false"
                        text="← - Implied By">
                 <HBox.margin>
                     <Insets left="25.0"/>
                 </HBox.margin>
-            </JFXButton>
+            </MFXButton>
         </HBox>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-            <JFXToggleButton fx:id="priorityToggle" onAction="#switchEquationPriority" text="(AB) Priority"/>
-            <JFXTextField fx:id="booleanMathOperation" alignment="CENTER" prefHeight="80.0" prefWidth="600.0"
+            <MFXToggleButton fx:id="priorityToggle" onAction="#switchEquationPriority" text="(AB) Priority"/>
+            <MFXTextField fx:id="booleanMathOperation" alignment="CENTER" prefHeight="80.0" prefWidth="600.0"
                           text="(AB)C">
                 <HBox.margin>
                     <Insets left="60.0" right="241.0"/>
                 </HBox.margin>
-            </JFXTextField>
+            </MFXTextField>
         </HBox>
     </GridPane>
 </GridPane>
