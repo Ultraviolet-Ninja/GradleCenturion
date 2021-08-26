@@ -3,8 +3,8 @@ package bomb.modules.dh.emoji;
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.event.HoverHandler;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -21,12 +21,14 @@ public class EmojiController implements Resettable {
 
     private EmojiControllerState currentState;
 
-    @FXML private JFXButton first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth,
+    @FXML
+    private MFXButton first, second, third, forth, fifth, sixth, seventh, eighth, ninth, tenth,
             add, minus, equal, clear;
 
-    @FXML private JFXTextField equationBar;
+    @FXML
+    private MFXTextField equationBar;
 
-    public EmojiController(){
+    public EmojiController() {
         currentState = FIRST_EMOJI_PRESS;
         internalEquation = new StringBuilder();
     }
@@ -42,7 +44,7 @@ public class EmojiController implements Resettable {
 
     private Consumer<ActionEvent> createEmojiButtonAction() {
         return event -> {
-            Emojis current = Emojis.getEmojiFromText(((JFXButton) event.getSource()).getText());
+            Emojis current = Emojis.getEmojiFromText(((MFXButton) event.getSource()).getText());
             internalEquation.append(Objects.requireNonNull(current).getLabel());
             exportToUI();
             handleState();
@@ -52,7 +54,7 @@ public class EmojiController implements Resettable {
     private Consumer<ActionEvent> createMathButtonAction() {
         return event -> {
             if (currentState != MATH_SYMBOL_PRESS) currentState = MATH_SYMBOL_PRESS;
-            String symbol = ((JFXButton) event.getSource()).getText();
+            String symbol = ((MFXButton) event.getSource()).getText();
             internalEquation.append(symbol);
             exportToUI();
             handleState();
