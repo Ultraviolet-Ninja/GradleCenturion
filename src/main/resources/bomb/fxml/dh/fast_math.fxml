@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -22,11 +22,11 @@
         <RowConstraints maxHeight="590.0" minHeight="0.0" prefHeight="511.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <VBox alignment="CENTER" prefHeight="242.0" prefWidth="1171.0">
-        <JFXTextField fx:id="outputMath" editable="false" promptText="Output Math">
+        <MFXTextField fx:id="outputMath" editable="false" promptText="Output Math">
             <VBox.margin>
                 <Insets left="250.0" right="250.0"/>
             </VBox.margin>
-        </JFXTextField>
+        </MFXTextField>
     </VBox>
     <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
         <center>
@@ -40,63 +40,63 @@
                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
                 </rowConstraints>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
-                    <JFXButton id="submit-button" fx:id="alfa" text="A"/>
-                    <JFXButton id="submit-button" fx:id="bravo" text="B">
+                    <MFXButton id="submit-button" fx:id="alfa" text="A"/>
+                    <MFXButton id="submit-button" fx:id="bravo" text="B">
                         <HBox.margin>
                             <Insets left="15.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" fx:id="charlie" layoutX="10.0" layoutY="10.0" text="C">
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="charlie" layoutX="10.0" layoutY="10.0" text="C">
                         <HBox.margin>
                             <Insets left="15.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" fx:id="delta" layoutX="62.0" layoutY="10.0" text="D">
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="delta" layoutX="62.0" layoutY="10.0" text="D">
                         <HBox.margin>
                             <Insets left="15.0"/>
                         </HBox.margin>
-                    </JFXButton>
+                    </MFXButton>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                    <JFXButton id="submit-button" fx:id="echo" text="E"/>
-                    <JFXButton id="submit-button" fx:id="golf" layoutX="10.0" layoutY="10.0" text="G">
+                    <MFXButton id="submit-button" fx:id="echo" text="E"/>
+                    <MFXButton id="submit-button" fx:id="golf" layoutX="10.0" layoutY="10.0" text="G">
                         <HBox.margin>
                             <Insets left="15.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" fx:id="kilo" layoutX="62.0" layoutY="10.0" text="K">
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="kilo" layoutX="62.0" layoutY="10.0" text="K">
                         <HBox.margin>
                             <Insets left="15.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" fx:id="november" layoutX="114.0" layoutY="10.0" text="N">
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="november" layoutX="114.0" layoutY="10.0" text="N">
                         <HBox.margin>
                             <Insets left="15.0"/>
                         </HBox.margin>
-                    </JFXButton>
+                    </MFXButton>
                 </HBox>
                 <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                    <JFXButton id="submit-button" fx:id="papa" text="P"/>
-                    <JFXButton id="submit-button" fx:id="sierra" layoutX="10.0" layoutY="10.0" text="S">
+                    <MFXButton id="submit-button" fx:id="papa" text="P"/>
+                    <MFXButton id="submit-button" fx:id="sierra" layoutX="10.0" layoutY="10.0" text="S">
                         <HBox.margin>
                             <Insets left="10.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" fx:id="tango" layoutX="10.0" layoutY="10.0" text="T">
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="tango" layoutX="10.0" layoutY="10.0" text="T">
                         <HBox.margin>
                             <Insets left="10.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" layoutX="62.0" layoutY="10.0" text="X" fx:id="xRay">
+                    </MFXButton>
+                    <MFXButton id="submit-button" layoutX="62.0" layoutY="10.0" text="X" fx:id="xRay">
                         <HBox.margin>
                             <Insets left="10.0"/>
                         </HBox.margin>
-                    </JFXButton>
-                    <JFXButton id="submit-button" fx:id="zulu" layoutX="166.0" layoutY="10.0" text="Z">
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="zulu" layoutX="166.0" layoutY="10.0" text="Z">
                         <HBox.margin>
                             <Insets left="10.0"/>
                         </HBox.margin>
-                    </JFXButton>
+                    </MFXButton>
                 </HBox>
             </GridPane>
         </center>
