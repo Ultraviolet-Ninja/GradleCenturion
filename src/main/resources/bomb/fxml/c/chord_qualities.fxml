@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import bomb.components.chord.NoteCircleComponent?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -17,7 +17,7 @@
     </center>
     <bottom>
         <HBox alignment="TOP_CENTER" prefHeight="235.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
-            <JFXTextField fx:id="outputField" alignment="CENTER" promptText="Output Chord" editable="false"/>
+            <MFXTextField fx:id="outputField" alignment="CENTER" promptText="Output Chord" editable="false"/>
         </HBox>
     </bottom>
 </BorderPane>

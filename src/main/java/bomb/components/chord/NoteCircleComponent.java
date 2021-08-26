@@ -1,7 +1,7 @@
 package bomb.components.chord;
 
 import bomb.abstractions.Resettable;
-import com.jfoenix.controls.JFXButton;
+import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,11 +17,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class NoteCircleComponent extends Pane implements Resettable {
-    public static final byte NOTE_LIMIT = 4;
+    public static final byte SELECTED_NOTE_LIMIT = 4;
 
     private static final String ENABLED_ID = "enabled-light-circle", DISABLED_ID = "disabled-light-circle";
 
-    private final Map<JFXButton, Circle> stateMap;
+    private final Map<MFXButton, Circle> stateMap;
     private final Set<String> selectedNoteSet;
 
     private Consumer<Set<String>> externalAction;
@@ -29,7 +29,7 @@ public class NoteCircleComponent extends Pane implements Resettable {
     @FXML private Circle noteALight, noteASharpLight, noteBLight, noteCLight, noteCSharpLight, noteDLight,
             noteDSharpLight,noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight;
 
-    @FXML private JFXButton a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
+    @FXML private MFXButton a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
 
     public NoteCircleComponent() {
         super();
@@ -47,7 +47,7 @@ public class NoteCircleComponent extends Pane implements Resettable {
     }
 
     public void initialize(){
-        JFXButton[] buttonArray = {a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp};
+        MFXButton[] buttonArray = {a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp};
         Circle[] circleArray = {
                 noteALight, noteASharpLight, noteBLight, noteCLight, noteCSharpLight, noteDLight,
                 noteDSharpLight,noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight
@@ -63,15 +63,15 @@ public class NoteCircleComponent extends Pane implements Resettable {
 
     private EventHandler<ActionEvent> createButtonEvent(){
         return event -> {
-            JFXButton source = (JFXButton) event.getSource();
-            Circle current = stateMap.get(source);
-            boolean currentlyDisabled = current.getId().equals(DISABLED_ID);
-            if (currentlyDisabled && selectedNoteSet.size() < NOTE_LIMIT) {
-                current.setId(ENABLED_ID);
+            MFXButton source = (MFXButton) event.getSource();
+            Circle associatedCircle = stateMap.get(source);
+            boolean currentlyDisabled = associatedCircle.getId().equals(DISABLED_ID);
+            if (currentlyDisabled && selectedNoteSet.size() < SELECTED_NOTE_LIMIT) {
+                associatedCircle.setId(ENABLED_ID);
                 selectedNoteSet.add(source.getText());
                 echoChanges();
             } else if (!currentlyDisabled) {
-                current.setId(DISABLED_ID);
+                associatedCircle.setId(DISABLED_ID);
                 selectedNoteSet.remove(source.getText());
                 echoChanges();
             }

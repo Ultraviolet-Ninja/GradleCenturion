@@ -7,19 +7,19 @@ import static org.testng.Assert.assertEquals;
 
 public class ChordQualitiesTest {
     @DataProvider
-    public Object[][] exceptionProvider(){
+    public Object[][] exceptionProvider() {
         return new Object[][]{
                 {"A A A A"}, {"A B C"}, {"A B C H"}, {"A B C D"}
         };
     }
 
     @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(String invalidInput){
+    public void exceptionTest(String invalidInput) {
         ChordQualities.solve(invalidInput);
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider(){
+    public Object[][] trainingVideoProvider() {
         return new String[][]{
                 {"A +2 +2 +3", "D#", "F", "G#", "A"}, {"F +3 +1 +6", "A#", "D", "D#", "F#"},
                 {"D# +3 +5 +3", "A", "B", "C#", "E"}, {"E +2 +1 +4", "G#", "C#", "D#", "E"},
@@ -28,12 +28,12 @@ public class ChordQualitiesTest {
     }
 
     @Test(dataProvider = "trainingVideoProvider")
-    public void trainingVideoTest(String expected, String ... testSet){
+    public void trainingVideoTest(String expected, String... testSet) {
         assertEqualsAnyOrder(expected, testSet);
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider(){
+    public Object[][] theGreatBerateProvider() {
         return new String[][]{
                 {"G +5 +2 +3", "G#", "B", "D", "E"}, {"E +3 +1 +6", "A#", "D#", "F", "F#"},
                 {"C# +3 +1 +6", "F#", "A", "C#", "D#"}
@@ -41,11 +41,16 @@ public class ChordQualitiesTest {
     }
 
     @Test(dataProvider = "theGreatBerateProvider")
-    public void theGreatBerateTest(String expected, String ... testSet){
+    public void theGreatBerateTest(String expected, String... testSet) {
         assertEqualsAnyOrder(expected, testSet);
     }
 
-    private void assertEqualsAnyOrder(String expected, String[] notes){
+    @Test
+    public void outOfOrderTest() {
+        assertEqualsAnyOrder("G +5 +2 +3", "B", "G#", "D", "E");
+    }
+
+    private void assertEqualsAnyOrder(String expected, String... notes) {
         int length = notes.length;
         for (int i = 0; i < length; i++) {
             String input = notes[i % length] + " " + notes[(i + 1) % length] +

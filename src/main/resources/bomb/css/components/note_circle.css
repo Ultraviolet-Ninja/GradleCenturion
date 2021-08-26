@@ -19,17 +19,25 @@
     -fx-stroke-width: 0;
 }
 
-.jfx-button {
+.mfx-button {
     -fx-background-color: #ffe3c8;
     -fx-background-radius: 50;
     -fx-border-radius: 50;
     -fx-text-fill: #0e0e0e;
-    -jfx-button-type: RAISED;
-    -jfx-rippler-fill: black;
+    -mfx-button-type: RAISED;
 }
 
-.jfx-button:hover {
+.mfx-button .mfx-ripple-generator {
+    -mfx-ripple-color: transparent;
+}
+
+.mfx-button:hover {
     -fx-background-color: #f9fe87;
+}
+
+.mfx-button:pressed {
+    -fx-scale-x: 0.9;
+    -fx-scale-y: 0.9;
 }
 
 #note-button {

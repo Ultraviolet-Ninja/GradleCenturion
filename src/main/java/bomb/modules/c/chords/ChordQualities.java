@@ -4,8 +4,8 @@ import bomb.Widget;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class ChordQualities extends Widget {
     public static final String NEW_CHORD = "New Chord: ";
@@ -17,29 +17,30 @@ public class ChordQualities extends Widget {
     }
 
     public static String solve(String input) throws IllegalArgumentException {
-        validateInput(input);
-        String[] chordQuality = getNextChordQuality(input);
+        Set<String> sortedSet = validateInput(input);
+        if (isSouvenirActive) Souvenir.addRelic("Chord Quality Original Notes", input);
+        String[] chordQuality = getNextChordQuality(sortedSet);
         if (chordQuality == null || chordQuality[1] == null)
             throw new IllegalArgumentException("The received notes didn't make a new chord quality");
         return NEW_CHORD + chordQuality[0] + " " + chordQuality[1];
     }
 
-    private static void validateInput(String input) throws IllegalArgumentException {
-        Set<String> repeatDetector = new HashSet<>();
+    private static Set<String> validateInput(String input) throws IllegalArgumentException {
+        Set<String> sortedSet = new TreeSet<>();
         for (String note : input.split(" ")) {
-            if (repeatDetector.contains(note))
+            if (sortedSet.contains(note))
                 throw new IllegalArgumentException("The input can't contain repeated notes");
             if (ALL_NOTES.findAbsoluteIndex(note) == -1)
                 throw new IllegalArgumentException("Invalid note was in the input");
-            repeatDetector.add(note);
+            sortedSet.add(note);
         }
-        if (repeatDetector.size() != 4)
+        if (sortedSet.size() != 4)
             throw new IllegalArgumentException("There weren't 4 notes in the input");
+        return sortedSet;
     }
 
-    private static String[] getNextChordQuality(String input) {
-        if (isSouvenirActive) Souvenir.addRelic("Chord Quality Original Notes", input);
-        ReadOnlyRing<String> inputNoteRing = new ReadOnlyRing<>(input.split(" "));
+    private static String[] getNextChordQuality(Set<String> input) {
+        ReadOnlyRing<String> inputNoteRing = new ReadOnlyRing<>(input);
         ReadOnlyRing<String> noteDistanceRing = createNoteDistanceRing(inputNoteRing);
         return generateNewChord(inputNoteRing, noteDistanceRing);
     }
