@@ -10,9 +10,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class WidgetEventFactory {
-    public static Consumer<MFXTextField> createNumbersOnlyTextArea(){
-        BiConsumer<MFXTextField, Integer> decideSetter = (jfxTextArea, number) -> {
-            if (jfxTextArea.getPromptText().contains("Minutes")) Widget.setStartTime(number);
+    public static Consumer<MFXTextField> createNumbersOnlyTextArea() {
+        BiConsumer<MFXTextField, Integer> decideSetter = (mfxTextArea, number) -> {
+            if (mfxTextArea.getPromptText().contains("Minutes")) Widget.setStartTime(number);
             else Widget.setNumModules(number);
         };
         return mfxTextField -> {

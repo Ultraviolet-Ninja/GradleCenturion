@@ -127,14 +127,14 @@ public class Widget {
      *
      * @param plates The given number
      */
-    public static void setNumberOfPlates(int plates){
-        if (plates >= 0){
+    public static void setNumberOfPlates(int plates) {
+        if (plates >= 0) {
             numPlates = plates;
         }
     }
 
     /**
-     * Stores the current Two Factor Authentication
+     * Stores the current Two-Factor Authentication
      *
      * @param twoFactor The String containing the 2-Factor
      */

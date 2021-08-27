@@ -68,23 +68,20 @@ public class NeutralizationController implements Resettable {
 
     @FXML
     private void changeColor(){
-        switch(FacadeFX.getToggleName(acidColors)){
-            case "Red":{
+        switch (FacadeFX.getToggleName(acidColors)) {
+            case "Red" -> {
                 testTube.setStyle(RED_STYLE);
                 solutionColor = Color.RED;
-                break;
             }
-            case "Yellow":{
+            case "Yellow" -> {
                 testTube.setStyle(YELLOW_STYLE);
                 solutionColor = Color.YELLOW;
-                break;
             }
-            case "Green":{
+            case "Green" -> {
                 testTube.setStyle(GREEN_STYLE);
                 solutionColor = Color.GREEN;
-                break;
             }
-            default:{
+            default -> {
                 testTube.setStyle(BLUE_STYLE);
                 solutionColor = Color.BLUE;
             }

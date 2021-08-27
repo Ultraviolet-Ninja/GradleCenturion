@@ -52,7 +52,7 @@ public class Star {
         return -1;
     }
 
-    //If no or one primary colors are flashing
+    //If there are one or less primary colors are flashing
     public boolean primaryRule(Screams[] flashOrder){
         Set<Screams> unique = new HashSet<>();
         Collections.addAll(unique, flashOrder);

@@ -129,49 +129,23 @@ public class Astrology extends Widget {
     }
 
     private static boolean isZodiac(AstroSymbol symbol) {
-        switch (symbol) {
-            case ARIES:
-            case TAURUS:
-            case GEMINI:
-            case CANCER:
-            case LEO:
-            case VIRGO:
-            case LIBRA:
-            case SCORPIO:
-            case SAGITTARIUS:
-            case CAPRICORN:
-            case AQUARIUS:
-            case PISCES:
-                return true;
-        }
-        return false;
+        return switch (symbol) {
+            case ARIES, TAURUS, GEMINI, CANCER, LEO, VIRGO, LIBRA, SCORPIO, SAGITTARIUS, CAPRICORN, AQUARIUS, PISCES -> true;
+            default -> false;
+        };
     }
 
     private static boolean isCelestial(AstroSymbol symbol) {
-        switch (symbol) {
-            case SUN:
-            case MOON:
-            case MERCURY:
-            case VENUS:
-            case MARS:
-            case JUPITER:
-            case SATURN:
-            case URANUS:
-            case NEPTUNE:
-            case PLUTO:
-                return true;
-        }
-        return false;
+        return switch (symbol) {
+            case SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE, PLUTO -> true;
+            default -> false;
+        };
     }
 
     private static boolean isElemental(AstroSymbol symbol) {
-        switch (symbol) {
-            case FIRE:
-            case EARTH:
-            case AIR:
-            case WATER:
-                return true;
-        }
-        return false;
+        return switch (symbol) {
+            case FIRE, EARTH, AIR, WATER -> true;
+            default -> false;
+        };
     }
 }

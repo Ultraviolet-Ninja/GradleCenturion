@@ -4,7 +4,7 @@ import bomb.tools.filter.Filter;
 import javafx.scene.control.TextFormatter;
 
 public class TextFormatterFactory {
-    public static TextFormatter<String> createSerialCodeFormatter(){
+    public static TextFormatter<String> createSerialCodeFormatter() {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
 
@@ -15,7 +15,7 @@ public class TextFormatterFactory {
         });
     }
 
-    public static TextFormatter<String> createNumbersOnlyFormatter(){
+    public static TextFormatter<String> createNumbersOnlyFormatter() {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
 

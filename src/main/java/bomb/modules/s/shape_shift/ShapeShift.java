@@ -4,9 +4,9 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.tools.data.structures.graph.list.ListGraph;
-
-import java.util.AbstractMap;
+import org.javatuples.Pair;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.ToIntFunction;
 
 //TODO Eventually document the code
@@ -14,7 +14,7 @@ public class ShapeShift extends Widget {
     private static final int[][] COUNT_TRACKER = new int[4][4];
     private static final ToIntFunction<Boolean> CONVERTER = bool -> bool ? 1 : 0;
 
-    private static ListGraph<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> graph;
+    private static ListGraph<Pair<ShapeEnd, ShapeEnd>> graph;
 
     //<editor-fold desc="Init methods">
     static {
@@ -34,17 +34,17 @@ public class ShapeShift extends Widget {
         initializeTriples();
     }
 
-    private static ArrayList<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> createList(){
-        ArrayList<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> list = new ArrayList<>();
+    private static List<Pair<ShapeEnd, ShapeEnd>> createList(){
+        List<Pair<ShapeEnd, ShapeEnd>> list = new ArrayList<>();
         for (ShapeEnd left : ShapeEnd.values()){
             for (ShapeEnd right : ShapeEnd.values())
-                list.add(new AbstractMap.SimpleEntry<>(left, right));
+                list.add(new Pair<>(left, right));
         }
         return list;
     }
 
     private static void initializeTriples(){
-        ArrayList<AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>> list = createList();
+        List<Pair<ShapeEnd, ShapeEnd>> list = createList();
         initializePairs(list.get(0), list.get(8), list.get(15));
         initializePairs(list.get(1), list.get(10), list.get(15));
         initializePairs(list.get(2), list.get(3), list.get(0));
@@ -64,7 +64,7 @@ public class ShapeShift extends Widget {
     }
 
     @SafeVarargs
-    private static void initializePairs(AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd>... trios){
+    private static void initializePairs(Pair<ShapeEnd, ShapeEnd>... trios){
         graph.addEdge(trios[0], trios[1]);
         graph.addEdge(trios[0], trios[2]);
     }
@@ -74,10 +74,10 @@ public class ShapeShift extends Widget {
         serialCodeChecker();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {
-            AbstractMap.SimpleEntry<ShapeEnd, ShapeEnd> pair = graph.get(
-                    new AbstractMap.SimpleEntry<>(left, right))
+            Pair<ShapeEnd, ShapeEnd> pair = graph.get(
+                    new Pair<>(left, right))
                     .get(CONVERTER.applyAsInt(conditionMap(left, right)));
-            return solve(pair.getKey(), pair.getValue());
+            return solve(pair.getValue0(), pair.getValue1());
         }
         resetMod();
         return new ShapeEnd[]{left, right};
@@ -97,68 +97,48 @@ public class ShapeShift extends Widget {
 
     //<editor-fold desc="Boolean Methods">
     private static boolean conditionMap(ShapeEnd left, ShapeEnd right){
-        switch (left){
-            case ROUND:
-                return roundedOptions(right);
-            case FLAT:
-                return rectangularOptions(right);
-            case POINT:
-                return triangularOptions(right);
-            default:
-                return ticketOptions(right);
-        }
+        return switch (left) {
+            case ROUND -> roundedOptions(right);
+            case FLAT -> rectangularOptions(right);
+            case POINT -> triangularOptions(right);
+            default -> ticketOptions(right);
+        };
     }
 
     private static boolean roundedOptions(ShapeEnd right){
-        switch (right){
-            case ROUND:
-                return hasVowel();
-            case FLAT:
-                return hasLitIndicator(Indicator.SND);
-            case POINT:
-                return hasLitIndicator(Indicator.SIG);
-            default:
-                return numDoubleAs > 1;
-        }
+        return switch (right) {
+            case ROUND -> hasVowel();
+            case FLAT -> hasLitIndicator(Indicator.SND);
+            case POINT -> hasLitIndicator(Indicator.SIG);
+            default -> numDoubleAs > 1;
+        };
     }
 
     private static boolean rectangularOptions(ShapeEnd right){
-        switch (right){
-            case ROUND:
-                return hasMoreThan(Port.DVI, 0);
-            case FLAT:
-                return lastDigit() % 2 == 1;
-            case POINT:
-                return hasLitIndicator(Indicator.MSA);
-            default:
-                return hasUnlitIndicator(Indicator.BOB);
-        }
+        return switch (right) {
+            case ROUND -> hasMoreThan(Port.DVI, 0);
+            case FLAT -> lastDigit() % 2 == 1;
+            case POINT -> hasLitIndicator(Indicator.MSA);
+            default -> hasUnlitIndicator(Indicator.BOB);
+        };
     }
 
     private static boolean triangularOptions(ShapeEnd right){
-        switch (right){
-            case ROUND:
-                return hasMoreThan(Port.PARALLEL, 0);
-            case FLAT:
-                return hasUnlitIndicator(Indicator.CAR);
-            case POINT:
-                return hasLitIndicator(Indicator.IND);
-            default:
-                return hasMoreThan(Port.RJ45, 0);
-        }
+        return switch (right) {
+            case ROUND -> hasMoreThan(Port.PARALLEL, 0);
+            case FLAT -> hasUnlitIndicator(Indicator.CAR);
+            case POINT -> hasLitIndicator(Indicator.IND);
+            default -> hasMoreThan(Port.RJ45, 0);
+        };
     }
 
     private static boolean ticketOptions(ShapeEnd right){
-        switch (right){
-            case ROUND:
-                return hasMoreThan(Port.RCA, 0);
-            case FLAT:
-                return hasUnlitIndicator(Indicator.FRQ);
-            case POINT:
-                return hasMoreThan(Port.PS2, 0);
-            default:
-                return getAllBatteries() >= 3;
-        }
+        return switch (right) {
+            case ROUND -> hasMoreThan(Port.RCA, 0);
+            case FLAT -> hasUnlitIndicator(Indicator.FRQ);
+            case POINT -> hasMoreThan(Port.PS2, 0);
+            default -> getAllBatteries() >= 3;
+        };
     }
     //</editor-fold>
 }

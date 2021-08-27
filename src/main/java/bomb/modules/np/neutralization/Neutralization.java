@@ -88,7 +88,7 @@ public class Neutralization extends Widget {
      *
      * @return
      */
-    private static boolean indicatorMatch(){
+    private static boolean indicatorMatch(){ //TODO Use Regex
         for (Indicator ind : indicatorArray){
             if (ind.getState() != UNKNOWN){
                 for (char letter : ind.name().toCharArray()){

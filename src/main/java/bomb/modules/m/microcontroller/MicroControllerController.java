@@ -64,15 +64,10 @@ public class MicroControllerController implements Resettable {
     }
 
     private void setFrontEnd(){
-        switch(pinCount){
-            case "6":
-                currentChip = new SixPinController();
-                break;
-            case "8":
-                currentChip = new EightPinController();
-                break;
-            default:
-               currentChip = new TenPinController();
+        switch (pinCount) {
+            case "6" -> currentChip = new SixPinController();
+            case "8" -> currentChip = new EightPinController();
+            default -> currentChip = new TenPinController();
         }
         chipBackground.getChildren().clear();
         chipBackground.getChildren().add(currentChip);
@@ -88,12 +83,12 @@ public class MicroControllerController implements Resettable {
 
     private AbstractController getType(){
         int pins = Integer.parseInt(pinCount);
-        switch (controllerType){
-            case "STRK": return new StrikeController(pins);
-            case "LEDS": return new DiodeController(pins);
-            case "EXPL": return new ExplodeController(pins);
-            default: return new CountdownController(pins);
-        }
+        return switch (controllerType) {
+            case "STRK" -> new StrikeController(pins);
+            case "LEDS" -> new DiodeController(pins);
+            case "EXPL" -> new ExplodeController(pins);
+            default -> new CountdownController(pins);
+        };
     }
 
     @Override

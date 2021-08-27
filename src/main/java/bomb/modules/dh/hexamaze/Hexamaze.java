@@ -67,14 +67,14 @@ public class Hexamaze extends Widget{
      * @param button The name of the currently toggled ToggleButton
      */
     public static void setShapeSelector(String button){
-        switch (button){
-            case "Erase": currentSelector = null; break;
-            case "Circle": currentSelector = HexShape.Circle; break;
-            case "Hexagon": currentSelector = HexShape.Hexagon; break;
-            case "Left Triangle": currentSelector = HexShape.LeftTriangle; break;
-            case "Right Triangle": currentSelector = HexShape.RightTriangle; break;
-            case "Up Triangle": currentSelector = HexShape.UpTriangle; break;
-            default: currentSelector = HexShape.DownTriangle;
+        switch (button) {
+            case "Erase" -> currentSelector = null;
+            case "Circle" -> currentSelector = HexShape.Circle;
+            case "Hexagon" -> currentSelector = HexShape.Hexagon;
+            case "Left Triangle" -> currentSelector = HexShape.LeftTriangle;
+            case "Right Triangle" -> currentSelector = HexShape.RightTriangle;
+            case "Up Triangle" -> currentSelector = HexShape.UpTriangle;
+            default -> currentSelector = HexShape.DownTriangle;
         }
     }
 

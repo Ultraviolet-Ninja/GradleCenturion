@@ -13,11 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HexamazeController implements Resettable {
-    @FXML
-    private ToggleGroup hexGroup, hexColorGroup;
+    @FXML private ToggleGroup hexGroup, hexColorGroup;
 
-    @FXML
-    private HexMazePanel oneOne, oneTwo, oneThree, oneFour,
+    @FXML private HexMazePanel oneOne, oneTwo, oneThree, oneFour,
             twoOne, twoTwo, twoThree, twoFour, twoFive,
             threeOne, threeTwo, threeThree, threeFour, threeFive, threeSix,
             fourOne, fourTwo, fourThree, fourFour, fourFive, fourSix, fourSeven,
@@ -50,22 +48,15 @@ public class HexamazeController implements Resettable {
     }
 
     private Color colorPicker(String strColor) {
-        switch (strColor) {
-            case "Red":
-                return Color.RED;
-            case "Yellow":
-                return Color.YELLOW;
-            case "Green":
-                return Color.GREEN;
-            case "Cyan":
-                return Color.CYAN;
-            case "Blue":
-                return Color.BLUE;
-            case "Pink":
-                return Color.PINK;
-            default:
-                return HexMazePanel.DEFAULT_PEG_COLOR;
-        }
+        return switch (strColor) {
+            case "Red" -> Color.RED;
+            case "Yellow" -> Color.YELLOW;
+            case "Green" -> Color.GREEN;
+            case "Cyan" -> Color.CYAN;
+            case "Blue" -> Color.BLUE;
+            case "Pink" -> Color.PINK;
+            default -> HexMazePanel.DEFAULT_PEG_COLOR;
+        };
     }
 
     @FXML

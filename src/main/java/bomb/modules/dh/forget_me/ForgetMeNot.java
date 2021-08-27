@@ -21,7 +21,7 @@ public class ForgetMeNot extends Widget {
 
     private static byte largestSerialCodeNumber = -1;
 
-    public static void add(int stageNumber) throws IllegalStateException{
+    public static void add(int stageNumber) throws IllegalStateException {
         if (!isForgetMeNotActive)
             throw new IllegalStateException("Forget Me Not wasn't activated");
 

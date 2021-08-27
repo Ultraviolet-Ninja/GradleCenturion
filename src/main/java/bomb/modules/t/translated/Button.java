@@ -13,8 +13,7 @@ import bomb.enumerations.TheButton;
  * Button class deals with a button module
  */
 public class Button extends TranslationCenter {
-    private static final String hold = "Hold",
-            tap = "Tap";
+    private static final String hold = "Hold", tap = "Tap";
 
     /**
      * evaluate() sorts through the conditions of the current bomb and tells either to hold or tap the button

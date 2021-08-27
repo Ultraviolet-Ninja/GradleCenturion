@@ -11,8 +11,6 @@ import javafx.scene.control.ToggleGroup;
 import java.util.Arrays;
 
 public class AstrologyController implements Resettable {
-    private static final byte ELEMENTAL_INDEX = 0, CELESTIAL_INDEX = 1, ZODIAC_INDEX = 2;
-
     private final AstroSymbol[] astroSymbolBuffer;
 
     @FXML private MFXButton resetButton;
@@ -28,19 +26,19 @@ public class AstrologyController implements Resettable {
     @FXML
     private void determineElement() {
         enableResetButton();
-        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), ELEMENTAL_INDEX);
+        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), Astrology.ELEMENT_INDEX);
     }
 
     @FXML
     private void determineCelestial() {
         enableResetButton();
-        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), CELESTIAL_INDEX);
+        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), Astrology.CELESTIAL_INDEX);
     }
 
     @FXML
     private void determineZodiac() {
         enableResetButton();
-        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), ZODIAC_INDEX);
+        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), Astrology.ZODIAC_INDEX);
     }
 
     private void enableResetButton() {

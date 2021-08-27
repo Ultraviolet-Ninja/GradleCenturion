@@ -21,6 +21,6 @@ public enum Pin {
     }
 
     public Color getColor(int index){
-        return colors[index%colors.length];
+        return colors[index % colors.length];
     }
 }

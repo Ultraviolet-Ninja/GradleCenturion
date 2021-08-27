@@ -46,7 +46,7 @@ public class Morse extends TranslationCenter {
      *
      * @param sample - the morse code letters
      * @return - [0] - the resulting words found from those letters.
-     *           [1] - the letters that match their morse code counter parts.
+     *           [1] - the letters that match their morse code counterparts.
      */
     public static String[] translate(String sample){
         String[] out = new String[2];
