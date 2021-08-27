@@ -16,11 +16,11 @@ public enum Pin {
 
     private final Color[] colors;
 
-    Pin(Color ... colors){
+    Pin(Color... colors) {
         this.colors = colors;
     }
 
-    public Color getColor(int index){
+    public Color getColor(int index) {
         return colors[index % colors.length];
     }
 }

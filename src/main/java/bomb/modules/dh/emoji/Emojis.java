@@ -15,7 +15,7 @@ public enum Emojis implements Labeled {
         return label;
     }
 
-    public static Emojis getEmojiFromText(String incoming){
+    public static Emojis getEmojiFromText(String incoming) {
         for (Emojis emoji : Emojis.values()) {
             if (emoji.label.equals(incoming))
                 return emoji;
@@ -23,7 +23,7 @@ public enum Emojis implements Labeled {
         return null;
     }
 
-    public static String generateCaptureGroup(){
+    public static String generateCaptureGroup() {
         StringBuilder sb = new StringBuilder("(?:");
         Emojis[] emojis = Emojis.values();
         for (int i = 0; i < emojis.length; i++) {
@@ -37,7 +37,7 @@ public enum Emojis implements Labeled {
         return sb.append("){1,2}").toString();
     }
 
-    Emojis(String label){
+    Emojis(String label) {
         this.label = label;
     }
 }

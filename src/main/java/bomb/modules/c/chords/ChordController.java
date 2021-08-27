@@ -11,15 +11,17 @@ import java.util.Set;
 import java.util.function.Consumer;
 
 public class ChordController implements Resettable {
-    @FXML private MFXTextField outputField;
+    @FXML
+    private MFXTextField outputField;
 
-    @FXML private NoteCircleComponent noteCircleComponent;
+    @FXML
+    private NoteCircleComponent noteCircleComponent;
 
-    public void initialize(){
+    public void initialize() {
         noteCircleComponent.addListenerAction(createListener());
     }
 
-    private Consumer<Set<String>> createListener(){
+    private Consumer<Set<String>> createListener() {
         return set -> {
             if (set.size() == NoteCircleComponent.SELECTED_NOTE_LIMIT) {
                 StringBuilder sb = new StringBuilder();

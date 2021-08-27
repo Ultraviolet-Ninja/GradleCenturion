@@ -22,14 +22,18 @@ public class BooleanController implements Resettable {
     private boolean isFirstSymbol;
     private StringBuilder currentOperation;
 
-    @FXML private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor, booleanXnor,
+    @FXML
+    private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor, booleanXnor,
             booleanImpliedBy;
 
-    @FXML private Circle a, b, c, ab, bc, ac, all, not;
+    @FXML
+    private Circle a, b, c, ab, bc, ac, all, not;
 
-    @FXML private MFXTextField booleanMathOperation;
+    @FXML
+    private MFXTextField booleanMathOperation;
 
-    @FXML private MFXToggleButton priorityToggle;
+    @FXML
+    private MFXToggleButton priorityToggle;
 
     static {
         PRESS_COLOR = "rgba(115,208,115,1)";
@@ -55,7 +59,7 @@ public class BooleanController implements Resettable {
         }
     }
 
-    private EventHandler<ActionEvent> createButtonAction(){
+    private EventHandler<ActionEvent> createButtonAction() {
         return event -> {
             addSymbolToEquation((MFXButton) event.getSource());
             solveEquation();
@@ -89,7 +93,7 @@ public class BooleanController implements Resettable {
         writeOutToTextField();
     }
 
-    private void makeSymbolReplacement(StringBuilder capturedText, String symbolToAdd){
+    private void makeSymbolReplacement(StringBuilder capturedText, String symbolToAdd) {
         char lastLetter = capturedText.charAt(capturedText.length() - 1);
 
         if (isFirstSymbol && "AB)".indexOf(lastLetter) == -1)
@@ -98,34 +102,34 @@ public class BooleanController implements Resettable {
         capturedText.append(symbolToAdd);
     }
 
-    private void overwriteOperationText(String overwriteText){
+    private void overwriteOperationText(String overwriteText) {
         currentOperation.setLength(0);
         currentOperation.append(overwriteText);
     }
 
     private void solveEquation() {
-        if (ultimateFilter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2){
+        if (ultimateFilter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2) {
             String code = BooleanVenn.resultCode(currentOperation.toString());
             setCircleFill(new Circle[]{not, c, b, a, bc, ac, ab, all}, code.toCharArray());
             toggleOperands(true);
         }
     }
 
-    private void setCircleFill(Circle[] circles, char[] bits){
+    private void setCircleFill(Circle[] circles, char[] bits) {
         for (int i = 0; i < circles.length; i++)
             circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }
 
-    private String getMathSymbol(MFXButton button){
+    private String getMathSymbol(MFXButton button) {
         return String.valueOf(button.getText().charAt(0));
     }
 
-    private void toggleOperands(boolean toggle){
+    private void toggleOperands(boolean toggle) {
         FacadeFX.toggleNodes(toggle, booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
                 booleanXnor, booleanImpliedBy);
     }
 
-    private StringBuilder shiftPriority(String reference){
+    private StringBuilder shiftPriority(String reference) {
         StringBuilder temp = new StringBuilder();
         String[] referenceSplit = reference.replaceAll("[()]", "").split("B");
 
@@ -142,12 +146,12 @@ public class BooleanController implements Resettable {
         return temp;
     }
 
-    private void writeOutToTextField(){
+    private void writeOutToTextField() {
         booleanMathOperation.setText(currentOperation.toString());
     }
 
     @FXML
-    private void resetModule(){
+    private void resetModule() {
         overwriteOperationText(DEFAULT_TEXT);
         writeOutToTextField();
         toggleOperands(false);

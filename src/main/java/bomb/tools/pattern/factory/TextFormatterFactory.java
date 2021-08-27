@@ -33,7 +33,7 @@ public class TextFormatterFactory {
                         null);
     }
 
-    public static TextFormatter<String> createOneLetterFormatter(){
+    public static TextFormatter<String> createOneLetterFormatter() {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
 
@@ -44,7 +44,7 @@ public class TextFormatterFactory {
         });
     }
 
-    public static TextFormatter<String> createTwoBitTextFormatter(){
+    public static TextFormatter<String> createTwoBitTextFormatter() {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
 

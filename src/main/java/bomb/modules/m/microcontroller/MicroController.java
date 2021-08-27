@@ -16,11 +16,11 @@ public class MicroController extends Widget {
 
     private static AbstractController instance;
 
-    public static void setController(AbstractController controller){
+    public static void setController(AbstractController controller) {
         instance = controller;
     }
 
-    public static ArrayList<Color> getPinColors(String serialNumbers){
+    public static ArrayList<Color> getPinColors(String serialNumbers) {
         if (containsRequiredNumbers(serialNumbers))
             return instance.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || portExists(Port.RJ45))
@@ -32,13 +32,13 @@ public class MicroController extends Widget {
         return instance.traversePins(4);
     }
 
-    private static boolean containsRequiredNumbers(String serialNumbers){
+    private static boolean containsRequiredNumbers(String serialNumbers) {
         NUMBER_PATTERN.loadText(serialNumbers);
         String numbers = NUMBER_PATTERN.createFilteredString();
         return numbers.contains("1") || numbers.contains("4");
     }
 
-    private static boolean numbersMatch(String serialNumbers){
+    private static boolean numbersMatch(String serialNumbers) {
         String lastNum = serialNumbers.substring(serialNumbers.length() - 1);
         return lastNum.contains(String.valueOf(getAllBatteries()));
     }

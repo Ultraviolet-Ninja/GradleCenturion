@@ -1,10 +1,10 @@
 package bomb.modules.m.microcontroller;
 
+import bomb.abstractions.Resettable;
 import bomb.components.microcontroller.AbstractChip;
 import bomb.components.microcontroller.EightPinController;
 import bomb.components.microcontroller.SixPinController;
 import bomb.components.microcontroller.TenPinController;
-import bomb.abstractions.Resettable;
 import bomb.modules.m.microcontroller.chip.AbstractController;
 import bomb.modules.m.microcontroller.chip.CountdownController;
 import bomb.modules.m.microcontroller.chip.DiodeController;
@@ -34,20 +34,20 @@ public class MicroControllerController implements Resettable {
     private ToggleGroup controllerGroup, pinCountGroup;
 
     @FXML
-    private void setController(){
+    private void setController() {
         controllerType = FacadeFX.getToggleName(controllerGroup);
         transferToMicro();
     }
 
     @FXML
-    private void setPinCount(){
+    private void setPinCount() {
         pinCount = FacadeFX.getToggleName(pinCountGroup).replace("-Pin", "");
         setFrontEnd();
         transferToMicro();
     }
 
     @FXML
-    private void trackTextField(){
+    private void trackTextField() {
         if (currentChip != null) currentChip.setChipSerialNum(serialInput.getText());
         if (serialInput.getText().length() == 2) {
             transferToMicro();
@@ -57,13 +57,13 @@ public class MicroControllerController implements Resettable {
     }
 
     @FXML
-    private void clearText(){
+    private void clearText() {
         FacadeFX.clearText(serialInput);
         FacadeFX.enable(serialInput);
         FacadeFX.disable(clearButton);
     }
 
-    private void setFrontEnd(){
+    private void setFrontEnd() {
         switch (pinCount) {
             case "6" -> currentChip = new SixPinController();
             case "8" -> currentChip = new EightPinController();
@@ -73,7 +73,7 @@ public class MicroControllerController implements Resettable {
         chipBackground.getChildren().add(currentChip);
     }
 
-    private void transferToMicro(){
+    private void transferToMicro() {
         if (!(controllerType.isEmpty() || pinCount.isEmpty())) {
             MicroController.setController(getType());
             currentChip.setColors(MicroController.getPinColors(serialInput.getText()));
@@ -81,7 +81,7 @@ public class MicroControllerController implements Resettable {
         }
     }
 
-    private AbstractController getType(){
+    private AbstractController getType() {
         int pins = Integer.parseInt(pinCount);
         return switch (controllerType) {
             case "STRK" -> new StrikeController(pins);

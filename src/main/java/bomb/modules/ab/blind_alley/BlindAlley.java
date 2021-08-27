@@ -28,47 +28,47 @@ public class BlindAlley extends Widget {
         bottomRight();
     }
 
-    private static void topLeft(){
-        alleyCat[0][0] = convertBool(hasUnlitIndicator(BOB)) + convertBool(hasLitIndicator(CAR)) +
-                convertBool(hasLitIndicator(IND)) + convertBool(getNumHolders() % 2 == 0);
+    private static void topLeft() {
+        alleyCat[0][0] = convertToBool(hasUnlitIndicator(BOB)) + convertToBool(hasLitIndicator(CAR)) +
+                convertToBool(hasLitIndicator(IND)) + convertToBool(getNumHolders() % 2 == 0);
     }
 
-    private static void topMid(){
-        alleyCat[0][1] = convertBool(hasUnlitIndicator(NSA)) + convertBool(hasLitIndicator(FRK)) +
-                convertBool(hasUnlitIndicator(CAR)) + convertBool(portExists(Port.RJ45));
+    private static void topMid() {
+        alleyCat[0][1] = convertToBool(hasUnlitIndicator(NSA)) + convertToBool(hasLitIndicator(FRK)) +
+                convertToBool(hasUnlitIndicator(CAR)) + convertToBool(portExists(RJ45));
     }
 
-    private static void left(){
-        alleyCat[1][0] = convertBool(hasUnlitIndicator(FRQ)) + convertBool(hasUnlitIndicator(IND)) +
-                convertBool(hasUnlitIndicator(TRN)) + convertBool(portExists(Port.DVI));
+    private static void left() {
+        alleyCat[1][0] = convertToBool(hasUnlitIndicator(FRQ)) + convertToBool(hasUnlitIndicator(IND)) +
+                convertToBool(hasUnlitIndicator(TRN)) + convertToBool(portExists(DVI));
     }
 
-    private static void middle(){
-        alleyCat[1][1] = convertBool(hasUnlitIndicator(SIG)) + convertBool(hasUnlitIndicator(SND)) +
-                convertBool(hasLitIndicator(NSA)) + convertBool(getAllBatteries() % 2 == 0);
+    private static void middle() {
+        alleyCat[1][1] = convertToBool(hasUnlitIndicator(SIG)) + convertToBool(hasUnlitIndicator(SND)) +
+                convertToBool(hasLitIndicator(NSA)) + convertToBool(getAllBatteries() % 2 == 0);
     }
 
-    private static void right(){
-        alleyCat[1][2] = convertBool(hasLitIndicator(BOB)) + convertBool(hasLitIndicator(CLR)) +
-                convertBool(portExists(Port.PS2)) + convertBool(portExists(Port.SERIAL));
+    private static void right() {
+        alleyCat[1][2] = convertToBool(hasLitIndicator(BOB)) + convertToBool(hasLitIndicator(CLR)) +
+                convertToBool(portExists(PS2)) + convertToBool(portExists(SERIAL));
     }
 
-    private static void bottomLeft(){
-        alleyCat[2][0] = convertBool(hasLitIndicator(FRQ)) + convertBool(hasLitIndicator(SIG)) +
-                convertBool(hasLitIndicator(TRN)) + convertBool(hasEven() == 0);
+    private static void bottomLeft() {
+        alleyCat[2][0] = convertToBool(hasLitIndicator(FRQ)) + convertToBool(hasLitIndicator(SIG)) +
+                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEven() == 0);
     }
 
-    private static void bottomMid(){
-        alleyCat[2][1] = convertBool(hasUnlitIndicator(FRK)) + convertBool(hasLitIndicator(MSA)) +
-                convertBool(portExists(Port.PARALLEL)) + convertBool(hasVowel());
+    private static void bottomMid() {
+        alleyCat[2][1] = convertToBool(hasUnlitIndicator(FRK)) + convertToBool(hasLitIndicator(MSA)) +
+                convertToBool(portExists(PARALLEL)) + convertToBool(hasVowel());
     }
 
-    private static void bottomRight(){
-        alleyCat[2][2] = convertBool(hasUnlitIndicator(CLR)) + convertBool(hasUnlitIndicator(MSA)) +
-                convertBool(hasLitIndicator(SND)) + convertBool(portExists(Port.RCA));
+    private static void bottomRight() {
+        alleyCat[2][2] = convertToBool(hasUnlitIndicator(CLR)) + convertToBool(hasUnlitIndicator(MSA)) +
+                convertToBool(hasLitIndicator(SND)) + convertToBool(portExists(RCA));
     }
 
-    private static int convertBool(boolean bool){
+    private static int convertToBool(boolean bool) {
         return bool ? 1 : 0;
     }
 
@@ -77,11 +77,11 @@ public class BlindAlley extends Widget {
      *
      * @return A 2D array with the information
      */
-    public static int[][] getAlleyCat(){
+    public static int[][] getAlleyCat() {
         return alleyCat;
     }
 
-    public static void reset(){
-        alleyCat = new int[][]{{0,0,0}, {0,0,0}, {0,0,0}};
+    public static void reset() {
+        alleyCat = new int[][]{{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
     }
 }

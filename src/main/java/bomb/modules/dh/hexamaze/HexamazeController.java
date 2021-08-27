@@ -1,8 +1,8 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.pattern.facade.FacadeFX;
 import bomb.components.hex.HexMazePanel;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HexamazeController implements Resettable {
-    @FXML private ToggleGroup hexGroup, hexColorGroup;
+    @FXML
+    private ToggleGroup hexGroup, hexColorGroup;
 
-    @FXML private HexMazePanel oneOne, oneTwo, oneThree, oneFour,
+    @FXML
+    private HexMazePanel oneOne, oneTwo, oneThree, oneFour,
             twoOne, twoTwo, twoThree, twoFour, twoFive,
             threeOne, threeTwo, threeThree, threeFour, threeFive, threeSix,
             fourOne, fourTwo, fourThree, fourFour, fourFive, fourSix, fourSeven,

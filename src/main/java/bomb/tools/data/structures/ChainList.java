@@ -8,7 +8,7 @@ import java.util.Queue;
 public class ChainList<E> implements Queue<E> {
     private final LinkedList<E> struct;
 
-    public ChainList(){
+    public ChainList() {
         struct = new LinkedList<>();
     }
 
@@ -38,13 +38,13 @@ public class ChainList<E> implements Queue<E> {
     }
 
     @Override
-    public <T> T[] toArray(T[] a) throws UnsupportedOperationException{
+    public <T> T[] toArray(T[] a) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean add(E e) throws UnsupportedOperationException{
-       throw new UnsupportedOperationException();
+    public boolean add(E e) throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -89,20 +89,20 @@ public class ChainList<E> implements Queue<E> {
 
     @Override
     public E poll() {
-        if (!struct.isEmpty()){
+        if (!struct.isEmpty()) {
             return struct.poll();
         }
         return null;
     }
 
     @Override
-    public E element() throws UnsupportedOperationException{
+    public E element() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public E peek() {
-        if (!struct.isEmpty()){
+        if (!struct.isEmpty()) {
             return struct.peek();
         }
         return null;

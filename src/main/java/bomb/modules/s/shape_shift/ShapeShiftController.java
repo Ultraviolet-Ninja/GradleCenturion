@@ -22,17 +22,17 @@ public class ShapeShiftController implements Resettable {
     }
 
     @FXML
-    private void decrementRight(){
+    private void decrementRight() {
 
     }
 
     @FXML
-    private void incrementLeft(){
+    private void incrementLeft() {
 
     }
 
     @FXML
-    private void incrementRight(){
+    private void incrementRight() {
 
     }
 

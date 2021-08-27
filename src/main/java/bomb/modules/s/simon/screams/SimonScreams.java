@@ -20,10 +20,10 @@ public class SimonScreams extends Widget {
             {"Red", "Purple", "Yellow", "Orange", "Green", "Blue"},
             {"Blue", "Red", "Purple", "Green", "Yellow", "Orange"}},
 
-            // The letter sets that determine the column of colors to use in resultingColors 2D array
-            CATEGORIES = {{"FFC", "CEH", "HAF", "ECD", "DDE", "AHA"}, {"AHF", "DFC", "ECH", "CDE", "FEA", "HAD"},
-                    {"DED", "ECF", "FHE", "HAA", "AFH", "CDC"}, {"HCE", "ADA", "CFD", "DHH", "EAC", "FEF"},
-                    {"CAH", "FHD", "DDA", "AEC", "HCF", "EFE"}, {"EDA", "HAE", "AEC", "FFF", "CHD", "DCH"}};
+    // The letter sets that determine the column of colors to use in resultingColors 2D array
+    CATEGORIES = {{"FFC", "CEH", "HAF", "ECD", "DDE", "AHA"}, {"AHF", "DFC", "ECH", "CDE", "FEA", "HAD"},
+            {"DED", "ECF", "FHE", "HAA", "AFH", "CDC"}, {"HCE", "ADA", "CFD", "DHH", "EAC", "FEF"},
+            {"CAH", "FHD", "DDA", "AEC", "HCF", "EFE"}, {"EDA", "HAE", "AEC", "FFF", "CHD", "DCH"}};
 
     private static boolean initialized;
     private static int stage;
@@ -40,9 +40,9 @@ public class SimonScreams extends Widget {
      *
      * @param order - The order of the colors of in the star in clockwise order
      * @throws IllegalArgumentException - The serial code isn't 6 characters long OR
-     *                                      The array is not 6 elements long
+     *                                  The array is not 6 elements long
      */
-    public static void initialize(Screams[] order) throws IllegalArgumentException{
+    public static void initialize(Screams[] order) throws IllegalArgumentException {
         serialCodeChecker();
         initialized = true;
         setOutputRules();
@@ -56,7 +56,7 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException{
+    public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException {
         if (flashingOrder == null || flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
@@ -69,7 +69,7 @@ public class SimonScreams extends Widget {
      * @param flashingOrder - The column to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char getStringLetter(Screams[] flashingOrder){
+    private static char getStringLetter(Screams[] flashingOrder) {
         if (lightOrder.threeAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
         if (lightOrder.oneTwoOneRule(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
         if (lightOrder.primaryRule(flashingOrder)) return extractCategory(flashingOrder[stage], 2);
@@ -81,11 +81,11 @@ public class SimonScreams extends Widget {
     /**
      * Finds the letter to help determine the column of colors to press from categories 2D array
      *
-     * @param stageColor - The column to determine the letter set
+     * @param stageColor  - The column to determine the letter set
      * @param correctRule - The row to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char extractCategory(Screams stageColor, int correctRule){
+    private static char extractCategory(Screams stageColor, int correctRule) {
         return CATEGORIES[correctRule][stageColor.ordinal()].charAt(stage++);
     }
 
@@ -96,18 +96,18 @@ public class SimonScreams extends Widget {
      * @param current - The column to be used with the 2D array
      * @return - The colors that should be pressed
      */
-    private static String findColors(Letters current){
+    private static String findColors(Letters current) {
         StringBuilder builder = new StringBuilder();
-        for (Integer num : CURRENT_OUTPUT_NUMBERS){
+        for (Integer num : CURRENT_OUTPUT_NUMBERS) {
             builder.append(RESULTING_COLORS[num][current.ordinal()]).append(",");
         }
-        return builder.substring(0,builder.toString().length()-1);
+        return builder.substring(0, builder.toString().length() - 1);
     }
 
     /**
      * Keeps track of the edgework that applies to the output colors
      */
-    private static void setOutputRules(){
+    private static void setOutputRules() {
         if (countIndicators(IndicatorFilter.ALL) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
         if (getTotalPorts() >= 3) CURRENT_OUTPUT_NUMBERS.add(1);
         if (countNumbersInSerialCode() >= 3) CURRENT_OUTPUT_NUMBERS.add(2);
@@ -116,15 +116,15 @@ public class SimonScreams extends Widget {
         if (getNumHolders() >= 3) CURRENT_OUTPUT_NUMBERS.add(5);
     }
 
-    public static int getStage(){
+    public static int getStage() {
         return stage;
     }
 
-    public static void resetLastStage(){
+    public static void resetLastStage() {
         if (stage != 0) stage--;
     }
 
-    public static void reset(){
+    public static void reset() {
         stage = 0;
         initialized = false;
         lightOrder = null;
@@ -134,9 +134,9 @@ public class SimonScreams extends Widget {
     private enum Letters {
         A, C, D, E, F, H;
 
-        private static Letters getFromChar(char letter){
+        private static Letters getFromChar(char letter) {
             String sample = String.valueOf(letter);
-            for (Letters let : Letters.values()){
+            for (Letters let : Letters.values()) {
                 if (let.name().equals(sample)) return let;
             }
             return null;

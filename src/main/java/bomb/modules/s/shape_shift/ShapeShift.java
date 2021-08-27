@@ -5,6 +5,7 @@ import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.tools.data.structures.graph.list.ListGraph;
 import org.javatuples.Pair;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.ToIntFunction;
@@ -22,28 +23,28 @@ public class ShapeShift extends Widget {
         initializeGraph();
     }
 
-    private static void zeroOutArray(){
-        for (ShapeEnd leftSide : ShapeEnd.values()){
+    private static void zeroOutArray() {
+        for (ShapeEnd leftSide : ShapeEnd.values()) {
             for (ShapeEnd rightSide : ShapeEnd.values())
                 COUNT_TRACKER[leftSide.ordinal()][rightSide.ordinal()] = 0;
         }
     }
 
-    private static void initializeGraph(){
+    private static void initializeGraph() {
         graph = new ListGraph<>(false);
         initializeTriples();
     }
 
-    private static List<Pair<ShapeEnd, ShapeEnd>> createList(){
+    private static List<Pair<ShapeEnd, ShapeEnd>> createList() {
         List<Pair<ShapeEnd, ShapeEnd>> list = new ArrayList<>();
-        for (ShapeEnd left : ShapeEnd.values()){
+        for (ShapeEnd left : ShapeEnd.values()) {
             for (ShapeEnd right : ShapeEnd.values())
                 list.add(new Pair<>(left, right));
         }
         return list;
     }
 
-    private static void initializeTriples(){
+    private static void initializeTriples() {
         List<Pair<ShapeEnd, ShapeEnd>> list = createList();
         initializePairs(list.get(0), list.get(8), list.get(15));
         initializePairs(list.get(1), list.get(10), list.get(15));
@@ -64,18 +65,18 @@ public class ShapeShift extends Widget {
     }
 
     @SafeVarargs
-    private static void initializePairs(Pair<ShapeEnd, ShapeEnd>... trios){
+    private static void initializePairs(Pair<ShapeEnd, ShapeEnd>... trios) {
         graph.addEdge(trios[0], trios[1]);
         graph.addEdge(trios[0], trios[2]);
     }
     //</editor-fold>
 
-    public static ShapeEnd[] solve(ShapeEnd left, ShapeEnd right){
+    public static ShapeEnd[] solve(ShapeEnd left, ShapeEnd right) {
         serialCodeChecker();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {
             Pair<ShapeEnd, ShapeEnd> pair = graph.get(
-                    new Pair<>(left, right))
+                            new Pair<>(left, right))
                     .get(CONVERTER.applyAsInt(conditionMap(left, right)));
             return solve(pair.getValue0(), pair.getValue1());
         }
@@ -83,20 +84,20 @@ public class ShapeShift extends Widget {
         return new ShapeEnd[]{left, right};
     }
 
-    private static void resetMod(){
+    private static void resetMod() {
         zeroOutArray();
     }
 
-    private static void increment(ShapeEnd left, ShapeEnd right){
+    private static void increment(ShapeEnd left, ShapeEnd right) {
         COUNT_TRACKER[left.ordinal()][right.ordinal()] += 1;
     }
 
-    private static boolean checkIfVisitedTwice(ShapeEnd left, ShapeEnd right){
+    private static boolean checkIfVisitedTwice(ShapeEnd left, ShapeEnd right) {
         return COUNT_TRACKER[left.ordinal()][right.ordinal()] < 2;
     }
 
     //<editor-fold desc="Boolean Methods">
-    private static boolean conditionMap(ShapeEnd left, ShapeEnd right){
+    private static boolean conditionMap(ShapeEnd left, ShapeEnd right) {
         return switch (left) {
             case ROUND -> roundedOptions(right);
             case FLAT -> rectangularOptions(right);
@@ -105,7 +106,7 @@ public class ShapeShift extends Widget {
         };
     }
 
-    private static boolean roundedOptions(ShapeEnd right){
+    private static boolean roundedOptions(ShapeEnd right) {
         return switch (right) {
             case ROUND -> hasVowel();
             case FLAT -> hasLitIndicator(Indicator.SND);
@@ -114,7 +115,7 @@ public class ShapeShift extends Widget {
         };
     }
 
-    private static boolean rectangularOptions(ShapeEnd right){
+    private static boolean rectangularOptions(ShapeEnd right) {
         return switch (right) {
             case ROUND -> hasMoreThan(Port.DVI, 0);
             case FLAT -> lastDigit() % 2 == 1;
@@ -123,7 +124,7 @@ public class ShapeShift extends Widget {
         };
     }
 
-    private static boolean triangularOptions(ShapeEnd right){
+    private static boolean triangularOptions(ShapeEnd right) {
         return switch (right) {
             case ROUND -> hasMoreThan(Port.PARALLEL, 0);
             case FLAT -> hasUnlitIndicator(Indicator.CAR);
@@ -132,7 +133,7 @@ public class ShapeShift extends Widget {
         };
     }
 
-    private static boolean ticketOptions(ShapeEnd right){
+    private static boolean ticketOptions(ShapeEnd right) {
         return switch (right) {
             case ROUND -> hasMoreThan(Port.RCA, 0);
             case FLAT -> hasUnlitIndicator(Indicator.FRQ);

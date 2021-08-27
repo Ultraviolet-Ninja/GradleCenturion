@@ -9,11 +9,11 @@ public enum Indicator {
         return state;
     }
 
-    public void setState(TrinarySwitch in){
+    public void setState(TrinarySwitch in) {
         state = in;
     }
 
-    Indicator(){
+    Indicator() {
         state = TrinarySwitch.UNKNOWN;
     }
 }

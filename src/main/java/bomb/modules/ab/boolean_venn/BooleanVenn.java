@@ -33,11 +33,11 @@ public class BooleanVenn extends Widget {
      * the operation between parenthesis
      *
      * @param operation The operation that the defuser sees on the bomb
-     * @throws IllegalArgumentException Format mismatch for the input equation
      * @return A String code that represents the state of each Venn Diagram section
-     *          The output order is not, c, b, a, bc, ac, ab, all
+     * The output order is not, c, b, a, bc, ac, ab, all
+     * @throws IllegalArgumentException Format mismatch for the input equation
      */
-    public static String resultCode(String operation) throws IllegalArgumentException{
+    public static String resultCode(String operation) throws IllegalArgumentException {
         if (operation.isEmpty()) throw new IllegalArgumentException("Cannot have empty String");
         return checkFormat(operation) ?
                 interpretAB(operation) :
@@ -49,10 +49,10 @@ public class BooleanVenn extends Widget {
      * with logic symbols in between AB and BC
      *
      * @param equation The valid or invalid equation
-     * @throws IllegalArgumentException Format mismatch for the input equation
      * @return Whether the equation matches the
+     * @throws IllegalArgumentException Format mismatch for the input equation
      */
-    private static boolean checkFormat(String equation) throws IllegalArgumentException{
+    private static boolean checkFormat(String equation) throws IllegalArgumentException {
         String abPriority = ultimateFilter(equation, AB_PRIORITY);
         String bcPriority = ultimateFilter(equation, BC_PRIORITY);
         if (xnor(abPriority.isEmpty(), bcPriority.isEmpty())) throw new IllegalArgumentException("Format mismatch!!");
@@ -64,12 +64,12 @@ public class BooleanVenn extends Widget {
      *
      * @param operation The appropriate equation
      * @return A String code that represents the state of each Venn Diagram section
-     *          The output order is not, c, b, a, bc, ac, ab, all
+     * The output order is not, c, b, a, bc, ac, ab, all
      */
-    private static String interpretAB(String operation){
+    private static String interpretAB(String operation) {
         String logicSymbols = ultimateFilter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
-        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0,1), A+B);
+        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0, 1), A + B);
 
         for (int i = 0; i < TEST_CASES.length; i++)
             builder.append(outsideOutputs(logicSymbols.substring(1), priorityCases[i], TEST_CASES[i][C]));
@@ -81,15 +81,15 @@ public class BooleanVenn extends Widget {
      *
      * @param operation The appropriate equation
      * @return A String code that represents the state of each Venn Diagram section
-     *          The output order is not, c, b, a, bc, ac, ab, all
+     * The output order is not, c, b, a, bc, ac, ab, all
      */
-    private static String interpretBC(String operation){
+    private static String interpretBC(String operation) {
         String logicSymbols = ultimateFilter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
-        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(1), B+C);
+        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(1), B + C);
 
         for (int i = 0; i < TEST_CASES.length; i++)
-            builder.append(outsideOutputs(logicSymbols.substring(0,1),TEST_CASES[i][A] , priorityCases[i]));
+            builder.append(outsideOutputs(logicSymbols.substring(0, 1), TEST_CASES[i][A], priorityCases[i]));
         return builder.toString();
     }
 
@@ -97,13 +97,13 @@ public class BooleanVenn extends Widget {
      * Performs the operation on the two variables inside the original equation's ()
      * and returns the outputs from those test cases
      *
-     * @param func The logic selector
+     * @param func        The logic selector
      * @param priorityNum The determining number to reflect whether the method call came from ab or bc
      * @return A set of booleans that reflect all test cases possible for the operation inside the ()
      */
     private static boolean[] priorityOutputs(String func, int priorityNum) {
         boolean[] out = new boolean[TEST_CASES.length];
-        if (priorityNum == 1){
+        if (priorityNum == 1) {
             for (int i = 0; i < TEST_CASES.length; i++)
                 out[i] = functionMap(func, TEST_CASES[i][A], TEST_CASES[i][B]);
         } else {
@@ -117,33 +117,33 @@ public class BooleanVenn extends Widget {
      * Returns 0 or 1 based on the boolean operation that gets passed in
      *
      * @param func The logic selector
-     * @param x 1st bit
-     * @param y 2nd bit
+     * @param x    1st bit
+     * @param y    2nd bit
      * @return 1 or 0 based on their respective booleans
      */
-    private static String outsideOutputs(String func, boolean x, boolean y){
-        return functionMap(func, x, y)?"1":"0";
+    private static String outsideOutputs(String func, boolean x, boolean y) {
+        return functionMap(func, x, y) ? "1" : "0";
     }
 
     /**
      * Selects the bitwise operation to be executed
      *
      * @param func The number selector
-     * @param x 1st bit
-     * @param y 2nd bit
+     * @param x    1st bit
+     * @param y    2nd bit
      * @return The result of the operation
      */
-    private static boolean functionMap(String func, boolean x, boolean y){
-        switch (func){
-            case "∧": return and(x,y);
-            case "∨": return or(x,y);
-            case "↓": return nor(x,y);
-            case "⊻": return xor(x,y);
-            case "|": return nand(x,y);
-            case "↔": return xnor(x,y);
-            case "→": return implies(x,y);
-            default: return impliedBy(x,y);
-        }
+    private static boolean functionMap(String func, boolean x, boolean y) {
+        return switch (func) {
+            case "∧" -> and(x, y);
+            case "∨" -> or(x, y);
+            case "↓" -> nor(x, y);
+            case "⊻" -> xor(x, y);
+            case "|" -> nand(x, y);
+            case "↔" -> xnor(x, y);
+            case "→" -> implies(x, y);
+            default -> impliedBy(x, y);
+        };
     }
 
     /**
@@ -153,7 +153,7 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the and operation
      */
-    private static boolean and(boolean x, boolean y){
+    private static boolean and(boolean x, boolean y) {
         return x && y;
     }
 
@@ -164,7 +164,7 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the nand operation
      */
-    private static boolean nand(boolean x, boolean y){
+    private static boolean nand(boolean x, boolean y) {
         return !and(x, y);
     }
 
@@ -175,7 +175,7 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the or operation
      */
-    private static boolean or(boolean x, boolean y){
+    private static boolean or(boolean x, boolean y) {
         return x || y;
     }
 
@@ -186,8 +186,8 @@ public class BooleanVenn extends Widget {
      * @param y - 2nd bit
      * @return - Result of the nor operation
      */
-    private static boolean nor(boolean x, boolean y){
-        return !or(x,y);
+    private static boolean nor(boolean x, boolean y) {
+        return !or(x, y);
     }
 
     /**
@@ -197,7 +197,7 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the xor operation
      */
-    private static boolean xor(boolean x, boolean y){
+    private static boolean xor(boolean x, boolean y) {
         return (x && !y) || (!x && y);
     }
 
@@ -208,8 +208,8 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the xnor operation
      */
-    private static boolean xnor(boolean x, boolean y){
-        return !xor(x,y);
+    private static boolean xnor(boolean x, boolean y) {
+        return !xor(x, y);
     }
 
     /**
@@ -223,7 +223,7 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the implies operation
      */
-    private static boolean implies(boolean x, boolean y){
+    private static boolean implies(boolean x, boolean y) {
         return !(x && !y);
     }
 
@@ -238,7 +238,7 @@ public class BooleanVenn extends Widget {
      * @param y 2nd bit
      * @return Result of the implied by operation
      */
-    private static boolean impliedBy(boolean x, boolean y){
+    private static boolean impliedBy(boolean x, boolean y) {
         return !(!x && y);
     }
 }

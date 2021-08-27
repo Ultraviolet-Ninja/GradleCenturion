@@ -22,7 +22,7 @@ public class Passwords extends TranslationCenter {
      * @param a - The letters of each column set. This can range from 1 - 5 sets of letters
      * @return - The possible passwords
      */
-    public static String solve(String ... a){
+    public static String solve(String... a) {
         //TODO - Needs to be split up
         ArrayList<String> torchBringer;
         StringBuilder solutions = new StringBuilder();
@@ -55,12 +55,12 @@ public class Passwords extends TranslationCenter {
         return solutions.toString();
     }
 
-    private static ArrayList<String> trial(int position, String lineSet, String[] compareTo){
+    private static ArrayList<String> trial(int position, String lineSet, String[] compareTo) {
         ArrayList<String> passed = new ArrayList<>();
 
-        for (int i = 0; i < lineSet.length(); i++){
-            for (String compare : compareTo){
-                if(matched(position, lineSet.charAt(i), compare)){
+        for (int i = 0; i < lineSet.length(); i++) {
+            for (String compare : compareTo) {
+                if (matched(position, lineSet.charAt(i), compare)) {
                     passed.add(compare);
                 }
             }
@@ -68,33 +68,33 @@ public class Passwords extends TranslationCenter {
         return passed;
     }
 
-    private static boolean matched(int position, char compare, String sample){
+    private static boolean matched(int position, char compare, String sample) {
         return compare == sample.charAt(position);
     }
 
-    private static String[] converter(ArrayList<String> in){
+    private static String[] converter(ArrayList<String> in) {
         String[] out = new String[in.size()];
 
-        for (int i = 0; i < in.size(); i++){
+        for (int i = 0; i < in.size(); i++) {
             out[i] = in.get(i);
         }
         return out;
     }
 
-    private static ArrayList<String> removeDoubles(ArrayList<String> old){
+    private static ArrayList<String> removeDoubles(ArrayList<String> old) {
         ArrayList<String> newList = new ArrayList<>();
 
-        for (String toNext : old){
-            if (!newList.contains(toNext)){
+        for (String toNext : old) {
+            if (!newList.contains(toNext)) {
                 newList.add(toNext);
             }
         }
         return newList;
     }
 
-    private static boolean testAllEmpty(String[] arrays){
-        for (String instance : arrays){
-            if (!instance.isEmpty()){
+    private static boolean testAllEmpty(String[] arrays) {
+        for (String instance : arrays) {
+            if (!instance.isEmpty()) {
                 return false;
             }
         }

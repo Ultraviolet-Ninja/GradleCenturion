@@ -22,7 +22,7 @@ public class Button extends TranslationCenter {
      *                   and determines what to do with the button.
      * @return - The String instruction of what to do
      */
-    public static String evaluate(TheButton[] properties){
+    public static String evaluate(TheButton[] properties) {
         boolean which;
         if (properties[0] == TheButton.BLUE && properties[1] == TheButton.ABORT)
             which = false;

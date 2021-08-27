@@ -14,104 +14,104 @@ public class Regex implements Iterable<String> {
     private final Pattern regPattern;
     private final Matcher textMatcher;
 
-    public Regex(String regex){
+    public Regex(String regex) {
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int flag){
+    public Regex(String regex, int flag) {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int ... flags){
+    public Regex(String regex, int... flags) {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, String matchText){
+    public Regex(String regex, String matchText) {
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int flag){
+    public Regex(String regex, String matchText, int flag) {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int ... flags){
+    public Regex(String regex, String matchText, int... flags) {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public void loadText(String text){
+    public void loadText(String text) {
         textMatcher.reset(text);
     }
 
-    public void loadCollection(Collection<String> textCollections){
+    public void loadCollection(Collection<String> textCollections) {
         StringBuilder sb = new StringBuilder();
         textCollections.forEach(text -> sb.append(text).append(" "));
         loadText(sb.toString());
     }
 
-    public boolean hasMatch(){
+    public boolean hasMatch() {
         return textMatcher.find();
     }
 
-    public boolean matchesRegex(){
+    public boolean matchesRegex() {
         return textMatcher.matches();
     }
 
-    public String captureGroup(int group){
+    public String captureGroup(int group) {
         return textMatcher.group(group);
     }
 
-    public String captureGroup(String customGroup){
+    public String captureGroup(String customGroup) {
         return textMatcher.group(customGroup);
     }
 
-    public int groupCount(){
+    public int groupCount() {
         return textMatcher.groupCount();
     }
 
-    public List<String> findAllMatches(){
+    public List<String> findAllMatches() {
         reset();
         ArrayList<String> output = new ArrayList<>();
-        while(textMatcher.find()){
+        while (textMatcher.find()) {
             output.add(textMatcher.group());
         }
         return output;
     }
 
-    public String getOriginalPattern(){
+    public String getOriginalPattern() {
         return regPattern.pattern();
     }
 
-    public String createFilteredString(){
+    public String createFilteredString() {
         reset();
         StringBuilder result = new StringBuilder();
-        for (String sample : findAllMatches()){
+        for (String sample : findAllMatches()) {
             result.append(sample);
         }
         return result.toString();
     }
 
-    public int flags(){
+    public int flags() {
         return regPattern.flags();
     }
 
-    public void reset(){
+    public void reset() {
         textMatcher.reset();
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Regex: " + regPattern.pattern() + " Text: " + textMatcher.toString();
     }
 
@@ -120,12 +120,12 @@ public class Regex implements Iterable<String> {
         return findAllMatches().iterator();
     }
 
-    private static void maxFlagCheck(int flags){
+    private static void maxFlagCheck(int flags) {
         if (flags > MAX_FLAG_SIZE || flags < 0)
             throw new IllegalArgumentException("Invalid flag number");
     }
 
-    private static int orMask(int[] flags){
+    private static int orMask(int[] flags) {
         int result = 0;
         for (int flag : flags)
             result |= flag;

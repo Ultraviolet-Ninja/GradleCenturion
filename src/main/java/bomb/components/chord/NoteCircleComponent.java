@@ -26,10 +26,12 @@ public class NoteCircleComponent extends Pane implements Resettable {
 
     private Consumer<Set<String>> externalAction;
 
-    @FXML private Circle noteALight, noteASharpLight, noteBLight, noteCLight, noteCSharpLight, noteDLight,
-            noteDSharpLight,noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight;
+    @FXML
+    private Circle noteALight, noteASharpLight, noteBLight, noteCLight, noteCSharpLight, noteDLight,
+            noteDSharpLight, noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight;
 
-    @FXML private MFXButton a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
+    @FXML
+    private MFXButton a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
 
     public NoteCircleComponent() {
         super();
@@ -41,16 +43,16 @@ public class NoteCircleComponent extends Pane implements Resettable {
         loader.setController(this);
         try {
             loader.load();
-        } catch (IOException ioex){
+        } catch (IOException ioex) {
             ioex.printStackTrace();
         }
     }
 
-    public void initialize(){
+    public void initialize() {
         MFXButton[] buttonArray = {a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp};
         Circle[] circleArray = {
                 noteALight, noteASharpLight, noteBLight, noteCLight, noteCSharpLight, noteDLight,
-                noteDSharpLight,noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight
+                noteDSharpLight, noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight
         };
 
         EventHandler<ActionEvent> action = createButtonEvent();
@@ -61,7 +63,7 @@ public class NoteCircleComponent extends Pane implements Resettable {
         }
     }
 
-    private EventHandler<ActionEvent> createButtonEvent(){
+    private EventHandler<ActionEvent> createButtonEvent() {
         return event -> {
             MFXButton source = (MFXButton) event.getSource();
             Circle associatedCircle = stateMap.get(source);
@@ -78,12 +80,12 @@ public class NoteCircleComponent extends Pane implements Resettable {
         };
     }
 
-    private void echoChanges(){
+    private void echoChanges() {
         if (externalAction != null)
             externalAction.accept(selectedNoteSet);
     }
 
-    public void addListenerAction(Consumer<Set<String>> action){
+    public void addListenerAction(Consumer<Set<String>> action) {
         externalAction = action;
     }
 

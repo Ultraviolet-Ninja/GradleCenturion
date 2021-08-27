@@ -1,8 +1,8 @@
 package bomb.modules.np.neutralization;
 
-import bomb.modules.s.souvenir.Souvenir;
-import bomb.enumerations.Indicator;
 import bomb.Widget;
+import bomb.enumerations.Indicator;
+import bomb.modules.s.souvenir.Souvenir;
 import javafx.scene.paint.Color;
 
 import static bomb.Widget.IndicatorFilter.ALL;
@@ -25,13 +25,11 @@ public class Neutralization extends Widget {
     private static Chemical.Base currentBase;
 
     /**
-     *
-     *
      * @param acidVol
      * @param solColor
      * @return
      */
-    public static String titrate(int acidVol, Color solColor) throws IllegalArgumentException{
+    public static String titrate(int acidVol, Color solColor) throws IllegalArgumentException {
         if (isSouvenirActive)
             Souvenir.addRelic("Neutralization Acid volume", String.valueOf(acidVol));
         if (serialCode.isEmpty()) throw new IllegalArgumentException("Need to set the serial code");
@@ -43,12 +41,10 @@ public class Neutralization extends Widget {
     }
 
     /**
-     *
-     *
      * @param color
      * @throws IllegalArgumentException
      */
-    private static void getAcid(Color color) throws IllegalArgumentException{
+    private static void getAcid(Color color) throws IllegalArgumentException {
         if (color == RED)
             currentAcid = Chemical.Acid.Hydrobromic_Acid;
         else if (color == BLUE)
@@ -66,7 +62,7 @@ public class Neutralization extends Widget {
     /**
      *
      */
-    private static void getBase(){
+    private static void getBase() {
         if (hasLitIndicator(Indicator.NSA) && getAllBatteries() == 3)
             currentBase = Chemical.Base.Ammonia;
         else if (hasAny())
@@ -84,15 +80,13 @@ public class Neutralization extends Widget {
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean indicatorMatch(){ //TODO Use Regex
-        for (Indicator ind : indicatorArray){
-            if (ind.getState() != UNKNOWN){
-                for (char letter : ind.name().toCharArray()){
-                    if (charMatch(currentAcid.getFormula().toUpperCase(), letter)){
+    private static boolean indicatorMatch() { //TODO Use Regex
+        for (Indicator ind : indicatorArray) {
+            if (ind.getState() != UNKNOWN) {
+                for (char letter : ind.name().toCharArray()) {
+                    if (charMatch(currentAcid.getFormula().toUpperCase(), letter)) {
                         return true;
                     }
                 }
@@ -102,12 +96,10 @@ public class Neutralization extends Widget {
     }
 
     /**
-     *
-     *
      * @param acidVol
      * @return
      */
-    private static double acidConcentration(int acidVol){
+    private static double acidConcentration(int acidVol) {
         double concentrate = currentAcid.getAtomicNum() - currentBase.getAtomicNum();
 
         if (!ultimateFilter(currentAcid.getSymbol(), VOWEL_FILTER).isEmpty() ||
@@ -117,19 +109,17 @@ public class Neutralization extends Widget {
 
         if (currentAcid.getSymbol().length() == currentBase.getSymbol().length())
             //Length of characters for the anion is equal to the cation symbol length
-            concentrate *=3;
-        concentrate = Math.abs(concentrate)%10;
+            concentrate *= 3;
+        concentrate = Math.abs(concentrate) % 10;
         if (concentrate == 0)
-            concentrate = acidVol*2/5.0;
-        return concentrate/10.0;
+            concentrate = acidVol * 2 / 5.0;
+        return concentrate / 10.0;
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static int baseConcentration(){
+    private static int baseConcentration() {
         if (!overrule()) {
             if (numHolders > getPortTypes() && numHolders > countIndicators(ALL))
                 return 5;
@@ -144,11 +134,9 @@ public class Neutralization extends Widget {
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean overrule(){
+    private static boolean overrule() {
         return (currentAcid == Chemical.Acid.Hydroiodic_Acid &&
                 currentBase == Chemical.Base.Potassium_Hydroxide) ||
                 (currentAcid == Chemical.Acid.Hydrochoric_Acid &&
@@ -156,11 +144,9 @@ public class Neutralization extends Widget {
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static int closestNum(){
+    private static int closestNum() {
         int holderDistance = Math.abs(currentBase.getAtomicNum() - 5),
                 portDistance = Math.abs(currentBase.getAtomicNum() - 10),
                 indDistance = Math.abs(currentBase.getAtomicNum() - 20);
@@ -169,73 +155,59 @@ public class Neutralization extends Widget {
             return 5;
         else if (portDistance < holderDistance && portDistance < indDistance)
             return 10;
-         return 20;
+        return 20;
     }
 
     /**
-     *
-     *
      * @param acidVol
      * @param acid
      * @param base
      * @return
      */
-    private static int dropCount(int acidVol, double acid, int base){
-        return (int)((20/base)*acid*acidVol);
+    private static int dropCount(int acidVol, double acid, int base) {
+        return (int) ((20 / base) * acid * acidVol);
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static String solubility(){
-        return  combinations() ?
+    private static String solubility() {
+        return combinations() ?
                 NO_FILTER :
                 FILTER;
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean combinations(){
+    private static boolean combinations() {
         return bromideCombos() || fluorideCombos() || chlorineCombos() || iodineCombos();
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean bromideCombos(){
+    private static boolean bromideCombos() {
         return currentAcid == Chemical.Acid.Hydrobromic_Acid && (currentBase == Chemical.Base.Ammonia ||
                 currentBase == Chemical.Base.Sodium_Hydroxide);
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean fluorideCombos(){
+    private static boolean fluorideCombos() {
         return currentAcid == Chemical.Acid.Hydrofluoric_Acid && (currentBase == Chemical.Base.Potassium_Hydroxide
                 || currentBase == Chemical.Base.Sodium_Hydroxide);
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean chlorineCombos(){
+    private static boolean chlorineCombos() {
         return currentAcid == Chemical.Acid.Hydrochoric_Acid && currentBase == Chemical.Base.Lithium_Hydroxide;
     }
 
     /**
-     *
-     *
      * @return
      */
     private static boolean iodineCombos() {
@@ -243,39 +215,33 @@ public class Neutralization extends Widget {
     }
 
     /**
-     *
-     *
      * @param comp
      * @param instance
      * @return
      */
-    private static boolean charMatch(String comp, char instance){
+    private static boolean charMatch(String comp, char instance) {
         return comp.indexOf(instance) != -1;
     }
 
     /**
-     *
-     *
      * @param color
      * @return
      */
-    private static String getColorName(Color color){
-       if (color == RED)
-           return "Red";
-       else if (color == YELLOW)
-           return "Yellow";
-       else if (color == GREEN)
-           return "Green";
-       else
-           return "Blue";
+    private static String getColorName(Color color) {
+        if (color == RED)
+            return "Red";
+        else if (color == YELLOW)
+            return "Yellow";
+        else if (color == GREEN)
+            return "Green";
+        else
+            return "Blue";
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean hasAny(){
+    private static boolean hasAny() {
         return hasLitIndicator(Indicator.CAR) || hasLitIndicator(Indicator.IND) || hasLitIndicator(Indicator.FRQ);
     }
 }

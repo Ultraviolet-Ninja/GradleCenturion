@@ -1,27 +1,30 @@
 package bomb.modules.s.souvenir;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.pattern.factory.TextFormatterFactory;
 import bomb.tools.pattern.facade.FacadeFX;
+import bomb.tools.pattern.factory.TextFormatterFactory;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.javatuples.Pair;
 import org.controlsfx.control.tableview2.TableColumn2;
 import org.controlsfx.control.tableview2.TableView2;
+import org.javatuples.Pair;
 
 public class SouvenirController implements Resettable {
     private final ObservableList<Pair<String, String>> souvenirData;
     private final FilteredList<Pair<String, String>> filteredData;
 
-    @FXML private MFXTextField searchField;
+    @FXML
+    private MFXTextField searchField;
 
-    @FXML private TableView2<Pair<String, String>> artifactView;
+    @FXML
+    private TableView2<Pair<String, String>> artifactView;
 
-    @FXML private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
+    @FXML
+    private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
 
     public SouvenirController() {
         souvenirData = FXCollections.observableArrayList();

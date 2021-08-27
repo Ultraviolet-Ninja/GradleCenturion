@@ -13,11 +13,14 @@ import java.util.Arrays;
 public class AstrologyController implements Resettable {
     private final AstroSymbol[] astroSymbolBuffer;
 
-    @FXML private MFXButton resetButton;
+    @FXML
+    private MFXButton resetButton;
 
-    @FXML private MFXTextField omenTextField;
+    @FXML
+    private MFXTextField omenTextField;
 
-    @FXML private ToggleGroup elementGroup, celestialGroup, zodiacGroup;
+    @FXML
+    private ToggleGroup elementGroup, celestialGroup, zodiacGroup;
 
     public AstrologyController() {
         astroSymbolBuffer = new AstroSymbol[3];
@@ -80,7 +83,7 @@ public class AstrologyController implements Resettable {
             omenTextField.setText(Astrology.calculate(
                     astroSymbolBuffer[0], astroSymbolBuffer[1], astroSymbolBuffer[2])
             );
-        } catch (IllegalArgumentException illegal){
+        } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
     }

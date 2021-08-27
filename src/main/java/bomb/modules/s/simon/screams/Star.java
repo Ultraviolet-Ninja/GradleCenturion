@@ -13,26 +13,26 @@ public class Star {
 
     private final ReadOnlyRing<Screams> colorOrder;
 
-    public Star(Screams[] order){
+    public Star(Screams[] order) {
         checkUniqueColors(order);
         colorOrder = new ReadOnlyRing<>(LIMIT);
         for (Screams instance : order) colorOrder.add(instance);
     }
 
-    private void checkUniqueColors(Screams[] order){
+    private void checkUniqueColors(Screams[] order) {
         Set<Screams> set = new HashSet<>(Arrays.asList(order));
         if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }
 
-    public boolean threeAdjacencyRule(Screams[] flashOrder){
+    public boolean threeAdjacencyRule(Screams[] flashOrder) {
         for (int i = 0; i < flashOrder.length - 2; i++)
-            if (threeAdjacencyRule(flashOrder[i], flashOrder[i+1], flashOrder[i+2]))
+            if (threeAdjacencyRule(flashOrder[i], flashOrder[i + 1], flashOrder[i + 2]))
                 return true;
         return false;
     }
 
     //Three that are adjacent in clockwise order
-    public boolean threeAdjacencyRule(Screams first, Screams second, Screams third){
+    public boolean threeAdjacencyRule(Screams first, Screams second, Screams third) {
         int firstIdx = colorOrder.findAbsoluteIndex(first);
         int secondIdx = colorOrder.findAbsoluteIndex(second);
         int thirdIdx = colorOrder.findAbsoluteIndex(third);
@@ -40,20 +40,20 @@ public class Star {
     }
 
     //Color, Adjacent, then color again
-    public boolean oneTwoOneRule(Screams[] flashOrder){
+    public boolean oneTwoOneRule(Screams[] flashOrder) {
         int track = sameColor(flashOrder);
         return track != -1 && twoAdjacencyRule(flashOrder[track + 1], flashOrder[track + 2]);
     }
 
     //Finding if the same color flashed twice with one color in between
-    private int sameColor(Screams[] flashOrder){
-        for (int i = 0; i < flashOrder.length-2; i++)
-            if (flashOrder[i] == flashOrder[i+2]) return i;
+    private int sameColor(Screams[] flashOrder) {
+        for (int i = 0; i < flashOrder.length - 2; i++)
+            if (flashOrder[i] == flashOrder[i + 2]) return i;
         return -1;
     }
 
     //If there are one or less primary colors are flashing
-    public boolean primaryRule(Screams[] flashOrder){
+    public boolean primaryRule(Screams[] flashOrder) {
         Set<Screams> unique = new HashSet<>();
         Collections.addAll(unique, flashOrder);
 
@@ -72,27 +72,27 @@ public class Star {
     }
 
     //Complementary Color Not Flashed Rule
-    public boolean complementRule(Screams[] flashOrder){
-        int counter  = 0;
-        for (int i = 0; i < LIMIT/2; i++){
+    public boolean complementRule(Screams[] flashOrder) {
+        int counter = 0;
+        for (int i = 0; i < LIMIT / 2; i++) {
             for (Screams flashColor : flashOrder) {
                 int index = colorOrder.findRelativeIndex(flashColor);
-                if (index == i || index == i + LIMIT/2)
+                if (index == i || index == i + LIMIT / 2)
                     counter++;
             }
         }
         return counter == 0;
     }
 
-    public boolean twoAdjacencyRule(Screams[] flashOrder){
-        for (int i = 0; i < flashOrder.length-1; i++) {
+    public boolean twoAdjacencyRule(Screams[] flashOrder) {
+        for (int i = 0; i < flashOrder.length - 1; i++) {
             if (twoAdjacencyRule(flashOrder[i], flashOrder[i + 1])) return true;
         }
         return false;
     }
 
     //Two that are adjacent in clockwise order
-    public boolean twoAdjacencyRule(Screams first, Screams second){
+    public boolean twoAdjacencyRule(Screams first, Screams second) {
         int firstIdx = colorOrder.findAbsoluteIndex(first);
         int secondIdx = colorOrder.findAbsoluteIndex(second);
         return secondIdx - firstIdx == 1;

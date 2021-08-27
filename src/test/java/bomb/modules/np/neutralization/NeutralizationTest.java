@@ -21,13 +21,14 @@ import static org.testng.Assert.assertEquals;
 
 public class NeutralizationTest {
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         Widget.resetProperties();
     }
 
     @DataProvider
-    public Object[][] exceptionProvider(){
-        ConditionSetter empty = () -> {};
+    public Object[][] exceptionProvider() {
+        ConditionSetter empty = () -> {
+        };
         ConditionSetter validSetup = this::setupOne;
         return new Object[][]{
                 {empty, 0, Color.RED}, {validSetup, 0, Color.CYAN}
@@ -35,46 +36,47 @@ public class NeutralizationTest {
     }
 
     @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(ConditionSetter setter, int vol, Color acidColor){
+    public void exceptionTest(ConditionSetter setter, int vol, Color acidColor) {
         setter.setCondition();
         Neutralization.titrate(vol, acidColor);
     }
 
     @Test
-    public void trainingVideoTestOne(){
+    public void trainingVideoTestOne() {
         setupOne();
         assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", FILTER});
     }
 
-    private void setupOne(){
-        Widget.setNumberOfPlates(1);Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
-        Widget.setPortValue(Port.PARALLEL,2);
-        Widget.setPortValue(Port.SERIAL,1);
-        Widget.setPortValue(Port.PS2,1);
-        Widget.setPortValue(Port.RJ45,1);
+    private void setupOne() {
+        Widget.setNumberOfPlates(1);
+        Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
+        Widget.setPortValue(Port.PARALLEL, 2);
+        Widget.setPortValue(Port.SERIAL, 1);
+        Widget.setPortValue(Port.PS2, 1);
+        Widget.setPortValue(Port.RJ45, 1);
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
         Widget.setSerialCode("2u3mr1");
     }
 
     @Test
-    public void trainingVideoTestTwo(){
+    public void trainingVideoTestTwo() {
         setupTwo();
         assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
                 "48", NO_FILTER});
     }
 
-    private void setupTwo(){
+    private void setupTwo() {
         Widget.setNumberOfPlates(3);
-        Widget.setPortValue(Port.PARALLEL,2);
-        Widget.setPortValue(Port.SERIAL,1);
+        Widget.setPortValue(Port.PARALLEL, 2);
+        Widget.setPortValue(Port.SERIAL, 1);
         Widget.setSerialCode("ew7qw5");
         Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
         Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider(){
+    public Object[][] theGreatBerateProvider() {
         ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
@@ -89,19 +91,19 @@ public class NeutralizationTest {
     }
 
     @Test(dataProvider = "theGreatBerateProvider")
-    public void theGreatBerateTest(ConditionSetter setter, int vol, Color acidColor, String[] expectedArr){
+    public void theGreatBerateTest(ConditionSetter setter, int vol, Color acidColor, String[] expectedArr) {
         setter.setCondition();
         assertEqual(vol, acidColor, expectedArr);
     }
 
-    private void assertEqual(int volume, Color color, String[] expected){
+    private void assertEqual(int volume, Color color, String[] expected) {
         String[] actual = Neutralization.titrate(volume, color).split("-");
         for (int i = 0; i < expected.length; i++)
             assertEquals(expected[i], actual[i]);
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         Widget.resetProperties();
     }
 }

@@ -28,22 +28,18 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param color
      */
-    public static void setPriority(SimonColors.States color){
+    public static void setPriority(SimonColors.States color) {
         prior = color.ordinal();
     }
 
     /**
-     *
-     *
      * @param colors
      * @param stage
      * @return
      */
-    public static String add(SimonColors.States[] colors, int stage){
+    public static String add(SimonColors.States[] colors, int stage) {
         if (isSouvenirActive)
             Souvenir.addRelic("Simon States - Stage " + stage, writeOut(colors));
 
@@ -59,15 +55,13 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static String stageOne(SimonColors.States[] colors){
+    private static String stageOne(SimonColors.States[] colors) {
         if (colors.length == 1)
             return firstCap(colors[0]);
-        else if(colors.length == 2 && contains(colors, BLUE))
+        else if (colors.length == 2 && contains(colors, BLUE))
             return firstCap(highest(colors));
         else if (colors.length == 2)
             return firstCap(BLUE);
@@ -79,12 +73,10 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static String stageTwo(SimonColors.States[] colors){
+    private static String stageTwo(SimonColors.States[] colors) {
         if (colors.length == 2 && contains(colors, BLUE) && contains(colors, RED))
             return firstCap(highestNotFlashed(colors));
         else if (colors.length == 2)
@@ -100,19 +92,17 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static String stageThree(SimonColors.States[] colors){
+    private static String stageThree(SimonColors.States[] colors) {
         if (colors.length == 3 && previouslyPressed(colors))
             return firstCap(highestNotPressed(colors));
         else if (colors.length == 3)
             return firstCap(highest(colors));
         else if (colors.length == 2)
-            return (bothPreviouslyPressed(colors))?
-                    firstCap(lowestNotFlashed(colors)):
+            return (bothPreviouslyPressed(colors)) ?
+                    firstCap(lowestNotFlashed(colors)) :
                     toPress.toString().split(" ")[0];
         else if (colors.length == 1)
             return firstCap(colors[0]);
@@ -121,12 +111,10 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static String stageFour(SimonColors.States[] colors){
+    private static String stageFour(SimonColors.States[] colors) {
         if (allUnique())
             return oddOneOut();
         else if (oneNotPressed(colors))
@@ -140,82 +128,70 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      * @throws IllegalArgumentException
      */
-    private static SimonColors.States highest(SimonColors.States[] colors) throws IllegalArgumentException{
-        for (SimonColors.States current : PRIORITY_ORDERS[prior]){
-            if(contains(colors, current)) return current;
+    private static SimonColors.States highest(SimonColors.States[] colors) throws IllegalArgumentException {
+        for (SimonColors.States current : PRIORITY_ORDERS[prior]) {
+            if (contains(colors, current)) return current;
         }
         throw new IllegalArgumentException("Unreachable section of highest() was reached");
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      * @throws IllegalArgumentException
      */
-    private static SimonColors.States highestNotFlashed(SimonColors.States[] colors) throws IllegalArgumentException{
-        for (SimonColors.States current : PRIORITY_ORDERS[prior]){
-            if(!contains(colors, current)) return current;
+    private static SimonColors.States highestNotFlashed(SimonColors.States[] colors) throws IllegalArgumentException {
+        for (SimonColors.States current : PRIORITY_ORDERS[prior]) {
+            if (!contains(colors, current)) return current;
         }
         throw new IllegalArgumentException("Unreachable section of highestNotFlashed() was reached");
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static SimonColors.States highestNotPressed(SimonColors.States[] colors){
-        for (SimonColors.States current : PRIORITY_ORDERS[prior]){
+    private static SimonColors.States highestNotPressed(SimonColors.States[] colors) {
+        for (SimonColors.States current : PRIORITY_ORDERS[prior]) {
             if (contains(colors, current) && containsNotPressed(colors)) return current;
         }
         throw new IllegalArgumentException("Unreachable section of highestNotPressed() was reached");
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      * @throws IllegalArgumentException
      */
-    private static SimonColors.States lowest(SimonColors.States[] colors) throws IllegalArgumentException{
-        for (int i = 3; i >= 0; i--){
+    private static SimonColors.States lowest(SimonColors.States[] colors) throws IllegalArgumentException {
+        for (int i = 3; i >= 0; i--) {
             if (contains(colors, PRIORITY_ORDERS[prior][i])) return PRIORITY_ORDERS[prior][i];
         }
         throw new IllegalArgumentException("Unreachable section of lowest() was reached");
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      * @throws IllegalArgumentException
      */
-    private static SimonColors.States lowestNotFlashed(SimonColors.States[] colors) throws IllegalArgumentException{
-        for (int i = 3; i >= 0; i--){
+    private static SimonColors.States lowestNotFlashed(SimonColors.States[] colors) throws IllegalArgumentException {
+        for (int i = 3; i >= 0; i--) {
             if (!contains(colors, PRIORITY_ORDERS[prior][i])) return PRIORITY_ORDERS[prior][i];
         }
         throw new IllegalArgumentException("Unreachable section of lowestNotFlashed() was reached");
     }
 
     /**
-     *
-     *
      * @param colors
      * @param has
      * @return
      */
-    private static boolean contains(SimonColors.States[] colors, SimonColors.States has){
+    private static boolean contains(SimonColors.States[] colors, SimonColors.States has) {
         for (SimonColors.States current : colors) {
             if (current == has) return true;
         }
@@ -223,12 +199,10 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static boolean containsNotPressed(SimonColors.States[] colors){
+    private static boolean containsNotPressed(SimonColors.States[] colors) {
         for (SimonColors.States color : colors) {
             for (String sample : toPress.toString().split(" ")) {
                 if (sample.equals(firstCap(color))) return false;
@@ -238,12 +212,10 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static boolean bothPreviouslyPressed(SimonColors.States[] colors){
+    private static boolean bothPreviouslyPressed(SimonColors.States[] colors) {
         boolean[] firstSet = new boolean[2], secondSet = new boolean[2];
         String[] temp = toPress.toString().split(" ");
         firstSet[0] = temp[0].equals(firstCap(colors[0]));
@@ -255,26 +227,23 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static boolean previouslyPressed(SimonColors.States[] colors){
-        for (SimonColors.States current : colors){
-            for (String sample : toPress.toString().split(" ")){
+    private static boolean previouslyPressed(SimonColors.States[] colors) {
+        for (SimonColors.States current : colors) {
+            for (String sample : toPress.toString().split(" ")) {
                 if (sample.equals(firstCap(current))) return true;
             }
-        } return false;
+        }
+        return false;
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static SimonColors.States oddOneOut(SimonColors.States[] colors){
+    private static SimonColors.States oddOneOut(SimonColors.States[] colors) {
         if (!contains(colors, RED)) return RED;
         else if (!contains(colors, YELLOW)) return YELLOW;
         else if (!contains(colors, GREEN)) return GREEN;
@@ -282,11 +251,9 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static String oddOneOut(){
+    private static String oddOneOut() {
         if (!toPress.toString().contains("Red"))
             return "Red";
         else if (!toPress.toString().contains("Yellow"))
@@ -297,40 +264,34 @@ public class SimonStates extends Widget {
     }
 
     /**
-     *
-     *
      * @return
      */
-    private static boolean allUnique(){
+    private static boolean allUnique() {
         String[] temp = toPress.toString().split(" ");
         return !((temp[0].equals(temp[1])) || (temp[0].equals(temp[2])) || (temp[1].equals(temp[2])));
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static boolean oneNotPressed(SimonColors.States[] colors){
-       int counter = 4;
-       for (SimonColors.States current : colors){
-           for (String sample : toPress.toString().split(" ")){
-               if (sample.equals(firstCap(current))) counter--;
-           }
-       }
+    private static boolean oneNotPressed(SimonColors.States[] colors) {
+        int counter = 4;
+        for (SimonColors.States current : colors) {
+            for (String sample : toPress.toString().split(" ")) {
+                if (sample.equals(firstCap(current))) counter--;
+            }
+        }
         return counter == 3;
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static String pressOneNot(SimonColors.States[] colors){
-        for (SimonColors.States current : colors){
-            for (String sample : toPress.toString().split(" ")){
+    private static String pressOneNot(SimonColors.States[] colors) {
+        for (SimonColors.States current : colors) {
+            for (String sample : toPress.toString().split(" ")) {
                 if (sample.equals(firstCap(current))) return firstCap(current);
             }
         }
@@ -340,34 +301,30 @@ public class SimonStates extends Widget {
     /**
      *
      */
-    public static void resetMod(){
+    public static void resetMod() {
         toPress = new StringBuilder();
     }
 
     /**
-     *
-     *
      * @param text
      * @return
      */
-    private static String firstCap(SimonColors.States text){
-        return (text.name().length() != 1)?
-                text.name().substring(0,1).toUpperCase() + text.name().substring(1):
+    private static String firstCap(SimonColors.States text) {
+        return (text.name().length() != 1) ?
+                text.name().substring(0, 1).toUpperCase() + text.name().substring(1) :
                 text.name().toUpperCase();
     }
 
     /**
-     *
-     *
      * @param colors
      * @return
      */
-    private static String writeOut(SimonColors.States[] colors){
+    private static String writeOut(SimonColors.States[] colors) {
         StringBuilder temp = new StringBuilder();
 
-        for (int i = 0; i < colors.length; i++){
+        for (int i = 0; i < colors.length; i++) {
             temp.append(firstCap(colors[i]));
-            if (i < colors.length-1)
+            if (i < colors.length - 1)
                 temp.append(" ");
         }
         return temp.toString();

@@ -8,7 +8,7 @@ public class Base91 {
         if (val < CODEX_STRING.length) return String.valueOf(CODEX_STRING[val]);
 
         StringBuilder builder = new StringBuilder();
-        while(val >= CODEX_STRING.length){
+        while (val >= CODEX_STRING.length) {
             int nextVal = val / CODEX_STRING.length;
             int mod = val % CODEX_STRING.length;
             builder.append(CODEX_STRING[mod]);
@@ -22,10 +22,10 @@ public class Base91 {
         long output = 0;
         String searchString = String.valueOf(CODEX_STRING);
 
-        for (char charInVal : val.toCharArray()){
+        for (char charInVal : val.toCharArray()) {
             int tempNum = searchString.indexOf(charInVal);
-            if(tempNum == -1) throw new IllegalArgumentException();
-            output += (long)Math.pow(CODEX_STRING.length, degree--) * tempNum;
+            if (tempNum == -1) throw new IllegalArgumentException();
+            output += (long) Math.pow(CODEX_STRING.length, degree--) * tempNum;
         }
         return output;
     }

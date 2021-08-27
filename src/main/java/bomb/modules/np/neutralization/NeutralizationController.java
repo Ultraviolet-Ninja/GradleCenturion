@@ -3,7 +3,12 @@ package bomb.modules.np.neutralization;
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
@@ -36,7 +41,7 @@ public class NeutralizationController implements Resettable {
     private ToggleGroup acidColors;
 
     @FXML
-    private void titrate(){
+    private void titrate() {
         //TODO - For GUI Overhaul, TextFields get cyan text with black background
         try {
             String[] answers = Neutralization.titrate((int) volume, solutionColor).split("-");
@@ -44,12 +49,12 @@ public class NeutralizationController implements Resettable {
             chemForm.setText(answers[1]);
             dropCount.setText(answers[2]);
             setFilter(answers[3]);
-        } catch (IllegalArgumentException illegal){
+        } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
     }
 
-    private void setFilter(String fil){
+    private void setFilter(String fil) {
         boolean cond = fil.contains("No");
         filterInstr.setStyle(cond ? NO_FILTER_STYLE : FILTER_STYLE);
         filterInstr.setText("Filter: " + (cond ? "Off" : "On"));
@@ -67,7 +72,7 @@ public class NeutralizationController implements Resettable {
     }
 
     @FXML
-    private void changeColor(){
+    private void changeColor() {
         switch (FacadeFX.getToggleName(acidColors)) {
             case "Red" -> {
                 testTube.setStyle(RED_STYLE);
@@ -89,7 +94,7 @@ public class NeutralizationController implements Resettable {
         toggleLock();
     }
 
-    private void toggleLock(){
+    private void toggleLock() {
         solve.setDisable(!(solutionColor != null && volTyped));
     }
 

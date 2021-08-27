@@ -20,12 +20,12 @@ public enum Keypads implements Labeled, Flaggable {
     NOT_THREE("Not3", false), STROKED_LAMBDA2("Lambda", false),
     HOLLOW_STAR2("Hollow Star", false),
 
-    RUSSIAN_SIX1("Russian 6", false),PARAGRAPH1("Paragraph", false),
+    RUSSIAN_SIX1("Russian 6", false), PARAGRAPH1("Paragraph", false),
     TB_1("Tb", false), RUSSIAN_CAT2("Russian Cat", false),
     RUSSIAN_X2("Russian X", false), SPANISH_QUESTION2("Spanish Question", false),
     SMILEY1("Smily", false),
 
-    PSI1("Psi", false),SMILEY2("Smily", false), TB_2("Tb", false),
+    PSI1("Psi", false), SMILEY2("Smily", false), TB_2("Tb", false),
     C_DOT("C", false), PARAGRAPH2("Paragraph", false),
     ALIEN_THREE("Alien 3", false), STAR("Star", false),
 
@@ -46,14 +46,14 @@ public enum Keypads implements Labeled, Flaggable {
             this.memory = memory;
     }
 
-    Keypads(String label, boolean flag){
+    Keypads(String label, boolean flag) {
         this.flag = flag;
         imageLocation = label;
     }
 
     @Override
     public String getLabel() {
-        return  imageLocation + ".PNG";
+        return imageLocation + ".PNG";
     }
 
     @Override

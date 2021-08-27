@@ -6,16 +6,16 @@ import bomb.abstractions.Listed;
 public enum Clothing {
     ARTICLE;
 
-    private Material mat;
+    private Material material;
     private Item item;
     private Color color;
 
-    public Material getMat() {
-        return mat;
+    public Material getMaterial() {
+        return material;
     }
 
-    public void setMat(Material mat) {
-        this.mat = mat;
+    public void setMaterial(Material mat) {
+        this.material = mat;
     }
 
     public Item getItem() {

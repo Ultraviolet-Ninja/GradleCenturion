@@ -20,7 +20,7 @@ public class AlphabetController implements Resettable {
     private MFXTextField firstInput, secondInput, thirdInput, forthInput,
             firstOutput, secondOutput, thirdOutput, forthOutput;
 
-    public AlphabetController(){
+    public AlphabetController() {
         stateMap = new HashMap<>();
     }
 
@@ -29,13 +29,13 @@ public class AlphabetController implements Resettable {
         stateMap.put(secondInput, thirdInput);
         stateMap.put(thirdInput, forthInput);
         stateMap.put(forthInput, null);
-        for (MFXTextField input : stateMap.keySet()){
+        for (MFXTextField input : stateMap.keySet()) {
             input.setTextFormatter(createOneLetterFormatter());
             input.setOnKeyReleased(actionHandler());
         }
     }
 
-    private EventHandler<KeyEvent> actionHandler(){
+    private EventHandler<KeyEvent> actionHandler() {
         return event -> {
             MFXTextField source = (MFXTextField) event.getSource();
             boolean canGetResults = false;
@@ -46,7 +46,7 @@ public class AlphabetController implements Resettable {
         };
     }
 
-    private boolean moveToLastEmptyTextField(MFXTextField source){
+    private boolean moveToLastEmptyTextField(MFXTextField source) {
         do {
             source = stateMap.get(source);
         } while (source != null && !source.getText().isEmpty());
@@ -58,7 +58,7 @@ public class AlphabetController implements Resettable {
         return true;
     }
 
-    private void getResults(){
+    private void getResults() {
         String inputText = firstInput.getText() + secondInput.getText() + thirdInput.getText() + forthInput.getText();
         try {
             String results = Alphabet.order(inputText);
@@ -66,13 +66,13 @@ public class AlphabetController implements Resettable {
             secondOutput.setText(String.valueOf(results.charAt(1)));
             thirdOutput.setText(String.valueOf(results.charAt(2)));
             forthOutput.setText(String.valueOf(results.charAt(3)));
-        } catch (IllegalArgumentException arg){
+        } catch (IllegalArgumentException arg) {
             FacadeFX.setAlert(ERROR, arg.getMessage());
         }
     }
 
     @FXML
-    private void resetPuzzle(){
+    private void resetPuzzle() {
         reset();
     }
 

@@ -20,7 +20,8 @@ public class FastMathTest {
 
     @DataProvider
     public Object[][] exceptionProvider() {
-        ConditionSetter empty = () -> {};
+        ConditionSetter empty = () -> {
+        };
         ConditionSetter setSerialCode = () -> Widget.setSerialCode("fr4op2");
         return new Object[][]{
                 {empty, ""}, {empty, null}, {empty, "AZ"}, {setSerialCode, "AY"}

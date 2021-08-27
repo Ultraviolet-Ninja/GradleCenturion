@@ -15,14 +15,18 @@ import javafx.scene.control.Label;
 import java.util.function.Consumer;
 
 public class ForgetMeNotController implements Resettable {
-    @FXML private MFXButton outputButton, undoButton, resetButton,
+    @FXML
+    private MFXButton outputButton, undoButton, resetButton,
             one, two, three, four, five, six, seven, eight, nine, zero;
 
-    @FXML private JFXTextArea outputArea;
+    @FXML
+    private JFXTextArea outputArea;
 
-    @FXML private MFXTextField confirmationField;
+    @FXML
+    private MFXTextField confirmationField;
 
-    @FXML private Label stageCounter;
+    @FXML
+    private Label stageCounter;
 
     public void initialize() {
         HoverHandler<ActionEvent> handler = new HoverHandler<>(createPressAction());

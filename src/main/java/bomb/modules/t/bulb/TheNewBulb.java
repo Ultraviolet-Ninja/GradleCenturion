@@ -30,8 +30,8 @@ public class TheNewBulb extends Widget {
         return output;
     }
 
-    private static String stepOne(){
-        if (THE_BULB.getLight() == BulbProperties.Light.ON){
+    private static String stepOne() {
+        if (THE_BULB.getLight() == BulbProperties.Light.ON) {
             return THE_BULB.getOpacity() == BulbProperties.Opacity.TRANSLUCENT ?
                     PRESS_I + ARROW + stepTwo() :
                     PRESS_O + ARROW + stepThree();
@@ -40,7 +40,7 @@ public class TheNewBulb extends Widget {
         return UNSCREW + ARROW + stepFour();
     }
 
-    private static String stepTwo(){
+    private static String stepTwo() {
         UNSCREW_ACTION.accept(THE_BULB);
         if (THE_BULB.getColor() == RED)
             return PRESS_I + ARROW + UNSCREW + ARROW + stepFive();
@@ -49,7 +49,7 @@ public class TheNewBulb extends Widget {
         return UNSCREW + ARROW + stepSeven();
     }
 
-    private static String stepThree(){
+    private static String stepThree() {
         UNSCREW_ACTION.accept(THE_BULB);
         if (THE_BULB.getColor() == GREEN)
             return PRESS_I + ARROW + UNSCREW + ARROW + stepSix();
@@ -58,45 +58,45 @@ public class TheNewBulb extends Widget {
         return UNSCREW + ARROW + stepEight();
     }
 
-    private static String stepFour(){
+    private static String stepFour() {
         if (hasFollowingIndicators(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND))
             return PRESS_I + ARROW + stepNine();
         return PRESS_O + ARROW + stepTen();
     }
 
-    private static String stepFive(){
+    private static String stepFive() {
         return null;
     }
 
-    private static String stepSix(){
+    private static String stepSix() {
         return null;
     }
 
-    private static String stepSeven(){
+    private static String stepSeven() {
         return null;
     }
 
-    private static String stepEight(){
+    private static String stepEight() {
         return null;
     }
 
-    private static String stepNine(){
+    private static String stepNine() {
         return null;
     }
 
-    private static String stepTen(){
+    private static String stepTen() {
         return null;
     }
 
-    private static String stepEleven(){
+    private static String stepEleven() {
         return null;
     }
 
-    private static String stepTwelve(){
+    private static String stepTwelve() {
         return null;
     }
 
-    private static String stepThirteen(){
+    private static String stepThirteen() {
         return null;
     }
 

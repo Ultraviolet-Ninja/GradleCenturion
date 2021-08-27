@@ -2,8 +2,8 @@ package bomb.tools.data.structures.dictionary;
 
 import java.util.HashMap;
 
-public class EsperantoDict extends Dictionary{
-    public EsperantoDict(){
+public class EsperantoDict extends Dictionary {
+    public EsperantoDict() {
         frequencies = new HashMap<>();
         stepTwoMap = new HashMap<>();
         initFreqs();
@@ -27,12 +27,14 @@ public class EsperantoDict extends Dictionary{
     public String predictWord(String part, boolean isMorse) {
         if (!isMorse) {
             switch (part.toLowerCase()) {
-                default: return part;
+                default:
+                    return part;
             }
         }
-         switch (part.toLowerCase()){
+        switch (part.toLowerCase()) {
 
-            default: return part;
+            default:
+                return part;
         }
     }
 

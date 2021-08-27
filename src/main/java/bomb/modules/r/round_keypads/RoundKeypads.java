@@ -10,9 +10,8 @@ import javafx.scene.paint.Color;
  */
 public class RoundKeypads extends Widget {
     //TODO - Finished Javadocs
+
     /**
-     *
-     *
      * @param values
      * @return
      */
@@ -43,7 +42,7 @@ public class RoundKeypads extends Widget {
      * Highlights or de-highlights the Keypad that was clicked by the user.
      *
      * @param toEdit - the Keypad to highlight or return to normal
-     * @param og - the Image of the original keypad appearance
+     * @param og     - the Image of the original keypad appearance
      * @return - the highlighted or normal image of the keypad
      */
     public static Image change(Keypads toEdit, Image og) {
@@ -66,8 +65,6 @@ public class RoundKeypads extends Widget {
     }
 
     /**
-     *
-     *
      * @param toHigh
      * @return
      */

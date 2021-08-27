@@ -14,14 +14,14 @@ public class RoundController implements Resettable {
             backEuro1, emptyRacket2, backC2, disneyQ1, hollowStar1, curvyH2, spanish1,
             copyright, leSac, disneyQ2, russianX1, not3, lambda2, hollowStar2,
             russianSix1, paragraph1, tB1, russianCat2, russianX2, spanish2, smile1,
-            psi1, smile2,tB2, cDot, paragraph2, shrek3, star,
+            psi1, smile2, tB2, cDot, paragraph2, shrek3, star,
             russianSix2, backEuro2, puzzle, aeyyLmao, psi2, russianHN, ohms;
 
     @FXML
     private VBox keypad1, keypad2, keypad3, keypad4, keypad5, keypad6;
 
     @FXML
-    private void keyPressed(){
+    private void keyPressed() {//TODO Look into using the HoverHandler
         if (emptyRacket1.isHover()) {
             emptyRacket1.setImage(RoundKeypads.change(Keypads.RACKET1,
                     emptyRacket1.getImage()));
@@ -211,7 +211,7 @@ public class RoundController implements Resettable {
         highlightBox(RoundKeypads.autoDetect(Keypads.values()));
     }
 
-    private void highlightBox(int which){
+    private void highlightBox(int which) {
         setBoxStyle(keypad1, which, 0);
         setBoxStyle(keypad2, which, 1);
         setBoxStyle(keypad3, which, 2);
@@ -220,7 +220,7 @@ public class RoundController implements Resettable {
         setBoxStyle(keypad6, which, 5);
     }
 
-    private void setBoxStyle(VBox keypad, int which, int required){
+    private void setBoxStyle(VBox keypad, int which, int required) {
         keypad.setStyle(which == required ? TO_HIGHLIGHT : FROM_HIGHLIGHT);
     }
 
