@@ -19,21 +19,6 @@
     -mfx-line-stroke-width: 0;
 }
 
-.jfx-slider {
-    -jfx-default-track: #0b234c;
-    -fx-font-size: 16;
-}
-
-.jfx-slider .track {
-    -fx-pref-width: 5px;
-    -fx-pref-height: 5px;
-}
-
-.jfx-slider .thumb {
-    -fx-pref-width: 20;
-    -fx-pref-height: 20;
-}
-
 #everything-else-label {
     -fx-font-size: 19;
 }
@@ -97,14 +82,34 @@
     -fx-font-size: 18;
 }
 
-#battery-slider {
-    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #bc2a23, #d9ae07, #f9cd35);
-    -fx-padding: 0 10 0 10;
+#battery-slider .bar {
+    -fx-fill: #f9cd35
 }
 
-#holder-slider {
-    -jfx-default-thumb: #3a4e77;
-    -fx-padding: 0 20 0 20;
+#battery-slider .track {
+    -fx-fill: derive(#f9cd35, 90%);
+}
+
+#battery-slider .thumb {
+    -mfx-color: #bc2a23;
+    -fx-fill: #bc2a23;
+}
+
+#holder-slider .thumb {
+    -mfx-color: #3a4e77;
+    -fx-fill: #3a4e77;
+}
+
+#holder-slider .thumb .mfx-ripple-generator {
+    -mfx-ripple-color: black;
+}
+
+#holder-slider .track {
+    -fx-fill: derive(#3a4e77, 75%);
+}
+
+#holder-slider .bar {
+    -fx-fill: #3a4e77;
 }
 
 #right-border-line-separator {

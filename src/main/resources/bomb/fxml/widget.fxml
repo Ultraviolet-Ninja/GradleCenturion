@@ -15,8 +15,7 @@
 
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/widget.css"
-          xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="bomb.WidgetController">
+          xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.WidgetController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="446.0"/>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="754.0"/>
@@ -47,7 +46,8 @@
             </rowConstraints>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                 <Label id="port-label" text="DVI"/>
-                <MFXSlider id="dvi-slider" fx:id="dviPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
+                <MFXSlider id="dvi-slider" fx:id="dviPortSlider" animateOnPress="false" bidirectional="false" max="10.0"
+                           prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="40.0"/>
                     </HBox.margin>
@@ -55,8 +55,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                 <Label id="port-label" text="Parallel"/>
-                <MFXSlider id="parallel-slider" fx:id="parallelPortSlider" max="10.0" prefHeight="54.0"
-                           prefWidth="220.0">
+                <MFXSlider id="parallel-slider" fx:id="parallelPortSlider" animateOnPress="false" bidirectional="false"
+                           max="10.0" prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="14.0"/>
                     </HBox.margin>
@@ -64,7 +64,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                 <Label id="port-label" text="PS-2"/>
-                <MFXSlider id="ps-slider" fx:id="psPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
+                <MFXSlider id="ps-slider" fx:id="psPortSlider" animateOnPress="false" bidirectional="false" max="10.0"
+                           prefHeight="54.0" prefWidth="220.0" sliderMode="SNAP_TO_TICKS">
                     <HBox.margin>
                         <Insets left="33.0"/>
                     </HBox.margin>
@@ -72,7 +73,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                 <Label id="port-label" text="RJ-45"/>
-                <MFXSlider id="rj-slider" fx:id="rjPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0" >
+                <MFXSlider id="rj-slider" fx:id="rjPortSlider" animateOnPress="false" bidirectional="false" max="10.0"
+                           prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="30.0"/>
                     </HBox.margin>
@@ -80,7 +82,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                 <Label id="port-label" text="Serial"/>
-                <MFXSlider id="serial-slider" fx:id="serialPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
+                <MFXSlider id="serial-slider" fx:id="serialPortSlider" animateOnPress="false" bidirectional="false"
+                           max="10.0" prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="26.0"/>
                     </HBox.margin>
@@ -88,7 +91,8 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                 <Label id="port-label" text="RCA"/>
-                <MFXSlider id="rca-slider" fx:id="rcaPortSlider" max="10.0" prefHeight="54.0" prefWidth="220.0">
+                <MFXSlider id="rca-slider" fx:id="rcaPortSlider" animateOnPress="false" bidirectional="false" max="10.0"
+                           prefHeight="54.0" prefWidth="220.0">
                     <HBox.margin>
                         <Insets left="36.0"/>
                     </HBox.margin>
@@ -158,12 +162,12 @@
                             <Insets top="30.0"/>
                         </VBox.margin>
                     </Label>
-                    <MFXSlider id="battery-slider" fx:id="dBatteries" layoutX="10.0"
-                               layoutY="161.0" max="10.0"/>
+                    <MFXSlider id="battery-slider" fx:id="dBatteries" layoutX="10.0" layoutY="161.0" max="10.0"/>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
                     <Label id="everything-else-label" text="Port Plates"/>
-                    <MFXSlider id="holder-slider" fx:id="portPlates" max="10.0">
+                    <MFXSlider id="holder-slider" fx:id="portPlates" animateOnPress="false" bidirectional="false"
+                               max="10.0">
                         <VBox.margin>
                             <Insets bottom="30.0"/>
                         </VBox.margin>
@@ -173,7 +177,8 @@
                             <Insets top="30.0"/>
                         </VBox.margin>
                     </Label>
-                    <MFXSlider id="holder-slider" fx:id="batteryHolders" max="10.0" />
+                    <MFXSlider id="holder-slider" fx:id="batteryHolders" animateOnPress="false" bidirectional="false"
+                               max="10.0"/>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
                     <MFXTextField fx:id="numberOfMinutesField" prefHeight="46.0" prefWidth="348.0"
@@ -237,8 +242,7 @@
                                 <ToggleGroup fx:id="bobGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$bobGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$bobGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
@@ -258,8 +262,7 @@
                                 <ToggleGroup fx:id="frkGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$frkGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$frkGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="2">
@@ -281,8 +284,7 @@
                                 <ToggleGroup fx:id="msaGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$msaGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$msaGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -302,8 +304,7 @@
                                 <ToggleGroup fx:id="frqGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$frqGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$frqGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -325,8 +326,7 @@
                                 <ToggleGroup fx:id="nsaGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$nsaGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$nsaGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="1">
@@ -346,8 +346,7 @@
                                 <ToggleGroup fx:id="carGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$carGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$carGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2">
@@ -367,8 +366,7 @@
                                 <ToggleGroup fx:id="clrGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$clrGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$clrGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -388,8 +386,7 @@
                                 <ToggleGroup fx:id="indGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$indGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$indGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane layoutX="10.0" layoutY="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
@@ -411,8 +408,7 @@
                                 <ToggleGroup fx:id="sigGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$sigGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$sigGroup"/>
                     </HBox>
                 </GridPane>
             </GridPane>
@@ -441,8 +437,7 @@
                                 <ToggleGroup fx:id="sndGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$sndGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$sndGroup"/>
                     </HBox>
                 </GridPane>
                 <GridPane GridPane.columnIndex="1">
@@ -462,8 +457,7 @@
                                 <ToggleGroup fx:id="trnGroup"/>
                             </toggleGroup>
                         </MFXToggleButton>
-                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit"
-                                         toggleGroup="$trnGroup"/>
+                        <MFXToggleButton id="unlit-label-toggle-button" text="Unlit" toggleGroup="$trnGroup"/>
                     </HBox>
                 </GridPane>
             </GridPane>
