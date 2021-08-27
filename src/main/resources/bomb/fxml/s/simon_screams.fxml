@@ -8,7 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 
-<Pane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15"
+<Pane prefHeight="770.0" prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.s.simon.screams.ScreamsController">
     <ToggleButton fx:id="colorSelectorToggle" layoutX="50.0" layoutY="687.0" mnemonicParsing="false"
                   onAction="#setSelector" text="Color Setter">

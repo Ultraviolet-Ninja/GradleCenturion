@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <TabPane prefHeight="818.0" prefWidth="1156.0" tabClosingPolicy="UNAVAILABLE"
-         xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="bomb.modules.t.translated.TranslationController">
     <Tab text="Language Select">
         <GridPane>

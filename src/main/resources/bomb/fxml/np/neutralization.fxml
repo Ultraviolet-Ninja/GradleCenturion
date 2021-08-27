@@ -15,7 +15,7 @@
 <?import javafx.scene.control.ToggleGroup?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
-          prefWidth="1160.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1"
+          prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.np.neutralization.NeutralizationController">
     <columnConstraints>
         <ColumnConstraints/>

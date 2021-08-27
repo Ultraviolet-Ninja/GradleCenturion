@@ -11,7 +11,7 @@
 
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/dh/emoji_math.css"
-          xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.dh.emoji.EmojiController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
