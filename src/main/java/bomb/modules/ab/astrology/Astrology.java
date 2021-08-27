@@ -57,11 +57,9 @@ public class Astrology extends Widget {
         int results = first + second + third;
         results = checkMatchingSerialLetters(results, sortSymbols);
 
-        return (results > 0) ?
-                (GOOD_OMEN + results) :
-                ((results == 0) ?
-                        NO_OMEN :
-                        (POOR_OMEN + Math.abs(results)));
+        return (results == 0) ?
+                NO_OMEN :
+                ((results > 0) ? GOOD_OMEN : POOR_OMEN) + Math.abs(results);
     }
 
     /**

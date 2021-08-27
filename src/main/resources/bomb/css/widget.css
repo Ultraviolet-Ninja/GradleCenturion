@@ -7,6 +7,10 @@
     -fx-font-size: 24;
 }
 
+.mfx-slider .thumb-container:pressed .thumb-radius {
+    -mfx-color: transparent;
+}
+
 .mfx-text-field {
     -fx-background-color: #00407c;
     -fx-background-radius: 15;
@@ -154,16 +158,16 @@
     -fx-fill: #3a4e77;
 }
 
-#holder-slider .thumb .mfx-ripple-generator {
-    -mfx-ripple-color: black;
-}
-
 #holder-slider .track {
     -fx-fill: derive(#3a4e77, 75%);
 }
 
 #holder-slider .bar {
     -fx-fill: #3a4e77;
+}
+
+#holder-slider .thumb-container .mfx-ripple-generator {
+    -mfx-ripple-color: black;
 }
 
 #right-border-line-separator {

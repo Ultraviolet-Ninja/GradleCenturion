@@ -61,15 +61,17 @@ public class AstrologyController implements Resettable {
             }
         }
 
-        if (astroSymbolBuffer[ELEMENTAL_INDEX] != null && astroSymbolBuffer[CELESTIAL_INDEX] != null &&
-                astroSymbolBuffer[ZODIAC_INDEX] != null)
+        if (astroSymbolBuffer[Astrology.ELEMENT_INDEX] != null &&
+                astroSymbolBuffer[Astrology.CELESTIAL_INDEX] != null &&
+                astroSymbolBuffer[Astrology.ZODIAC_INDEX] != null)
             processBuffer();
     }
 
     private void disableResetButton() {
         resetButton.setDisable(
-                astroSymbolBuffer[ELEMENTAL_INDEX] == null && astroSymbolBuffer[CELESTIAL_INDEX] == null &&
-                        astroSymbolBuffer[ZODIAC_INDEX] == null
+                astroSymbolBuffer[Astrology.ELEMENT_INDEX] == null &&
+                        astroSymbolBuffer[Astrology.CELESTIAL_INDEX] == null &&
+                        astroSymbolBuffer[Astrology.ZODIAC_INDEX] == null
         );
     }
 

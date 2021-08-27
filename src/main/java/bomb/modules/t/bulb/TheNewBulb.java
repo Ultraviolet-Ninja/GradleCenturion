@@ -5,6 +5,7 @@ import bomb.enumerations.Indicator;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 import static bomb.modules.t.bulb.BulbProperties.Color.GREEN;
