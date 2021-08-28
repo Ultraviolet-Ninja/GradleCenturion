@@ -1,27 +1,30 @@
 package bomb.modules.s.souvenir;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.pattern.factory.TextFormatterFactory;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXTextArea;
+import bomb.tools.pattern.factory.TextFormatterFactory;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.javatuples.Pair;
 import org.controlsfx.control.tableview2.TableColumn2;
 import org.controlsfx.control.tableview2.TableView2;
+import org.javatuples.Pair;
 
 public class SouvenirController implements Resettable {
     private final ObservableList<Pair<String, String>> souvenirData;
     private final FilteredList<Pair<String, String>> filteredData;
 
-    @FXML private JFXTextArea searchArea;
+    @FXML
+    private MFXTextField searchField;
 
-    @FXML private TableView2<Pair<String, String>> artifactView;
+    @FXML
+    private TableView2<Pair<String, String>> artifactView;
 
-    @FXML private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
+    @FXML
+    private TableColumn2<Pair<String, String>, String> keyColumn, answerColumn;
 
     public SouvenirController() {
         souvenirData = FXCollections.observableArrayList();
@@ -31,8 +34,8 @@ public class SouvenirController implements Resettable {
     public void initialize() {
         keyColumn.setCellValueFactory(new PropertyValueFactory<>("Key"));
         answerColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
-        searchArea.setTextFormatter(TextFormatterFactory.createNewLineRestrictionFormatter());
-        searchArea.textProperty().addListener((observable, oldValue, newValue) -> {
+        searchField.setTextFormatter(TextFormatterFactory.createNewLineRestrictionFormatter());
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(entry -> {
                 if (newValue == null || newValue.isEmpty())
                     return true;
@@ -51,15 +54,15 @@ public class SouvenirController implements Resettable {
         souvenirData.addAll(Souvenir.getPuzzleArtifacts());
         artifactView.setItems(souvenirData);
 
-        if (searchArea.isDisable() && !souvenirData.isEmpty())
-            FacadeFX.enable(searchArea);
+        if (searchField.isDisable() && !souvenirData.isEmpty())
+            FacadeFX.enable(searchField);
     }
 
     @Override
     public void reset() {
         Souvenir.reset();
-        FacadeFX.clearText(searchArea);
-        FacadeFX.disable(searchArea);
+        FacadeFX.clearText(searchField);
+        FacadeFX.disable(searchField);
         souvenirData.clear();
         artifactView.setItems(filteredData);
     }

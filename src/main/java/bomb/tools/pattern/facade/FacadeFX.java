@@ -16,61 +16,62 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 
 public class FacadeFX {
-    private FacadeFX(){}
+    private FacadeFX() {
+    }
 
-    public static void bindHandlerToButtons(EventHandler<ActionEvent> handler, Button... buttons){
+    public static void bindHandlerToButtons(EventHandler<ActionEvent> handler, Button... buttons) {
         for (Button button : buttons)
             button.setOnAction(handler);
     }
 
-    public static void bindOnClickHandler(EventHandler<MouseEvent> handler, Node ... nodes){
+    public static void bindOnClickHandler(EventHandler<MouseEvent> handler, Node... nodes) {
         for (Node node : nodes)
             node.setOnMouseClicked(handler);
     }
 
-    public static void clearText(TextInputControl text){
+    public static void clearText(TextInputControl text) {
         text.setText("");
     }
 
-    public static void clearText(Label label){
+    public static void clearText(Label label) {
         label.setText("");
     }
 
-    public static void clearMultipleTextFields(TextInputControl ... texts){
+    public static void clearMultipleTextFields(TextInputControl... texts) {
         for (TextInputControl text : texts)
             clearText(text);
     }
 
-    public static void clearMultipleLabels(Label ... labels){
+    public static void clearMultipleLabels(Label... labels) {
         for (Label label : labels)
             clearText(label);
     }
 
-    public static void disable(Node node){
+    public static void disable(Node node) {
         node.setDisable(true);
     }
 
-    public static void disableMultiple(Node ... nodes){
+    public static void disableMultiple(Node... nodes) {
         for (Node node : nodes)
             disable(node);
     }
 
-    public static void enable(Node node){
+    public static void enable(Node node) {
         node.setDisable(false);
     }
 
-    public static void enableMultiple(Node ... nodes){
+    public static void enableMultiple(Node... nodes) {
         for (Node node : nodes)
             enable(node);
     }
 
-    public static void parallelTransition(Node node, Transition ... transitions){
+    public static void parallelTransition(Node node, Transition... transitions) {
         ParallelTransition parallel = new ParallelTransition(node);
         parallel.getChildren().addAll(transitions);
         parallel.play();
     }
 
-    public static String getToggleName(ToggleGroup group){
+    public static String getToggleName(ToggleGroup group) {
         return ((ToggleButton) group.getSelectedToggle()).getText();
     }
 
@@ -78,39 +79,39 @@ public class FacadeFX {
         group.selectToggle(null);
     }
 
-    public static void resetSliderValues(Slider ... sliders){
+    public static void resetSliderValues(Slider... sliders) {
         for (Slider slider : sliders)
             slider.setValue(0.0);
     }
 
-    public static void setAlert(Alert.AlertType type, String context){
+    public static void setAlert(Alert.AlertType type, String context) {
         setAlert(type, context, "", "");
     }
 
-    public static void setAlert(Alert.AlertType type, String context, String header, String title){
+    public static void setAlert(Alert.AlertType type, String context, String header, String title) {
         Alert alert = new Alert(type, context);
         alert.setHeaderText(header);
         alert.setTitle(title);
         alert.showAndWait();
     }
 
-    public static void toggleNodes(boolean toggle, Node ... nodes){
+    public static void toggleNodes(boolean toggle, Node... nodes) {
         if (nodes.length > 0) if (nodes[0].isDisabled() == toggle) return;
         for (Node node : nodes) node.setDisable(toggle);
     }
 
-    public static void setToggleButtonsUnselected(ToggleButton ... toggleButtons){
+    public static void setToggleButtonsUnselected(ToggleButton... toggleButtons) {
         for (ToggleButton button : toggleButtons)
             button.setSelected(false);
     }
 
-    public static void unselectFromToggleGroup(ToggleGroup group){
+    public static void unselectFromToggleGroup(ToggleGroup group) {
         Toggle temp = group.getSelectedToggle();
         if (temp != null)
             temp.setSelected(false);
     }
 
-    public static void unselectFromMultipleToggleGroup(ToggleGroup ... groups){
+    public static void unselectFromMultipleToggleGroup(ToggleGroup... groups) {
         for (ToggleGroup group : groups)
             unselectFromToggleGroup(group);
     }

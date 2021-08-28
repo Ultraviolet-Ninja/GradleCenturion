@@ -16,12 +16,12 @@ import static bomb.Widget.IndicatorFilter.UNLIT;
 public class ForgetMeNot extends Widget {
     private static final IntUnaryOperator LEAST_SIG_DIGIT = num -> num % 10;
     private static final IntUnaryOperator MOST_SIG_DIGIT =
-            num -> (int) (num/Math.pow(10, Math.floor(Math.log10(num))));
+            num -> (int) (num / Math.pow(10, Math.floor(Math.log10(num))));
     private static final List<Byte> FINAL_CODE = new ArrayList<>();
 
     private static byte largestSerialCodeNumber = -1;
 
-    public static void add(int stageNumber) throws IllegalStateException{
+    public static void add(int stageNumber) throws IllegalStateException {
         if (!isForgetMeNotActive)
             throw new IllegalStateException("Forget Me Not wasn't activated");
 
@@ -34,7 +34,7 @@ public class ForgetMeNot extends Widget {
         FINAL_CODE.add(createNextNumber(stageNumber));
     }
 
-    private static byte createNextNumber(int stageNumber){
+    private static byte createNextNumber(int stageNumber) {
         if (FINAL_CODE.isEmpty())
             return (byte) LEAST_SIG_DIGIT.applyAsInt(createFirstNumber(stageNumber));
 
@@ -44,7 +44,7 @@ public class ForgetMeNot extends Widget {
         return (byte) LEAST_SIG_DIGIT.applyAsInt(createSucceedingNumber(stageNumber));
     }
 
-    private static int createFirstNumber(int stageNumber){
+    private static int createFirstNumber(int stageNumber) {
         if (hasUnlitIndicator(Indicator.CAR))
             return stageNumber + 2;
 
@@ -57,7 +57,7 @@ public class ForgetMeNot extends Widget {
         return stageNumber + lastDigit();
     }
 
-    private static int createSecondNumber(int stageNumber){
+    private static int createSecondNumber(int stageNumber) {
         if (portExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
@@ -65,7 +65,7 @@ public class ForgetMeNot extends Widget {
                 ((FINAL_CODE.get(0) % 2 == 0) ? 1 : -1);
     }
 
-    private static int createSucceedingNumber(int stageNumber){
+    private static int createSucceedingNumber(int stageNumber) {
         int length = FINAL_CODE.size();
         if (FINAL_CODE.get(length - 1) == 0 || FINAL_CODE.get(length - 2) == 0)
             return stageNumber + largestSerialCodeNumber;
@@ -78,22 +78,22 @@ public class ForgetMeNot extends Widget {
         );
     }
 
-    private static boolean bothPreviousNumbersAreEven(){
+    private static boolean bothPreviousNumbersAreEven() {
         int length = FINAL_CODE.size();
         return FINAL_CODE.get(length - 1) % 2 == 0 && FINAL_CODE.get(length - 2) % 2 == 0;
     }
 
-    private static int smallestOddDigitInSerialCode(){
+    private static int smallestOddDigitInSerialCode() {
         int compare = 10;
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        for (String num : singleNumberRegex){
+        for (String num : singleNumberRegex) {
             if (Integer.parseInt(num) < compare)
                 compare = Integer.parseInt(num);
         }
         return (compare % 2 == 1) ? compare : 9;
     }
 
-    public static void updateLargestValueInSerial(){
+    public static void updateLargestValueInSerial() {
         Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
         if (!Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
             largestSerialCodeNumber = -1;
@@ -109,16 +109,16 @@ public class ForgetMeNot extends Widget {
         }
     }
 
-    public static void undoLastStage(){
-        if (FINAL_CODE.size() != 0){
+    public static void undoLastStage() {
+        if (FINAL_CODE.size() != 0) {
             FINAL_CODE.remove(FINAL_CODE.size() - 1);
         }
     }
 
-    public static String stringifyFinalCode(){
+    public static String stringifyFinalCode() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= FINAL_CODE.size(); i++){
+        for (int i = 1; i <= FINAL_CODE.size(); i++) {
             sb.append(FINAL_CODE.get(i - 1));
             if (i % 3 == 0 && i != FINAL_CODE.size())
                 sb.append("-");
@@ -126,11 +126,11 @@ public class ForgetMeNot extends Widget {
         return sb.toString();
     }
 
-    public static int getStage(){
+    public static int getStage() {
         return FINAL_CODE.size();
     }
 
-    public static void reset(){
+    public static void reset() {
         FINAL_CODE.clear();
         updateLargestValueInSerial();
     }

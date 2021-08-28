@@ -1,8 +1,8 @@
 package bomb.modules.t.bulb;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.event.HoverHandler;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -34,16 +34,16 @@ public class TheBulbController implements Resettable {
     @FXML
     private TextArea bulbResults;
 
-    public void initialize(){
+    public void initialize() {
         FacadeFX.bindOnClickHandler(new HoverHandler<>(createAction()), red, yellow, green, blue, purple, white);
     }
 
-    private Consumer<MouseEvent> createAction(){
+    private Consumer<MouseEvent> createAction() {
         return event -> {
             bulbConditions[0] = true;
             Rectangle rect = (Rectangle) event.getSource();
             for (BulbProperties.Color color : BulbProperties.Color.values()) {
-                if (rect.getFill().equals(color.getAssociatedColor())){
+                if (rect.getFill().equals(color.getAssociatedColor())) {
                     THE_BULB.setColor(color);
                     labelSet(color.ordinal());
                 }
@@ -52,7 +52,7 @@ public class TheBulbController implements Resettable {
         };
     }
 
-    private void labelSet(int color){
+    private void labelSet(int color) {
         redLabel.setStyle(color == 0 ? RED_STYLE : BLACK_STYLE);
         yellowLabel.setStyle(color == 1 ? YELLOW_STYLE : BLACK_STYLE);
         greenLabel.setStyle(color == 2 ? GREEN_STYLE : BLACK_STYLE);
@@ -62,7 +62,7 @@ public class TheBulbController implements Resettable {
     }
 
     @FXML
-    private void luminositySet(){
+    private void luminositySet() {
         bulbConditions[1] = true;
         THE_BULB.setLight(FacadeFX.getToggleName(opacity).equals("On") ?
                 BulbProperties.Light.ON :
@@ -71,7 +71,7 @@ public class TheBulbController implements Resettable {
     }
 
     @FXML
-    private void opacitySet(){
+    private void opacitySet() {
         bulbConditions[2] = true;
         THE_BULB.setOpacity(FacadeFX.getToggleName(luminosity).equals("Opaque") ?
                 BulbProperties.Opacity.OPAQUE :
@@ -79,8 +79,8 @@ public class TheBulbController implements Resettable {
         plugInBulb();
     }
 
-    private void plugInBulb(){
-        if (bulbConditions[0] && bulbConditions[1] && bulbConditions[2]){
+    private void plugInBulb() {
+        if (bulbConditions[0] && bulbConditions[1] && bulbConditions[2]) {
             THE_BULB.setPosition(BulbProperties.Position.SCREWED);
             bulbResults.setText(TheBulb.entry(THE_BULB));
         }

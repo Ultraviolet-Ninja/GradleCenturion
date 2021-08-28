@@ -1,9 +1,9 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.pathfinding;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
 import bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.BufferedQueue;
 import javafx.scene.paint.Color;
@@ -36,19 +36,20 @@ public class MazeRunner {
     /**
      * Don't let anyone instantiate this class
      */
-    private MazeRunner() {}
+    private MazeRunner() {
+    }
 
     public static void getPegInformation(Color pegColor, int location, int gridSideLength) {
         currentPegColor = pegColor;
         startingPointCalculator(location, gridSideLength);
     }
 
-    private static void startingPointCalculator(int location, int gridSideLength){
+    private static void startingPointCalculator(int location, int gridSideLength) {
         boolean found = false;
         int[] columnLengths = AbstractHexagon.calculateColumnLengths(gridSideLength);
 
-        for (int k = 0; !found && k < columnLengths.length; k++){
-            if (location < columnLengths[k]){
+        for (int k = 0; !found && k < columnLengths.length; k++) {
+            if (location < columnLengths[k]) {
                 found = true;
                 currentLocation = new Coordinates(k, location);
             }
@@ -57,7 +58,7 @@ public class MazeRunner {
         if (!found) throw new IllegalStateException("This should be impossible");
     }
 
-    public static List<Coordinates> runMaze(HexGrid grid){
+    public static List<Coordinates> runMaze(HexGrid grid) {
         if (currentPegColor == null || currentLocation == null) return null;
 
         List<Coordinates> possibleExits = getPossibleExits(grid, grid.getRing().findRelativeIndex(currentPegColor));
@@ -65,7 +66,7 @@ public class MazeRunner {
         Graph<Coordinates, DefaultEdge> mappedGraph = mapToGraph(grid);
         List<List<Coordinates>> options = new ArrayList<>();
 
-        for (Coordinates exit : possibleExits){
+        for (Coordinates exit : possibleExits) {
             DijkstraShortestPath<Coordinates, DefaultEdge> shortest =
                     new DijkstraShortestPath<>(mappedGraph);
             options.add(shortest.getPath(currentLocation, exit).getVertexList());
@@ -75,85 +76,85 @@ public class MazeRunner {
         return options.get(0);
     }
 
-    private static List<Coordinates> getPossibleExits(HexGrid grid, int sideToExit){
+    private static List<Coordinates> getPossibleExits(HexGrid grid, int sideToExit) {
         List<Coordinates> output;
-        switch (sideToExit){
+        switch (sideToExit) {
             case 0:
                 output = getTopLeftSide(grid);
                 break;
             case 1:
-                output =  getTopRightSide(grid);
+                output = getTopRightSide(grid);
                 break;
             case 2:
-                output =  getRightSide(grid);
+                output = getRightSide(grid);
                 break;
             case 3:
-                output =  getBottomRightSide(grid);
+                output = getBottomRightSide(grid);
                 break;
             case 4:
-                output =  getBottomLeftSide(grid);
+                output = getBottomLeftSide(grid);
                 break;
             default:
-                output =  getLeftSide(grid);
+                output = getLeftSide(grid);
         }
         return filterBlockedExits(grid, output, sideToExit);
     }
 
-    private static List<Coordinates> getTopLeftSide(HexGrid grid){
+    private static List<Coordinates> getTopLeftSide(HexGrid grid) {
         ArrayList<Coordinates> output = new ArrayList<>();
-        for (int i = 0; i < grid.sideLength(); i++){
+        for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(i, 0));
         }
         return output;
     }
 
-    private static List<Coordinates> getTopRightSide(HexGrid grid){
+    private static List<Coordinates> getTopRightSide(HexGrid grid) {
         ArrayList<Coordinates> output = new ArrayList<>();
-        for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++){
+        for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
             output.add(new Coordinates(i, 0));
         }
         return output;
     }
 
-    private static List<Coordinates> getRightSide(HexGrid grid){
+    private static List<Coordinates> getRightSide(HexGrid grid) {
         ArrayList<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         int lastIndex = internals.cap() - 1;
-        for (int i = 0; i < internals.get(lastIndex).cap(); i++){
+        for (int i = 0; i < internals.get(lastIndex).cap(); i++) {
             output.add(new Coordinates(lastIndex, i));
         }
         return output;
     }
 
-    private static List<Coordinates> getBottomRightSide(HexGrid grid){
+    private static List<Coordinates> getBottomRightSide(HexGrid grid) {
         ArrayList<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
-        for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++){
-            output.add(new Coordinates(i, internals.get(i).cap()-1));
+        for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
+            output.add(new Coordinates(i, internals.get(i).cap() - 1));
         }
         return output;
     }
 
-    private static List<Coordinates> getBottomLeftSide(HexGrid grid){
+    private static List<Coordinates> getBottomLeftSide(HexGrid grid) {
         ArrayList<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
-        for (int i = 0; i < grid.sideLength(); i++){
-            output.add(new Coordinates(i, internals.get(i).cap()-1));
+        for (int i = 0; i < grid.sideLength(); i++) {
+            output.add(new Coordinates(i, internals.get(i).cap() - 1));
         }
         return output;
     }
 
-    private static List<Coordinates> getLeftSide(HexGrid grid){
+    private static List<Coordinates> getLeftSide(HexGrid grid) {
         ArrayList<Coordinates> output = new ArrayList<>();
-        for (int i = 0; i < grid.sideLength(); i++){
+        for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(0, i));
         }
         return output;
     }
 
-    private static List<Coordinates> filterBlockedExits(HexGrid grid, List<Coordinates> list, int sideToExit){
+    private static List<Coordinates> filterBlockedExits(HexGrid grid, List<Coordinates> list, int sideToExit) {
         HexWall[] wallsToFind;
-        switch(sideToExit){
+        switch (sideToExit) {
             case 0:
                 wallsToFind = new HexWall[]{TopLeft, Top};
                 break;
@@ -177,18 +178,18 @@ public class MazeRunner {
                 .collect(Collectors.toList());
     }
 
-    private static Graph<Coordinates, DefaultEdge> mapToGraph(HexGrid grid){
+    private static Graph<Coordinates, DefaultEdge> mapToGraph(HexGrid grid) {
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         Graph<Coordinates, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-        for (int x = 0; x < internals.cap(); x++){
-            for (int y = 0; y < internals.get(x).cap(); y++){
-                mapAdjacentNodes(grid, graph, new Coordinates(x,y));
+        for (int x = 0; x < internals.cap(); x++) {
+            for (int y = 0; y < internals.get(x).cap(); y++) {
+                mapAdjacentNodes(grid, graph, new Coordinates(x, y));
             }
         }
         return graph;
     }
 
-    private static void mapAdjacentNodes(HexGrid grid, Graph<Coordinates, DefaultEdge> graph, Coordinates location){
+    private static void mapAdjacentNodes(HexGrid grid, Graph<Coordinates, DefaultEdge> graph, Coordinates location) {
         boolean notHalfWay = location.getX() < grid.sideLength() - 1;
         mapSingleNode(grid, graph, TopRight, location, location.immutableAdd(notHalfWay ?
                 MOVE_RIGHT : RIGHT_SIDE_MOVE_TOP_RIGHT));
@@ -198,7 +199,7 @@ public class MazeRunner {
     }
 
     private static void mapSingleNode(HexGrid grid, Graph<Coordinates, DefaultEdge> graph,
-                                      HexWall correspondingWall, Coordinates from, Coordinates to){
+                                      HexWall correspondingWall, Coordinates from, Coordinates to) {
         HexNode currentNode = grid.retrieveNode(from);
         HexNode checkExists = grid.retrieveNode(to);
 

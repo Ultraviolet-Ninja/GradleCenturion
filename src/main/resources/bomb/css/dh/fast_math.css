@@ -1,10 +1,8 @@
-.jfx-button {
+.mfx-button {
     -fx-font-size: 32;
 }
 
-.jfx-text-field {
-    -jfx-focus-color: transparent;
-    -jfx-unfocus-color: transparent;
+.mfx-text-field {
     -fx-alignment: center;
     -fx-background-color: #00407c;
     -fx-background-radius: 15;
@@ -13,4 +11,5 @@
     -fx-border-width: 3;
     -fx-font-size: 36;
     -fx-prompt-text-fill: white;
+    -mfx-line-stroke-width: 0;
 }

@@ -3,8 +3,8 @@ package bomb.modules.dh.fast_math;
 import bomb.abstractions.Resettable;
 import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,10 +16,10 @@ public class FastController implements Resettable {
     private final StringBuilder buttonPressTracker, outputMathTextTracker;
 
     @FXML
-    private JFXButton alfa, bravo, charlie, delta, echo, golf, kilo, november, papa, sierra, tango, xRay, zulu;
+    private MFXButton alfa, bravo, charlie, delta, echo, golf, kilo, november, papa, sierra, tango, xRay, zulu;
 
     @FXML
-    private JFXTextField outputMath;
+    private MFXTextField outputMath;
 
     public FastController() {
         buttonPressTracker = new StringBuilder();
@@ -45,6 +45,7 @@ public class FastController implements Resettable {
                 if (outputMathTextTracker.length() > 2) outputMathTextTracker.setLength(0);
             } catch (IllegalArgumentException illegal) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getLocalizedMessage());
+                clear();
             }
         };
     }

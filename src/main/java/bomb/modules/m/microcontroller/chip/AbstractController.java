@@ -12,18 +12,25 @@ public abstract class AbstractController {
 
     private final int pinCount;
 
-    public AbstractController(int pinCount){
+    public AbstractController(int pinCount) {
         this.pinCount = pinCount;
         pinOrder = new ArrayList<>();
         setController();
     }
 
-    private void setController() throws IllegalArgumentException{
-        switch (pinCount){
-            case SIX_PIN: setSixPin(); break;
-            case EIGHT_PIN: setEightPin(); break;
-            case TEN_PIN: setTenPin(); break;
-            default: throw new IllegalArgumentException("Illegal pin count");
+    private void setController() throws IllegalArgumentException {
+        switch (pinCount) {
+            case SIX_PIN:
+                setSixPin();
+                break;
+            case EIGHT_PIN:
+                setEightPin();
+                break;
+            case TEN_PIN:
+                setTenPin();
+                break;
+            default:
+                throw new IllegalArgumentException("Illegal pin count");
         }
     }
 
@@ -33,7 +40,7 @@ public abstract class AbstractController {
 
     protected abstract void setTenPin();
 
-    public ArrayList<Color> traversePins(final int index){
+    public ArrayList<Color> traversePins(final int index) {
         ArrayList<Color> outputList = new ArrayList<>();
         for (Pin pin : pinOrder) outputList.add(pin.getColor(index));
         return outputList;

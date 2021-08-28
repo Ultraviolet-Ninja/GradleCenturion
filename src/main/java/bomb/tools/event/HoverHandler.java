@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 public class HoverHandler<T extends Event> implements EventHandler<T> {
     private final Consumer<T> action;
 
-    public HoverHandler(Consumer<T> action){
+    public HoverHandler(Consumer<T> action) {
         this.action = action;
     }
 

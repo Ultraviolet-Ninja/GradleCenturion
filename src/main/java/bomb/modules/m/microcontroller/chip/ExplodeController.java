@@ -2,7 +2,7 @@ package bomb.modules.m.microcontroller.chip;
 
 import bomb.modules.m.microcontroller.Pin;
 
-public class ExplodeController extends AbstractController{
+public class ExplodeController extends AbstractController {
     public ExplodeController(int pinCount) {
         super(pinCount);
     }

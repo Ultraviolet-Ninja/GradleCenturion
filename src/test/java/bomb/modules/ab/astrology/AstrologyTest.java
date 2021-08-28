@@ -32,24 +32,24 @@ public class AstrologyTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void serialCodeExceptionTest(){
+    public void serialCodeExceptionTest() {
         Astrology.calculate(EARTH, ARIES, MARS);
     }
 
     @DataProvider
-    public Object[][] exceptionProvider(){
+    public Object[][] exceptionProvider() {
         return new Object[][]{
                 {ARIES, ARIES, ARIES}, {VENUS, VENUS, VENUS}, {FIRE, FIRE, FIRE}, {ARIES, MARS, EARTH, EARTH}, {VENUS}
         };
     }
 
     @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(AstroSymbol... set){
+    public void exceptionTest(AstroSymbol... set) {
         Astrology.calculate(set);
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider(){
+    public Object[][] trainingVideoProvider() {
         return new Object[][]{
                 {(POOR_OMEN + 4), EARTH, MARS, ARIES}, {(GOOD_OMEN + 2), WATER, MERCURY, TAURUS},
                 {(GOOD_OMEN + 3), FIRE, MERCURY, SAGITTARIUS}
@@ -57,14 +57,14 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "trainingVideoProvider")
-    public void trainingVideoTest(String expected, AstroSymbol... set){
+    public void trainingVideoTest(String expected, AstroSymbol... set) {
         Widget.setSerialCode("jt3gu5");
 
         assertEquals(Astrology.calculate(set), expected);
     }
 
     @DataProvider
-    public Object[][] interchangeabilityProvider(){
+    public Object[][] interchangeabilityProvider() {
         String expected = POOR_OMEN + 4;
         return new Object[][]{
                 {expected, EARTH, MARS, ARIES}, {expected, MARS, EARTH, ARIES}, {expected, MARS, ARIES, EARTH},
@@ -73,14 +73,14 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "interchangeabilityProvider")
-    public void interchangeabilityTest(String expected, AstroSymbol... set){
+    public void interchangeabilityTest(String expected, AstroSymbol... set) {
         Widget.setSerialCode("jt3gu5");
 
         assertEquals(Astrology.calculate(set), expected);
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider(){
+    public Object[][] theGreatBerateProvider() {
         ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
@@ -91,14 +91,14 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "theGreatBerateProvider")
-    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstroSymbol... set){
+    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstroSymbol... set) {
         cond.setCondition();
 
         assertEquals(Astrology.calculate(set), expected);
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         Widget.resetProperties();
     }
 }

@@ -47,16 +47,16 @@ public enum BulbProperties {
 
         private final javafx.scene.paint.Color associatedColor;
 
-        Color(javafx.scene.paint.Color color){
+        Color(javafx.scene.paint.Color color) {
             associatedColor = color;
         }
 
-        public javafx.scene.paint.Color getAssociatedColor(){
+        public javafx.scene.paint.Color getAssociatedColor() {
             return associatedColor;
         }
     }
 
-    public enum Light{
+    public enum Light {
         ON, OFF
     }
 
@@ -64,7 +64,7 @@ public enum BulbProperties {
         OPAQUE, TRANSLUCENT
     }
 
-    public enum Position{
+    public enum Position {
         SCREWED, UNSCREWED
     }
 }

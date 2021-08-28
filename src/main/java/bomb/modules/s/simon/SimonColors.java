@@ -13,7 +13,7 @@ public class SimonColors {
 
         private final String label;
 
-        Screams(String label){
+        Screams(String label) {
             this.label = label;
         }
 

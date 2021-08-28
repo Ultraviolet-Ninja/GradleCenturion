@@ -19,17 +19,17 @@ import static org.testng.Assert.assertEquals;
 
 public class ShapeShiftTest {
     @BeforeMethod
-    public void methodSetup(){
+    public void methodSetup() {
         Widget.resetProperties();
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(){
+    public void exceptionTest() {
         ShapeShift.solve(ROUND, ROUND);
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider(){
+    public Object[][] trainingVideoProvider() {
         ConditionSetter firstVideo = this::testOneSetup;
         ConditionSetter secondVideo = this::testTwoSetup;
         return new Object[][]{
@@ -42,13 +42,13 @@ public class ShapeShiftTest {
     }
 
     @Test(dataProvider = "trainingVideoProvider")
-    public void trainingVideoTest(ConditionSetter setter, ShapeEnd[] expectedArr, ShapeEnd left, ShapeEnd right){
+    public void trainingVideoTest(ConditionSetter setter, ShapeEnd[] expectedArr, ShapeEnd left, ShapeEnd right) {
         setter.setCondition();
         assertPairEquals(expectedArr, ShapeShift.solve(left, right));
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider(){
+    public Object[][] theGreatBerateProvider() {
         ConditionSetter firstTake = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter secondTake = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter thirdTake = WidgetSimulations::videoTwoTakeTwo;
@@ -59,15 +59,15 @@ public class ShapeShiftTest {
         };
     }
 
-    private void testOneSetup(){
+    private void testOneSetup() {
         Widget.setSerialCode("ee3eu3");
         Widget.setDBatteries(3);
         Widget.setNumHolders(3);
-        Widget.setPortValue(Port.PARALLEL,2);
-        Widget.setPortValue(Port.SERIAL,1);
+        Widget.setPortValue(Port.PARALLEL, 2);
+        Widget.setPortValue(Port.SERIAL, 1);
     }
 
-    private void testTwoSetup(){
+    private void testTwoSetup() {
         Widget.setSerialCode("c88rx4");
         Widget.setNumHolders(2);
         Widget.setDBatteries(1);
@@ -77,13 +77,13 @@ public class ShapeShiftTest {
         Widget.setIndicator(TrinarySwitch.OFF, Indicator.TRN);
     }
 
-    private void assertPairEquals(ShapeEnd[] expected, ShapeEnd[] actual){
+    private void assertPairEquals(ShapeEnd[] expected, ShapeEnd[] actual) {
         assertEquals(expected[0], actual[0]);
         assertEquals(expected[1], actual[1]);
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         Widget.resetProperties();
     }
 }

@@ -10,6 +10,8 @@ import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
+//TODO - Probably change var names, finish Javadocs and break down a few methods
+
 /**
  *
  */

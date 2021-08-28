@@ -5,34 +5,34 @@ import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.fxml.FXML;
 
 public class ShapeShiftController implements Resettable {
-    private ReadOnlyRing<ShapeEnd> leftSide, rightSide;
+    private final ReadOnlyRing<ShapeEnd> leftSide, rightSide;
 
-    public void initialize(){
-        leftSide = new ReadOnlyRing<>(ShapeEnd.values().length);
-        rightSide = new ReadOnlyRing<>(ShapeEnd.values().length);
-        for (ShapeEnd shape : ShapeEnd.values()){
-            leftSide.add(shape);
-            rightSide.add(shape);
-        }
+    public ShapeShiftController() {
+        leftSide = new ReadOnlyRing<>(ShapeEnd.values());
+        rightSide = new ReadOnlyRing<>(ShapeEnd.values());
     }
 
-    @FXML
-    private void decrementLeft(){
+    public void initialize() {
 
     }
 
     @FXML
-    private void decrementRight(){
+    private void decrementLeft() {
 
     }
 
     @FXML
-    private void incrementLeft(){
+    private void decrementRight() {
 
     }
 
     @FXML
-    private void incrementRight(){
+    private void incrementLeft() {
+
+    }
+
+    @FXML
+    private void incrementRight() {
 
     }
 

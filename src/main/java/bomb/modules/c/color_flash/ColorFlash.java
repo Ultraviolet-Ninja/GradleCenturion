@@ -6,19 +6,19 @@ import bomb.Widget;
 
 public class ColorFlash extends Widget {
     static class Combo {
-        private final CFlash.Word word;
-        private final CFlash.Color color;
+        private final ColorFlashProperties.Word word;
+        private final ColorFlashProperties.Color color;
 
-        Combo(CFlash.Word word, CFlash.Color color) {
+        Combo(ColorFlashProperties.Word word, ColorFlashProperties.Color color) {
             this.color = color;
             this.word = word;
         }
 
-        public CFlash.Word getWord() {
+        public ColorFlashProperties.Word getWord() {
             return word;
         }
 
-        public CFlash.Color getColor() {
+        public ColorFlashProperties.Color getColor() {
             return color;
         }
     }
@@ -63,37 +63,37 @@ public class ColorFlash extends Widget {
 //        return output;
 //    }
 
-    private static Combo[] forgeCombos(CFlash.Word[] words, CFlash.Color[] colors){
+    private static Combo[] forgeCombos(ColorFlashProperties.Word[] words, ColorFlashProperties.Color[] colors) {
         Combo[] combos = new Combo[8];
-        for (int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             combos[i] = new Combo(words[i], colors[i]);
         }
         return combos;
     }
 
-    private static int iterateWord(Combo[] combos, CFlash.Word word){
+    private static int iterateWord(Combo[] combos, ColorFlashProperties.Word word) {
         int found = 0;
-        for (Combo combo : combos){
-            if (combo.getWord() == word){
+        for (Combo combo : combos) {
+            if (combo.getWord() == word) {
                 found++;
             }
         }
         return found;
     }
 
-    private static int iterateColor(Combo[] combos, CFlash.Color color){
+    private static int iterateColor(Combo[] combos, ColorFlashProperties.Color color) {
         int found = 0;
-        for (Combo combo : combos){
-            if (combo.getColor() == color){
+        for (Combo combo : combos) {
+            if (combo.getColor() == color) {
                 found++;
             }
         }
         return found;
     }
 
-    private static boolean matches(Combo[] combos, CFlash.Color color, CFlash.Word word){
-        for (Combo combo : combos){
-            if (combo.getWord() == word && combo.getColor() == color){
+    private static boolean matches(Combo[] combos, ColorFlashProperties.Color color, ColorFlashProperties.Word word) {
+        for (Combo combo : combos) {
+            if (combo.getWord() == word && combo.getColor() == color) {
                 return true;
             }
         }

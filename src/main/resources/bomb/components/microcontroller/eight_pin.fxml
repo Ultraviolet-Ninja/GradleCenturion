@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 
 <fx:root prefHeight="494.0" prefWidth="387.0" style="-fx-background-color: green;" type="javafx.scene.layout.Pane"
-         xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1">
+         xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Line endX="100.0" layoutX="-22.0" layoutY="90.0" startX="65.0" stroke="#61f23c" strokeWidth="2.0"/>
     <Line endX="100.0" layoutX="64.0" layoutY="90.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>
     <Line endX="100.0" layoutX="138.0" layoutY="91.0" startX="64.0" stroke="#61f23c" strokeWidth="2.0"/>

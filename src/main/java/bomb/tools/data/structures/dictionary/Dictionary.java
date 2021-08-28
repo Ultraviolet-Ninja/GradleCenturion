@@ -18,31 +18,31 @@ public abstract class Dictionary {
 
     protected abstract void initStepTwo();
 
-    public String getFancyChars(){
+    public String getFancyChars() {
         return fancyChars;
     }
 
-    public String[] exportPasswords(){
+    public String[] exportPasswords() {
         return passwords;
     }
 
-    public String[] getButtons(){
+    public String[] getButtons() {
         return buttonLabels;
     }
 
-    public String[] getMods(){
+    public String[] getMods() {
         return moduleLabels;
     }
 
-    public String[] getPhrases(){
-        return new String[] {yes, no};
+    public String[] getPhrases() {
+        return new String[]{yes, no};
     }
 
-    public HashMap<String, Double> getFrqMap(){
+    public HashMap<String, Double> getFrqMap() {
         return frequencies;
     }
 
-    public HashMap<String, String> getStepTwo(){
+    public HashMap<String, String> getStepTwo() {
         return stepTwoMap;
     }
 }

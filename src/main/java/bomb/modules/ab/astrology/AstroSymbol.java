@@ -35,7 +35,7 @@ public enum AstroSymbol implements Index {
      *
      * @param index Its index number found in the bomb manual page for Astrology
      */
-    AstroSymbol(int index){
+    AstroSymbol(int index) {
         this.index = (byte) index;
     }
 

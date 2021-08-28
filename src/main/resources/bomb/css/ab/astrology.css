@@ -1,10 +1,8 @@
-.jfx-button {
+.mfx-button {
     -fx-font-size: 24;
 }
 
-.jfx-text-field {
-    -jfx-focus-color: transparent;
-    -jfx-unfocus-color: transparent;
+.mfx-text-field {
     -fx-alignment: center;
     -fx-background-color: #00407c;
     -fx-background-radius: 15;
@@ -13,13 +11,14 @@
     -fx-border-width: 2;
     -fx-font-size: 30;
     -fx-prompt-text-fill: white;
+    -mfx-line-stroke-width: 0;
 }
 
-.jfx-toggle-button {
-    -jfx-untoggle-color: #354558;
-    -jfx-untoggle-line-color: #172b58;
-    -jfx-toggle-color: #dedee0;
-    -jfx-toggle-line-color: #2b4cff;
+.mfx-toggle-button {
+    -mfx-untoggle-color: #354558;
+    -mfx-untoggle-line-color: #172b58;
+    -mfx-toggle-color: #dedee0;
+    -mfx-toggle-line-color: #2b4cff;
 }
 /*TODO experiment with color schemes*/
 

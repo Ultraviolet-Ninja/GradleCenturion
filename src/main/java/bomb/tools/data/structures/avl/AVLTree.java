@@ -3,28 +3,26 @@ package bomb.tools.data.structures.avl;
 import java.util.List;
 
 /**
- *
  * @param <E>
  */
 public class AVLTree<E extends Comparable<E>> {
     /**
-     *
      * @param <E>
      */
-    static class Node<E>{
+    static class Node<E> {
         private final E element;
         private short balanceFactor;
         private final String value;
         private Node<E> left, right;
 
-        Node(E element, String value){
+        Node(E element, String value) {
             this.element = element;
             this.value = value;
             balanceFactor = 0;
             left = right = null;
         }
 
-        boolean isLeaf(){
+        boolean isLeaf() {
             return left == null && right == null;
         }
     }
@@ -34,13 +32,11 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      *
      */
-    public AVLTree(){
+    public AVLTree() {
         root = null;
     }
 
     /**
-     *
-     *
      * @param initArray
      * @param values
      * @throws UnbalancedEntriesException
@@ -53,34 +49,31 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param list
      * @param values
      * @throws UnbalancedEntriesException
      */
     public AVLTree(List<E> list, String[] values) throws UnbalancedEntriesException {
-        if (list.size() == values.length){
-            for (int i = 0; i< values.length; i++)
+        if (list.size() == values.length) {
+            for (int i = 0; i < values.length; i++)
                 addNode(list.get(i), values[i]);
         } else throw new UnbalancedEntriesException(list.size(), values.length);
     }
 
-    private E[] castArray(List<E> list){
+    private E[] castArray(List<E> list) {
         return null;
     }
 
     /**
-     *
      * @param element
      * @param value
      */
-    public void addNode(E element, String value){
+    public void addNode(E element, String value) {
         root = addNode(element, value, root);
         root = rescale(root);
     }
 
     /**
-     *
      * @param element
      * @param value
      * @param stem
@@ -101,11 +94,10 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param stem
      * @return
      */
-    private Node<E> rescale(Node<E> stem){
+    private Node<E> rescale(Node<E> stem) {
         if (stem.isLeaf()) {
             stem.balanceFactor = 0;
             return stem;
@@ -120,48 +112,44 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param stem
      * @return
      */
-    private short tiltScale(Node<E> stem){
+    private short tiltScale(Node<E> stem) {
         return (short) (height(stem.right) - height(stem.left));
     }
 
     /**
-     *
      * @param stem
      * @return
      */
-    private Node<E> algorithm(Node<E> stem){
-        if (stem.balanceFactor > 1){
-            stem = (stem.right.balanceFactor > 0)?
-                    doubleRight(stem): //Stem BF is 2 and Stem.right is positive - RR Tree
+    private Node<E> algorithm(Node<E> stem) {
+        if (stem.balanceFactor > 1) {
+            stem = (stem.right.balanceFactor > 0) ?
+                    doubleRight(stem) : //Stem BF is 2 and Stem.right is positive - RR Tree
                     rightLeft(stem); //Stem BF is 2 and Stem.right is negative - RL Tree
-        } else if (stem.balanceFactor < -1){
-            stem = (stem.left.balanceFactor < 0)?
-                    doubleLeft(stem): //Stem BF is 2 and Stem.left is negative - LL Tree
+        } else if (stem.balanceFactor < -1) {
+            stem = (stem.left.balanceFactor < 0) ?
+                    doubleLeft(stem) : //Stem BF is 2 and Stem.left is negative - LL Tree
                     leftRight(stem); //Stem BF is 2 and Stem.left is positive - LR Tree
         }
         return stem;
     }
 
     /**
-     *
      * @param search
      * @return
      */
-    public String dig(E search){
+    public String dig(E search) {
         return digDug(search, root);
     }
 
     /**
-     *
      * @param search
      * @param stem
      * @return
      */
-    private String digDug(E search, Node<E> stem){
+    private String digDug(E search, Node<E> stem) {
         if (search.equals(stem.element)) return stem.value;
         if (stem.isLeaf()) return null;
 
@@ -173,12 +161,11 @@ public class AVLTree<E extends Comparable<E>> {
     /**
      *
      */
-    public void traverse(){
+    public void traverse() {
         System.out.println(traversePreOrder(root));
     }
 
     /**
-     *
      * @param root
      * @return
      */
@@ -198,7 +185,6 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param sb
      * @param padding
      * @param pointer
@@ -223,15 +209,13 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @return
      */
-    public int getTotalHeight(){
+    public int getTotalHeight() {
         return height(root);
     }
 
     /**
-     *
      * @param stem
      * @return
      */
@@ -241,50 +225,44 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param root
      * @return
      */
-    private Node<E> doubleLeft(Node<E> root){
+    private Node<E> doubleLeft(Node<E> root) {
         return rotateRight(root);
     }
 
     /**
-     *
      * @param root
      * @return
      */
-    private Node<E> doubleRight(Node<E> root){
+    private Node<E> doubleRight(Node<E> root) {
         return rotateLeft(root);
     }
 
     /**
-     *
      * @param root
      * @return
      */
-    private Node<E> leftRight(Node<E> root){
+    private Node<E> leftRight(Node<E> root) {
         root.left = rotateLeft(root.left);
         return rotateRight(root);
     }
 
     /**
-     *
      * @param root
      * @return
      */
-    private Node<E> rightLeft(Node<E> root){
+    private Node<E> rightLeft(Node<E> root) {
         root.right = rotateRight(root.right);
         return rotateLeft(root);
     }
 
     /**
-     *
-     *
      * @param root
      * @return
      */
-    private Node<E> rotateRight(Node<E> root){
+    private Node<E> rotateRight(Node<E> root) {
         Node<E> temp = root.left;
         root.left = temp.right;
         temp.right = root;
@@ -292,7 +270,6 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param root
      * @return
      */
@@ -304,11 +281,10 @@ public class AVLTree<E extends Comparable<E>> {
     }
 
     /**
-     *
      * @param stem
      * @return
      */
-    private boolean notNull(Node<E> stem){
+    private boolean notNull(Node<E> stem) {
         return stem != null;
     }
 }

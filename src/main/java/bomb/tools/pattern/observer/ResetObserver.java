@@ -5,14 +5,14 @@ import javafx.fxml.FXMLLoader;
 
 import java.util.ArrayList;
 
-public class ResetObserver implements Observer{
+public class ResetObserver implements Observer {
     private final ArrayList<Resettable> controllerList;
 
-    public ResetObserver(){
+    public ResetObserver() {
         controllerList = new ArrayList<>();
     }
 
-    public void addController(FXMLLoader loader){
+    public void addController(FXMLLoader loader) {
         if (loader.getController() == null) return;
         controllerList.add(loader.getController());
     }

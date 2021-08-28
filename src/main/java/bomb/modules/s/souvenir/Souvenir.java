@@ -14,7 +14,7 @@ public class Souvenir {
         MODULE_ARTIFACTS = new LinkedHashMap<>();
     }
 
-    public static void addRelic(String key, String answer){
+    public static void addRelic(String key, String answer) {
         MODULE_ARTIFACTS.put(key, answer);
     }
 
@@ -25,7 +25,7 @@ public class Souvenir {
         return output;
     }
 
-    public static void reset(){
+    public static void reset() {
         MODULE_ARTIFACTS.clear();
     }
 }

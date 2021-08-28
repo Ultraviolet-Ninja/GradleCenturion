@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
@@ -11,9 +9,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <GridPane id="background" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/forget_me_not.css"
-          xmlns="http://javafx.com/javafx/8.0.202-ea" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.dh.forget_me.ForgetMeNotController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="553.0"/>
@@ -33,9 +33,9 @@
         <VBox alignment="CENTER" prefHeight="501.0" prefWidth="569.0">
             <ButtonBar prefHeight="40.0" prefWidth="200.0">
                 <buttons>
-                    <JFXButton id="number-pad-button" fx:id="one" buttonType="RAISED" ripplerFill="BLACK" text="1"/>
-                    <JFXButton id="number-pad-button" fx:id="two" buttonType="RAISED" ripplerFill="BLACK" text="2"/>
-                    <JFXButton id="number-pad-button" fx:id="three" buttonType="RAISED" ripplerFill="BLACK" text="3"/>
+                    <MFXButton id="number-pad-button" fx:id="one" buttonType="RAISED"  text="1"/>
+                    <MFXButton id="number-pad-button" fx:id="two" buttonType="RAISED"  text="2"/>
+                    <MFXButton id="number-pad-button" fx:id="three" buttonType="RAISED"  text="3"/>
                 </buttons>
                 <padding>
                     <Insets right="166.0"/>
@@ -46,9 +46,9 @@
             </ButtonBar>
             <ButtonBar layoutX="10.0" layoutY="190.0" prefHeight="40.0" prefWidth="200.0">
                 <buttons>
-                    <JFXButton id="number-pad-button" fx:id="four" buttonType="RAISED" ripplerFill="BLACK" text="4"/>
-                    <JFXButton id="number-pad-button" fx:id="five" buttonType="RAISED" ripplerFill="BLACK" text="5"/>
-                    <JFXButton id="number-pad-button" fx:id="six" buttonType="RAISED" ripplerFill="BLACK" text="6"/>
+                    <MFXButton id="number-pad-button" fx:id="four" buttonType="RAISED"  text="4"/>
+                    <MFXButton id="number-pad-button" fx:id="five" buttonType="RAISED"  text="5"/>
+                    <MFXButton id="number-pad-button" fx:id="six" buttonType="RAISED"  text="6"/>
                     <Label id="stage-counter" fx:id="stageCounter" alignment="CENTER" minWidth="35.0" prefHeight="17.0"
                            text="1"/>
                 </buttons>
@@ -61,10 +61,10 @@
             </ButtonBar>
             <ButtonBar layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="200.0">
                 <buttons>
-                    <JFXButton id="number-pad-button" fx:id="seven" buttonType="RAISED" ripplerFill="BLACK" text="7"/>
-                    <JFXButton id="number-pad-button" fx:id="eight" buttonType="RAISED" ripplerFill="BLACK" text="8"/>
-                    <JFXButton id="number-pad-button" fx:id="nine" buttonType="RAISED" ripplerFill="BLACK" text="9"/>
-                    <JFXButton id="number-pad-button" fx:id="zero" buttonType="RAISED" ripplerFill="BLACK" text="0"/>
+                    <MFXButton id="number-pad-button" fx:id="seven" buttonType="RAISED"  text="7"/>
+                    <MFXButton id="number-pad-button" fx:id="eight" buttonType="RAISED"  text="8"/>
+                    <MFXButton id="number-pad-button" fx:id="nine" buttonType="RAISED"  text="9"/>
+                    <MFXButton id="number-pad-button" fx:id="zero" buttonType="RAISED"  text="0"/>
                 </buttons>
                 <VBox.margin>
                     <Insets top="7.0"/>
@@ -75,18 +75,18 @@
             </ButtonBar>
         </VBox>
         <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-            <JFXTextField id="confirmation-field" fx:id="confirmationField" alignment="CENTER" editable="false"
-                          focusColor="#405aa800" promptText="Confirmation Area" unFocusColor="#4d4d4d00">
+            <MFXTextField id="confirmation-field" fx:id="confirmationField" alignment="CENTER" editable="false"
+                          promptText="Confirmation Area">
                 <VBox.margin>
                     <Insets left="50.0" right="33.0" top="2.0"/>
                 </VBox.margin>
-            </JFXTextField>
-            <JFXButton id="control-button" fx:id="undoButton" buttonType="RAISED" disable="true"
-                       onAction="#undoLastStage" ripplerFill="BLACK" text="Undo">
+            </MFXTextField>
+            <MFXButton id="control-button" fx:id="undoButton" buttonType="RAISED" disable="true"
+                       onAction="#undoLastStage"  text="Undo">
                 <VBox.margin>
                     <Insets right="262.0" top="28.0"/>
                 </VBox.margin>
-            </JFXButton>
+            </MFXButton>
         </VBox>
     </GridPane>
     <VBox id="border-divide" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
@@ -96,17 +96,17 @@
                 <Insets bottom="1.0" left="28.0" right="8.0" top="191.0"/>
             </VBox.margin>
         </JFXTextArea>
-        <JFXButton id="control-button" fx:id="outputButton" buttonType="RAISED" disable="true"
-                   onAction="#stringifyOutput" ripplerFill="BLACK" text="Create Output Code">
+        <MFXButton id="control-button" fx:id="outputButton" buttonType="RAISED" disable="true"
+                   onAction="#stringifyOutput"  text="Create Output Code">
             <VBox.margin>
                 <Insets right="230.0" top="40.0"/>
             </VBox.margin>
-        </JFXButton>
-        <JFXButton id="reset-button" fx:id="resetButton" buttonType="RAISED" disable="true" onAction="#resetModule"
-                   ripplerFill="BLACK" text="Reset" VBox.vgrow="ALWAYS">
+        </MFXButton>
+        <MFXButton id="reset-button" fx:id="resetButton" buttonType="RAISED" disable="true" onAction="#resetModule"
+                    text="Reset" VBox.vgrow="ALWAYS">
             <VBox.margin>
                 <Insets left="536.0" top="162.0"/>
             </VBox.margin>
-        </JFXButton>
+        </MFXButton>
     </VBox>
 </GridPane>

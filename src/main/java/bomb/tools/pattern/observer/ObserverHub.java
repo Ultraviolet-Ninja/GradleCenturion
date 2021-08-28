@@ -9,14 +9,15 @@ public class ObserverHub {
     }
 
     private static final List<Observer> OBSERVER_LIST = new ArrayList<>();
-    
-    private ObserverHub(){}
-    
-    public static void addObserver(Observer observer){
+
+    private ObserverHub() {
+    }
+
+    public static void addObserver(Observer observer) {
         OBSERVER_LIST.add(observer);
     }
 
-    public static void updateAtIndex(ObserverIndex index){
+    public static void updateAtIndex(ObserverIndex index) {
         OBSERVER_LIST.get(index.ordinal()).update();
     }
 }
