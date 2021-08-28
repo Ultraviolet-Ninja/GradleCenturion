@@ -1,8 +1,6 @@
 package bomb.modules.c.color_flash;
 
-public enum CFlash {
-    ;
-
+public class ColorFlashProperties {
     public enum Word {
         RED, YELLOW, GREEN, BLUE, MAGENTA, WHITE
     }
