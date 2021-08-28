@@ -1,9 +1,9 @@
 package bomb.modules.ab.blind_alley;
 
-import bomb.enumerations.Port;
 import bomb.Widget;
 
 import static bomb.enumerations.Indicator.*;
+import static bomb.enumerations.Port.*;
 
 /**
  * This class works on the Blind Alley module, updating the internal 2-D array whenever

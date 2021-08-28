@@ -7,25 +7,24 @@ import javafx.scene.paint.Color;
 
 import java.util.function.UnaryOperator;
 
+//TODO Finish desc
 /**
  *
  */
 public class RoundKeypads extends Widget {
-    //TODO - Finished Javadocs
-
     private static final byte NUMBER_OF_COLUMNS = 6, IMAGES_PER_COLUMN = 7;
     private static final UnaryOperator<Color> HIGHLIGHT_COMMAND = previousColor ->
             new Color(0, previousColor.getGreen(), previousColor.getBlue(), 1);
 
     /**
-     * @param values
-     * @return
+     * @return The column that contains the most clicked keypads or -1 if no keypads are selected
      */
-    public static int autoDetect(Keypad[] values) {
+    public static int determineBadColumn() {
         int[] columnCounters = new int[NUMBER_OF_COLUMNS];
         int maxHighlightedImages = 0, columnToHighlight = 0;
-        for (int i = 0; i < values.length; i++) {
-            if (values[i].getFlag()) columnCounters[Math.floorDiv(i, IMAGES_PER_COLUMN)]++;
+        Keypad[] keypads = Keypad.values();
+        for (int i = 0; i < keypads.length; i++) {
+            if (keypads[i].getFlag()) columnCounters[Math.floorDiv(i, IMAGES_PER_COLUMN)]++;
         }
 
         for (int j = columnCounters.length - 1; j >= 0; j--) {
@@ -34,7 +33,7 @@ public class RoundKeypads extends Widget {
                 columnToHighlight = j;
             }
         }
-        if (columnCounters[columnToHighlight] == 0) columnToHighlight = -1;
+        if (columnCounters[columnToHighlight] == 0) return -1;
 
         return columnToHighlight;
     }
@@ -65,5 +64,10 @@ public class RoundKeypads extends Widget {
             }
         }
         return nextImage;
+    }
+
+    public static void reset() {
+        for (Keypad currentKeypad : Keypad.values())
+            currentKeypad.setFlag(false);
     }
 }
