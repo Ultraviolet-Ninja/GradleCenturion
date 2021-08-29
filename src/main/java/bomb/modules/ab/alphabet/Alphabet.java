@@ -31,17 +31,17 @@ public class Alphabet extends Widget {
         StringBuilder output = new StringBuilder();
         Regex filterRegex = new Regex("[^" + input + "]");
 
-        for (String letterSet : WORD_BANK){
-            if (ultimateFilter(letterSet, filterRegex).isEmpty()){
+        for (String letterSet : WORD_BANK) {
+            if (ultimateFilter(letterSet, filterRegex).isEmpty()) {
                 output.append(letterSet);
                 input = input.replaceAll("[" + letterSet + "]", "");
-                if(input.isEmpty())
+                if (input.isEmpty())
                     return output.toString();
                 filterRegex = new Regex("[^" + input + "]");
             }
         }
 
-        if (!input.isEmpty()){
+        if (!input.isEmpty()) {
             char[] arr = input.toCharArray();
             Arrays.sort(arr);
             output.append(arr);
@@ -58,9 +58,9 @@ public class Alphabet extends Widget {
             throw new IllegalArgumentException("Input can't have repeated characters");
     }
 
-    private static boolean hasRepeatedCharacters(String input){
+    private static boolean hasRepeatedCharacters(String input) {
         Set<Character> set = new HashSet<>();
-        for(char letter : input.toCharArray()){
+        for (char letter : input.toCharArray()) {
             if (set.contains(letter))
                 return true;
             set.add(letter);

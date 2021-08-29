@@ -1,8 +1,8 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.pattern.facade.FacadeFX;
 import bomb.components.hex.HexMazePanel;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
@@ -50,22 +50,15 @@ public class HexamazeController implements Resettable {
     }
 
     private Color colorPicker(String strColor) {
-        switch (strColor) {
-            case "Red":
-                return Color.RED;
-            case "Yellow":
-                return Color.YELLOW;
-            case "Green":
-                return Color.GREEN;
-            case "Cyan":
-                return Color.CYAN;
-            case "Blue":
-                return Color.BLUE;
-            case "Pink":
-                return Color.PINK;
-            default:
-                return HexMazePanel.DEFAULT_PEG_COLOR;
-        }
+        return switch (strColor) {
+            case "Red" -> Color.RED;
+            case "Yellow" -> Color.YELLOW;
+            case "Green" -> Color.GREEN;
+            case "Cyan" -> Color.CYAN;
+            case "Blue" -> Color.BLUE;
+            case "Pink" -> Color.PINK;
+            default -> HexMazePanel.DEFAULT_PEG_COLOR;
+        };
     }
 
     @FXML

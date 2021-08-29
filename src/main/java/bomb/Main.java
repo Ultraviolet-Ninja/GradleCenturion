@@ -12,10 +12,10 @@ import java.util.Objects;
 public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("manual.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("manual.fxml")));
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(new Scene(root));
-        primaryStage.getIcons().add(new Image("bomb\\KTANE logo.png"));
+        primaryStage.getIcons().add(new Image(String.valueOf(Main.class.getResource("KTANE logo.png"))));
         primaryStage.show();
     }
 

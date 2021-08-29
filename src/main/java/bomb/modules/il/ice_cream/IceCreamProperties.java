@@ -11,7 +11,7 @@ public class IceCreamProperties {
 
         private final String label;
 
-        Flavor(String label){
+        Flavor(String label) {
             this.label = label;
         }
 

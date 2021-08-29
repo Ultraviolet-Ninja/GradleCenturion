@@ -16,13 +16,14 @@ import static org.testng.Assert.fail;
 
 public class LaundryTest {
     @BeforeMethod
-    public void methodSetup(){
+    public void methodSetup() {
         Widget.resetProperties();
     }
 
     @DataProvider
-    public Object[][] exceptionProvider(){
-        ConditionSetter empty = () -> {};
+    public Object[][] exceptionProvider() {
+        ConditionSetter empty = () -> {
+        };
         ConditionSetter setSerial = () -> Widget.setSerialCode("ajwf45");
         return new Object[][]{
                 {empty, "1", "1"}, {setSerial, "", "1"}, {empty, "1", ""}, {empty, "1", "1"}
@@ -30,13 +31,13 @@ public class LaundryTest {
     }
 
     @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(ConditionSetter setter, String solved, String needy){
+    public void exceptionTest(ConditionSetter setter, String solved, String needy) {
         setter.setCondition();
         Laundry.clean(solved, needy);
     }
 
     @DataProvider
-    public Object[][] normalValueProvider(){
+    public Object[][] normalValueProvider() {
         ConditionSetter setFirst = this::setupOne;
         ConditionSetter setSecond = this::setupTwo;
         return new Object[][]{
@@ -47,22 +48,22 @@ public class LaundryTest {
     }
 
     @Test(dataProvider = "normalValueProvider")
-    public void normalValueTest(ConditionSetter setter, String[] expectedArr, String solved, String needy){
+    public void normalValueTest(ConditionSetter setter, String[] expectedArr, String solved, String needy) {
         setter.setCondition();
         assertContains(expectedArr, solved, needy);
     }
 
-    private void setupOne(){
+    private void setupOne() {
         Widget.setDBatteries(1);
         Widget.setDoubleAs(2);
-        Widget.setPortValue(Port.SERIAL,1);
+        Widget.setPortValue(Port.SERIAL, 1);
         Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
         Widget.setNumHolders(2);
         Widget.setSerialCode("g64dv1");
         Widget.setNumModules(11);
     }
 
-    private void setupTwo(){
+    private void setupTwo() {
         Widget.setNumModules(11);
         Widget.setSerialCode("7h1iv1");
         Widget.setDBatteries(1);
@@ -70,11 +71,11 @@ public class LaundryTest {
         Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
         Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRQ);
         Widget.setNumberOfPlates(1);
-        Widget.setPortValue(Port.PARALLEL,1);
+        Widget.setPortValue(Port.PARALLEL, 1);
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider(){
+    public Object[][] theGreatBerateProvider() {
         ConditionSetter setFirst = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter setSecond = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter setThird = WidgetSimulations::videoTwoTakeTwo;
@@ -87,33 +88,33 @@ public class LaundryTest {
     }
 
     @Test(dataProvider = "theGreatBerateProvider")
-    public void theGreatBerate(ConditionSetter setter, String[] expectedArr, String solved, String needy){
+    public void theGreatBerate(ConditionSetter setter, String[] expectedArr, String solved, String needy) {
         setter.setCondition();
         assertContains(expectedArr, solved, needy);
     }
 
     @Test
-    public void thanksBobTest(){
+    public void thanksBobTest() {
         WidgetSimulations.thanksBobCenturion();
         String[] actual = Laundry.clean("0", "0");
         String[] expected = {"105F", "Don't Tumble Dry", "300", "Bleach", "CORDUROY - JADE - CORSET", Laundry.THANKS_BOB};
 
         if (actual.length != expected.length) fail("Size mismatch");
-        else{
-            for (int i = 0; i < actual.length; i++){
+        else {
+            for (int i = 0; i < actual.length; i++) {
                 assertTrue(actual[i].contains(expected[i]));
             }
         }
     }
 
-    private void assertContains(String[] expected, String solved, String needy){
+    private void assertContains(String[] expected, String solved, String needy) {
         String[] actual = Laundry.clean(solved, needy);
         for (int i = 0; i < expected.length; i++)
             assertTrue(actual[i].contains(expected[i]));
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         Widget.resetProperties();
     }
 }

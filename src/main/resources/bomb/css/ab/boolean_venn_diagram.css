@@ -1,24 +1,22 @@
-.jfx-text-field {
+.mfx-text-field {
     -fx-font-size: 36;
     -fx-text-fill: white;
     -fx-background-color: #00407c;
     -fx-border-color: black;
     -fx-border-width: 4;
-    -jfx-focus-color: transparent;
-    -jfx-unfocus-color: transparent;
+    -mfx-line-stroke-width: 0;
 }
 
-.jfx-toggle-button {
-    -jfx-toggle-color: #dedee0;
-    -jfx-toggle-line-color: #2b4cff;
-    -jfx-untoggle-color: #354558;
-    -jfx-untoggle-line-color: #172b58;
-    -fx-font-size: 20;
+.mfx-toggle-button {
+    -mfx-toggle-color: #dedee0;
+    -mfx-toggle-line-color: #2b4cff;
+    -mfx-untoggle-color: #354558;
+    -mfx-untoggle-line-color: #172b58;
+    -fx-font-size: 25;
     -fx-text-fill: white;
 }
 
-.jfx-button {
-    -jfx-button-type: RAISED;
+.mfx-button {
     -jfx-rippler-fill: black;
     -fx-background-color: #ffcd99;
     -fx-background-radius: 25;
@@ -26,17 +24,26 @@
     -fx-border-radius: 20;
     -fx-border-width: 2;
     -fx-text-fill: #221b18;
+    -mfx-button-type: RAISED;
+}
+
+.mfx-button .mfx-ripple-generator {
+    -mfx-ripple-color: black;
+    -mfx-ripple-radius: 15;
+}
+
+.mfx-button .text {
     -fx-font-weight: lighter;
     -fx-font-family: Tahoma;
 }
 
-.jfx-button:pressed {
+.mfx-button:pressed {
     -fx-scale-x: 0.9;
     -fx-scale-y: 0.9;
 }
 
 #boolean-operation-button {
-    -fx-font-size: 30;
+    -fx-font-size: 32;
 }
 
 #reset-button {

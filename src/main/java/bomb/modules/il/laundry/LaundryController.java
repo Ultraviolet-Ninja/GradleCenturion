@@ -2,8 +2,8 @@ package bomb.modules.il.laundry;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.filter.Regex;
-import bomb.tools.pattern.factory.TextFormatterFactory;
 import bomb.tools.pattern.facade.FacadeFX;
+import bomb.tools.pattern.factory.TextFormatterFactory;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,20 +16,23 @@ public class LaundryController implements Resettable {
             IRONING_INSTRUCTIONS = "Iron Instructions: ", SPECIAL_INSTRUCTIONS = "Special Instructions: ";
     private static final String MATERIAL_RESET_TEXT = "Material - Color - Item";
 
-    @FXML private ImageView washImage, dryImage;
+    @FXML
+    private ImageView washImage, dryImage;
 
-    @FXML private Label washText, dryText, ironText, specialText, article, bob;
+    @FXML
+    private Label washText, dryText, ironText, specialText, article, bob;
 
-    @FXML private JFXTextField solvedModuleNumberField, needyModuleNumberField;
+    @FXML
+    private JFXTextField solvedModuleNumberField, needyModuleNumberField;
 
-    public void initialize(){
+    public void initialize() {
         solvedModuleNumberField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
         needyModuleNumberField.setTextFormatter(TextFormatterFactory.createNumbersOnlyFormatter());
     }
 
     @FXML
-    private void coinInsert(){
-        try{
+    private void coinInsert() {
+        try {
             String[] outputs = Laundry.clean(
                     solvedModuleNumberField.getText(),
                     needyModuleNumberField.getText()
@@ -43,19 +46,19 @@ public class LaundryController implements Resettable {
             specialText.setText(SPECIAL_INSTRUCTIONS + outputs[3]);
             article.setText(restructure(outputs[4]));
             if (outputs.length == 6) bob.setText(outputs[5]);
-        } catch (IllegalArgumentException illegal){
+        } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.INFORMATION, illegal.getMessage());
         }
     }
 
-    private String separateText(String filename){
+    private String separateText(String filename) {
         Regex filenamePattern = new Regex("\\w+(?: \\w+)?\\.", filename);
         return filenamePattern.createFilteredString()
                 .replace(".", "")
                 .replace("F", "°F");
     }
 
-    private String restructure(String in){
+    private String restructure(String in) {
         String[] buffer = in.split(" - ");
         StringBuilder builder = new StringBuilder();
 
@@ -63,7 +66,7 @@ public class LaundryController implements Resettable {
             builder.append(s, 0, 1).append(s.substring(1).toLowerCase()).append(" - ");
         }
 
-        return builder.substring(0, builder.length()-3);
+        return builder.substring(0, builder.length() - 3);
     }
 
     @Override

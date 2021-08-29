@@ -19,7 +19,7 @@ public class EmojiMath extends Widget {
      * @param input The equation from the TextField
      * @return The values gathered from the emoji equation
      */
-    public static int calculate(String input){
+    public static int calculate(String input) {
         VALIDATION.loadText(input);
         if (!VALIDATION.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
 
@@ -35,20 +35,20 @@ public class EmojiMath extends Widget {
      * Translates the emojis in the equation to real numbers
      *
      * @param samples The 2 sides of the equation split by the + or - symbol
-     * @param add Whether the equation will be added or not
+     * @param add     Whether the equation will be added or not
      * @return The equation translated from emojis to numbers
      */
-    private static String translateEmojis(String[] samples, boolean add){
+    private static String translateEmojis(String[] samples, boolean add) {
         StringBuilder result = new StringBuilder();
         boolean flag = true;
-        for (String half : samples){
-            if (half.length() == 4){
-                result.append(findEmoji(half.substring(0, half.length()/2)));
-                result.append(findEmoji(half.substring(half.length()/2)));
+        for (String half : samples) {
+            if (half.length() == 4) {
+                result.append(findEmoji(half.substring(0, half.length() / 2)));
+                result.append(findEmoji(half.substring(half.length() / 2)));
             } else result.append(findEmoji(half));
-            if(flag){
+            if (flag) {
                 flag = false;
-                result.append(add?"+":"-");
+                result.append(add ? "+" : "-");
             }
         }
         return result.toString();
@@ -60,9 +60,9 @@ public class EmojiMath extends Widget {
      * @param emoji The emoji to translate
      * @return The number
      */
-    private static String findEmoji(String emoji){
+    private static String findEmoji(String emoji) {
         for (Emojis emo : Emojis.values()) {
-            if (emo.getLabel().equals(emoji)){
+            if (emo.getLabel().equals(emoji)) {
                 return String.valueOf(emo.ordinal());
             }
         }
@@ -73,12 +73,12 @@ public class EmojiMath extends Widget {
      * Calculates the sum or difference of the translated equation
      *
      * @param equation The equation put into real numbers
-     * @param add Whether the equation should be added or subtracted
-     * @throws NumberFormatException When a non-number or null is entered into the equation
+     * @param add      Whether the equation should be added or subtracted
      * @return The sum or difference of the translated numbers
+     * @throws NumberFormatException When a non-number or null is entered into the equation
      */
-    private static int calculateRealNumbers(String equation, boolean add) throws NumberFormatException{
-        String[] toNum = equation.split(add?"\\+":"-");
+    private static int calculateRealNumbers(String equation, boolean add) throws NumberFormatException {
+        String[] toNum = equation.split(add ? "\\+" : "-");
         int[] nums = new int[toNum.length];
         nums[0] = Integer.parseInt(toNum[0]);
         nums[1] = Integer.parseInt(toNum[1]);

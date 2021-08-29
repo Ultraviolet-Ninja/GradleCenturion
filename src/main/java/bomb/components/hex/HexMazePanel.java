@@ -52,17 +52,12 @@ public class HexMazePanel extends Pane implements Resettable {
     private void setupShape(HexNodeProperties.HexShape shape) {
         if (shape != null) {
             switch (shape) {
-                case Circle: exclusiveShapeSet(circle);
-                    break;
-                case Hexagon: exclusiveShapeSet(hexagon);
-                    break;
-                case LeftTriangle: exclusiveShapeSet(leftTriangle);
-                    break;
-                case RightTriangle: exclusiveShapeSet(rightTriangle);
-                    break;
-                case UpTriangle:exclusiveShapeSet(upTriangle);
-                    break;
-                default: exclusiveShapeSet(downTriangle);
+                case Circle -> exclusiveShapeSet(circle);
+                case Hexagon -> exclusiveShapeSet(hexagon);
+                case LeftTriangle -> exclusiveShapeSet(leftTriangle);
+                case RightTriangle -> exclusiveShapeSet(rightTriangle);
+                case UpTriangle -> exclusiveShapeSet(upTriangle);
+                default -> exclusiveShapeSet(downTriangle);
             }
         } else {
             setInvisible(circle);
@@ -106,14 +101,14 @@ public class HexMazePanel extends Pane implements Resettable {
         String remove = "123456";
         if (walls != null) {
             for (HexNodeProperties.HexWall wall : walls) {
-                switch (wall.ordinal()) {
-                    case 0: remove = setLine(northWest, remove, "1"); break;
-                    case 1: remove = setLine(north, remove, "2"); break;
-                    case 2: remove = setLine(northEast, remove, "3"); break;
-                    case 3: remove = setLine(southWest, remove, "4"); break;
-                    case 4: remove = setLine(south, remove, "5"); break;
-                    default: remove = setLine(southEast, remove, "6");
-                }
+                remove = switch (wall.ordinal()) {
+                    case 0 -> setLine(northWest, remove, "1");
+                    case 1 -> setLine(north, remove, "2");
+                    case 2 -> setLine(northEast, remove, "3");
+                    case 3 -> setLine(southWest, remove, "4");
+                    case 4 -> setLine(south, remove, "5");
+                    default -> setLine(southEast, remove, "6");
+                };
             }
             removeLines(remove);
         }

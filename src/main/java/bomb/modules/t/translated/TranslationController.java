@@ -1,7 +1,7 @@
 package bomb.modules.t.translated;
 
-import bomb.enumerations.TheButton;
 import bomb.abstractions.Resettable;
+import bomb.enumerations.TheButton;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,6 +11,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+
 import java.io.IOException;
 
 import static bomb.tools.filter.Mechanics.ultimateFilter;
@@ -47,71 +48,71 @@ public class TranslationController implements Resettable {
     private TextField
             morseInput, morseLetters, morseManual, morseManOut;
 
-    public void initialize(){
+    public void initialize() {
         red.setStyle(RED_STYLE);
         yellow.setStyle(YELLOW_STYLE);
         blue.setStyle(BLUE_STYLE);
         white.setStyle(WHITE_STYLE);
         try {
             Morse.init();
-        } catch (IOException ioException){
+        } catch (IOException ioException) {
             FacadeFX.setAlert(Alert.AlertType.WARNING, "Hey Chief, the file has a problem");
         }
     }
 
     //Translation Center Method
     @FXML
-    private void getFlag(){
-        if (brazil.isHover()){
+    private void getFlag() {
+        if (brazil.isHover()) {
             TranslationCenter.setLanguage("Brazil");
             setNextLabel(brazilLabel);
-        } else if (czech.isHover()){
+        } else if (czech.isHover()) {
             TranslationCenter.setLanguage("Czech");
             setNextLabel(czechLabel);
-        } else if (danish.isHover()){
+        } else if (danish.isHover()) {
             TranslationCenter.setLanguage("Denmark");
             setNextLabel(danishLabel);
-        } else if (dutch.isHover()){
+        } else if (dutch.isHover()) {
             TranslationCenter.setLanguage("Netherlands");
             setNextLabel(dutchLabel);
-        } else if (english.isHover()){
+        } else if (english.isHover()) {
             TranslationCenter.setLanguage("US");
             setNextLabel(englishLabel);
-        } else if (esperanto.isHover()){
+        } else if (esperanto.isHover()) {
             TranslationCenter.setLanguage("Esperanto");
             setNextLabel(esperantoLabel);
-        } else if (estonian.isHover()){
+        } else if (estonian.isHover()) {
             TranslationCenter.setLanguage("Estonia");
             setNextLabel(estonianLabel);
-        } else if (finnish.isHover()){
+        } else if (finnish.isHover()) {
             TranslationCenter.setLanguage("Finnish");
             setNextLabel(finnishLabel);
-        } else if (french.isHover()){
+        } else if (french.isHover()) {
             setNextLabel(frenchLabel);
-        } else if (german.isHover()){
+        } else if (german.isHover()) {
             TranslationCenter.setLanguage("");
             setNextLabel(germanLabel);
-        } else if (italian.isHover()){
+        } else if (italian.isHover()) {
             setNextLabel(italianLabel);
-        } else if (norwegian.isHover()){
+        } else if (norwegian.isHover()) {
             setNextLabel(norwegianLabel);
-        } else if (polish.isHover()){
+        } else if (polish.isHover()) {
             setNextLabel(polishLabel);
-        } else if (spanish.isHover()){
+        } else if (spanish.isHover()) {
             setNextLabel(spanishLabel);
-        } else if (swedish.isHover()){
+        } else if (swedish.isHover()) {
             setNextLabel(swedishLabel);
         }
         clearButtons();
     }
 
-    private void setNextLabel(Label next){
+    private void setNextLabel(Label next) {
         current.setStyle("-fx-text-fill: black");
         current = next;
         current.setStyle("-fx-text-fill: crimson");
         tabRename();
         buttonRename();
-        if (firstTime){
+        if (firstTime) {
             firstTime = false;
             button.setDisable(false);
             ventGas.setDisable(false);
@@ -121,7 +122,7 @@ public class TranslationController implements Resettable {
         }
     }
 
-    private void tabRename(){
+    private void tabRename() {
         button.setText(TranslationCenter.moduleNames[0] + "(Button)");
         onFirst.setText(TranslationCenter.moduleNames[1] + "(Who's On First)");
         morse.setText(TranslationCenter.moduleNames[2] + "(Morse Code)");
@@ -129,7 +130,7 @@ public class TranslationController implements Resettable {
         ventGas.setText(TranslationCenter.moduleNames[4] + "(Vent Gas)");
     }
 
-    private void buttonRename(){
+    private void buttonRename() {
         red.setText(TranslationCenter.buttonNames[0]);
         blue.setText(TranslationCenter.buttonNames[1]);
         yellow.setText(TranslationCenter.buttonNames[2]);
@@ -140,35 +141,35 @@ public class TranslationController implements Resettable {
         abort.setText(TranslationCenter.buttonNames[7]);
     }
 
-    private void clearButtons(){
+    private void clearButtons() {
         traits = new TheButton[2];
         FacadeFX.setToggleButtonsUnselected(red, white, blue, yellow, abort, press, detonate, hold);
     }
 
     //Button Methods
     @FXML
-    private void scanButtons(){
-        if (blue.isSelected()){
+    private void scanButtons() {
+        if (blue.isSelected()) {
             traits[0] = TheButton.BLUE;
-        } else if (red.isSelected()){
+        } else if (red.isSelected()) {
             traits[0] = TheButton.RED;
-        } else if (yellow.isSelected()){
+        } else if (yellow.isSelected()) {
             traits[0] = TheButton.YELLOW;
-        } else if (white.isSelected()){
+        } else if (white.isSelected()) {
             traits[0] = TheButton.WHITE;
         }
 
-        if (abort.isSelected()){
+        if (abort.isSelected()) {
             traits[1] = TheButton.ABORT;
-        } else if (press.isSelected()){
+        } else if (press.isSelected()) {
             traits[1] = TheButton.PRESS;
-        } else if (detonate.isSelected()){
+        } else if (detonate.isSelected()) {
             traits[1] = TheButton.DETONATE;
-        } else if (hold.isSelected()){
+        } else if (hold.isSelected()) {
             traits[1] = TheButton.HOLD;
         }
 
-        if (traits[0] != null && traits[1] != null){
+        if (traits[0] != null && traits[1] != null) {
             String goingIn = Button.evaluate(traits);
 
 //            isHold(goingIn);
@@ -176,7 +177,7 @@ public class TranslationController implements Resettable {
         }
     }
 
-    private void isHold(String text){
+    private void isHold(String text) {
 //        if (text.equals("Hold")){
 //            stripRed.setOpacity(0.5);
 //            stripBlue.setOpacity(0.5);
@@ -204,9 +205,9 @@ public class TranslationController implements Resettable {
             StringBuilder builder = new StringBuilder();
             String[] outputs = Morse.translate(input),
                     results = outputs[0].split("/");
-            for (int i = 0; i < results.length; i++){
+            for (int i = 0; i < results.length; i++) {
                 builder.append(results[i]);
-                if (i < results.length -1){
+                if (i < results.length - 1) {
                     builder.append("\n");
                 }
             }
@@ -224,7 +225,7 @@ public class TranslationController implements Resettable {
     }
 
     @FXML
-    private void searchWord(){
+    private void searchWord() {
 //        String takeIn = ultimateFilter(morseManual.getText().toLowerCase(), lowercaseRegex);
 //        if (!takeIn.isEmpty()){
 //            takeIn = Morse.predict(takeIn);
@@ -244,7 +245,7 @@ public class TranslationController implements Resettable {
     }
 
     @FXML
-    private void clearMorseFields(){
+    private void clearMorseFields() {
         morseOutput.setText("");
         morseInput.setText("");
         morseManOut.setText("");
@@ -254,8 +255,8 @@ public class TranslationController implements Resettable {
 
     //Vent Gas method
     @FXML
-    private void setGas(){
-        if (ventGas.isSelected()){
+    private void setGas() {
+        if (ventGas.isSelected()) {
             yesLabel.setText(VentGas.writeYes());
             noLabel.setText(VentGas.writeNo());
         }

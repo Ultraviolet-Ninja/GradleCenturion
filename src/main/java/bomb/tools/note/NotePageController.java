@@ -12,7 +12,7 @@ public class NotePageController extends Stage {
 
     private final List<NotePageController> internalReference;
 
-    public NotePageController(List<NotePageController> internalReference){
+    public NotePageController(List<NotePageController> internalReference) {
         super();
         this.internalReference = internalReference;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("note.fxml"));
@@ -28,7 +28,7 @@ public class NotePageController extends Stage {
     }
 
     @Override
-    public void close(){
+    public void close() {
         internalReference.remove(this);
         super.close();
     }

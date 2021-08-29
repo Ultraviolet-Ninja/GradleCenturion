@@ -27,12 +27,14 @@ public class FinnishDict extends Dictionary {
     public String predictWord(String part, boolean isMorse) {
         if (!isMorse) {
             switch (part.toLowerCase()) {
-                default: return part;
+                default:
+                    return part;
             }
         }
         switch (part.toLowerCase()) {
 
-            default: return part;
+            default:
+                return part;
         }
     }
 

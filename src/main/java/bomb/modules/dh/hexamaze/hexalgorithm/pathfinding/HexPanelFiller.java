@@ -9,17 +9,18 @@ import java.util.List;
 
 public class HexPanelFiller {
 
-    private HexPanelFiller(){}
+    private HexPanelFiller() {
+    }
 
     public static void fillPanels(List<Coordinates> directionSet, List<HexMazePanel> panelArray,
-                                  Color toFill, int hexagonSideLength){
+                                  Color toFill, int hexagonSideLength) {
         for (HexMazePanel panel : panelArray) panel.resetHexagonalFill();
-        for (Coordinates coordinates : directionSet){
+        for (Coordinates coordinates : directionSet) {
             panelArray.get(coordinateToIndex(coordinates, hexagonSideLength)).setHexagonalFill(toFill);
         }
     }
 
-    private static int coordinateToIndex(Coordinates set, int sideLength){
+    private static int coordinateToIndex(Coordinates set, int sideLength) {
         int counter = 0;
         int[] coordinates = set.getCoords(),
                 pings = AbstractHexagon.calculateColumnLengths(sideLength);

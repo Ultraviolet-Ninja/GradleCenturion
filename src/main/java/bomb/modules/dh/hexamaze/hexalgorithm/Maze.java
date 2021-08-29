@@ -1,6 +1,7 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,13 +16,13 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.decodeW
  * This class represents the entire maze that the expert sees on the manual page.The class takes in a file
  * that has contains data pertaining to the walls and shape for each HexNode.
  */
-public class Maze extends AbstractHexagon{
+public class Maze extends AbstractHexagon {
     /**
      * Initializes a Hex object with a side length of 12, representing the hexamaze on the manual, then
      * decodes the file to add the walls and shapes to HexNodes that'll get streamed into the maze
      *
      * @throws IOException If the file is not found at the designated source
-     */ 
+     */
     public Maze() throws IOException {
         super(new HexagonDataStructure(12));
         try {

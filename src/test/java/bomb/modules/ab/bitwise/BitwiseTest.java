@@ -23,14 +23,15 @@ public class BitwiseTest {
             LAST_DIGIT_EVEN = "ask412", LAST_DIGIT_ODD = "wo24l5";
 
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         Widget.resetProperties();
     }
 
     @DataProvider
-    public Object[] exceptionProvider(){
+    public Object[] exceptionProvider() {
         return new ConditionSetter[]{
-                () -> {},
+                () -> {
+                },
                 () -> Widget.setNumModules(1),
                 () -> {
                     Widget.setStartTime(4);
@@ -40,20 +41,20 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(ConditionSetter setter){
+    public void exceptionTest(ConditionSetter setter) {
         setter.setCondition();
         Bitwise.getByte(NOT);
     }
 
     @DataProvider
-    public Object[][] minimumConditionProvider(){
-        return new Object[][] {
+    public Object[][] minimumConditionProvider() {
+        return new Object[][]{
                 {MIN_AND, AND}, {MIN_OR, OR}, {MIN_XOR, XOR}, {MIN_NOT, NOT}
         };
     }
 
     @Test(dataProvider = "minimumConditionProvider")
-    public void minimumConditionTest(String expected, BitwiseOps operation){
+    public void minimumConditionTest(String expected, BitwiseOps operation) {
         setEssentialFalseConditions();
         Widget.setDoubleAs(2);
 
@@ -61,33 +62,33 @@ public class BitwiseTest {
     }
 
     @DataProvider
-    public Object[][] maximumConditionProvider(){
-        return new Object[][] {
+    public Object[][] maximumConditionProvider() {
+        return new Object[][]{
                 {MAX_AND, AND}, {MAX_OR, OR}, {MAX_XOR, XOR}, {MAX_NOT, NOT}
         };
     }
 
     @Test(dataProvider = "maximumConditionProvider")
-    public void maximumConditionTest(String expected, BitwiseOps operation){
+    public void maximumConditionTest(String expected, BitwiseOps operation) {
         setEssentialTrueConditions();
         maximizeConditions();
 
         assertEquals(Bitwise.getByte(operation), expected);
     }
 
-    private void setEssentialTrueConditions(){
+    private void setEssentialTrueConditions() {
         Widget.setSerialCode(LAST_DIGIT_ODD);
         Widget.setStartTime(DEFAULT_START_TIME);
         Widget.setNumModules(6);
     }
 
-    private void setEssentialFalseConditions(){
+    private void setEssentialFalseConditions() {
         Widget.setSerialCode(LAST_DIGIT_EVEN);
         Widget.setStartTime(DEFAULT_START_TIME);
         Widget.setNumModules(1);
     }
 
-    private void maximizeConditions(){
+    private void maximizeConditions() {
         Widget.setPortValue(PARALLEL, 3);
         Widget.setIndicator(TrinarySwitch.ON, Indicator.BOB);
         Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
@@ -98,7 +99,7 @@ public class BitwiseTest {
     }
 
     @AfterClass
-    public void tearDown(){
+    public void tearDown() {
         Widget.resetProperties();
     }
 }

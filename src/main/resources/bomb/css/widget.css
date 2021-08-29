@@ -3,60 +3,44 @@
     -fx-underline: true;
 }
 
-.jfx-button {
+.mfx-button {
     -fx-font-size: 24;
 }
 
-.jfx-text-area {
-    -jfx-focus-color: white;
-    -jfx-unfocus-color: transparent;
-    -fx-font-size: 18;
-    -fx-padding: 0 30 0 30;
-    -fx-prompt-text-fill: white;
+.mfx-slider .thumb-container:pressed .thumb-radius {
+    -mfx-color: transparent;
+}
+
+.mfx-text-field {
     -fx-background-color: #00407c;
     -fx-background-radius: 15;
     -fx-border-color: black;
     -fx-border-radius: 15;
     -fx-border-width: 2;
-}
-
-.jfx-text-area .content {
-    -fx-background-color: #00407c;
-}
-
-.jfx-slider {
-    -jfx-default-track: #0b234c;
-    -fx-font-size: 16;
-}
-
-.jfx-slider .track {
-    -fx-pref-width: 5px;
-    -fx-pref-height: 5px;
-}
-
-.jfx-slider .thumb {
-    -fx-pref-width: 20;
-    -fx-pref-height: 20;
+    -fx-font-size: 18;
+    -fx-padding: 0 0 0 10;
+    -fx-prompt-text-fill: white;
+    -mfx-line-stroke-width: 0;
 }
 
 #everything-else-label {
     -fx-font-size: 19;
 }
 
-.jfx-toggle-button {
-    -jfx-untoggle-color: #354558;
-    -jfx-untoggle-line-color: #172b58;
+.mfx-toggle-button {
+    -mfx-untoggle-color: #354558;
+    -mfx-untoggle-line-color: #172b58;
 }
 
 #lit-label-toggle-button {
-    -jfx-toggle-color: #dedee0;
-    -jfx-toggle-line-color: #2b4cff;
+    -mfx-toggle-color: #dedee0;
+    -mfx-toggle-line-color: #2b4cff;
     -fx-font-size: 18;
 }
 
 #unlit-label-toggle-button {
-    -jfx-toggle-color: #00033b;
-    -jfx-toggle-line-color: #041c48;
+    -mfx-toggle-color: #00033b;
+    -mfx-toggle-line-color: #041c48;
     -fx-font-size: 18;
 }
 
@@ -69,47 +53,121 @@
 }
 
 #boss-module-toggle-button {
-    -jfx-toggle-line-color: #860e0f;
-    -jfx-toggle-color: #f68484;
+    -mfx-toggle-line-color: #860e0f;
+    -mfx-toggle-color: #f68484;
     -fx-font-size: 25;
 }
 
-#dvi-slider {
-    -jfx-default-thumb: #983136;
+#dvi-slider .track {
+    -fx-fill: derive(#983136, 80%);
 }
 
-#parallel-slider {
-    -jfx-default-thumb: #d76793;
+#dvi-slider .thumb {
+    -mfx-color: #983136;
+    -fx-fill: #983136;
 }
 
-#ps-slider {
-    -jfx-default-thumb: #56a46a;
+#dvi-slider .bar {
+    -fx-fill: #983136;
 }
 
-#rj-slider {
-    -jfx-default-thumb: #2a2b3a;
+#parallel-slider .track {
+    -fx-fill: derive(#d76793, 80%);
 }
 
-#serial-slider {
-    -jfx-default-thumb: #37799f;
+#parallel-slider .thumb {
+    -mfx-color: #d76793;
+    -fx-fill: #d76793;
 }
 
-#rca-slider {
-    -jfx-default-thumb: linear-gradient(to right, #f7eadc, #c7200d);
+#parallel-slider .bar {
+    -fx-fill: #d76793;
+}
+
+#ps-slider .track {
+    -fx-fill: derive(#56a46a, 80%);
+}
+
+#ps-slider .thumb {
+    -mfx-color: #56a46a;
+    -fx-fill: #56a46a;
+}
+
+#ps-slider .bar {
+    -fx-fill: #56a46a;
+}
+
+#rj-slider .track {
+    -fx-fill: derive(#2a2b3a, 80%);
+}
+
+#rj-slider .thumb {
+    -mfx-color: #2a2b3a;
+    -fx-fill: #2a2b3a;
+}
+
+#rj-slider .bar {
+    -fx-fill: #2a2b3a;
+}
+
+#serial-slider .track {
+    -fx-fill: derive(#37799f, 80%);
+}
+
+#serial-slider .thumb {
+    -mfx-color: #37799f;
+    -fx-fill: #37799f;
+}
+
+#serial-slider .bar {
+    -fx-fill: #37799f;
+}
+
+#rca-slider .track {
+    -fx-fill: #f7eadc;
+}
+
+#rca-slider .thumb {
+    -mfx-color: #c7200d;
+    -fx-fill: #c7200d;
+}
+
+#rca-slider .bar {
+    -fx-fill: #c7200d;
 }
 
 #port-label {
     -fx-font-size: 18;
 }
 
-#battery-slider {
-    -jfx-default-thumb: linear-gradient(to right, #f9cd35, #d9ae07, #bc2a23, #d9ae07, #f9cd35);
-    -fx-padding: 0 10 0 10;
+#battery-slider .bar {
+    -fx-fill: #f9cd35
 }
 
-#holder-slider {
-    -jfx-default-thumb: #3a4e77;
-    -fx-padding: 0 20 0 20;
+#battery-slider .track {
+    -fx-fill: derive(#f9cd35, 90%);
+}
+
+#battery-slider .thumb {
+    -mfx-color: #bc2a23;
+    -fx-fill: #bc2a23;
+}
+
+#holder-slider .thumb {
+    -mfx-color: #3a4e77;
+    -fx-fill: #3a4e77;
+}
+
+#holder-slider .track {
+    -fx-fill: derive(#3a4e77, 75%);
+}
+
+#holder-slider .bar {
+    -fx-fill: #3a4e77;
+}
+
+#holder-slider .thumb-container .mfx-ripple-generator {
+    -mfx-ripple-color: black;
 }
 
 #right-border-line-separator {

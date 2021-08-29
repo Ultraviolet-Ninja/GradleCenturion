@@ -10,6 +10,7 @@ import java.util.ListIterator;
 /**
  * This class acts as a finite stack with an array as the internal storage
  * to contain a specified set of objects.
+ *
  * @param <E> Any object
  */
 public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
@@ -24,7 +25,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
      *
      * @param capacity How many objects this can hold
      */
-    public BufferedQueue(int capacity){
+    public BufferedQueue(int capacity) {
         this.capacity = capacity;
         data = new Object[capacity];
         linkedData = new LinkedList<>();
@@ -69,7 +70,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
      *
      * @return The int signifying the capacity
      */
-    public int cap(){
+    public int cap() {
         return capacity;
     }
 
@@ -78,7 +79,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
      *
      * @return True or false whether the FinalList is full
      */
-    public boolean full(){
+    public boolean full() {
         return size == capacity;
     }
 
@@ -103,7 +104,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
      *
      * @return The ArrayList of info
      */
-    public ArrayList<E> convert(){
+    public ArrayList<E> convert() {
         return new ArrayList<>(linkedData);
     }
 
@@ -112,7 +113,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
      *
      * @param num The number of elements to remove
      */
-    public void removeFromHead(int num) throws IllegalArgumentException{
+    public void removeFromHead(int num) throws IllegalArgumentException {
         if (num <= 0) return;
         if (num < capacity) {
             removeLoop(num);
@@ -121,14 +122,14 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
             throw new IllegalArgumentException("The removal number is larger than the capacity");
     }
 
-    private void removeLoop(int num){
-        for (int i = 0; i < num; i++){
+    private void removeLoop(int num) {
+        for (int i = 0; i < num; i++) {
             linkedData.removeFirst();
             data[size-- - 1] = null;
         }
     }
 
-    private void overwrite(){
+    private void overwrite() {
         Iterator<E> toArray = linkedData.iterator();
         for (int j = 0; toArray.hasNext(); j++)
             data[j] = toArray.next();
@@ -145,42 +146,42 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
     }
 
     @Override
-    public boolean remove(Object o) throws UnsupportedOperationException{
+    public boolean remove(Object o) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean addAll(int index, Collection<? extends E> c) throws UnsupportedOperationException{
+    public boolean addAll(int index, Collection<? extends E> c) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean addAll(Collection c) throws UnsupportedOperationException{
+    public boolean addAll(Collection c) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void clear() throws UnsupportedOperationException{
+    public void clear() throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public E set(int index, E element) throws UnsupportedOperationException{
+    public E set(int index, E element) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public void add(int index, E element) throws UnsupportedOperationException{
+    public void add(int index, E element) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public E remove(int index) throws UnsupportedOperationException{
+    public E remove(int index) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public int indexOf(Object o) throws UnsupportedOperationException{
+    public int indexOf(Object o) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
@@ -190,37 +191,37 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
     }
 
     @Override
-    public int lastIndexOf(Object o) throws UnsupportedOperationException{
+    public int lastIndexOf(Object o) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public ListIterator<E> listIterator(int index) throws UnsupportedOperationException{
+    public ListIterator<E> listIterator(int index) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<E> subList(int fromIndex, int toIndex) throws UnsupportedOperationException{
+    public List<E> subList(int fromIndex, int toIndex) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean retainAll(Collection c) throws UnsupportedOperationException{
+    public boolean retainAll(Collection c) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean removeAll(Collection c) throws UnsupportedOperationException{
+    public boolean removeAll(Collection c) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public boolean containsAll(Collection c) throws UnsupportedOperationException{
+    public boolean containsAll(Collection c) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public Object[] toArray(Object[] a) throws UnsupportedOperationException{
+    public Object[] toArray(Object[] a) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 }

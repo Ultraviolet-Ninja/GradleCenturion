@@ -1,10 +1,11 @@
 package bomb.modules.dh.fast_math;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.tools.filter.Regex;
 
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.enumerations.Port.SERIAL;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class FastMath extends Widget {
@@ -31,44 +32,30 @@ public class FastMath extends Widget {
     }
 
     private static int translateLetter(String letter) throws IllegalArgumentException {
-        switch (letter.toUpperCase()) {
-            case "A":
-                return 0;
-            case "B":
-                return 1;
-            case "C":
-                return 2;
-            case "D":
-                return 3;
-            case "E":
-                return 4;
-            case "G":
-                return 5;
-            case "K":
-                return 6;
-            case "N":
-                return 7;
-            case "P":
-                return 8;
-            case "S":
-                return 9;
-            case "T":
-                return 10;
-            case "X":
-                return 11;
-            case "Z":
-                return 12;
-            default:
-                throw new IllegalArgumentException("Illegal letter given");
-        }
+        return switch (letter.toUpperCase()) {
+            case "A" -> 0;
+            case "B" -> 1;
+            case "C" -> 2;
+            case "D" -> 3;
+            case "E" -> 4;
+            case "G" -> 5;
+            case "K" -> 6;
+            case "N" -> 7;
+            case "P" -> 8;
+            case "S" -> 9;
+            case "T" -> 10;
+            case "X" -> 11;
+            case "Z" -> 12;
+            default -> throw new IllegalArgumentException("Illegal letter given");
+        };
     }
 
     private static int edgework() {
-        int output = hasLitIndicator(Indicator.MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
-        output += portExists(Port.SERIAL) ? 14 : 0; //If the bomb has a Serial Port
+        int output = hasLitIndicator(MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
+        output += portExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
         //If the serial number has the letters F A S T
         output -= !ultimateFilter(serialCode, new Regex("[fast]")).isEmpty() ? 5 : 0;
-        output += portExists(Port.RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
+        output += portExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
         output -= getAllBatteries() > 3 ? 15 : 0; //If the bomb has more than 3 batteries
         return output;
     }

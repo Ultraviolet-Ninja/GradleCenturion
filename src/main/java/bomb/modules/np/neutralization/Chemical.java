@@ -26,7 +26,7 @@ public class Chemical {
         private final String formula, symbol, anion;
         private final int atomicNum;
 
-        Acid(int atomic, String formula, String symbol, String anion){
+        Acid(int atomic, String formula, String symbol, String anion) {
             this.formula = formula;
             this.atomicNum = atomic;
             this.symbol = symbol;
@@ -59,7 +59,7 @@ public class Chemical {
         private final String formula, symbol, cation;
         private final int atomicNum;
 
-        Base(int atomic, String formula, String symbol, String cation){
+        Base(int atomic, String formula, String symbol, String cation) {
             this.formula = formula;
             this.atomicNum = atomic;
             this.symbol = symbol;

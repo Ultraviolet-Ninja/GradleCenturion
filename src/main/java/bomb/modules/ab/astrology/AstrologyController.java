@@ -2,8 +2,8 @@ package bomb.modules.ab.astrology;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
@@ -11,15 +11,16 @@ import javafx.scene.control.ToggleGroup;
 import java.util.Arrays;
 
 public class AstrologyController implements Resettable {
-    private static final byte ELEMENTAL_INDEX = 0, CELESTIAL_INDEX = 1, ZODIAC_INDEX = 2;
-
     private final AstroSymbol[] astroSymbolBuffer;
 
-    @FXML private JFXButton resetButton;
+    @FXML
+    private MFXButton resetButton;
 
-    @FXML private JFXTextField omenTextField;
+    @FXML
+    private MFXTextField omenTextField;
 
-    @FXML private ToggleGroup elementGroup, celestialGroup, zodiacGroup;
+    @FXML
+    private ToggleGroup elementGroup, celestialGroup, zodiacGroup;
 
     public AstrologyController() {
         astroSymbolBuffer = new AstroSymbol[3];
@@ -28,19 +29,19 @@ public class AstrologyController implements Resettable {
     @FXML
     private void determineElement() {
         enableResetButton();
-        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), ELEMENTAL_INDEX);
+        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), Astrology.ELEMENT_INDEX);
     }
 
     @FXML
     private void determineCelestial() {
         enableResetButton();
-        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), CELESTIAL_INDEX);
+        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), Astrology.CELESTIAL_INDEX);
     }
 
     @FXML
     private void determineZodiac() {
         enableResetButton();
-        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), ZODIAC_INDEX);
+        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), Astrology.ZODIAC_INDEX);
     }
 
     private void enableResetButton() {
@@ -63,15 +64,17 @@ public class AstrologyController implements Resettable {
             }
         }
 
-        if (astroSymbolBuffer[ELEMENTAL_INDEX] != null && astroSymbolBuffer[CELESTIAL_INDEX] != null &&
-                astroSymbolBuffer[ZODIAC_INDEX] != null)
+        if (astroSymbolBuffer[Astrology.ELEMENT_INDEX] != null &&
+                astroSymbolBuffer[Astrology.CELESTIAL_INDEX] != null &&
+                astroSymbolBuffer[Astrology.ZODIAC_INDEX] != null)
             processBuffer();
     }
 
     private void disableResetButton() {
         resetButton.setDisable(
-                astroSymbolBuffer[ELEMENTAL_INDEX] == null && astroSymbolBuffer[CELESTIAL_INDEX] == null &&
-                        astroSymbolBuffer[ZODIAC_INDEX] == null
+                astroSymbolBuffer[Astrology.ELEMENT_INDEX] == null &&
+                        astroSymbolBuffer[Astrology.CELESTIAL_INDEX] == null &&
+                        astroSymbolBuffer[Astrology.ZODIAC_INDEX] == null
         );
     }
 
@@ -80,7 +83,7 @@ public class AstrologyController implements Resettable {
             omenTextField.setText(Astrology.calculate(
                     astroSymbolBuffer[0], astroSymbolBuffer[1], astroSymbolBuffer[2])
             );
-        } catch (IllegalArgumentException illegal){
+        } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
     }

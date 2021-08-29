@@ -96,10 +96,10 @@ public class HexagonDataStructure {
         }
 
         @Override
-        public boolean equals(Object obj){
+        public boolean equals(Object obj) {
             if (obj == this) return true;
             if (!(obj instanceof HexNode)) return false;
-            return ((HexNode)obj).fill == this.fill && hasMatchingWalls(((HexNode)obj).walls);
+            return ((HexNode) obj).fill == this.fill && hasMatchingWalls(((HexNode) obj).walls);
         }
 
         @Override
@@ -107,24 +107,24 @@ public class HexagonDataStructure {
             return HASHING_NUMBER * getShapeHash() + ((walls != null) ? getWallHash().hashCode() : 0);
         }
 
-        private boolean hasMatchingWalls(ArrayList<HexWall> toCompare){
+        private boolean hasMatchingWalls(ArrayList<HexWall> toCompare) {
             if (this.walls.size() != toCompare.size()) return false;
-            for (HexWall wall : toCompare){
+            for (HexWall wall : toCompare) {
                 if (!this.walls.contains(wall)) return false;
             }
             return true;
         }
 
-        public int getShapeHash(){
+        public int getShapeHash() {
             return HexShape.toShapeOrdinal(fill);
         }
 
-        public String getWallHash(){
+        public String getWallHash() {
             Collections.sort(walls);
             return HexWall.toHash(walls);
         }
 
-        public void recreateWallsFromHash(char letter){
+        public void recreateWallsFromHash(char letter) {
             walls = deepCopyWalls(HexWall.fromHash(String.valueOf(letter)));
         }
 
@@ -473,10 +473,10 @@ public class HexagonDataStructure {
         return (2 * sideLength) - 1;
     }
 
-    public String hashString(){
+    public String hashString() {
         StringBuilder sb = new StringBuilder();
-        for (int x = 0; x < hexagon.cap(); x++){
-            for (int y = 0; y < hexagon.get(x).cap(); y++){
+        for (int x = 0; x < hexagon.cap(); x++) {
+            for (int y = 0; y < hexagon.get(x).cap(); y++) {
                 sb.append(hexagon.get(x).get(y).getShapeHash());
             }
         }
