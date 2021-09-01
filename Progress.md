@@ -23,9 +23,10 @@
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
+- Switches
 - The Bulb
 
-5/100
+6/100
 
 ### Untouched Modules
 - 3D Maze
@@ -92,7 +93,6 @@
 - Silly Slots
 - Skewed Slots
 - Square Button
-- Switches
 - Symbolic Password
 - Text Field
 - The Clock
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-79/100 + Colored Switches
+78/100 + Colored Switches
