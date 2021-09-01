@@ -19,7 +19,6 @@ This is a huge project for one man to tackle, but I've learned a lot from the ch
 - Breadmoirai GitHub Release
 #### Dependencies
 - MaterialFX ver 11.12.0
-- ControlFX ver 11.1.0
 - JFoenix ver 9.0.10
 - JavaTuple ver 1.2
 - Medusa ver. 11.7
