@@ -114,7 +114,7 @@ public class BooleanVenn extends Widget {
     }
 
     /**
-     * Returns 0 or 1 based on the boolean operation that gets passed in
+     * Returns 0 or 1 based on the boolean operation that gets past in
      *
      * @param func The logic selector
      * @param x    1st bit
