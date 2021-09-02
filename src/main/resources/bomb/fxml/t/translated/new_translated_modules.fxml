@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<TabPane prefHeight="800.0" prefWidth="1200.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+         tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="bomb.modules.t.translated.NewTranslatedModuleController">
+    <Tab text="Language Select">
+
+    </Tab>
+    <Tab text="" disable="true">
+
+    </Tab>
+</TabPane>
