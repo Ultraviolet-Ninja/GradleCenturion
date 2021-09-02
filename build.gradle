@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.jfoenix:jfoenix:9.0.10'
+    implementation 'com.jfoenix:jfoenix:9.0.4'
     implementation 'org.javatuples:javatuples:1.2'
     implementation group: 'eu.hansolo', name: 'Medusa', version: '11.7'
     implementation group: 'org.fxmisc.richtext', name: 'richtextfx', version: '0.10.6'

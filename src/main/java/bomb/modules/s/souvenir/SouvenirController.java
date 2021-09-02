@@ -32,8 +32,8 @@ public class SouvenirController implements Resettable {
     }
 
     public void initialize() {
-        keyColumn.setCellValueFactory(new PropertyValueFactory<>("Key"));
-        answerColumn.setCellValueFactory(new PropertyValueFactory<>("Value"));
+        keyColumn.setCellValueFactory(new PropertyValueFactory<>("Value0"));
+        answerColumn.setCellValueFactory(new PropertyValueFactory<>("Value1"));
         searchField.setTextFormatter(TextFormatterFactory.createNewLineRestrictionFormatter());
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(entry -> {

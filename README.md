@@ -19,7 +19,7 @@ This is a huge project for one man to tackle, but I've learned a lot from the ch
 - Breadmoirai GitHub Release
 #### Dependencies
 - MaterialFX ver 11.12.0
-- JFoenix ver 9.0.10
+- JFoenix ver 9.0.4
 - JavaTuple ver 1.2
 - Medusa ver. 11.7
 - JGraphT ver. 1.5.1

@@ -21,15 +21,16 @@
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="516.0" vgrow="SOMETIMES"/>
     </rowConstraints>
     <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-        <MFXLegacyTableView fx:id="artifactView" prefHeight="495.0" prefWidth="1140.0">
+        <MFXLegacyTableView fx:id="artifactView" fixedCellSize="60.0" prefHeight="532.0" prefWidth="1100.0"
+        >
             <columns>
-                <TableColumn fx:id="keyColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="350.0"
-                             prefWidth="350.0" resizable="false" text="Key"/>
-                <TableColumn fx:id="answerColumn" editable="false" maxWidth="1.7976931348623157E308"
-                             minWidth="849.0" prefWidth="849.0" resizable="false" text="Answer"/>
+                <TableColumn fx:id="keyColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="400.0"
+                             prefWidth="400.0" resizable="false" text="Key"/>
+                <TableColumn fx:id="answerColumn" editable="false" maxWidth="1.7976931348623157E308" minWidth="700.0"
+                             prefWidth="700.0" resizable="false" text="Answer"/>
             </columns>
             <VBox.margin>
-                <Insets left="30.0" right="30.0"/>
+                <Insets left="50.0" right="50.0"/>
             </VBox.margin>
         </MFXLegacyTableView>
     </VBox>
