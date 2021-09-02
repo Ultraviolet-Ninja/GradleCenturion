@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.jfoenix:jfoenix:9.0.10'
+    implementation 'com.jfoenix:jfoenix:9.0.4'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.controlsfx:controlsfx:11.1.0'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
