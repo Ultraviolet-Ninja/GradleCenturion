@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/s/switches.css"
+          xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.s.switches.SwitchesController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <children>
+                <MFXToggleButton fx:id="firstSwitch" text=" "/>
+                <MFXToggleButton fx:id="secondSwitch" text=" "/>
+                <MFXToggleButton fx:id="thirdSwitch" text=" "/>
+                <MFXToggleButton fx:id="fourthSwitch" layoutX="396.0" layoutY="120.0" text=" "/>
+                <MFXToggleButton fx:id="fifthSwitch" layoutX="539.0" layoutY="120.0" text=" "/>
+            </children>
+        </HBox>
+        <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <JFXRadioButton fx:id="firstLight" text=" "/>
+                <JFXRadioButton fx:id="secondLight" text=" "/>
+                <JFXRadioButton fx:id="thirdLight" text=" "/>
+                <JFXRadioButton fx:id="fourthLight" text=" "/>
+                <JFXRadioButton fx:id="fifthLight" text=" "/>
+            </children>
+        </HBox>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+            <children>
+                <MFXTextField fx:id="outputField" alignment="CENTER" editable="false" prefHeight="55.0"
+                              prefWidth="471.0"
+                              promptText="Output Field"/>
+            </children>
+        </VBox>
+    </children>
+</GridPane>

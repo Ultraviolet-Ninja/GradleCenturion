@@ -24,7 +24,8 @@ public class SwitchesTest {
     @DataProvider
     public Object[][] trainingVideoProvider() {
         return new Object[][]{
-                {25, 2, new String[]{"1", "2", "5", "4"}}, {21, 9, new String[]{"1", "3", "2"}}
+                {25, 2, new String[]{"1", "2", "5", "4"}}, {21, 9, new String[]{"1", "3", "2"}},
+                {6, 31, new String[]{"3", "4", "5", "2", "1", "4", "3"}}
 //                {17, 22, new String[]{"5", "3", "4"}}
         };
     }
