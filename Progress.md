@@ -14,19 +14,19 @@
 - Round Keypads
 - Simon Screams
 - Souvenir
+- Switches
 - TwoBit
 
-16/100
+17/100
 
 ### Incomplete Modules
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
-- Switches
 - The Bulb
 
-6/100
+5/100
 
 ### Untouched Modules
 - 3D Maze
