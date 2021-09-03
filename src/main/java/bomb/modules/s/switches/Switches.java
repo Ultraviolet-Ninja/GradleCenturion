@@ -65,7 +65,7 @@ public class Switches extends Widget {
 
     private static void setToZero(List<String> moveList, byte startingState) {
         if (isSpecialCondition(startingState)) {
-            moveList.addAll(List.of(SPECIAL_CONDITIONS.get(startingState)));
+            moveList.addAll(Arrays.asList(SPECIAL_CONDITIONS.get(startingState)));
             return;
         }
 
@@ -79,7 +79,7 @@ public class Switches extends Widget {
 
     private static void setNeededSwitchesOn(List<String> moveList, byte desiredState) {
         if (isSpecialCondition(desiredState)) {
-            List<String> tempList = Arrays.asList(SPECIAL_CONDITIONS.get(desiredState));
+            List<String> tempList = Arrays.asList(SPECIAL_CONDITIONS.get(desiredState).clone());
             Collections.reverse(tempList);
             moveList.addAll(tempList);
             return;
