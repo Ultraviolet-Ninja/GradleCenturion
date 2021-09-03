@@ -64,11 +64,7 @@ public class SwitchesController implements Resettable {
     @Override
     public void reset() {
         FacadeFX.clearText(outputField);
-        FacadeFX.setToggleButtonsUnselected(firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch);
-        firstLight.setSelected(false);
-        secondLight.setSelected(false);
-        thirdLight.setSelected(false);
-        fourthLight.setSelected(false);
-        fifthLight.setSelected(false);
+        FacadeFX.setToggleButtonsUnselected(getAllSwitches());
+        FacadeFX.setToggleButtonsUnselected(getAllLights());
     }
 }

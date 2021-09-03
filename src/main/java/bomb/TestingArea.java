@@ -2,7 +2,6 @@ package bomb;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
-import bomb.modules.s.switches.Switches;
 import bomb.tools.filter.Regex;
 
 import java.text.DecimalFormat;
@@ -15,9 +14,6 @@ public class TestingArea {
         Regex labelFilter = new Regex("\"([^\"]*)\",?");
         Regex frequencyFilter = new Regex("frequencies\\.put\\(\"([^\"]+)\", (\\d\\.\\d{1,3})\\);");
         Regex whoMapFilter = new Regex("stepTwoMap\\.put\\(\"([^\"]+)\", \"([^\"]+)\"\\);");
-
-        System.out.println(Switches.produceMoveList((byte) 25, (byte) 2));
-        System.out.println(Switches.produceMoveList((byte) 21, (byte) 9));
     }
 
     private static HexGrid fromLine(String line){

@@ -95,11 +95,6 @@ public class FacadeFX {
         alert.showAndWait();
     }
 
-    public static void toggleNodes(boolean toggle, Node... nodes) {
-        if (nodes.length > 0) if (nodes[0].isDisabled() == toggle) return;
-        for (Node node : nodes) node.setDisable(toggle);
-    }
-
     public static void setToggleButtonsUnselected(ToggleButton... toggleButtons) {
         for (ToggleButton button : toggleButtons)
             button.setSelected(false);

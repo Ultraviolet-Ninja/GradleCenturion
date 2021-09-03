@@ -42,9 +42,9 @@ public class Switches extends Widget {
 
     private static void validateInput(byte startingState, byte desiredState) throws IllegalArgumentException {
         if (isForbiddenMove(startingState))
-            throw new IllegalArgumentException("The start state is an illegal move");
+            throw new IllegalArgumentException("The switches are in an illegal move");
         if (isForbiddenMove(desiredState))
-            throw new IllegalArgumentException("The desired state is an illegal move");
+            throw new IllegalArgumentException("The lights are in an illegal move");
         if (startingState == desiredState)
             throw new IllegalArgumentException("You're already at the desired state");
         if (inputOutOfRange(startingState) || inputOutOfRange(desiredState))
