@@ -1,13 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/s/switches.css"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.s.switches.SwitchesController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="482.0" minHeight="10.0" prefHeight="281.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="375.0" minHeight="10.0" prefHeight="226.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="293.0" minHeight="10.0" prefHeight="293.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <HBox alignment="CENTER" prefHeight="218.0" prefWidth="1200.0" GridPane.rowIndex="1">
+        <MFXToggleButton fx:id="firstSwitch" text=" ">
+            <HBox.margin>
+                <Insets bottom="38.0"/>
+            </HBox.margin>
+        </MFXToggleButton>
+        <MFXToggleButton fx:id="secondSwitch" text=" ">
+            <HBox.margin>
+                <Insets bottom="38.0"/>
+            </HBox.margin>
+        </MFXToggleButton>
+        <MFXToggleButton fx:id="thirdSwitch" text=" ">
+            <HBox.margin>
+                <Insets bottom="38.0"/>
+            </HBox.margin>
+        </MFXToggleButton>
+        <MFXToggleButton fx:id="fourthSwitch" layoutX="396.0" layoutY="120.0" text=" ">
+            <HBox.margin>
+                <Insets bottom="38.0"/>
+            </HBox.margin>
+        </MFXToggleButton>
+        <MFXToggleButton fx:id="fifthSwitch" layoutX="539.0" layoutY="120.0" text=" ">
+            <HBox.margin>
+                <Insets bottom="38.0"/>
+            </HBox.margin>
+        </MFXToggleButton>
+    </HBox>
+    <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+        <JFXRadioButton fx:id="firstLight" text=" ">
+            <HBox.margin>
+                <Insets left="16.0"/>
+            </HBox.margin>
+        </JFXRadioButton>
+        <JFXRadioButton fx:id="secondLight" text=" ">
+            <HBox.margin>
+                <Insets left="44.0"/>
+            </HBox.margin>
+        </JFXRadioButton>
+        <JFXRadioButton fx:id="thirdLight" text=" ">
+            <HBox.margin>
+                <Insets left="44.0"/>
+            </HBox.margin>
+        </JFXRadioButton>
+        <JFXRadioButton fx:id="fourthLight" text=" ">
+            <HBox.margin>
+                <Insets left="44.0"/>
+            </HBox.margin>
+        </JFXRadioButton>
+        <JFXRadioButton fx:id="fifthLight" text=" ">
+            <HBox.margin>
+                <Insets left="44.0"/>
+            </HBox.margin>
+        </JFXRadioButton>
+    </HBox>
+    <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+        <MFXButton id="submit-button" onAction="#submitStates" text="Submit"/>
+        <MFXTextField fx:id="outputField" alignment="CENTER" editable="false" prefHeight="55.0" prefWidth="471.0"
+                      promptText="Output Field">
+            <VBox.margin>
+                <Insets top="60.0"/>
+            </VBox.margin>
+        </MFXTextField>
+    </VBox>
+</GridPane>

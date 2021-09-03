@@ -111,7 +111,8 @@ public class BooleanController implements Resettable {
         if (ultimateFilter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2) {
             String code = BooleanVenn.resultCode(currentOperation.toString());
             setCircleFill(new Circle[]{not, c, b, a, bc, ac, ab, all}, code.toCharArray());
-            toggleOperands(true);
+            FacadeFX.disableMultiple(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
+                    booleanXnor, booleanImpliedBy);
         }
     }
 
@@ -122,11 +123,6 @@ public class BooleanController implements Resettable {
 
     private String getMathSymbol(MFXButton button) {
         return String.valueOf(button.getText().charAt(0));
-    }
-
-    private void toggleOperands(boolean toggle) {
-        FacadeFX.toggleNodes(toggle, booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
-                booleanXnor, booleanImpliedBy);
     }
 
     private StringBuilder shiftPriority(String reference) {
@@ -154,7 +150,8 @@ public class BooleanController implements Resettable {
     private void resetModule() {
         overwriteOperationText(DEFAULT_TEXT);
         writeOutToTextField();
-        toggleOperands(false);
+        FacadeFX.enableMultiple(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
+                booleanXnor, booleanImpliedBy);
         priorityToggle.setSelected(false);
         priorityToggle.setText("AB Priority");
 

@@ -41,7 +41,10 @@ public class HexamazeController implements Resettable {
 
     private void toggleColorControl() {
         boolean toggle = !FacadeFX.getToggleName(hexGroup).equals("Peg");
-        FacadeFX.toggleNodes(toggle, redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
+        if (toggle)
+            FacadeFX.disableMultiple(redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
+        else
+            FacadeFX.enableMultiple(redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
     }
 
     @FXML
