@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class Switches extends Widget {
-    private static final byte BIT_LENGTH = 5;
+    static final byte BIT_LENGTH = 5;
+
     private static final Set<Byte> FORBIDDEN_MOVES;
     private static final Map<Byte, String[]> SPECIAL_CONDITIONS;
 

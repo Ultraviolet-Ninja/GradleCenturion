@@ -12,7 +12,7 @@ public class SwitchesTest {
     @DataProvider
     public Object[][] exceptionTestDataProvider() {
         return new Byte[][]{
-                {11, 0}, {0, 11}, {1, 1}, {32, 0}
+                {11, 0}, {0, 11}, {1, 1}, {32, 0}, {0, 32}
         };
     }
 
