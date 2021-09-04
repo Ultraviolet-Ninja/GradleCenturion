@@ -1,25 +1,9 @@
 package bomb.modules.ab.blind_alley;
 
 import bomb.Widget;
-import bomb.tools.Bit;
 
-import static bomb.enumerations.Indicator.BOB;
-import static bomb.enumerations.Indicator.CAR;
-import static bomb.enumerations.Indicator.CLR;
-import static bomb.enumerations.Indicator.FRK;
-import static bomb.enumerations.Indicator.FRQ;
-import static bomb.enumerations.Indicator.IND;
-import static bomb.enumerations.Indicator.MSA;
-import static bomb.enumerations.Indicator.NSA;
-import static bomb.enumerations.Indicator.SIG;
-import static bomb.enumerations.Indicator.SND;
-import static bomb.enumerations.Indicator.TRN;
-import static bomb.enumerations.Port.DVI;
-import static bomb.enumerations.Port.PARALLEL;
-import static bomb.enumerations.Port.PS2;
-import static bomb.enumerations.Port.RCA;
-import static bomb.enumerations.Port.RJ45;
-import static bomb.enumerations.Port.SERIAL;
+import static bomb.enumerations.Indicator.*;
+import static bomb.enumerations.Port.*;
 
 /**
  * This class works on the Blind Alley module, updating the internal 2-D array whenever
@@ -45,43 +29,47 @@ public class BlindAlley extends Widget {
     }
 
     private static void topLeft() {
-        alleyCat[0][0] = Bit.convertBoolToInt(hasUnlitIndicator(BOB)) + Bit.convertBoolToInt(hasLitIndicator(CAR)) +
-                Bit.convertBoolToInt(hasLitIndicator(IND)) + Bit.convertBoolToInt(getNumHolders() % 2 == 0);
+        alleyCat[0][0] = convertToBool(hasUnlitIndicator(BOB)) + convertToBool(hasLitIndicator(CAR)) +
+                convertToBool(hasLitIndicator(IND)) + convertToBool(getNumHolders() % 2 == 0);
     }
 
     private static void topMid() {
-        alleyCat[0][1] = Bit.convertBoolToInt(hasUnlitIndicator(NSA)) + Bit.convertBoolToInt(hasLitIndicator(FRK)) +
-                Bit.convertBoolToInt(hasUnlitIndicator(CAR)) + Bit.convertBoolToInt(portExists(RJ45));
+        alleyCat[0][1] = convertToBool(hasUnlitIndicator(NSA)) + convertToBool(hasLitIndicator(FRK)) +
+                convertToBool(hasUnlitIndicator(CAR)) + convertToBool(portExists(RJ45));
     }
 
     private static void left() {
-        alleyCat[1][0] = Bit.convertBoolToInt(hasUnlitIndicator(FRQ)) + Bit.convertBoolToInt(hasUnlitIndicator(IND)) +
-                Bit.convertBoolToInt(hasUnlitIndicator(TRN)) + Bit.convertBoolToInt(portExists(DVI));
+        alleyCat[1][0] = convertToBool(hasUnlitIndicator(FRQ)) + convertToBool(hasUnlitIndicator(IND)) +
+                convertToBool(hasUnlitIndicator(TRN)) + convertToBool(portExists(DVI));
     }
 
     private static void middle() {
-        alleyCat[1][1] = Bit.convertBoolToInt(hasUnlitIndicator(SIG)) + Bit.convertBoolToInt(hasUnlitIndicator(SND)) +
-                Bit.convertBoolToInt(hasLitIndicator(NSA)) + Bit.convertBoolToInt(getAllBatteries() % 2 == 0);
+        alleyCat[1][1] = convertToBool(hasUnlitIndicator(SIG)) + convertToBool(hasUnlitIndicator(SND)) +
+                convertToBool(hasLitIndicator(NSA)) + convertToBool(getAllBatteries() % 2 == 0);
     }
 
     private static void right() {
-        alleyCat[1][2] = Bit.convertBoolToInt(hasLitIndicator(BOB)) + Bit.convertBoolToInt(hasLitIndicator(CLR)) +
-                Bit.convertBoolToInt(portExists(PS2)) + Bit.convertBoolToInt(portExists(SERIAL));
+        alleyCat[1][2] = convertToBool(hasLitIndicator(BOB)) + convertToBool(hasLitIndicator(CLR)) +
+                convertToBool(portExists(PS2)) + convertToBool(portExists(SERIAL));
     }
 
     private static void bottomLeft() {
-        alleyCat[2][0] = Bit.convertBoolToInt(hasLitIndicator(FRQ)) + Bit.convertBoolToInt(hasLitIndicator(SIG)) +
-                Bit.convertBoolToInt(hasLitIndicator(TRN)) + Bit.convertBoolToInt(hasEven() == 0);
+        alleyCat[2][0] = convertToBool(hasLitIndicator(FRQ)) + convertToBool(hasLitIndicator(SIG)) +
+                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEven() == 0);
     }
 
     private static void bottomMid() {
-        alleyCat[2][1] = Bit.convertBoolToInt(hasUnlitIndicator(FRK)) + Bit.convertBoolToInt(hasLitIndicator(MSA)) +
-                Bit.convertBoolToInt(portExists(PARALLEL)) + Bit.convertBoolToInt(hasVowel());
+        alleyCat[2][1] = convertToBool(hasUnlitIndicator(FRK)) + convertToBool(hasLitIndicator(MSA)) +
+                convertToBool(portExists(PARALLEL)) + convertToBool(hasVowel());
     }
 
     private static void bottomRight() {
-        alleyCat[2][2] = Bit.convertBoolToInt(hasUnlitIndicator(CLR)) + Bit.convertBoolToInt(hasUnlitIndicator(MSA)) +
-                Bit.convertBoolToInt(hasLitIndicator(SND)) + Bit.convertBoolToInt(portExists(RCA));
+        alleyCat[2][2] = convertToBool(hasUnlitIndicator(CLR)) + convertToBool(hasUnlitIndicator(MSA)) +
+                convertToBool(hasLitIndicator(SND)) + convertToBool(portExists(RCA));
+    }
+
+    private static int convertToBool(boolean bool) {
+        return bool ? 1 : 0;
     }
 
     /**
