@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -38,8 +39,8 @@ public class Maze extends AbstractHexagon {
      * @return A decoded ArrayList of HexNodes to be streamed into the maze
      * @throws IOException If the file is not found at the designated source
      */
-    private ArrayList<HexNode> decodeDoc() throws IOException, URISyntaxException {
-        ArrayList<HexNode> nodes = new ArrayList<>();
+    private List<HexNode> decodeDoc() throws IOException, URISyntaxException {
+        List<HexNode> nodes = new ArrayList<>();
         Scanner docScan = new Scanner(new File(Objects.requireNonNull(
                 getClass().getResource("HexMaze.txt")).toURI()).toPath());
         while (docScan.hasNextLine()) {
