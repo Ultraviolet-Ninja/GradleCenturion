@@ -1,6 +1,5 @@
 package bomb;
 
-import bomb.modules.c.colored_switches.ColoredSwitches;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,7 +12,6 @@ import java.util.Objects;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ColoredSwitches.producePreemptiveMoveList((byte) 32);
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("manual.fxml")));
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(new Scene(root));

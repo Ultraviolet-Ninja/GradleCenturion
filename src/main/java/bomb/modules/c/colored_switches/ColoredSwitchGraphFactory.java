@@ -1,17 +1,19 @@
 package bomb.modules.c.colored_switches;
 
 import bomb.tools.filter.Regex;
+import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+import java.util.Objects;
 
 public class ColoredSwitchGraphFactory {
     private static final byte OUTGOING_STATE = 1, COLOR_CONDITIONS = 2, SWITCH_TO_FLIP = 3;
@@ -20,25 +22,26 @@ public class ColoredSwitchGraphFactory {
 
     public ColoredSwitchGraphFactory() throws IOException, CsvValidationException {
         nodeList = new ArrayList<>();
-        Scanner csvReader = createReader();
+        CSVReader csvReader = createReader();
         Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])\\]");
 
         String[] nextRecord;
-        while (csvReader.hasNextLine()) {
-            nextRecord = csvReader.nextLine().split(",");
+        while ((nextRecord = csvReader.readNext()) != null) {
             nodeList.add(buildNode(nextRecord, connectionFinder));
         }
     }
 
-    private Scanner createReader() throws FileNotFoundException {
-
-        return new Scanner(new File(String.valueOf(getClass().getResource("graph.csv"))));
+    private CSVReader createReader() {
+        InputStream in = ColoredSwitchGraphFactory.class.getResourceAsStream("graph.csv");
+        Reader reader = new InputStreamReader(Objects.requireNonNull(in));
+        return new CSVReader(reader);
     }
 
     private ColoredSwitchNode buildNode(String[] record, Regex connectionFinder) {
         ColoredSwitchNode node = new ColoredSwitchNode(Byte.parseByte(record[0]));
 
         for (int i = 1; i < record.length; i++) {
+            if (record[i].isEmpty()) return node;
             connectionFinder.loadText(record[i]);
             connectionFinder.hasMatch();
 
@@ -73,7 +76,7 @@ public class ColoredSwitchGraphFactory {
 
         while (i < nodeList.size()) {
             for (byte connection : nodeList.get(i).getOutgoingConnections()) {
-                output.addEdge(nodeList.get(i), nodeList.get(connection + 1));
+                output.addEdge(nodeList.get(i), nodeList.get(connection));
             }
             i++;
         }

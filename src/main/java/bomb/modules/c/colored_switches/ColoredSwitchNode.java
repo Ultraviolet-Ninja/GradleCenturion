@@ -2,7 +2,7 @@ package bomb.modules.c.colored_switches;
 
 import org.javatuples.Pair;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ public class ColoredSwitchNode {
 
     public ColoredSwitchNode(byte state) {
         this.state = state;
-        outgoingConnections = new HashMap<>();
+        outgoingConnections = new LinkedHashMap<>();
     }
 
     public void addConnection(byte outgoingState, ColoredSwitchProperty[] colorRestrictions, byte switchToFlip) {
@@ -39,5 +39,10 @@ public class ColoredSwitchNode {
 
         ColoredSwitchNode node = (ColoredSwitchNode) o;
         return this.state == node.state && this.outgoingConnections.equals(node.outgoingConnections);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(state);
     }
 }
