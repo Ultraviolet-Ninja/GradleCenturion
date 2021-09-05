@@ -77,26 +77,14 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getPossibleExits(HexGrid grid, int sideToExit) {
-        List<Coordinates> output;
-        switch (sideToExit) {
-            case 0:
-                output = getTopLeftSide(grid);
-                break;
-            case 1:
-                output = getTopRightSide(grid);
-                break;
-            case 2:
-                output = getRightSide(grid);
-                break;
-            case 3:
-                output = getBottomRightSide(grid);
-                break;
-            case 4:
-                output = getBottomLeftSide(grid);
-                break;
-            default:
-                output = getLeftSide(grid);
-        }
+        List<Coordinates> output = switch (sideToExit) {
+            case 0 -> getTopLeftSide(grid);
+            case 1 -> getTopRightSide(grid);
+            case 2 -> getRightSide(grid);
+            case 3 -> getBottomRightSide(grid);
+            case 4 -> getBottomLeftSide(grid);
+            default -> getLeftSide(grid);
+        };
         return filterBlockedExits(grid, output, sideToExit);
     }
 
@@ -153,26 +141,14 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> filterBlockedExits(HexGrid grid, List<Coordinates> list, int sideToExit) {
-        HexWall[] wallsToFind;
-        switch (sideToExit) {
-            case 0:
-                wallsToFind = new HexWall[]{TopLeft, Top};
-                break;
-            case 1:
-                wallsToFind = new HexWall[]{TopRight, Top};
-                break;
-            case 2:
-                wallsToFind = new HexWall[]{TopRight, BottomRight};
-                break;
-            case 3:
-                wallsToFind = new HexWall[]{BottomRight, Bottom};
-                break;
-            case 4:
-                wallsToFind = new HexWall[]{Bottom, BottomLeft};
-                break;
-            default:
-                wallsToFind = new HexWall[]{TopLeft, BottomLeft};
-        }
+        HexWall[] wallsToFind = switch (sideToExit) {
+            case 0 -> new HexWall[]{TopLeft, Top};
+            case 1 -> new HexWall[]{TopRight, Top};
+            case 2 -> new HexWall[]{TopRight, BottomRight};
+            case 3 -> new HexWall[]{BottomRight, Bottom};
+            case 4 -> new HexWall[]{Bottom, BottomLeft};
+            default -> new HexWall[]{TopLeft, BottomLeft};
+        };
         return list.stream().filter(coords -> grid.retrieveNode(coords).isPathClear(wallsToFind[0].ordinal()) ||
                         grid.retrieveNode(coords).isPathClear(wallsToFind[1].ordinal()))
                 .collect(Collectors.toList());
