@@ -75,8 +75,8 @@ public class ColoredSwitches extends Switches {
         AStarShortestPath<ColoredSwitchNode, DefaultEdge> aStarShortestPath =
                 new AStarShortestPath<>(INTERNAL_GRAPH, heuristic);
 
-        ColoredSwitchNode startNode = new ColoredSwitchNode(secondaryStartLocation);
-        ColoredSwitchNode destination = new ColoredSwitchNode(desiredState);
+        ColoredSwitchNode startNode = getNodeByState(secondaryStartLocation);
+        ColoredSwitchNode destination = getNodeByState(desiredState);
 
         List<ColoredSwitchNode> nodeList = aStarShortestPath.getPath(startNode, destination).getVertexList();
 
@@ -91,11 +91,12 @@ public class ColoredSwitches extends Switches {
             double hX = Math.abs(desiredState - targetVertex.getState());
 
             Pair<SwitchColor[], Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
+            if (edgeData == null)
+                return WRONG_PATH_VALUE;
             SwitchColor switchToFlip = startingColors[edgeData.getValue1()];
 
-            if (!canFollowPath(edgeData.getValue0(), switchToFlip)) {
-                gX = WRONG_PATH_VALUE;
-            }
+            if (!canFollowPath(edgeData.getValue0(), switchToFlip))
+                return WRONG_PATH_VALUE;
 
             return gX + hX;
         });
@@ -119,7 +120,6 @@ public class ColoredSwitches extends Switches {
             if (switchColor == possibleConnection)
                 return true;
         }
-
         return false;
     }
 
