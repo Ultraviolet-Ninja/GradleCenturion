@@ -89,7 +89,7 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getTopLeftSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+        List<Coordinates> output = new ArrayList<>();
         for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(i, 0));
         }
@@ -97,7 +97,7 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getTopRightSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+        List<Coordinates> output = new ArrayList<>();
         for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
             output.add(new Coordinates(i, 0));
         }
@@ -105,7 +105,7 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getRightSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+        List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         int lastIndex = internals.cap() - 1;
         for (int i = 0; i < internals.get(lastIndex).cap(); i++) {
@@ -115,7 +115,7 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getBottomRightSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+        List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
             output.add(new Coordinates(i, internals.get(i).cap() - 1));
@@ -124,7 +124,7 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getBottomLeftSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+        List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(i, internals.get(i).cap() - 1));
@@ -133,7 +133,7 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getLeftSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+        List<Coordinates> output = new ArrayList<>();
         for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(0, i));
         }
