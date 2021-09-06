@@ -17,12 +17,8 @@ import static org.testng.Assert.fail;
 public class MazeFinderTest {
     @BeforeClass
     public void setup() {
-        try {
-            Maze maze = new Maze();
-            HexHashLibrary.initialize(maze, (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
-        } catch (IOException e) {
-            fail();
-        }
+        Maze maze = new Maze();
+        HexHashLibrary.initialize(maze, (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
     }
 
     @Test

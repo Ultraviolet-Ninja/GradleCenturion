@@ -112,7 +112,7 @@ public class Regex implements Iterable<String> {
 
     @Override
     public String toString() {
-        return "Regex: " + regPattern.pattern() + " Text: " + textMatcher.toString();
+        return "Regex: " + regPattern.pattern();
     }
 
     @Override

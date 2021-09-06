@@ -42,23 +42,12 @@ public class HexagonDataStructure {
             ArrayList<HexWall> newWalls = new ArrayList<>();
             for (HexWall construct : constructs) {
                 switch (construct) {
-                    case Top:
-                        newWalls.add(HexWall.Top);
-                        break;
-                    case TopLeft:
-                        newWalls.add(HexWall.TopLeft);
-                        break;
-                    case TopRight:
-                        newWalls.add(HexWall.TopRight);
-                        break;
-                    case Bottom:
-                        newWalls.add(HexWall.Bottom);
-                        break;
-                    case BottomLeft:
-                        newWalls.add(HexWall.BottomLeft);
-                        break;
-                    default:
-                        newWalls.add(HexWall.BottomRight);
+                    case Top -> newWalls.add(HexWall.Top);
+                    case TopLeft -> newWalls.add(HexWall.TopLeft);
+                    case TopRight -> newWalls.add(HexWall.TopRight);
+                    case Bottom -> newWalls.add(HexWall.Bottom);
+                    case BottomLeft -> newWalls.add(HexWall.BottomLeft);
+                    default -> newWalls.add(HexWall.BottomRight);
                 }
             }
             return newWalls;
@@ -66,20 +55,14 @@ public class HexagonDataStructure {
 
         private HexShape deepCopyShape(HexShape shape) {
             if (shape == null) return null;
-            switch (shape) {
-                case Circle:
-                    return HexShape.Circle;
-                case Hexagon:
-                    return HexShape.Hexagon;
-                case LeftTriangle:
-                    return HexShape.LeftTriangle;
-                case RightTriangle:
-                    return HexShape.RightTriangle;
-                case UpTriangle:
-                    return HexShape.UpTriangle;
-                default:
-                    return HexShape.DownTriangle;
-            }
+            return switch (shape) {
+                case Circle -> HexShape.Circle;
+                case Hexagon -> HexShape.Hexagon;
+                case LeftTriangle -> HexShape.LeftTriangle;
+                case RightTriangle -> HexShape.RightTriangle;
+                case UpTriangle -> HexShape.UpTriangle;
+                default -> HexShape.DownTriangle;
+            };
         }
 
         /**
@@ -337,23 +320,12 @@ public class HexagonDataStructure {
 
         for (HexWall wall : walls) {
             switch (wall) {
-                case TopLeft:
-                    temp.add(HexWall.Top);
-                    break;
-                case Top:
-                    temp.add(HexWall.TopRight);
-                    break;
-                case TopRight:
-                    temp.add(HexWall.BottomRight);
-                    break;
-                case BottomRight:
-                    temp.add(HexWall.Bottom);
-                    break;
-                case Bottom:
-                    temp.add(HexWall.BottomLeft);
-                    break;
-                default:
-                    temp.add(HexWall.TopLeft);
+                case TopLeft -> temp.add(HexWall.Top);
+                case Top -> temp.add(HexWall.TopRight);
+                case TopRight -> temp.add(HexWall.BottomRight);
+                case BottomRight -> temp.add(HexWall.Bottom);
+                case Bottom -> temp.add(HexWall.BottomLeft);
+                default -> temp.add(HexWall.TopLeft);
             }
         }
         return temp;
@@ -371,16 +343,12 @@ public class HexagonDataStructure {
         if (currentShape == HexShape.Circle) return HexShape.Circle;
         if (currentShape == HexShape.Hexagon) return HexShape.Hexagon;
 
-        switch (currentShape) {
-            case UpTriangle:
-                return HexShape.DownTriangle;
-            case DownTriangle:
-                return HexShape.UpTriangle;
-            case LeftTriangle:
-                return HexShape.RightTriangle;
-            default:
-                return HexShape.LeftTriangle;
-        }
+        return switch (currentShape) {
+            case UpTriangle -> HexShape.DownTriangle;
+            case DownTriangle -> HexShape.UpTriangle;
+            case LeftTriangle -> HexShape.RightTriangle;
+            default -> HexShape.LeftTriangle;
+        };
     }
 
     /**
@@ -399,22 +367,15 @@ public class HexagonDataStructure {
      * @return The shape for the HexNode
      */
     public static HexShape decodeShape(String letter) {
-        switch (letter.toLowerCase()) {
-            case "c":
-                return HexShape.Circle;
-            case "h":
-                return HexShape.Hexagon;
-            case "lt":
-                return HexShape.LeftTriangle;
-            case "rt":
-                return HexShape.RightTriangle;
-            case "ut":
-                return HexShape.UpTriangle;
-            case "dt":
-                return HexShape.DownTriangle;
-            default:
-                return null;
-        }
+        return switch (letter.toLowerCase()) {
+            case "c" -> HexShape.Circle;
+            case "h" -> HexShape.Hexagon;
+            case "lt" -> HexShape.LeftTriangle;
+            case "rt" -> HexShape.RightTriangle;
+            case "ut" -> HexShape.UpTriangle;
+            case "dt" -> HexShape.DownTriangle;
+            default -> null;
+        };
     }
 
     /**

@@ -9,9 +9,9 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
-public class Main extends Application{
+public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(Main.class.getResource("manual.fxml")));
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(new Scene(root));
