@@ -84,6 +84,8 @@ public class HexamazeController implements Resettable {
             String sideToExit = MazeRunner.getExitDirection();
             if (sideToExit != null)
                 exitDirectionLabel.setText("Exit out of the " + sideToExit + " side");
+            else
+                FacadeFX.clearText(exitDirectionLabel);
         } catch (IllegalArgumentException ex) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
         }
