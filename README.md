@@ -3,7 +3,7 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
-![Project Version](https://img.shields.io/badge/version-0.17.0-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.18.0-blueviolet)
 ### Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
 
@@ -23,6 +23,7 @@ This is a huge project for one man to tackle, but I've learned a lot from the ch
 - JavaTuple ver 1.2
 - Medusa ver. 11.7
 - JGraphT ver. 1.5.1
+- OpenCSV ver. 5.5
 #### Other Technologies
 - Circle CI
 - LGTM Code Quality

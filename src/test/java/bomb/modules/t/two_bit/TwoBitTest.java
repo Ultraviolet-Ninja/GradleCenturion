@@ -24,9 +24,9 @@ public class TwoBitTest {
     }
 
     @DataProvider
-    public Object[] nextCodeExceptionProvider() {
-        return new String[]{
-                "1", "311", "ab", "3fs11"
+    public Object[][] nextCodeExceptionProvider() {
+        return new String[][]{
+                {"1"}, {"311"}, {"ab"}, {"3fs11"}
         };
     }
 

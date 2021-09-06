@@ -8,9 +8,9 @@ import static org.testng.Assert.assertEquals;
 public class AlphabetTest {
 
     @DataProvider
-    public Object[] exceptionProvider() {
-        return new Object[]{
-                "A", "AABC"
+    public Object[][] exceptionProvider() {
+        return new Object[][]{
+                {"A"}, {"AABC"}
         };
     }
 

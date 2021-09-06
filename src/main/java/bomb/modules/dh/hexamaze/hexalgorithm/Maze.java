@@ -2,10 +2,9 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -20,28 +19,23 @@ public class Maze extends AbstractHexagon {
     /**
      * Initializes a Hex object with a side length of 12, representing the hexamaze on the manual, then
      * decodes the file to add the walls and shapes to HexNodes that'll get streamed into the maze
-     *
-     * @throws IOException If the file is not found at the designated source
      */
-    public Maze() throws IOException {
+    public Maze() {
         super(new HexagonDataStructure(12));
-        try {
-            hexagon.readInNodeList(decodeDoc());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        hexagon.readInNodeList(decodeDoc());
     }
 
     /**
      * Scans through the document to create new Shapes and wall arrays to be put into new HexNodes
      *
      * @return A decoded ArrayList of HexNodes to be streamed into the maze
-     * @throws IOException If the file is not found at the designated source
      */
-    private ArrayList<HexNode> decodeDoc() throws IOException, URISyntaxException {
-        ArrayList<HexNode> nodes = new ArrayList<>();
-        Scanner docScan = new Scanner(new File(Objects.requireNonNull(
-                getClass().getResource("HexMaze.txt")).toURI()).toPath());
+    private List<HexNode> decodeDoc() {
+        List<HexNode> nodes = new ArrayList<>();
+
+        InputStream in = Maze.class.getResourceAsStream("HexMaze.txt");
+        Scanner docScan = new Scanner(Objects.requireNonNull(in));
+
         while (docScan.hasNextLine()) {
             String[] elements = docScan.nextLine().split(" ");
             nodes.add(new HexNode(decodeShape(elements[1]), decodeWalls(elements[0])));
