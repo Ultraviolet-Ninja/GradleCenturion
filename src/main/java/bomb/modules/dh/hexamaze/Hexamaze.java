@@ -13,7 +13,6 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
 import javafx.scene.paint.Color;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +36,7 @@ public class Hexamaze extends Widget {
         currentPegLocation = -1;
         HEX_SHAPE_TRACKER = new ArrayList<>();
         setToNull();
-        try {
-            HexHashLibrary.initialize(new Maze(), (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        HexHashLibrary.initialize(new Maze(), (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
     }
 
     /**

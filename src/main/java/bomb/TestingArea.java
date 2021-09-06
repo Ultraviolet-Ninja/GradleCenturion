@@ -1,20 +1,27 @@
 package bomb;
 
+import bomb.modules.c.colored_switches.ColoredSwitches;
+import bomb.modules.c.colored_switches.SwitchColor;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.tools.filter.Regex;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Regex labelFilter = new Regex("\"([^\"]*)\",?");
         Regex frequencyFilter = new Regex("frequencies\\.put\\(\"([^\"]+)\", (\\d\\.\\d{1,3})\\);");
         Regex whoMapFilter = new Regex("stepTwoMap\\.put\\(\"([^\"]+)\", \"([^\"]+)\"\\);");
 
+        System.out.println(ColoredSwitches.producePreemptiveMoveList((byte) 21));
+        SwitchColor[] array = new SwitchColor[]{SwitchColor.GREEN, SwitchColor.RED, SwitchColor.GREEN, SwitchColor.BLUE, SwitchColor.BLUE};
+
+        System.out.println(ColoredSwitches.produceFinalMoveList(array, (byte) 1));
     }
 
     private static HexGrid fromLine(String line){

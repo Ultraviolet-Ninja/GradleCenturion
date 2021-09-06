@@ -5,6 +5,7 @@
 - Blind Alley
 - Boolean Venn Diagram
 - Chord Qualities
+- Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using A*)
 - Emoji Math
 - Fast Math
 - Forget Me Not
@@ -14,19 +15,19 @@
 - Round Keypads
 - Simon Screams
 - Souvenir
+- Switches
 - TwoBit
 
-16/100
+17/100 + Colored Switches
 
 ### Incomplete Modules
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
-- Switches
 - The Bulb
 
-6/100
+5/100
 
 ### Untouched Modules
 - 3D Maze
@@ -43,7 +44,6 @@
 - Color Flash
 - Color Math
 - Color Squares
-- Color Switches (Not technically part of the bomb, but will be a fun recursion problem)
 - Combination Lock
 - Complex Button
 - Connection Check
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-78/100 + Colored Switches
+78/100
