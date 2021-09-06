@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ColoredSwitches extends Switches {
-    private static final double WRONG_PATH_VALUE = 1 << 16;
+    private static final double WRONG_PATH_VALUE = Double.MAX_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;
 
     private static byte secondaryStartLocation = -1;
@@ -66,9 +66,10 @@ public class ColoredSwitches extends Switches {
 
     public static List<String> produceFinalMoveList(SwitchColor[] startingColors, byte desiredState) throws IllegalStateException, IllegalArgumentException {
         validateByte(desiredState);
+        validateSwitchColors(startingColors);
         if (startingColors.length != BIT_LENGTH)
             throw new IllegalArgumentException("There should be 5 switches");
-        if (secondaryStartLocation == -1)
+        if (!isFirstStepDone())
             throw new IllegalStateException("Must flip 3 switches before producing the final list");
 
         AStarAdmissibleHeuristic<ColoredSwitchNode> heuristic = createFinalMoveHeuristic(startingColors, desiredState);
@@ -123,13 +124,24 @@ public class ColoredSwitches extends Switches {
         return false;
     }
 
+    private static void validateSwitchColors(SwitchColor[] startingColors) {
+        for (SwitchColor switchColor : startingColors) {
+            if (switchColor == SwitchColor.NEUTRAL)
+                throw new IllegalArgumentException("All switches must have a color");
+        }
+    }
+
     private static boolean isBlackPath(SwitchColor[] connectionConditions) {
-        return connectionConditions.length == 1 && connectionConditions[0] == SwitchColor.BLACK;
+        return connectionConditions.length == 1 && connectionConditions[0] == SwitchColor.NEUTRAL;
     }
 
     private static void validateByte(byte state) throws IllegalArgumentException {
         if (inputOutOfRange(state))
             throw new IllegalArgumentException("Input out of range");
+    }
+
+    public static boolean isFirstStepDone() {
+        return secondaryStartLocation != -1;
     }
 
     public static void reset() {

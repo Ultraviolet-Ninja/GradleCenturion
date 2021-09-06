@@ -2,7 +2,7 @@ package bomb.modules.c.colored_switches;
 
 public enum SwitchColor {
     RED("red-switch"), ORANGE("orange-switch"), GREEN("green-switch"), CYAN("cyan-switch"),
-    BLUE("blue-switch"), PURPLE("purple-switch"), BLACK("");
+    BLUE("blue-switch"), MAGENTA("magenta-switch"), NEUTRAL("reset-state");
 
     private final String cssId;
 

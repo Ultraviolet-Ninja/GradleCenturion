@@ -9,6 +9,15 @@
     -jfx-unselected-color: #9e9e9e;
 }
 
+.jfx-toggle-button {
+    -jfx-toggle-color: #dedee0;
+    -jfx-toggle-line-color: #2b4cff;
+    -jfx-untoggle-color: #354558;
+    -jfx-untoggle-line-color: #172b58;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+}
+
 .mfx-button {
     -fx-font-size: 24;
 }
@@ -27,48 +36,49 @@
 }
 
 #red-switch {
-    -mfx-toggle-color: white;
-    -mfx-toggle-line-color: #b1b1b1;
-    -mfx-untoggle-color: white;
-    -mfx-untoggle-line-color: #b1b1b1;
+    -mfx-toggle-color: #9d2416;
+    -mfx-toggle-line-color: #5a1d23;
+    -mfx-untoggle-color: #9d2416;
+    -mfx-untoggle-line-color: #5a1d23;
 }
 
 #orange-switch {
-    -mfx-toggle-color: white;
-    -mfx-toggle-line-color: #b1b1b1;
-    -mfx-untoggle-color: white;
-    -mfx-untoggle-line-color: #b1b1b1;
+    -mfx-toggle-color: #c37c01;
+    -mfx-toggle-line-color: #9c6600;
+    -mfx-untoggle-color: #c37c01;
+    -mfx-untoggle-line-color: #9c6600;
 }
 
 #green-switch {
-    -mfx-toggle-color: white;
-    -mfx-toggle-line-color: #b1b1b1;
-    -mfx-untoggle-color: white;
-    -mfx-untoggle-line-color: #b1b1b1;
+    -mfx-toggle-color: #0f7f1f;
+    -mfx-toggle-line-color: #16502e;
+    -mfx-untoggle-color: #0f7f1f;
+    -mfx-untoggle-line-color: #16502e;
 }
 
 #cyan-switch {
-    -mfx-toggle-color: white;
-    -mfx-toggle-line-color: #b1b1b1;
-    -mfx-untoggle-color: white;
-    -mfx-untoggle-line-color: #b1b1b1;
+    -mfx-toggle-color: #348eb9;
+    -mfx-toggle-line-color: #285d75;
+    -mfx-untoggle-color: #348eb9;
+    -mfx-untoggle-line-color: #285d75;
 }
 
 #blue-switch {
-    -mfx-toggle-color: white;
-    -mfx-toggle-line-color: #b1b1b1;
-    -mfx-untoggle-color: white;
-    -mfx-untoggle-line-color: #b1b1b1;
+    -mfx-toggle-color: #3943b5;
+    -mfx-toggle-line-color: #37408f;
+    -mfx-untoggle-color: #3943b5;
+    -mfx-untoggle-line-color: #37408f;
 }
 
-#purple-switch {
-    -mfx-toggle-color: white;
-    -mfx-toggle-line-color: #b1b1b1;
-    -mfx-untoggle-color: white;
-    -mfx-untoggle-line-color: #b1b1b1;
+#magenta-switch {
+    -mfx-toggle-color: #932ca3;
+    -mfx-toggle-line-color: #5b236f;
+    -mfx-untoggle-color: #932ca3;
+    -mfx-untoggle-line-color: #5b236f;
 }
 
 .mfx-text-field {
+    -fx-alignment: center;
     -fx-background-color: #00407c;
     -fx-background-radius: 15;
     -fx-border-color: black;

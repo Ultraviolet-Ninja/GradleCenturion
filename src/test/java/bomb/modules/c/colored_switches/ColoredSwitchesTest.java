@@ -10,6 +10,7 @@ import java.util.List;
 import static bomb.modules.c.colored_switches.SwitchColor.BLUE;
 import static bomb.modules.c.colored_switches.SwitchColor.CYAN;
 import static bomb.modules.c.colored_switches.SwitchColor.GREEN;
+import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 import static bomb.modules.c.colored_switches.SwitchColor.RED;
 import static org.testng.Assert.assertEquals;
 
@@ -35,7 +36,8 @@ public class ColoredSwitchesTest {
     public Object[][] finalMoveListExceptionProvider() {
         return new Object[][]{
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE}, 0},
-                {new SwitchColor[]{RED, CYAN, GREEN, BLUE, RED}, 0}
+                {new SwitchColor[]{RED, CYAN, GREEN, BLUE, RED}, 0},
+                {new SwitchColor[]{RED, CYAN, GREEN, BLUE, NEUTRAL}, 0}
         };
     }
 
