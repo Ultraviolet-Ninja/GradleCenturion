@@ -2,9 +2,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,16 +19,10 @@ public class Maze extends AbstractHexagon {
     /**
      * Initializes a Hex object with a side length of 12, representing the hexamaze on the manual, then
      * decodes the file to add the walls and shapes to HexNodes that'll get streamed into the maze
-     *
-     * @throws IOException If the file is not found at the designated source
      */
-    public Maze() throws IOException {
+    public Maze() {
         super(new HexagonDataStructure(12));
-        try {
-            hexagon.readInNodeList(decodeDoc());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        hexagon.readInNodeList(decodeDoc());
     }
 
     /**
@@ -38,7 +30,7 @@ public class Maze extends AbstractHexagon {
      *
      * @return A decoded ArrayList of HexNodes to be streamed into the maze
      */
-    private List<HexNode> decodeDoc() throws URISyntaxException {
+    private List<HexNode> decodeDoc() {
         List<HexNode> nodes = new ArrayList<>();
 
         InputStream in = Maze.class.getResourceAsStream("HexMaze.txt");
