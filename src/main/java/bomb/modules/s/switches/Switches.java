@@ -51,7 +51,7 @@ public class Switches extends Widget {
             throw new IllegalArgumentException("Input was out of range (31 > n >= 0)");
     }
 
-    private static boolean inputOutOfRange(byte state) {
+    protected static boolean inputOutOfRange(byte state) {
         return state < 0 || state >= (1 << BIT_LENGTH);
     }
 

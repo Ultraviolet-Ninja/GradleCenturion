@@ -1,9 +1,9 @@
 package bomb.modules.c.colored_switches;
 
-public enum ColoredSwitchProperty {
+public enum SwitchColor {
     RED, ORANGE, GREEN, CYAN, BLUE, PURPLE, BLACK;
 
-    public static ColoredSwitchProperty getByIndex(int index) {
+    public static SwitchColor getByIndex(int index) {
         return values()[index];
     }
 }

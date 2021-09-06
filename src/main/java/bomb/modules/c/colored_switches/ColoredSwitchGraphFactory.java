@@ -46,7 +46,7 @@ public class ColoredSwitchGraphFactory {
             connectionFinder.hasMatch();
 
             byte outgoingConnection = Byte.parseByte(connectionFinder.captureGroup(OUTGOING_STATE));
-            ColoredSwitchProperty[] colorConditions = createConditions(connectionFinder.captureGroup(COLOR_CONDITIONS));
+            SwitchColor[] colorConditions = createConditions(connectionFinder.captureGroup(COLOR_CONDITIONS));
             byte switchToFlip = Byte.parseByte(connectionFinder.captureGroup(SWITCH_TO_FLIP));
 
             node.addConnection(outgoingConnection, colorConditions, switchToFlip);
@@ -55,11 +55,11 @@ public class ColoredSwitchGraphFactory {
         return node;
     }
 
-    private ColoredSwitchProperty[] createConditions(String ordinals) {
-        ColoredSwitchProperty[] output = new ColoredSwitchProperty[ordinals.length()];
+    private SwitchColor[] createConditions(String ordinals) {
+        SwitchColor[] output = new SwitchColor[ordinals.length()];
         int i = 0;
         for (String ordinal : ordinals.split("")) {
-            output[i++] = ColoredSwitchProperty.getByIndex(Integer.parseInt(ordinal));
+            output[i++] = SwitchColor.getByIndex(Integer.parseInt(ordinal));
         }
         return output;
     }

@@ -1,11 +1,8 @@
 package bomb;
 
 import bomb.modules.c.colored_switches.ColoredSwitches;
-import bomb.modules.dh.hexamaze.Hexamaze;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
-import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.s.switches.Switches;
 import bomb.tools.filter.Regex;
 
 import java.io.IOException;
@@ -20,8 +17,7 @@ public class TestingArea {
         Regex frequencyFilter = new Regex("frequencies\\.put\\(\"([^\"]+)\", (\\d\\.\\d{1,3})\\);");
         Regex whoMapFilter = new Regex("stepTwoMap\\.put\\(\"([^\"]+)\", \"([^\"]+)\"\\);");
 
-//        ColoredSwitches.producePreemptiveMoveList((byte) 32);
-        Maze maze = new Maze();
+        System.out.println(ColoredSwitches.producePreemptiveMoveList((byte) 31));
     }
 
     private static HexGrid fromLine(String line){

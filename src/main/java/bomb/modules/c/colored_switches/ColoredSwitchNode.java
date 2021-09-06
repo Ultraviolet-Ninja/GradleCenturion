@@ -8,14 +8,18 @@ import java.util.Set;
 
 public class ColoredSwitchNode {
     private final byte state;
-    private final Map<Byte, Pair<ColoredSwitchProperty[], Byte>> outgoingConnections;
+    private final Map<Byte, Pair<SwitchColor[], Byte>> outgoingConnections;
 
     public ColoredSwitchNode(byte state) {
         this.state = state;
         outgoingConnections = new LinkedHashMap<>();
     }
 
-    public void addConnection(byte outgoingState, ColoredSwitchProperty[] colorRestrictions, byte switchToFlip) {
+    public byte getState() {
+        return state;
+    }
+
+    public void addConnection(byte outgoingState, SwitchColor[] colorRestrictions, byte switchToFlip) {
         outgoingConnections.put(outgoingState, new Pair<>(colorRestrictions, switchToFlip));
     }
 
@@ -23,8 +27,8 @@ public class ColoredSwitchNode {
         return outgoingConnections.keySet();
     }
 
-    public int getConnectionSize() {
-        return outgoingConnections.size();
+    public Pair<SwitchColor[], Byte> getEdgeData(byte targetState) {
+        return outgoingConnections.get(targetState);
     }
 
     @Override
@@ -38,7 +42,7 @@ public class ColoredSwitchNode {
         if (!(o instanceof ColoredSwitchNode)) return false;
 
         ColoredSwitchNode node = (ColoredSwitchNode) o;
-        return this.state == node.state && this.outgoingConnections.equals(node.outgoingConnections);
+        return this.state == node.state;
     }
 
     @Override
