@@ -29,6 +29,7 @@ public class ColoredSwitchGraphFactory {
         while ((nextRecord = csvReader.readNext()) != null) {
             nodeList.add(buildNode(nextRecord, connectionFinder));
         }
+        csvReader.close();
     }
 
     private CSVReader createReader() {

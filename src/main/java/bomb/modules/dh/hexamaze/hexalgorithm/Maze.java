@@ -57,6 +57,8 @@ public class Maze extends AbstractHexagon {
                 nodes.add(new HexNode(decodedShape, decodedWalls));
             }
         }
+
+        csvReader.close();
         return nodes;
     }
 }
