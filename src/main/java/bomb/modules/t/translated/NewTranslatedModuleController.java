@@ -1,6 +1,8 @@
 package bomb.modules.t.translated;
 
-public class NewTranslatedModuleController {
+import bomb.abstractions.Resettable;
+
+public class NewTranslatedModuleController implements Resettable {
 
     public NewTranslatedModuleController() {
 
@@ -11,4 +13,8 @@ public class NewTranslatedModuleController {
     }
 
 
+    @Override
+    public void reset() {
+
+    }
 }
