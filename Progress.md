@@ -14,9 +14,10 @@
 - Round Keypads
 - Simon Screams
 - Souvenir
+- Switches
 - TwoBit
 
-16/100
+17/100
 
 ### Incomplete Modules
 - MicroController
@@ -92,7 +93,6 @@
 - Silly Slots
 - Skewed Slots
 - Square Button
-- Switches
 - Symbolic Password
 - Text Field
 - The Clock
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-79/100 + Colored Switches
+78/100 + Colored Switches

@@ -1,0 +1,35 @@
+.jfx-radio-button {
+    -fx-scale-x: 1.5;
+    -fx-scale-y: 1.5;
+    -jfx-unselected-color: black;
+    -jfx-selected-color: #4fac5f;
+}
+
+.jfx-radio-button:hover {
+    -jfx-unselected-color: #336f3c;
+}
+
+.mfx-button {
+    -fx-font-size: 24;
+}
+
+.mfx-toggle-button {
+    -fx-rotate: -90;
+    -fx-scale-x: 2.0;
+    -fx-scale-y: 2.0;
+    -mfx-toggle-color: black;
+    -mfx-toggle-line-color: #585858;
+    -mfx-untoggle-color: black;
+    -mfx-untoggle-line-color: #585858;
+}
+
+.mfx-text-field {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-font-size: 24;
+    -fx-prompt-text-fill: white;
+    -mfx-line-stroke-width: 0;
+}

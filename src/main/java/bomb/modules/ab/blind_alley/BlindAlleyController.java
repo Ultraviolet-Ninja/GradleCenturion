@@ -37,18 +37,13 @@ public class BlindAlleyController implements Resettable {
     }
 
     private String style(int number) {
-        switch (number) {
-            case 0:
-                return "-fx-text-fill: black";
-            case 1:
-                return "-fx-text-fill: green";
-            case 2:
-                return "-fx-text-fill: yellow";
-            case 3:
-                return "-fx-text-fill: orange";
-            default:
-                return "-fx-text-fill: red";
-        }
+        return switch (number) {
+            case 0 -> "-fx-text-fill: black";
+            case 1 -> "-fx-text-fill: green";
+            case 2 -> "-fx-text-fill: yellow";
+            case 3 -> "-fx-text-fill: orange";
+            default -> "-fx-text-fill: red";
+        };
     }
 
     private void writeMax(int[][] array) {

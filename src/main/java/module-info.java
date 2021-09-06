@@ -6,7 +6,6 @@ module jasmine.jragon.GradleCenturion.main {
 
     requires com.jfoenix;
     requires org.jgrapht.core;
-    requires org.controlsfx.controls;
     requires javatuples;
     requires MaterialFX;
 

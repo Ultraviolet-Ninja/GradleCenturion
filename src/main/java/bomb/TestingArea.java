@@ -2,6 +2,8 @@ package bomb;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.modules.s.switches.Switches;
+import bomb.tools.filter.Regex;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -10,9 +12,11 @@ public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
 
     public static void main(String[] args) {
-        System.out.println(Math.floorDiv(1, 7));
-        System.out.println(Math.floorDiv(8, 7));
-        System.out.println(Math.floorDiv(20, 7));
+        Regex labelFilter = new Regex("\"([^\"]*)\",?");
+        Regex frequencyFilter = new Regex("frequencies\\.put\\(\"([^\"]+)\", (\\d\\.\\d{1,3})\\);");
+        Regex whoMapFilter = new Regex("stepTwoMap\\.put\\(\"([^\"]+)\", \"([^\"]+)\"\\);");
+
+        System.out.println(Switches.produceMoveList((byte) 2, (byte) 22));
     }
 
     private static HexGrid fromLine(String line){
