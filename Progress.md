@@ -5,6 +5,7 @@
 - Blind Alley
 - Boolean Venn Diagram
 - Chord Qualities
+- Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using A*)
 - Emoji Math
 - Fast Math
 - Forget Me Not
@@ -17,17 +18,16 @@
 - Switches
 - TwoBit
 
-17/100
+17/100 + Colored Switches
 
 ### Incomplete Modules
-- Colored Switches (Not technically part of the bomb, but ~~will be~~ is a fun ~~recursion~~ graph problem using A*)
 - MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 - The Bulb
 
-5/100 + Colored Switches
+5/100
 
 ### Untouched Modules
 - 3D Maze
