@@ -9,41 +9,34 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class MicroController extends Widget {
     private static final String THIRD_CONDITION_REGEX = "[clrx18]";
 
-    private static AbstractController instance;
-
-    public static void setInternalController(AbstractController controller) {
-        instance = controller;
-    }
-
-    public static List<Color> getPinColors(String moduleSerialNumbers) throws IllegalArgumentException {
-        validateInput();
+    public static List<Color> getPinColors(String moduleSerialNumbers, AbstractController controller) throws IllegalArgumentException {
+        validateInput(moduleSerialNumbers, controller);
         if (containsRequiredNumbers(moduleSerialNumbers))
-            return instance.traversePins(0);
+            return controller.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || portExists(Port.RJ45))
-            return instance.traversePins(1);
+            return controller.traversePins(1);
         else if (ultimateFilter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
-            return instance.traversePins(2);
+            return controller.traversePins(2);
         else if (numbersMatch(moduleSerialNumbers))
-            return instance.traversePins(3);
-        return instance.traversePins(4);
+            return controller.traversePins(3);
+        return controller.traversePins(4);
     }
 
-    private static void validateInput() {
+    private static void validateInput(String moduleSerialNumbers, AbstractController controller) {
         serialCodeChecker();
-        if (instance == null)
+        if (!moduleSerialNumbers.matches("\\d{1,2}"))
+            throw new IllegalArgumentException("Module serial number wasn't 2 numbers");
+        if (controller == null)
             throw new IllegalArgumentException("Controller Type wasn't set");
     }
 
     private static boolean containsRequiredNumbers(String moduleSerialNumbers) {
-        NUMBER_PATTERN.loadText(moduleSerialNumbers);
-        String numbers = NUMBER_PATTERN.createFilteredString();
-        return numbers.contains("1") || numbers.contains("4");
+        return moduleSerialNumbers.contains("1") || moduleSerialNumbers.contains("4");
     }
 
     private static boolean numbersMatch(String moduleSerialNumbers) {

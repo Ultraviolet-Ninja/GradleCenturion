@@ -18,6 +18,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class MicroControllerController implements Resettable {
     @FXML
@@ -53,14 +56,13 @@ public class MicroControllerController implements Resettable {
     @FXML
     private void submitInfo() {
         int pinCount = getPinCount();
+        String moduleSerialNumbers = moduleSerialCodeInput.getText();
         AbstractChipComponent currentChip = createFrontEndChip(pinCount);
         AbstractController internalController = getControllerType(pinCount);
-        MicroController.setInternalController(internalController);
-
-        String moduleSerialNumbers = moduleSerialCodeInput.getText();
 
         try {
-            currentChip.setColors(MicroController.getPinColors(moduleSerialNumbers));
+            List<Color> colorList = MicroController.getPinColors(moduleSerialNumbers, internalController);
+            currentChip.setColors(colorList);
             currentChip.setChipType(internalController.acronym);
             currentChip.setChipSerialNum(moduleSerialNumbers);
             currentChip.setScaleX(1.5);

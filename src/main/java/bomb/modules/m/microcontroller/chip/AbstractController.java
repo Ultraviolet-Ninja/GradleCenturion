@@ -18,7 +18,7 @@ public abstract class AbstractController {
     public AbstractController(int pinCount, String acronym) {
         this.acronym = acronym;
         this.pinCount = (byte) pinCount;
-        pinOrder = new ArrayList<>();
+        pinOrder = new ArrayList<>(pinCount);
         setController();
     }
 

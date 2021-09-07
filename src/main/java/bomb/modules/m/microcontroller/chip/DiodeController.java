@@ -34,8 +34,8 @@ public class DiodeController extends AbstractController {
     @Override
     protected void setTenPin() {
         pinOrder.add(Pin.PWM);
-        pinOrder.add(Pin.DIN);
         pinOrder.add(Pin.AIN);
+        pinOrder.add(Pin.DIN);
         pinOrder.add(Pin.GND);
         pinOrder.add(Pin.GND);
         pinOrder.add(Pin.GND);
