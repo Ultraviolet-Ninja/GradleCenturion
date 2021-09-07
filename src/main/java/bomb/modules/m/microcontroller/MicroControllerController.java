@@ -97,6 +97,7 @@ public class MicroControllerController implements Resettable {
 
     @Override
     public void reset() {
+        FacadeFX.disable(submitButton);
         chipBackground.getChildren().clear();
         FacadeFX.resetToggleGroup(controllerGroup);
         FacadeFX.resetToggleGroup(pinCountGroup);
