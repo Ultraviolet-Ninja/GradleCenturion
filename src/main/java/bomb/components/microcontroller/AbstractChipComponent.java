@@ -7,11 +7,11 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public abstract class AbstractChip extends Pane {
+public abstract class AbstractChipComponent extends Pane {
     @FXML
     protected Label type, serialNumbers;
 
-    public AbstractChip() {
+    public AbstractChipComponent() {
         super();
     }
 

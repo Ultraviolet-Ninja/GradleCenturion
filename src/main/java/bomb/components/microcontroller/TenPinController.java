@@ -8,13 +8,13 @@ import javafx.scene.shape.Circle;
 import java.io.IOException;
 import java.util.List;
 
-public class TenPinController extends AbstractChip{
+public class TenPinController extends AbstractChipComponent {
     public static final int PIN_COUNT = 10;
 
     @FXML
     private Circle pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight, pinNine, pinTen;
 
-    public TenPinController(){
+    public TenPinController() {
         super();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ten_pin.fxml"));
         loader.setRoot(this);

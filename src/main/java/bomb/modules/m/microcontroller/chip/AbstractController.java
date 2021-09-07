@@ -9,11 +9,14 @@ import java.util.List;
 public abstract class AbstractController {
     public static final byte SIX_PIN = 6, EIGHT_PIN = 8, TEN_PIN = 10;
 
+    public final String acronym;
+
     protected final List<Pin> pinOrder;
 
     private final byte pinCount;
 
-    public AbstractController(int pinCount) {
+    public AbstractController(int pinCount, String acronym) {
+        this.acronym = acronym;
         this.pinCount = (byte) pinCount;
         pinOrder = new ArrayList<>();
         setController();

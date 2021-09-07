@@ -7,7 +7,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
-import static bomb.tools.pattern.factory.TextFormatterFactory.createTwoBitTextFormatter;
+import static bomb.tools.pattern.factory.TextFormatterFactory.createTwoDigitTextFormatter;
 
 public class TwoBitController implements Resettable {
     @FXML
@@ -17,7 +17,7 @@ public class TwoBitController implements Resettable {
     private MFXTextField queryField, numberCodeField, nextCodeOutputField;
 
     public void initialize() {
-        numberCodeField.setTextFormatter(createTwoBitTextFormatter());
+        numberCodeField.setTextFormatter(createTwoDigitTextFormatter());
     }
 
     @FXML
