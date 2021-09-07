@@ -5,10 +5,9 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
@@ -80,9 +79,9 @@
             </MFXButton>
         </VBox>
     </GridPane>
-    <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
-        <center>
-            <Pane fx:id="chipBackground" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
-        </center>
-    </BorderPane>
+    <HBox fx:id="chipBackground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+        <GridPane.margin>
+            <Insets bottom="150.0" top="150.0"/>
+        </GridPane.margin>
+    </HBox>
 </GridPane>
