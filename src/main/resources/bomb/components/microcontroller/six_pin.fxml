@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <fx:root id="pane" prefHeight="494.0" prefWidth="316.0" stylesheets="@../../css/components/pin.css"
-         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+         type="javafx.scene.layout.Pane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Line id="wire-line" endX="100.0" layoutX="-22.0" layoutY="90.0" startX="65.0"/>
     <Line id="wire-line" endX="100.0" layoutX="64.0" layoutY="90.0" startX="64.0"/>
     <Line id="wire-line" endX="100.0" layoutX="138.0" layoutY="91.0" startX="64.0"/>
@@ -28,36 +28,31 @@
     <Line id="wire-line" endX="151.4915313720703" layoutX="-10.0" layoutY="335.0" rotate="90.0" startX="64.0"/>
     <Line id="wire-line" endX="100.0" layoutX="140.0" layoutY="405.0" startX="64.0"/>
     <Line id="wire-line" endX="151.4915313720703" layoutX="70.0" layoutY="335.0" rotate="90.0" startX="64.0"/>
-    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="53.0"
-               layoutY="72.0" width="35.0"/>
-    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="135.0"
-               layoutY="72.0" width="35.0"/>
-    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="215.0"
-               layoutY="72.0" width="35.0"/>
-    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="53.0"
-               layoutY="388.0" width="35.0"/>
-    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="135.0"
-               layoutY="388.0" width="35.0"/>
-    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" fill="#ecff1f" height="35.0" layoutX="215.0"
-               layoutY="388.0" width="35.0"/>
-    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="60.0"
-               layoutY="82.0"
-               strokeType="INSIDE" width="22.0">
-    </Rectangle>
-    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="222.0"
-               layoutY="307.0"
-               strokeType="INSIDE" width="22.0">
-    </Rectangle>
-    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="141.0"
-               layoutY="307.0"
-               strokeType="INSIDE" width="22.0">
-    </Rectangle>
-    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="60.0"
-               layoutY="306.0"
+    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="53.0" layoutY="72.0"
+               width="35.0"/>
+    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="135.0" layoutY="72.0"
+               width="35.0"/>
+    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="215.0" layoutY="72.0"
+               width="35.0"/>
+    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="53.0" layoutY="388.0"
+               width="35.0"/>
+    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="135.0" layoutY="388.0"
+               width="35.0"/>
+    <Rectangle id="solder-square" arcHeight="5.0" arcWidth="5.0" height="35.0" layoutX="215.0" layoutY="388.0"
+               width="35.0"/>
+    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="60.0" layoutY="82.0"
                width="22.0">
     </Rectangle>
-    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" fill="#b9b9b9" height="104.0" layoutX="222.0"
-               layoutY="82.0"
+    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="222.0" layoutY="307.0"
+               width="22.0">
+    </Rectangle>
+    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="141.0" layoutY="307.0"
+               width="22.0">
+    </Rectangle>
+    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="60.0" layoutY="306.0"
+               width="22.0">
+    </Rectangle>
+    <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="222.0" layoutY="82.0"
                width="22.0">
     </Rectangle>
     <Rectangle id="chip-connector" arcHeight="5.0" arcWidth="5.0" height="104.0" layoutX="142.0" layoutY="82.0"
@@ -66,15 +61,15 @@
     <Rectangle id="chip-base" arcHeight="5.0" arcWidth="5.0" height="172.0" layoutX="37.0" layoutY="164.0"
                width="230.0">
     </Rectangle>
-    <Circle id="pin" fx:id="pinSix" fill="WHITE" layoutX="71.0" layoutY="40.0" radius="26.0"/>
-    <Circle id="pin" fx:id="pinThree" fill="WHITE" layoutX="233.0" layoutY="454.0" radius="26.0"/>
-    <Circle id="pin" fx:id="pinTwo" fill="WHITE" layoutX="153.0" layoutY="454.0" radius="26.0"/>
-    <Circle id="pin" fx:id="pinFour" fill="WHITE" layoutX="233.0" layoutY="40.0" radius="26.0"/>
-    <Circle id="pin" fx:id="pinOne" fill="WHITE" layoutX="71.0" layoutY="454.0" radius="26.0"/>
-    <Circle id="pin" fx:id="pinFive" fill="WHITE" layoutX="153.0" layoutY="40.0" radius="26.0"/>
-    <Label id="chip-type-label" fx:id="type" layoutX="50.0" layoutY="177.0" textFill="WHITE">
+    <Circle id="pin" fx:id="pinSix" layoutX="71.0" layoutY="40.0" radius="26.0"/>
+    <Circle id="pin" fx:id="pinThree" layoutX="233.0" layoutY="454.0" radius="26.0"/>
+    <Circle id="pin" fx:id="pinTwo" layoutX="153.0" layoutY="454.0" radius="26.0"/>
+    <Circle id="pin" fx:id="pinFour" layoutX="233.0" layoutY="40.0" radius="26.0"/>
+    <Circle id="pin" fx:id="pinOne" layoutX="71.0" layoutY="454.0" radius="26.0"/>
+    <Circle id="pin" fx:id="pinFive" layoutX="153.0" layoutY="40.0" radius="26.0"/>
+    <Label id="chip-type-label" fx:id="type" layoutX="50.0" layoutY="177.0">
     </Label>
-    <Label id="serial-number-label" fx:id="serialNumbers" layoutX="57.0" layoutY="275.0" textFill="WHITE">
+    <Label id="serial-number-label" fx:id="serialNumbers" layoutX="57.0" layoutY="275.0">
     </Label>
     <Circle fill="WHITE" layoutX="50.0" layoutY="321.0" radius="7.0" stroke="BLACK" strokeType="INSIDE"/>
     <Line id="wire-line" endX="100.0" layoutX="-54.0" layoutY="393.0" rotate="45.0" startX="64.0"/>

@@ -1,5 +1,5 @@
 #pane {
-    -fx-background-color: green;
+    -fx-background-color: #004400;
 }
 
 .label {
@@ -17,7 +17,6 @@
 #wire-line {
     -fx-stroke: #61f23c;
     -fx-stroke-width: 2;
-    -fx-stroke-type: inside;
 }
 
 #solder-square {
@@ -27,19 +26,20 @@
 }
 
 #pin {
-    -fx-stroke-width: 0;
+    -fx-stroke: black;
+    -fx-stroke-width: 1;
     -fx-stroke-type: inside;
 }
 
 #chip-base {
     -fx-fill: #141414;
-    -fx-stroke: linear-gradient(to bottom right, #505050, black);
+    -fx-stroke: linear-gradient(to bottom right, #525252, black);
     -fx-stroke-type: inside;
-    -fx-stroke-width: 7;
+    -fx-stroke-width: 4;
 }
 
 #chip-connector {
     -fx-fill: #b9b9b9;
-    -fx-stroke: linear-gradient(to bottom right, #c1c0c0, #939393);
+    -fx-stroke: linear-gradient(to bottom right, #c1c0c0, #a0a0a0);
     -fx-stroke-width: 3;
 }
