@@ -20,7 +20,7 @@ public enum Pin {
         this.colors = colors;
     }
 
-    public Color getColor(int index) {
+    public Color getColorAtIndex(int index) {
         return colors[index % colors.length];
     }
 }

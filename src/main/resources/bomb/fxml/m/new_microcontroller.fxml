@@ -78,7 +78,7 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
                     <children>
-                        <MFXTextField fx:id="serialInput" prefHeight="55.0" prefWidth="329.0"
+                        <MFXTextField fx:id="moduleSerialCodeInput" prefHeight="55.0" prefWidth="329.0"
                                       promptText="Microcontroller Serial No."/>
                         <MFXButton id="submit-button" fx:id="submitButton" disable="true" text="Submit">
                             <VBox.margin>

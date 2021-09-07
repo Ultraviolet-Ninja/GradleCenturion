@@ -21,7 +21,8 @@ public class MicroController extends Widget {
         instance = controller;
     }
 
-    public static List<Color> getPinColors(String serialNumbers) {
+    public static List<Color> getPinColors(String serialNumbers) throws IllegalArgumentException {
+        serialCodeChecker();
         if (containsRequiredNumbers(serialNumbers))
             return instance.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || portExists(Port.RJ45))

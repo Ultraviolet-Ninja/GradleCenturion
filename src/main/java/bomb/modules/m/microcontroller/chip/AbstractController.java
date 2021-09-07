@@ -4,33 +4,27 @@ import bomb.modules.m.microcontroller.Pin;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class AbstractController {
-    public static final int SIX_PIN = 6, EIGHT_PIN = 8, TEN_PIN = 10;
+    public static final byte SIX_PIN = 6, EIGHT_PIN = 8, TEN_PIN = 10;
 
-    protected final ArrayList<Pin> pinOrder;
+    protected final List<Pin> pinOrder;
 
-    private final int pinCount;
+    private final byte pinCount;
 
     public AbstractController(int pinCount) {
-        this.pinCount = pinCount;
+        this.pinCount = (byte) pinCount;
         pinOrder = new ArrayList<>();
         setController();
     }
 
     private void setController() throws IllegalArgumentException {
         switch (pinCount) {
-            case SIX_PIN:
-                setSixPin();
-                break;
-            case EIGHT_PIN:
-                setEightPin();
-                break;
-            case TEN_PIN:
-                setTenPin();
-                break;
-            default:
-                throw new IllegalArgumentException("Illegal pin count");
+            case SIX_PIN -> setSixPin();
+            case EIGHT_PIN -> setEightPin();
+            case TEN_PIN -> setTenPin();
+            default -> throw new IllegalArgumentException("Illegal pin count");
         }
     }
 
@@ -40,9 +34,9 @@ public abstract class AbstractController {
 
     protected abstract void setTenPin();
 
-    public ArrayList<Color> traversePins(final int index) {
-        ArrayList<Color> outputList = new ArrayList<>();
-        for (Pin pin : pinOrder) outputList.add(pin.getColor(index));
+    public List<Color> traversePins(final int index) {
+        List<Color> outputList = new ArrayList<>();
+        for (Pin pin : pinOrder) outputList.add(pin.getColorAtIndex(index));
         return outputList;
     }
 }
