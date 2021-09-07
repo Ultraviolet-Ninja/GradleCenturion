@@ -6,28 +6,28 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
-public class EightPinController extends AbstractChip{
+public class EightPinController extends AbstractChip {
     public static final int PIN_COUNT = 8;
 
     @FXML
     private Circle pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight;
 
-    public EightPinController(){
+    public EightPinController() {
         super();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("eight_pin.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try{
+        try {
             loader.load();
-        } catch(IOException ioe){
+        } catch (IOException ioe) {
             ioe.printStackTrace();
         }
     }
 
     @Override
-    public void setColors(ArrayList<Color> results) {
+    public void setColors(List<Color> results) {
         Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive, pinSix, pinSeven, pinEight};
         if (results.size() == PIN_COUNT) {
             for (int i = 0; i < array.length; i++)

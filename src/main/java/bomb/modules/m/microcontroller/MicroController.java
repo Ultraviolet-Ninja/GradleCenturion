@@ -4,15 +4,16 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.modules.m.microcontroller.chip.AbstractController;
+import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class MicroController extends Widget {
-    private static final String[] THIRD_CONDITION = new String[]{"c", "l", "r", "x", "1", "8"};
+    private static final String THIRD_CONDITION_REGEX = "[clrx18]";
 
     private static AbstractController instance;
 
@@ -20,12 +21,12 @@ public class MicroController extends Widget {
         instance = controller;
     }
 
-    public static ArrayList<Color> getPinColors(String serialNumbers) {
+    public static List<Color> getPinColors(String serialNumbers) {
         if (containsRequiredNumbers(serialNumbers))
             return instance.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || portExists(Port.RJ45))
             return instance.traversePins(1);
-        else if (ultimateFilter(serialCode, THIRD_CONDITION).length() > 0)
+        else if (ultimateFilter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
             return instance.traversePins(2);
         else if (numbersMatch(serialNumbers))
             return instance.traversePins(3);

@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class TenPinController extends AbstractChip{
     public static final int PIN_COUNT = 10;
@@ -27,7 +27,7 @@ public class TenPinController extends AbstractChip{
     }
 
     @Override
-    public void setColors(ArrayList<Color> results) {
+    public void setColors(List<Color> results) {
         Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive,
                 pinSix, pinSeven, pinEight, pinNine, pinTen};
         if (results.size() == PIN_COUNT) {
