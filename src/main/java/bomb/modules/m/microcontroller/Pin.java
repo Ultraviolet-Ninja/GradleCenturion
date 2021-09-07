@@ -11,7 +11,7 @@ import static javafx.scene.paint.Color.YELLOW;
 
 public enum Pin {
     VCC(YELLOW, YELLOW, RED, RED, GREEN), AIN(MAGENTA, RED, MAGENTA, BLUE, RED),
-    DIN(GREEN, MAGENTA, GREEN, YELLOW, YELLOW), PWM(BLUE, GREEN, BLUE, YELLOW, YELLOW),
+    DIN(GREEN, MAGENTA, GREEN, YELLOW, YELLOW), PWM(BLUE, GREEN, BLUE, GREEN, BLUE),
     RST(RED, BLUE, YELLOW, MAGENTA, MAGENTA), GND(WHITE);
 
     private final Color[] colors;
@@ -20,7 +20,7 @@ public enum Pin {
         this.colors = colors;
     }
 
-    public Color getColor(int index) {
+    public Color getColorAtIndex(int index) {
         return colors[index % colors.length];
     }
 }

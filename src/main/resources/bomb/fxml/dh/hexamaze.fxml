@@ -3,12 +3,12 @@
 <?import bomb.components.hex.HexMazePanel?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
           prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.dh.hexamaze.HexamazeController">
@@ -116,6 +116,7 @@
             <JFXRadioButton id="pink-button-selector" fx:id="pinkButton" disable="true" layoutX="918.0" layoutY="466.0"
                             mnemonicParsing="false" onAction="#setPegFill" text="Pink" toggleGroup="$hexColorGroup">
             </JFXRadioButton>
+            <Label fx:id="exitDirectionLabel" layoutX="684.0" layoutY="641.0" prefHeight="38.0" prefWidth="445.0"/>
         </Pane>
     </GridPane>
 </GridPane>

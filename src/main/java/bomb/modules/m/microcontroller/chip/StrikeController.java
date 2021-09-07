@@ -3,8 +3,10 @@ package bomb.modules.m.microcontroller.chip;
 import bomb.modules.m.microcontroller.Pin;
 
 public class StrikeController extends AbstractController {
+    public static final String ACRONYM = "STRK";
+
     public StrikeController(int pinCount) {
-        super(pinCount);
+        super(pinCount, ACRONYM);
     }
 
     @Override

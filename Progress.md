@@ -11,6 +11,7 @@
 - Forget Me Not
 - Hexamaze
 - Laundry
+- MicroController
 - Neutralization
 - Round Keypads
 - Simon Screams
@@ -18,16 +19,15 @@
 - Switches
 - TwoBit
 
-17/100 + Colored Switches
+18/100 + Colored Switches
 
 ### Incomplete Modules
-- MicroController
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 - The Bulb
 
-5/100
+4/100
 
 ### Untouched Modules
 - 3D Maze
