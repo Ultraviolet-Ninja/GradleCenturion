@@ -63,6 +63,8 @@ public class MicroControllerController implements Resettable {
             currentChip.setColors(MicroController.getPinColors(moduleSerialNumbers));
             currentChip.setChipType(internalController.acronym);
             currentChip.setChipSerialNum(moduleSerialNumbers);
+            currentChip.setScaleX(1.5);
+            currentChip.setScaleY(1.5);
             chipBackground.getChildren().clear();
             chipBackground.getChildren().add(currentChip);
         } catch (IllegalArgumentException illegal) {

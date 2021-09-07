@@ -1,7 +1,8 @@
 .jfx-radio-button {
     -jfx-unselected-color: #00255b;
     -jfx-selected-color: white;
-    -fx-font-size: 24;
+    -fx-font-size: 30;
+    -fx-text-fill: white;
 }
 
 .jfx-radio-button:hover {
@@ -9,7 +10,7 @@
 }
 
 .mfx-button {
-    -fx-font-size: 20;
+    -fx-font-size: 24;
 }
 
 .mfx-text-field {
@@ -18,7 +19,14 @@
     -fx-border-color: black;
     -fx-border-radius: 15;
     -fx-border-width: 2;
-    -fx-font-size: 22;
+    -fx-font-size: 26;
+    -fx-padding: 0 0 0 5;
     -fx-prompt-text-fill: white;
     -mfx-line-stroke-width: 0;
+}
+
+#chip-background {
+    -fx-background-color: #004400;
+    -fx-border-color: white;
+    -fx-border-width: 0 0 0 2;
 }

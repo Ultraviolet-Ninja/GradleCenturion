@@ -1,5 +1,6 @@
 #pane {
     -fx-background-color: #004400;
+    -fx-background-radius: 10;
 }
 
 .label {
@@ -7,11 +8,11 @@
 }
 
 #chip-type-label {
-    -fx-font-size: 56;
+    -fx-font-size: 52;
 }
 
 #serial-number-label {
-    -fx-font-size: 14;
+    -fx-font-size: 18;
 }
 
 #wire-line {
@@ -27,7 +28,7 @@
 
 #pin {
     -fx-stroke: black;
-    -fx-stroke-width: 1;
+    -fx-stroke-width: 3;
     -fx-stroke-type: inside;
 }
 

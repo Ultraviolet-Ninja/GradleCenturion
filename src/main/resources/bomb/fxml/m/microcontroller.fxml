@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/m/microcontroller.css"
-          xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.m.microcontroller.MicroControllerController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="585.0" minWidth="10.0" prefWidth="388.0"/>
@@ -70,8 +70,8 @@
             </JFXRadioButton>
         </VBox>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-            <MFXTextField fx:id="moduleSerialCodeInput" onKeyTyped="#toggleSubmitButton" prefHeight="55.0"
-                          prefWidth="329.0" promptText="Microcontroller Serial No."/>
+            <MFXTextField fx:id="moduleSerialCodeInput" onKeyTyped="#toggleSubmitButton" prefHeight="60.0"
+                          prefWidth="364.0" promptText="2 Numbers on MicroController"/>
             <MFXButton id="submit-button" fx:id="submitButton" disable="true" onAction="#submitInfo" text="Submit">
                 <VBox.margin>
                     <Insets top="20.0"/>
@@ -79,9 +79,13 @@
             </MFXButton>
         </VBox>
     </GridPane>
-    <HBox fx:id="chipBackground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+    <HBox id="chip-background" fx:id="chipBackground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
+          GridPane.columnIndex="1">
         <GridPane.margin>
-            <Insets bottom="150.0" top="150.0"/>
+            <Insets/>
         </GridPane.margin>
+        <padding>
+            <Insets top="165.0"/>
+        </padding>
     </HBox>
 </GridPane>
