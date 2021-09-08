@@ -18,7 +18,7 @@ public class HexagonDataStructure {
      * This class is the backing node to a given hexagon data structure.
      */
     public static final class HexNode extends EquatableObject {
-        public ArrayList<HexWall> walls;
+        public List<HexWall> walls;
         public HexShape fill;
 
         /**
@@ -28,7 +28,7 @@ public class HexagonDataStructure {
          * @param hexShape   The shape within the HexNode
          * @param constructs Which walls are present in this HexNode
          */
-        public HexNode(HexShape hexShape, ArrayList<HexWall> constructs) {
+        public HexNode(HexShape hexShape, List<HexWall> constructs) {
             walls = constructs;
             fill = hexShape;
         }
@@ -90,7 +90,7 @@ public class HexagonDataStructure {
             return HASHING_NUMBER * getShapeHash() + ((walls != null) ? getWallHash().hashCode() : 0);
         }
 
-        private boolean hasMatchingWalls(ArrayList<HexWall> toCompare) {
+        private boolean hasMatchingWalls(List<HexWall> toCompare) {
             if (this.walls.size() != toCompare.size()) return false;
             for (HexWall wall : toCompare) {
                 if (!this.walls.contains(wall)) return false;
@@ -314,9 +314,9 @@ public class HexagonDataStructure {
      * @param walls The array needing to be rotated
      * @return The newly rotated wall array
      */
-    private ArrayList<HexWall> rotateWallPositions(ArrayList<HexWall> walls) {
+    private List<HexWall> rotateWallPositions(List<HexWall> walls) {
         if (walls == null || walls.get(0) == null) return null;
-        ArrayList<HexWall> temp = new ArrayList<>();
+        List<HexWall> temp = new ArrayList<>();
 
         for (HexWall wall : walls) {
             switch (wall) {

@@ -1,8 +1,8 @@
 package bomb.components.hex;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties;
+import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -13,7 +13,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class HexMazePanel extends Pane implements Resettable {
     public static final Color DEFAULT_PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
@@ -97,7 +97,7 @@ public class HexMazePanel extends Pane implements Resettable {
         }
     }
 
-    private void setupLines(ArrayList<HexNodeProperties.HexWall> walls) {
+    private void setupLines(List<HexNodeProperties.HexWall> walls) {
         String remove = "123456";
         if (walls != null) {
             for (HexNodeProperties.HexWall wall : walls) {

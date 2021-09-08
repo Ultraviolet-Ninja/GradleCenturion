@@ -4,42 +4,43 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.modules.m.microcontroller.chip.AbstractController;
+import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class MicroController extends Widget {
-    private static final String[] THIRD_CONDITION = new String[]{"c", "l", "r", "x", "1", "8"};
+    private static final String THIRD_CONDITION_REGEX = "[clrx18]";
 
-    private static AbstractController instance;
-
-    public static void setController(AbstractController controller) {
-        instance = controller;
-    }
-
-    public static ArrayList<Color> getPinColors(String serialNumbers) {
-        if (containsRequiredNumbers(serialNumbers))
-            return instance.traversePins(0);
+    public static List<Color> getPinColors(String moduleSerialNumbers, AbstractController controller) throws IllegalArgumentException {
+        validateInput(moduleSerialNumbers, controller);
+        if (containsRequiredNumbers(moduleSerialNumbers))
+            return controller.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || portExists(Port.RJ45))
-            return instance.traversePins(1);
-        else if (ultimateFilter(serialCode, THIRD_CONDITION).length() > 0)
-            return instance.traversePins(2);
-        else if (numbersMatch(serialNumbers))
-            return instance.traversePins(3);
-        return instance.traversePins(4);
+            return controller.traversePins(1);
+        else if (ultimateFilter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
+            return controller.traversePins(2);
+        else if (numbersMatch(moduleSerialNumbers))
+            return controller.traversePins(3);
+        return controller.traversePins(4);
     }
 
-    private static boolean containsRequiredNumbers(String serialNumbers) {
-        NUMBER_PATTERN.loadText(serialNumbers);
-        String numbers = NUMBER_PATTERN.createFilteredString();
-        return numbers.contains("1") || numbers.contains("4");
+    private static void validateInput(String moduleSerialNumbers, AbstractController controller) {
+        serialCodeChecker();
+        if (!moduleSerialNumbers.matches("\\d{1,2}"))
+            throw new IllegalArgumentException("Module serial number wasn't 2 numbers");
+        if (controller == null)
+            throw new IllegalArgumentException("Controller Type wasn't set");
     }
 
-    private static boolean numbersMatch(String serialNumbers) {
-        String lastNum = serialNumbers.substring(serialNumbers.length() - 1);
+    private static boolean containsRequiredNumbers(String moduleSerialNumbers) {
+        return moduleSerialNumbers.contains("1") || moduleSerialNumbers.contains("4");
+    }
+
+    private static boolean numbersMatch(String moduleSerialNumbers) {
+        String lastNum = moduleSerialNumbers.substring(moduleSerialNumbers.length() - 1);
         return lastNum.contains(String.valueOf(getAllBatteries()));
     }
 }

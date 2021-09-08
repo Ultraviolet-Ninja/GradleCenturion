@@ -1,7 +1,7 @@
 package bomb.modules.m.microcontroller;
 
 import bomb.abstractions.Resettable;
-import bomb.components.microcontroller.AbstractChip;
+import bomb.components.microcontroller.AbstractChipComponent;
 import bomb.components.microcontroller.EightPinController;
 import bomb.components.microcontroller.SixPinController;
 import bomb.components.microcontroller.TenPinController;
@@ -11,88 +11,98 @@ import bomb.modules.m.microcontroller.chip.DiodeController;
 import bomb.modules.m.microcontroller.chip.ExplodeController;
 import bomb.modules.m.microcontroller.chip.StrikeController;
 import bomb.tools.pattern.facade.FacadeFX;
+import bomb.tools.pattern.factory.TextFormatterFactory;
+import io.github.palexdev.materialfx.controls.MFXButton;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
+import java.util.List;
 
 public class MicroControllerController implements Resettable {
-    private AbstractChip currentChip;
-    private String controllerType = "", pinCount = "";
-
     @FXML
-    private Button clearButton;
+    private MFXButton submitButton;
 
     @FXML
     private Pane chipBackground;
 
     @FXML
-    private TextField serialInput;
+    private MFXTextField moduleSerialCodeInput;
 
     @FXML
     private ToggleGroup controllerGroup, pinCountGroup;
 
-    @FXML
-    private void setController() {
-        controllerType = FacadeFX.getToggleName(controllerGroup);
-        transferToMicro();
+    public void initialize() {
+        moduleSerialCodeInput.setTextFormatter(TextFormatterFactory.createTwoDigitTextFormatter());
     }
 
     @FXML
-    private void setPinCount() {
-        pinCount = FacadeFX.getToggleName(pinCountGroup).replace("-Pin", "");
-        setFrontEnd();
-        transferToMicro();
-    }
+    private void toggleSubmitButton() {
+        boolean isControllerSelected = controllerGroup.getSelectedToggle() != null;
+        boolean isPinCountSelected = pinCountGroup.getSelectedToggle() != null;
+        boolean areTwoDigitEntered = moduleSerialCodeInput.getText().length() == 2;
 
-    @FXML
-    private void trackTextField() {
-        if (currentChip != null) currentChip.setChipSerialNum(serialInput.getText());
-        if (serialInput.getText().length() == 2) {
-            transferToMicro();
-            FacadeFX.disable(serialInput);
+        if (isControllerSelected && isPinCountSelected && areTwoDigitEntered) {
+            FacadeFX.enable(submitButton);
+            return;
         }
-        FacadeFX.enable(clearButton);
-    }
-
-    @FXML
-    private void clearText() {
-        FacadeFX.clearText(serialInput);
-        FacadeFX.enable(serialInput);
-        FacadeFX.disable(clearButton);
-    }
-
-    private void setFrontEnd() {
-        switch (pinCount) {
-            case "6" -> currentChip = new SixPinController();
-            case "8" -> currentChip = new EightPinController();
-            default -> currentChip = new TenPinController();
-        }
+        FacadeFX.disable(submitButton);
         chipBackground.getChildren().clear();
-        chipBackground.getChildren().add(currentChip);
     }
 
-    private void transferToMicro() {
-        if (!(controllerType.isEmpty() || pinCount.isEmpty())) {
-            MicroController.setController(getType());
-            currentChip.setColors(MicroController.getPinColors(serialInput.getText()));
-            currentChip.setChipType(controllerType);
+    @FXML
+    private void submitInfo() {
+        int pinCount = getPinCount();
+        String moduleSerialNumbers = moduleSerialCodeInput.getText();
+        AbstractChipComponent currentChip = createFrontEndChip(pinCount);
+        AbstractController internalController = getControllerType(pinCount);
+
+        try {
+            List<Color> colorList = MicroController.getPinColors(moduleSerialNumbers, internalController);
+            currentChip.setColors(colorList);
+            currentChip.setChipType(internalController.acronym);
+            currentChip.setChipSerialNum(moduleSerialNumbers);
+            currentChip.setScaleX(1.5);
+            currentChip.setScaleY(1.5);
+            chipBackground.getChildren().clear();
+            chipBackground.getChildren().add(currentChip);
+        } catch (IllegalArgumentException illegal) {
+            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
     }
 
-    private AbstractController getType() {
-        int pins = Integer.parseInt(pinCount);
+    private int getPinCount() {
+        String count = FacadeFX.getToggleName(pinCountGroup).replace("-Pin", "");
+        return Integer.parseInt(count);
+    }
+
+    private AbstractController getControllerType(int pinCount) {
+        String controllerType = FacadeFX.getToggleName(controllerGroup);
         return switch (controllerType) {
-            case "STRK" -> new StrikeController(pins);
-            case "LEDS" -> new DiodeController(pins);
-            case "EXPL" -> new ExplodeController(pins);
-            default -> new CountdownController(pins);
+            case StrikeController.ACRONYM -> new StrikeController(pinCount);
+            case DiodeController.ACRONYM -> new DiodeController(pinCount);
+            case ExplodeController.ACRONYM -> new ExplodeController(pinCount);
+            default -> new CountdownController(pinCount);
+        };
+    }
+
+    private AbstractChipComponent createFrontEndChip(int pinCount) {
+        return switch (pinCount) {
+            case SixPinController.PIN_COUNT -> new SixPinController();
+            case EightPinController.PIN_COUNT -> new EightPinController();
+            default -> new TenPinController();
         };
     }
 
     @Override
     public void reset() {
-
+        FacadeFX.disable(submitButton);
+        chipBackground.getChildren().clear();
+        FacadeFX.resetToggleGroup(controllerGroup);
+        FacadeFX.resetToggleGroup(pinCountGroup);
+        FacadeFX.clearText(moduleSerialCodeInput);
     }
 }
