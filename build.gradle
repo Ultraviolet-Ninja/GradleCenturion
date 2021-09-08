@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.opencsv:opencsv:5.5'
+    implementation 'com.opencsv:opencsv:5.5.2'
     implementation 'com.jfoenix:jfoenix:9.0.4'
     implementation 'org.javatuples:javatuples:1.2'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'

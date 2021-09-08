@@ -24,7 +24,7 @@ This is a huge project for one man to tackle, but I've learned a lot from the ch
 - JavaTuple ver 1.2
 - Medusa ver. 11.7
 - JGraphT ver. 1.5.1
-- OpenCSV ver. 5.5
+- OpenCSV ver. 5.5.2
 #### Other Technologies
 - Circle CI
 - LGTM Code Quality
