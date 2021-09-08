@@ -1,0 +1,46 @@
+#pane {
+    -fx-background-color: #004400;
+    -fx-background-radius: 10;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+#chip-type-label {
+    -fx-font-size: 52;
+}
+
+#serial-number-label {
+    -fx-font-size: 18;
+}
+
+#wire-line {
+    -fx-stroke: #61f23c;
+    -fx-stroke-width: 2;
+}
+
+#solder-square {
+    -fx-fill: #ecff1f;
+    -fx-stroke-width: 0;
+    -fx-stroke-type: inside;
+}
+
+#pin {
+    -fx-stroke: black;
+    -fx-stroke-width: 3;
+    -fx-stroke-type: inside;
+}
+
+#chip-base {
+    -fx-fill: #141414;
+    -fx-stroke: linear-gradient(to bottom right, #525252, black);
+    -fx-stroke-type: inside;
+    -fx-stroke-width: 4;
+}
+
+#chip-connector {
+    -fx-fill: #b9b9b9;
+    -fx-stroke: linear-gradient(to bottom right, #c1c0c0, #a0a0a0);
+    -fx-stroke-width: 3;
+}

@@ -28,14 +28,19 @@ public class BitwiseTest {
     }
 
     @DataProvider
-    public Object[] exceptionProvider() {
-        return new ConditionSetter[]{
-                () -> {
+    public Object[][] exceptionProvider() {
+        return new ConditionSetter[][]{
+                {
+                    () -> {}
                 },
-                () -> Widget.setNumModules(1),
-                () -> {
-                    Widget.setStartTime(4);
-                    Widget.setNumModules(1);
+                {
+                    () -> Widget.setNumModules(1)
+                },
+                {
+                    () -> {
+                        Widget.setStartTime(4);
+                        Widget.setNumModules(1);
+                    }
                 }
         };
     }

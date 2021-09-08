@@ -25,6 +25,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.To
 import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopRight;
 
 public class MazeRunner {
+    private static String exitDirection;
     private static Color currentPegColor = null;
     private static Coordinates currentLocation = null;
 
@@ -77,47 +78,38 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> getPossibleExits(HexGrid grid, int sideToExit) {
-        List<Coordinates> output;
-        switch (sideToExit) {
-            case 0:
-                output = getTopLeftSide(grid);
-                break;
-            case 1:
-                output = getTopRightSide(grid);
-                break;
-            case 2:
-                output = getRightSide(grid);
-                break;
-            case 3:
-                output = getBottomRightSide(grid);
-                break;
-            case 4:
-                output = getBottomLeftSide(grid);
-                break;
-            default:
-                output = getLeftSide(grid);
-        }
+        List<Coordinates> output = switch (sideToExit) {
+            case 0 -> getTopLeftSideExits(grid);
+            case 1 -> getTopRightSideExits(grid);
+            case 2 -> getRightSideExits(grid);
+            case 3 -> getBottomRightSideExits(grid);
+            case 4 -> getBottomLeftSideExits(grid);
+            default -> getLeftSideExits(grid);
+        };
         return filterBlockedExits(grid, output, sideToExit);
     }
 
-    private static List<Coordinates> getTopLeftSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+    private static List<Coordinates> getTopLeftSideExits(HexGrid grid) {
+        exitDirection = "Top Left";
+        List<Coordinates> output = new ArrayList<>();
         for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(i, 0));
         }
         return output;
     }
 
-    private static List<Coordinates> getTopRightSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+    private static List<Coordinates> getTopRightSideExits(HexGrid grid) {
+        exitDirection = "Top Right";
+        List<Coordinates> output = new ArrayList<>();
         for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
             output.add(new Coordinates(i, 0));
         }
         return output;
     }
 
-    private static List<Coordinates> getRightSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+    private static List<Coordinates> getRightSideExits(HexGrid grid) {
+        exitDirection = "Right";
+        List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         int lastIndex = internals.cap() - 1;
         for (int i = 0; i < internals.get(lastIndex).cap(); i++) {
@@ -126,8 +118,9 @@ public class MazeRunner {
         return output;
     }
 
-    private static List<Coordinates> getBottomRightSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+    private static List<Coordinates> getBottomRightSideExits(HexGrid grid) {
+        exitDirection = "Bottom Right";
+        List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
             output.add(new Coordinates(i, internals.get(i).cap() - 1));
@@ -135,8 +128,9 @@ public class MazeRunner {
         return output;
     }
 
-    private static List<Coordinates> getBottomLeftSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+    private static List<Coordinates> getBottomLeftSideExits(HexGrid grid) {
+        exitDirection = "Bottom Left";
+        List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(i, internals.get(i).cap() - 1));
@@ -144,8 +138,9 @@ public class MazeRunner {
         return output;
     }
 
-    private static List<Coordinates> getLeftSide(HexGrid grid) {
-        ArrayList<Coordinates> output = new ArrayList<>();
+    private static List<Coordinates> getLeftSideExits(HexGrid grid) {
+        exitDirection = "Left";
+        List<Coordinates> output = new ArrayList<>();
         for (int i = 0; i < grid.sideLength(); i++) {
             output.add(new Coordinates(0, i));
         }
@@ -153,26 +148,14 @@ public class MazeRunner {
     }
 
     private static List<Coordinates> filterBlockedExits(HexGrid grid, List<Coordinates> list, int sideToExit) {
-        HexWall[] wallsToFind;
-        switch (sideToExit) {
-            case 0:
-                wallsToFind = new HexWall[]{TopLeft, Top};
-                break;
-            case 1:
-                wallsToFind = new HexWall[]{TopRight, Top};
-                break;
-            case 2:
-                wallsToFind = new HexWall[]{TopRight, BottomRight};
-                break;
-            case 3:
-                wallsToFind = new HexWall[]{BottomRight, Bottom};
-                break;
-            case 4:
-                wallsToFind = new HexWall[]{Bottom, BottomLeft};
-                break;
-            default:
-                wallsToFind = new HexWall[]{TopLeft, BottomLeft};
-        }
+        HexWall[] wallsToFind = switch (sideToExit) {
+            case 0 -> new HexWall[]{TopLeft, Top};
+            case 1 -> new HexWall[]{TopRight, Top};
+            case 2 -> new HexWall[]{TopRight, BottomRight};
+            case 3 -> new HexWall[]{BottomRight, Bottom};
+            case 4 -> new HexWall[]{Bottom, BottomLeft};
+            default -> new HexWall[]{TopLeft, BottomLeft};
+        };
         return list.stream().filter(coords -> grid.retrieveNode(coords).isPathClear(wallsToFind[0].ordinal()) ||
                         grid.retrieveNode(coords).isPathClear(wallsToFind[1].ordinal()))
                 .collect(Collectors.toList());
@@ -208,5 +191,9 @@ public class MazeRunner {
             graph.addVertex(to);
             graph.addEdge(from, to);
         }
+    }
+
+    public static String getExitDirection() {
+        return exitDirection;
     }
 }

@@ -2,9 +2,11 @@ package bomb.modules.dh.hexamaze;
 
 import bomb.abstractions.Resettable;
 import bomb.components.hex.HexMazePanel;
+import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeRunner;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
@@ -27,6 +29,9 @@ public class HexamazeController implements Resettable {
 
     @FXML
     private RadioButton redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton;
+
+    @FXML
+    private Label exitDirectionLabel;
 
     public void initialize() {
         Hexamaze.setupVariables(transportPanels());
@@ -76,10 +81,13 @@ public class HexamazeController implements Resettable {
     private void mazeCompare() {
         try {
             Hexamaze.compareToFullMaze();
+            String sideToExit = MazeRunner.getExitDirection();
+            if (sideToExit != null)
+                exitDirectionLabel.setText("Exit out of the " + sideToExit + " side");
+            else
+                FacadeFX.clearText(exitDirectionLabel);
         } catch (IllegalArgumentException ex) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText(ex.getMessage());
-            alert.showAndWait();
+            FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
         }
     }
 
@@ -155,6 +163,7 @@ public class HexamazeController implements Resettable {
 
     @Override
     public void reset() {
+        FacadeFX.clearText(exitDirectionLabel);
         Hexamaze.resetHexPanelList();
         FacadeFX.unselectFromMultipleToggleGroup(hexGroup, hexColorGroup);
         FacadeFX.disableMultiple(redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);

@@ -7,8 +7,11 @@
     -fx-font-size: 25;
 }
 
-.mfx-button {
-    -fx-font-size: 25;
+.label {
+    -fx-alignment: center;
+    -fx-font-size: 26;
+    -fx-text-alignment: center;
+    -fx-text-fill: white;
 }
 
 #shape-selector {

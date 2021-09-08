@@ -44,7 +44,7 @@ public class SwitchesController implements Resettable {
     }
 
     private void sendToOutputField(List<String> outputList) {
-        String arrow = " -> ";
+        final String arrow = " -> ";
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < outputList.size(); i++) {
             sb.append(outputList.get(i));

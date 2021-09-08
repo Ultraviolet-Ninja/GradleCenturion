@@ -44,7 +44,7 @@ public class TextFormatterFactory {
         });
     }
 
-    public static TextFormatter<String> createTwoBitTextFormatter() {
+    public static TextFormatter<String> createTwoDigitTextFormatter() {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
 
