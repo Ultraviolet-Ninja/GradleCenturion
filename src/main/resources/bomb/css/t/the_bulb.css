@@ -1,0 +1,70 @@
+.jfx-button {
+    -fx-font-size: 32;
+}
+
+.jfx-radio-button {
+    -jfx-unselected-color: #00255b;
+    -fx-font-size: 32;
+}
+
+#red-radio-button {
+    -jfx-selected-color: red;
+}
+
+#red-radio-button:hover {
+    -jfx-selected-color: #870000;
+}
+
+#yellow-radio-button {
+    -jfx-selected-color: yellow;
+}
+
+#yellow-radio-button:hover {
+    -jfx-selected-color: #a5a500;
+}
+
+#green-radio-button {
+    -jfx-selected-color: green;
+}
+
+#green-radio-button:hover {
+    -jfx-selected-color: #005c00;
+}
+
+#blue-radio-button {
+    -jfx-selected-color: blue;
+}
+
+#blue-radio-button:hover {
+    -jfx-selected-color: #8787ff;
+}
+
+#pink-radio-button {
+    -jfx-selected-color: pink;
+}
+
+#pink-radio-button {
+    -jfx-selected-color: #a5757d;
+}
+
+#default-radio-button {
+    -jfx-selected-color: white;
+}
+
+#default-radio-button:hover {
+    -jfx-unselected-color: #0065de;
+}
+
+.jfx-text-area {
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+    -fx-background-color: black;
+    -fx-background-radius: 15;
+    -fx-border-color: #4792fc;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-font-size: 30;
+    -fx-padding: 0 0 0 2;
+    -fx-prompt-text-fill: white;
+}
+
