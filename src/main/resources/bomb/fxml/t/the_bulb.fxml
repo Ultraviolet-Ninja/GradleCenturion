@@ -24,7 +24,7 @@
     <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
         <JFXTextArea fx:id="bulbResults" editable="false" prefHeight="600.0" prefWidth="600.0" promptText="Results">
             <VBox.margin>
-                <Insets left="50.0" right="50.0" top="100.0"/>
+                <Insets left="50.0" right="50.0" top="200.0" bottom="200.0"/>
             </VBox.margin>
         </JFXTextArea>
     </VBox>

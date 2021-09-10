@@ -26,6 +26,7 @@ import static bomb.modules.t.bulb.Bulb.Color.RED;
 import static bomb.modules.t.bulb.Bulb.Color.WHITE;
 import static bomb.modules.t.bulb.Bulb.Color.YELLOW;
 import static bomb.modules.t.bulb.Bulb.Light.OFF;
+import static bomb.modules.t.bulb.Bulb.Light.ON;
 import static bomb.modules.t.bulb.Bulb.Opacity.OPAQUE;
 import static bomb.modules.t.bulb.Bulb.Opacity.TRANSLUCENT;
 import static bomb.modules.t.bulb.Bulb.Position.SCREWED;
@@ -67,6 +68,7 @@ public class TheBulb extends Widget {
     private static void stepTwo(Bulb bulb, List<String> outputList) {
         if (bulb.getColor() == RED) {
             outputList.add(PRESS_I);
+            checkIfLightTurnsOff(bulb, outputList);
             unscrewBulb(bulb, outputList);
             stepFive(bulb, outputList);
             return;
@@ -74,8 +76,8 @@ public class TheBulb extends Widget {
 
         if (bulb.getColor() == WHITE) {
             outputList.add(PRESS_O);
-            stepSix(outputList);
             unscrewBulb(bulb, outputList);
+            stepSix(bulb, outputList);
             return;
         }
 
@@ -86,14 +88,15 @@ public class TheBulb extends Widget {
     private static void stepThree(Bulb bulb, List<String> outputList) {
         if (bulb.getColor() == GREEN) {
             outputList.add(PRESS_I);
-            checkIfLightTurnsOff(bulb);
+            checkIfLightTurnsOff(bulb, outputList);
             unscrewBulb(bulb, outputList);
-            stepSix(outputList);
+            stepSix(bulb, outputList);
             return;
         }
 
         if (bulb.getColor() == PURPLE) {
             outputList.add(PRESS_O);
+            checkIfLightTurnsOff(bulb, outputList);
             unscrewBulb(bulb, outputList);
             stepFive(bulb, outputList);
             return;
@@ -115,20 +118,24 @@ public class TheBulb extends Widget {
     }
 
     private static void stepFive(Bulb bulb, List<String> outputList) {
-        if (true) {
-            outputList.add("");
+        String previousPress = outputList.get(outputList.size() - 2);
+
+        if (isLightOffAtStepOne) {
+            outputList.add(previousPress);
+        } else {
+            boolean wasPreviousPressI = previousPress.equals(PRESS_I);
+            outputList.add(wasPreviousPressI ? PRESS_O : PRESS_I);
         }
 
         screwBulb(bulb, outputList);
     }
 
-    private static void stepSix(List<String> outputList) {
-        if (isLightOffAtStepOne) {
-            outputList.add(outputList.get(0));
-        }
+    private static void stepSix(Bulb bulb, List<String> outputList) {
+        String firstButtonPress = outputList.get(0);
+        String lastButtonPress = outputList.get(outputList.size() - 2);
 
-        //Adds the previous button press
-        outputList.add(outputList.get(outputList.size() - 1));
+        outputList.add(isLightOffAtStepOne ? firstButtonPress : lastButtonPress);
+        screwBulb(bulb, outputList);
     }
 
     private static void stepSeven(Bulb bulb, List<String> outputList) {
@@ -270,12 +277,12 @@ public class TheBulb extends Widget {
     }
 
     private static void stepTwelve(List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn();
+        boolean isLightOn = confirmLightIsOn(outputList);
         outputList.add(isLightOn ? PRESS_I : PRESS_O);
     }
 
     private static void stepThirteen(List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn();
+        boolean isLightOn = confirmLightIsOn(outputList);
         outputList.add(isLightOn ? PRESS_O : PRESS_I);
     }
 
@@ -303,10 +310,14 @@ public class TheBulb extends Widget {
         Souvenir.addRelic("The Bulb button presses", toSouvenir.toString());
     }
 
-    private static void checkIfLightTurnsOff(Bulb bulb) {
+    private static void checkIfLightTurnsOff(Bulb bulb, List<String> outputList) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Off at the Press I");
+        alert.setTitle("Light Confirmation");
         alert.setContentText("Did the Bulb turn off when you pressed I?");
+        String currentInstructions = outputList.toString()
+                .replaceAll("[\\[\\]]", "")
+                .replace(", ", " -> ");
+        alert.setHeaderText(currentInstructions);
 
         ButtonType no = new ButtonType("No"),
                 yes = new ButtonType("Yes");
@@ -317,15 +328,17 @@ public class TheBulb extends Widget {
 
         options.ifPresent(buttonType -> isLightOffAtStepOne = buttonType == yes);
 
-        if (isLightOffAtStepOne) {
-            bulb.setLight(OFF);
-        }
+        bulb.setLight(isLightOffAtStepOne ? OFF : ON);
     }
 
-    private static boolean confirmLightIsOn() {
+    private static boolean confirmLightIsOn(List<String> outputList) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Light Confirmation");
         alert.setContentText("Is the bulb now on or off?");
+        String currentInstructions = outputList.toString()
+                .replaceAll("[\\[\\]]", "")
+                .replace(", ", " -> ");
+        alert.setHeaderText(currentInstructions);
 
         ButtonType on = new ButtonType("On"),
                 off = new ButtonType("Off");
