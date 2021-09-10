@@ -45,7 +45,7 @@
 - Color Math
 - Color Squares
 - Combination Lock
-- Complex Button
+- Complicated Buttons
 - Connection Check
 - Coordinates
 - Crazy Talk
