@@ -3,330 +3,172 @@ package bomb.modules.t.bulb;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.modules.s.souvenir.Souvenir;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
+import bomb.tools.filter.Regex;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.BiConsumer;
 
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.IND;
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Indicator.SND;
+import static bomb.modules.t.bulb.Bulb.Color.GREEN;
+import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
+import static bomb.modules.t.bulb.Bulb.Color.RED;
+import static bomb.modules.t.bulb.Bulb.Color.WHITE;
+import static bomb.modules.t.bulb.Bulb.Light.OFF;
+import static bomb.modules.t.bulb.Bulb.Opacity.TRANSLUCENT;
+import static bomb.modules.t.bulb.Bulb.Position.SCREWED;
+import static bomb.modules.t.bulb.Bulb.Position.UNSCREWED;
 
-//TODO - Finish Javadocs
 public class TheBulb extends Widget {
-    private static boolean stepOneWentOff, currentLight, shutdownAtPressOne;
-    private static BulbProperties.Light stepOnePressed;
-    private static Indicator remembered;
-    private static final String arrow = " -> ";
+    private static final String PRESS_I = "Press I", PRESS_O = "Press O",
+            UNSCREW = "Unscrew it", SCREW = "Screw it back in";
 
-    /**
-     * @param next
-     * @return
-     */
-    public static String entry(BulbProperties next) {
-        StringBuilder script = new StringBuilder();
-        String scriptOut = findSet(next, 1, script);
+    private static final BiConsumer<Bulb, List<String>>
+            UNSCREW_ACTION = (theBulb, list) -> {
+        theBulb.setPosition(UNSCREWED);
+        list.add(UNSCREW);
+    },
+            SCREW_ACTION = (theBulb, list) ->
+            {
+                theBulb.setPosition(SCREWED);
+                list.add(SCREW);
+            };
+
+    private static Indicator rememberedIndicator;
+
+    public static List<String> solve(Bulb bulb) {
+        List<String> outputList = new ArrayList<>();
+        stepOne(bulb, outputList);
         if (isSouvenirActive)
-            Souvenir.addRelic("The Bulb", ultimateFilter(scriptOut
-                    .replaceAll("Screw it back in", ""), "i", "o", " ")
-                    .toUpperCase());
-        return scriptOut;
+            sendInfoToSouvenir(outputList);
+        return outputList;
     }
 
-    /**
-     * @param next
-     * @param stage
-     * @param instruction
-     * @return
-     */
-    private static String findSet(BulbProperties next, int stage, StringBuilder instruction) {
-        //TODO - Break down
-        switch (stage) {
-            case 1: {
-                if (next.getLight() == BulbProperties.Light.ON) {
-                    if (next.getOpacity() == BulbProperties.Opacity.TRANSLUCENT) {
-                        stepOnePressed = BulbProperties.Light.ON;
-                        instruction.append("Press I");
-                        lightConfirmation(next, instruction.toString(), true);
-                        instruction.append(arrow);
-                        return findSet(next, 2, instruction);
-                    }
-                    stepOnePressed = BulbProperties.Light.OFF;
-                    instruction.append("Press O");
-                    lightConfirmation(next, instruction.toString(), true);
-                    instruction.append(arrow);
-                    return findSet(next, 3, instruction);
-                }
-                unscrew(next);
-                instruction.append("Unscrew").append(arrow);
-                return findSet(next, 4, instruction);
-            }
-            case 2: {
-                if (next.getColor() == BulbProperties.Color.RED) {
-                    instruction.append("Press I").append(arrow).append("Unscrew").append(arrow);
-                    return findSet(next, 5, instruction);
-                } else if (next.getColor() == BulbProperties.Color.WHITE) {
-                    instruction.append("Press O").append(arrow).append("Unscrew").append(arrow);
-                    unscrew(next);
-                    return findSet(next, 6, instruction);
-                }
-                unscrew(next);
-                instruction.append("Unscrew").append(arrow);
-                return findSet(next, 7, instruction);
-            }
-            case 3: {
-                unscrew(next);
-                if (next.getColor() == BulbProperties.Color.GREEN) {
-                    instruction.append("Press I");
-                    offAtPressI(next, instruction.toString());
-                    instruction.append(arrow).append("Unscrew").append(arrow);
-                    return findSet(next, 6, instruction);
-                } else if (next.getColor() == BulbProperties.Color.PURPLE) {
-                    instruction.append("Press O").append(arrow).append("Unscrew").append(arrow);
-                    return findSet(next, 5, instruction);
-                }
-                instruction.append("Unscrew").append(arrow);
-                return findSet(next, 8, instruction);
-            }
-            case 4: {
-                if (Widget.hasFollowingIndicators(Indicator.CAR, Indicator.IND, Indicator.MSA, Indicator.SND)) {
-                    instruction.append("Press I").append(arrow);
-                    return findSet(next, 9, instruction);
-                }
-                instruction.append("Press O").append(arrow);
-                return findSet(next, 10, instruction);
-            }
-            case 5: {
-                if (stepOneWentOff) {
-                    instruction.append("Press ").append(stepOnePressed == BulbProperties.Light.ON ? "I" : "O").append(arrow);
-                    return instruction.append("Screw the Bulb").toString();
-                }
-                instruction.append("Press ").append(stepOnePressed == BulbProperties.Light.ON ? "O" : "I")
-                        .append(arrow).append("Screw the Bulb");
-                return instruction.toString();
-            }
-            case 6: {
-                //TODO - Figure out a way to scan this
-                if (shutdownAtPressOne) {
-                    return instruction.append("Press the button from step 1").toString();
-                }
-                return instruction.append("Press the button from the previous step").toString();
-            }
-            case 7: {
-                if (next.getColor() == BulbProperties.Color.GREEN) {
-                    remembered = Indicator.SIG;
-                    instruction.append("Press I").append(arrow);
-                    return findSet(next, 11, instruction);
-                } else if (next.getColor() == BulbProperties.Color.PURPLE) {
-                    instruction.append("Press I").append(arrow).append("Screw it back in").append(arrow);
-                    screw(next);
-                    return findSet(next, 12, instruction);
-                } else if (next.getColor() == BulbProperties.Color.BLUE) {
-                    remembered = Indicator.CLR;
-                    instruction.append("Press O");
-                    return findSet(next, 11, instruction);
-                }
-                instruction.append("Press O").append(arrow).append("Screw it back in").append(arrow);
-                return findSet(next, 13, instruction);
-            }
-            case 8: {
-                if (next.getColor() == BulbProperties.Color.WHITE) {
-                    remembered = Indicator.FRQ;
-                    instruction.append("Press I").append(arrow);
-                    return findSet(next, 11, instruction);
-                } else if (next.getColor() == BulbProperties.Color.RED) {
-                    instruction.append("Press I").append(arrow).append("Screw it back in").append(arrow);
-                    return findSet(next, 13, instruction);
-                } else if (next.getColor() == BulbProperties.Color.YELLOW) {
-                    remembered = Indicator.FRK;
-                    instruction.append("Press O").append(arrow);
-                    return findSet(next, 11, instruction);
-                }
-                instruction.append("Press O").append(arrow).append("Screw it back in").append(arrow);
-                return findSet(next, 12, instruction);
-            }
-            case 9: {
-                switch (next.getColor()) {
-                    case BLUE: {
-                        instruction.append("Press I").append(arrow);
-                        return findSet(next, 14, instruction);
-                    }
-                    case GREEN: {
-                        instruction.append("Press I").append(arrow).append("Screw it back in")
-                                .append(arrow);
-                        return findSet(next, 12, instruction);
-                    }
-                    case YELLOW: {
-                        instruction.append("Press O").append(arrow);
-                        return findSet(next, 15, instruction);
-                    }
-                    case WHITE: {
-                        instruction.append("Press O").append(arrow).append("Screw it back in")
-                                .append(arrow);
-                        return findSet(next, 13, instruction);
-                    }
-                    case PURPLE: {
-                        instruction.append("Screw it back in").append(arrow).append("Press I")
-                                .append(arrow);
-                        return findSet(next, 12, instruction);
-                    }
-                    default: {
-                        instruction.append("Screw it back in").append(arrow).append("Press O")
-                                .append(arrow);
-                        return findSet(next, 13, instruction);
-                    }
-                }
-            }
-            case 10: {
-                switch (next.getColor()) {
-                    case PURPLE: {
-                        instruction.append("Press I").append(arrow);
-                        return findSet(next, 14, instruction);
-                    }
-                    case RED: {
-                        instruction.append("Press I").append(arrow).append("Screw it back in")
-                                .append(arrow);
-                        return findSet(next, 13, instruction);
-                    }
-                    case BLUE: {
-                        instruction.append("Press O").append(arrow);
-                        return findSet(next, 15, instruction);
-                    }
-                    case YELLOW: {
-                        instruction.append("Press O").append(arrow).append("Screw it back in")
-                                .append(arrow);
-                        return findSet(next, 12, instruction);
-                    }
-                    case GREEN: {
-                        instruction.append("Screw it back in").append(arrow).append("Press I")
-                                .append(arrow);
-                        return findSet(next, 13, instruction);
-                    }
-                    default: {
-                        instruction.append("Screw it back in").append(arrow).append("Press O")
-                                .append(arrow);
-                        return findSet(next, 12, instruction);
-                    }
-                }
-            }
-            case 11: {
-                if (hasRem()) {
-                    return instruction.toString() + "Press I" + arrow + "Screw it back in";
-                }
-                return instruction.toString() + "Press O" + arrow + "Screw it back in";
-            }
-            case 12: {
-                lightConfirmation(next, instruction.toString(), false);
-                return instruction.toString() + (currentLight ? "Press I" : "Press O");
-            }
-            case 13: {
-                lightConfirmation(next, instruction.toString(), false);
-                return instruction.toString() + (currentLight ? "Press O" : "Press I");
-            }
-            case 14: {
-                if (next.getOpacity() == BulbProperties.Opacity.OPAQUE) {
-                    return instruction.toString() + "Press I" + arrow + "Screw it back in";
-                }
-                return instruction.toString() + "Press O" + arrow + "Screw it back in";
-            }
-            default: {
-                if (next.getOpacity() == BulbProperties.Opacity.TRANSLUCENT) {
-                    return instruction.toString() + "Press I" + arrow + "Screw it back in";
-                }
-                return instruction.toString() + "Press O" + arrow + "Screw it back in";
-            }
+    private static void stepOne(Bulb bulb, List<String> outputList) {
+        if (bulb.getLight() == OFF) {
+            UNSCREW_ACTION.accept(bulb, outputList);
+            stepFour(bulb, outputList);
+            return;
         }
-    }
 
-    /**
-     * @param next
-     */
-    private static void unscrew(BulbProperties next) {
-        next.setPosition(BulbProperties.Position.UNSCREWED);
-    }
-
-    /**
-     * @param next
-     */
-    private static void screw(BulbProperties next) {
-        next.setPosition(BulbProperties.Position.SCREWED);
-    }
-
-    /**
-     * @param next
-     * @param instr
-     * @param isStepOne
-     */
-    private static void lightConfirmation(BulbProperties next, String instr, boolean isStepOne) {
-        //TODO - Break down????
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Light Confirmation");
-        alert.setContentText("Is the bulb now on or off?");
-        alert.setHeaderText(instr);
-
-        ButtonType on = new ButtonType("On"),
-                off = new ButtonType("Off");
-
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(on, off);
-        Optional<ButtonType> options = alert.showAndWait();
-
-        try {
-            if (options.isPresent()) {
-                if (isStepOne) {
-                    stepOneWentOff = options.get() == off;
-                    if (stepOneWentOff) {
-                        next.setLight(BulbProperties.Light.OFF);
-                    }
-                } else {
-                    currentLight = options.get() == on;
-                    if (currentLight) {
-                        next.setLight(BulbProperties.Light.ON);
-                    }
-                }
-            }
-        } catch (NoSuchElementException noElement) {
-            Alert wrong = new Alert(Alert.AlertType.ERROR);
-            wrong.setContentText("This shouldn't be happening");
-            wrong.showAndWait();
+        if (bulb.getOpacity() == TRANSLUCENT) {
+            outputList.add(PRESS_I);
+            stepTwo(bulb, outputList);
+            return;
         }
+
+        outputList.add(PRESS_O);
+        stepThree(bulb, outputList);
+
     }
 
-    /**
-     * @param next
-     * @param instr
-     */
-    private static void offAtPressI(BulbProperties next, String instr) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Off at the Press I");
-        alert.setContentText("Did the Bulb turn off when you pressed I?");
-        alert.setHeaderText(instr);
-
-        ButtonType no = new ButtonType("No"),
-                yes = new ButtonType("Yes");
-
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(yes, no);
-        Optional<ButtonType> options = alert.showAndWait();
-
-        try {
-            if (options.isPresent()) {
-                shutdownAtPressOne = options.get() == yes;
-                if (shutdownAtPressOne) {
-                    next.setLight(BulbProperties.Light.OFF);
-                    currentLight = false;
-                }
-            }
-        } catch (NoSuchElementException noElement) {
-            Alert wrong = new Alert(Alert.AlertType.ERROR);
-            wrong.setContentText("This shouldn't be happening");
-            wrong.showAndWait();
+    private static void stepTwo(Bulb bulb, List<String> outputList) {
+        if (bulb.getColor() == RED) {
+            outputList.add(PRESS_I);
+            UNSCREW_ACTION.accept(bulb, outputList);
+            stepFive(bulb, outputList);
+            return;
         }
+
+        if (bulb.getColor() == WHITE) {
+            outputList.add(PRESS_O);
+            UNSCREW_ACTION.accept(bulb, outputList);
+            stepSix(bulb, outputList);
+            return;
+        }
+
+        UNSCREW_ACTION.accept(bulb, outputList);
+        stepSeven(bulb, outputList);
     }
 
-    /**
-     * @return
-     */
-    private static boolean hasRem() {
-        return remembered != null && Widget.hasIndicator(remembered);
+    private static void stepThree(Bulb bulb, List<String> outputList) {
+        if (bulb.getColor() == GREEN) {
+            outputList.add(PRESS_I);
+            UNSCREW_ACTION.accept(bulb, outputList);
+            stepSix(bulb, outputList);
+            return;
+        }
+
+        if (bulb.getColor() == PURPLE) {
+            outputList.add(PRESS_O);
+            UNSCREW_ACTION.accept(bulb, outputList);
+            stepFive(bulb, outputList);
+            return;
+        }
+
+        UNSCREW_ACTION.accept(bulb, outputList);
+        stepEight(bulb, outputList);
+    }
+
+    private static void stepFour(Bulb bulb, List<String> outputList) {
+        if (hasFollowingIndicators(CAR, IND, MSA, SND)) {
+            outputList.add(PRESS_O);
+            stepNine(bulb, outputList);
+            return;
+        }
+
+        outputList.add(PRESS_O);
+        stepTen(bulb, outputList);
+    }
+
+    private static void stepFive(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepSix(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepSeven(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepEight(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepNine(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepTen(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepEleven(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepTwelve(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepThirteen(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepFourteen(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void stepFifteen(Bulb bulb, List<String> outputList) {
+
+    }
+
+    private static void sendInfoToSouvenir(List<String> outputList) {
+        Regex findButtonPresses = new Regex("Press [IO]");
+        findButtonPresses.loadCollection(outputList);
+        List<String> matches = findButtonPresses.findAllMatches();
+        StringBuilder toSouvenir = new StringBuilder();
+
+        for (int i = 0; i < matches.size(); i++) {
+            toSouvenir.append(matches.get(i));
+            if (i != matches.size() - 1)
+                toSouvenir.append("\n");
+        }
+        Souvenir.addRelic("The Bulb button presses", toSouvenir.toString());
     }
 }

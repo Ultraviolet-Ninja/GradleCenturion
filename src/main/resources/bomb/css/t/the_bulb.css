@@ -12,7 +12,7 @@
 }
 
 #red-radio-button:hover {
-    -jfx-selected-color: #870000;
+    -jfx-unselected-color: #870000;
 }
 
 #yellow-radio-button {
@@ -20,7 +20,7 @@
 }
 
 #yellow-radio-button:hover {
-    -jfx-selected-color: #a5a500;
+    -jfx-unselected-color: #a5a500;
 }
 
 #green-radio-button {
@@ -28,7 +28,7 @@
 }
 
 #green-radio-button:hover {
-    -jfx-selected-color: #005c00;
+    -jfx-unselected-color: #005c00;
 }
 
 #blue-radio-button {
@@ -36,15 +36,15 @@
 }
 
 #blue-radio-button:hover {
-    -jfx-selected-color: #8787ff;
+    -jfx-unselected-color: #8787ff;
 }
 
 #pink-radio-button {
     -jfx-selected-color: pink;
 }
 
-#pink-radio-button {
-    -jfx-selected-color: #a5757d;
+#pink-radio-button:hover {
+    -jfx-unselected-color: #a5757d;
 }
 
 #default-radio-button {
@@ -59,12 +59,13 @@
     -jfx-focus-color: transparent;
     -jfx-unfocus-color: transparent;
     -fx-background-color: black;
-    -fx-background-radius: 15;
     -fx-border-color: #4792fc;
-    -fx-border-radius: 15;
-    -fx-border-width: 2;
+    -fx-border-width: 5;
     -fx-font-size: 30;
     -fx-padding: 0 0 0 2;
     -fx-prompt-text-fill: white;
 }
 
+.jfx-text-area .content {
+    -fx-background-color: black;
+}
