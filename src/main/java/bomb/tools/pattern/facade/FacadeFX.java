@@ -75,10 +75,6 @@ public class FacadeFX {
         return ((ToggleButton) group.getSelectedToggle()).getText();
     }
 
-    public static boolean hasSelectedToggle(ToggleGroup group) {
-        return group.getSelectedToggle() != null;
-    }
-
     public static void resetToggleGroup(ToggleGroup group) {
         group.selectToggle(null);
     }
@@ -104,7 +100,6 @@ public class FacadeFX {
             button.setSelected(false);
     }
 
-    //TODO Check if these do the same thing
     public static void unselectFromToggleGroup(ToggleGroup group) {
         Toggle temp = group.getSelectedToggle();
         if (temp != null)

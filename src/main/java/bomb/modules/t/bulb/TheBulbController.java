@@ -1,98 +1,93 @@
 package bomb.modules.t.bulb;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 
-import java.util.List;
+import java.util.function.Consumer;
 
-import static bomb.modules.t.bulb.Bulb.Color.BLUE;
-import static bomb.modules.t.bulb.Bulb.Color.GREEN;
-import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
-import static bomb.modules.t.bulb.Bulb.Color.RED;
-import static bomb.modules.t.bulb.Bulb.Color.WHITE;
-import static bomb.modules.t.bulb.Bulb.Color.YELLOW;
-import static bomb.modules.t.bulb.Bulb.Light.OFF;
-import static bomb.modules.t.bulb.Bulb.Light.ON;
-import static bomb.modules.t.bulb.Bulb.Opacity.OPAQUE;
-import static bomb.modules.t.bulb.Bulb.Opacity.TRANSLUCENT;
-import static bomb.modules.t.bulb.Bulb.Position.SCREWED;
+import static bomb.modules.t.bulb.BulbProperties.THE_BULB;
 
 public class TheBulbController implements Resettable {
-    @FXML
-    private ToggleGroup colorGroup, opacityGroup, luminosityGroup;
+    private static final String RED_STYLE = "-fx-text-fill: red", YELLOW_STYLE = "-fx-text-fill: yellow",
+            GREEN_STYLE = "-fx-text-fill: #07c307", BLUE_STYLE = "-fx-text-fill: dodgerblue",
+            MAGENTA_STYLE = "-fx-text-fill: #cc0bdd", BLACK_STYLE = "-fx-text-fill: black",
+            WHITE_STYLE = "-fx-text-fill: white";
+
+    private final boolean[] bulbConditions = new boolean[3];
 
     @FXML
-    private JFXButton submitButton;
+    private ToggleGroup opacity, luminosity;
 
     @FXML
-    private JFXTextArea bulbResults;
+    private Label redLabel, yellowLabel, greenLabel, blueLabel, purpleLabel, whiteLabel;
 
     @FXML
-    private void enableSubmitButton() {
-        boolean isColorSelected = FacadeFX.hasSelectedToggle(colorGroup);
-        boolean isOpacitySelected = FacadeFX.hasSelectedToggle(opacityGroup);
-        boolean isLuminositySelected = FacadeFX.hasSelectedToggle(luminosityGroup);
+    private Rectangle red, yellow, green, blue, purple, white;
 
-        if (isColorSelected && isOpacitySelected && isLuminositySelected) {
-            FacadeFX.enable(submitButton);
-            return;
-        }
-        FacadeFX.disable(submitButton);
+    @FXML
+    private TextArea bulbResults;
+
+    public void initialize() {
+        FacadeFX.bindOnClickHandler(new HoverHandler<>(createAction()), red, yellow, green, blue, purple, white);
     }
 
-    @FXML
-    private void submitBulbInfo() {
-        Bulb input = new Bulb();
-        input.setColor(retrieveColor());
-        input.setLight(retrieveLuminosity());
-        input.setOpacity(retrieveOpacity());
-        input.setPosition(SCREWED);
-
-        outputToTextArea(TheBulb.solve(input));
-    }
-
-    private Bulb.Color retrieveColor() {
-        String resultingColor = FacadeFX.getToggleName(colorGroup);
-        return switch(resultingColor) {
-            case "Red" -> RED;
-            case "Yellow" -> YELLOW;
-            case "Green" -> GREEN;
-            case "Blue" -> BLUE;
-            case "Pink" -> PURPLE;
-            default -> WHITE;
+    private Consumer<MouseEvent> createAction() {
+        return event -> {
+            bulbConditions[0] = true;
+            Rectangle rect = (Rectangle) event.getSource();
+            for (BulbProperties.Color color : BulbProperties.Color.values()) {
+                if (rect.getFill().equals(color.getAssociatedColor())) {
+                    THE_BULB.setColor(color);
+                    labelSet(color.ordinal());
+                }
+            }
+            plugInBulb();
         };
     }
 
-    private Bulb.Light retrieveLuminosity() {
-        String resultingLight = FacadeFX.getToggleName(luminosityGroup);
-        return resultingLight.equals("Lit") ? ON : OFF;
+    private void labelSet(int color) {
+        redLabel.setStyle(color == 0 ? RED_STYLE : BLACK_STYLE);
+        yellowLabel.setStyle(color == 1 ? YELLOW_STYLE : BLACK_STYLE);
+        greenLabel.setStyle(color == 2 ? GREEN_STYLE : BLACK_STYLE);
+        blueLabel.setStyle(color == 3 ? BLUE_STYLE : BLACK_STYLE);
+        purpleLabel.setStyle(color == 4 ? MAGENTA_STYLE : BLACK_STYLE);
+        whiteLabel.setStyle(color == 5 ? WHITE_STYLE : BLACK_STYLE);
     }
 
-    private Bulb.Opacity retrieveOpacity() {
-        String resultingOpacity = FacadeFX.getToggleName(opacityGroup);
-        return resultingOpacity.equals("Opaque") ? OPAQUE : TRANSLUCENT;
+    @FXML
+    private void luminositySet() {
+        bulbConditions[1] = true;
+        THE_BULB.setLight(FacadeFX.getToggleName(opacity).equals("On") ?
+                BulbProperties.Light.ON :
+                BulbProperties.Light.OFF);
+        plugInBulb();
     }
 
-    private void outputToTextArea(List<String> results) {
-        StringBuilder sb = new StringBuilder();
+    @FXML
+    private void opacitySet() {
+        bulbConditions[2] = true;
+        THE_BULB.setOpacity(FacadeFX.getToggleName(luminosity).equals("Opaque") ?
+                BulbProperties.Opacity.OPAQUE :
+                BulbProperties.Opacity.TRANSLUCENT);
+        plugInBulb();
+    }
 
-        for (int i = 0; i < results.size(); i++) {
-            sb.append(results.get(i));
-            if (i != results.size() - 1)
-                sb.append("\n");
+    private void plugInBulb() {
+        if (bulbConditions[0] && bulbConditions[1] && bulbConditions[2]) {
+            THE_BULB.setPosition(BulbProperties.Position.SCREWED);
+            bulbResults.setText(TheBulb.entry(THE_BULB));
         }
-
-        bulbResults.setText(sb.toString());
     }
 
     @Override
     public void reset() {
-        FacadeFX.disable(submitButton);
-        FacadeFX.clearText(bulbResults);
-        FacadeFX.unselectFromMultipleToggleGroup(colorGroup, opacityGroup, luminosityGroup);
+
     }
 }
