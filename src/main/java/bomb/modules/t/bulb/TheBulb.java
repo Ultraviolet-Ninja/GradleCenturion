@@ -43,8 +43,10 @@ public class TheBulb extends Widget {
         validateBulb(bulb);
         List<String> outputList = new ArrayList<>();
         stepOne(bulb, outputList);
+
         if (isSouvenirActive)
             sendInfoToSouvenir(outputList);
+
         rememberedIndicator = null;
         return outputList;
     }
@@ -58,6 +60,10 @@ public class TheBulb extends Widget {
 
         if (bulb.getOpacity() == TRANSLUCENT) {
             outputList.add(PRESS_I);
+
+            if (bulb.getColor() == WHITE)
+                checkIfLightTurnsOff(bulb, outputList);
+
             stepTwo(bulb, outputList);
             return;
         }
@@ -68,8 +74,8 @@ public class TheBulb extends Widget {
 
     private static void stepTwo(Bulb bulb, List<String> outputList) {
         if (bulb.getColor() == RED) {
-            outputList.add(PRESS_I);
             checkIfLightTurnsOff(bulb, outputList);
+            outputList.add(PRESS_I);
             unscrewBulb(bulb, outputList);
             stepFive(bulb, outputList);
             return;
@@ -96,8 +102,8 @@ public class TheBulb extends Widget {
         }
 
         if (bulb.getColor() == PURPLE) {
-            outputList.add(PRESS_O);
             checkIfLightTurnsOff(bulb, outputList);
+            outputList.add(PRESS_O);
             unscrewBulb(bulb, outputList);
             stepFive(bulb, outputList);
             return;
@@ -150,7 +156,7 @@ public class TheBulb extends Widget {
         if (bulb.getColor() == PURPLE) {
             outputList.add(PRESS_I);
             screwBulb(bulb, outputList);
-            stepTwelve(outputList);
+            stepTwelve(bulb, outputList);
             return;
         }
 
@@ -163,7 +169,7 @@ public class TheBulb extends Widget {
 
         outputList.add(PRESS_O);
         screwBulb(bulb, outputList);
-        stepThirteen(outputList);
+        stepThirteen(bulb, outputList);
     }
 
     private static void stepEight(Bulb bulb, List<String> outputList) {
@@ -177,7 +183,7 @@ public class TheBulb extends Widget {
         if (bulb.getColor() == RED) {
             outputList.add(PRESS_I);
             screwBulb(bulb, outputList);
-            stepThirteen(outputList);
+            stepThirteen(bulb, outputList);
             return;
         }
 
@@ -190,7 +196,7 @@ public class TheBulb extends Widget {
 
         outputList.add(PRESS_O);
         screwBulb(bulb, outputList);
-        stepTwelve(outputList);
+        stepTwelve(bulb, outputList);
     }
 
     private static void stepNine(Bulb bulb, List<String> outputList) {
@@ -203,7 +209,7 @@ public class TheBulb extends Widget {
         if (bulb.getColor() == GREEN) {
             outputList.add(PRESS_I);
             screwBulb(bulb, outputList);
-            stepTwelve(outputList);
+            stepTwelve(bulb, outputList);
             return;
         }
 
@@ -216,20 +222,20 @@ public class TheBulb extends Widget {
         if (bulb.getColor() == WHITE) {
             outputList.add(PRESS_O);
             screwBulb(bulb, outputList);
-            stepThirteen(outputList);
+            stepThirteen(bulb, outputList);
             return;
         }
 
         if (bulb.getColor() == PURPLE) {
             screwBulb(bulb, outputList);
             outputList.add(PRESS_I);
-            stepTwelve(outputList);
+            stepTwelve(bulb, outputList);
             return;
         }
 
         screwBulb(bulb, outputList);
         outputList.add(PRESS_O);
-        stepThirteen(outputList);
+        stepThirteen(bulb, outputList);
     }
 
     private static void stepTen(Bulb bulb, List<String> outputList) {
@@ -242,7 +248,7 @@ public class TheBulb extends Widget {
         if (bulb.getColor() == RED) {
             outputList.add(PRESS_I);
             screwBulb(bulb, outputList);
-            stepThirteen(outputList);
+            stepThirteen(bulb, outputList);
             return;
         }
 
@@ -255,20 +261,20 @@ public class TheBulb extends Widget {
         if (bulb.getColor() == YELLOW) {
             outputList.add(PRESS_O);
             screwBulb(bulb, outputList);
-            stepTwelve(outputList);
+            stepTwelve(bulb, outputList);
             return;
         }
 
         if (bulb.getColor() == GREEN) {
             screwBulb(bulb, outputList);
             outputList.add(PRESS_I);
-            stepThirteen(outputList);
+            stepThirteen(bulb, outputList);
             return;
         }
 
         screwBulb(bulb, outputList);
         outputList.add(PRESS_O);
-        stepTwelve(outputList);
+        stepTwelve(bulb, outputList);
     }
 
     private static void stepEleven(Bulb bulb, List<String> outputList) {
@@ -277,13 +283,13 @@ public class TheBulb extends Widget {
         screwBulb(bulb, outputList);
     }
 
-    private static void stepTwelve(List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn(outputList);
+    private static void stepTwelve(Bulb bulb, List<String> outputList) {
+        boolean isLightOn = confirmLightIsOn(bulb, outputList);
         outputList.add(isLightOn ? PRESS_I : PRESS_O);
     }
 
-    private static void stepThirteen(List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn(outputList);
+    private static void stepThirteen(Bulb bulb, List<String> outputList) {
+        boolean isLightOn = confirmLightIsOn(bulb, outputList);
         outputList.add(isLightOn ? PRESS_O : PRESS_I);
     }
 
@@ -332,7 +338,7 @@ public class TheBulb extends Widget {
         bulb.setLight(isLightOffAtStepOne ? OFF : ON);
     }
 
-    private static boolean confirmLightIsOn(List<String> outputList) throws IllegalStateException {
+    private static boolean confirmLightIsOn(Bulb bulb, List<String> outputList) throws IllegalStateException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Light Confirmation");
         alert.setContentText("Is the bulb now on or off?");
@@ -350,7 +356,10 @@ public class TheBulb extends Widget {
 
         if (options.isEmpty())
             throw new IllegalStateException("Unexpected state");
-        return options.get() == on;
+
+        boolean isLightOn = options.get() == on;
+        bulb.setLight(isLightOn ? ON : OFF);
+        return isLightOn;
     }
 
     private static void unscrewBulb(Bulb theBulb, List<String> list) throws IllegalStateException {
