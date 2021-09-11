@@ -40,6 +40,7 @@ public class TheBulb extends Widget {
     private static Indicator rememberedIndicator = null;
 
     public static List<String> solve(Bulb bulb) {
+        validateBulb(bulb);
         List<String> outputList = new ArrayList<>();
         stepOne(bulb, outputList);
         if (isSouvenirActive)
@@ -331,7 +332,7 @@ public class TheBulb extends Widget {
         bulb.setLight(isLightOffAtStepOne ? OFF : ON);
     }
 
-    private static boolean confirmLightIsOn(List<String> outputList) {
+    private static boolean confirmLightIsOn(List<String> outputList) throws IllegalStateException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Light Confirmation");
         alert.setContentText("Is the bulb now on or off?");
@@ -352,15 +353,24 @@ public class TheBulb extends Widget {
         return options.get() == on;
     }
 
-    private static void unscrewBulb(Bulb theBulb, List<String> list) {
-        if (theBulb.getPosition() == UNSCREWED) throw new IllegalStateException("Invalid Unscrew state");
+    private static void unscrewBulb(Bulb theBulb, List<String> list) throws IllegalStateException {
         theBulb.setPosition(UNSCREWED);
         list.add(UNSCREW);
     }
 
-    private static void screwBulb(Bulb theBulb, List<String> list) {
-        if (theBulb.getPosition() == SCREWED) throw new IllegalStateException("Invalid Screw state");
+    private static void screwBulb(Bulb theBulb, List<String> list) throws IllegalStateException {
         theBulb.setPosition(SCREWED);
         list.add(SCREW);
+    }
+
+    private static void validateBulb(Bulb bulb) throws IllegalArgumentException {
+        if (bulb.getPosition() != SCREWED)
+            throw new IllegalArgumentException("Bulb must be screwed in at the start");
+        if (bulb.getColor() == null)
+            throw new IllegalArgumentException("Bulb must have a color");
+        if (bulb.getLight() == null)
+            throw new IllegalArgumentException("Bulb must be lit or unlit");
+        if (bulb.getOpacity() == null)
+            throw new IllegalArgumentException("Bulb must be Opaque or Translucent");
     }
 }

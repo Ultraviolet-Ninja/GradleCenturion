@@ -15,7 +15,6 @@ import java.util.List;
 import static bomb.modules.t.bulb.Bulb.Color.BLUE;
 import static bomb.modules.t.bulb.Bulb.Color.GREEN;
 import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
-import static bomb.modules.t.bulb.Bulb.Color.RED;
 import static bomb.modules.t.bulb.Bulb.Color.WHITE;
 import static bomb.modules.t.bulb.Bulb.Color.YELLOW;
 import static bomb.modules.t.bulb.Bulb.Light.OFF;
@@ -36,13 +35,21 @@ public class TheBulbTest {
         Widget.resetProperties();
     }
 
-    @Test(expectedExceptions = IllegalStateException.class)
-    public void exceptionTest() {
+    @DataProvider
+    public Object[][] exceptionTestProvider() {
+        return new Object[][] {
+                {UNSCREWED, null, null, null}, {SCREWED, null, null, null},
+                {SCREWED, ON, null, null}, {SCREWED, ON, PURPLE, null}
+        };
+    }
+
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
+    public void exceptionTest(Bulb.Position position, Bulb.Light inputLight, Bulb.Color inputColor, Bulb.Opacity inputOpacity) {
         Bulb testBulb = new Bulb();
-        testBulb.setPosition(UNSCREWED);
-        testBulb.setOpacity(OPAQUE);
-        testBulb.setLight(OFF);
-        testBulb.setColor(RED);
+        testBulb.setPosition(position);
+        testBulb.setOpacity(inputOpacity);
+        testBulb.setLight(inputLight);
+        testBulb.setColor(inputColor);
 
         TheBulb.solve(testBulb);
     }
