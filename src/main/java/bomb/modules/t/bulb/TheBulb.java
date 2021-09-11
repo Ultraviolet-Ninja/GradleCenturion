@@ -108,7 +108,7 @@ public class TheBulb extends Widget {
 
     private static void stepFour(Bulb bulb, List<String> outputList) {
         if (hasFollowingIndicators(CAR, IND, MSA, SND)) {
-            outputList.add(PRESS_O);
+            outputList.add(PRESS_I);
             stepNine(bulb, outputList);
             return;
         }

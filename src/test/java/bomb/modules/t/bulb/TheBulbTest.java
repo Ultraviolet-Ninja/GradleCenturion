@@ -12,8 +12,12 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static bomb.modules.t.bulb.Bulb.Color.BLUE;
 import static bomb.modules.t.bulb.Bulb.Color.GREEN;
+import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
 import static bomb.modules.t.bulb.Bulb.Color.RED;
+import static bomb.modules.t.bulb.Bulb.Color.WHITE;
+import static bomb.modules.t.bulb.Bulb.Color.YELLOW;
 import static bomb.modules.t.bulb.Bulb.Light.OFF;
 import static bomb.modules.t.bulb.Bulb.Light.ON;
 import static bomb.modules.t.bulb.Bulb.Opacity.OPAQUE;
@@ -51,13 +55,54 @@ public class TheBulbTest {
             Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
             Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
         };
+
+        ConditionSetter secondTrainingVideoConditions = () -> Widget.setIndicator(TrinarySwitch.ON, Indicator.SIG);
+
+        ConditionSetter thirdTrainingVideoConditions = () -> {
+            Widget.setIndicator(TrinarySwitch.ON, Indicator.IND);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
+            Widget.setIndicator(TrinarySwitch.OFF, Indicator.NSA);
+        };
+
         return new Object[][]{
-                {trainingVideoConditions, ON, GREEN, TRANSLUCENT, new String[]{PRESS_I, UNSCREW, PRESS_I, PRESS_O, SCREW}}
+                {trainingVideoConditions, ON, GREEN, TRANSLUCENT, new String[]{PRESS_I, UNSCREW, PRESS_I, PRESS_O, SCREW}},
+                {secondTrainingVideoConditions, OFF, BLUE, OPAQUE, new String[]{UNSCREW, PRESS_O, PRESS_O, PRESS_O, SCREW}},
+                {thirdTrainingVideoConditions, ON, BLUE, TRANSLUCENT, new String[]{PRESS_I, UNSCREW, PRESS_O, PRESS_O, SCREW}}
         };
     }
 
     @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoTest(ConditionSetter bombConditions, Bulb.Light inputLight, Bulb.Color inputColor, Bulb.Opacity inputOpacity, String[] expectedResults) {
+        bombConditions.setCondition();
+
+        Bulb testBulb = new Bulb();
+        testBulb.setPosition(SCREWED);
+        testBulb.setOpacity(inputOpacity);
+        testBulb.setLight(inputLight);
+        testBulb.setColor(inputColor);
+
+        List<String> convertedResults = Arrays.asList(expectedResults);
+
+        assertEquals(TheBulb.solve(testBulb), convertedResults);
+    }
+
+    @DataProvider
+    public Object[][] writtenTestProvider() {
+        ConditionSetter testConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
+        ConditionSetter secondTestConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, Indicator.CAR);
+        ConditionSetter emptyCondition = () -> {};
+
+        return new Object[][]{
+                {testConditions, ON, YELLOW, OPAQUE, new String[]{PRESS_O, UNSCREW, PRESS_O, PRESS_I, SCREW}},
+                {testConditions, ON, WHITE, OPAQUE, new String[]{PRESS_O, UNSCREW, PRESS_I, PRESS_O, SCREW}},
+                {secondTestConditions, OFF, YELLOW, TRANSLUCENT, new String[]{UNSCREW, PRESS_I, PRESS_O, PRESS_I, SCREW}},
+                {secondTestConditions, OFF, BLUE, OPAQUE, new String[]{UNSCREW, PRESS_I, PRESS_I, PRESS_I, SCREW}},
+                {emptyCondition, OFF, PURPLE, TRANSLUCENT, new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}}
+        };
+    }
+
+    @Test(dataProvider = "writtenTestProvider")
+    public void writtenTest(ConditionSetter bombConditions, Bulb.Light inputLight, Bulb.Color inputColor, Bulb.Opacity inputOpacity, String[] expectedResults) {
         bombConditions.setCondition();
 
         Bulb testBulb = new Bulb();
