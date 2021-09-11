@@ -366,10 +366,10 @@ public class TheBulb extends Widget {
     private static void validateBulb(Bulb bulb) throws IllegalArgumentException {
         if (bulb.getPosition() != SCREWED)
             throw new IllegalArgumentException("Bulb must be screwed in at the start");
-        if (bulb.getColor() == null)
-            throw new IllegalArgumentException("Bulb must have a color");
         if (bulb.getLight() == null)
             throw new IllegalArgumentException("Bulb must be lit or unlit");
+        if (bulb.getColor() == null)
+            throw new IllegalArgumentException("Bulb must have a color");
         if (bulb.getOpacity() == null)
             throw new IllegalArgumentException("Bulb must be Opaque or Translucent");
     }
