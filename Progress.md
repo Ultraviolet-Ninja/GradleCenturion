@@ -20,7 +20,7 @@
 - The Bulb
 - TwoBit
 
-18/100 + Colored Switches
+19/100 + Colored Switches
 
 ### Incomplete Modules
 - Translated Vanilla Modules (9/15 Supported languages)
