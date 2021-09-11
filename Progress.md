@@ -17,6 +17,7 @@
 - Simon Screams
 - Souvenir
 - Switches
+- The Bulb
 - TwoBit
 
 18/100 + Colored Switches
@@ -25,9 +26,8 @@
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
-- The Bulb
 
-4/100
+3/100
 
 ### Untouched Modules
 - 3D Maze
@@ -45,7 +45,7 @@
 - Color Math
 - Color Squares
 - Combination Lock
-- Complex Button
+- Complicated Buttons
 - Connection Check
 - Coordinates
 - Crazy Talk
