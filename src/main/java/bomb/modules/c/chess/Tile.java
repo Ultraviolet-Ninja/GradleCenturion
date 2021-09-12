@@ -38,6 +38,6 @@ public class Tile {
 
     @Override
     public String toString() {
-        return tileColor + "Tile - Piece: " + currentPiece + " - Covered: " + isCovered;
+        return tileColor + " Tile - Piece: " + currentPiece + " - Covered: " + isCovered;
     }
 }

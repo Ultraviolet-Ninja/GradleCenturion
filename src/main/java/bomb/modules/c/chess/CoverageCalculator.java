@@ -31,7 +31,7 @@ public class CoverageCalculator {
 
         for (int x = 0; x < ChessBoard.BOARD_LENGTH; x++) {
             for (int y = 0; y < ChessBoard.BOARD_LENGTH; y++) {
-                if (board.isTileCovered(x, y))
+                if (!board.isTileCovered(x, y))
                     uncoveredTiles.add(new Coordinates(x, y));
             }
         }
@@ -78,10 +78,13 @@ public class CoverageCalculator {
 
     private static List<Coordinates> createFileMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+        outputList.add(originalPosition);
 
-        for (int i = 0; i < ChessBoard.BOARD_LENGTH; i++) {
-            Coordinates newCoordinates = originalPosition.immutableAdd(new Coordinates(originalPosition.getX(), i));
-            outputList.add(newCoordinates);
+        for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
+            Coordinates down = originalPosition.immutableAdd(new Coordinates(0, i));
+            Coordinates up = originalPosition.immutableAdd(new Coordinates(0, -i));
+            outputList.add(up);
+            outputList.add(down);
         }
 
         return outputList;
@@ -89,10 +92,13 @@ public class CoverageCalculator {
 
     private static List<Coordinates> createColumnMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+        outputList.add(originalPosition);
 
-        for (int i = 0; i < ChessBoard.BOARD_LENGTH; i++) {
-            Coordinates newCoordinates = originalPosition.immutableAdd(new Coordinates(i, originalPosition.getY()));
-            outputList.add(newCoordinates);
+        for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
+            Coordinates right = originalPosition.immutableAdd(new Coordinates(i, 0));
+            Coordinates left = originalPosition.immutableAdd(new Coordinates(-i, 0));
+            outputList.add(left);
+            outputList.add(right);
         }
 
         return outputList;
@@ -100,8 +106,9 @@ public class CoverageCalculator {
 
     private static List<Coordinates> createDiagonalMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+        outputList.add(originalPosition);
 
-        for (int i = 1 ; i <= ChessBoard.BOARD_LENGTH; i++) {
+        for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
             Coordinates topLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(i, -i)));
             Coordinates topRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(i, i)));
             Coordinates bottomLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(-i, -i)));
@@ -130,6 +137,7 @@ public class CoverageCalculator {
 
     private static List<Coordinates> createKnightMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+        outputList.add(originalPosition);
         int[][] moveOutlines = new int[][]{
                 {1,2}, {2,1}
         };

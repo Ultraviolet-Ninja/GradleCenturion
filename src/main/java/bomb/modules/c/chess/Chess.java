@@ -25,10 +25,10 @@ public class Chess extends Widget {
         List<Coordinates> output = new ArrayList<>();
 
         for (String chessCoordinate : inputCoordinateList) {
-            char xCoordinate = chessCoordinate.charAt(0);
+            char xCoordinate = chessCoordinate.toUpperCase().charAt(0);
             char yCoordinate = chessCoordinate.charAt(chessCoordinate.length() - 1);
 
-            int x = 'a' - xCoordinate;
+            int x = xCoordinate - 'A';
             int y = ChessBoard.BOARD_LENGTH - Character.getNumericValue(yCoordinate);
             output.add(new Coordinates(x, y));
         }
@@ -37,7 +37,7 @@ public class Chess extends Widget {
 
     private static ChessBoard createBoard(List<Coordinates> coordinateList) {
         ChessBoard board = new ChessBoard();
-        List<ChessPiece> setPieces = new ArrayList<>(ChessBoard.BOARD_LENGTH);
+        List<ChessPiece> setPieces = createEmptyList();
         setFourthPosition(board, setPieces, coordinateList.get(3));
         setFifthPosition(board, setPieces, coordinateList.get(4));
         setFirstPosition(board, setPieces, coordinateList.get(0));
@@ -47,11 +47,18 @@ public class Chess extends Widget {
         return board;
     }
 
+    private static List<ChessPiece> createEmptyList() {
+        List<ChessPiece> output = new ArrayList<>(ChessBoard.BOARD_LENGTH);
+        for (int i = 0 ; i < ChessBoard.BOARD_LENGTH; i++)
+            output.add(null);
+        return output;
+    }
+
     private static void setFirstPosition(ChessBoard board, List<ChessPiece> setPieces, Coordinates coordinates) {
         boolean isQueenAtPosition = setPieces.get(4) == ChessPiece.QUEEN;
-        ChessPiece pieceToSet = isQueenAtPosition ? ChessPiece.QUEEN : ChessPiece.BISHOP;
+        ChessPiece pieceToSet = isQueenAtPosition ? ChessPiece.KING : ChessPiece.BISHOP;
 
-        setPieces.add(0, pieceToSet);
+        setPieces.set(0, pieceToSet);
         board.setPieceAtLocation(pieceToSet, coordinates);
     }
 
@@ -59,7 +66,7 @@ public class Chess extends Widget {
         boolean isLastDigitOdd = getSerialCodeLastDigit() % 2 == 1;
         ChessPiece pieceToSet = isLastDigitOdd ? ChessPiece.ROOK : ChessPiece.KNIGHT;
 
-        setPieces.add(1, pieceToSet);
+        setPieces.set(1, pieceToSet);
         board.setPieceAtLocation(pieceToSet, coordinates);
     }
 
@@ -70,13 +77,13 @@ public class Chess extends Widget {
 
         ChessPiece pieceToSet = lessThanTwoRooks ? ChessPiece.QUEEN : ChessPiece.KING;
 
-        setPieces.add(2, pieceToSet);
+        setPieces.set(2, pieceToSet);
         board.setPieceAtLocation(pieceToSet, coordinates);
     }
 
     private static void setFourthPosition(ChessBoard board, List<ChessPiece> setPieces, Coordinates coordinates) {
         //Rook is always set at fourth position
-        setPieces.add(3, ChessPiece.ROOK);
+        setPieces.set(3, ChessPiece.ROOK);
         board.setPieceAtLocation(ChessPiece.ROOK, coordinates);
     }
 
@@ -84,7 +91,7 @@ public class Chess extends Widget {
         boolean isWhiteTile = board.getTile(coordinates).getTileColor() == Tile.TileColor.WHITE;
         ChessPiece pieceToSet = isWhiteTile ? ChessPiece.QUEEN : ChessPiece.ROOK;
 
-        setPieces.add(4, pieceToSet);
+        setPieces.set(4, pieceToSet);
         board.setPieceAtLocation(pieceToSet, coordinates);
     }
 
@@ -96,7 +103,7 @@ public class Chess extends Widget {
                 hasNoKnightsOnBoard ? ChessPiece.KNIGHT :
                         ChessPiece.BISHOP;
 
-        setPieces.add(5, pieceToSet);
+        setPieces.set(5, pieceToSet);
         board.setPieceAtLocation(pieceToSet, coordinates);
     }
 
