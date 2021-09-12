@@ -5,9 +5,9 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Chess extends Widget {
     public static String solve(List<String> inputCoordinateList) throws IllegalArgumentException, IllegalStateException {
@@ -108,14 +108,22 @@ public class Chess extends Widget {
     }
 
     private static void validateList(List<String> inputCoordinateList) throws IllegalArgumentException {
-        Set<String> uniqueCoordinateChecker = new HashSet<>(inputCoordinateList);
-        if (uniqueCoordinateChecker.size() != ChessBoard.BOARD_LENGTH)
-            throw new IllegalArgumentException("Size mismatch");
+        checkUniqueness(inputCoordinateList);
+        if (inputCoordinateList.contains(""))
+            throw new IllegalArgumentException("Every space must be filled with a move");
 
         for (String chessCoordinate : inputCoordinateList) {
             if (!chessCoordinate.matches("[A-Fa-f]-?[1-6]"))
                 throw new IllegalArgumentException("Coordinate doesn't match the specified format");
         }
+    }
+
+    private static void checkUniqueness(List<String> inputCoordinateList) {
+        Set<String> uniqueCoordinateChecker = inputCoordinateList.stream()
+                .map(chessCoordinate -> chessCoordinate.toUpperCase().replace("-", ""))
+                .collect(Collectors.toSet());
+        if (uniqueCoordinateChecker.size() != ChessBoard.BOARD_LENGTH)
+            throw new IllegalArgumentException("Size mismatch");
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {

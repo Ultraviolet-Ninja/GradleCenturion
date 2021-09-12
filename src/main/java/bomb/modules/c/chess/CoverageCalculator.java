@@ -36,7 +36,7 @@ public class CoverageCalculator {
             }
         }
 
-        if (uncoveredTiles.size() > 1)
+        if (uncoveredTiles.size() != 1)
             throw new IllegalStateException("There should only be one uncovered tile");
         return uncoveredTiles.get(0);
     }
