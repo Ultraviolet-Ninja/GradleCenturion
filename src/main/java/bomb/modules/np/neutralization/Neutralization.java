@@ -67,7 +67,7 @@ public class Neutralization extends Widget {
             currentBase = Chemical.Base.Ammonia;
         else if (hasAny())
             currentBase = Chemical.Base.Potassium_Hydroxide;
-        else if (getTotalPorts() == 0 && hasVowel())
+        else if (getTotalPorts() == 0 && hasVowelInSerialCode())
             currentBase = Chemical.Base.Lithium_Hydroxide;
         else if (indicatorMatch())
             currentBase = Chemical.Base.Potassium_Hydroxide;

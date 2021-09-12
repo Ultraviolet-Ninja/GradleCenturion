@@ -23,11 +23,12 @@
 19/100 + Colored Switches
 
 ### Incomplete Modules
+- Chess
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 
-3/100
+4/100
 
 ### Untouched Modules
 - 3D Maze
@@ -40,7 +41,6 @@
 - Broken Button
 - Caesar Cipher
 - Cheap Checkout
-- Chess
 - Color Flash
 - Color Math
 - Color Squares
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-78/100
+77/100
