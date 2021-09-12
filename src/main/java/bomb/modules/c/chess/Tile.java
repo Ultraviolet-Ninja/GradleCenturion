@@ -8,7 +8,6 @@ public class Tile {
     private final TileColor tileColor;
 
     private boolean isCovered;
-
     private ChessPiece currentPiece;
 
     public Tile(TileColor tileColor) {
@@ -35,5 +34,10 @@ public class Tile {
 
     public void setCurrentPiece(ChessPiece currentPiece) {
         this.currentPiece = currentPiece;
+    }
+
+    @Override
+    public String toString() {
+        return tileColor + "Tile - Piece: " + currentPiece + " - Covered: " + isCovered;
     }
 }

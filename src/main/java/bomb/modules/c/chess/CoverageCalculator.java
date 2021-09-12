@@ -3,7 +3,6 @@ package bomb.modules.c.chess;
 import bomb.tools.Coordinates;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class CoverageCalculator {
 
                 if (currentPiece != null) {
                     List<Coordinates> pieceMoveList = createPieceSpecificMoves(currentPiece, currentLocation);
-                    Set<Coordinates> moveSet = new HashSet<>(filterOutOfBoundsMoves(pieceMoveList));
+                    Set<Coordinates> moveSet = filterOutOfBoundsMoves(pieceMoveList);
                     coverDesignatedTiles(board, moveSet);
                 }
             }
@@ -47,11 +46,11 @@ public class CoverageCalculator {
             board.setTileCovered(move);
     }
 
-    private static List<Coordinates> filterOutOfBoundsMoves(List<Coordinates> moveList) {
+    private static Set<Coordinates> filterOutOfBoundsMoves(List<Coordinates> moveList) {
         return moveList.stream()
                 .filter(coordinates -> coordinates.getX() >= 0 && coordinates.getX() < ChessBoard.BOARD_LENGTH)
                 .filter(coordinates -> coordinates.getY() >= 0 && coordinates.getY() < ChessBoard.BOARD_LENGTH)
-                .collect(Collectors.toList());
+                .collect(Collectors.toSet());
     }
 
     private static List<Coordinates> createPieceSpecificMoves(ChessPiece piece, Coordinates position) {
@@ -79,16 +78,40 @@ public class CoverageCalculator {
 
     private static List<Coordinates> createFileMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+
+        for (int i = 0; i < ChessBoard.BOARD_LENGTH; i++) {
+            Coordinates newCoordinates = originalPosition.immutableAdd(new Coordinates(originalPosition.getX(), i));
+            outputList.add(newCoordinates);
+        }
+
         return outputList;
     }
 
     private static List<Coordinates> createColumnMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+
+        for (int i = 0; i < ChessBoard.BOARD_LENGTH; i++) {
+            Coordinates newCoordinates = originalPosition.immutableAdd(new Coordinates(i, originalPosition.getY()));
+            outputList.add(newCoordinates);
+        }
+
         return outputList;
     }
 
     private static List<Coordinates> createDiagonalMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+
+        for (int i = 1 ; i <= ChessBoard.BOARD_LENGTH; i++) {
+            Coordinates topLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(i, -i)));
+            Coordinates topRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(i, i)));
+            Coordinates bottomLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(-i, -i)));
+            Coordinates bottomRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(-i, i)));
+            outputList.add(topLeft);
+            outputList.add(topRight);
+            outputList.add(bottomLeft);
+            outputList.add(bottomRight);
+        }
+
         return outputList;
     }
 
@@ -107,6 +130,21 @@ public class CoverageCalculator {
 
     private static List<Coordinates> createKnightMoves(Coordinates originalPosition) {
         List<Coordinates> outputList = new ArrayList<>();
+        int[][] moveOutlines = new int[][]{
+                {1,2}, {2,1}
+        };
+
+        for (int[] moveOutline : moveOutlines) {
+            Coordinates topLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(moveOutline[0], -moveOutline[1])));
+            Coordinates topRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(moveOutline[0], moveOutline[1])));
+            Coordinates bottomLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(-moveOutline[0], -moveOutline[1])));
+            Coordinates bottomRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(-moveOutline[0], moveOutline[1])));
+            outputList.add(topLeft);
+            outputList.add(topRight);
+            outputList.add(bottomLeft);
+            outputList.add(bottomRight);
+        }
+
         return outputList;
     }
 }

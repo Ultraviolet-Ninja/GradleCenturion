@@ -114,7 +114,6 @@ public class Chess extends Widget {
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
         char horizontal = (char) ('A' + uncoveredLocation.getX());
         String vertical = String.valueOf(ChessBoard.BOARD_LENGTH - uncoveredLocation.getY());
-
         return horizontal + "-" + vertical;
     }
 
