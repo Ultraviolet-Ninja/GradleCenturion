@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Chess extends Widget {
+    private static final char INT_CONVERSION_LETTER = 'A';
+
     public static String solve(List<String> inputCoordinateList) throws IllegalArgumentException, IllegalStateException {
         checkSerialCode();
         validateList(inputCoordinateList);
@@ -28,7 +30,7 @@ public class Chess extends Widget {
             char xCoordinate = chessCoordinate.toUpperCase().charAt(0);
             char yCoordinate = chessCoordinate.charAt(chessCoordinate.length() - 1);
 
-            int x = xCoordinate - 'A';
+            int x = xCoordinate - INT_CONVERSION_LETTER;
             int y = ChessBoard.BOARD_LENGTH - Character.getNumericValue(yCoordinate);
             output.add(new Coordinates(x, y));
         }
@@ -127,7 +129,7 @@ public class Chess extends Widget {
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
-        char horizontal = (char) ('A' + uncoveredLocation.getX());
+        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.getX());
         String vertical = String.valueOf(ChessBoard.BOARD_LENGTH - uncoveredLocation.getY());
         return horizontal + "-" + vertical;
     }

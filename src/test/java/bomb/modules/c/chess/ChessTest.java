@@ -35,7 +35,8 @@ public class ChessTest {
     @DataProvider
     public Object[][] trainingVideoTestProvider() {
         return new Object[][]{
-                {"e60xa6", new String[]{"c-5", "d-5", "a-1", "f-3", "d-1", "E-4"}, "E-6"}
+                {"e60xa6", new String[]{"c-5", "d-5", "a-1", "f-3", "d-1", "E-4"}, "E-6"},
+                {"e60xa6", new String[]{"a-5", "d-2", "d-6", "b-1", "c-2", "f-2"}, "E-2"}
         };
     }
 

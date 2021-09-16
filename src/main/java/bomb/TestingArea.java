@@ -1,8 +1,6 @@
 package bomb;
 
 import bomb.modules.c.chess.Chess;
-import bomb.modules.c.colored_switches.ColoredSwitches;
-import bomb.modules.c.colored_switches.SwitchColor;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.tools.filter.Regex;

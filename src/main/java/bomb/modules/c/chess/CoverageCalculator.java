@@ -3,8 +3,12 @@ package bomb.modules.c.chess;
 import bomb.tools.Coordinates;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.NavigableSet;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static bomb.modules.c.chess.ChessPiece.BISHOP;
@@ -17,8 +21,8 @@ public class CoverageCalculator {
                 ChessPiece currentPiece = board.getTile(currentLocation).getCurrentPiece();
 
                 if (currentPiece != null) {
-                    List<Coordinates> pieceMoveList = createPieceSpecificMoves(currentPiece, currentLocation);
-                    Set<Coordinates> moveSet = filterOutOfBoundsMoves(pieceMoveList);
+                    List<Coordinates> pieceMoveList = createPieceSpecificMoves(board, currentPiece, currentLocation);
+                    Set<Coordinates> moveSet = new HashSet<>(filterOutOfBoundsMoves(pieceMoveList));
                     coverDesignatedTiles(board, moveSet);
                 }
             }
@@ -46,14 +50,7 @@ public class CoverageCalculator {
             board.setTileCovered(move);
     }
 
-    private static Set<Coordinates> filterOutOfBoundsMoves(List<Coordinates> moveList) {
-        return moveList.stream()
-                .filter(coordinates -> coordinates.getX() >= 0 && coordinates.getX() < ChessBoard.BOARD_LENGTH)
-                .filter(coordinates -> coordinates.getY() >= 0 && coordinates.getY() < ChessBoard.BOARD_LENGTH)
-                .collect(Collectors.toSet());
-    }
-
-    private static List<Coordinates> createPieceSpecificMoves(ChessPiece piece, Coordinates position) {
+    private static List<Coordinates> createPieceSpecificMoves(ChessBoard board, ChessPiece piece, Coordinates position) {
         List<Coordinates> outputList = new ArrayList<>();
 
         switch (piece) {
@@ -65,61 +62,59 @@ public class CoverageCalculator {
                 break;
             case QUEEN:
             case BISHOP:
-                outputList.addAll(createDiagonalMoves(position));
+                outputList.addAll(createDiagonalMoves(board, position));
                 if (piece == BISHOP) break;
             default:
-                outputList.addAll(createFileMoves(position));
-                outputList.addAll(createColumnMoves(position));
+                outputList.addAll(createStraightMoves(board, position));
                 break;
         }
 
         return outputList;
     }
 
-    private static List<Coordinates> createFileMoves(Coordinates originalPosition) {
-        List<Coordinates> outputList = new ArrayList<>();
-        outputList.add(originalPosition);
+    private static List<Coordinates> createStraightMoves(ChessBoard board, Coordinates originalPosition) {
+        Collection<Coordinates> leftwardMoveList = new ArrayList<>(),
+                rightwardMoveList = new ArrayList<>(),
+                downwardMoveList = new ArrayList<>(),
+                upwardMoveList = new ArrayList<>();
 
         for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
-            Coordinates down = originalPosition.immutableAdd(new Coordinates(0, i));
-            Coordinates up = originalPosition.immutableAdd(new Coordinates(0, -i));
-            outputList.add(up);
-            outputList.add(down);
+            leftwardMoveList.add(originalPosition.immutableAdd(-i, 0));
+            rightwardMoveList.add(originalPosition.immutableAdd(i, 0));
+            upwardMoveList.add(originalPosition.immutableAdd(0, -i));
+            downwardMoveList.add(originalPosition.immutableAdd(0, i));
         }
 
-        return outputList;
+        List<Coordinates> out = new ArrayList<>(removeAllIllegalMoves(board, leftwardMoveList, false));
+        out.addAll(removeAllIllegalMoves(board, rightwardMoveList, true));
+        out.addAll(removeAllIllegalMoves(board, upwardMoveList, false));
+        out.addAll(removeAllIllegalMoves(board, downwardMoveList, true));
+        out.add(originalPosition);
+
+        return out;
     }
 
-    private static List<Coordinates> createColumnMoves(Coordinates originalPosition) {
-        List<Coordinates> outputList = new ArrayList<>();
-        outputList.add(originalPosition);
+    private static List<Coordinates> createDiagonalMoves(ChessBoard board, Coordinates originalPosition) {
+        Collection<Coordinates> upLeftMoveList = new ArrayList<>(),
+                upRightMoveList = new ArrayList<>(),
+                downLeftMoveList = new ArrayList<>(),
+                downRightMoveList = new ArrayList<>();
 
         for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
-            Coordinates right = originalPosition.immutableAdd(new Coordinates(i, 0));
-            Coordinates left = originalPosition.immutableAdd(new Coordinates(-i, 0));
-            outputList.add(left);
-            outputList.add(right);
+            upLeftMoveList.add(originalPosition.immutableAdd(-i, -i));
+            upRightMoveList.add(originalPosition.immutableAdd(i, -i));
+            downLeftMoveList.add(originalPosition.immutableAdd(-i, i));
+            downRightMoveList.add(originalPosition.immutableAdd(i, i));
         }
 
-        return outputList;
-    }
+        List<Coordinates> out = new ArrayList<>();
+        out.add(originalPosition);
+        out.addAll(removeAllIllegalMoves(board, upLeftMoveList, false));
+        out.addAll(removeAllIllegalMoves(board, downLeftMoveList, false));
+        out.addAll(removeAllIllegalMoves(board, upRightMoveList, true));
+        out.addAll(removeAllIllegalMoves(board, downRightMoveList, true));
 
-    private static List<Coordinates> createDiagonalMoves(Coordinates originalPosition) {
-        List<Coordinates> outputList = new ArrayList<>();
-        outputList.add(originalPosition);
-
-        for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
-            Coordinates topLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(i, -i)));
-            Coordinates topRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(i, i)));
-            Coordinates bottomLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(-i, -i)));
-            Coordinates bottomRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(-i, i)));
-            outputList.add(topLeft);
-            outputList.add(topRight);
-            outputList.add(bottomLeft);
-            outputList.add(bottomRight);
-        }
-
-        return outputList;
+        return out;
     }
 
     private static List<Coordinates> createAdjacentMoves(Coordinates originalPosition) {
@@ -127,7 +122,7 @@ public class CoverageCalculator {
 
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                Coordinates newCoordinates = originalPosition.immutableAdd(new Coordinates(x, y));
+                Coordinates newCoordinates = originalPosition.immutableAdd(x, y);
                 outputList.add(newCoordinates);
             }
         }
@@ -143,16 +138,46 @@ public class CoverageCalculator {
         };
 
         for (int[] moveOutline : moveOutlines) {
-            Coordinates topLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(moveOutline[0], -moveOutline[1])));
-            Coordinates topRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(moveOutline[0], moveOutline[1])));
-            Coordinates bottomLeft = new Coordinates(originalPosition.immutableAdd(new Coordinates(-moveOutline[0], -moveOutline[1])));
-            Coordinates bottomRight = new Coordinates(originalPosition.immutableAdd(new Coordinates(-moveOutline[0], moveOutline[1])));
-            outputList.add(topLeft);
-            outputList.add(topRight);
-            outputList.add(bottomLeft);
-            outputList.add(bottomRight);
+            outputList.add(originalPosition.immutableAdd(moveOutline[0], -moveOutline[1]));
+            outputList.add(originalPosition.immutableAdd(moveOutline[0], moveOutline[1]));
+            outputList.add(originalPosition.immutableAdd(-moveOutline[0], -moveOutline[1]));
+            outputList.add(originalPosition.immutableAdd(-moveOutline[0], moveOutline[1]));
         }
 
         return outputList;
+    }
+
+    private static Collection<Coordinates> removeAllIllegalMoves(ChessBoard board, Collection<Coordinates> coordinatesList, boolean isAscending) {
+        coordinatesList = filterOutOfBoundsMoves(coordinatesList);
+        return removeBlockedMoves(board, coordinatesList, isAscending);
+    }
+
+    private static List<Coordinates> filterOutOfBoundsMoves(Collection<Coordinates> moveList) {
+        return moveList.stream()
+                .filter(coordinates -> coordinates.getX() >= 0 && coordinates.getX() < ChessBoard.BOARD_LENGTH)
+                .filter(coordinates -> coordinates.getY() >= 0 && coordinates.getY() < ChessBoard.BOARD_LENGTH)
+                .collect(Collectors.toList());
+    }
+
+    private static Collection<Coordinates> removeBlockedMoves(ChessBoard board, Collection<Coordinates> coordinatesList, boolean isAscending) {
+        NavigableSet<Coordinates> sortedMoves;
+
+        if (isAscending) {
+            sortedMoves = new TreeSet<>(coordinatesList);
+            for (Coordinates move : sortedMoves) {
+                ChessPiece currentPiece = board.getTile(move).getCurrentPiece();
+                if (currentPiece != null)
+                    return sortedMoves.headSet(move);
+            }
+            return coordinatesList;
+        }
+        sortedMoves = new TreeSet<>(coordinatesList).descendingSet();
+
+        for (Coordinates move : sortedMoves) {
+            ChessPiece currentPiece = board.getTile(move).getCurrentPiece();
+            if (currentPiece != null)
+                return sortedMoves.headSet(move);
+        }
+        return coordinatesList;
     }
 }
