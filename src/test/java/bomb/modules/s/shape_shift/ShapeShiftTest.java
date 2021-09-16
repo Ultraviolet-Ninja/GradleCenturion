@@ -29,7 +29,7 @@ public class ShapeShiftTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider() {
+    public Object[][] trainingVideoTestProvider() {
         ConditionSetter firstVideo = this::testOneSetup;
         ConditionSetter secondVideo = this::testTwoSetup;
         return new Object[][]{
@@ -41,14 +41,14 @@ public class ShapeShiftTest {
         };
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoTest(ConditionSetter setter, ShapeEnd[] expectedArr, ShapeEnd left, ShapeEnd right) {
         setter.setCondition();
         assertPairEquals(expectedArr, ShapeShift.solve(left, right));
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         ConditionSetter firstTake = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter secondTake = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter thirdTake = WidgetSimulations::videoTwoTakeTwo;

@@ -28,7 +28,7 @@ public class BitwiseTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         return new ConditionSetter[][]{
                 {
                     () -> {}
@@ -45,20 +45,20 @@ public class BitwiseTest {
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(ConditionSetter setter) {
         setter.setCondition();
         Bitwise.getByte(NOT);
     }
 
     @DataProvider
-    public Object[][] minimumConditionProvider() {
+    public Object[][] minimumConditionTestProvider() {
         return new Object[][]{
                 {MIN_AND, AND}, {MIN_OR, OR}, {MIN_XOR, XOR}, {MIN_NOT, NOT}
         };
     }
 
-    @Test(dataProvider = "minimumConditionProvider")
+    @Test(dataProvider = "minimumConditionTestProvider")
     public void minimumConditionTest(String expected, BitwiseOps operation) {
         setEssentialFalseConditions();
         Widget.setDoubleAs(2);
@@ -67,13 +67,13 @@ public class BitwiseTest {
     }
 
     @DataProvider
-    public Object[][] maximumConditionProvider() {
+    public Object[][] maximumConditionTestProvider() {
         return new Object[][]{
                 {MAX_AND, AND}, {MAX_OR, OR}, {MAX_XOR, XOR}, {MAX_NOT, NOT}
         };
     }
 
-    @Test(dataProvider = "maximumConditionProvider")
+    @Test(dataProvider = "maximumConditionTestProvider")
     public void maximumConditionTest(String expected, BitwiseOps operation) {
         setEssentialTrueConditions();
         maximizeConditions();

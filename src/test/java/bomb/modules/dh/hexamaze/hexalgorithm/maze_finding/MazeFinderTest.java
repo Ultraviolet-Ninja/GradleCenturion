@@ -7,12 +7,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
-import static org.testng.Assert.fail;
 
 public class MazeFinderTest {
     @BeforeClass
@@ -29,14 +27,14 @@ public class MazeFinderTest {
     }
 
     @DataProvider
-    public Object[][] comparatorProvider() {
+    public Object[][] comparatorTestProvider() {
         return new Object[][]{
                 {"n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,c,n,n,n,n"},
                 {"n,n,n,rt,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n"}
         };
     }
 
-    @Test(dataProvider = "comparatorProvider")
+    @Test(dataProvider = "comparatorTestProvider")
     public void comparatorTest(String line) {
         assertNotNull(HexHashLibrary.find(hexagonFromLine(line)));
     }

@@ -27,7 +27,7 @@ public class SimonScreamsTest {
     }
 
     @DataProvider
-    public Object[][] initMethodExceptionProvider() {
+    public Object[][] initializeMethodExceptionProvider() {
         testReset();
         ConditionSetter empty = () -> {
         };
@@ -39,7 +39,7 @@ public class SimonScreamsTest {
         };
     }
 
-    @Test(dataProvider = "initMethodExceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "initializeMethodExceptionProvider", expectedExceptions = IllegalArgumentException.class)
     public void initMethodExceptionTest(ConditionSetter setter, Screams[] arr) {
         setter.setCondition();
 
@@ -54,7 +54,7 @@ public class SimonScreamsTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProviderOne() {
+    public Object[][] trainingVideoTestProviderOne() {
         testReset();
         setUpOne();
         return new Object[][]{
@@ -65,7 +65,7 @@ public class SimonScreamsTest {
     }
 
 
-    @Test(dataProvider = "trainingVideoProviderOne")
+    @Test(dataProvider = "trainingVideoTestProviderOne")
     public void trainingVideoTestOne(Screams[] flashOrder, String expected) {
         assertEquals(SimonScreams.nextSolve(flashOrder), expected);
     }
@@ -85,7 +85,7 @@ public class SimonScreamsTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProviderTwo() {
+    public Object[][] trainingVideoTestProviderTwo() {
         testReset();
         setUpTwo();
         return new Object[][]{
@@ -95,7 +95,7 @@ public class SimonScreamsTest {
         };
     }
 
-    @Test(dataProvider = "trainingVideoProviderTwo")
+    @Test(dataProvider = "trainingVideoTestProviderTwo")
     public void trainingVideoTestTwo(Screams[] flashOrder, String expected) {
         assertEquals(SimonScreams.nextSolve(flashOrder), expected);
     }
