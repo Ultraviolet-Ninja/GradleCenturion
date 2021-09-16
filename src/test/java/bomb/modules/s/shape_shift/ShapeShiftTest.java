@@ -49,13 +49,13 @@ public class ShapeShiftTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter firstTake = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter secondTake = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter thirdTake = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter takeOne = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter takeTwo = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter takeThree = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
-                {firstTake, new ShapeEnd[]{TICKET, POINT}, FLAT, ROUND},
-                {secondTake, new ShapeEnd[]{FLAT, FLAT}, POINT, FLAT},
-                {thirdTake, new ShapeEnd[]{FLAT, TICKET}, TICKET, POINT}
+                {takeOne, new ShapeEnd[]{TICKET, POINT}, FLAT, ROUND},
+                {takeTwo, new ShapeEnd[]{FLAT, FLAT}, POINT, FLAT},
+                {takeThree, new ShapeEnd[]{FLAT, TICKET}, TICKET, POINT}
         };
     }
 
