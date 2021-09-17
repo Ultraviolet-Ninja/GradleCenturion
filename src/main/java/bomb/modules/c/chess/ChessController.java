@@ -58,9 +58,9 @@ public class ChessController implements Resettable {
     private EventHandler<KeyEvent> createTextFieldEvent() {
         return event -> {
             String positionInput = positionTextField.getText();
-            if (positionInput.matches(Chess.VALIDITY_REGEX)) {
-                positionList.set(previousPosition, positionInput);
-            }
+            String inputToSet = positionInput.matches(Chess.VALIDITY_REGEX) ? positionInput : "";
+            positionList.set(previousPosition, inputToSet);
+
             submitButton.setDisable(areAnyPositionsInvalid());
         };
     }
