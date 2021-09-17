@@ -1,13 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/15.0.1"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/c/chess.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.c.chess.ChessController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="268.0" minHeight="10.0" prefHeight="268.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="164.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="368.0" minHeight="10.0" prefHeight="368.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <MFXTextField fx:id="positionTextField">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+            </MFXTextField>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+         <children>
+            <MFXTextField fx:id="outputTextField">
+               <VBox.margin>
+                  <Insets bottom="50.0" />
+               </VBox.margin>
+            </MFXTextField>
+            <MFXButton id="submit-button" fx:id="submitButton" text="Submit" />
+         </children>
+      </VBox>
+      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <MFXButton id="submit-button" fx:id="firstPositionButton" text="1" />
+            <MFXButton id="submit-button" fx:id="secondPositionButton" text="2">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="thirdPositionButton" text="3">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="fourthPositionButton" text="4">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="fifthPositionButton" text="5">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="sixthPositionButton" text="6">
+               <HBox.margin>
+                  <Insets left="15.0" />
+               </HBox.margin>
+            </MFXButton>
+         </children>
+      </HBox>
+   </children>
+</GridPane>

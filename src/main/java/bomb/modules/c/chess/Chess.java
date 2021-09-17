@@ -10,6 +10,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Chess extends Widget {
+    public static final String VALIDITY_REGEX = "[A-Fa-f]-?[1-6]";
+
     private static final char INT_CONVERSION_LETTER = 'A';
 
     public static String solve(List<String> inputCoordinateList) throws IllegalArgumentException, IllegalStateException {
@@ -115,7 +117,7 @@ public class Chess extends Widget {
             throw new IllegalArgumentException("Every space must be filled with a move");
 
         for (String chessCoordinate : inputCoordinateList) {
-            if (!chessCoordinate.matches("[A-Fa-f]-?[1-6]"))
+            if (!chessCoordinate.matches(VALIDITY_REGEX))
                 throw new IllegalArgumentException("Coordinate doesn't match the specified format");
         }
     }
