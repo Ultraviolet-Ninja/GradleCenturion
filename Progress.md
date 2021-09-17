@@ -4,6 +4,7 @@
 - Bitwise Ops
 - Blind Alley
 - Boolean Venn Diagram
+- Chess
 - Chord Qualities
 - Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using A*)
 - Emoji Math
@@ -20,15 +21,14 @@
 - The Bulb
 - TwoBit
 
-19/100 + Colored Switches
+20/100 + Colored Switches
 
 ### Incomplete Modules
-- Chess
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 
-4/100
+3/100
 
 ### Untouched Modules
 - 3D Maze
