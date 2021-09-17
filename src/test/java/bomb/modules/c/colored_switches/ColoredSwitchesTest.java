@@ -21,19 +21,19 @@ public class ColoredSwitchesTest {
     }
 
     @DataProvider
-    public Object[][] preemptiveMoveExceptionProvider() {
+    public Object[][] preemptiveMoveExceptionTestProvider() {
         return new Byte[][]{
                 {-1}, {32}
         };
     }
 
-    @Test(dataProvider = "preemptiveMoveExceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "preemptiveMoveExceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void preemptiveMoveTest(byte startingState) {
         ColoredSwitches.producePreemptiveMoveList(startingState);
     }
 
     @DataProvider
-    public Object[][] finalMoveListExceptionProvider() {
+    public Object[][] finalMoveListExceptionTestProvider() {
         return new Object[][]{
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE}, 0},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE, RED}, 0},
@@ -41,19 +41,19 @@ public class ColoredSwitchesTest {
         };
     }
 
-    @Test(dataProvider = "finalMoveListExceptionProvider", expectedExceptions = {IllegalStateException.class, IllegalArgumentException.class})
+    @Test(dataProvider = "finalMoveListExceptionTestProvider", expectedExceptions = {IllegalStateException.class, IllegalArgumentException.class})
     public void finalMoveListExceptionTest(SwitchColor[] switchArray, int desiredState) {
         ColoredSwitches.produceFinalMoveList(switchArray, (byte) desiredState);
     }
 
     @DataProvider
-    public Object[][] validPreemptiveMoveProvider() {
+    public Object[][] validPreemptiveMoveTestProvider() {
         return new Object[][]{
                 {0, new String[]{"1", "5", "2"}}, {31, new String[]{"3", "1", "2"}}, {7, new String[]{"2", "1", "3"}}
         };
     }
 
-    @Test(dataProvider = "validPreemptiveMoveProvider")
+    @Test(dataProvider = "validPreemptiveMoveTestProvider")
     public void validPreemptiveMoveTest(int startingState, String[] expectedResults) {
         List<String> converted = Arrays.asList(expectedResults);
 

@@ -28,7 +28,7 @@ public class MicroController extends Widget {
     }
 
     private static void validateInput(String moduleSerialNumbers, AbstractController controller) {
-        serialCodeChecker();
+        checkSerialCode();
         if (!moduleSerialNumbers.matches("\\d{1,2}"))
             throw new IllegalArgumentException("Module serial number wasn't 2 numbers");
         if (controller == null)

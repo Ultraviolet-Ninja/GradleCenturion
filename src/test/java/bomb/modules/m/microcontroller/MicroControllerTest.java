@@ -31,13 +31,13 @@ public class MicroControllerTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         return new Object[][]{
                 {"a", "12", null}, {"akw234", "a1", null}, {"akw234", "31", null}
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(String serialCode, String moduleSerialNumbers, AbstractController controller) {
         Widget.setSerialCode(serialCode);
 
