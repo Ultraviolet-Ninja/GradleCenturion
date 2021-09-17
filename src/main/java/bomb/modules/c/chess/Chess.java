@@ -127,7 +127,7 @@ public class Chess extends Widget {
                 .map(chessCoordinate -> chessCoordinate.toUpperCase().replace("-", ""))
                 .collect(Collectors.toSet());
         if (uniqueCoordinateChecker.size() != ChessBoard.BOARD_LENGTH)
-            throw new IllegalArgumentException("Size mismatch");
+            throw new IllegalArgumentException("Not all positions were unique. Please remove duplicates");
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {

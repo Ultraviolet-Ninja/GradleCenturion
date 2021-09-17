@@ -40,8 +40,16 @@ public class CoverageCalculator {
             }
         }
 
-        if (uncoveredTiles.size() != 1)
-            throw new IllegalStateException("There should only be one uncovered tile");
+        if (uncoveredTiles.size() != 1) {
+            String moreThanOneTileError = """
+                There's more than one tile uncovered.
+                Are you sure you entered the positions in correctly?
+                """;
+
+            throw new IllegalStateException(uncoveredTiles.size() > 1 ?
+                    moreThanOneTileError :
+                    "All tiles were covered");
+        }
         return uncoveredTiles.get(0);
     }
 

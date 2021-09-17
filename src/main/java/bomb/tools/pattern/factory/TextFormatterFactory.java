@@ -61,7 +61,7 @@ public class TextFormatterFactory {
             if (!change.isContentChange()) return change;
 
             String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b[A-Fa-f]-?[1-6]?\\b"))
+            if (text.isEmpty() || text.matches("\\b[A-Fa-f]-?[1-6]?"))
                 return change;
 
             return null;
