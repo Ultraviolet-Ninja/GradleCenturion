@@ -26,7 +26,7 @@ public class NeutralizationTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         ConditionSetter empty = () -> {
         };
         ConditionSetter validSetup = this::setupOne;
@@ -35,7 +35,7 @@ public class NeutralizationTest {
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(ConditionSetter setter, int vol, Color acidColor) {
         setter.setCondition();
         Neutralization.titrate(vol, acidColor);
@@ -76,7 +76,7 @@ public class NeutralizationTest {
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
@@ -90,7 +90,7 @@ public class NeutralizationTest {
         };
     }
 
-    @Test(dataProvider = "theGreatBerateProvider")
+    @Test(dataProvider = "theGreatBerateSimulationProvider")
     public void theGreatBerateTest(ConditionSetter setter, int vol, Color acidColor, String[] expectedArr) {
         setter.setCondition();
         assertEqual(vol, acidColor, expectedArr);

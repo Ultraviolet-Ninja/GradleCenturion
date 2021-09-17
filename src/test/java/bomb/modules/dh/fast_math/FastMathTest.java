@@ -19,7 +19,7 @@ public class FastMathTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         ConditionSetter empty = () -> {
         };
         ConditionSetter setSerialCode = () -> Widget.setSerialCode("fr4op2");
@@ -28,20 +28,20 @@ public class FastMathTest {
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(ConditionSetter setter, String input) {
         setter.setCondition();
         FastMath.solve(input);
     }
 
     @DataProvider
-    public Object[][] allPreconditionProvider() {
+    public Object[][] allPreconditionTestProvider() {
         return new String[][]{
                 {"40", "zz"}, {"81", "xS"}, {"22", "KK"}
         };
     }
 
-    @Test(dataProvider = "allPreconditionProvider")
+    @Test(dataProvider = "allPreconditionTestProvider")
     public void allPreconditionTest(String expected, String input) {
         Widget.setPortValue(Port.SERIAL, 1);
         Widget.setPortValue(Port.RJ45, 1);
@@ -53,13 +53,13 @@ public class FastMathTest {
     }
 
     @DataProvider
-    public Object[][] belowZeroProvider() {
+    public Object[][] belowZeroTestProvider() {
         return new String[][]{
                 {"41", "ab"}, {"30", "Dg"}, {"43", "BX"}
         };
     }
 
-    @Test(dataProvider = "belowZeroProvider")
+    @Test(dataProvider = "belowZeroTestProvider")
     public void belowZeroTest(String expected, String input) {
         Widget.setSerialCode("fr4op2");
         Widget.setDBatteries(4);//In total, adds -20 to the count
@@ -68,13 +68,13 @@ public class FastMathTest {
     }
 
     @DataProvider
-    public Object[][] noPreconditionProvider() {
+    public Object[][] noPreconditionTestProvider() {
         return new String[][]{
                 {"25", "aa"}, {"40", "xS"}, {"14", "KT"}
         };
     }
 
-    @Test(dataProvider = "noPreconditionProvider")
+    @Test(dataProvider = "noPreconditionTestProvider")
     public void noPreconditionTest(String expected, String input) {
         Widget.setSerialCode("nr4op2");
 

@@ -29,7 +29,7 @@ public class ShapeShiftTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider() {
+    public Object[][] trainingVideoTestProvider() {
         ConditionSetter firstVideo = this::testOneSetup;
         ConditionSetter secondVideo = this::testTwoSetup;
         return new Object[][]{
@@ -41,21 +41,21 @@ public class ShapeShiftTest {
         };
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoTest(ConditionSetter setter, ShapeEnd[] expectedArr, ShapeEnd left, ShapeEnd right) {
         setter.setCondition();
         assertPairEquals(expectedArr, ShapeShift.solve(left, right));
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
-        ConditionSetter firstTake = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter secondTake = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter thirdTake = WidgetSimulations::videoTwoTakeTwo;
+    public Object[][] theGreatBerateSimulationProvider() {
+        ConditionSetter takeOne = WidgetSimulations::theGreatBerateVideoOne;
+        ConditionSetter takeTwo = WidgetSimulations::theGreatBerateVideoTwo;
+        ConditionSetter takeThree = WidgetSimulations::videoTwoTakeTwo;
         return new Object[][]{
-                {firstTake, new ShapeEnd[]{TICKET, POINT}, FLAT, ROUND},
-                {secondTake, new ShapeEnd[]{FLAT, FLAT}, POINT, FLAT},
-                {thirdTake, new ShapeEnd[]{FLAT, TICKET}, TICKET, POINT}
+                {takeOne, new ShapeEnd[]{TICKET, POINT}, FLAT, ROUND},
+                {takeTwo, new ShapeEnd[]{FLAT, FLAT}, POINT, FLAT},
+                {takeThree, new ShapeEnd[]{FLAT, TICKET}, TICKET, POINT}
         };
     }
 

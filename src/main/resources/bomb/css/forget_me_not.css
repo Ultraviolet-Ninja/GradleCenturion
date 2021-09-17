@@ -33,20 +33,20 @@
 #stage-counter {
     -fx-font-size: 45;
     -fx-background-color: black;
-    -fx-background-radius: 10 10 10 10;
+    -fx-background-radius: 15;
     -fx-text-fill: #2eff00;
     -fx-border-color: #85e0ff;
-    -fx-border-radius: 10;
+    -fx-border-radius: 15;
     -fx-border-width: 3;
 }
 
 #confirmation-field {
     -fx-background-color: black;
-    -fx-background-radius: 10 10 10 10;
+    -fx-background-radius: 15;
     -fx-text-fill: #2eff00;
     -fx-font-size: 20;
     -fx-border-color: #85e0ff;
-    -fx-border-radius: 10;
+    -fx-border-radius: 15;
     -fx-border-width: 3;
     -fx-prompt-text-fill: #38b822;
     -mfx-line-stroke-width: 0;
@@ -54,11 +54,11 @@
 
 #output-area {
     -fx-background-color: black;
-    -fx-background-radius: 10 10 10 10;
+    -fx-background-radius: 15;
     -fx-text-fill: #2eff00;
     -fx-font-size: 35;
     -fx-border-color: #85e0ff;
-    -fx-border-radius: 10;
+    -fx-border-radius: 15;
     -fx-border-width: 3;
     -fx-padding: 5;
 }

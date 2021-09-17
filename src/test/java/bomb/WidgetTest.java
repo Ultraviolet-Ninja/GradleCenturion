@@ -61,7 +61,7 @@ public class WidgetTest {
     public void negativePortPlateTest(int val, int expected) {
         Widget.setNumberOfPlates(val);
 
-        assertEquals(Widget.getNumPlates(), expected);
+        assertEquals(Widget.getNumPortPlates(), expected);
     }
 
     @Test(dataProvider = "negativeValueProvider")

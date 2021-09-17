@@ -4,6 +4,7 @@
 - Bitwise Ops
 - Blind Alley
 - Boolean Venn Diagram
+- Chess
 - Chord Qualities
 - Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using A*)
 - Emoji Math
@@ -17,17 +18,17 @@
 - Simon Screams
 - Souvenir
 - Switches
+- The Bulb
 - TwoBit
 
-18/100 + Colored Switches
+20/100 + Colored Switches
 
 ### Incomplete Modules
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
-- The Bulb
 
-4/100
+3/100
 
 ### Untouched Modules
 - 3D Maze
@@ -40,12 +41,11 @@
 - Broken Button
 - Caesar Cipher
 - Cheap Checkout
-- Chess
 - Color Flash
 - Color Math
 - Color Squares
 - Combination Lock
-- Complex Button
+- Complicated Buttons
 - Connection Check
 - Coordinates
 - Crazy Talk
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-78/100
+77/100

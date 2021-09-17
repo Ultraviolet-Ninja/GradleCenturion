@@ -22,7 +22,7 @@ public class ForgetMeNotTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         ConditionSetter blank = () -> {
         };
         ConditionSetter activatedForgetMeNot = () -> Widget.setIsForgetMeNotActive(true);
@@ -35,7 +35,7 @@ public class ForgetMeNotTest {
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions =
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions =
             {IllegalStateException.class, IllegalArgumentException.class})
     public void exceptionTest(ConditionSetter setup) {
         setup.setCondition();
@@ -43,7 +43,7 @@ public class ForgetMeNotTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider() {
+    public Object[][] trainingVideoTestProvider() {
         ConditionSetter widgetSetup = () -> {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode("QS1LN4");
@@ -61,7 +61,7 @@ public class ForgetMeNotTest {
         };
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideo(ConditionSetter setup, int[] input, String expected) {
         setup.setCondition();
         for (int number : input)
@@ -69,7 +69,7 @@ public class ForgetMeNotTest {
         assertEquals(ForgetMeNot.stringifyFinalCode(), expected);
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void getStageTest(ConditionSetter setup, int[] input, String expected) {
         setup.setCondition();
         for (int number : input)
@@ -78,7 +78,7 @@ public class ForgetMeNotTest {
     }
 
     @DataProvider
-    public Object[][] createFirstNumberBranchProvider() {
+    public Object[][] createFirstNumberBranchTestProvider() {
         String serialCode = "12jaw3";
         ConditionSetter setupCarIndicatorUnlit = () -> {
             Widget.setIsForgetMeNotActive(true);
@@ -103,7 +103,7 @@ public class ForgetMeNotTest {
         };
     }
 
-    @Test(dataProvider = "createFirstNumberBranchProvider")
+    @Test(dataProvider = "createFirstNumberBranchTestProvider")
     public void createFirstNumberBranchTest(ConditionSetter setup, int input, String expected) {
         setup.setCondition();
         ForgetMeNot.add(input);
@@ -111,7 +111,7 @@ public class ForgetMeNotTest {
     }
 
     @DataProvider
-    public Object[][] createSecondNumberBranchProvider() {
+    public Object[][] createSecondNumberBranchTestProvider() {
         String serialCode = "00iu00";
         ConditionSetter setupFirstBranch = () -> {
             Widget.setIsForgetMeNotActive(true);
@@ -130,7 +130,7 @@ public class ForgetMeNotTest {
         };
     }
 
-    @Test(dataProvider = "createSecondNumberBranchProvider")
+    @Test(dataProvider = "createSecondNumberBranchTestProvider")
     public void createSecondNumberTest(ConditionSetter setup, int[] inputs, String expected) {
         setup.setCondition();
         for (int input : inputs)

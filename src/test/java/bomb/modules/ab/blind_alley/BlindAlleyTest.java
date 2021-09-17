@@ -65,7 +65,7 @@ public class BlindAlleyTest {
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         ConditionSetter partOne = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter partTwo = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter partThree = WidgetSimulations::videoTwoTakeTwo;
@@ -75,7 +75,7 @@ public class BlindAlleyTest {
         };
     }
 
-    @Test(dataProvider = "theGreatBerateProvider")
+    @Test(dataProvider = "theGreatBerateSimulationProvider")
     public void theGreatBerateTest(ConditionSetter setter, int[][] arr) {
         setter.setCondition();
         assertArrayEquals(arr);

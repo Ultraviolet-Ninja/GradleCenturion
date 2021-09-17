@@ -92,12 +92,11 @@ public class HexGrid extends AbstractHexagon {
      * @return The result HexNode
      */
     public HexNode retrieveNode(Coordinates pair) {
-        int[] values = pair.getCoords();
-        if (values[0] < 0 || values[0] >= hexagon.getSpan()) return null;
-        BufferedQueue<HexNode> column = exportTo2DQueue().get(values[0]);
+        if (pair.getX() < 0 || pair.getX() >= hexagon.getSpan()) return null;
+        BufferedQueue<HexNode> column = exportTo2DQueue().get(pair.getX());
 
-        if (values[1] < 0 || values[1] >= column.cap()) return null;
-        return column.get(values[1]);
+        if (pair.getY() < 0 || pair.getY() >= column.cap()) return null;
+        return column.get(pair.getY());
     }
 
     public void resetColorRing() {
@@ -105,8 +104,8 @@ public class HexGrid extends AbstractHexagon {
             rotateColorOrder();
     }
 
-    public ArrayList<String> hashStrings() {
-        ArrayList<String> outputs = new ArrayList<>(2);
+    public List<String> createHashStrings() {
+        List<String> outputs = new ArrayList<>(2);
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
         BufferedQueue<BufferedQueue<HexNode>> queues = hexagon.exportTo2DQueue();
 

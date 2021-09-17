@@ -85,7 +85,7 @@ public class Laundry extends Widget {
      * Last Digit of the Serial Code + the No. of All Batteries
      */
     private static void setColor() {
-        switch (balance(lastDigit() + getAllBatteries())) {
+        switch (balance(getSerialCodeLastDigit() + getAllBatteries())) {
             case 0 -> ARTICLE.setColor(Clothing.Color.RUBY);
             case 1 -> ARTICLE.setColor(Clothing.Color.STAR);
             case 2 -> ARTICLE.setColor(Clothing.Color.SAPPHIRE);

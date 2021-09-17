@@ -54,7 +54,7 @@ public class ForgetMeNot extends Widget {
         if (countIndicators(UNLIT) == 0)
             return stageNumber + countIndicators(LIT);
 
-        return stageNumber + lastDigit();
+        return stageNumber + getSerialCodeLastDigit();
     }
 
     private static int createSecondNumber(int stageNumber) {

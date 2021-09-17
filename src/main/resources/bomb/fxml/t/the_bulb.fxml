@@ -1,141 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.ToggleGroup?>
-
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
-          prefWidth="1160.0"
-          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+<?import javafx.scene.layout.VBox?>
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/t/the_bulb.css"
+          xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.t.bulb.TheBulbController">
     <columnConstraints>
-        <ColumnConstraints/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints/>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
     </rowConstraints>
-    <GridPane prefHeight="741.0" prefWidth="1192.0">
+    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+        <JFXTextArea fx:id="bulbResults" editable="false" prefHeight="600.0" prefWidth="600.0" promptText="Results">
+            <VBox.margin>
+                <Insets left="50.0" right="50.0" top="200.0" bottom="200.0"/>
+            </VBox.margin>
+        </JFXTextArea>
+    </VBox>
+    <GridPane>
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="282.0" minHeight="10.0" prefHeight="282.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="180.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="244.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES"/>
-            <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="261.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="273.0" minHeight="10.0" prefHeight="273.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="202.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="297.0" minHeight="10.0" prefHeight="164.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="231.0" minHeight="10.0" prefHeight="231.0" vgrow="SOMETIMES"/>
         </rowConstraints>
-        <Pane prefHeight="200.0" prefWidth="200.0">
-            <Rectangle fx:id="yellow" arcHeight="5.0" arcWidth="5.0" fill="YELLOW" height="99.0"
-                       layoutX="262.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
-            <Rectangle fx:id="red" arcHeight="5.0" arcWidth="5.0" fill="RED" height="99.0" layoutX="88.0"
-                       layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
-            <Rectangle fx:id="white" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="99.0"
-                       layoutX="984.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
-            <Rectangle fx:id="purple" arcHeight="5.0" arcWidth="5.0" fill="#cc0bdd" height="99.0"
-                       layoutX="813.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
-            <Rectangle fx:id="green" arcHeight="5.0" arcWidth="5.0" fill="#07c307" height="99.0"
-                       layoutX="453.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
-            <Rectangle fx:id="blue" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="99.0"
-                       layoutX="629.0" stroke="BLACK" strokeType="INSIDE" width="106.0"/>
-            <Label fx:id="redLabel" layoutX="101.0" layoutY="27.0" text="Is Red">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-            <Label fx:id="yellowLabel" layoutX="258.0" layoutY="181.0" text="Is Yellow">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-            <Label fx:id="greenLabel" layoutX="452.0" layoutY="27.0" text="Is Green">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-            <Label fx:id="blueLabel" layoutX="639.0" layoutY="181.0" text="Is Blue">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-            <Label fx:id="purpleLabel" layoutX="809.0" layoutY="27.0" text="Is Purple">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-            <Label fx:id="whiteLabel" layoutX="980.0" layoutY="181.0" text="Is White">
-                <font>
-                    <Font size="30.0"/>
-                </font>
-            </Label>
-        </Pane>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-            <TextArea fx:id="bulbResults" editable="false" prefHeight="261.0" prefWidth="424.0"
-                      promptText="Results" wrapText="true">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                <JFXRadioButton id="red-radio-button" onAction="#enableSubmitButton" text="Red">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="colorGroup"/>
+                    </toggleGroup>
+                </JFXRadioButton>
+                <JFXRadioButton id="yellow-radio-button" onAction="#enableSubmitButton" text="Yellow"
+                                toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton id="green-radio-button" onAction="#enableSubmitButton" text="Green"
+                                toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                <JFXRadioButton id="blue-radio-button" onAction="#enableSubmitButton" text="Blue"
+                                toggleGroup="$colorGroup"/>
+                <JFXRadioButton id="pink-radio-button" onAction="#enableSubmitButton" text="Pink"
+                                toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton id="default-radio-button" onAction="#enableSubmitButton" text="White"
+                                toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets top="20.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+        </GridPane>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <JFXRadioButton id="default-radio-button" onAction="#enableSubmitButton" text="Lit">
+                <toggleGroup>
+                    <ToggleGroup fx:id="luminosityGroup"/>
+                </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton id="default-radio-button" onAction="#enableSubmitButton" text="Not Lit"
+                            toggleGroup="$luminosityGroup">
                 <HBox.margin>
-                    <Insets left="380.0"/>
+                    <Insets left="80.0"/>
                 </HBox.margin>
-                <font>
-                    <Font size="24.0"/>
-                </font>
-            </TextArea>
+            </JFXRadioButton>
         </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-            <ToggleButton mnemonicParsing="false" onAction="#luminositySet" text="On">
-                <font>
-                    <Font size="36.0"/>
-                </font>
-                <HBox.margin>
-                    <Insets left="350.0"/>
-                </HBox.margin>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <JFXRadioButton id="default-radio-button" onAction="#enableSubmitButton" text="Opaque">
                 <toggleGroup>
-                    <ToggleGroup fx:id="opacity"/>
+                    <ToggleGroup fx:id="opacityGroup"/>
                 </toggleGroup>
-            </ToggleButton>
-            <ToggleButton mnemonicParsing="false" onAction="#luminositySet" text="Off">
-                <font>
-                    <Font size="36.0"/>
-                </font>
+            </JFXRadioButton>
+            <JFXRadioButton id="default-radio-button" onAction="#enableSubmitButton" text="Transparent"
+                            toggleGroup="$opacityGroup">
                 <HBox.margin>
-                    <Insets left="250.0"/>
+                    <Insets left="40.0"/>
                 </HBox.margin>
-                <toggleGroup>
-                    <fx:reference source="opacity"/>
-                </toggleGroup>
-            </ToggleButton>
+            </JFXRadioButton>
         </HBox>
-        <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-            <ToggleButton mnemonicParsing="false" onAction="#opacitySet" text="Opaque">
-                <font>
-                    <Font size="36.0"/>
-                </font>
-                <HBox.margin>
-                    <Insets left="270.0"/>
-                </HBox.margin>
-                <toggleGroup>
-                    <ToggleGroup fx:id="luminosity"/>
-                </toggleGroup>
-            </ToggleButton>
-            <ToggleButton mnemonicParsing="false" onAction="#opacitySet"
-                          text="See Through">
-                <font>
-                    <Font size="36.0"/>
-                </font>
-                <HBox.margin>
-                    <Insets left="250.0"/>
-                </HBox.margin>
-                <toggleGroup>
-                    <fx:reference source="luminosity"/>
-                </toggleGroup>
-            </ToggleButton>
-        </HBox>
+        <VBox alignment="CENTER" GridPane.rowIndex="3">
+            <JFXButton id="submit-button" fx:id="submitButton" disable="true" onAction="#submitBulbInfo" text="Submit"/>
+        </VBox>
     </GridPane>
 </GridPane>

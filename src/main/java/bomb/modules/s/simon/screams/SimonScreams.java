@@ -43,7 +43,7 @@ public class SimonScreams extends Widget {
      *                                  The array is not 6 elements long
      */
     public static void initialize(Screams[] order) throws IllegalArgumentException {
-        serialCodeChecker();
+        checkSerialCode();
         initialized = true;
         setOutputRules();
         lightOrder = new Star(order);

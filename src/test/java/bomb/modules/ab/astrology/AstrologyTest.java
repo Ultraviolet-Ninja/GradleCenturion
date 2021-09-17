@@ -37,26 +37,26 @@ public class AstrologyTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         return new Object[][]{
                 {ARIES, ARIES, ARIES}, {VENUS, VENUS, VENUS}, {FIRE, FIRE, FIRE}, {ARIES, MARS, EARTH, EARTH}, {VENUS}
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(AstroSymbol... set) {
         Astrology.calculate(set);
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider() {
+    public Object[][] trainingVideoTestProvider() {
         return new Object[][]{
                 {(POOR_OMEN + 4), EARTH, MARS, ARIES}, {(GOOD_OMEN + 2), WATER, MERCURY, TAURUS},
                 {(GOOD_OMEN + 3), FIRE, MERCURY, SAGITTARIUS}
         };
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoTest(String expected, AstroSymbol... set) {
         Widget.setSerialCode("jt3gu5");
 
@@ -64,7 +64,7 @@ public class AstrologyTest {
     }
 
     @DataProvider
-    public Object[][] interchangeabilityProvider() {
+    public Object[][] interchangeabilityTestProvider() {
         String expected = POOR_OMEN + 4;
         return new Object[][]{
                 {expected, EARTH, MARS, ARIES}, {expected, MARS, EARTH, ARIES}, {expected, MARS, ARIES, EARTH},
@@ -72,7 +72,7 @@ public class AstrologyTest {
         };
     }
 
-    @Test(dataProvider = "interchangeabilityProvider")
+    @Test(dataProvider = "interchangeabilityTestProvider")
     public void interchangeabilityTest(String expected, AstroSymbol... set) {
         Widget.setSerialCode("jt3gu5");
 
@@ -80,7 +80,7 @@ public class AstrologyTest {
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
@@ -90,7 +90,7 @@ public class AstrologyTest {
         };
     }
 
-    @Test(dataProvider = "theGreatBerateProvider")
+    @Test(dataProvider = "theGreatBerateSimulationProvider")
     public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstroSymbol... set) {
         cond.setCondition();
 

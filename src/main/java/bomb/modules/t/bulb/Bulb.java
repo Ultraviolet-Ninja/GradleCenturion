@@ -1,8 +1,6 @@
 package bomb.modules.t.bulb;
 
-public enum BulbProperties {
-    THE_BULB;
-
+public class Bulb {
     private Color color;
     private Light light;
     private Opacity opacity;
@@ -41,19 +39,7 @@ public enum BulbProperties {
     }
 
     public enum Color {
-        RED(javafx.scene.paint.Color.RED), YELLOW(javafx.scene.paint.Color.YELLOW),
-        GREEN(javafx.scene.paint.Color.web("#07c307")), BLUE(javafx.scene.paint.Color.DODGERBLUE),
-        PURPLE(javafx.scene.paint.Color.web("#cc0bdd")), WHITE(javafx.scene.paint.Color.WHITE);
-
-        private final javafx.scene.paint.Color associatedColor;
-
-        Color(javafx.scene.paint.Color color) {
-            associatedColor = color;
-        }
-
-        public javafx.scene.paint.Color getAssociatedColor() {
-            return associatedColor;
-        }
+        RED, YELLOW, GREEN, BLUE, PURPLE, WHITE
     }
 
     public enum Light {

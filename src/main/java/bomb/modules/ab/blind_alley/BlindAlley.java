@@ -55,12 +55,12 @@ public class BlindAlley extends Widget {
 
     private static void bottomLeft() {
         alleyCat[2][0] = convertToBool(hasLitIndicator(FRQ)) + convertToBool(hasLitIndicator(SIG)) +
-                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEven() == 0);
+                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEvenNumberInSerialCode() == 0);
     }
 
     private static void bottomMid() {
         alleyCat[2][1] = convertToBool(hasUnlitIndicator(FRK)) + convertToBool(hasLitIndicator(MSA)) +
-                convertToBool(portExists(PARALLEL)) + convertToBool(hasVowel());
+                convertToBool(portExists(PARALLEL)) + convertToBool(hasVowelInSerialCode());
     }
 
     private static void bottomRight() {
