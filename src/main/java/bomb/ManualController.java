@@ -94,9 +94,12 @@ public class ManualController {
     private void setupMap() throws IllegalArgumentException {
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
+        List<String> paneLocations = filesFromFolder(new File(path));
+        paneLocations.removeIf(location -> location.contains("component"));
+
         List<String> formattedNameList = formatWords(radioButtonList.iterator()),
-                paneLocations = filesFromFolder(new File(path)),
                 filteredLocations = filterLocations(paneLocations);
+
         List<Region> paneList = panesFromFolder(paneLocations);
         setPairs(radioButtonList, formattedNameList, paneList, filteredLocations);
     }
