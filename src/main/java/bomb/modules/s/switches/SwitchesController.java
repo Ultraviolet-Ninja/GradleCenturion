@@ -29,9 +29,9 @@ public class SwitchesController implements Resettable {
 
         for (int i = 0; i < Switches.BIT_LENGTH; i++) {
             if (allSwitches[i].isSelected())
-                startingState |= 1 << i;
+                startingState |= 1 << (Switches.BIT_LENGTH - i - 1);
             if (allLights[i].isSelected())
-                desiredState |= 1 << i;
+                desiredState |= 1 << (Switches.BIT_LENGTH - i - 1);
         }
 
         try {
