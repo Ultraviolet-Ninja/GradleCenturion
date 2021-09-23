@@ -2,8 +2,10 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
+    id 'edu.sc.seis.launch4j' version '2.5.0'
     id 'com.palantir.docker' version '0.28.0'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
 
@@ -32,13 +34,12 @@ repositories {
 }
 
 dependencies {
+    implementation 'eu.hansolo:Medusa:11.7'
     implementation 'com.opencsv:opencsv:5.5.2'
     implementation 'com.jfoenix:jfoenix:9.0.4'
     implementation 'org.javatuples:javatuples:1.2'
-    //implementation 'io.github.fvarrui:javpackager:1.5.1'
-    implementation 'eu.hansolo:Medusa:11.7'
-    implementation 'org.fxmisc.richtext:richtextfx:0.10.6'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
+    implementation 'org.fxmisc.richtext:richtextfx:0.10.6'
     implementation('io.github.palexdev:materialfx:11.12.0') {
         transitive(true)
         exclude group: "org.javafx"
