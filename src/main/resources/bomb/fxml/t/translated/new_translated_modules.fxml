@@ -1,8 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXMasonryPane?>
-<JFXMasonryPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.t.translated.NewTranslatedModuleController">
-   <children>
-      <fx:include source="component/button.fxml"/>
-   </children>
-</JFXMasonryPane>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0"
+         stylesheets="@../../../css/t/translated-tabs.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="bomb.modules.t.translated.NewTranslatedModuleController">
+    <tabs>
+        <Tab text="Language Select">
+            <content>
+                <GridPane>
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES"/>
+                    </rowConstraints>
+
+
+                </GridPane>
+            </content>
+        </Tab>
+        <Tab text="Translated Modules">
+            <content>
+                <JFXMasonryPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+                    <children>
+                        <fx:include source="component/button.fxml"/>
+                    </children>
+                </JFXMasonryPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>
