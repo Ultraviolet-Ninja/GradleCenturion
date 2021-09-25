@@ -1,6 +1,7 @@
 package bomb.modules.t.translated;
 
 import bomb.abstractions.Resettable;
+import bomb.modules.t.translated.LanguageCSVReader.LanguageColumn;
 import bomb.modules.t.translated.solutions.button.ButtonComponent;
 import bomb.modules.t.translated.solutions.gas.VentGasComponent;
 import bomb.modules.t.translated.solutions.morse.MorseCodeComponent;
@@ -53,8 +54,8 @@ public class TranslatedModuleController implements Resettable {
         return event -> {
             String buttonText = ((RadioButton)event.getSource()).getText();
             try {
-                Language currentLanguage = Language.translateText(buttonText);
-                List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguage);
+                LanguageColumn currentLanguageColumn = LanguageColumn.getLanguageFromString(buttonText);
+                List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguageColumn);
 //                buttonUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
             } catch (CsvValidationException | IOException e) {
