@@ -3,7 +3,9 @@ package bomb.modules.t.translated;
 import bomb.abstractions.Resettable;
 import bomb.modules.t.translated.solutions.button.ButtonComponent;
 import bomb.modules.t.translated.solutions.gas.VentGasComponent;
+import bomb.modules.t.translated.solutions.morse.MorseCodeComponent;
 import bomb.modules.t.translated.solutions.password.PasswordComponent;
+import bomb.modules.t.translated.solutions.wof.WOFComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.event.ActionEvent;
@@ -18,15 +20,21 @@ import javafx.scene.control.ToggleGroup;
 import java.io.IOException;
 import java.util.List;
 
-public class NewTranslatedModuleController implements Resettable {
+public class TranslatedModuleController implements Resettable {
     @FXML
     private ButtonComponent buttonUI;
+
+    @FXML
+    private MorseCodeComponent morseCodeUI;
 
     @FXML
     private PasswordComponent passwordUI;
 
     @FXML
     private VentGasComponent ventGasUI;
+
+    @FXML
+    private WOFComponent wofUI;
 
     @FXML
     private Tab translatedModuleTab;
@@ -38,15 +46,14 @@ public class NewTranslatedModuleController implements Resettable {
         for (Toggle toggle : flagGroup.getToggles()) {
             RadioButton source = (RadioButton) toggle;
             source.setOnAction(createButtonAction());
-
         }
     }
 
     private EventHandler<ActionEvent> createButtonAction() {
         return event -> {
-            RadioButton source = (RadioButton) event.getSource();
+            String buttonText = ((RadioButton)event.getSource()).getText();
             try {
-                Language currentLanguage = Language.translateText(source.getText());
+                Language currentLanguage = Language.translateText(buttonText);
                 List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguage);
 //                buttonUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
@@ -60,6 +67,6 @@ public class NewTranslatedModuleController implements Resettable {
     public void reset() {
         translatedModuleTab.setDisable(true);
         FacadeFX.resetToggleGroup(flagGroup);
-        buttonUI.reset();
+//        buttonUI.reset();
     }
 }

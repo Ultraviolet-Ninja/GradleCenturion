@@ -18,7 +18,7 @@ import java.util.List;
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.BUTTON_LABEL_ROW;
 
 public class ButtonComponent extends Pane implements Resettable, TranslationComponent {
-    private final ButtonProperties[] properties;
+    private final ButtonProperty[] properties;
 
     @FXML
     private ToggleGroup colorGroup, labelGroup;
@@ -32,7 +32,7 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
 
     public ButtonComponent() {
         super();
-        properties = new ButtonProperties[2];
+        properties = new ButtonProperty[2];
         FXMLLoader loader = new FXMLLoader(getClass().getResource("button.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -44,17 +44,17 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
     }
 
     public void initialize() {
-        redButton.setOnAction(createButtonAction(ButtonProperties.RED, Button.COLOR_INDEX));
-        yellowButton.setOnAction(createButtonAction(ButtonProperties.YELLOW, Button.COLOR_INDEX));
-        blueButton.setOnAction(createButtonAction(ButtonProperties.BLUE, Button.COLOR_INDEX));
-        whiteButton.setOnAction(createButtonAction(ButtonProperties.WHITE, Button.COLOR_INDEX));
-        detonateButton.setOnAction(createButtonAction(ButtonProperties.DETONATE, Button.LABEL_INDEX));
-        abortButton.setOnAction(createButtonAction(ButtonProperties.ABORT, Button.LABEL_INDEX));
-        pressButton.setOnAction(createButtonAction(ButtonProperties.PRESS, Button.LABEL_INDEX));
-        holdButton.setOnAction(createButtonAction(ButtonProperties.HOLD, Button.LABEL_INDEX));
+        redButton.setOnAction(createButtonAction(ButtonProperty.RED, Button.COLOR_INDEX));
+        yellowButton.setOnAction(createButtonAction(ButtonProperty.YELLOW, Button.COLOR_INDEX));
+        blueButton.setOnAction(createButtonAction(ButtonProperty.BLUE, Button.COLOR_INDEX));
+        whiteButton.setOnAction(createButtonAction(ButtonProperty.WHITE, Button.COLOR_INDEX));
+        detonateButton.setOnAction(createButtonAction(ButtonProperty.DETONATE, Button.LABEL_INDEX));
+        abortButton.setOnAction(createButtonAction(ButtonProperty.ABORT, Button.LABEL_INDEX));
+        pressButton.setOnAction(createButtonAction(ButtonProperty.PRESS, Button.LABEL_INDEX));
+        holdButton.setOnAction(createButtonAction(ButtonProperty.HOLD, Button.LABEL_INDEX));
     }
 
-    private EventHandler<ActionEvent> createButtonAction(ButtonProperties property, int index) {
+    private EventHandler<ActionEvent> createButtonAction(ButtonProperty property, int index) {
         return event -> {
             properties[index] = property;
             if (FacadeFX.hasSelectedToggle(colorGroup) && FacadeFX.hasSelectedToggle(labelGroup))
