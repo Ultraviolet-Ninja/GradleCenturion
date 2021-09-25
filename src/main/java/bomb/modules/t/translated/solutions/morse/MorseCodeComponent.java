@@ -1,4 +1,4 @@
-package bomb.modules.t.translated.component;
+package bomb.modules.t.translated.solutions.morse;
 
 import bomb.abstractions.Resettable;
 

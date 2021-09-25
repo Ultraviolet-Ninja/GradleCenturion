@@ -55,4 +55,16 @@ public class TextFormatterFactory {
             return null;
         });
     }
+
+    public static TextFormatter<String> createSixLetterTextFormatter() {
+        return new TextFormatter<>(change -> {
+            if (!change.isContentChange()) return change;
+
+            String text = change.getControlNewText();
+            if (text.isEmpty() || text.matches("\\b[a-zA-Z]{1,6}\\b"))
+                return change;
+
+            return null;
+        });
+    }
 }

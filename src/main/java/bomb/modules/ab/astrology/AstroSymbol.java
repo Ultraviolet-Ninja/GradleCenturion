@@ -26,7 +26,7 @@ public enum AstroSymbol implements Index {
     private final byte index;
 
     @Override
-    public int getIdx() {
+    public int getIndex() {
         return index;
     }
 

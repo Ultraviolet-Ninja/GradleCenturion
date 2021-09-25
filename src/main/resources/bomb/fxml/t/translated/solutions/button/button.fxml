@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="400.0"
+         type="Pane" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+              minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="562.0" minHeight="10.0" prefHeight="196.0" vgrow="SOMETIMES"/>
+            <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                <JFXRadioButton fx:id="redButton" text="Red">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="colorGroup"/>
+                    </toggleGroup>
+                    <VBox.margin>
+                        <Insets left="70.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton fx:id="yellowButton" text="Yellow" toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets left="70.0" top="7.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton fx:id="blueButton" text="Blue" toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets left="70.0" top="7.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton fx:id="whiteButton" text="White" toggleGroup="$colorGroup">
+                    <VBox.margin>
+                        <Insets left="70.0" top="7.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                <JFXRadioButton fx:id="detonateButton" text="Detonate">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="labelGroup"/>
+                    </toggleGroup>
+                    <VBox.margin>
+                        <Insets left="64.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton fx:id="pressButton" text="Press" toggleGroup="$labelGroup">
+                    <VBox.margin>
+                        <Insets left="64.0" top="7.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton fx:id="holdButton" text="Hold" toggleGroup="$labelGroup">
+                    <VBox.margin>
+                        <Insets left="64.0" top="7.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+                <JFXRadioButton fx:id="abortButton" text="Abort" toggleGroup="$labelGroup">
+                    <VBox.margin>
+                        <Insets left="64.0" top="7.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+        </GridPane>
+        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <MFXTextField fx:id="outputField" promptText="Tap or Hold"/>
+        </HBox>
+    </GridPane>
+</fx:root>

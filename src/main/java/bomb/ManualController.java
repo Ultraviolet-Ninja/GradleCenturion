@@ -95,7 +95,7 @@ public class ManualController {
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
         List<String> paneLocations = filesFromFolder(new File(path));
-        paneLocations.removeIf(location -> location.contains("component"));
+        paneLocations.removeIf(location -> location.contains("solutions"));
 
         List<String> formattedNameList = formatWords(radioButtonList.iterator()),
                 filteredLocations = filterLocations(paneLocations);
