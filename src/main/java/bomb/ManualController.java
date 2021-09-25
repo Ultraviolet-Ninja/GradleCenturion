@@ -94,14 +94,14 @@ public class ManualController {
     private void setupMap() throws IllegalArgumentException {
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
-        List<String> paneLocations = filesFromFolder(new File(path));
-        paneLocations.removeIf(location -> location.contains("solutions"));
+        List<String> filePathList = getFilesFromDirectory(new File(path));
+        filePathList.removeIf(location -> location.contains("solutions") || location.contains("new") || location.contains("old"));
 
-        List<String> formattedNameList = formatWords(radioButtonList.iterator()),
-                filteredLocations = filterLocations(paneLocations);
+        List<String> formattedRadioButtonNameList = formatWords(radioButtonList.iterator()),
+                filteredLocationNames = filterPathNames(filePathList);
 
-        List<Region> paneList = panesFromFolder(paneLocations);
-        setPairs(radioButtonList, formattedNameList, paneList, filteredLocations);
+        List<Region> regionList = createRegionList(filePathList);
+        setPairs(radioButtonList, formattedRadioButtonNameList, regionList, filteredLocationNames);
     }
 
     private List<String> formatWords(Iterator<Toggle> nameIterator) {
@@ -114,7 +114,7 @@ public class ManualController {
         return list;
     }
 
-    private List<Region> panesFromFolder(List<String> fileLocations) {
+    private List<Region> createRegionList(List<String> fileLocations) {
         List<Region> paneList = new ArrayList<>();
         ResetObserver resetObserver = new ResetObserver();
         try {
@@ -143,18 +143,18 @@ public class ManualController {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
-    private List<String> filesFromFolder(final File folder) throws IllegalArgumentException{
+    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws IllegalArgumentException{
         List<String> list = new ArrayList<>();
-        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())){
+        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())){
             if (fileEntry.isDirectory())
-                list.addAll(filesFromFolder(fileEntry));
+                list.addAll(getFilesFromDirectory(fileEntry));
             else
                 list.add(fileEntry.getPath());
         }
         return list;
     }
 
-    private List<String> filterLocations(List<String> originalLocations){
+    private List<String> filterPathNames(List<String> originalLocations){
         List<String> outputList = new ArrayList<>();
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);

@@ -1,13 +1,13 @@
 package bomb.modules.t.translated;
 
 import bomb.abstractions.Index;
-import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -17,11 +17,11 @@ public class LanguageCSVReader {
         if (language == null) throw new IllegalArgumentException("Language is null");
 
         List<String> dictionaryContent = new ArrayList<>();
-        InputStream in = Maze.class.getResourceAsStream("dictionary.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in)));
+        InputStream in = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
+        CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in), StandardCharsets.UTF_8));
         String[] dataRow;
         while ((dataRow = csvReader.readNext()) != null) {
-            dictionaryContent.add(dataRow[language.ordinal()]);
+            dictionaryContent.add(dataRow[language.getIndex()]);
         }
 
         return dictionaryContent;

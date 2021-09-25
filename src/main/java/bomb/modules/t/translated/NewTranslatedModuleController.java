@@ -38,7 +38,7 @@ public class NewTranslatedModuleController implements Resettable {
         for (Toggle toggle : flagGroup.getToggles()) {
             RadioButton source = (RadioButton) toggle;
             source.setOnAction(createButtonAction());
-            if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
+
         }
     }
 
@@ -48,7 +48,8 @@ public class NewTranslatedModuleController implements Resettable {
             try {
                 Language currentLanguage = Language.translateText(source.getText());
                 List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguage);
-                buttonUI.setContent(languageContent);
+//                buttonUI.setContent(languageContent);
+                if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
             } catch (CsvValidationException | IOException e) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
             }
