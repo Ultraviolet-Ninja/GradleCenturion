@@ -8,38 +8,38 @@ import static org.testng.Assert.assertEquals;
 public class AlphabetTest {
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] exceptionTestProvider() {
         return new Object[][]{
                 {"A"}, {"AABC"}
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(String exceptionInput) {
         Alphabet.order(exceptionInput);
     }
 
     @DataProvider
-    public Object[][] fourLetterProvider() {
+    public Object[][] fourLetterTestProvider() {
         return new Object[][]{
                 {"JQXZ", "XZQJ"}, {"OKBV", "KOVB"}, {"PQJS", "QJPS"}, {"IRNM", "RINM"},
                 {"QYDX", "YDXQ"}, {"ARGF", "FGAR"}
         };
     }
 
-    @Test(dataProvider = "fourLetterProvider")
+    @Test(dataProvider = "fourLetterTestProvider")
     public void fourLetterTest(String expected, String testPhrase) {
         assertEquals(Alphabet.order(testPhrase), expected);
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         return new Object[][]{
                 {"ZNYL", "ZYNL"}, {"YKQV", "QYVK"}, {"ACHZ", "HZAC"}
         };
     }
 
-    @Test(dataProvider = "theGreatBerateProvider")
+    @Test(dataProvider = "theGreatBerateSimulationProvider")
     public void theGreatBerate(String expected, String testPhrase) {
         assertEquals(Alphabet.order(testPhrase), expected);
     }

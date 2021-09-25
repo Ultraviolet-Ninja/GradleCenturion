@@ -12,25 +12,25 @@ public class EmojiMathTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider() {
+    public Object[][] trainingVideoTestProvider() {
         return new Object[][]{
                 {-1, "=)(=-=):|"}, {95, ":|:|+(="}, {189, "|:=)+|:)="}, {-10, ":(:)-)::)"}
         };
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoTest(int expected, String equation) {
         assertEquals(EmojiMath.calculate(equation), expected);
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         return new Object[][]{
                 {-54, ")=:)-:|:("}, {120, ":((=+(=)="}, {144, "(=:(+(=:)"}
         };
     }
 
-    @Test(dataProvider = "theGreatBerateProvider")
+    @Test(dataProvider = "theGreatBerateSimulationProvider")
     public void theGreatBerateTest(int expected, String equation) {
         assertEquals(EmojiMath.calculate(equation), expected);
     }

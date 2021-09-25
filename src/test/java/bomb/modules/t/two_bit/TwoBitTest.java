@@ -24,13 +24,13 @@ public class TwoBitTest {
     }
 
     @DataProvider
-    public Object[][] nextCodeExceptionProvider() {
+    public Object[][] nextCodeExceptionTestProvider() {
         return new String[][]{
                 {"1"}, {"311"}, {"ab"}, {"3fs11"}
         };
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class, dataProvider = "nextCodeExceptionProvider")
+    @Test( dataProvider = "nextCodeExceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void nextCodeExceptionTest(String input) {
         TwoBit.nextCode(input);
     }
@@ -42,7 +42,7 @@ public class TwoBitTest {
     }
 
     @DataProvider
-    public Object[][] trainingVideoProvider() {
+    public Object[][] trainingVideoTestProvider() {
         widgetSetupOne();
         return new Object[][]{
                 {new String[]{QUERY_TEXT + "gv", QUERY_TEXT + "vt", SUBMIT_TEXT + "gz"}, new String[]{"02", "07", "89"}},
@@ -50,7 +50,7 @@ public class TwoBitTest {
         };
     }
 
-    @Test(dataProvider = "trainingVideoProvider")
+    @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoQuerySubmitTest(String[] expectedArr, String[] inputArr) {
         for (int i = 0; i < expectedArr.length; i++) {
             assertEquals(expectedArr[i], TwoBit.nextCode(inputArr[i]));

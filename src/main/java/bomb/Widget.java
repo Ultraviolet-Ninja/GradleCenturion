@@ -24,13 +24,8 @@ import static bomb.tools.filter.Filter.ultimateFilter;
  * as well as the MainController to add/subtract to the widgets.
  */
 public class Widget {
-    protected static boolean isSouvenirActive = false, isForgetMeNotActive = false;
-    protected static int numDoubleAs = 0,
-            numDBatteries = 0,
-            numHolders = 0,
-            numModules = 0,
-            numPlates = 0,
-            numStartingMin = 0;
+    protected static boolean isSouvenirActive, isForgetMeNotActive;
+    protected static int numDoubleAs, numDBatteries, numHolders, numModules, numPortPlates, numStartingMinutes;
     protected static String serialCode = "", twoFactor = "";
     protected static Indicator[] indicatorArray = Indicator.values();
 
@@ -54,7 +49,7 @@ public class Widget {
      */
     public static void setStartTime(int startTime){
         if (startTime >= 0){
-            numStartingMin = startTime;
+            numStartingMinutes = startTime;
         }
     }
 
@@ -129,7 +124,7 @@ public class Widget {
      */
     public static void setNumberOfPlates(int plates) {
         if (plates >= 0) {
-            numPlates = plates;
+            numPortPlates = plates;
         }
     }
 
@@ -175,7 +170,7 @@ public class Widget {
      *
      * @return 0 for Yes, 1 for No, 2 for No Number
      */
-    public static int hasEven(){
+    public static int hasEvenNumberInSerialCode(){
         //TODO - Might need to rename, hasEven sends the wrong message,
         // probably by adding even and odd number regexes
         String sample = ultimateFilter(serialCode, NUMBER_PATTERN);
@@ -192,7 +187,7 @@ public class Widget {
      *
      * @return An int of the last digit from a String
      */
-    public static int lastDigit(){
+    public static int getSerialCodeLastDigit(){
         String buffer = ultimateFilter(serialCode, NUMBER_PATTERN);
         return Integer.parseInt(buffer.substring(buffer.length()-1));
     }
@@ -245,7 +240,7 @@ public class Widget {
      *
      * @return True if A,E,I,O, or U appear
      */
-    public static boolean hasVowel(){
+    public static boolean hasVowelInSerialCode(){
         return !ultimateFilter(serialCode, VOWEL_FILTER).isEmpty();
     }
 
@@ -274,7 +269,7 @@ public class Widget {
      * @param howMany The required amount
      * @return True if the bomb contains more the required amount
      */
-    public static boolean hasMoreThan(Port port, int howMany){
+    public static boolean hasMorePortsThan(Port port, int howMany){
         return portArray[port.ordinal()] > howMany;
     }
 
@@ -357,8 +352,8 @@ public class Widget {
         return numDBatteries + numDoubleAs;
     }
 
-    public static int getNumPlates() {
-        return numPlates;
+    public static int getNumPortPlates() {
+        return numPortPlates;
     }
 
     public static String getTwoFactor() {
@@ -375,7 +370,7 @@ public class Widget {
         return portArray[port.ordinal()] > 0;
     }
 
-    public static void serialCodeChecker(){
+    public static void checkSerialCode(){
         SERIAL_CODE_PATTERN.loadText(serialCode);
         if (!SERIAL_CODE_PATTERN.matchesRegex()) throw new IllegalArgumentException("Serial Code is required");
     }
@@ -385,8 +380,8 @@ public class Widget {
         numDBatteries = 0;
         numHolders = 0;
         numModules = 0;
-        numPlates = 0;
-        numStartingMin = 0;
+        numPortPlates = 0;
+        numStartingMinutes = 0;
         serialCode = "";
         twoFactor = "";
         portArray = new int[]{0,0,0,0,0,0};

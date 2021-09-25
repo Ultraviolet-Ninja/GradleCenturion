@@ -155,7 +155,7 @@ class HashingThread extends RecursiveAction {
                     hexagonalSideLength);
             HexGrid current = new HexGrid(currentIterator);
             for (int i = 0; i < 6; i++) {
-                ArrayList<String> temp = current.hashStrings();
+                List<String> temp = current.createHashStrings();
                 PILE.put(temp.get(HexHashLibrary.HASH_STRING_SHAPES), temp.get(HexHashLibrary.HASH_STRING_WALLS));
                 current.rotate();
             }

@@ -74,7 +74,7 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] secondBits() {
-        return new boolean[]{hasMoreThan(Port.PARALLEL, 0), getTotalPorts() > 2};
+        return new boolean[]{hasMorePortsThan(Port.PARALLEL, 0), getTotalPorts() > 2};
     }
 
     private static boolean[] thirdBits() {
@@ -82,9 +82,9 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] forthBits() throws IllegalArgumentException {
-        if (numModules == 0 || numStartingMin == 0) throw new IllegalArgumentException(
+        if (numModules == 0 || numStartingMinutes == 0) throw new IllegalArgumentException(
                 "Number of starting modules and minutes should be filled!");
-        return new boolean[]{numModules > numStartingMin, hasLitIndicator(Indicator.BOB)};
+        return new boolean[]{numModules > numStartingMinutes, hasLitIndicator(Indicator.BOB)};
     }
 
     private static boolean[] fifthBits() {

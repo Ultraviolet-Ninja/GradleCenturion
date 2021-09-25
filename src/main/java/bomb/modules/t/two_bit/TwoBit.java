@@ -40,7 +40,7 @@ public class TwoBit extends Widget {
      * @throws IllegalArgumentException The serial code was not set
      */
     public static String initialCode() throws IllegalArgumentException {
-        serialCodeChecker();
+        checkSerialCode();
         String numbersInSerialCode = ultimateFilter(serialCode, NUMBER_PATTERN);
         String first = ultimateFilter(serialCode, CHAR_FILTER).toLowerCase();
         int alphabetBaseValue = !first.isEmpty() ?

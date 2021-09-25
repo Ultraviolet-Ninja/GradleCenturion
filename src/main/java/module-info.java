@@ -23,6 +23,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.ab.boolean_venn to javafx.fxml;
     exports bomb.modules.c.caesar to javafx.fxml;
     exports bomb.modules.c.cheap_checkout to javafx.fxml;
+    exports bomb.modules.c.chess to javafx.fxml;
     exports bomb.modules.c.chords to javafx.fxml;
     exports bomb.modules.c.color_flash to javafx.fxml;
     exports bomb.modules.c.colored_switches to javafx.fxml;
@@ -71,6 +72,7 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.ab.boolean_venn;
     opens bomb.modules.c.caesar;
     opens bomb.modules.c.cheap_checkout;
+    opens bomb.modules.c.chess;
     opens bomb.modules.c.chords;
     opens bomb.modules.c.color_flash;
     opens bomb.modules.c.colored_switches;

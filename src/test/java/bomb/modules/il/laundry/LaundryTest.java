@@ -37,7 +37,7 @@ public class LaundryTest {
     }
 
     @DataProvider
-    public Object[][] normalValueProvider() {
+    public Object[][] normalValueTestProvider() {
         ConditionSetter setFirst = this::setupOne;
         ConditionSetter setSecond = this::setupTwo;
         return new Object[][]{
@@ -47,7 +47,7 @@ public class LaundryTest {
         };
     }
 
-    @Test(dataProvider = "normalValueProvider")
+    @Test(dataProvider = "normalValueTestProvider")
     public void normalValueTest(ConditionSetter setter, String[] expectedArr, String solved, String needy) {
         setter.setCondition();
         assertContains(expectedArr, solved, needy);
@@ -75,7 +75,7 @@ public class LaundryTest {
     }
 
     @DataProvider
-    public Object[][] theGreatBerateProvider() {
+    public Object[][] theGreatBerateSimulationProvider() {
         ConditionSetter setFirst = WidgetSimulations::theGreatBerateVideoOne;
         ConditionSetter setSecond = WidgetSimulations::theGreatBerateVideoTwo;
         ConditionSetter setThird = WidgetSimulations::videoTwoTakeTwo;
@@ -87,7 +87,7 @@ public class LaundryTest {
         };
     }
 
-    @Test(dataProvider = "theGreatBerateProvider")
+    @Test(dataProvider = "theGreatBerateSimulationProvider")
     public void theGreatBerate(ConditionSetter setter, String[] expectedArr, String solved, String needy) {
         setter.setCondition();
         assertContains(expectedArr, solved, needy);

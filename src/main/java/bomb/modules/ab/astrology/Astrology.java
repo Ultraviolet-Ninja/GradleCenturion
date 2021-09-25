@@ -46,7 +46,7 @@ public class Astrology extends Widget {
      * @throws IllegalArgumentException Serial code is empty or there's an issue with the amount of symbols
      */
     public static String calculate(AstroSymbol... symbols) throws IllegalArgumentException {
-        serialCodeChecker();
+        checkSerialCode();
         checkThreeTypes(symbols);
         AstroSymbol[] sortSymbols = sort(symbols);
 

@@ -72,7 +72,7 @@ public class ShapeShift extends Widget {
     //</editor-fold>
 
     public static ShapeEnd[] solve(ShapeEnd left, ShapeEnd right) {
-        serialCodeChecker();
+        checkSerialCode();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {
             Pair<ShapeEnd, ShapeEnd> pair = graph.get(
@@ -108,7 +108,7 @@ public class ShapeShift extends Widget {
 
     private static boolean roundedOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasVowel();
+            case ROUND -> hasVowelInSerialCode();
             case FLAT -> hasLitIndicator(Indicator.SND);
             case POINT -> hasLitIndicator(Indicator.SIG);
             default -> numDoubleAs > 1;
@@ -117,8 +117,8 @@ public class ShapeShift extends Widget {
 
     private static boolean rectangularOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMoreThan(Port.DVI, 0);
-            case FLAT -> lastDigit() % 2 == 1;
+            case ROUND -> hasMorePortsThan(Port.DVI, 0);
+            case FLAT -> getSerialCodeLastDigit() % 2 == 1;
             case POINT -> hasLitIndicator(Indicator.MSA);
             default -> hasUnlitIndicator(Indicator.BOB);
         };
@@ -126,18 +126,18 @@ public class ShapeShift extends Widget {
 
     private static boolean triangularOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMoreThan(Port.PARALLEL, 0);
+            case ROUND -> hasMorePortsThan(Port.PARALLEL, 0);
             case FLAT -> hasUnlitIndicator(Indicator.CAR);
             case POINT -> hasLitIndicator(Indicator.IND);
-            default -> hasMoreThan(Port.RJ45, 0);
+            default -> hasMorePortsThan(Port.RJ45, 0);
         };
     }
 
     private static boolean ticketOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMoreThan(Port.RCA, 0);
+            case ROUND -> hasMorePortsThan(Port.RCA, 0);
             case FLAT -> hasUnlitIndicator(Indicator.FRQ);
-            case POINT -> hasMoreThan(Port.PS2, 0);
+            case POINT -> hasMorePortsThan(Port.PS2, 0);
             default -> getAllBatteries() >= 3;
         };
     }

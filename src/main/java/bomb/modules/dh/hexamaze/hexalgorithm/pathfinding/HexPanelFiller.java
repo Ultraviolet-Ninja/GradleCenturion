@@ -20,11 +20,10 @@ public class HexPanelFiller {
         }
     }
 
-    private static int coordinateToIndex(Coordinates set, int sideLength) {
+    private static int coordinateToIndex(Coordinates originalCoordinates, int sideLength) {
         int counter = 0;
-        int[] coordinates = set.getCoords(),
-                pings = AbstractHexagon.calculateColumnLengths(sideLength);
-        for (int i = 0; i < coordinates[0]; i++) counter += pings[i];
-        return counter + coordinates[1];
+        int[] columnLengths = AbstractHexagon.calculateColumnLengths(sideLength);
+        for (int i = 0; i < originalCoordinates.getX(); i++) counter += columnLengths[i];
+        return counter + originalCoordinates.getY();
     }
 }
