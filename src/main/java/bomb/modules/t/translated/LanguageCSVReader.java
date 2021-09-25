@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class NewTranslationCenter {
+public class LanguageCSVReader {
     public static List<String> getLanguageContent(Language language) throws CsvValidationException, IOException, IllegalArgumentException {
         if (language == null) throw new IllegalArgumentException("Language is null");
 

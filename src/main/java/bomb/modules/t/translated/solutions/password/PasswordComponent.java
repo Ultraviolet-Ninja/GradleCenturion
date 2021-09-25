@@ -14,7 +14,7 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.List;
 
-import static bomb.modules.t.translated.NewTranslationCenter.LanguageRow.PASSWORD_ROW;
+import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.PASSWORD_ROW;
 
 public class PasswordComponent extends Pane implements Resettable, TranslationComponent {
     @FXML
@@ -43,7 +43,7 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
     @FXML
     private void submitInfo() {
         String[] columnInfo = retrieveColumnLetters();
-        try{
+        try {
             String results = Password.getPasswords(columnInfo).toString()
                     .replaceAll("[()]", "")
                     .replaceAll(",", "\n");

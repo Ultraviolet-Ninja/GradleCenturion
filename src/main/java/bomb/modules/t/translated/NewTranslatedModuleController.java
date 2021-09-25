@@ -2,6 +2,8 @@ package bomb.modules.t.translated;
 
 import bomb.abstractions.Resettable;
 import bomb.modules.t.translated.solutions.button.ButtonComponent;
+import bomb.modules.t.translated.solutions.gas.VentGasComponent;
+import bomb.modules.t.translated.solutions.password.PasswordComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.event.ActionEvent;
@@ -19,6 +21,12 @@ import java.util.List;
 public class NewTranslatedModuleController implements Resettable {
     @FXML
     private ButtonComponent buttonUI;
+
+    @FXML
+    private PasswordComponent passwordUI;
+
+    @FXML
+    private VentGasComponent ventGasUI;
 
     @FXML
     private Tab translatedModuleTab;
@@ -39,8 +47,8 @@ public class NewTranslatedModuleController implements Resettable {
             RadioButton source = (RadioButton) event.getSource();
             try {
                 Language currentLanguage = Language.translateText(source.getText());
-                List<String> languageContent = NewTranslationCenter.getLanguageContent(currentLanguage);
-
+                List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguage);
+                buttonUI.setContent(languageContent);
             } catch (CsvValidationException | IOException e) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
             }

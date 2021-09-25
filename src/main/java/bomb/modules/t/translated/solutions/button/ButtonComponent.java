@@ -15,6 +15,8 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 import java.util.List;
 
+import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.BUTTON_LABEL_ROW;
+
 public class ButtonComponent extends Pane implements Resettable, TranslationComponent {
     private final ButtonProperties[] properties;
 
@@ -69,6 +71,14 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
 
     @Override
     public void setContent(List<String> languageContent) {
-
+        String[] buttonLabels = languageContent.get(BUTTON_LABEL_ROW.getIndex()).split("\\|");
+        redButton.setText(buttonLabels[0]);
+        blueButton.setText(buttonLabels[1]);
+        yellowButton.setText(buttonLabels[2]);
+        whiteButton.setText(buttonLabels[3]);
+        holdButton.setText(buttonLabels[4]);
+        pressButton.setText(buttonLabels[5]);
+        detonateButton.setText(buttonLabels[6]);
+        abortButton.setText(buttonLabels[7]);
     }
 }
