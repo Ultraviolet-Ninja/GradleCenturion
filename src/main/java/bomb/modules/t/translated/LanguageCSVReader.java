@@ -24,6 +24,7 @@ public class LanguageCSVReader {
             dictionaryContent.add(dataRow[language.getIndex()]);
         }
 
+        csvReader.close();
         return dictionaryContent;
     }
 
