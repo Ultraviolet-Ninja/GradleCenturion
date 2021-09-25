@@ -2,9 +2,11 @@
 
 <?import com.jfoenix.controls.JFXMasonryPane?>
 <?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -14,131 +16,189 @@
          stylesheets="@../../../css/t/translated-tabs.css" tabClosingPolicy="UNAVAILABLE"
          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="bomb.modules.t.translated.NewTranslatedModuleController">
-    <tabs>
-        <Tab text="Language Select">
-            <content>
-                <GridPane>
-                    <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" />
-                  <ColumnConstraints hgrow="SOMETIMES" />
-                  <ColumnConstraints hgrow="SOMETIMES" />
-                  <ColumnConstraints hgrow="SOMETIMES" />
-                        <ColumnConstraints hgrow="SOMETIMES" />
-                    </columnConstraints>
-                    <rowConstraints>
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                        <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Brazilian">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="flagGroup" />
-                           </toggleGroup>
-                        </JFXRadioButton>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Czech" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Danish" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Dutch" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="English" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Esperanto" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Italian" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Estonian" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Norwegian" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Finnish" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Polish" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="French" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="German" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Spanish" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
-                     <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <JFXRadioButton text="Swedish" toggleGroup="$flagGroup" />
-                     </children>
-                  </VBox>
-               </children>
+    <Tab text="Language Select">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES"/>
+                <ColumnConstraints hgrow="SOMETIMES"/>
+                <ColumnConstraints hgrow="SOMETIMES"/>
+                <ColumnConstraints hgrow="SOMETIMES"/>
+                <ColumnConstraints hgrow="SOMETIMES"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+                <RowConstraints vgrow="SOMETIMES"/>
+            </rowConstraints>
 
 
-                </GridPane>
-            </content>
-        </Tab>
-        <Tab fx:id="translatedModuleTab" disable="true" text="Translated Modules">
-            <content>
-                <JFXMasonryPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
-                    <children>
-<!--                        <ButtonComponent fx:id="buttonUI"/>-->
-                    </children>
-                </JFXMasonryPane>
-            </content>
-        </Tab>
-    </tabs>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Brazil.png"/>
+                </ImageView>
+                <JFXRadioButton text="Brazilian">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="flagGroup"/>
+                    </toggleGroup>
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Czech.png"/>
+                </ImageView>
+                <JFXRadioButton text="Czech" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Danish.png"/>
+                </ImageView>
+                <JFXRadioButton text="Danish" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Dutch.png"/>
+                </ImageView>
+                <JFXRadioButton text="Dutch" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/American.png"/>
+                </ImageView>
+                <JFXRadioButton text="English" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="22.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Esperanto.png"/>
+                </ImageView>
+                <JFXRadioButton text="Esperanto" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Italian.png"/>
+                </ImageView>
+                <JFXRadioButton text="Italian" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Estonian.png"/>
+                </ImageView>
+                <JFXRadioButton text="Estonian" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="4.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+                  GridPane.rowIndex="2">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Norwegian.png"/>
+                </ImageView>
+                <JFXRadioButton text="Norwegian" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Finnish.png"/>
+                </ImageView>
+                <JFXRadioButton text="Finnish" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="9.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2"
+                  GridPane.rowIndex="2">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Polish.png"/>
+                </ImageView>
+                <JFXRadioButton text="Polish" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3"
+                  GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/French.png"/>
+                </ImageView>
+                <JFXRadioButton text="French" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4"
+                  GridPane.rowIndex="1">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/German.png"/>
+                </ImageView>
+                <JFXRadioButton text="German" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3"
+                  GridPane.rowIndex="2">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Spanish.png"/>
+                </ImageView>
+                <JFXRadioButton text="Spanish" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4"
+                  GridPane.rowIndex="2">
+                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../../../flags/Swedish.png"/>
+                </ImageView>
+                <JFXRadioButton text="Swedish" toggleGroup="$flagGroup">
+                    <VBox.margin>
+                        <Insets top="6.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
+            </VBox>
+        </GridPane>
+    </Tab>
+    <Tab fx:id="translatedModuleTab" disable="true" text="Translated Modules">
+        <JFXMasonryPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                        minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+            <!--                        <ButtonComponent fx:id="buttonUI"/>-->
+        </JFXMasonryPane>
+    </Tab>
 </TabPane>
