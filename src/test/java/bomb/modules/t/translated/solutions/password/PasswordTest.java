@@ -38,7 +38,8 @@ public class PasswordTest {
         return new Object[][]{
                 {new String[]{"a", "", "", "", ""}, 2, "achar"},
                 {new String[]{"z", "", "", "", ""}, 1, "No passwords found"},
-                {new String[]{"", "", "", "", ""}, 0, null}
+                {new String[]{"", "", "", "", ""}, 0, null},
+                {null, 0, null}
         };
     }
 
