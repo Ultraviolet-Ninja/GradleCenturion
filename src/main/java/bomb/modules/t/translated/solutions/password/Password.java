@@ -14,7 +14,7 @@ public class Password {
         passwords = input;
     }
 
-    public static List<String> getPasswords(String[] letterSets) {
+    public static List<String> getPasswords(String[] letterSets) throws IllegalArgumentException {
         if (passwords == null) throw new IllegalArgumentException("Please set a language to start");
         if (areAllEmpty(letterSets)) return new ArrayList<>();
 
@@ -38,6 +38,7 @@ public class Password {
     }
 
     private static boolean areAllEmpty(String[] arrays) {
+        if (arrays == null) return true;
         for (String instance : arrays) {
             if (!instance.isEmpty())
                 return false;
