@@ -44,10 +44,14 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
     private void submitInfo() {
         String[] columnInfo = retrieveColumnLetters();
         try {
+            final String bulletPoint = "\u2022 ";
             String results = Password.getPasswords(columnInfo).toString()
-                    .replaceAll("[()]", "")
-                    .replaceAll(",", "\n");
-            outputArea.setText(results);
+                    .replaceAll("[\\[\\]()]", "")
+                    .replaceAll(", ", "\n" + bulletPoint);
+
+            String finalOutput = (results.isEmpty() ? "" : bulletPoint) + results;
+
+            outputArea.setText(finalOutput);
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }

@@ -2,10 +2,10 @@ package bomb.modules.t.translated.solutions.gas;
 
 import bomb.abstractions.Resettable;
 import bomb.modules.t.translated.solutions.TranslationComponent;
-import bomb.tools.pattern.facade.FacadeFX;
+import bomb.tools.pattern.facade.MaterialFacade;
+import io.github.palexdev.materialfx.controls.MFXLabel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
@@ -16,7 +16,7 @@ import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.YES_ROW;
 
 public class VentGasComponent extends Pane implements Resettable, TranslationComponent {
     @FXML
-    private Label yesLabel, noLabel;
+    private MFXLabel yesLabel, noLabel;
 
     public VentGasComponent() {
         super();
@@ -32,7 +32,7 @@ public class VentGasComponent extends Pane implements Resettable, TranslationCom
 
     @Override
     public void reset() {
-        FacadeFX.clearMultipleLabels(yesLabel, noLabel);
+        MaterialFacade.clearMultipleLabels(yesLabel, noLabel);
     }
 
     @Override

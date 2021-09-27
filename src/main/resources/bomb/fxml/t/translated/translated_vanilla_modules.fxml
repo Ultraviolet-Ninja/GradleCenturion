@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import bomb.modules.t.translated.solutions.button.ButtonComponent?>
+<?import bomb.modules.t.translated.solutions.gas.VentGasComponent?>
+<?import bomb.modules.t.translated.solutions.password.PasswordComponent?>
 <?import com.jfoenix.controls.JFXMasonryPane?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
@@ -14,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0"
          stylesheets="@../../../css/t/translated-tabs.css" tabClosingPolicy="UNAVAILABLE"
-         xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+         xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="bomb.modules.t.translated.TranslatedModuleController">
     <Tab text="Language Select">
         <GridPane>
@@ -36,7 +39,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Brazil.png"/>
                 </ImageView>
-                <JFXRadioButton text="Brazilian">
+                <JFXRadioButton id="standard-radio-button" text="Brazilian">
                     <toggleGroup>
                         <ToggleGroup fx:id="flagGroup"/>
                     </toggleGroup>
@@ -49,7 +52,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Czech.png"/>
                 </ImageView>
-                <JFXRadioButton text="Czech" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Czech" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -59,7 +62,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Danish.png"/>
                 </ImageView>
-                <JFXRadioButton text="Danish" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Danish" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -69,7 +72,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Dutch.png"/>
                 </ImageView>
-                <JFXRadioButton text="Dutch" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Dutch" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -79,7 +82,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/American.png"/>
                 </ImageView>
-                <JFXRadioButton text="English" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="English" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="22.0"/>
                     </VBox.margin>
@@ -89,7 +92,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Esperanto.png"/>
                 </ImageView>
-                <JFXRadioButton text="Esperanto" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Esperanto" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -99,7 +102,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Italian.png"/>
                 </ImageView>
-                <JFXRadioButton text="Italian" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Italian" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -110,7 +113,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Estonian.png"/>
                 </ImageView>
-                <JFXRadioButton text="Estonian" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Estonian" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="4.0"/>
                     </VBox.margin>
@@ -121,7 +124,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Norwegian.png"/>
                 </ImageView>
-                <JFXRadioButton text="Norwegian" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Norwegian" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -132,7 +135,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Finnish.png"/>
                 </ImageView>
-                <JFXRadioButton text="Finnish" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Finnish" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="9.0"/>
                     </VBox.margin>
@@ -143,7 +146,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Polish.png"/>
                 </ImageView>
-                <JFXRadioButton text="Polish" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Polish" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -154,7 +157,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/French.png"/>
                 </ImageView>
-                <JFXRadioButton text="French" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="French" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -165,7 +168,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/German.png"/>
                 </ImageView>
-                <JFXRadioButton text="German" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="German" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -176,7 +179,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Spanish.png"/>
                 </ImageView>
-                <JFXRadioButton text="Spanish" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Spanish" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -187,7 +190,7 @@
                 <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                     <Image url="@../../../flags/Swedish.png"/>
                 </ImageView>
-                <JFXRadioButton text="Swedish" toggleGroup="$flagGroup">
+                <JFXRadioButton id="standard-radio-button" text="Swedish" toggleGroup="$flagGroup">
                     <VBox.margin>
                         <Insets top="6.0"/>
                     </VBox.margin>
@@ -196,9 +199,11 @@
         </GridPane>
     </Tab>
     <Tab fx:id="translatedModuleTab" disable="true" text="Translated Modules">
-        <JFXMasonryPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                        minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
-            <!--                        <ButtonComponent fx:id="buttonUI"/>-->
+        <JFXMasonryPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+                        minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+            <ButtonComponent fx:id="buttonUI"/>
+            <PasswordComponent fx:id="passwordUI"/>
+            <VentGasComponent fx:id="ventGasUI"/>
         </JFXMasonryPane>
     </Tab>
 </TabPane>

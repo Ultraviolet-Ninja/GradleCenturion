@@ -30,7 +30,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
             </rowConstraints>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
-                <JFXRadioButton fx:id="redButton" text="Red">
+                <JFXRadioButton id="red-radio-button" fx:id="redButton" text="Red">
                     <toggleGroup>
                         <ToggleGroup fx:id="colorGroup"/>
                     </toggleGroup>
@@ -38,24 +38,24 @@
                         <Insets left="70.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton fx:id="yellowButton" text="Yellow" toggleGroup="$colorGroup">
+                <JFXRadioButton id="yellow-radio-button" fx:id="yellowButton" text="Yellow" toggleGroup="$colorGroup">
                     <VBox.margin>
                         <Insets left="70.0" top="7.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton fx:id="blueButton" text="Blue" toggleGroup="$colorGroup">
+                <JFXRadioButton id="blue-radio-button" fx:id="blueButton" text="Blue" toggleGroup="$colorGroup">
                     <VBox.margin>
                         <Insets left="70.0" top="7.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton fx:id="whiteButton" text="White" toggleGroup="$colorGroup">
+                <JFXRadioButton id="standard-radio-button" fx:id="whiteButton" text="White" toggleGroup="$colorGroup">
                     <VBox.margin>
                         <Insets left="70.0" top="7.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
-                <JFXRadioButton fx:id="detonateButton" text="Detonate">
+                <JFXRadioButton id="standard-radio-button" fx:id="detonateButton" text="Detonate">
                     <toggleGroup>
                         <ToggleGroup fx:id="labelGroup"/>
                     </toggleGroup>
@@ -63,17 +63,17 @@
                         <Insets left="64.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton fx:id="pressButton" text="Press" toggleGroup="$labelGroup">
+                <JFXRadioButton id="standard-radio-button" fx:id="pressButton" text="Press" toggleGroup="$labelGroup">
                     <VBox.margin>
                         <Insets left="64.0" top="7.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton fx:id="holdButton" text="Hold" toggleGroup="$labelGroup">
+                <JFXRadioButton id="standard-radio-button" fx:id="holdButton" text="Hold" toggleGroup="$labelGroup">
                     <VBox.margin>
                         <Insets left="64.0" top="7.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton fx:id="abortButton" text="Abort" toggleGroup="$labelGroup">
+                <JFXRadioButton id="standard-radio-button" fx:id="abortButton" text="Abort" toggleGroup="$labelGroup">
                     <VBox.margin>
                         <Insets left="64.0" top="7.0"/>
                     </VBox.margin>
@@ -81,7 +81,7 @@
             </VBox>
         </GridPane>
         <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-            <MFXTextField fx:id="outputField" promptText="Tap or Hold"/>
+            <MFXTextField fx:id="outputField" editable="false" promptText="Tap or Hold"/>
         </HBox>
     </GridPane>
 </fx:root>

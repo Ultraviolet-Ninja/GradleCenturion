@@ -56,7 +56,9 @@ public class TranslatedModuleController implements Resettable {
             try {
                 LanguageColumn currentLanguageColumn = LanguageColumn.getLanguageFromString(buttonText);
                 List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguageColumn);
-//                buttonUI.setContent(languageContent);
+                buttonUI.setContent(languageContent);
+                passwordUI.setContent(languageContent);
+                ventGasUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
             } catch (CsvValidationException | IOException e) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
@@ -68,6 +70,7 @@ public class TranslatedModuleController implements Resettable {
     public void reset() {
         translatedModuleTab.setDisable(true);
         FacadeFX.resetToggleGroup(flagGroup);
-//        buttonUI.reset();
+        buttonUI.reset();
+        passwordUI.reset();
     }
 }
