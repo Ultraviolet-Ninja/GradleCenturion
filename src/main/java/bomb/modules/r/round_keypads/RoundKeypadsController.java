@@ -5,7 +5,48 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-import static bomb.modules.r.round_keypads.Keypad.*;
+import static bomb.modules.r.round_keypads.Keypad.AE;
+import static bomb.modules.r.round_keypads.Keypad.ALIEN_THREE;
+import static bomb.modules.r.round_keypads.Keypad.A_T;
+import static bomb.modules.r.round_keypads.Keypad.BACK_C1;
+import static bomb.modules.r.round_keypads.Keypad.BACK_C2;
+import static bomb.modules.r.round_keypads.Keypad.COPYRIGHT;
+import static bomb.modules.r.round_keypads.Keypad.CURVY_H1;
+import static bomb.modules.r.round_keypads.Keypad.CURVY_H2;
+import static bomb.modules.r.round_keypads.Keypad.C_DOT;
+import static bomb.modules.r.round_keypads.Keypad.DISNEY_Q1;
+import static bomb.modules.r.round_keypads.Keypad.DISNEY_Q2;
+import static bomb.modules.r.round_keypads.Keypad.HARRY_POTTER;
+import static bomb.modules.r.round_keypads.Keypad.HOLLOW_STAR1;
+import static bomb.modules.r.round_keypads.Keypad.HOLLOW_STAR2;
+import static bomb.modules.r.round_keypads.Keypad.NOT_THREE;
+import static bomb.modules.r.round_keypads.Keypad.OMEGA;
+import static bomb.modules.r.round_keypads.Keypad.PARAGRAPH1;
+import static bomb.modules.r.round_keypads.Keypad.PARAGRAPH2;
+import static bomb.modules.r.round_keypads.Keypad.PSI1;
+import static bomb.modules.r.round_keypads.Keypad.PSI2;
+import static bomb.modules.r.round_keypads.Keypad.PUZZLE;
+import static bomb.modules.r.round_keypads.Keypad.RACKET1;
+import static bomb.modules.r.round_keypads.Keypad.RACKET2;
+import static bomb.modules.r.round_keypads.Keypad.REVERSE_EURO1;
+import static bomb.modules.r.round_keypads.Keypad.REVERSE_EURO2;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_CAT1;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_CAT2;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_NH;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_SIX1;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_SIX2;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_X1;
+import static bomb.modules.r.round_keypads.Keypad.RUSSIAN_X2;
+import static bomb.modules.r.round_keypads.Keypad.SMILEY1;
+import static bomb.modules.r.round_keypads.Keypad.SMILEY2;
+import static bomb.modules.r.round_keypads.Keypad.SPANISH_QUESTION1;
+import static bomb.modules.r.round_keypads.Keypad.SPANISH_QUESTION2;
+import static bomb.modules.r.round_keypads.Keypad.STAR;
+import static bomb.modules.r.round_keypads.Keypad.STROKED_LAMBDA1;
+import static bomb.modules.r.round_keypads.Keypad.STROKED_LAMBDA2;
+import static bomb.modules.r.round_keypads.Keypad.TB_1;
+import static bomb.modules.r.round_keypads.Keypad.TB_2;
+import static bomb.modules.r.round_keypads.Keypad.THE_SAC;
 
 public class RoundKeypadsController implements Resettable {
     private static final String BAD_COLUMN_BACKGROUND = "-fx-background-color: crimson",
@@ -32,6 +73,7 @@ public class RoundKeypadsController implements Resettable {
                 puzzlePiece, aeyyLmao, omega, russianHN};
         Keypad[] matchingKeypads = {A_T, HARRY_POTTER, COPYRIGHT, THE_SAC, NOT_THREE, C_DOT, ALIEN_THREE,
                 STAR, PUZZLE, AE, OMEGA, RUSSIAN_NH};
+
         for (int i = 0; i < singleViewArray.length; i++) {
             Keypad matchingKey = matchingKeypads[i];
             singleViewArray[i].setOnMouseClicked(event -> {
@@ -121,8 +163,8 @@ public class RoundKeypadsController implements Resettable {
                 psi1, smile2, tB2, cDot, paragraph2, shrekThree, star,
                 russianSix2, backEuro2, puzzlePiece, aeyyLmao, psi2, russianHN, omega};
         Keypad[] keypads = Keypad.values();
-        int i = 0;
-        while (i < keypads.length) {
+
+        for (int i = 0; i < keypads.length; i++) {
             if (keypads[i].getFlag())
                 allViews[i].setImage(keypads[i].getMemory());
             i++;
