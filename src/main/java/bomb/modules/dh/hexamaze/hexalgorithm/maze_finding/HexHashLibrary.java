@@ -96,17 +96,17 @@ class HashingThread extends RecursiveAction {
     }
 
     private static BufferedQueue<HexNode> deepCopyList(BufferedQueue<HexNode> input) {
-        BufferedQueue<HexNode> output = new BufferedQueue<>(input.cap());
-        for (int i = 0; i < output.cap(); i++)
+        BufferedQueue<HexNode> output = new BufferedQueue<>(input.getCapacity());
+        for (int i = 0; i < output.getCapacity(); i++)
             output.add(new HexNode(input.get(i)));
         return output;
     }
 
     private static int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns) {
-        int[] positions = new int[columns.cap()];
-        int middleValue = columns.get(columns.cap() / 2).cap();
-        for (int i = 0; i < columns.cap(); i++) {
-            int placeholderValue = columns.get(i).cap() - middleValue;
+        int[] positions = new int[columns.getCapacity()];
+        int middleValue = columns.get(columns.getCapacity() / 2).getCapacity();
+        for (int i = 0; i < columns.getCapacity(); i++) {
+            int placeholderValue = columns.get(i).getCapacity() - middleValue;
             positions[i] = Math.max(placeholderValue, 0);
         }
 
@@ -170,8 +170,8 @@ class HashingThread extends RecursiveAction {
     }
 
     private boolean notDone(BufferedQueue<BufferedQueue<HexNode>> columns, int[] endPositions) {
-        for (int i = 0; i < columns.cap(); i++)
-            if (endPositions[i] > columns.get(i).cap()) return false;
+        for (int i = 0; i < columns.getCapacity(); i++)
+            if (endPositions[i] > columns.get(i).getCapacity()) return false;
         return true;
     }
 

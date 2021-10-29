@@ -13,7 +13,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.EnumSet;
 
 public class HexMazePanel extends Pane implements Resettable {
     public static final Color DEFAULT_PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
@@ -45,8 +45,8 @@ public class HexMazePanel extends Pane implements Resettable {
     }
 
     public void setup(HexagonDataStructure.HexNode currentNode) {
-        setupLines(currentNode.walls);
-        setupShape(currentNode.fill);
+        setupLines(currentNode.getWalls());
+        setupShape(currentNode.getFill());
     }
 
     private void setupShape(HexNodeProperties.HexShape shape) {
@@ -97,7 +97,7 @@ public class HexMazePanel extends Pane implements Resettable {
         }
     }
 
-    private void setupLines(List<HexNodeProperties.HexWall> walls) {
+    private void setupLines(EnumSet<HexNodeProperties.HexWall> walls) {
         String remove = "123456";
         if (walls != null) {
             for (HexNodeProperties.HexWall wall : walls) {

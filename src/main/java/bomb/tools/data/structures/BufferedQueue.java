@@ -70,7 +70,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E> {
      *
      * @return The int signifying the capacity
      */
-    public int cap() {
+    public int getCapacity() {
         return capacity;
     }
 

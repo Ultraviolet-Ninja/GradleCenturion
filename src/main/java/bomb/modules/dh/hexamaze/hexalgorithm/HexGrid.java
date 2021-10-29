@@ -95,7 +95,7 @@ public class HexGrid extends AbstractHexagon {
         if (pair.getX() < 0 || pair.getX() >= hexagon.getSpan()) return null;
         BufferedQueue<HexNode> column = exportTo2DQueue().get(pair.getX());
 
-        if (pair.getY() < 0 || pair.getY() >= column.cap()) return null;
+        if (pair.getY() < 0 || pair.getY() >= column.getCapacity()) return null;
         return column.get(pair.getY());
     }
 
@@ -109,8 +109,8 @@ public class HexGrid extends AbstractHexagon {
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
         BufferedQueue<BufferedQueue<HexNode>> queues = hexagon.exportTo2DQueue();
 
-        for (int x = 0; x < queues.cap(); x++) {
-            for (int y = 0; y < queues.get(x).cap(); y++) {
+        for (int x = 0; x < queues.getCapacity(); x++) {
+            for (int y = 0; y < queues.get(x).getCapacity(); y++) {
                 shapeHash.append(queues.get(x).get(y).getShapeHash());
                 wallHash.append(queues.get(x).get(y).getWallHash());
             }
