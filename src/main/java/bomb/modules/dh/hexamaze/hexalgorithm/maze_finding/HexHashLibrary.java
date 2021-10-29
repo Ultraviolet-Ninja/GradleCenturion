@@ -24,7 +24,7 @@ public class HexHashLibrary {
 
     public static void initialize(Maze fullMaze, int userGridSpan) {
         int iterations = fullMaze.getSpan() - userGridSpan;
-        ArrayList<Integer> columnList = new ArrayList<>();
+        List<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
 
@@ -54,7 +54,7 @@ class HashingThread extends RecursiveAction {
     @Override
     protected void compute() {
         if (colList.size() != 1) {
-            ArrayList<ArrayList<Integer>> splitList = splitList(colList);
+            List<List<Integer>> splitList = splitList(colList);
             HashingThread taskOne = new HashingThread(splitList.get(0), maze, userGridSpan);
             HashingThread taskTwo = new HashingThread(splitList.get(1), maze, userGridSpan);
 
@@ -62,15 +62,15 @@ class HashingThread extends RecursiveAction {
         } else sequentialWork(colList.get(0));
     }
 
-    private ArrayList<ArrayList<Integer>> splitList(List<Integer> list) {
-        int split = list.size() / 2;
-        ArrayList<ArrayList<Integer>> output = new ArrayList<>();
-        output.add(new ArrayList<>(list.subList(0, split)));
-        output.add(new ArrayList<>(list.subList(split, list.size())));
+    private List<List<Integer>> splitList(List<Integer> list) {
+        int splitIndex = list.size() / 2;
+        List<List<Integer>> output = new ArrayList<>();
+        output.add(new ArrayList<>(list.subList(0, splitIndex)));
+        output.add(new ArrayList<>(list.subList(splitIndex, list.size())));
         return output;
     }
 
-    public HashingThread(ArrayList<Integer> columnList, Maze maze, int userGridSpan) {
+    public HashingThread(List<Integer> columnList, Maze maze, int userGridSpan) {
         colList = columnList;
         this.maze = maze;
         this.userGridSpan = userGridSpan;

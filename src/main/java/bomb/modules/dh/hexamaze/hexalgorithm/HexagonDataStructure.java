@@ -40,6 +40,7 @@ public class HexagonDataStructure {
 
         private ArrayList<HexWall> deepCopyWalls(List<HexWall> constructs) {
             ArrayList<HexWall> newWalls = new ArrayList<>();
+            //TODO
             for (HexWall construct : constructs) {
                 switch (construct) {
                     case Top -> newWalls.add(HexWall.Top);
