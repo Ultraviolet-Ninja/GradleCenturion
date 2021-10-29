@@ -77,6 +77,7 @@ public class Astrology extends Widget {
         String letters = ultimateFilter(serialCode, CHAR_FILTER);
         for (AstroSymbol symbol : symbols) {
             Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
+            //TODO is there a better way of doing this?
             if (checker.findAllMatches().isEmpty()) initialVal--;
             else initialVal++;
         }

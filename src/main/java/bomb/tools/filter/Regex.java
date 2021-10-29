@@ -1,8 +1,8 @@
 package bomb.tools.filter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -80,9 +80,9 @@ public class Regex implements Iterable<String> {
         return textMatcher.groupCount();
     }
 
-    public List<String> findAllMatches() {
+    public LinkedList<String> findAllMatches() {
         reset();
-        List<String> output = new ArrayList<>();
+        LinkedList<String> output = new LinkedList<>();
         while (textMatcher.find()) {
             output.add(textMatcher.group());
         }

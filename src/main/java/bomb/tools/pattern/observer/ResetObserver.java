@@ -3,14 +3,14 @@ package bomb.tools.pattern.observer;
 import bomb.abstractions.Resettable;
 import javafx.fxml.FXMLLoader;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ResetObserver implements Observer {
     private final List<Resettable> controllerList;
 
     public ResetObserver() {
-        controllerList = new ArrayList<>();
+        controllerList = new LinkedList<>();
     }
 
     public void addController(FXMLLoader loader) {
