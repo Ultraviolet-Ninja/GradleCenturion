@@ -26,8 +26,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -53,7 +51,7 @@ public class ManualController {
     @FXML private VBox menuVBox, radioButtonHouse;
 
     public void initialize() {
-        allRadioButtons = new LinkedList<>(radioButtonHouse.getChildren());
+        allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
         setupMap();
@@ -108,7 +106,7 @@ public class ManualController {
 
     private List<String> formatWords(List<Toggle> nameList) {
         List<String> list = new ArrayList<>();
-        LinkedList<Toggle> temp = new LinkedList<>(nameList);
+        List<Toggle> temp = new ArrayList<>(nameList);
 
         for (Toggle name : temp){
             String line = ((ToggleButton)name).getText().replace(" ", "_")

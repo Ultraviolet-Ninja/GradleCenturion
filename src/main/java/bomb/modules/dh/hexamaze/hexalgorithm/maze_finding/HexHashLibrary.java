@@ -97,17 +97,20 @@ class HashingThread extends RecursiveAction {
 
     private static BufferedQueue<HexNode> deepCopyList(BufferedQueue<HexNode> input) {
         BufferedQueue<HexNode> output = new BufferedQueue<>(input.getCapacity());
-        for (int i = 0; i < output.getCapacity(); i++)
-            output.add(new HexNode(input.get(i)));
+        for (HexNode node : input)
+            output.add(new HexNode(node));
         return output;
     }
 
     private static int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns) {
         int[] positions = new int[columns.getCapacity()];
-        int middleValue = columns.get(columns.getCapacity() / 2).getCapacity();
-        for (int i = 0; i < columns.getCapacity(); i++) {
-            int placeholderValue = columns.get(i).getCapacity() - middleValue;
-            positions[i] = Math.max(placeholderValue, 0);
+        int middleIndex = columns.getCapacity() / 2;
+        int middleValue = columns.get(middleIndex).getCapacity();
+
+        int index = 0;
+        for (BufferedQueue<HexNode> column : columns) {
+            int placeholderValue = column.getCapacity() - middleValue;
+            positions[index++] = Math.max(placeholderValue, 0);
         }
 
         if (arrayIsAllZero(positions))

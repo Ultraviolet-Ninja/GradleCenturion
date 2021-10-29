@@ -7,14 +7,14 @@ import bomb.tools.data.structures.BufferedQueue;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.LinkedList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
  * using individual HexNodes to represent what a tile contains.
  */
-public class HexagonDataStructure {
+public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataStructure.HexNode>>{
     /**
      * This class is the backing node to a given hexagon data structure.
      */
@@ -154,14 +154,14 @@ public class HexagonDataStructure {
      * Initializes a hexagonal storage system based on a simple ArrayList of HexNodes,
      * taking the size of the list before sending it to the stream method
      *
-     * @param imports The Arraylist of HexNodes
+     * @param nodeList The List of HexNodes
      * @throws IllegalArgumentException The side length didn't given an integer value
      */
-    public HexagonDataStructure(List<HexNode> imports) throws IllegalArgumentException {
-        sideLength = nodalSideLength(imports.size());
+    public HexagonDataStructure(List<HexNode> nodeList) throws IllegalArgumentException {
+        sideLength = nodalSideLength(nodeList.size());
         if (sideLength == 0)
             throw new IllegalArgumentException("Given List would not create a complete Hexagon");
-        hexagon = convertListToQueues(imports);
+        hexagon = convertFromList(nodeList);
         span = calculateHexagonalSpan();
     }
 
@@ -195,22 +195,22 @@ public class HexagonDataStructure {
      * @param stream The ArrayList of HexNodes
      */
     public void readInNodeList(List<HexNode> stream) {
-        hexagon = convertListToQueues(stream);
+        hexagon = convertFromList(stream);
     }
 
     /**
      * Takes in an ArrayList of HexNodes and converts to a hexagonal representation
      *
-     * @param newStream The ArrayList of HexNodes
+     * @param newList The ArrayList of HexNodes
      * @return A successfully streamed FinalList of FinalLists
      * @throws IllegalArgumentException Too few or too many HexNodes were given
      */
-    private BufferedQueue<BufferedQueue<HexNode>> convertListToQueues(List<HexNode> newStream)
+    private BufferedQueue<BufferedQueue<HexNode>> convertFromList(List<HexNode> newList)
             throws IllegalArgumentException {
-        if (nodalSideLength(newStream.size()) == 0)
-            throw new IllegalArgumentException("Too few nodes were sent: " + newStream.size());
+        if (nodalSideLength(newList.size()) == 0)
+            throw new IllegalArgumentException("Too few nodes were sent: " + newList.size());
         BufferedQueue<BufferedQueue<HexNode>> temp = createHexagonStructure(sideLength);
-        for (HexNode hexNode : newStream)
+        for (HexNode hexNode : newList)
             if (!add(temp, hexNode)) throw new IllegalArgumentException("We have extra nodes being added");
         return temp;
     }
@@ -224,7 +224,7 @@ public class HexagonDataStructure {
      */
     private boolean add(BufferedQueue<BufferedQueue<HexNode>> toFill, HexNode toAdd) {
         for (int i = 0; i < toFill.getCapacity(); i++) {
-            if (!toFill.get(i).full()) {
+            if (!toFill.get(i).isFull()) {
                 toFill.get(i).add(toAdd);
                 return true;
             }
@@ -242,8 +242,8 @@ public class HexagonDataStructure {
 
     public List<HexNode> exportToList() {
         List<HexNode> output = new ArrayList<>();
-        for (int i = 0; i < hexagon.getCapacity(); i++)
-            output.addAll(hexagon.get(i));
+        for (BufferedQueue<HexNode> queue : hexagon)
+            output.addAll(queue);
         return output;
     }
 
@@ -253,41 +253,43 @@ public class HexagonDataStructure {
      * @throws IllegalArgumentException If extra nodes were being added to the new hexagon
      */
     public void rotate() throws IllegalArgumentException {
-        List<HexNode> linearOrder = new LinkedList<>();
-        //TODO - Needs to be broken down
+        List<HexNode> newLinearOrder = new ArrayList<>();
         //For loop for the entire algorithm
         for (int columnIndex = 0; columnIndex < hexagon.getCapacity(); columnIndex++) {
-            //For loop for 1st half of the hexagon and its center
-            for (int firstHalfIndex = 0; firstHalfIndex < sideLength; firstHalfIndex++) {
-                //If the row capacity - a is less than zero,
-                // that means we can't draw from that FinalList row anymore
-                if (hexagon.get(firstHalfIndex).getCapacity() - columnIndex > 0) {
-                    int lastIndex = hexagon.get(firstHalfIndex).getCapacity() - 1;
-                    linearOrder.add(hexagon.get(firstHalfIndex).get(lastIndex - columnIndex));
-                }
-            }
+            addLeftHalf(newLinearOrder, columnIndex);
 
-            int rowCounter = sideLength;
-            //If loop prevents the 2nd half from running on the first total algorithm run
-            if (columnIndex != 0) {
-                //For loop for 2nd half copies value from a and decreases for each row past Center
-                for (int secondHalfIndex = columnIndex; secondHalfIndex > 0; secondHalfIndex--) {
-                    //If statement prevents excess instances from being copied over to the new hexagon
-                    if (rowCounter < hexagon.getCapacity()) {
-                        int lastIndex = hexagon.get(rowCounter).getCapacity() - secondHalfIndex;
-                        linearOrder.add(hexagon.get(rowCounter).get(lastIndex));
-                        rowCounter++;
-                    } else secondHalfIndex = 0;
-                }
+            if (columnIndex != 0) { //If loop prevents the 2nd half from running on the first total algorithm run
+                addRightHalf(newLinearOrder, columnIndex, sideLength);
             }
         }
 
-        for (HexNode hexNode : linearOrder) {
+        for (HexNode hexNode : newLinearOrder) {
             hexNode.walls = rotateWallPositions(hexNode.walls);
             hexNode.fill = rotateShape(hexNode.fill);
         }
 
-        hexagon = convertListToQueues(linearOrder);
+        hexagon = convertFromList(newLinearOrder);
+    }
+
+    private void addLeftHalf(List<HexNode> newLinearOrder, int columnIndex) {
+        for (int firstHalfIndex = 0; firstHalfIndex < sideLength; firstHalfIndex++) {
+            //If the row capacity - a is less than zero, that means we can't draw from that BufferedQueue row anymore
+            if (hexagon.get(firstHalfIndex).getCapacity() - columnIndex > 0) {
+                int lastIndex = hexagon.get(firstHalfIndex).getCapacity() - 1;
+                newLinearOrder.add(hexagon.get(firstHalfIndex).get(lastIndex - columnIndex));
+            }
+        }
+    }
+
+    private void addRightHalf(List<HexNode> newLinearOrder, int columnIndex, int rowCounter) {
+        for (int secondHalfIndex = columnIndex; secondHalfIndex > 0; secondHalfIndex--) {
+            //If statement prevents excess instances from being copied over to the new hexagon
+            if (rowCounter < hexagon.getCapacity()) {
+                int lastIndex = hexagon.get(rowCounter).getCapacity() - secondHalfIndex;
+                newLinearOrder.add(hexagon.get(rowCounter).get(lastIndex));
+                rowCounter++;
+            } else secondHalfIndex = 0;
+        }
     }
 
     /**
@@ -424,5 +426,10 @@ public class HexagonDataStructure {
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<BufferedQueue<HexNode>> iterator() {
+        return hexagon.iterator();
     }
 }
