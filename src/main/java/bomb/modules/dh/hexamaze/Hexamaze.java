@@ -49,7 +49,7 @@ public class Hexamaze extends Widget {
     }
 
     /**
-     * Sets up the variables for the Hexamaze. This includes setting up the full maze, the defuser's grid
+     * Sets up the variables for the Hexamaze. This includes setting up the full maze, the Defuser's grid
      * and an ArrayList representation of the grid
      */
     public static void setupVariables(List<HexMazePanel> panelArray) {

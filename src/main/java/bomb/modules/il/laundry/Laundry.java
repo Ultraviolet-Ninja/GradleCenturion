@@ -70,7 +70,7 @@ public class Laundry extends Widget {
      * @param solved The number of solved modules
      */
     private static void setMaterial(int solved) {
-        switch (balance(solved + getTotalPorts() - numHolders)) {
+        switch (balance(solved + calculateTotalPorts() - numHolders)) {
             case 0 -> ARTICLE.setMaterial(Clothing.Material.POLYESTER);
             case 1 -> ARTICLE.setMaterial(Clothing.Material.COTTON);
             case 2 -> ARTICLE.setMaterial(Clothing.Material.WOOL);
@@ -102,7 +102,7 @@ public class Laundry extends Widget {
      * @param unsolved The number of unsolved modules
      */
     private static void setItem(int unsolved) {
-        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL))) {
+        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL_PRESENT))) {
             case 0 -> ARTICLE.setItem(Clothing.Item.CORSET);
             case 1 -> ARTICLE.setItem(Clothing.Item.SHIRT);
             case 2 -> ARTICLE.setItem(Clothing.Item.SKIRT);

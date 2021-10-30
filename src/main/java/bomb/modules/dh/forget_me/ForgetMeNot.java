@@ -58,7 +58,7 @@ public class ForgetMeNot extends Widget {
     }
 
     private static int createSecondNumber(int stageNumber) {
-        if (portExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
+        if (doesPortExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
         return stageNumber + FINAL_CODE.get(0) +

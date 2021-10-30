@@ -2,7 +2,7 @@ package bomb.modules.il.laundry;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
+import bomb.BombSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -76,9 +76,9 @@ public class LaundryTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter setFirst = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter setSecond = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter setThird = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter setFirst = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter setSecond = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter setThird = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {setSecond, new String[]{"105F", "Medium Heat", "110", "Wet Cleaning", "CORDUROY - MALINITE - SCARF"},
                         "0", "1"},
@@ -95,7 +95,7 @@ public class LaundryTest {
 
     @Test
     public void thanksBobTest() {
-        WidgetSimulations.thanksBobCenturion();
+        BombSimulations.thanksBobCenturion();
         String[] actual = Laundry.clean("0", "0");
         String[] expected = {"105F", "Don't Tumble Dry", "300", "Bleach", "CORDUROY - JADE - CORSET", Laundry.THANKS_BOB};
 

@@ -1,13 +1,15 @@
 package bomb;
 
-
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
 
+import java.util.EnumSet;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
@@ -30,11 +32,7 @@ public class Widget {
     protected static Indicator[] indicatorArray = Indicator.values();
 
     private static int[] portArray = {0,0,0,0,0,0};
-    /**
-     * Sets the number of battery holders on the bomb
-     *
-     * @param numHolders The given number
-     */
+
     public static void setNumHolders(int numHolders) {
         if (numHolders >= 0) {
             Widget.numHolders = numHolders;
@@ -42,40 +40,21 @@ public class Widget {
         }
     }
 
-    /**
-     * Sets the number of minutes on the bomb
-     *
-     * @param startTime The given number
-     */
     public static void setStartTime(int startTime){
-        if (startTime >= 0){
+        if (startTime >= 0)
             numStartingMinutes = startTime;
-        }
     }
 
-    /**
-     * Sets the Serial Code
-     *
-     * @param serialCode The given code
-     */
     public static void setSerialCode(String serialCode) {
         Widget.serialCode = serialCode;
-        updates();
+        updatesModules();
     }
 
-    /**
-     * Records updates for Blind Alley and Forget Me Not that occur while doing edgework
-     */
-    private static void updates(){
+    private static void updatesModules(){
         BlindAlley.alleyUpdate();
         if (isForgetMeNotActive) ForgetMeNot.updateLargestValueInSerial();
     }
 
-    /**
-     * Sets the number of double A's on the bomb
-     *
-     * @param doubleAs The given number
-     */
     public static void setDoubleAs(int doubleAs) {
         if (doubleAs >= 0) {
             numDoubleAs = doubleAs;
@@ -83,11 +62,6 @@ public class Widget {
         }
     }
 
-    /**
-     * Sets the number of D batteries on the bomb
-     *
-     * @param dBatteries The given number
-     */
     public static void setDBatteries(int dBatteries){
         if (dBatteries >= 0) {
             numDBatteries = dBatteries;
@@ -95,71 +69,36 @@ public class Widget {
         }
     }
 
-    /**
-     * Sets a specified Indicator with a specified state
-     *
-     * @param state The state to give the Indicator
-     * @param which The Indicator to change
-     */
     public static void setIndicator(TrinarySwitch state, Indicator which){
         indicatorArray[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
 
-    /**
-     * Sets the number of modules on the bomb
-     *
-     * @param numModules The given number
-     */
     public static void setNumModules(int numModules) {
         if (numModules >= 0) {
             Widget.numModules = numModules;
         }
     }
 
-    /**
-     * Sets the number of port plates on the bomb
-     *
-     * @param plates The given number
-     */
     public static void setNumberOfPlates(int plates) {
         if (plates >= 0) {
             numPortPlates = plates;
         }
     }
 
-    /**
-     * Stores the current Two-Factor Authentication
-     *
-     * @param twoFactor The String containing the 2-Factor
-     */
     public static void setTwoFactor(String twoFactor){
         Widget.twoFactor = twoFactor;
     }
 
-    /**
-     * Sets whether the Souvenir module is active on the Bomb
-     *
-     * @param set The toggle
-     */
     public static void setIsSouvenirActive(boolean set){
         isSouvenirActive = set;
     }
 
-    /**
-     * Sets whether the 'Forget Me Not' module is active on the Bomb
-     *
-     * @param set The toggle
-     */
     public static void setIsForgetMeNotActive(boolean set){
         isForgetMeNotActive = set;
-        updates();
+        updatesModules();
     }
 
-    /**
-     * @param which The port to add to
-     * @param newValue The value that will overwrite the array location
-     */
     public static void setPortValue(Port which, int newValue){
         portArray[which.ordinal()] = newValue;
         BlindAlley.alleyUpdate();
@@ -235,11 +174,6 @@ public class Widget {
         return indicatorArray[ind.ordinal()].getState() == OFF;
     }
 
-    /**
-     * Checks to see if the Serial Code has contains a vowel
-     *
-     * @return True if A,E,I,O, or U appear
-     */
     public static boolean hasVowelInSerialCode(){
         return !ultimateFilter(serialCode, VOWEL_FILTER).isEmpty();
     }
@@ -269,15 +203,10 @@ public class Widget {
      * @param howMany The required amount
      * @return True if the bomb contains more the required amount
      */
-    public static boolean hasMorePortsThan(Port port, int howMany){
+    public static boolean hasMorePortsThanSpecified(Port port, int howMany){
         return portArray[port.ordinal()] > howMany;
     }
 
-    /**
-     * Returns the number of battery holders
-     *
-     * @return The number of battery holders
-     */
     public static int getNumHolders() {
         return numHolders;
     }
@@ -286,33 +215,17 @@ public class Widget {
         return numModules;
     }
 
-    /**
-     * Returns the number of a specified port
-     *
-     * @param which The port to check
-     * @return The number of that port
-     */
     public static int getPortQuantity(Port which){
         return portArray[which.ordinal()];
     }
 
-    /**
-     * Counts the number of all ports on the bomb
-     *
-     * @return The total number of ports
-     */
-    public static int getTotalPorts(){
+    public static int calculateTotalPorts(){
         int counter = 0;
         for (int num : portArray) counter += num;
         return counter;
     }
 
-    /**
-     *
-     *
-     * @return The number of port types on the bomb
-     */
-    public static int getPortTypes(){
+    public static int countPortTypes(){
         int counter = 0;
         for (int type : portArray){
             if (type > 0)
@@ -329,6 +242,18 @@ public class Widget {
         return isSouvenirActive;
     }
 
+    public static EnumSet<Indicator> getFilteredSetOfIndicators(IndicatorFilter filter) {
+        EnumSet<Indicator> allIndicators = EnumSet.allOf(Indicator.class);
+
+        List<Indicator> tempList =  allIndicators.stream()
+                .filter(indicator -> filter.test(indicator.getState()))
+                .collect(Collectors.toList());
+
+        return tempList.isEmpty() ?
+                EnumSet.noneOf(Indicator.class) :
+                EnumSet.copyOf(tempList);
+    }
+
     /**
      * Counts all indicators, whether lit, unlit or all if specified
      *
@@ -336,18 +261,9 @@ public class Widget {
      * @return The number of indicators
      */
     public static int countIndicators(IndicatorFilter filter){
-        int counter = 0;
-        for (Indicator indicator : indicatorArray) {
-            if (filter.test(indicator.getState())) counter++;
-        }
-        return counter;
+        return getFilteredSetOfIndicators(filter).size();
     }
 
-    /**
-     * Returns the sum of double A and D batteries
-     *
-     * @return The sum of all batteries
-     */
     public static int getAllBatteries(){
         return numDBatteries + numDoubleAs;
     }
@@ -360,13 +276,7 @@ public class Widget {
         return twoFactor;
     }
 
-    /**
-     * Tests to see if a specified port exists on the current bomb
-     *
-     * @param port The port to test
-     * @return True if the port is present somewhere on the Bomb
-     */
-    public static boolean portExists(Port port){
+    public static boolean doesPortExists(Port port){
         return portArray[port.ordinal()] > 0;
     }
 
@@ -394,7 +304,7 @@ public class Widget {
     }
 
     public enum IndicatorFilter {
-        LIT(state -> state == ON), UNLIT(state -> state == OFF), ALL(state -> state != UNKNOWN);
+        LIT(state -> state == ON), UNLIT(state -> state == OFF), ALL_PRESENT(state -> state != UNKNOWN);
 
         private final Predicate<TrinarySwitch> condition;
 

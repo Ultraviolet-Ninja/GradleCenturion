@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class creates a representation of what hte defuser sees on the Bomb.
+ * This class creates a representation of what hte Defuser sees on the Bomb.
  * It encapsulates a Hex class and contains data that's appropriate for that puzzle that
  * wouldn't be needed for all Hex objects
  */
@@ -20,7 +20,7 @@ public class HexGrid extends AbstractHexagon {
     private final ReadOnlyRing<Color> colorRing;
 
     /**
-     * Initializes a Hex object with a side length of 4, representing what the defuser sees on thr bomb
+     * Initializes a Hex object with a side length of 4, representing what the Defuser sees on thr bomb
      */
     public HexGrid() {
         super(new HexagonDataStructure(STANDARD_SIDE_LENGTH));

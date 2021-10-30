@@ -10,8 +10,6 @@ import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
-//TODO - Probably change var names, finish Javadocs and break down a few methods
-
 /**
  *
  */
@@ -64,7 +62,7 @@ public class TwoBit extends Widget {
     /**
      * Gets the next code in the {@link TwoBit#CODE_GRID}
      *
-     * @param code The next number code received from the defuser
+     * @param code The next number code received from the Defuser
      * @return The next letter code along with a Query or Submit phrase
      * @throws IllegalArgumentException The given input was not 2 numbers
      */
@@ -100,10 +98,12 @@ public class TwoBit extends Widget {
         int[] codeOut = new int[2];
         if (code.length() == 1) {
             codeOut[1] = Integer.parseInt(code);
-        } else {
-            codeOut[0] = Integer.parseInt(code.substring(0, 1));
-            codeOut[1] = Integer.parseInt(code.substring(1));
+            return codeOut;
         }
+
+        codeOut[0] = Integer.parseInt(code.substring(0, 1));
+        codeOut[1] = Integer.parseInt(code.substring(1));
+
         return codeOut;
     }
 

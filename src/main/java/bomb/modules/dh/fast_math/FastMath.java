@@ -52,10 +52,10 @@ public class FastMath extends Widget {
 
     private static int edgework() {
         int output = hasLitIndicator(MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
-        output += portExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
+        output += doesPortExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
         //If the serial number has the letters F A S T
         output -= !ultimateFilter(serialCode, new Regex("[fast]")).isEmpty() ? 5 : 0;
-        output += portExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
+        output += doesPortExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
         output -= getAllBatteries() > 3 ? 15 : 0; //If the bomb has more than 3 batteries
         return output;
     }

@@ -309,7 +309,6 @@ public class TheBulb extends Widget {
         List<String> matches = findButtonPresses.findAllMatches();
         StringBuilder toSouvenir = new StringBuilder();
 
-        //TODO
         for (int i = 0; i < matches.size(); i++) {
             toSouvenir.append(matches.get(i));
             if (i != matches.size() - 1)
