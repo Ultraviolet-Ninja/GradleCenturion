@@ -101,8 +101,8 @@ public class ForgetMeNot extends Widget {
         }
 
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        //TODO
-        if (!singleNumberRegex.findAllMatches().isEmpty()) {
+
+        if (singleNumberRegex.hasMatch()) {
             for (String num : singleNumberRegex) {
                 if (Integer.parseInt(num) > largestSerialCodeNumber)
                     largestSerialCodeNumber = Byte.parseByte(num);
@@ -111,9 +111,9 @@ public class ForgetMeNot extends Widget {
     }
 
     public static void undoLastStage() {
-        if (FINAL_CODE.size() != 0) {
-            FINAL_CODE.remove(FINAL_CODE.size() - 1);
-        }
+        int size = FINAL_CODE.size();
+        if (size != 0)
+            FINAL_CODE.remove(size - 1);
     }
 
     public static String stringifyFinalCode() {
