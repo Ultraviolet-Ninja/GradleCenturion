@@ -3,7 +3,7 @@ package bomb.tools.filter;
 import java.util.regex.Pattern;
 
 public class Filter {
-    public static final String LOGIC_REGEX = "(?:∧|∨|↓|⊻|←|→|↔|\\|)";
+    public static final String LOGIC_REGEX = "[∧∨↓⊻←→↔|]";
 
     public static final Regex SERIAL_CODE_PATTERN = new Regex("\\b[a-zA-Z0-9]{6}\\b"),
             NUMBER_PATTERN = new Regex("\\d+\\.?\\d*"),
