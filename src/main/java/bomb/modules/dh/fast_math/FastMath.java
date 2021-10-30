@@ -19,7 +19,7 @@ public class FastMath extends Widget {
             {13, 23, 26, 85, 92, 12, 73, 56, 81, 7, 75, 47, 99}
     };
 
-    public static String solve(String letters) {
+    public static String solve(String letters) throws IllegalArgumentException {
         if (letters == null || letters.length() != 2)
             throw new IllegalArgumentException("Input 2 letters, please");
         checkSerialCode();
