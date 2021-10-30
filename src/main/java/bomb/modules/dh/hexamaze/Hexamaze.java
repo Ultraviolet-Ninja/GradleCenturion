@@ -43,7 +43,8 @@ public class Hexamaze extends Widget {
      * Sets all elements of the representation to null
      */
     private static void setToNull() {
-        for (int i = 0; i < nodalArea(HexGrid.STANDARD_SIDE_LENGTH); i++)
+        int nodalArea = nodalArea(HexGrid.STANDARD_SIDE_LENGTH);
+        for (int i = 0; i < nodalArea; i++)
             HEX_SHAPE_TRACKER.add(null);
     }
 

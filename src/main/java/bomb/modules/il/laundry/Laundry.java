@@ -42,11 +42,11 @@ public class Laundry extends Widget {
      */
     private static void validateInput(String solved, String needy) throws IllegalArgumentException {
         if (serialCode.isEmpty()) throw new
-                IllegalArgumentException("Serial Code must be typed in.");
+                IllegalArgumentException("Serial Code must be typed in");
         else if (needy.isEmpty()) throw new
                 IllegalArgumentException("This module needs to know about the number of needy modules");
         else if (solved.isEmpty()) throw new
-                IllegalArgumentException("This module needs the number of currently solved modules.");
+                IllegalArgumentException("This module needs the number of currently solved modules");
     }
 
     /**
@@ -56,7 +56,7 @@ public class Laundry extends Widget {
      */
     private static void setClothing(int solved) throws IllegalArgumentException {
         if (numModules == 0)
-            throw new IllegalArgumentException("This needs the number of modules to function.");
+            throw new IllegalArgumentException("This needs the number of modules to function");
 
         setMaterial(solved);
         setColor();
