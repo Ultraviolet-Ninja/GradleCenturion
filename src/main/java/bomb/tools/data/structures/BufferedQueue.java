@@ -21,6 +21,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
 
     private int size;
 
+    @SuppressWarnings("unchecked")
     public BufferedQueue(int capacity) {
         this.capacity = capacity;
         data = (E[]) new Object[capacity];
@@ -179,7 +180,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
     }
 
     @Override
-    public Object[] toArray(Object[] a) throws UnsupportedOperationException {
+    public <T> T[] toArray(T[] a) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
     }
 }
