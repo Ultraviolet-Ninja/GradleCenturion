@@ -32,7 +32,7 @@ public class BooleanVenn extends Widget {
      * the correct method depending on which side of the operation has the priority, that being
      * the operation between parenthesis
      *
-     * @param operation The operation that the defuser sees on the bomb
+     * @param operation The operation that the Defuser sees on the bomb
      * @return A String code that represents the state of each Venn Diagram section
      * The output order is not, c, b, a, bc, ac, ab, all
      * @throws IllegalArgumentException Format mismatch for the input equation

@@ -51,9 +51,9 @@ public class BooleanController implements Resettable {
     public void initialize() {
         MFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
                 booleanXnor, booleanImpliedBy};
-        int i = 0;
         EventHandler<ActionEvent> onActionEvent = createButtonAction();
-        while (i < buttonArray.length) {
+
+        for (int i = 0; i < buttonArray.length; i++) {
             buttonArray[i].setOnAction(onActionEvent);
             i++;
         }

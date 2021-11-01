@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,7 +53,7 @@ public class Maze extends AbstractHexagon {
         while ((rowOfNodes = csvReader.readNext()) != null) {
             for (String node : rowOfNodes) {
                 String[] nodeInfo = node.split(" ");
-                List<HexWall> decodedWalls = decodeWalls(nodeInfo[WALLS_INDEX]);
+                EnumSet<HexWall> decodedWalls = decodeWalls(nodeInfo[WALLS_INDEX]);
                 HexShape decodedShape = decodeShape(nodeInfo[SHAPE_INDEX]);
                 nodes.add(new HexNode(decodedShape, decodedWalls));
             }

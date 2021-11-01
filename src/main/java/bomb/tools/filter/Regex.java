@@ -82,7 +82,7 @@ public class Regex implements Iterable<String> {
 
     public List<String> findAllMatches() {
         reset();
-        ArrayList<String> output = new ArrayList<>();
+        List<String> output = new ArrayList<>();
         while (textMatcher.find()) {
             output.add(textMatcher.group());
         }

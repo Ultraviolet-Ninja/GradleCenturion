@@ -117,7 +117,7 @@ public class ShapeShift extends Widget {
 
     private static boolean rectangularOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMorePortsThan(Port.DVI, 0);
+            case ROUND -> hasMorePortsThanSpecified(Port.DVI, 0);
             case FLAT -> getSerialCodeLastDigit() % 2 == 1;
             case POINT -> hasLitIndicator(Indicator.MSA);
             default -> hasUnlitIndicator(Indicator.BOB);
@@ -126,18 +126,18 @@ public class ShapeShift extends Widget {
 
     private static boolean triangularOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMorePortsThan(Port.PARALLEL, 0);
+            case ROUND -> hasMorePortsThanSpecified(Port.PARALLEL, 0);
             case FLAT -> hasUnlitIndicator(Indicator.CAR);
             case POINT -> hasLitIndicator(Indicator.IND);
-            default -> hasMorePortsThan(Port.RJ45, 0);
+            default -> hasMorePortsThanSpecified(Port.RJ45, 0);
         };
     }
 
     private static boolean ticketOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMorePortsThan(Port.RCA, 0);
+            case ROUND -> hasMorePortsThanSpecified(Port.RCA, 0);
             case FLAT -> hasUnlitIndicator(Indicator.FRQ);
-            case POINT -> hasMorePortsThan(Port.PS2, 0);
+            case POINT -> hasMorePortsThanSpecified(Port.PS2, 0);
             default -> getAllBatteries() >= 3;
         };
     }

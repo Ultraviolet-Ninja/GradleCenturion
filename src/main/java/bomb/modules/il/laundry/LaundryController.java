@@ -37,6 +37,7 @@ public class LaundryController implements Resettable {
                     solvedModuleNumberField.getText(),
                     needyModuleNumberField.getText()
             );
+
             washImage.setImage(new Image(String.valueOf(getClass().getResource(outputs[0]))));
             dryImage.setImage(new Image(String.valueOf(getClass().getResource(outputs[1]))));
             washText.setText(WASH_INSTRUCTIONS + separateText(outputs[0]));
@@ -44,7 +45,7 @@ public class LaundryController implements Resettable {
 
             ironText.setText(IRONING_INSTRUCTIONS + outputs[2]);
             specialText.setText(SPECIAL_INSTRUCTIONS + outputs[3]);
-            article.setText(restructure(outputs[4]));
+            article.setText(reformatClothingOutput(outputs[4]));
             if (outputs.length == 6) bob.setText(outputs[5]);
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.INFORMATION, illegal.getMessage());
@@ -58,7 +59,7 @@ public class LaundryController implements Resettable {
                 .replace("F", "°F");
     }
 
-    private String restructure(String in) {
+    private String reformatClothingOutput(String in) {
         String[] buffer = in.split(" - ");
         StringBuilder builder = new StringBuilder();
 

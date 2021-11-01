@@ -77,7 +77,8 @@ public class Astrology extends Widget {
         String letters = ultimateFilter(serialCode, CHAR_FILTER);
         for (AstroSymbol symbol : symbols) {
             Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
-            if (checker.findAllMatches().isEmpty()) initialVal--;
+
+            if (!checker.hasMatch()) initialVal--;
             else initialVal++;
         }
         return initialVal;

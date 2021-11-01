@@ -16,6 +16,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.components.microcontroller to javafx.fxml;
     exports bomb.components.simon.screams to javafx.fxml;
     exports bomb.components.simon.states to javafx.fxml;
+    exports bomb.enumerations to javafx.fxml;
     exports bomb.modules.ab.alphabet to javafx.fxml;
     exports bomb.modules.ab.astrology to javafx.fxml;
     exports bomb.modules.ab.bitwise to javafx.fxml;

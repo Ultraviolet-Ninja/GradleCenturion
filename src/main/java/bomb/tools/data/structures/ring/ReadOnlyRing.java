@@ -37,7 +37,7 @@ public class ReadOnlyRing<E> implements Iterable<E> {
         headIndex = 0;
     }
 
-    public void add(E element) {
+    public void add(E element) throws BufferOverflowException {
         if (internalStructure.size() == capacity)
             throw new BufferOverflowException();
         internalStructure.add(element);

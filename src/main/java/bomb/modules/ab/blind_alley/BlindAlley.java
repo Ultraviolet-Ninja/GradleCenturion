@@ -35,12 +35,12 @@ public class BlindAlley extends Widget {
 
     private static void topMid() {
         alleyCat[0][1] = convertToBool(hasUnlitIndicator(NSA)) + convertToBool(hasLitIndicator(FRK)) +
-                convertToBool(hasUnlitIndicator(CAR)) + convertToBool(portExists(RJ45));
+                convertToBool(hasUnlitIndicator(CAR)) + convertToBool(doesPortExists(RJ45));
     }
 
     private static void left() {
         alleyCat[1][0] = convertToBool(hasUnlitIndicator(FRQ)) + convertToBool(hasUnlitIndicator(IND)) +
-                convertToBool(hasUnlitIndicator(TRN)) + convertToBool(portExists(DVI));
+                convertToBool(hasUnlitIndicator(TRN)) + convertToBool(doesPortExists(DVI));
     }
 
     private static void middle() {
@@ -50,7 +50,7 @@ public class BlindAlley extends Widget {
 
     private static void right() {
         alleyCat[1][2] = convertToBool(hasLitIndicator(BOB)) + convertToBool(hasLitIndicator(CLR)) +
-                convertToBool(portExists(PS2)) + convertToBool(portExists(SERIAL));
+                convertToBool(doesPortExists(PS2)) + convertToBool(doesPortExists(SERIAL));
     }
 
     private static void bottomLeft() {
@@ -60,12 +60,12 @@ public class BlindAlley extends Widget {
 
     private static void bottomMid() {
         alleyCat[2][1] = convertToBool(hasUnlitIndicator(FRK)) + convertToBool(hasLitIndicator(MSA)) +
-                convertToBool(portExists(PARALLEL)) + convertToBool(hasVowelInSerialCode());
+                convertToBool(doesPortExists(PARALLEL)) + convertToBool(hasVowelInSerialCode());
     }
 
     private static void bottomRight() {
         alleyCat[2][2] = convertToBool(hasUnlitIndicator(CLR)) + convertToBool(hasUnlitIndicator(MSA)) +
-                convertToBool(hasLitIndicator(SND)) + convertToBool(portExists(RCA));
+                convertToBool(hasLitIndicator(SND)) + convertToBool(doesPortExists(RCA));
     }
 
     private static int convertToBool(boolean bool) {
