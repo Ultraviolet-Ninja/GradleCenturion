@@ -6,6 +6,7 @@ import bomb.enumerations.TrinarySwitch;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -215,18 +216,13 @@ public class Widget {
     }
 
     public static int calculateTotalPorts(){
-        int counter = 0;
-        for (int num : portArray) counter += num;
-        return counter;
+        return  Arrays.stream(portArray).sum();
     }
 
     public static int countPortTypes(){
-        int counter = 0;
-        for (int type : portArray){
-            if (type > 0)
-                counter++;
-        }
-        return counter;
+        return (int) Arrays.stream(portArray)
+                .filter(port -> port > 0)
+                .count();
     }
 
     public static boolean getIsForgetMeNotActive(){
