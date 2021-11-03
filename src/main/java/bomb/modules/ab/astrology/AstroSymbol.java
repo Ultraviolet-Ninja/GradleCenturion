@@ -12,12 +12,12 @@ public enum AstroSymbol implements Index {
      */
     FIRE(0), WATER(1), EARTH(2), AIR(3),
     /**
-     * The Planetary symbols
+     * The Celestial symbols
      */
     SUN(0), MOON(1), MERCURY(2), VENUS(3), MARS(4),
     JUPITER(5), SATURN(6), URANUS(7), NEPTUNE(8), PLUTO(9),
     /**
-     * The Astrological symbols
+     * The Zodiac symbols
      */
     ARIES(0), TAURUS(1), GEMINI(2), CANCER(3), LEO(4), VIRGO(5),
     LIBRA(6), SCORPIO(7), SAGITTARIUS(8), CAPRICORN(9),
