@@ -6,7 +6,7 @@ import bomb.abstractions.Index;
  * This enum deals with the symbols from Astrology, each containing an index in arrays
  * when used in the Astrology class
  */
-public enum AstroSymbol implements Index {
+public enum AstrologySymbol implements Index {
     /**
      * The Elemental symbols
      */
@@ -35,20 +35,20 @@ public enum AstroSymbol implements Index {
      *
      * @param index Its index number found in the bomb manual page for Astrology
      */
-    AstroSymbol(int index) {
+    AstrologySymbol(int index) {
         this.index = (byte) index;
     }
 
-    public static AstroSymbol[] getElementalSymbols() {
-        return new AstroSymbol[]{FIRE, WATER, EARTH, AIR};
+    public static AstrologySymbol[] getElementalSymbols() {
+        return new AstrologySymbol[]{FIRE, WATER, EARTH, AIR};
     }
 
-    public static AstroSymbol[] getCelestialSymbols() {
-        return new AstroSymbol[]{SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE, PLUTO};
+    public static AstrologySymbol[] getCelestialSymbols() {
+        return new AstrologySymbol[]{SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE, PLUTO};
     }
 
-    public static AstroSymbol[] getZodiacSymbols() {
-        return new AstroSymbol[]{ARIES, TAURUS, GEMINI, CANCER, LEO, VIRGO, LIBRA, SCORPIO, SAGITTARIUS, CAPRICORN,
+    public static AstrologySymbol[] getZodiacSymbols() {
+        return new AstrologySymbol[]{ARIES, TAURUS, GEMINI, CANCER, LEO, VIRGO, LIBRA, SCORPIO, SAGITTARIUS, CAPRICORN,
                 AQUARIUS, PISCES};
     }
 }

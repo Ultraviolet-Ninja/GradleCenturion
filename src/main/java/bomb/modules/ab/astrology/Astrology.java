@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.regex.Pattern;
 
-import static bomb.modules.ab.astrology.AstroSymbol.ARIES;
-import static bomb.modules.ab.astrology.AstroSymbol.PISCES;
-import static bomb.modules.ab.astrology.AstroSymbol.PLUTO;
-import static bomb.modules.ab.astrology.AstroSymbol.SUN;
+import static bomb.modules.ab.astrology.AstrologySymbol.ARIES;
+import static bomb.modules.ab.astrology.AstrologySymbol.PISCES;
+import static bomb.modules.ab.astrology.AstrologySymbol.PLUTO;
+import static bomb.modules.ab.astrology.AstrologySymbol.SUN;
 import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
@@ -51,7 +51,7 @@ public class Astrology extends Widget {
      * @return The String command
      * @throws IllegalArgumentException Serial code is empty or there's an issue with the amount or type of symbols
      */
-    public static String calculate(AstroSymbol... symbols) throws IllegalArgumentException {
+    public static String calculate(AstrologySymbol... symbols) throws IllegalArgumentException {
         checkSerialCode();
         checkInputHasAllThreeTypes(symbols);
         Arrays.sort(symbols);
@@ -78,10 +78,10 @@ public class Astrology extends Widget {
      * @return The resulting output value
      * @throws IllegalArgumentException The Serial Code is empty
      */
-    private static int checkMatchingSerialCodeLetters(int initialVal, AstroSymbol[] symbols)
+    private static int checkMatchingSerialCodeLetters(int initialVal, AstrologySymbol[] symbols)
             throws IllegalArgumentException {
         String letters = ultimateFilter(serialCode, CHAR_FILTER);
-        for (AstroSymbol symbol : symbols) {
+        for (AstrologySymbol symbol : symbols) {
             Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
 
             if (!checker.hasMatch()) initialVal--;
@@ -90,19 +90,19 @@ public class Astrology extends Widget {
         return initialVal;
     }
 
-    private static void checkInputHasAllThreeTypes(AstroSymbol[] symbols) throws IllegalArgumentException {
+    private static void checkInputHasAllThreeTypes(AstrologySymbol[] symbols) throws IllegalArgumentException {
         if (symbols.length != EXPECTED_SIZE)
             throw new IllegalArgumentException("Astrology input size should be " + EXPECTED_SIZE);
         containsOneOfEach(symbols);
     }
 
-    private static void containsOneOfEach(AstroSymbol[] symbols) throws IllegalArgumentException {
+    private static void containsOneOfEach(AstrologySymbol[] symbols) throws IllegalArgumentException {
         int zodiacCount = 0, celestialCount = 0, elementalCount = 0;
 
-        EnumSet<AstroSymbol> zodiacSet = EnumSet.range(ARIES, PISCES);
-        EnumSet<AstroSymbol> celestialSet = EnumSet.range(SUN, PLUTO);
+        EnumSet<AstrologySymbol> zodiacSet = EnumSet.range(ARIES, PISCES);
+        EnumSet<AstrologySymbol> celestialSet = EnumSet.range(SUN, PLUTO);
 
-        for (AstroSymbol symbol : symbols) {
+        for (AstrologySymbol symbol : symbols) {
             if (zodiacSet.contains(symbol))
                 zodiacCount++;
             else if (celestialSet.contains(symbol))
