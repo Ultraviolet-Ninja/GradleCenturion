@@ -14,17 +14,20 @@ import static bomb.tools.filter.Filter.ultimateFilter;
 public class Battleship extends Widget {
     private static Ocean ocean;
     private static int[] rowCounters, columnCounters;
+    private static int numberOfRadarSpots;
 
     static {
         ocean = new Ocean();
-        rowCounters = new int[Ocean.BOARD_LENGTH];
-        columnCounters = new int[Ocean.BOARD_LENGTH];
+        rowCounters = null;
+        columnCounters = null;
+        numberOfRadarSpots = -1;
     }
 
     public static Set<String> calculateRadarPositions() throws IllegalArgumentException {
         checkSerialCode();
         Set<String> output = new TreeSet<>(calculateSerialCodeCoordinates());
         output.add(calculateEdgeworkCoordinates());
+        numberOfRadarSpots = output.size();
         return output;
     }
 
@@ -84,9 +87,44 @@ public class Battleship extends Widget {
         return ocean;
     }
 
+    public static void setRowCounters(int[] rowCounters) {
+        if (validateArray(rowCounters))
+            Battleship.rowCounters = rowCounters;
+    }
+
+    public static void setColumnCounters(int[] columnCounters) {
+        if (validateArray(columnCounters))
+            Battleship.columnCounters = columnCounters;
+    }
+
+    private static boolean validateArray(int[] array) {
+        if (array.length != Ocean.BOARD_LENGTH)
+            return false;
+
+        for (int number : array) {
+            if (number < 0 || number >= Ocean.BOARD_LENGTH)
+                return false;
+        }
+        return true;
+    }
+
+    public static void confirmRadarSpots(Tile... tiles) throws IllegalArgumentException {
+        validateConfirmedTiles(tiles);
+
+
+    }
+
+    private static void validateConfirmedTiles(Tile[] tiles) throws IllegalArgumentException {
+        if (numberOfRadarSpots == -1)
+            throw new IllegalArgumentException("Radar spots were not identified");
+        if (tiles.length != numberOfRadarSpots)
+            throw new IllegalArgumentException("Size mismatch");
+    }
+
     public static void reset() {
         ocean = new Ocean();
-        rowCounters = new int[Ocean.BOARD_LENGTH];
-        columnCounters = new int[Ocean.BOARD_LENGTH];
+        rowCounters = null;
+        columnCounters = null;
+        numberOfRadarSpots = -1;
     }
 }
