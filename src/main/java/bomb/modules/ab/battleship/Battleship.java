@@ -110,8 +110,9 @@ public class Battleship extends Widget {
 
     public static void confirmRadarSpots(Tile... tiles) throws IllegalArgumentException {
         validateConfirmedTiles(tiles);
-
-
+        ocean.removeRadarSpots(tiles);
+        numberOfRadarSpots = -1;
+        recalculateCounters();
     }
 
     private static void validateConfirmedTiles(Tile[] tiles) throws IllegalArgumentException {
@@ -119,6 +120,22 @@ public class Battleship extends Widget {
             throw new IllegalArgumentException("Radar spots were not identified");
         if (tiles.length != numberOfRadarSpots)
             throw new IllegalArgumentException("Size mismatch");
+        if (columnCounters == null || rowCounters == null)
+            throw new IllegalArgumentException("Initial rows and columns need to be set");
+    }
+
+    private static void recalculateCounters() {
+        for (int i = 0; i < Ocean.BOARD_LENGTH; i++) {
+            rowCounters[i] = recalculateSingleValue(ocean.getRow(i), rowCounters[i]);
+            columnCounters[i] = recalculateSingleValue(ocean.getColumn(i), columnCounters[i]);
+        }
+    }
+
+    private static int recalculateSingleValue(List<Tile> section, int originalValue) {
+        int foundShips = (int) section.stream()
+                .filter(tile -> tile == Tile.SHIP)
+                .count();
+        return originalValue - foundShips;
     }
 
     public static void reset() {

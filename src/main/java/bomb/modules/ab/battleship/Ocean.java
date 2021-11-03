@@ -42,6 +42,17 @@ public class Ocean {
         return result;
     }
 
+    public void removeRadarSpots(Tile[] tiles) {
+        int counter = 0;
+        for (int x = 0; x < gameBoard.length; x++) {
+            for (int y = 0; y < gameBoard.length; y++) {
+                if (gameBoard[x][y] == Tile.RADAR) {
+                    gameBoard[x][y] = tiles[counter++];
+                }
+            }
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
