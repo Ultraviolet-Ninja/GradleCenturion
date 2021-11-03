@@ -104,21 +104,16 @@ public class Widget {
         BlindAlley.alleyUpdate();
     }
 
-    /**
-     * Checks the Serial Code of an even number
-     *
-     * @return 0 for Yes, 1 for No, 2 for No Number
-     */
-    public static int hasEvenNumberInSerialCode(){
-        //TODO - Might need to rename, hasEven sends the wrong message,
-        // probably by adding even and odd number regexes
+    public static boolean hasEvenNumberInSerialCode(){
         String sample = ultimateFilter(serialCode, NUMBER_PATTERN);
-        if (!sample.isEmpty()){
-            for (char num : sample.toCharArray())
-                if ((int) num % 2 == 0) return 0;
-            return 1;
+        if (sample.isEmpty())
+            return false;
+
+        for (char numberChar : sample.toCharArray()) {
+            if (numberChar % 2 == 0)
+                return true;
         }
-        return 2;
+        return false;
     }
 
     /**
