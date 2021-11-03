@@ -13,16 +13,18 @@ import static bomb.tools.filter.Filter.ultimateFilter;
 
 public class Battleship extends Widget {
     private static Ocean ocean;
+    private static int[] rowCounters, columnCounters;
 
     static {
         ocean = new Ocean();
+        rowCounters = new int[Ocean.BOARD_LENGTH];
+        columnCounters = new int[Ocean.BOARD_LENGTH];
     }
 
     public static Set<String> calculateRadarPositions() throws IllegalArgumentException {
         checkSerialCode();
         Set<String> output = new TreeSet<>(calculateSerialCodeCoordinates());
         output.add(calculateEdgeworkCoordinates());
-
         return output;
     }
 
@@ -53,7 +55,7 @@ public class Battleship extends Widget {
         if (startingColumn < 0)
             startingColumn += Ocean.BOARD_LENGTH;
 
-        setRadar(startingRow, startingColumn);
+        setTileAsRadar(startingRow, startingColumn);
         return offsetChar(charLetterToInt, startingRow) +
                 offsetChar(charNumberToInt, startingColumn);
     }
@@ -65,12 +67,12 @@ public class Battleship extends Widget {
         int startingRow = getTotalPorts() % Ocean.BOARD_LENGTH;
         int startingColumn = (countIndicators(IndicatorFilter.ALL) + getAllBatteries()) % Ocean.BOARD_LENGTH;
 
-        setRadar(startingRow, startingColumn);
+        setTileAsRadar(startingRow, startingColumn);
         return offsetChar(charLetterToInt, startingRow) +
                 offsetChar(charNumberToInt, startingColumn);
     }
 
-    private static void setRadar(int x, int y) {
+    private static void setTileAsRadar(int x, int y) {
         ocean.setTileState(x, y, Tile.RADAR);
     }
 
@@ -84,5 +86,7 @@ public class Battleship extends Widget {
 
     public static void reset() {
         ocean = new Ocean();
+        rowCounters = new int[Ocean.BOARD_LENGTH];
+        columnCounters = new int[Ocean.BOARD_LENGTH];
     }
 }

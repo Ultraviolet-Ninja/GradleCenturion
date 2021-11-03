@@ -35,10 +35,22 @@ public class Ocean {
     }
 
     public List<Tile> getColumn(int column) {
-        List<Tile> result = new ArrayList<>();
+        List<Tile> result = new ArrayList<>(BOARD_LENGTH);
         for (Tile[] row : gameBoard) {
             result.add(row[column]);
         }
         return result;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for (Tile[] column : gameBoard) {
+            for (Tile tile : column) {
+                builder.append(tile).append(" ");
+            }
+            builder.append("\n");
+        }
+        return builder.toString();
     }
 }
