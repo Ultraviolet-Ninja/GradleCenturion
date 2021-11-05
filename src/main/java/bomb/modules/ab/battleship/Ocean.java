@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.stream;
+
 public class Ocean {
     public static final int BOARD_LENGTH = 5;
 
@@ -13,6 +15,10 @@ public class Ocean {
     public Ocean() {
         gameBoard = new Tile[BOARD_LENGTH][BOARD_LENGTH];
         initializeBoard();
+    }
+
+    public Ocean(Tile[][] board) {
+        gameBoard = board;
     }
 
     private void initializeBoard() {
@@ -54,11 +60,21 @@ public class Ocean {
         }
     }
 
+    public int[] countByTile() {
+        int[] counters = new int[Tile.values().length];
+        for (Tile[] column : gameBoard) {
+            for (Tile tile : column) {
+                counters[tile.ordinal()]++;
+            }
+        }
+        return counters;
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Tile[] column : gameBoard) {
-            builder.append(Arrays.stream(column)
+            builder.append(stream(column)
                             .map(Enum::name)
                             .collect(Collectors.joining(", "))
             );

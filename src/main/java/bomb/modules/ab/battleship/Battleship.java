@@ -7,9 +7,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static bomb.modules.ab.battleship.Tile.RADAR;
+import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
+import static java.util.Arrays.stream;
 
 public class Battleship extends Widget {
     private static Ocean ocean;
@@ -17,10 +20,7 @@ public class Battleship extends Widget {
     private static int numberOfRadarSpots;
 
     static {
-        ocean = new Ocean();
-        rowCounters = null;
-        columnCounters = null;
-        numberOfRadarSpots = -1;
+        reset();
     }
 
     public static Set<String> calculateRadarPositions() throws IllegalArgumentException {
@@ -76,11 +76,11 @@ public class Battleship extends Widget {
     }
 
     private static void setTileAsRadar(int x, int y) {
-        ocean.setTileState(x, y, Tile.RADAR);
+        ocean.setTileState(x, y, RADAR);
     }
 
     private static String offsetChar(char letter, int offset) {
-        return String.valueOf((char)(letter + offset));
+        return String.valueOf((char) (letter + offset));
     }
 
     public static void setRowCounters(int[] rowCounters) {
@@ -108,7 +108,6 @@ public class Battleship extends Widget {
         validateConfirmedTiles(tiles);
         ocean.removeRadarSpots(tiles);
         numberOfRadarSpots = -1;
-        recalculateCounters();
     }
 
     private static void validateConfirmedTiles(Tile[] tiles) throws IllegalArgumentException {
@@ -116,26 +115,49 @@ public class Battleship extends Widget {
             throw new IllegalArgumentException("Radar spots were not identified");
         if (tiles.length != numberOfRadarSpots)
             throw new IllegalArgumentException("Size mismatch");
-        if (columnCounters == null || rowCounters == null)
-            throw new IllegalArgumentException("Initial rows and columns need to be set");
-    }
-
-    private static void recalculateCounters() {
-        for (int i = 0; i < Ocean.BOARD_LENGTH; i++) {
-            rowCounters[i] = recalculateSingleValue(ocean.getRow(i), rowCounters[i]);
-            columnCounters[i] = recalculateSingleValue(ocean.getColumn(i), columnCounters[i]);
-        }
-    }
-
-    private static int recalculateSingleValue(List<Tile> section, int originalValue) {
-        int foundShips = (int) section.stream()
-                .filter(tile -> tile == Tile.SHIP)
-                .count();
-        return originalValue - foundShips;
     }
 
     public static Ocean solveOcean() {
-        return null;
+        validateEssentialData();
+        BoardSolver.solve(ocean, rowCounters, columnCounters);
+        return ocean;
+    }
+
+    private static void validateEssentialData() throws IllegalArgumentException {
+        String errorMessage = "";
+        int[] counters = ocean.countByTile();
+
+        if (counters[UNKNOWN.ordinal()] == Math.pow(Ocean.BOARD_LENGTH, 2)) {
+            errorMessage = "Please use the Radar first";
+        } else if (counters[RADAR.ordinal()] > 0) {
+            errorMessage = "Board still contains Radar spots";
+        } else if (columnCounters == null || rowCounters == null) {
+            errorMessage = "Initial rows and columns need to be set";
+        } else if (!Ship.areQuantitiesSet()) {
+            errorMessage = "The number of Ships has not been set";
+        }
+
+        if (!errorMessage.isEmpty())
+            throw new IllegalArgumentException(errorMessage);
+        confirmShipSpaceOccupancy();
+    }
+
+    private static void confirmShipSpaceOccupancy() throws IllegalArgumentException {
+        int columnSpaces = stream(columnCounters).sum();
+        int rowSpaces = stream(rowCounters).sum();
+        int numberOfShipSpaces = Ship.getNumberOfShipSpaces();
+
+        if (columnSpaces == rowSpaces && columnSpaces == numberOfShipSpaces)
+            return;
+
+        String errorMessage = String.format("""
+                One of these values doesn't match.
+                Column Spaces: %d
+                Row Spaces: %d
+                Ship Spaces: %d
+                """, columnSpaces, rowSpaces, numberOfShipSpaces);
+
+        throw new IllegalArgumentException(errorMessage);
     }
 
     public static void reset() {
@@ -143,5 +165,6 @@ public class Battleship extends Widget {
         rowCounters = null;
         columnCounters = null;
         numberOfRadarSpots = -1;
+        Ship.clearAllQuantities();
     }
 }
