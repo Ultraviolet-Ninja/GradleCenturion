@@ -64,11 +64,11 @@ public class Battleship extends Widget {
     }
 
     private static String calculateEdgeworkCoordinates() {
-        final char charLetterToInt = 'a';
+        final char charLetterToInt = '`';
         final char charNumberToInt = '1';
 
         int startingRow = getTotalPorts() % Ocean.BOARD_LENGTH;
-        int startingColumn = (countIndicators(IndicatorFilter.ALL) + getAllBatteries()) % Ocean.BOARD_LENGTH;
+        int startingColumn = (countIndicators(IndicatorFilter.ALL) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
 
         setTileAsRadar(startingRow, startingColumn);
         return offsetChar(charLetterToInt, startingRow) +
@@ -81,10 +81,6 @@ public class Battleship extends Widget {
 
     private static String offsetChar(char letter, int offset) {
         return String.valueOf((char)(letter + offset));
-    }
-
-    public static Ocean getOcean() {
-        return ocean;
     }
 
     public static void setRowCounters(int[] rowCounters) {
@@ -136,6 +132,10 @@ public class Battleship extends Widget {
                 .filter(tile -> tile == Tile.SHIP)
                 .count();
         return originalValue - foundShips;
+    }
+
+    public static Ocean solveOcean() {
+        return null;
     }
 
     public static void reset() {

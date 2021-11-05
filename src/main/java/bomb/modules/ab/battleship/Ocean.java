@@ -3,6 +3,7 @@ package bomb.modules.ab.battleship;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ocean {
     public static final int BOARD_LENGTH = 5;
@@ -57,11 +58,34 @@ public class Ocean {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (Tile[] column : gameBoard) {
-            for (Tile tile : column) {
-                builder.append(tile).append(" ");
-            }
+            builder.append(Arrays.stream(column)
+                            .map(Enum::name)
+                            .collect(Collectors.joining(", "))
+            );
             builder.append("\n");
         }
         return builder.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof Ocean))
+            return false;
+
+        Ocean other = (Ocean) o;
+        for (int x = 0; x < BOARD_LENGTH; x++) {
+            for (int y = 0; y < BOARD_LENGTH; y++) {
+                if (gameBoard[x][y] != other.gameBoard[x][y])
+                    return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(gameBoard);
     }
 }
