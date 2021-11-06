@@ -45,12 +45,8 @@ public class SwitchesController implements Resettable {
 
     private void sendToOutputField(List<String> outputList) {
         final String arrow = " -> ";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < outputList.size(); i++) {
-            sb.append(outputList.get(i));
-            if (i != outputList.size() - 1) sb.append(arrow);
-        }
-        outputField.setText(sb.toString());
+        String outputText = String.join(arrow, outputList);
+        outputField.setText(outputText);
     }
 
     private JFXRadioButton[] getAllLights() {

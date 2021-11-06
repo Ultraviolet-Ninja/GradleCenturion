@@ -55,9 +55,7 @@ public class Regex implements Iterable<String> {
     }
 
     public void loadCollection(Collection<String> textCollections) {
-        StringBuilder sb = new StringBuilder();
-        textCollections.forEach(text -> sb.append(text).append(" "));
-        loadText(sb.toString());
+        loadText(String.join(" ", textCollections));
     }
 
     public boolean hasMatch() {
@@ -95,11 +93,7 @@ public class Regex implements Iterable<String> {
 
     public String createFilteredString() {
         reset();
-        StringBuilder result = new StringBuilder();
-        for (String sample : findAllMatches()) {
-            result.append(sample);
-        }
-        return result.toString();
+        return String.join("", findAllMatches());
     }
 
     public int flags() {

@@ -65,10 +65,10 @@ public class LaundryController implements Resettable {
     }
 
     private String reformatClothingOutput(String in) {
-        final String split = " - ";
-        return stream(in.split(split))
+        final String delimiter = " - ";
+        return stream(in.split(delimiter))
                 .map(FIRST_LETTER_CAPITAL)
-                .collect(Collectors.joining(split));
+                .collect(Collectors.joining(delimiter));
     }
 
     @Override
