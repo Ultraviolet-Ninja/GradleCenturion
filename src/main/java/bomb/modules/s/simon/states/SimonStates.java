@@ -1,246 +1,217 @@
 package bomb.modules.s.simon.states;
 
 import bomb.Widget;
-import bomb.modules.s.simon.SimonColors.States;
+import bomb.modules.s.simon.SimonColors.StateColor;
 import bomb.modules.s.souvenir.Souvenir;
 
-import static bomb.modules.s.simon.SimonColors.States.BLUE;
-import static bomb.modules.s.simon.SimonColors.States.GREEN;
-import static bomb.modules.s.simon.SimonColors.States.RED;
-import static bomb.modules.s.simon.SimonColors.States.YELLOW;
+import java.util.AbstractCollection;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.stream.Stream;
 
-/**
- *
- */
+import static bomb.modules.s.simon.SimonColors.StateColor.BLUE;
+import static bomb.modules.s.simon.SimonColors.StateColor.GREEN;
+import static bomb.modules.s.simon.SimonColors.StateColor.RED;
+import static bomb.modules.s.simon.SimonColors.StateColor.YELLOW;
+import static bomb.modules.s.simon.states.StageState.FIRST;
+import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
+import static java.util.Arrays.asList;
+import static java.util.Collections.reverse;
+import static java.util.stream.Collectors.joining;
+
 public class SimonStates extends Widget {
-    private static int prior;
-    private static StringBuilder toPress = new StringBuilder();
+    private static final int HIGH = 1, LOW = 2, LOWEST = 3;
+    private static final List<StateColor> pressedColorHistory;
+    private static final String ERROR_MESSAGE = "The element does not exist";
+    private static final StringBuilder toPress;
+    private static final BiPredicate<EnumSet<StateColor>, StateColor> FLASHED, DID_NOT_FLASH;
 
-    private static final States[][] PRIORITY_ORDERS = new States[][]{
+    private static final StateColor[][] PRIORITY_ORDERS = new StateColor[][]{
             {RED, BLUE, GREEN, YELLOW}, //Highest to Lowest
             {BLUE, YELLOW, RED, GREEN},
             {GREEN, RED, YELLOW, BLUE},
             {YELLOW, GREEN, BLUE, RED}
     };
 
-    enum Priorities {
-        HIGHEST, HIGH, LOW, LOWEST
+    private static int topLeftButtonColor;
+    private static StageState currentStage;
+
+    static {
+        topLeftButtonColor = -1;
+        currentStage = FIRST;
+        pressedColorHistory = new ArrayList<>();
+        toPress = new StringBuilder();
+        FLASHED = AbstractCollection::contains;
+        DID_NOT_FLASH = FLASHED.negate();
     }
 
-    /**
-     * @param color
-     */
-    public static void setPriority(States color) {
-        prior = color.ordinal();
+    public static void setTopLeftButtonColor(StateColor color) {
+        topLeftButtonColor = color.ordinal();
     }
 
-    /**
-     * @param colors
-     * @param stage
-     * @return
-     */
-    public static String add(States[] colors, int stage) {
+    public static String calculateNextStage(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+        validate(colorsFlashed);
         if (isSouvenirActive)
-            Souvenir.addRelic("Simon States - Stage " + stage, writeOut(colors));
+            Souvenir.addRelic("Simon States - Stage " + currentStage.getIndex(), writeOutToSouvenir(colorsFlashed));
 
-        if (stage == 1)
-            toPress.append(stageOne(colors)).append(" ");
-        else if (stage == 2)
-            toPress.append(stageTwo(colors)).append(" ");
-        else if (stage == 3)
-            toPress.append(stageThree(colors)).append(" ");
-        else
-            toPress.append(stageFour(colors)).append(" ");
-        return toPress.toString();
+        StateColor colorToPress = switch (currentStage) {
+            case FIRST -> getStageOne(colorsFlashed);
+            case SECOND -> getStateTwo(colorsFlashed);
+            case THIRD -> getStateThree(colorsFlashed);
+            default -> getStateFour(colorsFlashed);
+        };
+        pressedColorHistory.add(colorToPress);
+
+        currentStage = currentStage.nextState();
+        resetHistory();
+        String stageColor = FIRST_LETTER_CAPITAL.apply(colorToPress.name());
+        return toPress.append(stageColor).toString();
     }
 
-    private static String stageOne(States[] colors) {
-        if (colors.length == 1)
-            return firstCap(colors[0]);
-        else if (colors.length == 2 && contains(colors, BLUE))
-            return firstCap(highest(colors));
-        else if (colors.length == 2)
-            return firstCap(BLUE);
-        else if (colors.length == 3 && contains(colors, RED))
-            return firstCap(lowest(colors));
-        else if (colors.length == 3)
-            return firstCap(RED);
-        return firstCap(PRIORITY_ORDERS[prior][Priorities.HIGH.ordinal()]);
+    private static StateColor getStageOne(EnumSet<StateColor> colorsFlashed) {
+        return switch (colorsFlashed.size()) {
+            case 1 -> getColorFlashed(colorsFlashed);
+
+            case 2 -> DID_NOT_FLASH.test(colorsFlashed, BLUE) ?
+                    BLUE :
+                    getFirstInOrder(FLASHED, colorsFlashed, getHighestPriorityOrder());
+
+            case 3 -> DID_NOT_FLASH.test(colorsFlashed, RED) ?
+                    RED :
+                    getFirstInOrder(FLASHED, colorsFlashed, getLowestPriorityOrder());
+
+            default -> getAtPriorityLevel(HIGH);
+        };
     }
 
-    private static String stageTwo(States[] colors) {
-        if (colors.length == 2 && contains(colors, BLUE) && contains(colors, RED))
-            return firstCap(highestNotFlashed(colors));
-        else if (colors.length == 2)
-            return firstCap(lowestNotFlashed(colors));
-        else if (colors.length == 1 && !contains(colors, BLUE))
-            return firstCap(BLUE);
-        else if (colors.length == 1)
-            return firstCap(YELLOW);
-        else if (colors.length == 4)
-            return toPress.toString().split(" ")[0];
-        else
-            return firstCap(oddOneOut(colors));
+    private static StateColor getStateTwo(EnumSet<StateColor> colorsFlashed) {
+        return switch (colorsFlashed.size()) {
+            case 1 -> DID_NOT_FLASH.test(colorsFlashed, BLUE) ? BLUE : YELLOW;
+
+            case 2 -> (FLASHED.test(colorsFlashed, RED) && FLASHED.test(colorsFlashed, BLUE)) ?
+                    getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getHighestPriorityOrder()) :
+                    getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getLowestPriorityOrder());
+
+            case 3 -> getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getHighestPriorityOrder());
+            default -> pressedColorHistory.get(0);
+        };
     }
 
-    private static String stageThree(States[] colors) {
-        if (colors.length == 3 && previouslyPressed(colors))
-            return firstCap(highestNotPressed(colors));
-        else if (colors.length == 3)
-            return firstCap(highest(colors));
-        else if (colors.length == 2)
-            return (bothPreviouslyPressed(colors)) ?
-                    firstCap(lowestNotFlashed(colors)) :
-                    toPress.toString().split(" ")[0];
-        else if (colors.length == 1)
-            return firstCap(colors[0]);
-        else
-            return firstCap(PRIORITY_ORDERS[prior][Priorities.LOW.ordinal()]);
+    private static StateColor getStateThree(EnumSet<StateColor> colorsFlashed) {
+        return switch (colorsFlashed.size()) {
+            case 1 -> getColorFlashed(colorsFlashed);
+
+            case 2 -> pressedColorHistory.containsAll(colorsFlashed) ?
+                    getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getLowestPriorityOrder()) :
+                    pressedColorHistory.get(0);
+
+            case 3 -> historyContainsAny(colorsFlashed) ?
+                    getFirstInOrder(//Get the highest priority that has flash and not been pressed
+                            FLASHED.and((set, color) -> !pressedColorHistory.contains(color)),
+                            colorsFlashed,
+                            getHighestPriorityOrder()
+                    ) :
+                    getFirstInOrder(FLASHED, colorsFlashed, getHighestPriorityOrder());
+            default -> getAtPriorityLevel(LOW);
+        };
     }
 
-    private static String stageFour(States[] colors) {
-        if (allUnique())
-            return oddOneOut();
-        else if (oneNotPressed(colors))
-            return pressOneNot(colors);
-        else if (colors.length == 3)
-            return firstCap(PRIORITY_ORDERS[prior][Priorities.LOWEST.ordinal()]);
-        else if (colors.length == 1)
-            return firstCap(colors[0]);
-        else
-            return firstCap(GREEN);
+    private static boolean historyContainsAny(EnumSet<StateColor> colorsFlashed) {
+        return colorsFlashed.stream()
+                .map(pressedColorHistory::contains)
+                .reduce((boolOne, boolTwo) -> boolOne || boolTwo)
+                .orElse(false);
+//        for (StateColor color : colorsFlashed) {
+//            if (pressedColorHistory.contains(color))
+//                return true;
+//        }
+//        return false;
     }
 
-    private static States highest(States[] colors) throws IllegalArgumentException {
-        for (States current : PRIORITY_ORDERS[prior]) {
-            if (contains(colors, current)) return current;
+    private static StateColor getStateFour(EnumSet<StateColor> colorsFlashed) {
+        if (areAllDistinct()) {
+            EnumSet<StateColor> complement = notInSet(EnumSet.copyOf(pressedColorHistory));
+            return getColorFlashed(complement);
         }
-        throw new IllegalArgumentException("Unreachable section of highest() was reached");
-    }
+        int size = colorsFlashed.size();
 
-    private static States highestNotFlashed(States[] colors) throws IllegalArgumentException {
-        for (States current : PRIORITY_ORDERS[prior]) {
-            if (!contains(colors, current)) return current;
+        if (size == 3) {
+            Stream<StateColor> stream = colorsFlashed.stream()
+                    .filter(color -> !pressedColorHistory.contains(color));
+            if (stream.count() == 1)
+                return stream.findFirst().orElseThrow(IllegalStateException::new);
         }
-        throw new IllegalArgumentException("Unreachable section of highestNotFlashed() was reached");
+
+        if (size >= 3)
+            return getAtPriorityLevel(LOWEST);
+        else if (size == 1)
+            return getColorFlashed(colorsFlashed);
+        return GREEN;
     }
 
-    private static States highestNotPressed(States[] colors) {
-        for (States current : PRIORITY_ORDERS[prior]) {
-            if (contains(colors, current) && containsNotPressed(colors)) return current;
-        }
-        throw new IllegalArgumentException("Unreachable section of highestNotPressed() was reached");
+    private static StateColor getColorFlashed(EnumSet<StateColor> colorsFlashed) {
+        return colorsFlashed.iterator().next();
     }
 
-    private static States lowest(States[] colors) throws IllegalArgumentException {
-        for (int i = 3; i >= 0; i--) {
-            if (contains(colors, PRIORITY_ORDERS[prior][i])) return PRIORITY_ORDERS[prior][i];
-        }
-        throw new IllegalArgumentException("Unreachable section of lowest() was reached");
+    private static StateColor getFirstInOrder(BiPredicate<EnumSet<StateColor>, StateColor> condition,
+                                              EnumSet<StateColor> colorsFlashed, List<StateColor> priorityOrder) throws IllegalArgumentException {
+        return filter(condition, colorsFlashed, priorityOrder)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE));
     }
 
-    private static States lowestNotFlashed(States[] colors) throws IllegalArgumentException {
-        for (int i = 3; i >= 0; i--) {
-            if (!contains(colors, PRIORITY_ORDERS[prior][i])) return PRIORITY_ORDERS[prior][i];
-        }
-        throw new IllegalArgumentException("Unreachable section of lowestNotFlashed() was reached");
+    private static Stream<StateColor> filter(BiPredicate<EnumSet<StateColor>, StateColor> condition,
+                                             EnumSet<StateColor> colorsFlashed, List<StateColor> priorityOrder) {
+        return priorityOrder.stream()
+                .filter(state -> condition.test(colorsFlashed, state));
     }
 
-    private static boolean contains(States[] colors, States has) {
-        for (States current : colors) {
-            if (current == has) return true;
-        }
-        return false;
+    private static List<StateColor> getHighestPriorityOrder() {
+        return asList(PRIORITY_ORDERS[topLeftButtonColor]);
     }
 
-    private static boolean containsNotPressed(States[] colors) {
-        for (States color : colors) {
-            for (String sample : toPress.toString().split(" ")) {
-                if (sample.equals(firstCap(color))) return false;
-            }
-        }
-        return true;
+    private static List<StateColor> getLowestPriorityOrder() {
+        List<StateColor> highest = getHighestPriorityOrder();
+        reverse(highest);
+        return highest;
     }
 
-    private static boolean bothPreviouslyPressed(States[] colors) {
-        boolean[] firstSet = new boolean[2], secondSet = new boolean[2];
-        String[] temp = toPress.toString().split(" ");
-        firstSet[0] = temp[0].equals(firstCap(colors[0]));
-        firstSet[1] = temp[1].equals(firstCap(colors[1]));
-
-        secondSet[0] = temp[0].equals(firstCap(colors[1]));
-        secondSet[1] = temp[1].equals(firstCap(colors[0]));
-        return (firstSet[0] && firstSet[1]) || (secondSet[0] && secondSet[1]);
+    private static StateColor getAtPriorityLevel(int priorityLevel) {
+        return PRIORITY_ORDERS[topLeftButtonColor][priorityLevel];
     }
 
-    private static boolean previouslyPressed(States[] colors) {
-        for (States current : colors) {
-            for (String sample : toPress.toString().split(" ")) {
-                if (sample.equals(firstCap(current))) return true;
-            }
-        }
-        return false;
+    private static EnumSet<StateColor> notInSet(EnumSet<StateColor> colorsFlashed) {
+        return EnumSet.complementOf(colorsFlashed);
     }
 
-    private static States oddOneOut(States[] colors) {
-        if (!contains(colors, RED)) return RED;
-        else if (!contains(colors, YELLOW)) return YELLOW;
-        else if (!contains(colors, GREEN)) return GREEN;
-        else return BLUE;
+    private static boolean areAllDistinct() {
+        return pressedColorHistory.size() == pressedColorHistory.stream().distinct().count();
     }
 
-    private static String oddOneOut() {
-        if (!toPress.toString().contains("Red"))
-            return "Red";
-        else if (!toPress.toString().contains("Yellow"))
-            return "Yellow";
-        else if (!toPress.toString().contains("Green"))
-            return "Green";
-        return "Blue";
-    }
-
-    private static boolean allUnique() {
-        String[] temp = toPress.toString().split(" ");
-        return !((temp[0].equals(temp[1])) || (temp[0].equals(temp[2])) || (temp[1].equals(temp[2])));
-    }
-
-    private static boolean oneNotPressed(States[] colors) {
-        int counter = 4;
-        for (States current : colors) {
-            for (String sample : toPress.toString().split(" ")) {
-                if (sample.equals(firstCap(current))) counter--;
-            }
-        }
-        return counter == 3;
-    }
-
-    private static String pressOneNot(States[] colors) {
-        for (States current : colors) {
-            for (String sample : toPress.toString().split(" ")) {
-                if (sample.equals(firstCap(current))) return firstCap(current);
-            }
-        }
-        return null;
+    private static void validate(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+        if (topLeftButtonColor == -1)
+            throw new IllegalArgumentException("Priority has not been set");
+        if (colorsFlashed.isEmpty())
+            throw new IllegalArgumentException("Empty set is not allowed");
     }
 
     public static void reset() {
-        toPress = new StringBuilder();
+        topLeftButtonColor = -1;
+        toPress.setLength(0);
+        currentStage = FIRST;
+        resetHistory();
     }
 
-    private static String firstCap(States text) {
-        return (text.name().length() != 1) ?
-                text.name().substring(0, 1).toUpperCase() + text.name().substring(1) :
-                text.name().toUpperCase();
+    private static void resetHistory() {
+        if (currentStage == FIRST)
+            pressedColorHistory.clear();
     }
 
-    private static String writeOut(States[] colors) {
-        StringBuilder temp = new StringBuilder();
-
-        for (int i = 0; i < colors.length; i++) {
-            temp.append(firstCap(colors[i]));
-            if (i < colors.length - 1)
-                temp.append(" ");
-        }
-        return temp.toString();
+    private static String writeOutToSouvenir(EnumSet<StateColor> colorsFlashed) {
+        return colorsFlashed.stream()
+                .map(color -> FIRST_LETTER_CAPITAL.apply(color.name()))
+                .collect(joining(" "));
     }
 }

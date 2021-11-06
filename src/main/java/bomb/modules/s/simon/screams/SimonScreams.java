@@ -1,7 +1,7 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
-import bomb.modules.s.simon.SimonColors.Screams;
+import bomb.modules.s.simon.SimonColors.ScreamColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class SimonScreams extends Widget {
      * @throws IllegalArgumentException - The serial code isn't 6 characters long OR
      *                                  The array is not 6 elements long
      */
-    public static void initialize(Screams[] order) throws IllegalArgumentException {
+    public static void initialize(ScreamColor[] order) throws IllegalArgumentException {
         checkSerialCode();
         initialized = true;
         setOutputRules();
@@ -57,7 +57,7 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException {
+    public static String nextSolve(ScreamColor[] flashingOrder) throws IllegalArgumentException {
         if (flashingOrder == null || flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
@@ -70,7 +70,7 @@ public class SimonScreams extends Widget {
      * @param flashingOrder - The column to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char getStringLetter(Screams[] flashingOrder) {
+    private static char getStringLetter(ScreamColor[] flashingOrder) {
         if (lightOrder.threeAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
         if (lightOrder.oneTwoOneRule(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
         if (lightOrder.primaryRule(flashingOrder)) return extractCategory(flashingOrder[stage], 2);
@@ -86,7 +86,7 @@ public class SimonScreams extends Widget {
      * @param correctRule - The row to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char extractCategory(Screams stageColor, int correctRule) {
+    private static char extractCategory(ScreamColor stageColor, int correctRule) {
         return CATEGORIES[correctRule][stageColor.ordinal()].charAt(stage++);
     }
 

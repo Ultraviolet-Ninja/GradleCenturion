@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ReadOnlyRing<E> implements Iterable<E> {
-    private final ArrayList<E> internalStructure;
+    private final List<E> internalStructure;
     private final int capacity;
 
     private int headIndex;
@@ -85,13 +86,23 @@ public class ReadOnlyRing<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         if (headIndex == 0)
             return internalStructure.iterator();
+        return reorderList().iterator();
+    }
+
+    public Stream<E> stream() {
+        if (headIndex == 0)
+            return internalStructure.stream();
+        return reorderList().stream();
+    }
+
+    private List<E> reorderList() {
         List<E> temp = internalStructure.subList(headIndex, capacity);
         temp.addAll(internalStructure.subList(0, headIndex));
-        return temp.iterator();
+        return temp;
     }
 
     @Override
     public String toString() {
-        return "Head Index: " + headIndex + " for " + internalStructure.toString();
+        return String.format("Head Index: %d for %s", headIndex, internalStructure);
     }
 }

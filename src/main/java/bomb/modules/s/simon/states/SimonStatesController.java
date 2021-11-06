@@ -1,4 +1,4 @@
 package bomb.modules.s.simon.states;
 
-public class StatesController {
+public class SimonStatesController {
 }
