@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.enumerations.TrinarySwitch.ON;
@@ -36,7 +37,6 @@ public class ButtonTest {
 
     @DataProvider
     public Object[][] validInputTestProvider() {
-        ConditionSetter noAction = () -> {};
         ConditionSetter setFrkCondition = () -> {
             Widget.setIndicator(ON, FRK);
             Widget.setDoubleAs(4);
@@ -47,11 +47,11 @@ public class ButtonTest {
 
         return new Object[][]{
                 {setDetonateCondition, new ButtonProperty[]{ButtonProperty.RED, ButtonProperty.DETONATE}, TAP},
-                {noAction, new ButtonProperty[]{ButtonProperty.RED, ButtonProperty.DETONATE}, HOLD},
-                {noAction, new ButtonProperty[]{ButtonProperty.RED, ButtonProperty.HOLD}, TAP},
-                {noAction, new ButtonProperty[]{ButtonProperty.BLUE, ButtonProperty.ABORT}, HOLD},
+                {EMPTY_SETTER, new ButtonProperty[]{ButtonProperty.RED, ButtonProperty.DETONATE}, HOLD},
+                {EMPTY_SETTER, new ButtonProperty[]{ButtonProperty.RED, ButtonProperty.HOLD}, TAP},
+                {EMPTY_SETTER, new ButtonProperty[]{ButtonProperty.BLUE, ButtonProperty.ABORT}, HOLD},
                 {setCarCondition, new ButtonProperty[]{ButtonProperty.WHITE, ButtonProperty.PRESS}, HOLD},
-                {noAction, new ButtonProperty[]{ButtonProperty.YELLOW, ButtonProperty.ABORT}, HOLD},
+                {EMPTY_SETTER, new ButtonProperty[]{ButtonProperty.YELLOW, ButtonProperty.ABORT}, HOLD},
                 {setFrkCondition, new ButtonProperty[]{ButtonProperty.YELLOW, ButtonProperty.ABORT}, TAP}
         };
     }

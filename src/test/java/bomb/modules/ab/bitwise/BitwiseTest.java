@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.enumerations.Port.PARALLEL;
 import static bomb.modules.ab.bitwise.BitwiseOps.AND;
 import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
@@ -31,7 +32,7 @@ public class BitwiseTest {
     public Object[][] exceptionTestProvider() {
         return new ConditionSetter[][]{
                 {
-                    () -> {}
+                    EMPTY_SETTER
                 },
                 {
                     () -> Widget.setNumModules(1)

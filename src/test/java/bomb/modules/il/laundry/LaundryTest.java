@@ -1,8 +1,8 @@
 package bomb.modules.il.laundry;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.BombSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
@@ -22,11 +23,10 @@ public class LaundryTest {
 
     @DataProvider
     public Object[][] exceptionProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter setSerial = () -> Widget.setSerialCode("ajwf45");
         return new Object[][]{
-                {empty, "1", "1"}, {setSerial, "", "1"}, {empty, "1", ""}, {empty, "1", "1"}
+                {EMPTY_SETTER, "1", "1"}, {setSerial, "", "1"}, {EMPTY_SETTER, "1", ""},
+                {EMPTY_SETTER, "1", "1"}
         };
     }
 

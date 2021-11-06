@@ -26,7 +26,6 @@ public class SimonStates extends Widget {
     private static final int HIGH = 1, LOW = 2, LOWEST = 3;
     private static final List<StateColor> pressedColorHistory;
     private static final String ERROR_MESSAGE = "The element does not exist";
-    private static final StringBuilder toPress;
     private static final BiPredicate<EnumSet<StateColor>, StateColor> FLASHED, DID_NOT_FLASH;
 
     private static final StateColor[][] PRIORITY_ORDERS = new StateColor[][]{
@@ -43,19 +42,19 @@ public class SimonStates extends Widget {
         topLeftButtonColor = -1;
         currentStage = FIRST;
         pressedColorHistory = new ArrayList<>();
-        toPress = new StringBuilder();
         FLASHED = AbstractCollection::contains;
         DID_NOT_FLASH = FLASHED.negate();
     }
 
-    public static void setTopLeftButtonColor(StateColor color) {
-        topLeftButtonColor = Objects.requireNonNull(color).ordinal();
+    public static void setDominantColor(StateColor dominantColor) {
+        topLeftButtonColor = Objects.requireNonNull(dominantColor).ordinal();
     }
 
-    public static String calculateNextColorPress(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+    public static List<StateColor> calculateNextColorPress(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)
             Souvenir.addRelic("Simon States - Stage " + currentStage.getIndex(), writeOutToSouvenir(colorsFlashed));
+        resetHistory();
 
         StateColor colorToPress = switch (currentStage) {
             case FIRST -> getStageOne(colorsFlashed);
@@ -63,12 +62,10 @@ public class SimonStates extends Widget {
             case THIRD -> getStateThree(colorsFlashed);
             default -> getStateFour(colorsFlashed);
         };
-        pressedColorHistory.add(colorToPress);
-
         currentStage = currentStage.nextState();
-        resetHistory();
-        String stageColor = FIRST_LETTER_CAPITAL.apply(colorToPress.name());
-        return toPress.append(stageColor).toString();
+
+        pressedColorHistory.add(colorToPress);
+        return pressedColorHistory;
     }
 
     private static StateColor getStageOne(EnumSet<StateColor> colorsFlashed) {
@@ -201,7 +198,6 @@ public class SimonStates extends Widget {
 
     public static void reset() {
         topLeftButtonColor = -1;
-        toPress.setLength(0);
         currentStage = FIRST;
         resetHistory();
     }

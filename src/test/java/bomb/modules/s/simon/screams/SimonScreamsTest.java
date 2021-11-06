@@ -10,6 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.BLUE;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.GREEN;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.ORANGE;
@@ -29,13 +30,11 @@ public class SimonScreamsTest {
     @DataProvider
     public Object[][] initializeMethodExceptionProvider() {
         testReset();
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter fillSerial = () -> Widget.setSerialCode(MORE_LETTERS);
         return new Object[][]{
-                {empty, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE, BLUE}}, //No Serial Code
+                {EMPTY_SETTER, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE, BLUE}}, //No Serial Code
                 {fillSerial, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE}}, //Only 5 elements
-                {empty, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE, GREEN}} //GREEN is repeated
+                {EMPTY_SETTER, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE, GREEN}} //GREEN is repeated
         };
     }
 

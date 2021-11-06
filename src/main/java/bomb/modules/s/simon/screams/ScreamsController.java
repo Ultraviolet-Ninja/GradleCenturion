@@ -12,6 +12,7 @@ import javafx.scene.control.ToggleButton;
 
 import java.util.stream.Collectors;
 
+import static bomb.tools.string.StringFormat.BULLET_POINT;
 import static java.util.Arrays.stream;
 
 public class ScreamsController implements Resettable {
@@ -55,9 +56,8 @@ public class ScreamsController implements Resettable {
         try {
             String output = SimonScreams.nextSolve(star.collectFlashOrder());
 
-            final String bulletPoint = "\u2022 ";
             String outputText = stream(output.split(","))
-                    .map(sample -> bulletPoint + sample)
+                    .map(sample -> BULLET_POINT + sample)
                     .collect(Collectors.joining("\n"));
 
             resultArea.setText(outputText);

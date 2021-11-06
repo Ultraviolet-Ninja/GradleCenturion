@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static org.testng.Assert.assertEquals;
 
 public class FastMathTest {
@@ -20,11 +21,9 @@ public class FastMathTest {
 
     @DataProvider
     public Object[][] exceptionTestProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter setSerialCode = () -> Widget.setSerialCode("fr4op2");
         return new Object[][]{
-                {empty, ""}, {empty, null}, {empty, "AZ"}, {setSerialCode, "AY"}
+                {EMPTY_SETTER, ""}, {EMPTY_SETTER, null}, {EMPTY_SETTER, "AZ"}, {setSerialCode, "AY"}
         };
     }
 

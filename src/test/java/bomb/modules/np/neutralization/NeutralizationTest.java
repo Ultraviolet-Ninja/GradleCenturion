@@ -1,8 +1,8 @@
 package bomb.modules.np.neutralization;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.BombSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.modules.np.neutralization.Chemical.Base.Ammonia;
 import static bomb.modules.np.neutralization.Chemical.Base.Lithium_Hydroxide;
 import static bomb.modules.np.neutralization.Chemical.Base.Potassium_Hydroxide;
@@ -27,11 +28,9 @@ public class NeutralizationTest {
 
     @DataProvider
     public Object[][] exceptionTestProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter validSetup = this::setupOne;
         return new Object[][]{
-                {empty, 0, Color.RED}, {validSetup, 0, Color.CYAN}
+                {EMPTY_SETTER, 0, Color.RED}, {validSetup, 0, Color.CYAN}
         };
     }
 

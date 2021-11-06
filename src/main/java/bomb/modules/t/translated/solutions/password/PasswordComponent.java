@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.PASSWORD_ROW;
+import static bomb.tools.string.StringFormat.BULLET_POINT;
 
 public class PasswordComponent extends Pane implements Resettable, TranslationComponent {
     @FXML
@@ -44,12 +45,11 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
     private void submitInfo() {
         String[] columnInfo = retrieveColumnLetters();
         try {
-            final String bulletPoint = "\u2022 ";
             String results = Password.getPasswords(columnInfo).toString()
                     .replaceAll("[\\[\\]()]", "")
-                    .replaceAll(", ", "\n" + bulletPoint);
+                    .replaceAll(", ", "\n" + BULLET_POINT);
 
-            String finalOutput = (results.isEmpty() ? "" : bulletPoint) + results;
+            String finalOutput = (results.isEmpty() ? "" : BULLET_POINT) + results;
 
             outputArea.setText(finalOutput);
         } catch (IllegalArgumentException illegal) {
