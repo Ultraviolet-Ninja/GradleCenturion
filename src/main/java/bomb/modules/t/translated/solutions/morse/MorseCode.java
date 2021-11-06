@@ -40,7 +40,7 @@ public class MorseCode {
 
     public static void setFrequencyMap(String frequencies) {
         FREQUENCY_MAP.clear();
-        Regex frequencyReader = new Regex("[(\\D+) (3\\.[0-9]{1,3})]");
+        Regex frequencyReader = new Regex("\\[(\\D+) (3\\.[0-9]{1,3})]");
 
         for (String frequencyInstance : frequencies.split("\\|")) {
             frequencyReader.loadText(frequencyInstance);

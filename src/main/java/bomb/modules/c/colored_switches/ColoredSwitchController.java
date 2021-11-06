@@ -16,12 +16,12 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
-import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 import static bomb.modules.c.colored_switches.SwitchColor.BLUE;
 import static bomb.modules.c.colored_switches.SwitchColor.CYAN;
 import static bomb.modules.c.colored_switches.SwitchColor.GREEN;
-import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.MAGENTA;
+import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
+import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.RED;
 
 public class ColoredSwitchController implements Resettable {
@@ -120,6 +120,7 @@ public class ColoredSwitchController implements Resettable {
         return new MFXToggleButton[]{firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch};
     }
 
+    @SuppressWarnings("unchecked")
     private ReadOnlyRing<SwitchColor>[] getAssociatedRings() {
         return new ReadOnlyRing[]{firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
                 fifthButtonRing};

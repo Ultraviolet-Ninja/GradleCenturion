@@ -66,11 +66,8 @@ public class ChessController implements Resettable {
     }
 
     private boolean areAnyPositionsInvalid() {
-        for (String position : positionList) {
-            if (position == null || !position.matches(Chess.VALIDITY_REGEX))
-                return true;
-        }
-        return false;
+        return positionList.stream()
+                .anyMatch(position -> position == null || !position.matches(Chess.VALIDITY_REGEX));
     }
 
     @FXML

@@ -2,8 +2,23 @@ package bomb.modules.ab.blind_alley;
 
 import bomb.Widget;
 
-import static bomb.enumerations.Indicator.*;
-import static bomb.enumerations.Port.*;
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.CLR;
+import static bomb.enumerations.Indicator.FRK;
+import static bomb.enumerations.Indicator.FRQ;
+import static bomb.enumerations.Indicator.IND;
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.Indicator.SIG;
+import static bomb.enumerations.Indicator.SND;
+import static bomb.enumerations.Indicator.TRN;
+import static bomb.enumerations.Port.DVI;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.PS2;
+import static bomb.enumerations.Port.RCA;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.enumerations.Port.SERIAL;
 
 /**
  * This class works on the Blind Alley module, updating the internal 2-D array whenever
@@ -55,7 +70,7 @@ public class BlindAlley extends Widget {
 
     private static void bottomLeft() {
         alleyCat[2][0] = convertToBool(hasLitIndicator(FRQ)) + convertToBool(hasLitIndicator(SIG)) +
-                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEvenNumberInSerialCode() == 0);
+                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEvenNumberInSerialCode());
     }
 
     private static void bottomMid() {

@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class ReadOnlyRing<E> implements Iterable<E> {
-    private final List<E> internalStructure;
+    private final ArrayList<E> internalStructure;
     private final int capacity;
 
     private int headIndex;
@@ -25,8 +23,8 @@ public class ReadOnlyRing<E> implements Iterable<E> {
     @SafeVarargs
     public ReadOnlyRing(E... elements) {
         this(elements.length);
-        for (int i = 0; i < capacity; i++)
-            add(elements[i]);
+        for (E element : elements)
+            add(element);
     }
 
     public ReadOnlyRing(Collection<E> c) {
@@ -75,8 +73,7 @@ public class ReadOnlyRing<E> implements Iterable<E> {
     }
 
     public void rotateCounterClockwise() {
-        headIndex--;
-        if (headIndex < 0) headIndex += capacity;
+        if (--headIndex < 0) headIndex += capacity;
     }
 
     public void rotateCounterClockwise(int rotations) {
@@ -88,10 +85,13 @@ public class ReadOnlyRing<E> implements Iterable<E> {
     public Iterator<E> iterator() {
         if (headIndex == 0)
             return internalStructure.iterator();
-        List<E> rotatedOutput = IntStream
-                .range(0, capacity)
-                .mapToObj(i -> internalStructure.get((headIndex + i) % capacity))
-                .collect(Collectors.toList());
-        return rotatedOutput.iterator();
+        List<E> temp = internalStructure.subList(headIndex, capacity);
+        temp.addAll(internalStructure.subList(0, headIndex));
+        return temp.iterator();
+    }
+
+    @Override
+    public String toString() {
+        return "Head Index: " + headIndex + " for " + internalStructure.toString();
     }
 }

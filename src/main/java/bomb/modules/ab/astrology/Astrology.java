@@ -3,8 +3,14 @@ package bomb.modules.ab.astrology;
 import bomb.Widget;
 import bomb.tools.filter.Regex;
 
+import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.regex.Pattern;
 
+import static bomb.modules.ab.astrology.AstrologySymbol.ARIES;
+import static bomb.modules.ab.astrology.AstrologySymbol.PISCES;
+import static bomb.modules.ab.astrology.AstrologySymbol.PLUTO;
+import static bomb.modules.ab.astrology.AstrologySymbol.SUN;
 import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
@@ -43,19 +49,19 @@ public class Astrology extends Widget {
      *
      * @param symbols The input symbols
      * @return The String command
-     * @throws IllegalArgumentException Serial code is empty or there's an issue with the amount of symbols
+     * @throws IllegalArgumentException Serial code is empty or there's an issue with the amount or type of symbols
      */
-    public static String calculate(AstroSymbol... symbols) throws IllegalArgumentException {
+    public static String calculate(AstrologySymbol... symbols) throws IllegalArgumentException {
         checkSerialCode();
-        checkThreeTypes(symbols);
-        AstroSymbol[] sortSymbols = sort(symbols);
+        checkInputHasAllThreeTypes(symbols);
+        Arrays.sort(symbols);
 
-        int first = ELEMENT_CELESTIAL_GRID[sortSymbols[ELEMENT_INDEX].getIndex()][sortSymbols[CELESTIAL_INDEX].getIndex()],
-                second = ELEMENT_ZODIAC_GRID[sortSymbols[ELEMENT_INDEX].getIndex()][sortSymbols[ZODIAC_INDEX].getIndex()],
-                third = CELESTIAL_ZODIAC_GRID[sortSymbols[CELESTIAL_INDEX].getIndex()][sortSymbols[ZODIAC_INDEX].getIndex()];
+        int first = ELEMENT_CELESTIAL_GRID[symbols[ELEMENT_INDEX].getIndex()][symbols[CELESTIAL_INDEX].getIndex()],
+                second = ELEMENT_ZODIAC_GRID[symbols[ELEMENT_INDEX].getIndex()][symbols[ZODIAC_INDEX].getIndex()],
+                third = CELESTIAL_ZODIAC_GRID[symbols[CELESTIAL_INDEX].getIndex()][symbols[ZODIAC_INDEX].getIndex()];
 
         int results = first + second + third;
-        results = checkMatchingSerialLetters(results, sortSymbols);
+        results = checkMatchingSerialCodeLetters(results, symbols);
 
         return (results == 0) ?
                 NO_OMEN :
@@ -72,10 +78,10 @@ public class Astrology extends Widget {
      * @return The resulting output value
      * @throws IllegalArgumentException The Serial Code is empty
      */
-    private static int checkMatchingSerialLetters(int initialVal, AstroSymbol[] symbols)
+    private static int checkMatchingSerialCodeLetters(int initialVal, AstrologySymbol[] symbols)
             throws IllegalArgumentException {
         String letters = ultimateFilter(serialCode, CHAR_FILTER);
-        for (AstroSymbol symbol : symbols) {
+        for (AstrologySymbol symbol : symbols) {
             Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
 
             if (!checker.hasMatch()) initialVal--;
@@ -84,67 +90,28 @@ public class Astrology extends Widget {
         return initialVal;
     }
 
-    private static void checkThreeTypes(AstroSymbol[] symbols) throws IllegalArgumentException {
+    private static void checkInputHasAllThreeTypes(AstrologySymbol[] symbols) throws IllegalArgumentException {
         if (symbols.length != EXPECTED_SIZE)
             throw new IllegalArgumentException("Astrology input size should be " + EXPECTED_SIZE);
         containsOneOfEach(symbols);
     }
 
-    private static void containsOneOfEach(AstroSymbol[] symbols) throws IllegalArgumentException {
-        containsOneCelestial(symbols);
-        containsOneElement(symbols);
-        containsOneZodiac(symbols);
-    }
+    private static void containsOneOfEach(AstrologySymbol[] symbols) throws IllegalArgumentException {
+        int zodiacCount = 0, celestialCount = 0, elementalCount = 0;
 
-    private static void containsOneCelestial(AstroSymbol[] symbols) {
-        int count = 0;
-        for (AstroSymbol symbol : symbols)
-            if (isCelestial(symbol)) count++;
-        if (count > 1) throw new IllegalArgumentException("Only one celestial body allowed");
-    }
+        EnumSet<AstrologySymbol> zodiacSet = EnumSet.range(ARIES, PISCES);
+        EnumSet<AstrologySymbol> celestialSet = EnumSet.range(SUN, PLUTO);
 
-    private static void containsOneElement(AstroSymbol[] symbols) {
-        int count = 0;
-        for (AstroSymbol symbol : symbols)
-            if (isElemental(symbol)) count++;
-        if (count > 1) throw new IllegalArgumentException("Only one element allowed");
-    }
-
-    private static void containsOneZodiac(AstroSymbol[] symbols) {
-        int count = 0;
-        for (AstroSymbol symbol : symbols)
-            if (isZodiac(symbol)) count++;
-        if (count > 1) throw new IllegalArgumentException("Only one zodiac allowed");
-    }
-
-    private static AstroSymbol[] sort(AstroSymbol[] symbols) {
-        AstroSymbol[] output = new AstroSymbol[symbols.length];
-        for (AstroSymbol symbol : symbols) {
-            if (isElemental(symbol)) output[ELEMENT_INDEX] = symbol;
-            else if (isCelestial(symbol)) output[CELESTIAL_INDEX] = symbol;
-            else if (isZodiac(symbol)) output[ZODIAC_INDEX] = symbol;
+        for (AstrologySymbol symbol : symbols) {
+            if (zodiacSet.contains(symbol))
+                zodiacCount++;
+            else if (celestialSet.contains(symbol))
+                celestialCount++;
+            else
+                elementalCount++;
         }
-        return output;
-    }
 
-    private static boolean isZodiac(AstroSymbol symbol) {
-        return switch (symbol) {
-            case ARIES, TAURUS, GEMINI, CANCER, LEO, VIRGO, LIBRA, SCORPIO, SAGITTARIUS, CAPRICORN, AQUARIUS, PISCES -> true;
-            default -> false;
-        };
-    }
-
-    private static boolean isCelestial(AstroSymbol symbol) {
-        return switch (symbol) {
-            case SUN, MOON, MERCURY, VENUS, MARS, JUPITER, SATURN, URANUS, NEPTUNE, PLUTO -> true;
-            default -> false;
-        };
-    }
-
-    private static boolean isElemental(AstroSymbol symbol) {
-        return switch (symbol) {
-            case FIRE, EARTH, AIR, WATER -> true;
-            default -> false;
-        };
+        if (zodiacCount != celestialCount && zodiacCount != elementalCount)
+            throw new IllegalArgumentException("There are too many of one type of Astrology Symbol");
     }
 }

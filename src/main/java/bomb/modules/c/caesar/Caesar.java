@@ -31,7 +31,7 @@ public class Caesar extends Widget {
         int out = 0;
         out += getAllBatteries();
         if (hasVowelInSerialCode()) out--;
-        if (hasEvenNumberInSerialCode() == 0) out++;
+        if (hasEvenNumberInSerialCode()) out++;
         if (hasIndicator(Indicator.CAR)) out++;
         return out;
     }

@@ -9,7 +9,7 @@ import bomb.tools.filter.Regex;
  */
 public class EmojiMath extends Widget {
     private static final String EMOJI_REGEX = Emojis.generateCaptureGroup();
-    private static final Regex VALIDATION = new Regex("(?<![:|()=])" + EMOJI_REGEX + "(\\+|-)" + EMOJI_REGEX +
+    private static final Regex VALIDATION = new Regex("(?<![:|()=])" + EMOJI_REGEX + "([+\\-])" + EMOJI_REGEX +
             "(?![:|()=])");
 
 

@@ -24,7 +24,7 @@ public class ColoredSwitchGraphFactory {
     public ColoredSwitchGraphFactory() throws IOException, CsvValidationException {
         nodeList = new ArrayList<>();
         CSVReader csvReader = createReader();
-        Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])\\]");
+        Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])]");
 
         String[] nextRecord;
         while ((nextRecord = csvReader.readNext()) != null) {
