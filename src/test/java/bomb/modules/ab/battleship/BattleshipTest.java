@@ -115,7 +115,7 @@ public class BattleshipTest {
 
     @Test(dataProvider = "solveOceanFifthBranchExceptionTestProvider",
             expectedExceptions = IllegalArgumentException.class,
-            expectedExceptionsMessageRegExp = "One of these values doesn't match\\..*")
+            expectedExceptionsMessageRegExp = "Values doesn't match\\..*")
     public void solveOceanFifthBranchExceptionTest(int[] rowCounters, int[] columnCounters, int[] shipQuantities,
                                                    Tile[] confirmedRadarSpots) {
         setShipQuantities(shipQuantities);

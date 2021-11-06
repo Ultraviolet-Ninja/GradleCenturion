@@ -151,7 +151,7 @@ public class Battleship extends Widget {
             return;
 
         String errorMessage = String.format("""
-                One of these values doesn't match.
+                Values don't match.
                 Column Spaces: %d
                 Row Spaces: %d
                 Ship Spaces: %d
