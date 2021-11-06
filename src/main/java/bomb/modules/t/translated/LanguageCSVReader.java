@@ -2,27 +2,28 @@ package bomb.modules.t.translated;
 
 import bomb.abstractions.Index;
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
+import com.opencsv.exceptions.CsvException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LanguageCSVReader {
-    public static List<String> getLanguageContent(LanguageColumn languageColumn) throws CsvValidationException, IOException, IllegalArgumentException {
+    public static List<String> getLanguageContent(LanguageColumn languageColumn)
+            throws CsvException, IOException, IllegalArgumentException {
         if (languageColumn == null) throw new IllegalArgumentException("Language is null");
 
-        List<String> dictionaryContent = new ArrayList<>();
+        int columnIndex = languageColumn.getIndex();
         InputStream in = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
         CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in), StandardCharsets.UTF_8));
-        String[] dataRow;
-        while ((dataRow = csvReader.readNext()) != null) {
-            dictionaryContent.add(dataRow[languageColumn.getIndex()]);
-        }
+        List<String> dictionaryContent = csvReader.readAll()
+                .stream()
+                .map(array -> array[columnIndex])
+                .collect(Collectors.toList());
 
         csvReader.close();
         return dictionaryContent;
@@ -50,16 +51,6 @@ public class LanguageCSVReader {
         SPANISH(13), SWEDISH(14);
 
         private final byte index;
-
-        public static LanguageColumn getLanguageFromString(String language) {
-            language = language.toUpperCase();
-
-            for (LanguageColumn currentLanguageColumn : LanguageColumn.values()) {
-                if (currentLanguageColumn.name().equals(language)) return currentLanguageColumn;
-            }
-
-            return null;
-        }
 
         LanguageColumn(int index) {
             this.index = (byte) index;

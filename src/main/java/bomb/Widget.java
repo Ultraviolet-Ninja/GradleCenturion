@@ -30,7 +30,7 @@ public class Widget {
     protected static boolean isSouvenirActive, isForgetMeNotActive;
     protected static int numDoubleAs, numDBatteries, numHolders, numModules, numPortPlates, numStartingMinutes;
     protected static String serialCode = "", twoFactor = "";
-    protected static Indicator[] indicatorArray = Indicator.values();
+    protected static final Indicator[] indicatorArray = Indicator.values();
 
     private static int[] portArray = {0,0,0,0,0,0};
 

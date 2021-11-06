@@ -8,6 +8,7 @@ import bomb.modules.t.translated.solutions.morse.MorseCodeComponent;
 import bomb.modules.t.translated.solutions.password.PasswordComponent;
 import bomb.modules.t.translated.solutions.wof.WOFComponent;
 import bomb.tools.pattern.facade.FacadeFX;
+import com.opencsv.exceptions.CsvException;
 import com.opencsv.exceptions.CsvValidationException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -54,13 +55,13 @@ public class TranslatedModuleController implements Resettable {
         return event -> {
             String buttonText = ((RadioButton)event.getSource()).getText();
             try {
-                LanguageColumn currentLanguageColumn = LanguageColumn.getLanguageFromString(buttonText);
+                LanguageColumn currentLanguageColumn = LanguageColumn.valueOf(buttonText.toUpperCase());
                 List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguageColumn);
                 buttonUI.setContent(languageContent);
                 passwordUI.setContent(languageContent);
                 ventGasUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
-            } catch (CsvValidationException | IOException e) {
+            } catch (IOException | CsvException e) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
             }
         };
