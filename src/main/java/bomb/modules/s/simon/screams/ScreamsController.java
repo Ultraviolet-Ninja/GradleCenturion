@@ -10,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+
 public class ScreamsController implements Resettable {
     @FXML
     private Button solve, resetLastStage;
@@ -50,11 +54,13 @@ public class ScreamsController implements Resettable {
     private void collectClicks() {
         try {
             String output = SimonScreams.nextSolve(star.collectFlashOrder());
-            StringBuilder sb = new StringBuilder();
-            for (String point : output.split(",")) {
-                sb.append("\u2022 ").append(point).append("\n");
-            }
-            resultArea.setText(sb.toString());
+
+            final String bulletPoint = "\u2022 ";
+            String outputText = stream(output.split(","))
+                    .map(sample -> bulletPoint + sample)
+                    .collect(Collectors.joining("\n"));
+
+            resultArea.setText(outputText);
             star.resetClicks();
             updateStageNumber();
             resetLastStage.setDisable(false);

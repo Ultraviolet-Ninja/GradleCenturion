@@ -11,6 +11,11 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.stream.Collectors;
+
+import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
+import static java.util.Arrays.stream;
+
 public class LaundryController implements Resettable {
     private static final String WASH_INSTRUCTIONS = "Wash Instructions: ", DRY_INSTRUCTIONS = "Dry Instructions: ",
             IRONING_INSTRUCTIONS = "Iron Instructions: ", SPECIAL_INSTRUCTIONS = "Special Instructions: ";
@@ -60,14 +65,10 @@ public class LaundryController implements Resettable {
     }
 
     private String reformatClothingOutput(String in) {
-        String[] buffer = in.split(" - ");
-        StringBuilder builder = new StringBuilder();
-
-        for (String s : buffer) {
-            builder.append(s, 0, 1).append(s.substring(1).toLowerCase()).append(" - ");
-        }
-
-        return builder.substring(0, builder.length() - 3);
+        final String split = " - ";
+        return stream(in.split(split))
+                .map(FIRST_LETTER_CAPITAL)
+                .collect(Collectors.joining(split));
     }
 
     @Override

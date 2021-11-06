@@ -5,6 +5,7 @@ import bomb.modules.s.simon.SimonColors.Screams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -97,11 +98,9 @@ public class SimonScreams extends Widget {
      * @return - The colors that should be pressed
      */
     private static String findColors(Letters current) {
-        StringBuilder builder = new StringBuilder();
-        for (Integer num : CURRENT_OUTPUT_NUMBERS) {
-            builder.append(RESULTING_COLORS[num][current.ordinal()]).append(",");
-        }
-        return builder.substring(0, builder.toString().length() - 1);
+        return CURRENT_OUTPUT_NUMBERS.stream()
+                .map(index -> RESULTING_COLORS[index][current.ordinal()])
+                .collect(Collectors.joining(","));
     }
 
     /**
@@ -136,10 +135,7 @@ public class SimonScreams extends Widget {
 
         private static Letters getFromChar(char letter) {
             String sample = String.valueOf(letter);
-            for (Letters let : Letters.values()) {
-                if (let.name().equals(sample)) return let;
-            }
-            return null;
+            return valueOf(sample);
         }
     }
 }

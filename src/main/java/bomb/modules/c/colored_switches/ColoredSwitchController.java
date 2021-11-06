@@ -184,12 +184,8 @@ public class ColoredSwitchController implements Resettable {
 
     private void sendToOutputField(MFXTextField field, List<String> outputList) {
         final String arrow = " -> ";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < outputList.size(); i++) {
-            sb.append(outputList.get(i));
-            if (i != outputList.size() - 1) sb.append(arrow);
-        }
-        field.setText(sb.toString());
+        String output = String.join(arrow, outputList);
+        field.setText(output);
     }
 
     private void detectRadioButtonChanges() {
