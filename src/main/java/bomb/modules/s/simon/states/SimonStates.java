@@ -8,6 +8,7 @@ import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
@@ -48,10 +49,10 @@ public class SimonStates extends Widget {
     }
 
     public static void setTopLeftButtonColor(StateColor color) {
-        topLeftButtonColor = color.ordinal();
+        topLeftButtonColor = Objects.requireNonNull(color).ordinal();
     }
 
-    public static String calculateNextStage(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+    public static String calculateNextColorPress(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)
             Souvenir.addRelic("Simon States - Stage " + currentStage.getIndex(), writeOutToSouvenir(colorsFlashed));
@@ -191,6 +192,7 @@ public class SimonStates extends Widget {
     }
 
     private static void validate(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+        Objects.requireNonNull(colorsFlashed);
         if (topLeftButtonColor == -1)
             throw new IllegalArgumentException("Priority has not been set");
         if (colorsFlashed.isEmpty())
