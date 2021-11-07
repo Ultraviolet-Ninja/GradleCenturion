@@ -31,13 +31,6 @@ public class EmojiMath extends Widget {
         return calculateRealNumbers(translatedEq, toAdd);
     }
 
-    /**
-     * Translates the emojis in the equation to real numbers
-     *
-     * @param samples The 2 sides of the equation split by the + or - symbol
-     * @param add     Whether the equation will be added or not
-     * @return The equation translated from emojis to numbers
-     */
     private static String translateEmojis(String[] samples, boolean add) {
         StringBuilder result = new StringBuilder();
         boolean flag = true;
@@ -46,6 +39,7 @@ public class EmojiMath extends Widget {
                 result.append(findEmoji(half.substring(0, half.length() / 2)));
                 result.append(findEmoji(half.substring(half.length() / 2)));
             } else result.append(findEmoji(half));
+
             if (flag) {
                 flag = false;
                 result.append(add ? "+" : "-");
@@ -54,12 +48,6 @@ public class EmojiMath extends Widget {
         return result.toString();
     }
 
-    /**
-     * Translates a single emoji into the number associated with it
-     *
-     * @param emoji The emoji to translate
-     * @return The number
-     */
     private static String findEmoji(String emoji) {
         for (Emojis emo : Emojis.values()) {
             if (emo.getLabel().equals(emoji)) {
@@ -69,14 +57,6 @@ public class EmojiMath extends Widget {
         return null;
     }
 
-    /**
-     * Calculates the sum or difference of the translated equation
-     *
-     * @param equation The equation put into real numbers
-     * @param add      Whether the equation should be added or subtracted
-     * @return The sum or difference of the translated numbers
-     * @throws NumberFormatException When a non-number or null is entered into the equation
-     */
     private static int calculateRealNumbers(String equation, boolean add) throws NumberFormatException {
         String[] toNum = equation.split(add ? "\\+" : "-");
         int[] nums = new int[toNum.length];
