@@ -8,9 +8,10 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 
 import java.util.function.Consumer;
+
+import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
 public class BitwiseController implements Resettable {
     @FXML
@@ -26,7 +27,7 @@ public class BitwiseController implements Resettable {
 
     private Consumer<ActionEvent> createButtonAction() {
         return event -> {
-            String buttonText = ((Button) event.getSource()).getText();
+            String buttonText = BUTTON_NAME_FROM_EVENT.apply(event);
             BitwiseOps source = BitwiseOps.valueOf(buttonText.toUpperCase());
             try {
                 byteTextField.setText(Bitwise.getByte(source));
