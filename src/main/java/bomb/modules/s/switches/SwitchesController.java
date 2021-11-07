@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 
 import java.util.List;
 
+import static bomb.tools.string.StringFormat.ARROW;
+
 public class SwitchesController implements Resettable {
     @FXML
     private JFXRadioButton firstLight, secondLight, thirdLight, fourthLight, fifthLight;
@@ -44,8 +46,7 @@ public class SwitchesController implements Resettable {
     }
 
     private void sendToOutputField(List<String> outputList) {
-        final String arrow = " -> ";
-        String outputText = String.join(arrow, outputList);
+        String outputText = String.join(ARROW, outputList);
         outputField.setText(outputText);
     }
 

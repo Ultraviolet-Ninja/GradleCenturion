@@ -14,6 +14,8 @@ import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
+
 public class ChessController implements Resettable {
     private byte previousPosition = 0;
     private final List<String> positionList;
@@ -46,8 +48,8 @@ public class ChessController implements Resettable {
             String positionInput = positionTextField.getText();
             positionList.set(previousPosition, positionInput);
 
-            MFXButton source = (MFXButton) event.getSource();
-            byte nextPosition = (byte) (Integer.parseInt(source.getText()) - 1);
+            String buttonText = BUTTON_NAME_FROM_EVENT.apply(event);
+            byte nextPosition = (byte) (Integer.parseInt(buttonText) - 1);
             positionTextField.setText(positionList.get(nextPosition));
 
             previousPosition = nextPosition;

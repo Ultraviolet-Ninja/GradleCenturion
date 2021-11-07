@@ -105,4 +105,14 @@ public class ReadOnlyRing<E> implements Iterable<E> {
     public String toString() {
         return String.format("Head Index: %d for %s", headIndex, internalStructure);
     }
+
+    public void setToIndex(E element) {
+        int index = findRelativeIndex(element);
+        if (index != -1)
+            rotateClockwise(index);
+    }
+
+    public void reset() {
+        headIndex = 0;
+    }
 }

@@ -23,6 +23,7 @@ import static bomb.modules.c.colored_switches.SwitchColor.MAGENTA;
 import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.RED;
+import static bomb.tools.string.StringFormat.ARROW;
 
 public class ColoredSwitchController implements Resettable {
     private final ReadOnlyRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
@@ -183,8 +184,7 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void sendToOutputField(MFXTextField field, List<String> outputList) {
-        final String arrow = " -> ";
-        String output = String.join(arrow, outputList);
+        String output = String.join(ARROW, outputList);
         field.setText(output);
     }
 
@@ -221,7 +221,7 @@ public class ColoredSwitchController implements Resettable {
 
     private void resetRings() {
         for (ReadOnlyRing<SwitchColor> ring : getAssociatedRings()) {
-            ring.rotateClockwise(ring.findRelativeIndex(NEUTRAL));
+            ring.reset();
         }
     }
 }

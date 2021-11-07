@@ -80,17 +80,18 @@ public class ForgetMeNot extends Widget {
 
     private static boolean bothPreviousNumbersAreEven() {
         int length = FINAL_CODE.size();
-        return FINAL_CODE.get(length - 1) % 2 == 0 && FINAL_CODE.get(length - 2) % 2 == 0;
+        int firstPrevious = FINAL_CODE.get(length - 1);
+        int secondPrevious = FINAL_CODE.get(length - 2);
+        return  firstPrevious% 2 == 0 && secondPrevious % 2 == 0;
     }
 
     private static int smallestOddDigitInSerialCode() {
-        int compare = 10;
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        for (String num : singleNumberRegex) {
-            if (Integer.parseInt(num) < compare)
-                compare = Integer.parseInt(num);
-        }
-        return (compare % 2 == 1) ? compare : 9;
+        return singleNumberRegex.stream()
+                .mapToInt(Integer::parseInt)
+                .filter(num -> num % 2 == 1)
+                .min()
+                .orElse(9);
     }
 
     public static void updateLargestValueInSerial() {
