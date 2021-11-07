@@ -80,9 +80,7 @@ public class AstrologyController implements Resettable {
 
     private void processBuffer() {
         try {
-            omenTextField.setText(Astrology.calculate(
-                    astrologySymbolBuffer[0], astrologySymbolBuffer[1], astrologySymbolBuffer[2])
-            );
+            omenTextField.setText(Astrology.calculate(astrologySymbolBuffer));
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }

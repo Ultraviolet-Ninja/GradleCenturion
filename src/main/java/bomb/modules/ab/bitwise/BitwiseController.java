@@ -13,17 +13,21 @@ import javafx.scene.control.Button;
 import java.util.function.Consumer;
 
 public class BitwiseController implements Resettable {
-    @FXML private MFXButton bitAnd, bitOr, bitXor, bitNot;
+    @FXML
+    private MFXButton andButton, orButton, xorButton, notButton;
 
-    @FXML private MFXTextField byteTextField;
+    @FXML
+    private MFXTextField byteTextField;
 
     public void initialize() {
-        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initAction()), bitAnd, bitNot, bitXor, bitOr);
+        FacadeFX.bindHandlerToButtons(new HoverHandler<>(createButtonAction()),
+                andButton, notButton, xorButton, orButton);
     }
 
-    private Consumer<ActionEvent> initAction() {
+    private Consumer<ActionEvent> createButtonAction() {
         return event -> {
-            BitwiseOps source = BitwiseOps.valueOf(((Button) event.getSource()).getText().toUpperCase());
+            String buttonText = ((Button) event.getSource()).getText();
+            BitwiseOps source = BitwiseOps.valueOf(buttonText.toUpperCase());
             try {
                 byteTextField.setText(Bitwise.getByte(source));
             } catch (IllegalArgumentException illegal) {

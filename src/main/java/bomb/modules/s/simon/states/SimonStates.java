@@ -121,11 +121,6 @@ public class SimonStates extends Widget {
                 .map(pressedColorHistory::contains)
                 .reduce((boolOne, boolTwo) -> boolOne || boolTwo)
                 .orElse(false);
-//        for (StateColor color : colorsFlashed) {
-//            if (pressedColorHistory.contains(color))
-//                return true;
-//        }
-//        return false;
     }
 
     private static StateColor getStateFour(EnumSet<StateColor> colorsFlashed) {
