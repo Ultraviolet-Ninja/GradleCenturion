@@ -16,13 +16,14 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
-import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 import static bomb.modules.c.colored_switches.SwitchColor.BLUE;
 import static bomb.modules.c.colored_switches.SwitchColor.CYAN;
 import static bomb.modules.c.colored_switches.SwitchColor.GREEN;
-import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.MAGENTA;
+import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
+import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.RED;
+import static bomb.tools.string.StringFormat.ARROW;
 
 public class ColoredSwitchController implements Resettable {
     private final ReadOnlyRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
@@ -120,6 +121,7 @@ public class ColoredSwitchController implements Resettable {
         return new MFXToggleButton[]{firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch};
     }
 
+    @SuppressWarnings("unchecked")
     private ReadOnlyRing<SwitchColor>[] getAssociatedRings() {
         return new ReadOnlyRing[]{firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
                 fifthButtonRing};
@@ -182,13 +184,8 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void sendToOutputField(MFXTextField field, List<String> outputList) {
-        final String arrow = " -> ";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < outputList.size(); i++) {
-            sb.append(outputList.get(i));
-            if (i != outputList.size() - 1) sb.append(arrow);
-        }
-        field.setText(sb.toString());
+        String output = String.join(ARROW, outputList);
+        field.setText(output);
     }
 
     private void detectRadioButtonChanges() {
@@ -224,7 +221,7 @@ public class ColoredSwitchController implements Resettable {
 
     private void resetRings() {
         for (ReadOnlyRing<SwitchColor> ring : getAssociatedRings()) {
-            ring.rotateClockwise(ring.findRelativeIndex(NEUTRAL));
+            ring.reset();
         }
     }
 }

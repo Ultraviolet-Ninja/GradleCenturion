@@ -15,7 +15,12 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 
+import java.util.function.Function;
+
 public class FacadeFX {
+    public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
+            ((Button) actionEvent.getSource()).getText();
+
     private FacadeFX() {
     }
 

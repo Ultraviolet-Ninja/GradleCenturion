@@ -1,8 +1,8 @@
 package bomb.modules.il.laundry;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -11,6 +11,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
 
@@ -22,11 +23,10 @@ public class LaundryTest {
 
     @DataProvider
     public Object[][] exceptionProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter setSerial = () -> Widget.setSerialCode("ajwf45");
         return new Object[][]{
-                {empty, "1", "1"}, {setSerial, "", "1"}, {empty, "1", ""}, {empty, "1", "1"}
+                {EMPTY_SETTER, "1", "1"}, {setSerial, "", "1"}, {EMPTY_SETTER, "1", ""},
+                {EMPTY_SETTER, "1", "1"}
         };
     }
 
@@ -76,9 +76,9 @@ public class LaundryTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter setFirst = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter setSecond = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter setThird = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter setFirst = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter setSecond = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter setThird = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {setSecond, new String[]{"105F", "Medium Heat", "110", "Wet Cleaning", "CORDUROY - MALINITE - SCARF"},
                         "0", "1"},
@@ -95,7 +95,7 @@ public class LaundryTest {
 
     @Test
     public void thanksBobTest() {
-        WidgetSimulations.thanksBobCenturion();
+        BombSimulations.thanksBobCenturion();
         String[] actual = Laundry.clean("0", "0");
         String[] expected = {"105F", "Don't Tumble Dry", "300", "Bleach", "CORDUROY - JADE - CORSET", Laundry.THANKS_BOB};
 

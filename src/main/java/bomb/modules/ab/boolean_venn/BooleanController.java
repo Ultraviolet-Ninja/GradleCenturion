@@ -51,11 +51,10 @@ public class BooleanController implements Resettable {
     public void initialize() {
         MFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
                 booleanXnor, booleanImpliedBy};
-        int i = 0;
         EventHandler<ActionEvent> onActionEvent = createButtonAction();
-        while (i < buttonArray.length) {
-            buttonArray[i].setOnAction(onActionEvent);
-            i++;
+
+        for (MFXButton mfxButton : buttonArray) {
+            mfxButton.setOnAction(onActionEvent);
         }
     }
 
@@ -74,7 +73,9 @@ public class BooleanController implements Resettable {
         if (currentOperation.toString().length() != DEFAULT_TEXT.length()) {
             currentOperation = shiftPriority(currentOperation.toString());
             solveEquation();
-        } else overwriteOperationText(priorityToggle.isSelected() ? "A(BC)" : DEFAULT_TEXT);
+        } else {
+            overwriteOperationText(priorityToggle.isSelected() ? "A(BC)" : DEFAULT_TEXT);
+        }
 
         writeOutToTextField();
     }

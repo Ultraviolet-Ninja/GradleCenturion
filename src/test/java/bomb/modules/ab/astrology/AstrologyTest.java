@@ -1,28 +1,28 @@
 package bomb.modules.ab.astrology;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.modules.ab.astrology.AstroSymbol.ARIES;
-import static bomb.modules.ab.astrology.AstroSymbol.EARTH;
-import static bomb.modules.ab.astrology.AstroSymbol.FIRE;
-import static bomb.modules.ab.astrology.AstroSymbol.GEMINI;
-import static bomb.modules.ab.astrology.AstroSymbol.JUPITER;
-import static bomb.modules.ab.astrology.AstroSymbol.MARS;
-import static bomb.modules.ab.astrology.AstroSymbol.MERCURY;
-import static bomb.modules.ab.astrology.AstroSymbol.SAGITTARIUS;
-import static bomb.modules.ab.astrology.AstroSymbol.TAURUS;
-import static bomb.modules.ab.astrology.AstroSymbol.URANUS;
-import static bomb.modules.ab.astrology.AstroSymbol.VENUS;
-import static bomb.modules.ab.astrology.AstroSymbol.VIRGO;
-import static bomb.modules.ab.astrology.AstroSymbol.WATER;
 import static bomb.modules.ab.astrology.Astrology.GOOD_OMEN;
 import static bomb.modules.ab.astrology.Astrology.POOR_OMEN;
+import static bomb.modules.ab.astrology.AstrologySymbol.ARIES;
+import static bomb.modules.ab.astrology.AstrologySymbol.EARTH;
+import static bomb.modules.ab.astrology.AstrologySymbol.FIRE;
+import static bomb.modules.ab.astrology.AstrologySymbol.GEMINI;
+import static bomb.modules.ab.astrology.AstrologySymbol.JUPITER;
+import static bomb.modules.ab.astrology.AstrologySymbol.MARS;
+import static bomb.modules.ab.astrology.AstrologySymbol.MERCURY;
+import static bomb.modules.ab.astrology.AstrologySymbol.SAGITTARIUS;
+import static bomb.modules.ab.astrology.AstrologySymbol.TAURUS;
+import static bomb.modules.ab.astrology.AstrologySymbol.URANUS;
+import static bomb.modules.ab.astrology.AstrologySymbol.VENUS;
+import static bomb.modules.ab.astrology.AstrologySymbol.VIRGO;
+import static bomb.modules.ab.astrology.AstrologySymbol.WATER;
 import static org.testng.Assert.assertEquals;
 
 public class AstrologyTest {
@@ -44,7 +44,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(AstroSymbol... set) {
+    public void exceptionTest(AstrologySymbol... set) {
         Astrology.calculate(set);
     }
 
@@ -57,7 +57,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "trainingVideoTestProvider")
-    public void trainingVideoTest(String expected, AstroSymbol... set) {
+    public void trainingVideoTest(String expected, AstrologySymbol... set) {
         Widget.setSerialCode("jt3gu5");
 
         assertEquals(Astrology.calculate(set), expected);
@@ -73,7 +73,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "interchangeabilityTestProvider")
-    public void interchangeabilityTest(String expected, AstroSymbol... set) {
+    public void interchangeabilityTest(String expected, AstrologySymbol... set) {
         Widget.setSerialCode("jt3gu5");
 
         assertEquals(Astrology.calculate(set), expected);
@@ -81,9 +81,9 @@ public class AstrologyTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter first = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter second = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter third = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {first, (POOR_OMEN + 1), URANUS, FIRE, ARIES}, {second, (POOR_OMEN + 2), WATER, URANUS, VIRGO},
                 {third, (GOOD_OMEN + 6), JUPITER, EARTH, GEMINI}
@@ -91,7 +91,7 @@ public class AstrologyTest {
     }
 
     @Test(dataProvider = "theGreatBerateSimulationProvider")
-    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstroSymbol... set) {
+    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstrologySymbol... set) {
         cond.setCondition();
 
         assertEquals(Astrology.calculate(set), expected);

@@ -1,8 +1,8 @@
 package bomb.modules.np.neutralization;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -12,11 +12,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.modules.np.neutralization.Chemical.Base.Ammonia;
 import static bomb.modules.np.neutralization.Chemical.Base.Lithium_Hydroxide;
 import static bomb.modules.np.neutralization.Chemical.Base.Potassium_Hydroxide;
-import static bomb.modules.np.neutralization.Neutralization.FILTER;
-import static bomb.modules.np.neutralization.Neutralization.NO_FILTER;
+import static bomb.modules.np.neutralization.Neutralization.FILTER_TEXT;
+import static bomb.modules.np.neutralization.Neutralization.NO_FILTER_TEXT;
 import static org.testng.Assert.assertEquals;
 
 public class NeutralizationTest {
@@ -27,11 +28,9 @@ public class NeutralizationTest {
 
     @DataProvider
     public Object[][] exceptionTestProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter validSetup = this::setupOne;
         return new Object[][]{
-                {empty, 0, Color.RED}, {validSetup, 0, Color.CYAN}
+                {EMPTY_SETTER, 0, Color.RED}, {validSetup, 0, Color.CYAN}
         };
     }
 
@@ -44,7 +43,7 @@ public class NeutralizationTest {
     @Test
     public void trainingVideoTestOne() {
         setupOne();
-        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", FILTER});
+        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", FILTER_TEXT});
     }
 
     private void setupOne() {
@@ -63,7 +62,7 @@ public class NeutralizationTest {
     public void trainingVideoTestTwo() {
         setupTwo();
         assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                "48", NO_FILTER});
+                "48", NO_FILTER_TEXT});
     }
 
     private void setupTwo() {
@@ -77,16 +76,16 @@ public class NeutralizationTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter first = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter second = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter third = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {first, 5, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                        "12", NO_FILTER}},
+                        "12", NO_FILTER_TEXT}},
                 {second, 5, Color.RED, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                        "4", FILTER}},
+                        "4", FILTER_TEXT}},
                 {third, 10, Color.YELLOW, new String[]{"Potassium Hydroxide", Potassium_Hydroxide.getFormula(),
-                        "4", NO_FILTER}}
+                        "4", NO_FILTER_TEXT}}
         };
     }
 

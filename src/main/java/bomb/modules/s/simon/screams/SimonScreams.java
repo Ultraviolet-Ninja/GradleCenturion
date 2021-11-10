@@ -1,10 +1,11 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
-import bomb.modules.s.simon.SimonColors.Screams;
+import bomb.modules.s.simon.SimonColors.ScreamColor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -42,7 +43,7 @@ public class SimonScreams extends Widget {
      * @throws IllegalArgumentException - The serial code isn't 6 characters long OR
      *                                  The array is not 6 elements long
      */
-    public static void initialize(Screams[] order) throws IllegalArgumentException {
+    public static void initialize(ScreamColor[] order) throws IllegalArgumentException {
         checkSerialCode();
         initialized = true;
         setOutputRules();
@@ -56,7 +57,7 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(Screams[] flashingOrder) throws IllegalArgumentException {
+    public static String nextSolve(ScreamColor[] flashingOrder) throws IllegalArgumentException {
         if (flashingOrder == null || flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
@@ -69,7 +70,7 @@ public class SimonScreams extends Widget {
      * @param flashingOrder - The column to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char getStringLetter(Screams[] flashingOrder) {
+    private static char getStringLetter(ScreamColor[] flashingOrder) {
         if (lightOrder.threeAdjacencyRule(flashingOrder)) return extractCategory(flashingOrder[stage], 0);
         if (lightOrder.oneTwoOneRule(flashingOrder)) return extractCategory(flashingOrder[stage], 1);
         if (lightOrder.primaryRule(flashingOrder)) return extractCategory(flashingOrder[stage], 2);
@@ -85,7 +86,7 @@ public class SimonScreams extends Widget {
      * @param correctRule - The row to determine the letter set
      * @return - The letter determined by the correct array index and correct stage
      */
-    private static char extractCategory(Screams stageColor, int correctRule) {
+    private static char extractCategory(ScreamColor stageColor, int correctRule) {
         return CATEGORIES[correctRule][stageColor.ordinal()].charAt(stage++);
     }
 
@@ -97,19 +98,17 @@ public class SimonScreams extends Widget {
      * @return - The colors that should be pressed
      */
     private static String findColors(Letters current) {
-        StringBuilder builder = new StringBuilder();
-        for (Integer num : CURRENT_OUTPUT_NUMBERS) {
-            builder.append(RESULTING_COLORS[num][current.ordinal()]).append(",");
-        }
-        return builder.substring(0, builder.toString().length() - 1);
+        return CURRENT_OUTPUT_NUMBERS.stream()
+                .map(index -> RESULTING_COLORS[index][current.ordinal()])
+                .collect(Collectors.joining(","));
     }
 
     /**
      * Keeps track of the edgework that applies to the output colors
      */
     private static void setOutputRules() {
-        if (countIndicators(IndicatorFilter.ALL) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
-        if (getTotalPorts() >= 3) CURRENT_OUTPUT_NUMBERS.add(1);
+        if (countIndicators(IndicatorFilter.ALL_PRESENT) >= 3) CURRENT_OUTPUT_NUMBERS.add(0);
+        if (calculateTotalPorts() >= 3) CURRENT_OUTPUT_NUMBERS.add(1);
         if (countNumbersInSerialCode() >= 3) CURRENT_OUTPUT_NUMBERS.add(2);
         if (countLettersInSerialCode() >= 3) CURRENT_OUTPUT_NUMBERS.add(3);
         if (getAllBatteries() >= 3) CURRENT_OUTPUT_NUMBERS.add(4);
@@ -136,10 +135,7 @@ public class SimonScreams extends Widget {
 
         private static Letters getFromChar(char letter) {
             String sample = String.valueOf(letter);
-            for (Letters let : Letters.values()) {
-                if (let.name().equals(sample)) return let;
-            }
-            return null;
+            return valueOf(sample);
         }
     }
 }

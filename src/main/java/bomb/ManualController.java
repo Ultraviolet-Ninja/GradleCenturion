@@ -26,7 +26,6 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -75,55 +74,60 @@ public class ManualController {
     public void search() {
         String searchTerm = searchBar.getText();
         radioButtonHouse.getChildren().clear();
+
         if (searchTerm.isEmpty()){
             radioButtonHouse.getChildren().addAll(allRadioButtons);
             return;
         }
+
         Regex searchPattern = new Regex(searchTerm, Pattern.CASE_INSENSITIVE);
 
-        int i = 0;
-        while (i < allRadioButtons.size()) {
-            Node node = allRadioButtons.get(i);
-            searchPattern.loadText(((RadioButton) node).getText());
+        for (Node radioButton : allRadioButtons) {
+            searchPattern.loadText(((RadioButton) radioButton).getText());
+
             if (searchPattern.hasMatch())
-                radioButtonHouse.getChildren().add(node);
-            i++;
+                radioButtonHouse.getChildren().add(radioButton);
         }
     }
 
     private void setupMap() throws IllegalArgumentException {
         String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
-        List<String> formattedNameList = formatWords(radioButtonList.iterator()),
-                paneLocations = filesFromFolder(new File(path)),
-                filteredLocations = filterLocations(paneLocations);
-        List<Region> paneList = panesFromFolder(paneLocations);
-        setPairs(radioButtonList, formattedNameList, paneList, filteredLocations);
+        List<String> filePathList = getFilesFromDirectory(new File(path));
+
+        filePathList.removeIf(location -> location.contains("solutions") || location.contains("new") || location.contains("old"));
+
+        List<String> formattedRadioButtonNameList = formatWords(radioButtonList),
+                filteredLocationNames = filterPathNames(filePathList);
+
+        List<Region> regionList = createRegionList(filePathList);
+        setPairs(radioButtonList, formattedRadioButtonNameList, regionList, filteredLocationNames);
     }
 
-    private List<String> formatWords(Iterator<Toggle> nameIterator) {
+    private List<String> formatWords(List<Toggle> nameList) {
         List<String> list = new ArrayList<>();
-        while(nameIterator.hasNext()){
-            String line = ((ToggleButton)nameIterator.next()).getText().replace(" ", "_")
+        List<Toggle> temp = new ArrayList<>(nameList);
+
+        for (Toggle name : temp){
+            String line = ((ToggleButton)name).getText().replace(" ", "_")
                     .replace("-", "_");
             list.add(ultimateFilter(line, NORMAL_CHAR_REGEX, "_"));
         }
+
         return list;
     }
 
-    private List<Region> panesFromFolder(List<String> fileLocations) {
+    private List<Region> createRegionList(List<String> fileLocations) {
         List<Region> paneList = new ArrayList<>();
         ResetObserver resetObserver = new ResetObserver();
         try {
-            int i = 0;
-            while (i < fileLocations.size()) {
-                String fxmlFile = fileLocations.get(i);
-                FXMLLoader loader = new FXMLLoader(Paths.get(fxmlFile).toUri().toURL());
+            for (String singleLocation : fileLocations) {
+                FXMLLoader loader = new FXMLLoader(Paths.get(singleLocation).toUri().toURL());
                 paneList.add(loader.load());
-                if (!fxmlFile.contains("widget")) resetObserver.addController(loader);
-                if (fxmlFile.contains("souvenir")) extractSouvenirController(loader);
-                if (fxmlFile.contains("blind_alley")) extractBlindAlleyController(loader);
-                i++;
+                if (!singleLocation.contains("widget")) resetObserver.addController(loader);
+
+                if (singleLocation.contains("souvenir")) extractSouvenirController(loader);
+                else if (singleLocation.contains("blind_alley")) extractBlindAlleyController(loader);
             }
             ObserverHub.addObserver(resetObserver);
         } catch (IOException e){
@@ -140,18 +144,18 @@ public class ManualController {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
-    private List<String> filesFromFolder(final File folder) throws IllegalArgumentException{
+    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws IllegalArgumentException{
         List<String> list = new ArrayList<>();
-        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())){
+        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())){
             if (fileEntry.isDirectory())
-                list.addAll(filesFromFolder(fileEntry));
+                list.addAll(getFilesFromDirectory(fileEntry));
             else
                 list.add(fileEntry.getPath());
         }
         return list;
     }
 
-    private List<String> filterLocations(List<String> originalLocations){
+    private List<String> filterPathNames(List<String> originalLocations){
         List<String> outputList = new ArrayList<>();
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);

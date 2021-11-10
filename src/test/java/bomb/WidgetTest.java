@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static org.testng.Assert.assertEquals;
 
 public class WidgetTest {
@@ -109,15 +110,13 @@ public class WidgetTest {
 
     @DataProvider
     public Object[][] indicatorProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter trueSetter = () -> {
             Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
             Widget.setIndicator(TrinarySwitch.OFF, Indicator.NSA);
         };
 
         return new Object[][]{
-                {empty, Indicator.BOB, false}, {trueSetter, Indicator.MSA, true},
+                {EMPTY_SETTER, Indicator.BOB, false}, {trueSetter, Indicator.MSA, true},
                 {trueSetter, Indicator.NSA, true}
         };
     }

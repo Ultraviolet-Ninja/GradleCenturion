@@ -31,11 +31,11 @@ public class AlphabetController implements Resettable {
         stateMap.put(forthInput, null);
         for (MFXTextField input : stateMap.keySet()) {
             input.setTextFormatter(createOneLetterFormatter());
-            input.setOnKeyReleased(actionHandler());
+            input.setOnKeyReleased(createActionHandler());
         }
     }
 
-    private EventHandler<KeyEvent> actionHandler() {
+    private EventHandler<KeyEvent> createActionHandler() {
         return event -> {
             MFXTextField source = (MFXTextField) event.getSource();
             boolean canGetResults = false;

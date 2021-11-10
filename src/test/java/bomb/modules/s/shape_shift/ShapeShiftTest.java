@@ -2,7 +2,7 @@ package bomb.modules.s.shape_shift;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
+import bomb.BombSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -49,9 +49,9 @@ public class ShapeShiftTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter takeOne = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter takeTwo = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter takeThree = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter takeOne = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter takeTwo = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter takeThree = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {takeOne, new ShapeEnd[]{TICKET, POINT}, FLAT, ROUND},
                 {takeTwo, new ShapeEnd[]{FLAT, FLAT}, POINT, FLAT},

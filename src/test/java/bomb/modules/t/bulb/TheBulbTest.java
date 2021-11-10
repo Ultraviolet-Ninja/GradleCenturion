@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.modules.t.bulb.Bulb.Color.BLUE;
 import static bomb.modules.t.bulb.Bulb.Color.GREEN;
 import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
@@ -97,14 +98,13 @@ public class TheBulbTest {
     public Object[][] writtenTestProvider() {
         ConditionSetter testConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
         ConditionSetter secondTestConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, Indicator.CAR);
-        ConditionSetter emptyCondition = () -> {};
 
         return new Object[][]{
                 {testConditions, ON, YELLOW, OPAQUE, new String[]{PRESS_O, UNSCREW, PRESS_O, PRESS_I, SCREW}},
                 {testConditions, ON, WHITE, OPAQUE, new String[]{PRESS_O, UNSCREW, PRESS_I, PRESS_O, SCREW}},
                 {secondTestConditions, OFF, YELLOW, TRANSLUCENT, new String[]{UNSCREW, PRESS_I, PRESS_O, PRESS_I, SCREW}},
                 {secondTestConditions, OFF, BLUE, OPAQUE, new String[]{UNSCREW, PRESS_I, PRESS_I, PRESS_I, SCREW}},
-                {emptyCondition, OFF, PURPLE, TRANSLUCENT, new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}}
+                {EMPTY_SETTER, OFF, PURPLE, TRANSLUCENT, new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}}
         };
     }
 

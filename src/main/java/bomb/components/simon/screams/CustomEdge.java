@@ -1,7 +1,7 @@
 package bomb.components.simon.screams;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.s.simon.SimonColors.Screams;
+import bomb.modules.s.simon.SimonColors.ScreamColor;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.animation.FadeTransition;
@@ -20,7 +20,7 @@ public class CustomEdge extends Polygon implements Resettable {
     private boolean selectorMode;
     private List<CustomEdge> internalReference;
 
-    private final ReadOnlyRing<Screams> colors;
+    private final ReadOnlyRing<ScreamColor> colors;
 
     public CustomEdge(){
         super();
@@ -38,7 +38,7 @@ public class CustomEdge extends Polygon implements Resettable {
     }
 
     private void fill(){
-        for (Screams scream : Screams.values())
+        for (ScreamColor scream : ScreamColor.values())
             colors.add(scream);
         colors.rotateCounterClockwise();
     }
@@ -86,7 +86,7 @@ public class CustomEdge extends Polygon implements Resettable {
         return scale;
     }
 
-    public Screams exportColor(){
+    public ScreamColor exportColor(){
         if (getFill() == WHITE)
             return null;
         return colors.getHeadData();
@@ -99,7 +99,7 @@ public class CustomEdge extends Polygon implements Resettable {
     @Override
     public void reset(){
         setFill(WHITE);
-        while (colors.getHeadData() != Screams.PURPLE) colors.rotateClockwise();
+        while (colors.getHeadData() != ScreamColor.PURPLE) colors.rotateClockwise();
         selectorMode = false;
     }
 }

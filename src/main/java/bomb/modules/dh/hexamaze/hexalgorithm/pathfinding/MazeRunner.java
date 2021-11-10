@@ -111,8 +111,8 @@ public class MazeRunner {
         exitDirection = "Right";
         List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
-        int lastIndex = internals.cap() - 1;
-        for (int i = 0; i < internals.get(lastIndex).cap(); i++) {
+        int lastIndex = internals.getCapacity() - 1;
+        for (int i = 0; i < internals.get(lastIndex).getCapacity(); i++) {
             output.add(new Coordinates(lastIndex, i));
         }
         return output;
@@ -123,7 +123,7 @@ public class MazeRunner {
         List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = grid.sideLength() - 1; i < grid.getSpan(); i++) {
-            output.add(new Coordinates(i, internals.get(i).cap() - 1));
+            output.add(new Coordinates(i, internals.get(i).getCapacity() - 1));
         }
         return output;
     }
@@ -133,7 +133,7 @@ public class MazeRunner {
         List<Coordinates> output = new ArrayList<>();
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         for (int i = 0; i < grid.sideLength(); i++) {
-            output.add(new Coordinates(i, internals.get(i).cap() - 1));
+            output.add(new Coordinates(i, internals.get(i).getCapacity() - 1));
         }
         return output;
     }
@@ -164,8 +164,8 @@ public class MazeRunner {
     private static Graph<Coordinates, DefaultEdge> mapToGraph(HexGrid grid) {
         BufferedQueue<BufferedQueue<HexNode>> internals = grid.exportTo2DQueue();
         Graph<Coordinates, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-        for (int x = 0; x < internals.cap(); x++) {
-            for (int y = 0; y < internals.get(x).cap(); y++) {
+        for (int x = 0; x < internals.getCapacity(); x++) {
+            for (int y = 0; y < internals.get(x).getCapacity(); y++) {
                 mapAdjacentNodes(grid, graph, new Coordinates(x, y));
             }
         }

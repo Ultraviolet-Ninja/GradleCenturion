@@ -10,6 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.BombSimulations.EMPTY_SETTER;
 import static org.testng.Assert.assertEquals;
 
 public class ForgetMeNotTest {
@@ -23,15 +24,13 @@ public class ForgetMeNotTest {
 
     @DataProvider
     public Object[][] exceptionTestProvider() {
-        ConditionSetter blank = () -> {
-        };
         ConditionSetter activatedForgetMeNot = () -> Widget.setIsForgetMeNotActive(true);
         ConditionSetter triggerNoModule = () -> {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode("12sk23");
         };
         return new Object[][]{
-                {blank}, {activatedForgetMeNot}, {triggerNoModule}
+                {EMPTY_SETTER}, {activatedForgetMeNot}, {triggerNoModule}
         };
     }
 
