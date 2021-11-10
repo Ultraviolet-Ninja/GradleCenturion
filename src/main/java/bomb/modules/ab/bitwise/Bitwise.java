@@ -24,7 +24,7 @@ public class Bitwise extends Widget {
      * @throws IllegalArgumentException - The serial code, number of timer minutes and modules
      *                                  are needed for this module to work
      */
-    public static String getByte(BitwiseOps bit) throws IllegalArgumentException {
+    public static String getByte(BitwiseOperator bit) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 8; i++)
             builder.append(solve(i, bit));
@@ -39,7 +39,7 @@ public class Bitwise extends Widget {
      * @return The value of the resulting bitOp
      * @throws IllegalArgumentException - The serial code is needed for this module to work
      */
-    private static int solve(int sigBit, BitwiseOps bitOp) throws IllegalArgumentException {
+    private static int solve(int sigBit, BitwiseOperator bitOp) throws IllegalArgumentException {
         boolean[] bits = switch (sigBit) {
             case 0 -> firstBits();
             case 1 -> secondBits();
@@ -60,7 +60,7 @@ public class Bitwise extends Widget {
      * @param bits  The pair of bits that being compared
      * @return The result from the operation
      */
-    private static boolean operator(BitwiseOps bitOp, boolean[] bits) {
+    private static boolean operator(BitwiseOperator bitOp, boolean[] bits) {
         return switch (bitOp) {
             case OR -> bits[0] || bits[1];
             case AND -> bits[0] && bits[1];

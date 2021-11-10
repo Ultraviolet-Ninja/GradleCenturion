@@ -28,7 +28,8 @@ public class BitwiseController implements Resettable {
     private Consumer<ActionEvent> createButtonAction() {
         return event -> {
             String buttonText = BUTTON_NAME_FROM_EVENT.apply(event);
-            BitwiseOps source = BitwiseOps.valueOf(buttonText.toUpperCase());
+            BitwiseOperator source = BitwiseOperator.valueOf(buttonText.toUpperCase());
+
             try {
                 byteTextField.setText(Bitwise.getByte(source));
             } catch (IllegalArgumentException illegal) {

@@ -11,10 +11,10 @@ import org.testng.annotations.Test;
 
 import static bomb.BombSimulations.EMPTY_SETTER;
 import static bomb.enumerations.Port.PARALLEL;
-import static bomb.modules.ab.bitwise.BitwiseOps.AND;
-import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
-import static bomb.modules.ab.bitwise.BitwiseOps.OR;
-import static bomb.modules.ab.bitwise.BitwiseOps.XOR;
+import static bomb.modules.ab.bitwise.BitwiseOperator.AND;
+import static bomb.modules.ab.bitwise.BitwiseOperator.NOT;
+import static bomb.modules.ab.bitwise.BitwiseOperator.OR;
+import static bomb.modules.ab.bitwise.BitwiseOperator.XOR;
 import static org.testng.Assert.assertEquals;
 
 public class BitwiseTest {
@@ -60,7 +60,7 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "minimumConditionTestProvider")
-    public void minimumConditionTest(String expected, BitwiseOps operation) {
+    public void minimumConditionTest(String expected, BitwiseOperator operation) {
         setEssentialFalseConditions();
         Widget.setDoubleAs(2);
 
@@ -75,7 +75,7 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "maximumConditionTestProvider")
-    public void maximumConditionTest(String expected, BitwiseOps operation) {
+    public void maximumConditionTest(String expected, BitwiseOperator operation) {
         setEssentialTrueConditions();
         maximizeConditions();
 
