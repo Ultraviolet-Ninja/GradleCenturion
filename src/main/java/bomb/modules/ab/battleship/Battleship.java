@@ -67,8 +67,8 @@ public class Battleship extends Widget {
         final char charLetterToInt = '`';
         final char charNumberToInt = '1';
 
-        int startingRow = getTotalPorts() % Ocean.BOARD_LENGTH;
-        int startingColumn = (countIndicators(IndicatorFilter.ALL) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
+        int startingRow = calculateTotalPorts() % Ocean.BOARD_LENGTH;
+        int startingColumn = (countIndicators(IndicatorFilter.ALL_PRESENT) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
 
         setTileAsRadar(startingRow, startingColumn);
         return offsetChar(charLetterToInt, startingRow) +
