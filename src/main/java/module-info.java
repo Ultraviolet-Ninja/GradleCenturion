@@ -43,6 +43,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.s.seashells to javafx.fxml;
     exports bomb.modules.s.semaphore to javafx.fxml;
     exports bomb.modules.s.shape_shift to javafx.fxml;
+    exports bomb.modules.s.simon to javafx.fxml;
     exports bomb.modules.s.simon.screams to javafx.fxml;
     exports bomb.modules.s.simon.states to javafx.fxml;
     exports bomb.modules.s.souvenir to javafx.fxml;

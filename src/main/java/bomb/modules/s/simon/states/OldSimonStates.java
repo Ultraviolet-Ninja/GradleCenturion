@@ -27,18 +27,10 @@ public class OldSimonStates extends Widget {
         HIGHEST, HIGH, LOW, LOWEST
     }
 
-    /**
-     * @param color
-     */
     public static void setPriority(StateColor color) {
         prior = color.ordinal();
     }
 
-    /**
-     * @param colors
-     * @param stage
-     * @return
-     */
     public static String add(StateColor[] colors, int stage) {
         if (isSouvenirActive)
             Souvenir.addRelic("Simon States - Stage " + stage, writeOut(colors));
