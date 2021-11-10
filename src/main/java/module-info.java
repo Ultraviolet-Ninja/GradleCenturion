@@ -58,6 +58,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.t.translated.solutions.wof to javafx.fxml;
     exports bomb.modules.t.two_bit to javafx.fxml;
     exports bomb.modules.wz.zoo to javafx.fxml;
+    exports bomb.tools.logic to javafx.fxml;
     exports bomb.tools.note to javafx.fxml;
 
     opens bomb;

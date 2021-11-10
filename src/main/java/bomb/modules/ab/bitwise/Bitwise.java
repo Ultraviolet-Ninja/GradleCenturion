@@ -3,6 +3,7 @@ package bomb.modules.ab.bitwise;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
+import bomb.tools.logic.LogicOperator;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
@@ -15,7 +16,6 @@ import static bomb.tools.filter.Filter.ultimateFilter;
  * which bits will be 1 or 0 in the byte line.
  */
 public class Bitwise extends Widget {
-
     /**
      * Turns the edgework conditions into a byte that the Defuser will input into the bomb module
      *
@@ -24,7 +24,7 @@ public class Bitwise extends Widget {
      * @throws IllegalArgumentException - The serial code, number of timer minutes and modules
      *                                  are needed for this module to work
      */
-    public static String getByte(BitwiseOperator bit) throws IllegalArgumentException {
+    public static String getByte(LogicOperator bit) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 8; i++)
             builder.append(solve(i, bit));
@@ -35,11 +35,11 @@ public class Bitwise extends Widget {
      * Evaluates the resulting bitOp from the position, the needed operation and the edgework conditions
      *
      * @param sigBit Which bitOp in the byte the method will focus on
-     * @param bitOp  The operation that must be used on each pair of bits
+     * @param logicOp  The operation that must be used on each pair of bits
      * @return The value of the resulting bitOp
      * @throws IllegalArgumentException - The serial code is needed for this module to work
      */
-    private static int solve(int sigBit, BitwiseOperator bitOp) throws IllegalArgumentException {
+    private static int solve(int sigBit, LogicOperator logicOp) throws IllegalArgumentException {
         boolean[] bits = switch (sigBit) {
             case 0 -> firstBits();
             case 1 -> secondBits();
@@ -50,23 +50,7 @@ public class Bitwise extends Widget {
             case 6 -> seventhBits();
             default -> eighthBits();
         };
-        return operator(bitOp, bits) ? 1 : 0;
-    }
-
-    /**
-     * Executes a boolean operation on the 2 bits to determine the resulting bit
-     *
-     * @param bitOp The operation to be executed on the bits
-     * @param bits  The pair of bits that being compared
-     * @return The result from the operation
-     */
-    private static boolean operator(BitwiseOperator bitOp, boolean[] bits) {
-        return switch (bitOp) {
-            case OR -> bits[0] || bits[1];
-            case AND -> bits[0] && bits[1];
-            case XOR -> ((bits[0] && !bits[1]) || (!bits[0] && bits[1]));
-            default -> !bits[0];
-        };
+        return logicOp.test(bits[0], bits[1]) ? 1 : 0;
     }
 
     private static boolean[] firstBits() {

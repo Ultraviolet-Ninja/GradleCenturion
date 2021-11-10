@@ -2,6 +2,7 @@ package bomb.modules.ab.bitwise;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.event.HoverHandler;
+import bomb.tools.logic.LogicOperator;
 import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -28,7 +29,7 @@ public class BitwiseController implements Resettable {
     private Consumer<ActionEvent> createButtonAction() {
         return event -> {
             String buttonText = BUTTON_NAME_FROM_EVENT.apply(event);
-            BitwiseOperator source = BitwiseOperator.valueOf(buttonText.toUpperCase());
+            LogicOperator source = LogicOperator.valueOf(buttonText.toUpperCase());
 
             try {
                 byteTextField.setText(Bitwise.getByte(source));

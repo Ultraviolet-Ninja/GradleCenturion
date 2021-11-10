@@ -2,10 +2,19 @@ package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
 import bomb.tools.filter.Regex;
+import bomb.tools.logic.LogicOperator;
 
 import static bomb.tools.filter.Filter.LOGIC_REGEX;
 import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.logic.LogicOperator.AND;
+import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
+import static bomb.tools.logic.LogicOperator.IMPLIES;
+import static bomb.tools.logic.LogicOperator.NAND;
+import static bomb.tools.logic.LogicOperator.NOR;
+import static bomb.tools.logic.LogicOperator.OR;
+import static bomb.tools.logic.LogicOperator.XNOR;
+import static bomb.tools.logic.LogicOperator.XOR;
 
 /**
  * This class deals with the Boolean Venn Diagram module.
@@ -55,7 +64,9 @@ public class BooleanVenn extends Widget {
     private static boolean checkFormat(String equation) throws IllegalArgumentException {
         String abPriority = ultimateFilter(equation, AB_PRIORITY);
         String bcPriority = ultimateFilter(equation, BC_PRIORITY);
-        if (xnor(abPriority.isEmpty(), bcPriority.isEmpty())) throw new IllegalArgumentException("Format mismatch!!");
+
+        if (XNOR.test(abPriority.isEmpty(), bcPriority.isEmpty()))
+            throw new IllegalArgumentException("Format mismatch!!");
         return !abPriority.isEmpty();
     }
 
@@ -134,111 +145,17 @@ public class BooleanVenn extends Widget {
      * @return The result of the operation
      */
     private static boolean functionMap(String func, boolean x, boolean y) {
-        return switch (func) {
-            case "∧" -> and(x, y);
-            case "∨" -> or(x, y);
-            case "↓" -> nor(x, y);
-            case "⊻" -> xor(x, y);
-            case "|" -> nand(x, y);
-            case "↔" -> xnor(x, y);
-            case "→" -> implies(x, y);
-            default -> impliedBy(x, y);
+        LogicOperator operator = switch (func) {
+            case "∧" -> AND;
+            case "∨" -> OR;
+            case "↓" -> NOR;
+            case "⊻" -> XOR;
+            case "|" -> NAND;
+            case "↔" -> XNOR;
+            case "→" -> IMPLIES;
+            default -> IMPLIED_BY;
         };
-    }
 
-    /**
-     * Bitwise And
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the and operation
-     */
-    private static boolean and(boolean x, boolean y) {
-        return x && y;
-    }
-
-    /**
-     * Bitwise Nand
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the nand operation
-     */
-    private static boolean nand(boolean x, boolean y) {
-        return !and(x, y);
-    }
-
-    /**
-     * Bitwise Or
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the or operation
-     */
-    private static boolean or(boolean x, boolean y) {
-        return x || y;
-    }
-
-    /**
-     * Bitwise Nor
-     *
-     * @param x - 1st bit
-     * @param y - 2nd bit
-     * @return - Result of the nor operation
-     */
-    private static boolean nor(boolean x, boolean y) {
-        return !or(x, y);
-    }
-
-    /**
-     * Bitwise Xor
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the xor operation
-     */
-    private static boolean xor(boolean x, boolean y) {
-        return (x && !y) || (!x && y);
-    }
-
-    /**
-     * Bitwise Xnor
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the xnor operation
-     */
-    private static boolean xnor(boolean x, boolean y) {
-        return !xor(x, y);
-    }
-
-    /**
-     * Bitwise Implies follows this order...
-     * False -> False - True
-     * False -> True - True
-     * True -> False - False
-     * True -> True - True
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the implies operation
-     */
-    private static boolean implies(boolean x, boolean y) {
-        return !(x && !y);
-    }
-
-    /**
-     * Bitwise Implied By follows this order...
-     * False <- False - True
-     * False <- True - False
-     * True <- False - True
-     * True <- True - True
-     *
-     * @param x 1st bit
-     * @param y 2nd bit
-     * @return Result of the implied by operation
-     */
-    private static boolean impliedBy(boolean x, boolean y) {
-        return !(!x && y);
+        return operator.test(x, y);
     }
 }
