@@ -1,0 +1,72 @@
+.jfx-radio-button {
+    -jfx-unselected-color: #00255b;
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+}
+
+#standard-radio-button {
+    -jfx-selected-color: white;
+}
+
+#standard-radio-button:hover {
+    -jfx-unselected-color: #0065de;
+}
+
+#red-radio-button {
+    -jfx-selected-color: red;
+}
+
+#red-radio-button:hover {
+    -jfx-unselected-color: #930000;
+}
+
+#yellow-radio-button {
+    -jfx-selected-color: yellow;
+}
+
+#yellow-radio-button:hover {
+    -jfx-unselected-color: #b3b300;
+}
+
+#blue-radio-button {
+    -jfx-selected-color: #0065de;
+}
+
+#blue-radio-button:hover {
+    -jfx-unselected-color: #3671bb;
+}
+
+.jfx-text-area {
+    -jfx-focus-color: transparent;
+    -jfx-unfocus-color: transparent;
+    -fx-background-color: #00407c;
+    -fx-border-color: black;
+    -fx-border-width: 3;
+    -fx-font-size: 22;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}
+
+.jfx-text-area .content {
+    -fx-background-color: #00407c;
+}
+
+.mfx-label {
+    -fx-font-size: 22;
+    -fx-text-fill: white;
+    -mfx-line-stroke-width: 0;
+    -mfx-text-fill: white;
+}
+
+.mfx-text-field {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-font-size: 22;
+    -fx-padding: 0 0 0 10;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+    -mfx-line-stroke-width: 0;
+}

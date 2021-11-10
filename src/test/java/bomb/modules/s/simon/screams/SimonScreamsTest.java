@@ -5,17 +5,18 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
-import bomb.modules.s.simon.SimonColors.Screams;
+import bomb.modules.s.simon.SimonColors.ScreamColor;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.modules.s.simon.SimonColors.Screams.BLUE;
-import static bomb.modules.s.simon.SimonColors.Screams.GREEN;
-import static bomb.modules.s.simon.SimonColors.Screams.ORANGE;
-import static bomb.modules.s.simon.SimonColors.Screams.PURPLE;
-import static bomb.modules.s.simon.SimonColors.Screams.RED;
-import static bomb.modules.s.simon.SimonColors.Screams.YELLOW;
+import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.BLUE;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.GREEN;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.ORANGE;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.PURPLE;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.RED;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.YELLOW;
 import static org.testng.Assert.assertEquals;
 
 public class SimonScreamsTest {
@@ -29,18 +30,16 @@ public class SimonScreamsTest {
     @DataProvider
     public Object[][] initializeMethodExceptionProvider() {
         testReset();
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter fillSerial = () -> Widget.setSerialCode(MORE_LETTERS);
         return new Object[][]{
-                {empty, new Screams[]{RED, YELLOW, ORANGE, GREEN, PURPLE, BLUE}}, //No Serial Code
-                {fillSerial, new Screams[]{RED, YELLOW, ORANGE, GREEN, PURPLE}}, //Only 5 elements
-                {empty, new Screams[]{RED, YELLOW, ORANGE, GREEN, PURPLE, GREEN}} //GREEN is repeated
+                {EMPTY_SETTER, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE, BLUE}}, //No Serial Code
+                {fillSerial, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE}}, //Only 5 elements
+                {EMPTY_SETTER, new ScreamColor[]{RED, YELLOW, ORANGE, GREEN, PURPLE, GREEN}} //GREEN is repeated
         };
     }
 
     @Test(dataProvider = "initializeMethodExceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void initMethodExceptionTest(ConditionSetter setter, Screams[] arr) {
+    public void initMethodExceptionTest(ConditionSetter setter, ScreamColor[] arr) {
         setter.setCondition();
 
         SimonScreams.initialize(arr);
@@ -58,15 +57,15 @@ public class SimonScreamsTest {
         testReset();
         setUpOne();
         return new Object[][]{
-                {new Screams[]{BLUE, ORANGE, BLUE}, "Purple,Green"}, //Primary Rule
-                {new Screams[]{BLUE, ORANGE, BLUE, GREEN}, "Yellow,Blue"}, //Primary Rule
-                {new Screams[]{BLUE, ORANGE, BLUE, GREEN, RED}, "Red,Orange"} //Otherwise Rule
+                {new ScreamColor[]{BLUE, ORANGE, BLUE}, "Purple,Green"}, //Primary Rule
+                {new ScreamColor[]{BLUE, ORANGE, BLUE, GREEN}, "Yellow,Blue"}, //Primary Rule
+                {new ScreamColor[]{BLUE, ORANGE, BLUE, GREEN, RED}, "Red,Orange"} //Otherwise Rule
         };
     }
 
 
     @Test(dataProvider = "trainingVideoTestProviderOne")
-    public void trainingVideoTestOne(Screams[] flashOrder, String expected) {
+    public void trainingVideoTestOne(ScreamColor[] flashOrder, String expected) {
         assertEquals(SimonScreams.nextSolve(flashOrder), expected);
     }
 
@@ -81,7 +80,7 @@ public class SimonScreamsTest {
         Widget.setPortValue(Port.RJ45, 1);
         Widget.setPortValue(Port.DVI, 1);
         Widget.setPortValue(Port.PS2, 1);
-        SimonScreams.initialize(new Screams[]{PURPLE, ORANGE, RED, GREEN, BLUE, YELLOW});
+        SimonScreams.initialize(new ScreamColor[]{PURPLE, ORANGE, RED, GREEN, BLUE, YELLOW});
     }
 
     @DataProvider
@@ -89,14 +88,14 @@ public class SimonScreamsTest {
         testReset();
         setUpTwo();
         return new Object[][]{
-                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE}, "Blue,Purple"}, //One Two One Rule
-                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN}, "Blue,Purple"}, //One Two One Rule
-                {new Screams[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN, BLUE, ORANGE}, "Green,Orange"}//One Two One Rule
+                {new ScreamColor[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE}, "Blue,Purple"}, //One Two One Rule
+                {new ScreamColor[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN}, "Blue,Purple"}, //One Two One Rule
+                {new ScreamColor[]{BLUE, ORANGE, PURPLE, ORANGE, BLUE, GREEN, BLUE, ORANGE}, "Green,Orange"}//One Two One Rule
         };
     }
 
     @Test(dataProvider = "trainingVideoTestProviderTwo")
-    public void trainingVideoTestTwo(Screams[] flashOrder, String expected) {
+    public void trainingVideoTestTwo(ScreamColor[] flashOrder, String expected) {
         assertEquals(SimonScreams.nextSolve(flashOrder), expected);
     }
 
@@ -107,7 +106,7 @@ public class SimonScreamsTest {
         Widget.setIndicator(TrinarySwitch.OFF, Indicator.TRN);
         Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
         Widget.setSerialCode("kn8rx2");
-        SimonScreams.initialize(new Screams[]{YELLOW, BLUE, GREEN, RED, PURPLE, ORANGE});
+        SimonScreams.initialize(new ScreamColor[]{YELLOW, BLUE, GREEN, RED, PURPLE, ORANGE});
     }
 
     @AfterClass

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 @SuppressWarnings("MagicConstant")
 public class Regex implements Iterable<String> {
@@ -55,9 +56,7 @@ public class Regex implements Iterable<String> {
     }
 
     public void loadCollection(Collection<String> textCollections) {
-        StringBuilder sb = new StringBuilder();
-        textCollections.forEach(text -> sb.append(text).append(" "));
-        loadText(sb.toString());
+        loadText(String.join(" ", textCollections));
     }
 
     public boolean hasMatch() {
@@ -82,7 +81,7 @@ public class Regex implements Iterable<String> {
 
     public List<String> findAllMatches() {
         reset();
-        ArrayList<String> output = new ArrayList<>();
+        List<String> output = new ArrayList<>();
         while (textMatcher.find()) {
             output.add(textMatcher.group());
         }
@@ -95,11 +94,7 @@ public class Regex implements Iterable<String> {
 
     public String createFilteredString() {
         reset();
-        StringBuilder result = new StringBuilder();
-        for (String sample : findAllMatches()) {
-            result.append(sample);
-        }
-        return result.toString();
+        return String.join("", findAllMatches());
     }
 
     public int flags() {
@@ -113,6 +108,10 @@ public class Regex implements Iterable<String> {
     @Override
     public String toString() {
         return "Regex: " + regPattern.pattern();
+    }
+
+    public Stream<String> stream() {
+        return findAllMatches().stream();
     }
 
     @Override

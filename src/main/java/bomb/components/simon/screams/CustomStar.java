@@ -1,7 +1,7 @@
 package bomb.components.simon.screams;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.s.simon.SimonColors.Screams;
+import bomb.modules.s.simon.SimonColors.ScreamColor;
 import bomb.tools.event.HoverHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,13 +41,13 @@ public class CustomStar extends Pane implements Resettable {
         }
     }
 
-    public Screams[] collectOrder(){
-        return new Screams[]{first.exportColor(), second.exportColor(), third.exportColor(),
+    public ScreamColor[] collectOrder(){
+        return new ScreamColor[]{first.exportColor(), second.exportColor(), third.exportColor(),
                 forth.exportColor(), fifth.exportColor(), sixth.exportColor()};
     }
 
     public boolean confirmDifferentColors(){
-        Set<Screams> check = new HashSet<>(Arrays.asList(collectOrder()));
+        Set<ScreamColor> check = new HashSet<>(Arrays.asList(collectOrder()));
         return check.size() == 6 && !check.contains(null);
     }
 
@@ -70,8 +70,8 @@ public class CustomStar extends Pane implements Resettable {
         sixth.reset();
     }
 
-    public Screams[] collectFlashOrder(){
-        Screams[] output = new Screams[clicks.size()];
+    public ScreamColor[] collectFlashOrder(){
+        ScreamColor[] output = new ScreamColor[clicks.size()];
         for (int i = 0; i < clicks.size(); i++){
             output[i] = clicks.get(i).exportColor();
         }

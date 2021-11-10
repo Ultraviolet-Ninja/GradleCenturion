@@ -16,6 +16,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.components.microcontroller to javafx.fxml;
     exports bomb.components.simon.screams to javafx.fxml;
     exports bomb.components.simon.states to javafx.fxml;
+    exports bomb.enumerations to javafx.fxml;
     exports bomb.modules.ab.alphabet to javafx.fxml;
     exports bomb.modules.ab.astrology to javafx.fxml;
     exports bomb.modules.ab.bitwise to javafx.fxml;
@@ -49,6 +50,12 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.t.bulb to javafx.fxml;
     exports bomb.modules.t.three_d_maze to javafx.fxml;
     exports bomb.modules.t.translated to javafx.fxml;
+    exports bomb.modules.t.translated.solutions to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.button to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.gas to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.morse to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.password to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.wof to javafx.fxml;
     exports bomb.modules.t.two_bit to javafx.fxml;
     exports bomb.modules.wz.zoo to javafx.fxml;
     exports bomb.tools.note to javafx.fxml;
@@ -92,7 +99,14 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.t.bulb;
     opens bomb.modules.t.three_d_maze;
     opens bomb.modules.t.translated;
+    opens bomb.modules.t.translated.solutions;
+    opens bomb.modules.t.translated.solutions.button;
+    opens bomb.modules.t.translated.solutions.morse;
+    opens bomb.modules.t.translated.solutions.password;
+    opens bomb.modules.t.translated.solutions.gas;
+    opens bomb.modules.t.translated.solutions.wof;
     opens bomb.modules.t.two_bit;
     opens bomb.modules.wz.zoo;
     opens bomb.tools.note;
+
 }

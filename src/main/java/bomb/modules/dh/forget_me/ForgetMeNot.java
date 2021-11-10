@@ -58,7 +58,7 @@ public class ForgetMeNot extends Widget {
     }
 
     private static int createSecondNumber(int stageNumber) {
-        if (portExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
+        if (doesPortExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
         return stageNumber + FINAL_CODE.get(0) +
@@ -80,17 +80,18 @@ public class ForgetMeNot extends Widget {
 
     private static boolean bothPreviousNumbersAreEven() {
         int length = FINAL_CODE.size();
-        return FINAL_CODE.get(length - 1) % 2 == 0 && FINAL_CODE.get(length - 2) % 2 == 0;
+        int firstPrevious = FINAL_CODE.get(length - 1);
+        int secondPrevious = FINAL_CODE.get(length - 2);
+        return  firstPrevious% 2 == 0 && secondPrevious % 2 == 0;
     }
 
     private static int smallestOddDigitInSerialCode() {
-        int compare = 10;
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        for (String num : singleNumberRegex) {
-            if (Integer.parseInt(num) < compare)
-                compare = Integer.parseInt(num);
-        }
-        return (compare % 2 == 1) ? compare : 9;
+        return singleNumberRegex.stream()
+                .mapToInt(Integer::parseInt)
+                .filter(num -> num % 2 == 1)
+                .min()
+                .orElse(9);
     }
 
     public static void updateLargestValueInSerial() {
@@ -101,7 +102,8 @@ public class ForgetMeNot extends Widget {
         }
 
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        if (!singleNumberRegex.findAllMatches().isEmpty()) {
+
+        if (singleNumberRegex.hasMatch()) {
             for (String num : singleNumberRegex) {
                 if (Integer.parseInt(num) > largestSerialCodeNumber)
                     largestSerialCodeNumber = Byte.parseByte(num);
@@ -110,9 +112,9 @@ public class ForgetMeNot extends Widget {
     }
 
     public static void undoLastStage() {
-        if (FINAL_CODE.size() != 0) {
-            FINAL_CODE.remove(FINAL_CODE.size() - 1);
-        }
+        int size = FINAL_CODE.size();
+        if (size != 0)
+            FINAL_CODE.remove(size - 1);
     }
 
     public static String stringifyFinalCode() {

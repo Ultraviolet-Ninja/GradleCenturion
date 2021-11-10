@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
+import static bomb.modules.np.neutralization.Neutralization.OUTPUT_SEPARATOR;
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
 
@@ -44,7 +45,7 @@ public class NeutralizationController implements Resettable {
     private void titrate() {
         //TODO - For GUI Overhaul, TextFields get cyan text with black background
         try {
-            String[] answers = Neutralization.titrate((int) volume, solutionColor).split("-");
+            String[] answers = Neutralization.titrate((int) volume, solutionColor).split(OUTPUT_SEPARATOR);
             chemName.setText(answers[0]);
             chemForm.setText(answers[1]);
             dropCount.setText(answers[2]);

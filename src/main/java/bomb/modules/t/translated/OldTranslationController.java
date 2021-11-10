@@ -1,7 +1,6 @@
 package bomb.modules.t.translated;
 
 import bomb.abstractions.Resettable;
-import bomb.enumerations.TheButton;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -16,14 +15,14 @@ import java.io.IOException;
 
 import static bomb.tools.filter.Mechanics.ultimateFilter;
 
-public class TranslationController implements Resettable {
+public class OldTranslationController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",
             BLUE_STYLE = "-fx-text-fill: #3043AC",
             WHITE_STYLE = "-fx-text-fill: #FFF9ED; -fx-background-color: black";
 
     private boolean firstTime = true;
     private Label current = new Label();
-    private TheButton[] traits = new TheButton[2];
+    private ButtonProperties[] traits = new ButtonProperties[2];
 
     @FXML
     private ImageView brazil, czech, danish, dutch, english, esperanto, estonian,
@@ -142,7 +141,7 @@ public class TranslationController implements Resettable {
     }
 
     private void clearButtons() {
-        traits = new TheButton[2];
+        traits = new ButtonProperties[2];
         FacadeFX.setToggleButtonsUnselected(red, white, blue, yellow, abort, press, detonate, hold);
     }
 
@@ -150,23 +149,23 @@ public class TranslationController implements Resettable {
     @FXML
     private void scanButtons() {
         if (blue.isSelected()) {
-            traits[0] = TheButton.BLUE;
+            traits[0] = ButtonProperties.BLUE;
         } else if (red.isSelected()) {
-            traits[0] = TheButton.RED;
+            traits[0] = ButtonProperties.RED;
         } else if (yellow.isSelected()) {
-            traits[0] = TheButton.YELLOW;
+            traits[0] = ButtonProperties.YELLOW;
         } else if (white.isSelected()) {
-            traits[0] = TheButton.WHITE;
+            traits[0] = ButtonProperties.WHITE;
         }
 
         if (abort.isSelected()) {
-            traits[1] = TheButton.ABORT;
+            traits[1] = ButtonProperties.ABORT;
         } else if (press.isSelected()) {
-            traits[1] = TheButton.PRESS;
+            traits[1] = ButtonProperties.PRESS;
         } else if (detonate.isSelected()) {
-            traits[1] = TheButton.DETONATE;
+            traits[1] = ButtonProperties.DETONATE;
         } else if (hold.isSelected()) {
-            traits[1] = TheButton.HOLD;
+            traits[1] = ButtonProperties.HOLD;
         }
 
         if (traits[0] != null && traits[1] != null) {

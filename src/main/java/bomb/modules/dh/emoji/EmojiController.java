@@ -1,8 +1,8 @@
 package bomb.modules.dh.emoji;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.event.HoverHandler;
+import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
@@ -13,8 +13,9 @@ import java.util.function.Consumer;
 
 import static bomb.modules.dh.emoji.EmojiControllerState.END;
 import static bomb.modules.dh.emoji.EmojiControllerState.FIRST_EMOJI_PRESS;
-import static bomb.modules.dh.emoji.EmojiControllerState.RESET;
 import static bomb.modules.dh.emoji.EmojiControllerState.MATH_SYMBOL_PRESS;
+import static bomb.modules.dh.emoji.EmojiControllerState.RESET;
+import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
 public class EmojiController implements Resettable {
     private final StringBuilder internalEquation;
@@ -44,7 +45,8 @@ public class EmojiController implements Resettable {
 
     private Consumer<ActionEvent> createEmojiButtonAction() {
         return event -> {
-            Emojis current = Emojis.getEmojiFromText(((MFXButton) event.getSource()).getText());
+            String emojiText = BUTTON_NAME_FROM_EVENT.apply(event);
+            Emojis current = Emojis.getEmojiFromText(emojiText);
             internalEquation.append(Objects.requireNonNull(current).getLabel());
             exportToUI();
             handleState();
@@ -54,7 +56,7 @@ public class EmojiController implements Resettable {
     private Consumer<ActionEvent> createMathButtonAction() {
         return event -> {
             if (currentState != MATH_SYMBOL_PRESS) currentState = MATH_SYMBOL_PRESS;
-            String symbol = ((MFXButton) event.getSource()).getText();
+            String symbol = BUTTON_NAME_FROM_EVENT.apply(event);
             internalEquation.append(symbol);
             exportToUI();
             handleState();

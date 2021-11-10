@@ -11,7 +11,7 @@ import javafx.scene.control.ToggleGroup;
 import java.util.Arrays;
 
 public class AstrologyController implements Resettable {
-    private final AstroSymbol[] astroSymbolBuffer;
+    private final AstrologySymbol[] astrologySymbolBuffer;
 
     @FXML
     private MFXButton resetButton;
@@ -23,25 +23,25 @@ public class AstrologyController implements Resettable {
     private ToggleGroup elementGroup, celestialGroup, zodiacGroup;
 
     public AstrologyController() {
-        astroSymbolBuffer = new AstroSymbol[3];
+        astrologySymbolBuffer = new AstrologySymbol[3];
     }
 
     @FXML
     private void determineElement() {
         enableResetButton();
-        setBufferLocation(elementGroup, AstroSymbol.getElementalSymbols(), Astrology.ELEMENT_INDEX);
+        setBufferLocation(elementGroup, AstrologySymbol.getElementalSymbols(), Astrology.ELEMENT_INDEX);
     }
 
     @FXML
     private void determineCelestial() {
         enableResetButton();
-        setBufferLocation(celestialGroup, AstroSymbol.getCelestialSymbols(), Astrology.CELESTIAL_INDEX);
+        setBufferLocation(celestialGroup, AstrologySymbol.getCelestialSymbols(), Astrology.CELESTIAL_INDEX);
     }
 
     @FXML
     private void determineZodiac() {
         enableResetButton();
-        setBufferLocation(zodiacGroup, AstroSymbol.getZodiacSymbols(), Astrology.ZODIAC_INDEX);
+        setBufferLocation(zodiacGroup, AstrologySymbol.getZodiacSymbols(), Astrology.ZODIAC_INDEX);
     }
 
     private void enableResetButton() {
@@ -49,9 +49,9 @@ public class AstrologyController implements Resettable {
             FacadeFX.enable(resetButton);
     }
 
-    private void setBufferLocation(ToggleGroup currentGroup, AstroSymbol[] searchArray, int index) {
+    private void setBufferLocation(ToggleGroup currentGroup, AstrologySymbol[] searchArray, int index) {
         if (currentGroup.getSelectedToggle() == null) {
-            astroSymbolBuffer[index] = null;
+            astrologySymbolBuffer[index] = null;
             disableResetButton();
             return;
         }
@@ -59,30 +59,28 @@ public class AstrologyController implements Resettable {
         String toggleName = FacadeFX.getToggleName(currentGroup).toUpperCase();
         for (int i = 0; i < searchArray.length; i++) {
             if (toggleName.equals(searchArray[i].name())) {
-                astroSymbolBuffer[index] = searchArray[i];
+                astrologySymbolBuffer[index] = searchArray[i];
                 i = searchArray.length;
             }
         }
 
-        if (astroSymbolBuffer[Astrology.ELEMENT_INDEX] != null &&
-                astroSymbolBuffer[Astrology.CELESTIAL_INDEX] != null &&
-                astroSymbolBuffer[Astrology.ZODIAC_INDEX] != null)
+        if (astrologySymbolBuffer[Astrology.ELEMENT_INDEX] != null &&
+                astrologySymbolBuffer[Astrology.CELESTIAL_INDEX] != null &&
+                astrologySymbolBuffer[Astrology.ZODIAC_INDEX] != null)
             processBuffer();
     }
 
     private void disableResetButton() {
         resetButton.setDisable(
-                astroSymbolBuffer[Astrology.ELEMENT_INDEX] == null &&
-                        astroSymbolBuffer[Astrology.CELESTIAL_INDEX] == null &&
-                        astroSymbolBuffer[Astrology.ZODIAC_INDEX] == null
+                astrologySymbolBuffer[Astrology.ELEMENT_INDEX] == null &&
+                        astrologySymbolBuffer[Astrology.CELESTIAL_INDEX] == null &&
+                        astrologySymbolBuffer[Astrology.ZODIAC_INDEX] == null
         );
     }
 
     private void processBuffer() {
         try {
-            omenTextField.setText(Astrology.calculate(
-                    astroSymbolBuffer[0], astroSymbolBuffer[1], astroSymbolBuffer[2])
-            );
+            omenTextField.setText(Astrology.calculate(astrologySymbolBuffer));
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
@@ -90,7 +88,7 @@ public class AstrologyController implements Resettable {
 
     @FXML
     private void resetModule() {
-        Arrays.fill(astroSymbolBuffer, null);
+        Arrays.fill(astrologySymbolBuffer, null);
         FacadeFX.disable(resetButton);
         FacadeFX.clearText(omenTextField);
         FacadeFX.resetToggleGroup(elementGroup);

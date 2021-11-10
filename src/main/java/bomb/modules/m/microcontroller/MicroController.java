@@ -18,7 +18,7 @@ public class MicroController extends Widget {
         validateInput(moduleSerialNumbers, controller);
         if (containsRequiredNumbers(moduleSerialNumbers))
             return controller.traversePins(0);
-        else if (hasLitIndicator(Indicator.SIG) || portExists(Port.RJ45))
+        else if (hasLitIndicator(Indicator.SIG) || doesPortExists(Port.RJ45))
             return controller.traversePins(1);
         else if (ultimateFilter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
             return controller.traversePins(2);

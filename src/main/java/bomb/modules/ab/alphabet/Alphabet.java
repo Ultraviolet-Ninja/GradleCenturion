@@ -11,8 +11,9 @@ import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * This class deals with the Alphabet module. The module comprises a 2x2 square containing 4 tiles
- * with letters on them. The order in which they're pressed is based on the given sets if the letters appear
- * in those 4 tiles. But if no set matches the 4 tiles, they are to be pressed in alphabetical order.
+ * with letters on them. The order in which they're pressed is based on the given sets in the {@link #WORD_BANK}
+ * if the letters appear in those 4 tiles.
+ * But if no set matches the 4 tiles, the tiles are to be pressed in alphabetical order.
  */
 public class Alphabet extends Widget {
     private static final String[] WORD_BANK = {"JQXZ", "QEW", "AC", "ZNY", "TJL",

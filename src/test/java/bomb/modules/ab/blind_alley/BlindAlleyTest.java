@@ -2,7 +2,7 @@ package bomb.modules.ab.blind_alley;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
+import bomb.BombSimulations;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -66,9 +66,9 @@ public class BlindAlleyTest {
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter partOne = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter partTwo = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter partThree = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter partOne = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter partTwo = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter partThree = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
                 {partOne, new int[][]{{0, 0, 0}, {0, 0, 0}, {1, 2, 0}}}, {partTwo, new int[][]{{1, 1, 0}, {1, 0, 2}, {1, 2, 1}}},
                 {partThree, new int[][]{{1, 0, 0}, {0, 1, 0}, {0, 2, 2}}}

@@ -17,13 +17,14 @@ import java.util.Objects;
 
 public class ColoredSwitchGraphFactory {
     private static final byte OUTGOING_STATE = 1, COLOR_CONDITIONS = 2, SWITCH_TO_FLIP = 3;
+    private static final String FILENAME = "graph.csv";
 
     private final List<ColoredSwitchNode> nodeList;
 
     public ColoredSwitchGraphFactory() throws IOException, CsvValidationException {
         nodeList = new ArrayList<>();
         CSVReader csvReader = createReader();
-        Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])\\]");
+        Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])]");
 
         String[] nextRecord;
         while ((nextRecord = csvReader.readNext()) != null) {
@@ -33,7 +34,7 @@ public class ColoredSwitchGraphFactory {
     }
 
     private CSVReader createReader() {
-        InputStream in = ColoredSwitchGraphFactory.class.getResourceAsStream("graph.csv");
+        InputStream in = ColoredSwitchGraphFactory.class.getResourceAsStream(FILENAME);
         Reader reader = new InputStreamReader(Objects.requireNonNull(in));
         return new CSVReader(reader);
     }
@@ -67,19 +68,15 @@ public class ColoredSwitchGraphFactory {
 
     public Graph<ColoredSwitchNode, DefaultEdge> constructGraph() {
         Graph<ColoredSwitchNode, DefaultEdge> output = new SimpleDirectedGraph<>(DefaultEdge.class);
-        int i = 0;
 
-        while (i < nodeList.size()) {
-            output.addVertex(nodeList.get(i));
-            i++;
+        for (ColoredSwitchNode node : nodeList) {
+            output.addVertex(node);
         }
-        i = 0;
 
-        while (i < nodeList.size()) {
-            for (byte connection : nodeList.get(i).getOutgoingConnections()) {
-                output.addEdge(nodeList.get(i), nodeList.get(connection));
+        for (ColoredSwitchNode node : nodeList) {
+            for (byte connection : node.getOutgoingConnections()) {
+                output.addEdge(node, nodeList.get(connection));
             }
-            i++;
         }
 
         return output;

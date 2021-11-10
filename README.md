@@ -50,8 +50,8 @@ Widgets are important details about the bomb such that many modules depend on wh
 not. The list of details includes Port Types, Number of Port Plates, Lit and Unlit Indicators, Number of Batteries,
 Number of Battery Holders, Two-Factor Authentication, and the Serial Code.
 ![WidgetOne](markdown/Widget1.jpg)
-One D Battery in one holder and a lit NSA indicator
+**One D Battery** in **one holder** and a **lit NSA indicator**
 
 ![WidgetTwo](markdown/Widget2.jpg)
-One port plate with a PS/2 port, another D battery in one holder and a serial code "PN4XC5".<br>
-Overall, this edgework would be given as "1 PS2 port in 1 plate, a lit NSA, 2 in 2 (2 batteries in 2 holders), and serial is Papa November 4 X-ray Charlie 5" (Using the Nato Phonetic Alphabet)
+**One port plate** with a **PS/2 port**, another **D battery in one holder** and a serial code **"PN4XC5"**.<br>
+Overall, this edgework would be given as "1 PS2 port in 1 plate, a lit November SA, 2 in 2 (2 batteries in 2 holders), and serial is Papa November 4 X-ray Charlie 5" (Using the Nato Phonetic Alphabet)

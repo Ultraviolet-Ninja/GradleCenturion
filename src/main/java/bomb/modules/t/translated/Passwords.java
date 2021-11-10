@@ -19,7 +19,7 @@ public class Passwords extends TranslationCenter {
      * solve() solves the password module from gathering the letters of any column and
      * compares the possible passwords to find ones that are possible based on the given combinations.
      *
-     * @param a - The letters of each column set. This can range from 1 - 5 sets of letters
+     * @param a - The letters of each column set. This can range from 1 to 5 sets of letters
      * @return - The possible passwords
      */
     public static String solve(String... a) {

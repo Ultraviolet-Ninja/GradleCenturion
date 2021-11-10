@@ -8,22 +8,28 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 
 import java.util.function.Consumer;
 
-public class BitwiseController implements Resettable {
-    @FXML private MFXButton bitAnd, bitOr, bitXor, bitNot;
+import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
-    @FXML private MFXTextField byteTextField;
+public class BitwiseController implements Resettable {
+    @FXML
+    private MFXButton andButton, orButton, xorButton, notButton;
+
+    @FXML
+    private MFXTextField byteTextField;
 
     public void initialize() {
-        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initAction()), bitAnd, bitNot, bitXor, bitOr);
+        FacadeFX.bindHandlerToButtons(new HoverHandler<>(createButtonAction()),
+                andButton, notButton, xorButton, orButton);
     }
 
-    private Consumer<ActionEvent> initAction() {
+    private Consumer<ActionEvent> createButtonAction() {
         return event -> {
-            BitwiseOperator source = BitwiseOperator.valueOf(((Button) event.getSource()).getText().toUpperCase());
+            String buttonText = BUTTON_NAME_FROM_EVENT.apply(event);
+            BitwiseOperator source = BitwiseOperator.valueOf(buttonText.toUpperCase());
+
             try {
                 byteTextField.setText(Bitwise.getByte(source));
             } catch (IllegalArgumentException illegal) {

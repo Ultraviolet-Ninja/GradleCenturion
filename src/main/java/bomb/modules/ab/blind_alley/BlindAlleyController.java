@@ -6,10 +6,14 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class BlindAlleyController implements Resettable {
-    @FXML private Label maxAlley;
+import java.util.Arrays;
 
-    @FXML private JFXTextField topLeft, topMid, midLeft, trueMid, midRight, bottomLeft, bottomMid, bottomRight;
+public class BlindAlleyController implements Resettable {
+    @FXML
+    private Label maxAlley;
+
+    @FXML
+    private JFXTextField topLeft, topMid, midLeft, trueMid, midRight, bottomLeft, bottomMid, bottomRight;
 
     public void liveUpdate() {
         int[][] buffer = BlindAlley.getAlleyCat();
@@ -22,7 +26,7 @@ public class BlindAlleyController implements Resettable {
         bottomLeft.setText(String.valueOf(buffer[2][0]));
         bottomMid.setText(String.valueOf(buffer[2][1]));
         bottomRight.setText(String.valueOf(buffer[2][2]));
-        writeMax(buffer);
+        writeMaxNumber(buffer);
     }
 
     private void stylerSet(int[][] array) {
@@ -46,12 +50,11 @@ public class BlindAlleyController implements Resettable {
         };
     }
 
-    private void writeMax(int[][] array) {
-        int max = 0;
-        for (int[] col : array) {
-            for (int num : col)
-                if (num > max) max = num;
-        }
+    private void writeMaxNumber(int[][] array) {
+        int max = Arrays.stream(array)
+                .flatMapToInt(Arrays::stream)
+                .max()
+                .orElse(0);
 
         maxAlley.setText("All with " + max);
     }

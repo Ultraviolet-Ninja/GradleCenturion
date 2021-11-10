@@ -11,16 +11,16 @@ import static bomb.tools.filter.Filter.ultimateFilter;
 
 /**
  * This class deals with the Bitwise Operators module. Bitwise Ops is a screen containing a simple 8-bit
- * number line with a specific boolean operator that the defuser reads to the expert. The class evaluates
+ * number line with a specific boolean operator that the Defuser reads to the expert. The class evaluates
  * which bits will be 1 or 0 in the byte line.
  */
 public class Bitwise extends Widget {
 
     /**
-     * Turns the edgework conditions into a byte that the defuser will input into the bomb module
+     * Turns the edgework conditions into a byte that the Defuser will input into the bomb module
      *
      * @param bit The operation that must be used on each pair of bits
-     * @return The String of 1's and 0's that the defuser must put into the module screen
+     * @return The String of 1's and 0's that the Defuser must put into the module screen
      * @throws IllegalArgumentException - The serial code, number of timer minutes and modules
      *                                  are needed for this module to work
      */
@@ -74,7 +74,7 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] secondBits() {
-        return new boolean[]{hasMorePortsThan(Port.PARALLEL, 0), getTotalPorts() > 2};
+        return new boolean[]{hasMorePortsThanSpecified(Port.PARALLEL, 0), calculateTotalPorts() > 2};
     }
 
     private static boolean[] thirdBits() {
@@ -103,6 +103,6 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] eighthBits() {
-        return new boolean[]{getTotalPorts() < 4, getAllBatteries() > 1};
+        return new boolean[]{calculateTotalPorts() < 4, getAllBatteries() > 1};
     }
 }
