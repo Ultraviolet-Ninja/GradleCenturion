@@ -5,7 +5,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 
 import java.util.ArrayList;
 import java.util.List;

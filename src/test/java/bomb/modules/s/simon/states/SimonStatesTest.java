@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import java.util.EnumSet;
 import java.util.List;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.modules.s.simon.SimonColors.StateColor.BLUE;
 import static bomb.modules.s.simon.SimonColors.StateColor.GREEN;
 import static bomb.modules.s.simon.SimonColors.StateColor.RED;
@@ -40,7 +40,7 @@ public class SimonStatesTest {
     }
 
     @Test(dataProvider = "calculateNextColorPressExceptionTestProvider",
-            expectedExceptions = {IllegalArgumentException.class, NullPointerException.class})
+            expectedExceptions = IllegalArgumentException.class)
     public void calculateNextColorPressExceptionTest(ConditionSetter setter, EnumSet<StateColor> colorsFlashed) {
         setter.setCondition();
 

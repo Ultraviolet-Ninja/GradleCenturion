@@ -1,7 +1,7 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 
 public abstract class AbstractHexagon {
     protected HexagonDataStructure hexagon;

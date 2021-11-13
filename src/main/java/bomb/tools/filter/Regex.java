@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 @SuppressWarnings("MagicConstant")
 public class Regex implements Iterable<String> {
+    public static final Function<String, Regex> CREATE_INSENSITIVE_SET =
+            input -> new Regex("[" + input + "]", Pattern.CASE_INSENSITIVE),
+            CREATE_NEGATED_SET = input -> new Regex("[^" + input + "]");
+
     private static final int MAX_FLAG_SIZE = 0x1ff;
 
     private final Pattern regPattern;

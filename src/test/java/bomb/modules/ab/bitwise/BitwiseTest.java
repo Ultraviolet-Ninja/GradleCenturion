@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.enumerations.Port.PARALLEL;
 import static bomb.tools.logic.LogicOperator.AND;
 import static bomb.tools.logic.LogicOperator.NOT;

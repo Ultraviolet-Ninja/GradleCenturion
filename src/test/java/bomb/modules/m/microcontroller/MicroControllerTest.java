@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.MAGENTA;

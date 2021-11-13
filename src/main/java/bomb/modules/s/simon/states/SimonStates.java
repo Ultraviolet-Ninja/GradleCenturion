@@ -106,7 +106,7 @@ public class SimonStates extends Widget {
                     getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getLowestPriorityOrder()) :
                     PRESSED_COLOR_HISTORY.get(0);
 
-            case 3 -> historyContainsAny(colorsFlashed) ?
+            case 3 -> historyContainsAnyFlashed(colorsFlashed) ?
                     getFirstInOrder(//Get the highest priority that has flash and not been pressed
                             FLASHED.and((set, color) -> !PRESSED_COLOR_HISTORY.contains(color)),
                             colorsFlashed,
@@ -117,7 +117,7 @@ public class SimonStates extends Widget {
         };
     }
 
-    private static boolean historyContainsAny(EnumSet<StateColor> colorsFlashed) {
+    private static boolean historyContainsAnyFlashed(EnumSet<StateColor> colorsFlashed) {
         return colorsFlashed.stream()
                 .map(PRESSED_COLOR_HISTORY::contains)
                 .reduce((boolOne, boolTwo) -> boolOne || boolTwo)
@@ -185,10 +185,9 @@ public class SimonStates extends Widget {
     }
 
     private static void validate(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
-        Objects.requireNonNull(colorsFlashed);
         if (dominantColorIndex == -1)
             throw new IllegalArgumentException("Priority has not been set");
-        if (colorsFlashed.isEmpty())
+        if (colorsFlashed == null || colorsFlashed.isEmpty())
             throw new IllegalArgumentException("Empty set is not allowed");
     }
 

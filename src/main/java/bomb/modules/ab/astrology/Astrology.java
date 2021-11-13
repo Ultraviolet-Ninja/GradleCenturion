@@ -5,7 +5,6 @@ import bomb.tools.filter.Regex;
 
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.regex.Pattern;
 
 import static bomb.modules.ab.astrology.AstrologySymbol.ARIES;
 import static bomb.modules.ab.astrology.AstrologySymbol.PISCES;
@@ -13,6 +12,7 @@ import static bomb.modules.ab.astrology.AstrologySymbol.PLUTO;
 import static bomb.modules.ab.astrology.AstrologySymbol.SUN;
 import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.Regex.CREATE_INSENSITIVE_SET;
 
 /**
  * This class deals with the Astrology module. This module displays three different astrological symbols
@@ -82,7 +82,8 @@ public class Astrology extends Widget {
             throws IllegalArgumentException {
         String letters = ultimateFilter(serialCode, CHAR_FILTER);
         for (AstrologySymbol symbol : symbols) {
-            Regex checker = new Regex("[" + letters + "]", symbol.name(), Pattern.CASE_INSENSITIVE);
+            Regex checker = CREATE_INSENSITIVE_SET.apply(letters);
+            checker.loadText(symbol.name());
 
             if (!checker.hasMatch()) initialVal--;
             else initialVal++;
