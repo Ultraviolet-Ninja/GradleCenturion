@@ -1,34 +1,134 @@
 package bomb.tools.data.structures.trie;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Trie {
-    public static class TrieNode {
-        private char c;
-        private Map<Character, TrieNode> children = new HashMap<>();
-        private boolean isLeaf;
+    private final TrieNode root;
 
-        public TrieNode() {}
+    public Trie() {
+        root = new TrieNode();
+    }
 
-        public TrieNode(char c){
-            this.c = c;
+    public void addWord(String word) {
+        addWord(word.toLowerCase(), 0, root);
+    }
+
+    private void addWord(String word, int index, TrieNode currentNode) {
+        if (index == word.length()) {
+            currentNode.setEndOfWord(true);
+            return;
+        }
+        char nextChar = word.charAt(index);
+
+        if (currentNode.doesNotContainChild(nextChar))
+            currentNode.addConnection(nextChar);
+
+        addWord(word, index + 1, currentNode.getNextNode(nextChar));
+    }
+
+    public Set<String> getWordsWithPrefix(String prefix) {
+        List<String> words = new ArrayList<>();
+        StringBuilder builder = new StringBuilder();
+        TrieNode currentNode = root;
+
+        if (!prefix.isEmpty()) {
+            for (char nextChar : prefix.toLowerCase().toCharArray()) {
+                if (currentNode.doesNotContainChild(nextChar))
+                    return null;
+
+                currentNode = currentNode.getNextNode(nextChar);
+                builder.append(nextChar);
+                addIfIsWord(words, builder, currentNode);
+            }
         }
 
-        public Map<Character, TrieNode> getChildren() {
-            return children;
+        if (!currentNode.hasNoChild())
+            words.addAll(getWordsWithPrefix(currentNode, builder));
+
+        return new TreeSet<>(words);
+    }
+
+    private List<String> getWordsWithPrefix(TrieNode currentNode, StringBuilder builder) {
+        List<String> words = new ArrayList<>();
+
+        if (currentNode.hasNoChild())
+            return words;
+
+        if (currentNode.getChildCount() == 1) {
+            Character nextChar = currentNode.firstChild();
+            currentNode = currentNode.getNextNode(nextChar);
+            builder.append(nextChar);
+
+            addIfIsWord(words, builder, currentNode);
+            words.addAll(getWordsWithPrefix(currentNode, builder));
+            return words;
         }
 
-        public void setChildren(HashMap<Character, TrieNode> children) {
-            this.children = children;
+        for (Character nextChar : currentNode.getChildSet()) {
+            StringBuilder clonedBuilder = new StringBuilder(builder).append(nextChar);
+            TrieNode nextNode = currentNode.getNextNode(nextChar);
+
+            addIfIsWord(words, clonedBuilder, nextNode);
+            words.addAll(getWordsWithPrefix(nextNode, clonedBuilder));
         }
 
-        public boolean isLeaf() {
-            return isLeaf;
+        return words;
+    }
+
+    private void addIfIsWord(List<String> words, StringBuilder builder, TrieNode currentNode) {
+        if (currentNode.isEndOfWord)
+            words.add(builder.toString());
+    }
+
+    @Override
+    public String toString() {
+        return getWordsWithPrefix("").toString();
+    }
+
+    private static class TrieNode {
+        private final Map<Character, TrieNode> children;
+        private boolean isEndOfWord;
+
+        public TrieNode() {
+            children = new HashMap<>();
+            isEndOfWord = false;
         }
 
-        public void setLeaf(boolean isLeaf) {
-            this.isLeaf = isLeaf;
+        public Set<Character> getChildSet() {
+            return children.keySet();
+        }
+
+        public void addConnection(char c) {
+            children.put(c, new TrieNode());
+        }
+
+        public TrieNode getNextNode(char c) {
+            return children.get(c);
+        }
+
+        public boolean doesNotContainChild(char c) {
+            return !children.containsKey(c);
+        }
+
+        public int getChildCount() {
+            return children.size();
+        }
+
+        public boolean hasNoChild() {
+            return children.isEmpty();
+        }
+
+        public Character firstChild() {
+            return children.keySet().iterator().next();
+        }
+
+        public void setEndOfWord(boolean isEndOfWord) {
+            this.isEndOfWord = isEndOfWord;
         }
     }
 }
