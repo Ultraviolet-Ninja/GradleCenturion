@@ -85,6 +85,19 @@ public class Trie {
             words.add(builder.toString());
     }
 
+    public boolean search(String word) {
+        if (word == null || word.isEmpty())
+            return false;
+
+        TrieNode currentNode = root;
+        for (char letter : word.toCharArray()) {
+            currentNode = currentNode.getNextNode(letter);
+            if (currentNode == null)
+                return false;
+        }
+        return currentNode.isEndOfWord;
+    }
+
     @Override
     public String toString() {
         return getWordsWithPrefix("").toString();
