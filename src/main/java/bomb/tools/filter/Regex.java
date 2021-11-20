@@ -102,8 +102,13 @@ public class Regex implements Iterable<String> {
         return String.join("", findAllMatches());
     }
 
-    public int flags() {
-        return regPattern.flags();
+    public boolean collectionMatches(Collection<String> c) {
+        String pattern = regPattern.pattern();
+
+        return c.stream()
+                .map(phrase -> phrase.matches(pattern))
+                .reduce((b1, b2) -> b1 || b2)
+                .orElse(false);
     }
 
     public void reset() {

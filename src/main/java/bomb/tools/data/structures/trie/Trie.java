@@ -2,10 +2,10 @@ package bomb.tools.data.structures.trie;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeSet;
 
 public class Trie {
     private final TrieNode root;
@@ -14,11 +14,11 @@ public class Trie {
         root = new TrieNode();
     }
 
-    public void addWord(String word) {
+    public void addWord(final String word) {
         addWord(word.toLowerCase(), 0, root);
     }
 
-    private void addWord(String word, int index, TrieNode currentNode) {
+    private void addWord(final String word, int index, TrieNode currentNode) {
         if (index == word.length()) {
             currentNode.setEndOfWord(true);
             return;
@@ -50,7 +50,7 @@ public class Trie {
         if (!currentNode.hasNoChild())
             words.addAll(getWordsWithPrefix(currentNode, builder));
 
-        return new TreeSet<>(words);
+        return new LinkedHashSet<>(words);
     }
 
     private List<String> getWordsWithPrefix(TrieNode currentNode, StringBuilder builder) {
