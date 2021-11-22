@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
 
 public class Ocean {
     public static final int BOARD_LENGTH = 5;
@@ -71,37 +72,35 @@ public class Ocean {
     }
 
     @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Tile[] column : gameBoard) {
-            builder.append(stream(column)
-                            .map(Enum::name)
-                            .collect(Collectors.joining(", "))
-            );
-            builder.append("\n");
-        }
-        return builder.toString();
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (o == this)
             return true;
         if (!(o instanceof Ocean))
             return false;
 
-        Ocean other = (Ocean) o;
-        for (int x = 0; x < BOARD_LENGTH; x++) {
-            for (int y = 0; y < BOARD_LENGTH; y++) {
-                if (gameBoard[x][y] != other.gameBoard[x][y])
-                    return false;
-            }
-        }
-        return true;
+        List<Tile> currentBoard = createBoardList(gameBoard);
+        List<Tile> otherBoard = createBoardList(((Ocean) o).gameBoard);
+
+        return currentBoard.equals(otherBoard);
+    }
+
+    private List<Tile> createBoardList(Tile[][] board) {
+        return Arrays.stream(board)
+                .flatMap(Arrays::stream)
+                .collect(Collectors.toList());
     }
 
     @Override
     public int hashCode() {
         return Arrays.deepHashCode(gameBoard);
+    }
+
+    @Override
+    public String toString() {
+        return stream(gameBoard)
+                .map(Arrays::toString)
+                .map(line -> line.replaceAll("[\\[\\]]", ""))
+                .map(line -> line.replaceAll(", ", "\t"))
+                .collect(joining("\n"));
     }
 }
