@@ -54,6 +54,5 @@ public enum LogicOperator implements BooleanOperation {
         public boolean test(boolean bitOne, boolean bitTwo) {
             return !(!bitOne && bitTwo);
         }
-    };
-
+    }
 }
