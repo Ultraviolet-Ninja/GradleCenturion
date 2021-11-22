@@ -3,7 +3,7 @@ package bomb.modules.ab.battleship;
 import static java.util.Arrays.stream;
 
 public enum Ship {
-    BATTLESHIP(4), DESTROYER(3), CRUISER(2), U_BOAT(1);
+    BATTLESHIP(4), CRUISER(3), DESTROYER(2), SUBMARINE(1);
 
     /** Minimum number of ships on a given board */
     private static final int MINIMUM_NUMBER_OF_SHIPS = 4;
@@ -44,5 +44,13 @@ public enum Ship {
     public static void clearAllQuantities() {
         for (Ship ship : values())
             ship.setCurrentQuantity((byte) 0);
+    }
+
+    public static Ship getCurrentLargestShip() {
+        for (Ship ship : values()) {
+            if (ship.currentQuantity > 0)
+                return ship;
+        }
+        return null;
     }
 }
