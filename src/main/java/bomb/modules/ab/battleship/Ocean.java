@@ -38,27 +38,33 @@ public class Ocean {
         return gameBoard[x][y];
     }
 
-    public List<Tile> getRow(int row) {
-        return Arrays.asList(gameBoard[row]);
+    public List<Tile> getRow(int column) {
+        return Arrays.asList(gameBoard[column]);
     }
 
-    public List<Tile> getColumn(int column) {
+    public List<Tile> getColumn(int row) {
         List<Tile> result = new ArrayList<>(BOARD_LENGTH);
-        for (Tile[] row : gameBoard) {
-            result.add(row[column]);
+        for (Tile[] tileRow : gameBoard) {
+            result.add(tileRow[row]);
         }
         return result;
     }
 
     public void removeRadarSpots(Tile[] tiles) {
         int counter = 0;
-        for (int x = 0; x < gameBoard.length; x++) {
-            for (int y = 0; y < gameBoard.length; y++) {
+        for (int x = 0; x < BOARD_LENGTH; x++) {
+            for (int y = 0; y < BOARD_LENGTH; y++) {
                 if (gameBoard[x][y] == Tile.RADAR) {
                     gameBoard[x][y] = tiles[counter++];
                 }
             }
         }
+    }
+
+    public boolean hasUnknownTile() {
+        return stream(gameBoard)
+                .flatMap(Arrays::stream)
+                .anyMatch(tile -> tile == Tile.UNKNOWN);
     }
 
     public int[] countByTile() {
@@ -85,7 +91,7 @@ public class Ocean {
     }
 
     private List<Tile> createBoardList(Tile[][] board) {
-        return Arrays.stream(board)
+        return stream(board)
                 .flatMap(Arrays::stream)
                 .collect(Collectors.toList());
     }
