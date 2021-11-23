@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
@@ -25,7 +26,7 @@ public class Ocean {
     private void initializeBoard() {
         for (int i = 0; i < BOARD_LENGTH; i++) {
             for (int j = 0; j < BOARD_LENGTH; j++) {
-                gameBoard[i][j] = Tile.UNKNOWN;
+                gameBoard[i][j] = UNKNOWN;
             }
         }
     }
@@ -50,6 +51,20 @@ public class Ocean {
         return result;
     }
 
+    public void fillColumnsWithTile(int row, Tile tile) {
+        for (int i = 0; i < BOARD_LENGTH; i++) {
+            if (gameBoard[i][row] == UNKNOWN)
+                gameBoard[i][row] = tile;
+        }
+    }
+
+    public void fillRowsWithTile(int column, Tile tile) {
+        for (int i = 0; i < BOARD_LENGTH; i++) {
+            if (gameBoard[column][i] == UNKNOWN)
+                gameBoard[column][i] = tile;
+        }
+    }
+
     public void removeRadarSpots(Tile[] tiles) {
         int counter = 0;
         for (int x = 0; x < BOARD_LENGTH; x++) {
@@ -64,7 +79,7 @@ public class Ocean {
     public boolean hasUnknownTile() {
         return stream(gameBoard)
                 .flatMap(Arrays::stream)
-                .anyMatch(tile -> tile == Tile.UNKNOWN);
+                .anyMatch(tile -> tile == UNKNOWN);
     }
 
     public int[] countByTile() {

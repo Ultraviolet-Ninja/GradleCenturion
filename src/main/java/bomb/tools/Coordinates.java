@@ -45,7 +45,7 @@ public class Coordinates extends EquatableObject implements Comparable<Coordinat
 
     @Override
     public String toString() {
-        return "(" + x + "," + y + ")";
+        return String.format("(%d,%d)", x, y);
     }
 
     @SuppressWarnings("NullableProblems")

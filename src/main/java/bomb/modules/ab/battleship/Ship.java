@@ -1,5 +1,8 @@
 package bomb.modules.ab.battleship;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.util.Arrays.stream;
 
 public enum Ship {
@@ -29,6 +32,11 @@ public enum Ship {
         return currentQuantity;
     }
 
+    public void decrementQuantity() {
+        if (currentQuantity == 0) return;
+        currentQuantity--;
+    }
+
     public static int getNumberOfShipSpaces() {
         return stream(values())
                 .mapToInt(ship -> ship.shipSize * ship.currentQuantity)
@@ -52,5 +60,14 @@ public enum Ship {
                 return ship;
         }
         return null;
+    }
+
+    public static List<Ship> getAllShips() {
+        List<Ship> shipList = new ArrayList<>();
+        for (Ship ship : values()) {
+            for (int i = 0; i < ship.shipSize; i++)
+                shipList.add(ship);
+        }
+        return shipList;
     }
 }
