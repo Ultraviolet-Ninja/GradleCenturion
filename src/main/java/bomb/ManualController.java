@@ -35,10 +35,11 @@ import static bomb.tools.filter.Mechanics.NORMAL_CHAR_REGEX;
 import static bomb.tools.filter.Mechanics.ultimateFilter;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
+import static java.util.stream.Collectors.toList;
 
 public class ManualController {
-    private Map<String, Region> regionMap;
-    private List<Node> allRadioButtons;
+    private final Map<String, Region> regionMap;
+    private final List<Node> allRadioButtons;
 
     @FXML private GridPane base;
 
@@ -50,8 +51,13 @@ public class ManualController {
 
     @FXML private VBox menuVBox, radioButtonHouse;
 
+    public ManualController() {
+        regionMap = new HashMap<>();
+        allRadioButtons = new ArrayList<>();
+    }
+
     public void initialize() {
-        allRadioButtons = new ArrayList<>(radioButtonHouse.getChildren());
+        allRadioButtons.addAll(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
         setupMap();
@@ -82,12 +88,14 @@ public class ManualController {
 
         Regex searchPattern = new Regex(searchTerm, Pattern.CASE_INSENSITIVE);
 
-        for (Node radioButton : allRadioButtons) {
-            searchPattern.loadText(((RadioButton) radioButton).getText());
-
-            if (searchPattern.hasMatch())
-                radioButtonHouse.getChildren().add(radioButton);
-        }
+        List<Node> resultingButtons = allRadioButtons.stream()
+                .filter(radioButton -> {
+                    String name = ((RadioButton) radioButton).getText();
+                    searchPattern.loadText(name);
+                    return searchPattern.hasMatch();
+                })
+                .collect(toList());
+        radioButtonHouse.getChildren().addAll(resultingButtons);
     }
 
     private void setupMap() throws IllegalArgumentException {
@@ -105,16 +113,11 @@ public class ManualController {
     }
 
     private List<String> formatWords(List<Toggle> nameList) {
-        List<String> list = new ArrayList<>();
-        List<Toggle> temp = new ArrayList<>(nameList);
-
-        for (Toggle name : temp){
-            String line = ((ToggleButton)name).getText().replace(" ", "_")
-                    .replace("-", "_");
-            list.add(ultimateFilter(line, NORMAL_CHAR_REGEX, "_"));
-        }
-
-        return list;
+        return nameList.parallelStream()
+                .map(toggle -> ((ToggleButton)toggle).getText())
+                .map(name -> name.replaceAll("[ -]", "_"))
+                .map(name -> ultimateFilter(name, NORMAL_CHAR_REGEX, "_"))
+                .collect(toList());
     }
 
     private List<Region> createRegionList(List<String> fileLocations) {
@@ -156,16 +159,17 @@ public class ManualController {
     }
 
     private List<String> filterPathNames(List<String> originalLocations){
-        List<String> outputList = new ArrayList<>();
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);
-        for (String result : filenamePattern) outputList.add(result.substring(0, result.length() - 1));
-        return outputList;
+        return filenamePattern.stream()
+                .parallel()
+                .map(line -> line.replace(".", ""))
+                .collect(toList());
     }
 
     private void setPairs(List<Toggle> toggleList, List<String> toggleListFormatted,
                           List<Region> paneList, List<String> paneLocationsFormatted){
-        regionMap = new HashMap<>();
+        regionMap.clear();
         for (int i = 0; i < toggleList.size(); i++){
             String keyText = ((ToggleButton)toggleList.get(i)).getText();
             Region valuePane = paneList.get(paneLocationsFormatted.indexOf(toggleListFormatted.get(i)));
