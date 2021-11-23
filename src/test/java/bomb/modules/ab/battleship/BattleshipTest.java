@@ -164,7 +164,7 @@ public class BattleshipTest {
         };
     }
 
-    @Test(enabled = true, dataProvider = "videoOceanSolverTestProvider")
+    @Test(enabled = false, dataProvider = "videoOceanSolverTestProvider")
     public void videoOceanSolverTest(Tile[] confirmedRadarSpots, int[] rowCounters,
                                      int[] columnCounters, int[] shipQuantities, Tile[][] expected) {
         setVideoEdgework();
