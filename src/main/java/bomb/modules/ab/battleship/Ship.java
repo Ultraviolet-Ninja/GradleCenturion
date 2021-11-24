@@ -14,14 +14,24 @@ public enum Ship {
     private final byte shipSize;
 
     private byte currentQuantity;
+    private byte foundShips;
 
     Ship(int shipSize) {
         this.shipSize = (byte) shipSize;
         this.currentQuantity = 0;
+        this.foundShips = 0;
     }
 
     public int getShipSize() {
         return shipSize;
+    }
+
+    public int getFoundShips() {
+        return foundShips;
+    }
+
+    public void setFoundShips(int foundShips) {
+        this.foundShips = (byte) foundShips;
     }
 
     public void setCurrentQuantity(byte currentQuantity) {
@@ -30,11 +40,6 @@ public enum Ship {
 
     public int getCurrentQuantity() {
         return currentQuantity;
-    }
-
-    public void decrementQuantity() {
-        if (currentQuantity == 0) return;
-        currentQuantity--;
     }
 
     public static int getNumberOfShipSpaces() {
@@ -60,14 +65,5 @@ public enum Ship {
                 return ship;
         }
         return null;
-    }
-
-    public static List<Ship> getAllShips() {
-        List<Ship> shipList = new ArrayList<>();
-        for (Ship ship : values()) {
-            for (int i = 0; i < ship.shipSize; i++)
-                shipList.add(ship);
-        }
-        return shipList;
     }
 }

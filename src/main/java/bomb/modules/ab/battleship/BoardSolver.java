@@ -84,21 +84,17 @@ public class BoardSolver {
                 int newColumn = column + i;
                 int newRow = row + j;
 
-                if (isInRange(newColumn, newRow))
+                if (Ocean.isInBoardRange(newColumn, newRow))
                     ocean.setTileState(newColumn, newRow, CLEAR);
             }
         }
-    }
-
-    private static boolean isInRange(int x, int y) {
-        return x >= 0 && x < BOARD_LENGTH &&
-                y >= 0 && y < BOARD_LENGTH;
     }
 
     private static void findLargestShip(Ocean ocean, int[] rowCounters, int[] columnCounters) {
         Ship ship = Ship.getCurrentLargestShip();
         if (ship == null)
             return;
+
 
     }
 

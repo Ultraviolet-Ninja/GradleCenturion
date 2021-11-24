@@ -124,4 +124,9 @@ public class Ocean {
                 .map(line -> line.replaceAll(", ", "\t"))
                 .collect(joining("\n"));
     }
+
+    public static boolean isInBoardRange(int x, int y) {
+        return x >= 0 && x < BOARD_LENGTH &&
+                y >= 0 && y < BOARD_LENGTH;
+    }
 }
