@@ -35,7 +35,8 @@ public class BattleshipTest {
 
     @DataProvider
     public Object[][] confirmRadarSpotsExceptionTestProvider() {
-        ConditionSetter empty = () -> {};
+        ConditionSetter empty = () -> {
+        };
         ConditionSetter setSerialCode = () -> Widget.setSerialCode("e60xa6");
 
         return new Object[][]{
@@ -53,7 +54,9 @@ public class BattleshipTest {
         Battleship.confirmRadarSpots(inputTiles);
     }
 
-    /** Impractical set up one data provider for all 6 six branches */
+    /**
+     * Impractical set up one data provider for all 6 six branches
+     */
 
     @Test(expectedExceptions = IllegalArgumentException.class,
             expectedExceptionsMessageRegExp = "Please use the Radar first")
@@ -91,7 +94,7 @@ public class BattleshipTest {
     @DataProvider
     public Object[][] solveOceanFourthBranchExceptionTestProvider() {
         return new Object[][]{
-                {new int[] {1,2,3,0,3}, new Tile[]{CLEAR, CLEAR, SHIP}}
+                {new int[]{1, 2, 3, 0, 3}, new Tile[]{CLEAR, CLEAR, SHIP}}
         };
     }
 
@@ -111,7 +114,7 @@ public class BattleshipTest {
     @DataProvider
     public Object[][] solveOceanFifthBranchExceptionTestProvider() {
         return new Object[][]{
-                {new int[] {1,2,3,0,3}, new int[] {3,1,2,1,3}, new int[]{1,1,1,1}, new Tile[]{CLEAR, CLEAR, SHIP}}
+                {new int[]{1, 2, 3, 0, 3}, new int[]{3, 1, 2, 1, 3}, new int[]{1, 1, 1, 1}, new Tile[]{CLEAR, CLEAR, SHIP}}
         };
     }
 
@@ -151,8 +154,8 @@ public class BattleshipTest {
     public Object[][] videoOceanSolverTestProvider() {
         return new Object[][]{
                 {
-                    new Tile[]{CLEAR, CLEAR, SHIP}, new int[]{1,2,3,0,4}, new int[]{3,1,2,1,3},
-                        new int[]{1,1,1,1},
+                        new Tile[]{CLEAR, CLEAR, SHIP}, new int[]{1, 2, 3, 0, 4}, new int[]{3, 1, 2, 1, 3},
+                        new int[]{1, 1, 1, 1},
                         new Tile[][]{
                                 {CLEAR, CLEAR, CLEAR, CLEAR, SHIP},
                                 {SHIP, CLEAR, CLEAR, CLEAR, SHIP},
@@ -199,7 +202,7 @@ public class BattleshipTest {
 
     private static void setShipQuantities(int[] shipQuantities) {
         Ship[] ships = Ship.values();
-        for (int i = 0; i< shipQuantities.length; i++) {
+        for (int i = 0; i < shipQuantities.length; i++) {
             ships[i].setCurrentQuantity((byte) shipQuantities[i]);
         }
     }

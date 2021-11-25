@@ -1,8 +1,5 @@
 package bomb.modules.ab.battleship;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static java.util.Arrays.stream;
 
 public enum Ship {
