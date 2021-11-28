@@ -154,14 +154,14 @@ public class BattleshipTest {
     public Object[][] videoOceanSolverTestProvider() {
         return new Object[][]{
                 {
-                        new Tile[]{CLEAR, CLEAR, SHIP}, new int[]{1, 2, 3, 0, 4}, new int[]{3, 1, 2, 1, 3},
-                        new int[]{1, 1, 1, 1},
+                        new Tile[]{CLEAR, CLEAR, SHIP}, new int[]{1, 2, 3, 0, 4},
+                        new int[]{3, 1, 2, 1, 3}, new int[]{1, 1, 1, 1},
                         new Tile[][]{
-                                {CLEAR, CLEAR, CLEAR, CLEAR, SHIP},
-                                {SHIP, CLEAR, CLEAR, CLEAR, SHIP},
-                                {SHIP, CLEAR, SHIP, CLEAR, SHIP},
-                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
-                                {SHIP, SHIP, SHIP, SHIP, CLEAR}
+                                {CLEAR, CLEAR,  CLEAR,  CLEAR,  SHIP},
+                                {SHIP,  CLEAR,  CLEAR,  CLEAR,  SHIP},
+                                {SHIP,  CLEAR,  SHIP,   CLEAR,  SHIP},
+                                {CLEAR, CLEAR,  CLEAR,  CLEAR,  CLEAR},
+                                {SHIP,  SHIP,   SHIP,   SHIP,   CLEAR}
                         }
                 }
         };
