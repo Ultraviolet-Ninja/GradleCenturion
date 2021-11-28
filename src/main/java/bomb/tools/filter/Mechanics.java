@@ -1,7 +1,13 @@
 package bomb.tools.filter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.function.BiFunction;
+
+import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
 
 public class Mechanics {
     public static final String[]
@@ -18,34 +24,28 @@ public class Mechanics {
                     "u", "û", "ü", "ŭ", "v", "w", "x", "y", "z", "ź", "ż", "ß",
                     "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
+    private static final BiFunction<String, Set<String>, String> FILTER_LETTERS =
+        (input, passableLetters) ->
+                stream(input.toLowerCase().split(""))
+                .filter(passableLetters::contains)
+                .collect(joining(""));
+
     public static String ultimateFilter(String input, String... exceptions) {
-        StringBuilder builder = new StringBuilder();
-        for (char in : input.toLowerCase().toCharArray()) {
-            for (String exception : exceptions) {
-                if (exception.indexOf(in) != -1)
-                    builder.append(in);
-            }
-        }
-        return builder.toString();
+        Set<String> passableLetters = new TreeSet<>(asList(exceptions));
+
+        return FILTER_LETTERS.apply(input, passableLetters);
     }
 
     public static String ultimateFilter(String input, String[] regex, String... exceptions) {
-        StringBuilder builder = new StringBuilder();
-        ArrayList<String> combine = combine(regex, exceptions);
-        input = input.toLowerCase();
-        for (char next : input.toCharArray()) {
-            for (String exception : combine) {
-                if (exception.indexOf(next) != -1)
-                    builder.append(exception);
-            }
-        }
-        return builder.toString();
+        Set<String> passableLetters = new TreeSet<>(combine(regex, exceptions));
+
+        return FILTER_LETTERS.apply(input, passableLetters);
     }
 
     private static ArrayList<String> combine(String[] a, String[] b) {
         ArrayList<String> out = new ArrayList<>();
-        out.addAll(Arrays.asList(a));
-        out.addAll(Arrays.asList(b));
+        out.addAll(asList(a));
+        out.addAll(asList(b));
         return out;
     }
 }
