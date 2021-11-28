@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 
 import static bomb.modules.np.neutralization.Neutralization.OUTPUT_SEPARATOR;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
-import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 
 public class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;
@@ -63,7 +63,7 @@ public class NeutralizationController implements Resettable {
 
     @FXML
     private void volume() {
-        String sample = ultimateFilter(acidVolume.getText(), NUMBER_PATTERN);
+        String sample = filter(acidVolume.getText(), NUMBER_PATTERN);
         if (!sample.isEmpty()) {
             volume = Double.parseDouble(sample);
             testTube.setProgress(volume / MAX_VOLUME);

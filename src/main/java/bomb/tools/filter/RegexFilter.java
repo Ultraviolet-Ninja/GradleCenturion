@@ -14,7 +14,7 @@ public class RegexFilter {
             CHAR_FILTER = new Regex("[a-zæąåàêęèéîïôöóøœûüŭ]+?", Pattern.CASE_INSENSITIVE),
             ALL_CHAR_FILTER = new Regex("[a-z0-9æąåàêęèéîïôöóøœûüŭ]+?", Pattern.CASE_INSENSITIVE);
 
-    public static String ultimateFilter(String input, Regex pattern) {
+    public static String filter(String input, Regex pattern) {
         pattern.loadText(input);
         return pattern.createFilteredString();
     }

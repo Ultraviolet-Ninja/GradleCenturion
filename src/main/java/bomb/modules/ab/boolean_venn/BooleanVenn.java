@@ -6,7 +6,7 @@ import bomb.tools.logic.LogicOperator;
 
 import static bomb.tools.filter.RegexFilter.LOGIC_REGEX;
 import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.logic.LogicOperator.AND;
 import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
 import static bomb.tools.logic.LogicOperator.IMPLIES;
@@ -62,8 +62,8 @@ public class BooleanVenn extends Widget {
      * @throws IllegalArgumentException Format mismatch for the input equation
      */
     private static boolean checkFormat(String equation) throws IllegalArgumentException {
-        String abPriority = ultimateFilter(equation, AB_PRIORITY);
-        String bcPriority = ultimateFilter(equation, BC_PRIORITY);
+        String abPriority = filter(equation, AB_PRIORITY);
+        String bcPriority = filter(equation, BC_PRIORITY);
 
         if (XNOR.test(abPriority.isEmpty(), bcPriority.isEmpty()))
             throw new IllegalArgumentException("Format mismatch!!");
@@ -78,7 +78,7 @@ public class BooleanVenn extends Widget {
      * The output order is not, c, b, a, bc, ac, ab, all
      */
     private static String interpretAB(String operation) {
-        String logicSymbols = ultimateFilter(operation, LOGIC_SYMBOL_FILTER);
+        String logicSymbols = filter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
         boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0, 1), A + B);
 
@@ -95,7 +95,7 @@ public class BooleanVenn extends Widget {
      * The output order is not, c, b, a, bc, ac, ab, all
      */
     private static String interpretBC(String operation) {
-        String logicSymbols = ultimateFilter(operation, LOGIC_SYMBOL_FILTER);
+        String logicSymbols = filter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
         boolean[] priorityCases = priorityOutputs(logicSymbols.substring(1), B + C);
 

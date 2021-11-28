@@ -23,6 +23,11 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,8 +36,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static bomb.tools.filter.StreamFilter.NORMAL_CHAR_REGEX;
-import static bomb.tools.filter.StreamFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.ALL_CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 import static java.util.stream.Collectors.toList;
@@ -56,7 +61,7 @@ public class ManualController {
         allRadioButtons = new ArrayList<>();
     }
 
-    public void initialize() {
+    public void initialize() throws URISyntaxException {
         allRadioButtons.addAll(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
@@ -98,8 +103,9 @@ public class ManualController {
         radioButtonHouse.getChildren().addAll(resultingButtons);
     }
 
-    private void setupMap() throws IllegalArgumentException {
-        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
+    private void setupMap() throws IllegalArgumentException, URISyntaxException {
+        URI path = Objects.requireNonNull(ManualController.class.getResource("fxml")).toURI();
+
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
         List<String> filePathList = getFilesFromDirectory(new File(path));
 
@@ -113,30 +119,70 @@ public class ManualController {
     }
 
     private List<String> formatWords(List<Toggle> nameList) {
-        return nameList.parallelStream()
+        String newRegex = ALL_CHAR_FILTER.getOriginalPattern()
+                .replace("]", "_]");
+        Regex regex = new Regex(newRegex);
+
+        return nameList.stream()
                 .map(toggle -> ((ToggleButton)toggle).getText())
                 .map(name -> name.replaceAll("[ -]", "_"))
-                .map(name -> ultimateFilter(name, NORMAL_CHAR_REGEX, "_"))
+                .map(String::toLowerCase)
+                .map(name -> filter(name, regex))
                 .collect(toList());
     }
 
     private List<Region> createRegionList(List<String> fileLocations) {
         List<Region> paneList = new ArrayList<>();
         ResetObserver resetObserver = new ResetObserver();
-        try {
-            for (String singleLocation : fileLocations) {
-                FXMLLoader loader = new FXMLLoader(Paths.get(singleLocation).toUri().toURL());
-                paneList.add(loader.load());
-                if (!singleLocation.contains("widget")) resetObserver.addController(loader);
+//        try {
+//            for (String singleLocation : fileLocations) {
+//                FXMLLoader loader = new FXMLLoader(Paths.get(singleLocation).toUri().toURL());
+//                paneList.add(loader.load());
+//                if (!singleLocation.contains("widget")) resetObserver.addController(loader);
+//
+//                if (singleLocation.contains("souvenir")) extractSouvenirController(loader);
+//                else if (singleLocation.contains("blind_alley")) extractBlindAlleyController(loader);
+//            }
+//        } catch (IOException e){
+//            e.printStackTrace();
+//        }
 
-                if (singleLocation.contains("souvenir")) extractSouvenirController(loader);
-                else if (singleLocation.contains("blind_alley")) extractBlindAlleyController(loader);
-            }
-            ObserverHub.addObserver(resetObserver);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
+        paneList = fileLocations.stream()
+                .parallel()
+                .map(Paths::get)
+                .map(Path::toUri)
+                .map(this::toURL)
+                .map(FXMLLoader::new)
+                .map(loader -> createRegion(loader, resetObserver))
+                .collect(toList());
+
+        ObserverHub.addObserver(resetObserver);
         return paneList;
+    }
+
+    private URL toURL(URI uri) throws IllegalArgumentException {
+        try {
+            return uri.toURL();
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    private Region createRegion(FXMLLoader loader, ResetObserver resetObserver) {
+        String location = loader.getLocation().toString();
+        try {
+            Region output = loader.load();
+
+            if (!location.contains("widget")) resetObserver.addController(loader);
+
+            if (location.contains("souvenir")) extractSouvenirController(loader);
+            else if (location.contains("blind_alley")) extractBlindAlleyController(loader);
+            return output;
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+        return null;
     }
 
     private void extractBlindAlleyController(FXMLLoader loader){
@@ -162,7 +208,6 @@ public class ManualController {
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);
         return filenamePattern.stream()
-                .parallel()
                 .map(line -> line.replace(".", ""))
                 .collect(toList());
     }

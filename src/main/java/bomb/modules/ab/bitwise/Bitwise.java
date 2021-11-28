@@ -8,7 +8,7 @@ import bomb.tools.logic.LogicOperator;
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
-import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 
 /**
  * This class deals with the Bitwise Operators module. Bitwise Ops is a screen containing a simple 8-bit
@@ -78,7 +78,7 @@ public class Bitwise extends Widget {
     private static boolean[] sixthBits() throws IllegalArgumentException {
         if (serialCode.isEmpty())
             throw new IllegalArgumentException("You need the serial code to solve Bitwise Ops!");
-        String nums = ultimateFilter(serialCode, NUMBER_PATTERN);
+        String nums = filter(serialCode, NUMBER_PATTERN);
         return new boolean[]{numModules % 3 == 0, nums.charAt(nums.length() - 1) % 2 == 1};
     }
 

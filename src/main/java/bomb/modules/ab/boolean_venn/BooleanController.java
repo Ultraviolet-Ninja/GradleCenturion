@@ -13,7 +13,7 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 
 public class BooleanController implements Resettable {
     private static final String PRESS_COLOR, DO_NOT_PRESS_COLOR, DEFAULT_TEXT;
@@ -109,7 +109,7 @@ public class BooleanController implements Resettable {
     }
 
     private void solveEquation() {
-        if (ultimateFilter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2) {
+        if (filter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2) {
             String code = BooleanVenn.resultCode(currentOperation.toString());
             setCircleFill(new Circle[]{not, c, b, a, bc, ac, ab, all}, code.toCharArray());
             FacadeFX.disableMultiple(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,

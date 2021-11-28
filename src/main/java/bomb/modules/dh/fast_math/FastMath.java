@@ -6,7 +6,7 @@ import bomb.tools.filter.Regex;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
-import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 
 public class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID = new int[][]{
@@ -54,7 +54,7 @@ public class FastMath extends Widget {
         int output = hasLitIndicator(MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
         output += doesPortExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
         //If the serial number has the letters F A S T
-        output -= !ultimateFilter(serialCode, new Regex("[fast]")).isEmpty() ? 5 : 0;
+        output -= !filter(serialCode, new Regex("[fast]")).isEmpty() ? 5 : 0;
         output += doesPortExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
         output -= getAllBatteries() > 3 ? 15 : 0; //If the bomb has more than 3 batteries
         return output;

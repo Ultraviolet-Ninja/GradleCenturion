@@ -8,7 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static bomb.tools.filter.Regex.CREATE_NEGATED_SET;
-import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 
 /**
  * This class deals with the Alphabet module. The module comprises a 2x2 square containing 4 tiles
@@ -34,7 +34,7 @@ public class Alphabet extends Widget {
         Regex filterRegex = CREATE_NEGATED_SET.apply(input);
 
         for (String letterSet : WORD_BANK) {
-            if (ultimateFilter(letterSet, filterRegex).isEmpty()) {
+            if (filter(letterSet, filterRegex).isEmpty()) {
                 output.append(letterSet);
                 input = input.replaceAll("[" + letterSet + "]", "");
                 if (input.isEmpty())
