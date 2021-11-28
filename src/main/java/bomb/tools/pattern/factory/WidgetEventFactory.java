@@ -1,7 +1,7 @@
 package bomb.tools.pattern.factory;
 
 import bomb.Widget;
-import bomb.tools.filter.Filter;
+import bomb.tools.filter.RegexFilter;
 import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.scene.control.Alert;
@@ -17,8 +17,8 @@ public class WidgetEventFactory {
         };
         return mfxTextField -> {
             String number = mfxTextField.getText();
-            Filter.NUMBER_PATTERN.loadText(number);
-            if (!Filter.NUMBER_PATTERN.matchesRegex()) {
+            RegexFilter.NUMBER_PATTERN.loadText(number);
+            if (!RegexFilter.NUMBER_PATTERN.matchesRegex()) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, "This is not a number");
                 mfxTextField.setText("0");
                 decideSetter.accept(mfxTextField, 0);

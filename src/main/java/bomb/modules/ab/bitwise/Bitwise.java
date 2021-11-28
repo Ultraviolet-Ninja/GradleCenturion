@@ -7,8 +7,8 @@ import bomb.tools.logic.LogicOperator;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 /**
  * This class deals with the Bitwise Operators module. Bitwise Ops is a screen containing a simple 8-bit

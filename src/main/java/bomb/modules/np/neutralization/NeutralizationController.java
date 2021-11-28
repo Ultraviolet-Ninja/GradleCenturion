@@ -12,8 +12,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
 import static bomb.modules.np.neutralization.Neutralization.OUTPUT_SEPARATOR;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 public class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;

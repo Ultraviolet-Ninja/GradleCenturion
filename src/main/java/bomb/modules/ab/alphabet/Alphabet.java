@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static bomb.tools.filter.Filter.ultimateFilter;
 import static bomb.tools.filter.Regex.CREATE_NEGATED_SET;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 /**
  * This class deals with the Alphabet module. The module comprises a 2x2 square containing 4 tiles

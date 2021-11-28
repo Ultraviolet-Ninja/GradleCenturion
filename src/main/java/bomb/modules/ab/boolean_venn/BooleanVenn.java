@@ -4,9 +4,9 @@ import bomb.Widget;
 import bomb.tools.filter.Regex;
 import bomb.tools.logic.LogicOperator;
 
-import static bomb.tools.filter.Filter.LOGIC_REGEX;
-import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.LOGIC_REGEX;
+import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 import static bomb.tools.logic.LogicOperator.AND;
 import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
 import static bomb.tools.logic.LogicOperator.IMPLIES;

@@ -6,7 +6,7 @@ import bomb.tools.filter.Regex;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 public class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID = new int[][]{

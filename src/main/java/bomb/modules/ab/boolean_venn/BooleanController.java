@@ -12,8 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 public class BooleanController implements Resettable {
     private static final String PRESS_COLOR, DO_NOT_PRESS_COLOR, DEFAULT_TEXT;

@@ -1,14 +1,14 @@
 package bomb.modules.t.two_bit;
 
-import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 import bomb.enumerations.Port;
+import bomb.modules.s.souvenir.Souvenir;
 
 import static bomb.modules.t.two_bit.TwoBitState.SECOND_QUERY;
 import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 /**
  *

@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.filter.StreamFilter.ultimateFilter;
 
 public class OldTranslationController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",

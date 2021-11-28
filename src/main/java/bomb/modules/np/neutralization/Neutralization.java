@@ -11,8 +11,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static bomb.Widget.IndicatorFilter.ALL_PRESENT;
-import static bomb.tools.filter.Filter.VOWEL_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;

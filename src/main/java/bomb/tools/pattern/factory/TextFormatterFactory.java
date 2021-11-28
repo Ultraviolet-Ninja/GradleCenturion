@@ -1,6 +1,6 @@
 package bomb.tools.pattern.factory;
 
-import bomb.tools.filter.Filter;
+import bomb.tools.filter.RegexFilter;
 import javafx.scene.control.TextFormatter;
 
 public class TextFormatterFactory {
@@ -20,9 +20,9 @@ public class TextFormatterFactory {
             if (!change.isContentChange()) return change;
 
             String text = change.getControlNewText();
-            Filter.NUMBER_PATTERN.loadText(text);
+            RegexFilter.NUMBER_PATTERN.loadText(text);
             if (text.isEmpty()) return change;
-            return Filter.NUMBER_PATTERN.matchesRegex() ? change : null;
+            return RegexFilter.NUMBER_PATTERN.matchesRegex() ? change : null;
         });
     }
 

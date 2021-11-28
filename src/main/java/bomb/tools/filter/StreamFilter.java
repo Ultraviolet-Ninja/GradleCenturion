@@ -9,7 +9,7 @@ import static java.util.Arrays.asList;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
-public class Mechanics {
+public class StreamFilter {
     public static final String[]
             VOWEL_REGEX = {"a", "æ", "ą", "å", "à", "e", "ê", "ę", "è", "é", "i", "î",
             "ï", "o", "ô", "ö", "ó", "ø", "œ", "u", "û", "ü", "ŭ"},
@@ -26,9 +26,10 @@ public class Mechanics {
 
     private static final BiFunction<String, Set<String>, String> FILTER_LETTERS =
         (input, passableLetters) ->
-                stream(input.split(""))
-                .filter(letter -> passableLetters.contains(letter.toLowerCase()))
-                .collect(joining(""));
+                stream(input.toLowerCase().split(""))
+//                        .parallel()
+                        .filter(passableLetters::contains)
+                        .collect(joining(""));
 
     public static String ultimateFilter(String input, String... exceptions) {
         Set<String> passableLetters = new TreeSet<>(asList(exceptions));

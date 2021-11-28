@@ -31,8 +31,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-import static bomb.tools.filter.Mechanics.NORMAL_CHAR_REGEX;
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.filter.StreamFilter.NORMAL_CHAR_REGEX;
+import static bomb.tools.filter.StreamFilter.ultimateFilter;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 
@@ -109,7 +109,8 @@ public class ManualController {
         List<Toggle> temp = new ArrayList<>(nameList);
 
         for (Toggle name : temp){
-            String line = ((ToggleButton)name).getText().replace(" ", "_")
+            String line = ((ToggleButton)name).getText()
+                    .replace(" ", "_")
                     .replace("-", "_");
             list.add(ultimateFilter(line, NORMAL_CHAR_REGEX, "_"));
         }

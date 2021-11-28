@@ -15,11 +15,11 @@ import java.util.stream.Collectors;
 import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.TrinarySwitch.UNKNOWN;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.SERIAL_CODE_PATTERN;
-import static bomb.tools.filter.Filter.VOWEL_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
+import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 /**
  * Widget class carries all the important widgets of the current bomb.

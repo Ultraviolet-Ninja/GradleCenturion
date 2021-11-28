@@ -2,7 +2,7 @@ package bomb.tools.filter;
 
 import java.util.regex.Pattern;
 
-public class Filter {
+public class RegexFilter {
     public static final String LOGIC_REGEX = "[∧∨↓⊻←→↔|]";
 
     public static final Regex SERIAL_CODE_PATTERN = new Regex("\\b[a-zA-Z0-9]{6}\\b"),

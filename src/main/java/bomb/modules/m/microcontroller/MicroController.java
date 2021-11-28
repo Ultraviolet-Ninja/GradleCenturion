@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 public class MicroController extends Widget {
     private static final String THIRD_CONDITION_REGEX = "[clrx18]";

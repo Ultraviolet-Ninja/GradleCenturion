@@ -3,10 +3,10 @@ package bomb;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
+import bomb.tools.filter.RegexFilter;
+import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.facade.MaterialFacade;
 import bomb.tools.pattern.factory.TextFormatterFactory;
-import bomb.tools.pattern.facade.FacadeFX;
-import bomb.tools.filter.Filter;
 import bomb.tools.pattern.factory.WidgetEventFactory;
 import bomb.tools.pattern.observer.ObserverHub;
 import io.github.palexdev.materialfx.controls.MFXSlider;
@@ -21,8 +21,15 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.function.Consumer;
 
-import static bomb.enumerations.Port.*;
-import static bomb.enumerations.TrinarySwitch.*;
+import static bomb.enumerations.Port.DVI;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.PS2;
+import static bomb.enumerations.Port.RCA;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.enumerations.Port.SERIAL;
+import static bomb.enumerations.TrinarySwitch.OFF;
+import static bomb.enumerations.TrinarySwitch.ON;
+import static bomb.enumerations.TrinarySwitch.UNKNOWN;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT_TOGGLE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOGGLE;
@@ -123,8 +130,8 @@ public class WidgetController {
     @FXML
     private void detectSerialCodeAreaChange() {
         String serialCode = serialCodeField.getText();
-        Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
+        RegexFilter.SERIAL_CODE_PATTERN.loadText(serialCode);
+        if (RegexFilter.SERIAL_CODE_PATTERN.matchesRegex()) {
             Widget.setSerialCode(serialCode);
             FacadeFX.disable(serialCodeField);
         }

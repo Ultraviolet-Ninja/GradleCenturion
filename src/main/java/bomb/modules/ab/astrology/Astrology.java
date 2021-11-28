@@ -10,9 +10,9 @@ import static bomb.modules.ab.astrology.AstrologySymbol.ARIES;
 import static bomb.modules.ab.astrology.AstrologySymbol.PISCES;
 import static bomb.modules.ab.astrology.AstrologySymbol.PLUTO;
 import static bomb.modules.ab.astrology.AstrologySymbol.SUN;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
 import static bomb.tools.filter.Regex.CREATE_INSENSITIVE_SET;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.ultimateFilter;
 
 /**
  * This class deals with the Astrology module. This module displays three different astrological symbols
