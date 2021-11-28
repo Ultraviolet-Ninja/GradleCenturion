@@ -120,9 +120,9 @@ public class ForgetMeNot extends Widget {
     public static String stringifyFinalCode() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= FINAL_CODE.size(); i++) {
-            sb.append(FINAL_CODE.get(i - 1));
-            if (i % 3 == 0 && i != FINAL_CODE.size())
+        for (int i = 0; i < FINAL_CODE.size(); i++) {
+            sb.append(FINAL_CODE.get(i));
+            if (i % 3 == 2)
                 sb.append("-");
         }
         return sb.toString();

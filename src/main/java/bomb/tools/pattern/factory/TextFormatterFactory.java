@@ -3,7 +3,19 @@ package bomb.tools.pattern.factory;
 import bomb.tools.filter.RegexFilter;
 import javafx.scene.control.TextFormatter;
 
+import java.util.function.Function;
+
 public class TextFormatterFactory {
+    private static final Function<String, TextFormatter<String>> REGEX_MATCH_FORMATTER = regex ->
+            new TextFormatter<>(change -> {
+                if (!change.isContentChange()) return change;
+
+                String text = change.getControlNewText();
+                if (text.isEmpty() || text.matches(regex)) return change;
+
+                return null;
+            });
+
     public static TextFormatter<String> createSerialCodeFormatter() {
         return new TextFormatter<>(change -> {
             if (!change.isContentChange()) return change;
@@ -34,49 +46,22 @@ public class TextFormatterFactory {
     }
 
     public static TextFormatter<String> createOneLetterFormatter() {
-        return new TextFormatter<>(change -> {
-            if (!change.isContentChange()) return change;
-
-            String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b[a-zA-Z]\\b")) return change;
-
-            return null;
-        });
+        return REGEX_MATCH_FORMATTER.apply("\\b[a-zA-Z]\\b");
     }
 
     public static TextFormatter<String> createTwoDigitTextFormatter() {
-        return new TextFormatter<>(change -> {
-            if (!change.isContentChange()) return change;
-
-            String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b\\d{1,2}\\b"))
-                return change;
-
-            return null;
-        });
+        return REGEX_MATCH_FORMATTER.apply("\\b\\d{1,2}\\b");
     }
 
     public static TextFormatter<String> createChessNotationTextFormatter() {
-        return new TextFormatter<>(change -> {
-            if (!change.isContentChange()) return change;
-
-            String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b[A-Fa-f]-?[1-6]?"))
-                return change;
-
-            return null;
-        });
+        return REGEX_MATCH_FORMATTER.apply("\\b[A-Fa-f]-?[1-6]?");
     }
 
     public static TextFormatter<String> createSixLetterTextFormatter() {
-        return new TextFormatter<>(change -> {
-            if (!change.isContentChange()) return change;
+        return REGEX_MATCH_FORMATTER.apply("\\b[a-zA-Z]{1,6}\\b");
+    }
 
-            String text = change.getControlNewText();
-            if (text.isEmpty() || text.matches("\\b[a-zA-Z]{1,6}\\b"))
-                return change;
-
-            return null;
-        });
+    public static TextFormatter<String> createBattleshipCounterTextFormatter() {
+        return REGEX_MATCH_FORMATTER.apply("\\b[0-4]\\b");
     }
 }

@@ -15,6 +15,8 @@ import static bomb.tools.filter.RegexFilter.ultimateFilter;
 import static java.util.Arrays.stream;
 
 public class Battleship extends Widget {
+    private static final char CHAR_LETTER_TO_INT = 'a', CHAR_NUMBER_TO_INT = '1';
+
     private static Ocean ocean;
     private static int[] rowCounters, columnCounters;
     private static int numberOfRadarSpots;
@@ -49,30 +51,25 @@ public class Battleship extends Widget {
     }
 
     private static String calculateSingleSerialCodeCoordinates(char letter, char number) {
-        final char charLetterToInt = 'a';
-        final char charNumberToInt = '1';
-
-        int startingRow = (letter - charLetterToInt) % Ocean.BOARD_LENGTH;
-        int startingColumn = (number - charNumberToInt) % Ocean.BOARD_LENGTH;
+        int startingRow = (letter - CHAR_LETTER_TO_INT) % Ocean.BOARD_LENGTH;
+        int startingColumn = (number - CHAR_NUMBER_TO_INT) % Ocean.BOARD_LENGTH;
 
         if (startingColumn < 0)
             startingColumn += Ocean.BOARD_LENGTH;
 
-        setTileAsRadar(startingRow, startingColumn);
-        return offsetChar(charLetterToInt, startingRow) +
-                offsetChar(charNumberToInt, startingColumn);
+        setTileAsRadar(startingColumn, startingRow);
+        return offsetChar(CHAR_LETTER_TO_INT, startingRow) +
+                offsetChar(CHAR_NUMBER_TO_INT, startingColumn);
     }
 
     private static String calculateEdgeworkCoordinates() {
-        final char charLetterToInt = '`';
-        final char charNumberToInt = '1';
+        int startingRow = calculateTotalPorts() % Ocean.BOARD_LENGTH - 1;
+        int startingColumn =
+                (countIndicators(IndicatorFilter.ALL_PRESENT) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
 
-        int startingRow = calculateTotalPorts() % Ocean.BOARD_LENGTH;
-        int startingColumn = (countIndicators(IndicatorFilter.ALL_PRESENT) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
-
-        setTileAsRadar(startingRow, startingColumn);
-        return offsetChar(charLetterToInt, startingRow) +
-                offsetChar(charNumberToInt, startingColumn);
+        setTileAsRadar(startingColumn, startingRow);
+        return offsetChar(CHAR_LETTER_TO_INT, startingRow) +
+                offsetChar(CHAR_NUMBER_TO_INT, startingColumn);
     }
 
     private static void setTileAsRadar(int x, int y) {
@@ -128,8 +125,10 @@ public class Battleship extends Widget {
         int[] counters = ocean.countByTile();
 
         if (counters[UNKNOWN.ordinal()] == Math.pow(Ocean.BOARD_LENGTH, 2)) {
+            //Check if the board is full of UNKNOWN tiles
             errorMessage = "Please use the Radar first";
         } else if (counters[RADAR.ordinal()] > 0) {
+            //Are there any more RADAR tiles
             errorMessage = "Board still contains Radar spots";
         } else if (columnCounters == null || rowCounters == null) {
             errorMessage = "Initial rows and columns need to be set";
@@ -158,6 +157,10 @@ public class Battleship extends Widget {
                 """, columnSpaces, rowSpaces, numberOfShipSpaces);
 
         throw new IllegalArgumentException(errorMessage);
+    }
+
+    public static Ocean getOcean() {
+        return ocean;
     }
 
     public static void reset() {

@@ -6,11 +6,9 @@ import bomb.enumerations.TrinarySwitch;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
@@ -20,6 +18,8 @@ import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
 import static bomb.tools.filter.RegexFilter.ultimateFilter;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -216,11 +216,11 @@ public class Widget {
     }
 
     public static int calculateTotalPorts(){
-        return  Arrays.stream(portArray).sum();
+        return  stream(portArray).sum();
     }
 
     public static int countPortTypes(){
-        return (int) Arrays.stream(portArray)
+        return (int) stream(portArray)
                 .filter(port -> port > 0)
                 .count();
     }
@@ -238,7 +238,7 @@ public class Widget {
 
         List<Indicator> tempList =  allIndicators.stream()
                 .filter(indicator -> filter.test(indicator.getState()))
-                .collect(Collectors.toList());
+                .collect(toList());
 
         return tempList.isEmpty() ?
                 EnumSet.noneOf(Indicator.class) :
