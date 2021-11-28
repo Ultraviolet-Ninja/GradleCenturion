@@ -26,8 +26,8 @@ public class Mechanics {
 
     private static final BiFunction<String, Set<String>, String> FILTER_LETTERS =
         (input, passableLetters) ->
-                stream(input.toLowerCase().split(""))
-                .filter(passableLetters::contains)
+                stream(input.split(""))
+                .filter(letter -> passableLetters.contains(letter.toLowerCase()))
                 .collect(joining(""));
 
     public static String ultimateFilter(String input, String... exceptions) {
