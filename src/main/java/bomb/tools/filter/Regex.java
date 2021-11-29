@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 @SuppressWarnings("MagicConstant")
 public class Regex implements Iterable<String> {
     public static final Function<String, Regex> CREATE_INSENSITIVE_SET =
@@ -64,8 +66,12 @@ public class Regex implements Iterable<String> {
         textMatcher.reset(text);
     }
 
-    public void loadCollection(Collection<String> textCollections) {
-        loadText(String.join(" ", textCollections));
+    public List<String> loadCollection(Collection<String> textCollections) {
+        return textCollections.stream()
+                .map(regPattern::matcher)
+                .map(RESULT_STREAM)
+                .map(stream -> stream.collect(Collectors.joining()))
+                .collect(toList());
     }
 
     public boolean hasMatch() {
@@ -90,7 +96,7 @@ public class Regex implements Iterable<String> {
 
     public List<String> findAllMatches() {
         return RESULT_STREAM.apply(textMatcher)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
     public String getOriginalPattern() {
