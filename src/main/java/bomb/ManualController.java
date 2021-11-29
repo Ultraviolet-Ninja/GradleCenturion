@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
 import java.util.regex.Pattern;
 
 import static bomb.tools.filter.RegexFilter.ALL_CHAR_FILTER;
@@ -112,14 +113,26 @@ public class ManualController {
         URI path = Objects.requireNonNull(ManualController.class.getResource("fxml")).toURI();
 
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
+
+        CompletableFuture<List<String>> filePathFuture = CompletableFuture
+                .supplyAsync(() -> getFilesFromDirectory(new File(path)))
+                .thenApply(list -> {
+                        list.removeIf(location ->
+                                location.contains("solutions") || location.contains("new") || location.contains("old")
+                        );
+                        return list;
+                });
+
+
         List<String> filePathList = getFilesFromDirectory(new File(path));
 
         filePathList.removeIf(location ->
                 location.contains("solutions") || location.contains("new") || location.contains("old")
         );
 
-        List<String> formattedRadioButtonNameList = formatWords(radioButtonList),
-                filteredLocationNames = filterPathNames(filePathList);
+        List<String> formattedRadioButtonNameList = formatWords(radioButtonList);
+
+        List<String> filteredLocationNames = filterPathNames(filePathList);
 
         List<Region> regionList = createRegionList(filePathList);
         setPairs(radioButtonList, formattedRadioButtonNameList, regionList, filteredLocationNames);
