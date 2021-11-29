@@ -21,6 +21,9 @@ public class FacadeFX {
     public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
             ((Button) actionEvent.getSource()).getText();
 
+    public static final Function<Toggle, String> GET_TOGGLE_NAME = toggle ->
+            ((ToggleButton)toggle).getText();
+
     private FacadeFX() {
     }
 

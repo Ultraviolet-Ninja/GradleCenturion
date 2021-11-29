@@ -30,6 +30,7 @@ import static bomb.enumerations.Port.SERIAL;
 import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.TrinarySwitch.UNKNOWN;
+import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT_TOGGLE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOGGLE;
@@ -124,7 +125,7 @@ public class WidgetController {
 
     private TrinarySwitch determineState(Toggle selected) {
         if (selected == null) return UNKNOWN;
-        return ((ToggleButton) selected).getText().equals("Lit") ? ON : OFF;
+        return GET_TOGGLE_NAME.apply(selected).equals("Lit") ? ON : OFF;
     }
 
     @FXML

@@ -15,7 +15,6 @@ import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -38,6 +37,7 @@ import java.util.regex.Pattern;
 
 import static bomb.tools.filter.RegexFilter.ALL_CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 import static java.util.stream.Collectors.toList;
@@ -46,15 +46,20 @@ public class ManualController {
     private final Map<String, Region> regionMap;
     private final List<Node> allRadioButtons;
 
-    @FXML private GridPane base;
+    @FXML
+    private GridPane base;
 
-    @FXML private JFXRadioButton forgetMeNot, souvenir;
+    @FXML
+    private JFXRadioButton forgetMeNot, souvenir;
 
-    @FXML private TextField searchBar;
+    @FXML
+    private TextField searchBar;
 
-    @FXML private ToggleGroup options;
+    @FXML
+    private ToggleGroup options;
 
-    @FXML private VBox menuVBox, radioButtonHouse;
+    @FXML
+    private VBox menuVBox, radioButtonHouse;
 
     public ManualController() {
         regionMap = new HashMap<>();
@@ -86,7 +91,7 @@ public class ManualController {
         String searchTerm = searchBar.getText();
         radioButtonHouse.getChildren().clear();
 
-        if (searchTerm.isEmpty()){
+        if (searchTerm.isEmpty()) {
             radioButtonHouse.getChildren().addAll(allRadioButtons);
             return;
         }
@@ -109,7 +114,9 @@ public class ManualController {
         List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
         List<String> filePathList = getFilesFromDirectory(new File(path));
 
-        filePathList.removeIf(location -> location.contains("solutions") || location.contains("new") || location.contains("old"));
+        filePathList.removeIf(location ->
+                location.contains("solutions") || location.contains("new") || location.contains("old")
+        );
 
         List<String> formattedRadioButtonNameList = formatWords(radioButtonList),
                 filteredLocationNames = filterPathNames(filePathList);
@@ -124,31 +131,16 @@ public class ManualController {
         Regex regex = new Regex(newRegex);
 
         return nameList.stream()
-                .map(toggle -> ((ToggleButton)toggle).getText())
+                .map(GET_TOGGLE_NAME)
                 .map(name -> name.replaceAll("[ -]", "_"))
                 .map(String::toLowerCase)
                 .map(name -> filter(name, regex))
                 .collect(toList());
     }
 
-    private List<Region> createRegionList(List<String> fileLocations) {
-        List<Region> paneList = new ArrayList<>();
+    private List<Region> createRegionList(List<String> fileLocations) throws IllegalArgumentException {
         ResetObserver resetObserver = new ResetObserver();
-//        try {
-//            for (String singleLocation : fileLocations) {
-//                FXMLLoader loader = new FXMLLoader(Paths.get(singleLocation).toUri().toURL());
-//                paneList.add(loader.load());
-//                if (!singleLocation.contains("widget")) resetObserver.addController(loader);
-//
-//                if (singleLocation.contains("souvenir")) extractSouvenirController(loader);
-//                else if (singleLocation.contains("blind_alley")) extractBlindAlleyController(loader);
-//            }
-//        } catch (IOException e){
-//            e.printStackTrace();
-//        }
-
-        paneList = fileLocations.stream()
-                .parallel()
+        List<Region> paneList = fileLocations.stream()
                 .map(Paths::get)
                 .map(Path::toUri)
                 .map(this::toURL)
@@ -169,33 +161,32 @@ public class ManualController {
     }
 
     private Region createRegion(FXMLLoader loader, ResetObserver resetObserver) {
-        String location = loader.getLocation().toString();
+        Region output;
         try {
-            Region output = loader.load();
-
-            if (!location.contains("widget")) resetObserver.addController(loader);
-
-            if (location.contains("souvenir")) extractSouvenirController(loader);
-            else if (location.contains("blind_alley")) extractBlindAlleyController(loader);
-            return output;
+            output = loader.load();
         } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
+            throw new IllegalArgumentException(e);
         }
-        return null;
+
+        String location = loader.getLocation().toString();
+        if (!location.contains("widget")) resetObserver.addController(loader);
+
+        if (location.contains("souvenir")) extractSouvenirController(loader);
+        else if (location.contains("blind_alley")) extractBlindAlleyController(loader);
+        return output;
     }
 
-    private void extractBlindAlleyController(FXMLLoader loader){
+    private void extractBlindAlleyController(FXMLLoader loader) {
         ObserverHub.addObserver(new BlindAlleyPaneObserver(loader.getController()));
     }
 
-    private void extractSouvenirController(FXMLLoader loader){
+    private void extractSouvenirController(FXMLLoader loader) {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
-    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws IllegalArgumentException{
+    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws NullPointerException {
         List<String> list = new ArrayList<>();
-        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())){
+        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())) {
             if (fileEntry.isDirectory())
                 list.addAll(getFilesFromDirectory(fileEntry));
             else
@@ -204,7 +195,7 @@ public class ManualController {
         return list;
     }
 
-    private List<String> filterPathNames(List<String> originalLocations){
+    private List<String> filterPathNames(List<String> originalLocations) {
         Regex filenamePattern = new Regex("\\w+\\.");
         filenamePattern.loadCollection(originalLocations);
         return filenamePattern.stream()
@@ -213,13 +204,12 @@ public class ManualController {
     }
 
     private void setPairs(List<Toggle> toggleList, List<String> toggleListFormatted,
-                          List<Region> paneList, List<String> paneLocationsFormatted){
+                          List<Region> paneList, List<String> paneLocationsFormatted) {
         regionMap.clear();
-        for (int i = 0; i < toggleList.size(); i++){
-            String keyText = ((ToggleButton)toggleList.get(i)).getText();
+        for (int i = 0; i < toggleList.size(); i++) {
+            String keyText = GET_TOGGLE_NAME.apply(toggleList.get(i));
             Region valuePane = paneList.get(paneLocationsFormatted.indexOf(toggleListFormatted.get(i)));
             regionMap.put(keyText, valuePane);
         }
     }
 }
-
