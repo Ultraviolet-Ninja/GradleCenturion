@@ -19,15 +19,15 @@ public class Bitwise extends Widget {
     /**
      * Turns the edgework conditions into a byte that the Defuser will input into the bomb module
      *
-     * @param bit The operation that must be used on each pair of bits
+     * @param logicOps The operation that must be used on each pair of bits
      * @return The String of 1's and 0's that the Defuser must put into the module screen
      * @throws IllegalArgumentException - The serial code, number of timer minutes and modules
      *                                  are needed for this module to work
      */
-    public static String getByte(LogicOperator bit) throws IllegalArgumentException {
+    public static String getByte(LogicOperator logicOps) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 8; i++)
-            builder.append(solve(i, bit));
+            builder.append(solve(i, logicOps));
         return builder.toString();
     }
 
