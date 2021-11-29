@@ -1,7 +1,6 @@
 package bomb;
 
 import bomb.tools.filter.Regex;
-import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
@@ -26,14 +25,15 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 import static bomb.tools.filter.RegexFilter.ALL_CHAR_FILTER;
@@ -41,10 +41,12 @@ import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
+import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class ManualController {
-    private final Map<String, Region> regionMap;
+    private Map<Toggle, Region> regionMap;
     private final List<Node> allRadioButtons;
 
     @FXML
@@ -63,23 +65,27 @@ public class ManualController {
     private VBox menuVBox, radioButtonHouse;
 
     public ManualController() {
-        regionMap = new HashMap<>();
         allRadioButtons = new ArrayList<>();
     }
 
-    public void initialize() throws URISyntaxException {
+    public void initialize() throws URISyntaxException, ExecutionException, InterruptedException {
         allRadioButtons.addAll(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
-        setupMap();
+        regionMap = setupRegionMap().get();
     }
 
     @FXML
     public void buttonPress() {
-        String selected = FacadeFX.getToggleName(options);
-        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
-        if (selected.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
+        long start = System.nanoTime();
+        Toggle selected = options.getSelectedToggle();
+        String selectedName = GET_TOGGLE_NAME.apply(selected);
+        if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
+        else if (selectedName.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
         paneSwitch(regionMap.get(selected));
+        long stop = System.nanoTime();
+
+        System.out.printf("Time: %,d%n", stop - start);
     }
 
     private void paneSwitch(final Region pane) {
@@ -109,71 +115,73 @@ public class ManualController {
         radioButtonHouse.getChildren().addAll(resultingButtons);
     }
 
-    private void setupMap() throws IllegalArgumentException, URISyntaxException {
-        URI path = Objects.requireNonNull(ManualController.class.getResource("fxml")).toURI();
+    private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
+        CompletableFuture<Map<String, Region>> filePathFuture = createFilePathFuture();
+        CompletableFuture<Map<String, Toggle>> radioButtonNameFuture =
+                createRadioButtonNameFuture(options.getToggles());
 
-        List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
-
-        CompletableFuture<List<String>> filePathFuture = CompletableFuture
-                .supplyAsync(() -> getFilesFromDirectory(new File(path)))
-                .thenApply(list -> {
-                        list.removeIf(location ->
-                                location.contains("solutions") || location.contains("new") || location.contains("old")
-                        );
-                        return list;
-                });
-
-
-        List<String> filePathList = getFilesFromDirectory(new File(path));
-
-        filePathList.removeIf(location ->
-                location.contains("solutions") || location.contains("new") || location.contains("old")
-        );
-
-        List<String> formattedRadioButtonNameList = formatWords(radioButtonList);
-
-        List<String> filteredLocationNames = filterPathNames(filePathList);
-
-        List<Region> regionList = createRegionList(filePathList);
-        setPairs(radioButtonList, formattedRadioButtonNameList, regionList, filteredLocationNames);
+        return filePathFuture.thenCombine(radioButtonNameFuture,
+                (filePathMap, radioButtonMap) -> createRegionMap(radioButtonMap, filePathMap));
     }
 
-    private List<String> formatWords(List<Toggle> nameList) {
+    private CompletableFuture<Map<String, Region>> createFilePathFuture() {
+        Regex filenamePattern = new Regex("\\w+\\.");
+        ResetObserver resetObserver = new ResetObserver();
+
+        CompletableFuture<Map<String, Region>> future = CompletableFuture.supplyAsync(
+                () -> ManualController.class.getResource("fxml"))
+                .thenApply(this::toURI)
+                .handle((path, ex) -> {
+                    if (ex != null){
+                        ex.printStackTrace();
+                        System.exit(-1);
+                    }
+                    return path;
+                })
+                .thenApply(File::new)
+                .thenApply(this::getFilesFromDirectory)
+                .thenApply(Collection::stream)
+                .thenApply(stream -> stream.filter(location -> !location.contains("solutions")))
+                .thenApply(stream -> stream.filter(location -> !location.contains("old")))
+                .thenApply(stream -> stream.filter(location -> !location.contains("new")))
+                .thenApply(stream -> stream.collect(toMap(
+                        location -> filter(location, filenamePattern)
+                                .replace(".", ""),
+                        location -> createSingleRegion(location, resetObserver)
+                )));
+
+        ObserverHub.addObserver(resetObserver);
+        return future;
+    }
+
+    private CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
         String newRegex = ALL_CHAR_FILTER.getOriginalPattern()
                 .replace("]", "_]");
         Regex regex = new Regex(newRegex);
 
-        return nameList.stream()
-                .map(GET_TOGGLE_NAME)
-                .map(name -> name.replaceAll("[ -]", "_"))
-                .map(String::toLowerCase)
-                .map(name -> filter(name, regex))
-                .collect(toList());
+        return CompletableFuture.supplyAsync(radioButtonList::stream)
+                .thenApply(stream ->
+                        stream.collect(toMap(
+                                toggle -> formatRadioButtonName(toggle, regex),
+                                identity()
+                        )));
     }
 
-    private List<Region> createRegionList(List<String> fileLocations) throws IllegalArgumentException {
-        ResetObserver resetObserver = new ResetObserver();
-        List<Region> paneList = fileLocations.stream()
-                .map(Paths::get)
-                .map(Path::toUri)
-                .map(this::toURL)
-                .map(FXMLLoader::new)
-                .map(loader -> createRegion(loader, resetObserver))
-                .collect(toList());
+    private String formatRadioButtonName(Toggle toggle, Regex regex) {
+        String buttonName = GET_TOGGLE_NAME.apply(toggle)
+                .replaceAll("[ -]", "_")
+                .toLowerCase();
 
-        ObserverHub.addObserver(resetObserver);
-        return paneList;
+        return filter(buttonName, regex);
     }
 
-    private URL toURL(URI uri) throws IllegalArgumentException {
-        try {
-            return uri.toURL();
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(e);
-        }
+    private Region createSingleRegion(String fileLocation, ResetObserver resetObserver) {
+        URI path = Paths.get(fileLocation).toUri();
+        FXMLLoader loader = new FXMLLoader(toURL(path));
+        return loadToObserver(loader, resetObserver);
     }
 
-    private Region createRegion(FXMLLoader loader, ResetObserver resetObserver) {
+    private Region loadToObserver(FXMLLoader loader, ResetObserver resetObserver) {
         Region output;
         try {
             output = loader.load();
@@ -184,16 +192,16 @@ public class ManualController {
         String location = loader.getLocation().toString();
         if (!location.contains("widget")) resetObserver.addController(loader);
 
-        if (location.contains("souvenir")) extractSouvenirController(loader);
-        else if (location.contains("blind_alley")) extractBlindAlleyController(loader);
+        if (location.contains("souvenir")) loadSouvenirController(loader);
+        else if (location.contains("blind_alley")) loadBlindAlleyController(loader);
         return output;
     }
 
-    private void extractBlindAlleyController(FXMLLoader loader) {
+    private void loadBlindAlleyController(FXMLLoader loader) {
         ObserverHub.addObserver(new BlindAlleyPaneObserver(loader.getController()));
     }
 
-    private void extractSouvenirController(FXMLLoader loader) {
+    private void loadSouvenirController(FXMLLoader loader) {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
@@ -208,21 +216,30 @@ public class ManualController {
         return list;
     }
 
-    private List<String> filterPathNames(List<String> originalLocations) {
-        Regex filenamePattern = new Regex("\\w+\\.");
-        filenamePattern.loadCollection(originalLocations);
-        return filenamePattern.stream()
-                .map(line -> line.replace(".", ""))
-                .collect(toList());
+    private Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
+                                                Map<String, Region> filePathMap) {
+        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
+        radioButtonMap.keySet()
+                .forEach(key -> regionMap.put(
+                        radioButtonMap.get(key),
+                        filePathMap.get(key)
+                        ));
+        return regionMap;
     }
 
-    private void setPairs(List<Toggle> toggleList, List<String> toggleListFormatted,
-                          List<Region> paneList, List<String> paneLocationsFormatted) {
-        regionMap.clear();
-        for (int i = 0; i < toggleList.size(); i++) {
-            String keyText = GET_TOGGLE_NAME.apply(toggleList.get(i));
-            Region valuePane = paneList.get(paneLocationsFormatted.indexOf(toggleListFormatted.get(i)));
-            regionMap.put(keyText, valuePane);
+    private URI toURI(URL url) throws IllegalArgumentException {
+        try {
+            return url.toURI();
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    private URL toURL(URI uri) throws IllegalArgumentException {
+        try {
+            return uri.toURL();
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 }
