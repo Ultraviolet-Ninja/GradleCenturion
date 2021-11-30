@@ -30,10 +30,6 @@ public abstract class AbstractHexagon {
         return hexagon.exportTo2DQueue();
     }
 
-    public void rotate() {
-        hexagon.rotate();
-    }
-
     public static int[] calculateColumnLengths(int sideLength) {
         int counter = 0;
         int[] request = new int[2 * sideLength - 1];

@@ -68,7 +68,7 @@ public class ManualController {
         allRadioButtons = new ArrayList<>();
     }
 
-    public void initialize() throws URISyntaxException, ExecutionException, InterruptedException {
+    public void initialize() throws ExecutionException, InterruptedException {
         allRadioButtons.addAll(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
