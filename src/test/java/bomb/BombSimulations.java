@@ -14,7 +14,6 @@ import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 
 public class BombSimulations {
-    public static final ConditionSetter EMPTY_SETTER = () -> {};
     public static final int CENTURION_MODULE_NUM = 101, CENTURION_START_TIME = 100,
             PRAETORIAN_START_TIME = 160, PRAETORIAN_MODULE_NUM = 161,
             SOUVENIR_ARMY_MODULE_NUM = 79, SOUVENIR_ARMY_START_TIME = 120;

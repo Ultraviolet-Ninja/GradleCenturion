@@ -1,15 +1,26 @@
 package bomb.tools.filter;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Function;
+import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 @SuppressWarnings("MagicConstant")
 public class Regex implements Iterable<String> {
+    public static final Function<String, Regex> CREATE_INSENSITIVE_SET =
+            input -> new Regex("[" + input + "]", Pattern.CASE_INSENSITIVE),
+            CREATE_NEGATED_SET = input -> new Regex("[^" + input + "]");
+
+    private static final Function<Matcher, Stream<String>> RESULT_STREAM = matcher ->
+            matcher.results().map(MatchResult::group);
+
     private static final int MAX_FLAG_SIZE = 0x1ff;
 
     private final Pattern regPattern;
@@ -20,13 +31,13 @@ public class Regex implements Iterable<String> {
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int flag) {
+    public Regex(String regex, int flag) throws IllegalArgumentException {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int... flags) {
+    public Regex(String regex, int... flags) throws IllegalArgumentException {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
@@ -38,13 +49,13 @@ public class Regex implements Iterable<String> {
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int flag) {
+    public Regex(String regex, String matchText, int flag) throws IllegalArgumentException {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int... flags) {
+    public Regex(String regex, String matchText, int... flags) throws IllegalArgumentException {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
@@ -55,8 +66,12 @@ public class Regex implements Iterable<String> {
         textMatcher.reset(text);
     }
 
-    public void loadCollection(Collection<String> textCollections) {
-        loadText(String.join(" ", textCollections));
+    public List<String> loadCollection(Collection<String> textCollections) {
+        return textCollections.stream()
+                .map(regPattern::matcher)
+                .map(RESULT_STREAM)
+                .map(stream -> stream.collect(Collectors.joining()))
+                .collect(toList());
     }
 
     public boolean hasMatch() {
@@ -80,12 +95,8 @@ public class Regex implements Iterable<String> {
     }
 
     public List<String> findAllMatches() {
-        reset();
-        List<String> output = new ArrayList<>();
-        while (textMatcher.find()) {
-            output.add(textMatcher.group());
-        }
-        return output;
+        return RESULT_STREAM.apply(textMatcher)
+                .collect(toList());
     }
 
     public String getOriginalPattern() {
@@ -93,12 +104,17 @@ public class Regex implements Iterable<String> {
     }
 
     public String createFilteredString() {
-        reset();
-        return String.join("", findAllMatches());
+        return RESULT_STREAM.apply(textMatcher)
+                .collect(Collectors.joining());
     }
 
-    public int flags() {
-        return regPattern.flags();
+    public boolean collectionMatches(Collection<String> c) {
+        String pattern = regPattern.pattern();
+
+        return c.stream()
+                .map(phrase -> phrase.matches(pattern))
+                .reduce((b1, b2) -> b1 || b2)
+                .orElse(false);
     }
 
     public void reset() {
@@ -111,7 +127,7 @@ public class Regex implements Iterable<String> {
     }
 
     public Stream<String> stream() {
-        return findAllMatches().stream();
+        return RESULT_STREAM.apply(textMatcher);
     }
 
     @Override

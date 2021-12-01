@@ -305,8 +305,7 @@ public class TheBulb extends Widget {
 
     private static void sendInfoToSouvenir(List<String> outputList) {
         Regex findButtonPresses = new Regex("Press [IO]");
-        findButtonPresses.loadCollection(outputList);
-        List<String> matches = findButtonPresses.findAllMatches();
+        List<String> matches = findButtonPresses.loadCollection(outputList);
         String outputText = String.join("\n", matches);
         Souvenir.addRelic("The Bulb button presses", outputText);
     }

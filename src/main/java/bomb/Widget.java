@@ -6,20 +6,20 @@ import bomb.enumerations.TrinarySwitch;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.TrinarySwitch.UNKNOWN;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.SERIAL_CODE_PATTERN;
-import static bomb.tools.filter.Filter.VOWEL_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
+import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
+import static bomb.tools.filter.RegexFilter.filter;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -106,7 +106,7 @@ public class Widget {
     }
 
     public static boolean hasEvenNumberInSerialCode(){
-        String sample = ultimateFilter(serialCode, NUMBER_PATTERN);
+        String sample = filter(serialCode, NUMBER_PATTERN);
         if (sample.isEmpty())
             return false;
 
@@ -123,7 +123,7 @@ public class Widget {
      * @return An int of the last digit from a String
      */
     public static int getSerialCodeLastDigit(){
-        String buffer = ultimateFilter(serialCode, NUMBER_PATTERN);
+        String buffer = filter(serialCode, NUMBER_PATTERN);
         return Integer.parseInt(buffer.substring(buffer.length()-1));
     }
 
@@ -171,7 +171,7 @@ public class Widget {
     }
 
     public static boolean hasVowelInSerialCode(){
-        return !ultimateFilter(serialCode, VOWEL_FILTER).isEmpty();
+        return !filter(serialCode, VOWEL_FILTER).isEmpty();
     }
 
     /**
@@ -180,7 +180,7 @@ public class Widget {
      * @return The number of letters
      */
     public static int countLettersInSerialCode(){
-        return ultimateFilter(serialCode, CHAR_FILTER).length();
+        return filter(serialCode, CHAR_FILTER).length();
     }
 
     /**
@@ -189,7 +189,7 @@ public class Widget {
      * @return The number of numbers
      */
     public static int countNumbersInSerialCode(){
-        return ultimateFilter(serialCode, NUMBER_PATTERN).length();
+        return filter(serialCode, NUMBER_PATTERN).length();
     }
 
     /**
@@ -216,11 +216,11 @@ public class Widget {
     }
 
     public static int calculateTotalPorts(){
-        return  Arrays.stream(portArray).sum();
+        return  stream(portArray).sum();
     }
 
     public static int countPortTypes(){
-        return (int) Arrays.stream(portArray)
+        return (int) stream(portArray)
                 .filter(port -> port > 0)
                 .count();
     }
@@ -238,7 +238,7 @@ public class Widget {
 
         List<Indicator> tempList =  allIndicators.stream()
                 .filter(indicator -> filter.test(indicator.getState()))
-                .collect(Collectors.toList());
+                .collect(toList());
 
         return tempList.isEmpty() ?
                 EnumSet.noneOf(Indicator.class) :

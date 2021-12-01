@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.modules.t.bulb.Bulb.Color.BLUE;
 import static bomb.modules.t.bulb.Bulb.Color.GREEN;
 import static bomb.modules.t.bulb.Bulb.Color.PURPLE;

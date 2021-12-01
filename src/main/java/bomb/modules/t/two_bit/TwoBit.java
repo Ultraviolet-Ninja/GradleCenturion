@@ -1,14 +1,14 @@
 package bomb.modules.t.two_bit;
 
-import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
 import bomb.enumerations.Port;
+import bomb.modules.s.souvenir.Souvenir;
 
 import static bomb.modules.t.two_bit.TwoBitState.SECOND_QUERY;
 import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.filter;
 
 /**
  *
@@ -39,8 +39,8 @@ public class TwoBit extends Widget {
      */
     public static String initialCode() throws IllegalArgumentException {
         checkSerialCode();
-        String numbersInSerialCode = ultimateFilter(serialCode, NUMBER_PATTERN);
-        String first = ultimateFilter(serialCode, CHAR_FILTER).toLowerCase();
+        String numbersInSerialCode = filter(serialCode, NUMBER_PATTERN);
+        String first = filter(serialCode, CHAR_FILTER).toLowerCase();
         int alphabetBaseValue = !first.isEmpty() ?
                 first.charAt(0) - LETTER_TO_NUMBER_CONVERTER :
                 0;
@@ -67,7 +67,7 @@ public class TwoBit extends Widget {
      * @throws IllegalArgumentException The given input was not 2 numbers
      */
     public static String nextCode(String code) throws IllegalArgumentException {
-        String newCode = ultimateFilter(code, NUMBER_PATTERN);
+        String newCode = filter(code, NUMBER_PATTERN);
         validateNextCode(code, newCode);
         int[] coords = translateToBitCoordinates(newCode);
 

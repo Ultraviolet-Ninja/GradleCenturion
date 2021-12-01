@@ -1,8 +1,9 @@
-package bomb.tools;
+package bomb.tools.string;
 
 public class Base91 {
     private static final char[] CODEX_STRING =
-            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./;<=>?@[]^_`{|}~\":".toCharArray();
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&()*+,./;<=>?@[]^_`{|}~\":"
+                    .toCharArray();
 
     public static String encrypt(int val) {
         if (val < CODEX_STRING.length) return String.valueOf(CODEX_STRING[val]);
@@ -24,7 +25,7 @@ public class Base91 {
 
         for (char charInVal : val.toCharArray()) {
             int tempNum = searchString.indexOf(charInVal);
-            if (tempNum == -1) throw new IllegalArgumentException();
+            if (tempNum == -1) throw new IllegalArgumentException("Letter was not in the codex");
             output += (long) Math.pow(CODEX_STRING.length, degree--) * tempNum;
         }
         return output;

@@ -4,8 +4,8 @@ import bomb.Widget;
 import bomb.enumerations.Indicator;
 
 import static bomb.modules.il.laundry.Clothing.ARTICLE;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.filter;
 
 /**
  * This class deals with the Laundry module. The module requires a plethora of conditions that involve the
@@ -209,7 +209,7 @@ public class Laundry extends Widget {
      * @return True if a letter from the Serial Code matches a letter in the clothing material
      */
     private static boolean letterMatch() {
-        String letters = ultimateFilter(serialCode, CHAR_FILTER);
+        String letters = filter(serialCode, CHAR_FILTER);
         for (char instance : letters.toCharArray())
             if (ARTICLE.getMaterial().name().toLowerCase().indexOf(instance) != -1) return true;
         return false;

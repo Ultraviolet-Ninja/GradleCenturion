@@ -24,18 +24,18 @@
 20/100 + Colored Switches
 
 ### Incomplete Modules
+- Battleship
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 
-3/100
+4/100
 
 ### Untouched Modules
 - 3D Maze
 - Adjacent Letters
 - Adventure Game
 - Anagrams
-- Battleship
 - Binary LEDs
 - BitMaps
 - Broken Button

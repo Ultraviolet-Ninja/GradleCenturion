@@ -3,8 +3,8 @@ package bomb.modules.dh.forget_me;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.tools.filter.Filter;
 import bomb.tools.filter.Regex;
+import bomb.tools.filter.RegexFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,8 +95,8 @@ public class ForgetMeNot extends Widget {
     }
 
     public static void updateLargestValueInSerial() {
-        Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (!Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
+        RegexFilter.SERIAL_CODE_PATTERN.loadText(serialCode);
+        if (!RegexFilter.SERIAL_CODE_PATTERN.matchesRegex()) {
             largestSerialCodeNumber = -1;
             return;
         }
@@ -120,9 +120,9 @@ public class ForgetMeNot extends Widget {
     public static String stringifyFinalCode() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= FINAL_CODE.size(); i++) {
-            sb.append(FINAL_CODE.get(i - 1));
-            if (i % 3 == 0 && i != FINAL_CODE.size())
+        for (int i = 0; i < FINAL_CODE.size(); i++) {
+            sb.append(FINAL_CODE.get(i));
+            if (i % 3 == 2)
                 sb.append("-");
         }
         return sb.toString();

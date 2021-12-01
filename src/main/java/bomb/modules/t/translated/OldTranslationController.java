@@ -13,7 +13,8 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.MORSE_CODE_PATTERN;
+import static bomb.tools.filter.RegexFilter.filter;
 
 public class OldTranslationController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",
@@ -197,8 +198,7 @@ public class OldTranslationController implements Resettable {
     //Morse Code Methods
     @FXML
     private void typeTrigger() {
-        String input = ultimateFilter(morseInput.getText(),
-                "-", ".", " ");
+        String input = filter(morseInput.getText(), MORSE_CODE_PATTERN);
 
         if (!input.isEmpty()) {
             StringBuilder builder = new StringBuilder();

@@ -5,7 +5,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 import javafx.scene.paint.Color;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;

@@ -60,12 +60,9 @@ public class Star {
         int counter = 0;
         for (ScreamColor instance : unique) {
             switch (instance) {
-                case RED:
-                case BLUE:
-                case YELLOW:
-                    counter++;
-                    break;
-                default:
+                case RED, BLUE, YELLOW -> counter++;
+                default -> {
+                }
             }
         }
         return counter < 2;

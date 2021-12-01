@@ -20,7 +20,7 @@ public class ResetObserver implements Observer {
 
     @Override
     public void update() {
-        for (Resettable resettable : controllerList)
-            resettable.reset();
+        controllerList.parallelStream()
+                .forEach(Resettable::reset);
     }
 }
