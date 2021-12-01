@@ -39,6 +39,12 @@ public enum Ship {
         return currentQuantity;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Type: %s - Required Number: %d - # Found: %d",
+                name(), currentQuantity, foundShips);
+    }
+
     public static int getNumberOfShipSpaces() {
         return stream(values())
                 .mapToInt(ship -> ship.shipSize * ship.currentQuantity)
@@ -58,7 +64,15 @@ public enum Ship {
 
     public static Ship getCurrentLargestShip() {
         for (Ship ship : values()) {
-            if (ship.currentQuantity > 0)
+            if (ship.currentQuantity > ship.foundShips)
+                return ship;
+        }
+        return null;
+    }
+
+    public static Ship matchShipToSize(int size) {
+        for (Ship ship : values()) {
+            if (ship.shipSize == size)
                 return ship;
         }
         return null;

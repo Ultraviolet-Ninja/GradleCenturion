@@ -1,4 +1,8 @@
-package bomb.modules.ab.battleship;
+package bomb.modules.ab.battleship.solve;
+
+import bomb.modules.ab.battleship.Ocean;
+import bomb.modules.ab.battleship.Ship;
+import bomb.modules.ab.battleship.Tile;
 
 import java.util.List;
 
@@ -13,6 +17,7 @@ public class BoardSolver {
             setClearTiles(ocean, rowCounters, columnCounters);
             setDiagonalAdjacentShipTilesClear(ocean);
             guaranteeShipTile(ocean, rowCounters, columnCounters);
+            ShipFinder.updateFoundShips(ocean);
 //            findLargestShip(ocean, rowCounters, columnCounters);
         } while (ocean.hasUnknownTile());
     }
