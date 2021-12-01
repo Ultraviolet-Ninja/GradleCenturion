@@ -24,7 +24,7 @@ public class ChordController implements Resettable {
     private Consumer<Set<String>> createListener() {
         return set -> {
             if (set.size() == NoteCircleComponent.SELECTED_NOTE_LIMIT) {
-                String output = String.join(", ", set);
+                String output = String.join(" ", set);
 
                 try {
                     outputField.setText(ChordQualities.solve(output.trim()));
