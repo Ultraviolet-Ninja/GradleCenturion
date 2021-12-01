@@ -9,6 +9,7 @@ import java.util.TreeSet;
 
 import static bomb.modules.ab.battleship.Tile.RADAR;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
+import static bomb.modules.ab.battleship.solve.BoardSolver.solve;
 import static bomb.tools.filter.Filter.CHAR_FILTER;
 import static bomb.tools.filter.Filter.NUMBER_PATTERN;
 import static bomb.tools.filter.Filter.ultimateFilter;
@@ -116,7 +117,7 @@ public class Battleship extends Widget {
 
     public static Ocean solveOcean() {
         validateEssentialData();
-        BoardSolver.solve(ocean, rowCounters, columnCounters);
+        solve(ocean, rowCounters, columnCounters);
         return ocean;
     }
 
