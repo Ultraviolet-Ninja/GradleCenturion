@@ -58,7 +58,6 @@ public class HexGrid extends AbstractHexagon {
         hexagon.readInNodeList(nodeList);
     }
 
-    @Override
     public void rotate() {
         hexagon.rotate();
         rotateColorOrder();
