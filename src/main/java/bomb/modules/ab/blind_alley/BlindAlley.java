@@ -19,6 +19,7 @@ import static bomb.enumerations.Port.PS2;
 import static bomb.enumerations.Port.RCA;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
+import static bomb.tools.logic.BitConverter.TO_INT;
 
 /**
  * This class works on the Blind Alley module, updating the internal 2-D array whenever
@@ -44,47 +45,43 @@ public class BlindAlley extends Widget {
     }
 
     private static void topLeft() {
-        alleyCat[0][0] = convertToBool(hasUnlitIndicator(BOB)) + convertToBool(hasLitIndicator(CAR)) +
-                convertToBool(hasLitIndicator(IND)) + convertToBool(getNumHolders() % 2 == 0);
+        alleyCat[0][0] = TO_INT.apply(hasUnlitIndicator(BOB)) + TO_INT.apply(hasLitIndicator(CAR)) +
+                TO_INT.apply(hasLitIndicator(IND)) + TO_INT.apply(getNumHolders() % 2 == 0);
     }
 
     private static void topMid() {
-        alleyCat[0][1] = convertToBool(hasUnlitIndicator(NSA)) + convertToBool(hasLitIndicator(FRK)) +
-                convertToBool(hasUnlitIndicator(CAR)) + convertToBool(doesPortExists(RJ45));
+        alleyCat[0][1] = TO_INT.apply(hasUnlitIndicator(NSA)) + TO_INT.apply(hasLitIndicator(FRK)) +
+                TO_INT.apply(hasUnlitIndicator(CAR)) + TO_INT.apply(doesPortExists(RJ45));
     }
 
     private static void left() {
-        alleyCat[1][0] = convertToBool(hasUnlitIndicator(FRQ)) + convertToBool(hasUnlitIndicator(IND)) +
-                convertToBool(hasUnlitIndicator(TRN)) + convertToBool(doesPortExists(DVI));
+        alleyCat[1][0] = TO_INT.apply(hasUnlitIndicator(FRQ)) + TO_INT.apply(hasUnlitIndicator(IND)) +
+                TO_INT.apply(hasUnlitIndicator(TRN)) + TO_INT.apply(doesPortExists(DVI));
     }
 
     private static void middle() {
-        alleyCat[1][1] = convertToBool(hasUnlitIndicator(SIG)) + convertToBool(hasUnlitIndicator(SND)) +
-                convertToBool(hasLitIndicator(NSA)) + convertToBool(getAllBatteries() % 2 == 0);
+        alleyCat[1][1] = TO_INT.apply(hasUnlitIndicator(SIG)) + TO_INT.apply(hasUnlitIndicator(SND)) +
+                TO_INT.apply(hasLitIndicator(NSA)) + TO_INT.apply(getAllBatteries() % 2 == 0);
     }
 
     private static void right() {
-        alleyCat[1][2] = convertToBool(hasLitIndicator(BOB)) + convertToBool(hasLitIndicator(CLR)) +
-                convertToBool(doesPortExists(PS2)) + convertToBool(doesPortExists(SERIAL));
+        alleyCat[1][2] = TO_INT.apply(hasLitIndicator(BOB)) + TO_INT.apply(hasLitIndicator(CLR)) +
+                TO_INT.apply(doesPortExists(PS2)) + TO_INT.apply(doesPortExists(SERIAL));
     }
 
     private static void bottomLeft() {
-        alleyCat[2][0] = convertToBool(hasLitIndicator(FRQ)) + convertToBool(hasLitIndicator(SIG)) +
-                convertToBool(hasLitIndicator(TRN)) + convertToBool(hasEvenNumberInSerialCode());
+        alleyCat[2][0] = TO_INT.apply(hasLitIndicator(FRQ)) + TO_INT.apply(hasLitIndicator(SIG)) +
+                TO_INT.apply(hasLitIndicator(TRN)) + TO_INT.apply(hasEvenNumberInSerialCode());
     }
 
     private static void bottomMid() {
-        alleyCat[2][1] = convertToBool(hasUnlitIndicator(FRK)) + convertToBool(hasLitIndicator(MSA)) +
-                convertToBool(doesPortExists(PARALLEL)) + convertToBool(hasVowelInSerialCode());
+        alleyCat[2][1] = TO_INT.apply(hasUnlitIndicator(FRK)) + TO_INT.apply(hasLitIndicator(MSA)) +
+                TO_INT.apply(doesPortExists(PARALLEL)) + TO_INT.apply(hasVowelInSerialCode());
     }
 
     private static void bottomRight() {
-        alleyCat[2][2] = convertToBool(hasUnlitIndicator(CLR)) + convertToBool(hasUnlitIndicator(MSA)) +
-                convertToBool(hasLitIndicator(SND)) + convertToBool(doesPortExists(RCA));
-    }
-
-    private static int convertToBool(boolean bool) {
-        return bool ? 1 : 0;
+        alleyCat[2][2] = TO_INT.apply(hasUnlitIndicator(CLR)) + TO_INT.apply(hasUnlitIndicator(MSA)) +
+                TO_INT.apply(hasLitIndicator(SND)) + TO_INT.apply(doesPortExists(RCA));
     }
 
     /**

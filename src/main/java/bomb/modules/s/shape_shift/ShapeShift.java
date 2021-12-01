@@ -8,17 +8,18 @@ import org.javatuples.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.ToIntFunction;
 
-//TODO Eventually document the code
+import static bomb.tools.logic.BitConverter.TO_INT;
+
 public class ShapeShift extends Widget {
-    private static final int[][] COUNT_TRACKER = new int[4][4];
-    private static final ToIntFunction<Boolean> CONVERTER = bool -> bool ? 1 : 0;
+    private static final int[][] COUNT_TRACKER;
 
     private static ListGraph<Pair<ShapeEnd, ShapeEnd>> graph;
 
     //<editor-fold desc="Init methods">
     static {
+        int size = ShapeEnd.values().length;
+        COUNT_TRACKER = new int[size][size];
         zeroOutArray();
         initializeGraph();
     }
@@ -77,7 +78,7 @@ public class ShapeShift extends Widget {
         if (checkIfVisitedTwice(left, right)) {
             Pair<ShapeEnd, ShapeEnd> pair = graph.get(
                             new Pair<>(left, right))
-                    .get(CONVERTER.applyAsInt(conditionMap(left, right)));
+                    .get(TO_INT.apply(conditionMap(left, right)));
             return solve(pair.getValue0(), pair.getValue1());
         }
         resetMod();

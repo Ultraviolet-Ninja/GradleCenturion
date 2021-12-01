@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ColoredSwitchesTest {
     @BeforeMethod
-    public static void setUp() {
+    public void setUp() {
         ColoredSwitches.reset();
     }
 
