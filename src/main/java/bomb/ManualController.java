@@ -77,15 +77,11 @@ public class ManualController {
 
     @FXML
     public void buttonPress() {
-        long start = System.nanoTime();
         Toggle selected = options.getSelectedToggle();
         String selectedName = GET_TOGGLE_NAME.apply(selected);
         if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
         else if (selectedName.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
         paneSwitch(regionMap.get(selected));
-        long stop = System.nanoTime();
-
-        System.out.printf("Time: %,d%n", stop - start);
     }
 
     private void paneSwitch(final Region pane) {
