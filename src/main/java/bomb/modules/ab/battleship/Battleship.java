@@ -9,10 +9,11 @@ import java.util.TreeSet;
 
 import static bomb.modules.ab.battleship.Tile.RADAR;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
+
 import static bomb.modules.ab.battleship.solve.BoardSolver.solve;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.filter;
 import static java.util.Arrays.stream;
 
 public class Battleship extends Widget {
@@ -36,8 +37,8 @@ public class Battleship extends Widget {
 
     private static List<String> calculateSerialCodeCoordinates() {
         List<String> output = new ArrayList<>();
-        String lettersInCode = ultimateFilter(serialCode, CHAR_FILTER).toLowerCase();
-        String numbersInCode = ultimateFilter(serialCode, NUMBER_PATTERN);
+        String lettersInCode = filter(serialCode, CHAR_FILTER).toLowerCase();
+        String numbersInCode = filter(serialCode, NUMBER_PATTERN);
 
         while (!lettersInCode.isEmpty() && !numbersInCode.isEmpty()) {
             output.add(calculateSingleSerialCodeCoordinates(

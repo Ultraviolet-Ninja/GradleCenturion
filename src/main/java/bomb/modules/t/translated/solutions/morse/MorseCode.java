@@ -1,8 +1,8 @@
 package bomb.modules.t.translated.solutions.morse;
 
 import bomb.modules.t.translated.LanguageCSVReader;
-import bomb.tools.filter.Filter;
 import bomb.tools.filter.Regex;
+import bomb.tools.filter.RegexFilter;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 
@@ -70,8 +70,8 @@ public class MorseCode {
     }
 
     private static void validateInput(String text) {
-        Filter.MORSE_CODE_PATTERN.loadText(text);
-        if (!Filter.MORSE_CODE_PATTERN.matchesRegex()){
+        RegexFilter.MORSE_CODE_PATTERN.loadText(text);
+        if (!RegexFilter.MORSE_CODE_PATTERN.matchesRegex()){
             throw new IllegalArgumentException("Only periods and hyphens are allowed as input, separated by spaces");
         }
     }

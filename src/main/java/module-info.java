@@ -36,6 +36,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.il.laundry to javafx.fxml;
     exports bomb.modules.il.led_encryption to javafx.fxml;
     exports bomb.modules.m.microcontroller to javafx.fxml;
+    exports bomb.modules.m.microcontroller.chip to javafx.fxml;
     exports bomb.modules.m.monsplode to javafx.fxml;
     exports bomb.modules.np.neutralization to javafx.fxml;
     exports bomb.modules.np.number_pad to javafx.fxml;
@@ -43,6 +44,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.s.seashells to javafx.fxml;
     exports bomb.modules.s.semaphore to javafx.fxml;
     exports bomb.modules.s.shape_shift to javafx.fxml;
+    exports bomb.modules.s.simon to javafx.fxml;
     exports bomb.modules.s.simon.screams to javafx.fxml;
     exports bomb.modules.s.simon.states to javafx.fxml;
     exports bomb.modules.s.souvenir to javafx.fxml;
@@ -58,6 +60,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.t.translated.solutions.wof to javafx.fxml;
     exports bomb.modules.t.two_bit to javafx.fxml;
     exports bomb.modules.wz.zoo to javafx.fxml;
+    exports bomb.tools.logic to javafx.fxml;
     exports bomb.tools.note to javafx.fxml;
 
     opens bomb;
@@ -85,6 +88,7 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.il.laundry;
     opens bomb.modules.il.led_encryption;
     opens bomb.modules.m.microcontroller;
+    opens bomb.modules.m.microcontroller.chip;
     opens bomb.modules.m.monsplode;
     opens bomb.modules.np.neutralization;
     opens bomb.modules.np.number_pad;

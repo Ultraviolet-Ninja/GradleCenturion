@@ -1,7 +1,6 @@
 package bomb;
 
 import bomb.tools.filter.Regex;
-import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
@@ -15,7 +14,6 @@ import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -23,51 +21,66 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
+import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
-import static bomb.tools.filter.Mechanics.NORMAL_CHAR_REGEX;
-import static bomb.tools.filter.Mechanics.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.ALL_CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
+import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toMap;
 
 public class ManualController {
-    private final Map<String, Region> regionMap;
+    private Map<Toggle, Region> regionMap;
     private final List<Node> allRadioButtons;
 
-    @FXML private GridPane base;
+    @FXML
+    private GridPane base;
 
-    @FXML private JFXRadioButton forgetMeNot, souvenir;
+    @FXML
+    private JFXRadioButton forgetMeNot, souvenir;
 
-    @FXML private TextField searchBar;
+    @FXML
+    private TextField searchBar;
 
-    @FXML private ToggleGroup options;
+    @FXML
+    private ToggleGroup options;
 
-    @FXML private VBox menuVBox, radioButtonHouse;
+    @FXML
+    private VBox menuVBox, radioButtonHouse;
 
     public ManualController() {
-        regionMap = new HashMap<>();
         allRadioButtons = new ArrayList<>();
     }
 
-    public void initialize() {
+    public void initialize() throws ExecutionException, InterruptedException {
         allRadioButtons.addAll(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
-        setupMap();
+        regionMap = setupRegionMap().get();
     }
 
     @FXML
     public void buttonPress() {
-        String selected = FacadeFX.getToggleName(options);
-        if (selected.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
-        if (selected.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
+        Toggle selected = options.getSelectedToggle();
+        String selectedName = GET_TOGGLE_NAME.apply(selected);
+        if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
+        else if (selectedName.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
         paneSwitch(regionMap.get(selected));
     }
 
@@ -81,7 +94,7 @@ public class ManualController {
         String searchTerm = searchBar.getText();
         radioButtonHouse.getChildren().clear();
 
-        if (searchTerm.isEmpty()){
+        if (searchTerm.isEmpty()) {
             radioButtonHouse.getChildren().addAll(allRadioButtons);
             return;
         }
@@ -98,58 +111,99 @@ public class ManualController {
         radioButtonHouse.getChildren().addAll(resultingButtons);
     }
 
-    private void setupMap() throws IllegalArgumentException {
-        String path = System.getProperty("user.dir") + "\\src\\main\\resources\\bomb\\fxml";
-        List<Toggle> radioButtonList = new ArrayList<>(options.getToggles());
-        List<String> filePathList = getFilesFromDirectory(new File(path));
+    private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
+        CompletableFuture<Map<String, Region>> filePathFuture = createFilePathFuture();
+        CompletableFuture<Map<String, Toggle>> radioButtonNameFuture =
+                createRadioButtonNameFuture(options.getToggles());
 
-        filePathList.removeIf(location -> location.contains("solutions") || location.contains("new") || location.contains("old"));
-
-        List<String> formattedRadioButtonNameList = formatWords(radioButtonList),
-                filteredLocationNames = filterPathNames(filePathList);
-
-        List<Region> regionList = createRegionList(filePathList);
-        setPairs(radioButtonList, formattedRadioButtonNameList, regionList, filteredLocationNames);
+        return filePathFuture.thenCombine(radioButtonNameFuture,
+                (filePathMap, radioButtonMap) -> createRegionMap(radioButtonMap, filePathMap));
     }
 
-    private List<String> formatWords(List<Toggle> nameList) {
-        return nameList.parallelStream()
-                .map(toggle -> ((ToggleButton)toggle).getText())
-                .map(name -> name.replaceAll("[ -]", "_"))
-                .map(name -> ultimateFilter(name, NORMAL_CHAR_REGEX, "_"))
-                .collect(toList());
-    }
-
-    private List<Region> createRegionList(List<String> fileLocations) {
-        List<Region> paneList = new ArrayList<>();
+    private CompletableFuture<Map<String, Region>> createFilePathFuture() {
+        Regex filenamePattern = new Regex("\\w+\\.");
         ResetObserver resetObserver = new ResetObserver();
-        try {
-            for (String singleLocation : fileLocations) {
-                FXMLLoader loader = new FXMLLoader(Paths.get(singleLocation).toUri().toURL());
-                paneList.add(loader.load());
-                if (!singleLocation.contains("widget")) resetObserver.addController(loader);
 
-                if (singleLocation.contains("souvenir")) extractSouvenirController(loader);
-                else if (singleLocation.contains("blind_alley")) extractBlindAlleyController(loader);
-            }
-            ObserverHub.addObserver(resetObserver);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-        return paneList;
+        CompletableFuture<Map<String, Region>> future = CompletableFuture.supplyAsync(
+                () -> ManualController.class.getResource("fxml"))
+                .thenApply(this::toURI)
+                .handle((path, ex) -> {
+                    if (ex != null){
+                        ex.printStackTrace();
+                        System.exit(-1);
+                    }
+                    return path;
+                })
+                .thenApply(File::new)
+                .thenApply(this::getFilesFromDirectory)
+                .thenApply(Collection::stream)
+                .thenApply(stream -> stream.filter(location -> !location.contains("solutions")))
+                .thenApply(stream -> stream.filter(location -> !location.contains("old")))
+                .thenApply(stream -> stream.filter(location -> !location.contains("new")))
+                .thenApply(stream -> stream.collect(toMap(
+                        location -> filter(location, filenamePattern)
+                                .replace(".", ""),
+                        location -> createSingleRegion(location, resetObserver)
+                )));
+
+        ObserverHub.addObserver(resetObserver);
+        return future;
     }
 
-    private void extractBlindAlleyController(FXMLLoader loader){
+    private CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
+        String newRegex = ALL_CHAR_FILTER.getOriginalPattern()
+                .replace("]", "_]");
+        Regex regex = new Regex(newRegex);
+
+        return CompletableFuture.supplyAsync(radioButtonList::stream)
+                .thenApply(stream ->
+                        stream.collect(toMap(
+                                toggle -> formatRadioButtonName(toggle, regex),
+                                identity()
+                        )));
+    }
+
+    private String formatRadioButtonName(Toggle toggle, Regex regex) {
+        String buttonName = GET_TOGGLE_NAME.apply(toggle)
+                .replaceAll("[ -]", "_")
+                .toLowerCase();
+
+        return filter(buttonName, regex);
+    }
+
+    private Region createSingleRegion(String fileLocation, ResetObserver resetObserver) {
+        URI path = Paths.get(fileLocation).toUri();
+        FXMLLoader loader = new FXMLLoader(toURL(path));
+        return loadToObserver(loader, resetObserver);
+    }
+
+    private Region loadToObserver(FXMLLoader loader, ResetObserver resetObserver) {
+        Region output;
+        try {
+            output = loader.load();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+
+        String location = loader.getLocation().toString();
+        if (!location.contains("widget")) resetObserver.addController(loader);
+
+        if (location.contains("souvenir")) loadSouvenirController(loader);
+        else if (location.contains("blind_alley")) loadBlindAlleyController(loader);
+        return output;
+    }
+
+    private void loadBlindAlleyController(FXMLLoader loader) {
         ObserverHub.addObserver(new BlindAlleyPaneObserver(loader.getController()));
     }
 
-    private void extractSouvenirController(FXMLLoader loader){
+    private void loadSouvenirController(FXMLLoader loader) {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
-    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws IllegalArgumentException{
+    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws NullPointerException {
         List<String> list = new ArrayList<>();
-        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())){
+        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())) {
             if (fileEntry.isDirectory())
                 list.addAll(getFilesFromDirectory(fileEntry));
             else
@@ -158,23 +212,30 @@ public class ManualController {
         return list;
     }
 
-    private List<String> filterPathNames(List<String> originalLocations){
-        Regex filenamePattern = new Regex("\\w+\\.");
-        filenamePattern.loadCollection(originalLocations);
-        return filenamePattern.stream()
-                .parallel()
-                .map(line -> line.replace(".", ""))
-                .collect(toList());
+    private Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
+                                                Map<String, Region> filePathMap) {
+        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
+        radioButtonMap.keySet()
+                .forEach(key -> regionMap.put(
+                        radioButtonMap.get(key),
+                        filePathMap.get(key)
+                        ));
+        return regionMap;
     }
 
-    private void setPairs(List<Toggle> toggleList, List<String> toggleListFormatted,
-                          List<Region> paneList, List<String> paneLocationsFormatted){
-        regionMap.clear();
-        for (int i = 0; i < toggleList.size(); i++){
-            String keyText = ((ToggleButton)toggleList.get(i)).getText();
-            Region valuePane = paneList.get(paneLocationsFormatted.indexOf(toggleListFormatted.get(i)));
-            regionMap.put(keyText, valuePane);
+    private URI toURI(URL url) throws IllegalArgumentException {
+        try {
+            return url.toURI();
+        } catch (URISyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    private URL toURL(URI uri) throws IllegalArgumentException {
+        try {
+            return uri.toURL();
+        } catch (MalformedURLException e) {
+            throw new IllegalArgumentException(e);
         }
     }
 }
-

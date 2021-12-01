@@ -2,7 +2,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 import bomb.tools.data.structures.ring.ReadOnlyRing;
 import javafx.scene.paint.Color;
 
@@ -58,7 +58,6 @@ public class HexGrid extends AbstractHexagon {
         hexagon.readInNodeList(nodeList);
     }
 
-    @Override
     public void rotate() {
         hexagon.rotate();
         rotateColorOrder();

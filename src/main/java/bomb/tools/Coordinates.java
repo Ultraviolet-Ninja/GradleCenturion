@@ -10,11 +10,6 @@ public class Coordinates extends EquatableObject implements Comparable<Coordinat
         this.y = y;
     }
 
-    public Coordinates(Coordinates original) {
-        this.x = original.x;
-        this.y = original.y;
-    }
-
     public int getX() {
         return x;
     }

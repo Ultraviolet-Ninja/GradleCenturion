@@ -7,7 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.enumerations.TrinarySwitch.ON;

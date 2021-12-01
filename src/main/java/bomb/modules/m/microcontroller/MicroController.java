@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.filter;
 
 public class MicroController extends Widget {
     private static final String THIRD_CONDITION_REGEX = "[clrx18]";
@@ -20,7 +20,7 @@ public class MicroController extends Widget {
             return controller.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || doesPortExists(Port.RJ45))
             return controller.traversePins(1);
-        else if (ultimateFilter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
+        else if (filter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
             return controller.traversePins(2);
         else if (numbersMatch(moduleSerialNumbers))
             return controller.traversePins(3);

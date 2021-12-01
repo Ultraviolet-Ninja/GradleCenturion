@@ -1,4 +1,4 @@
-package bomb.tools.data.structures;
+package bomb.tools.data.structures.queue;
 
 import java.util.Arrays;
 import java.util.Collection;

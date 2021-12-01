@@ -4,17 +4,18 @@ import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.TrinarySwitch;
+import bomb.tools.logic.LogicOperator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.enumerations.Port.PARALLEL;
-import static bomb.modules.ab.bitwise.BitwiseOperator.AND;
-import static bomb.modules.ab.bitwise.BitwiseOperator.NOT;
-import static bomb.modules.ab.bitwise.BitwiseOperator.OR;
-import static bomb.modules.ab.bitwise.BitwiseOperator.XOR;
+import static bomb.tools.logic.LogicOperator.AND;
+import static bomb.tools.logic.LogicOperator.NOT;
+import static bomb.tools.logic.LogicOperator.OR;
+import static bomb.tools.logic.LogicOperator.XOR;
 import static org.testng.Assert.assertEquals;
 
 public class BitwiseTest {
@@ -60,7 +61,7 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "minimumConditionTestProvider")
-    public void minimumConditionTest(String expected, BitwiseOperator operation) {
+    public void minimumConditionTest(String expected, LogicOperator operation) {
         setEssentialFalseConditions();
         Widget.setDoubleAs(2);
 
@@ -75,7 +76,7 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "maximumConditionTestProvider")
-    public void maximumConditionTest(String expected, BitwiseOperator operation) {
+    public void maximumConditionTest(String expected, LogicOperator operation) {
         setEssentialTrueConditions();
         maximizeConditions();
 

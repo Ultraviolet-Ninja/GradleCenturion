@@ -10,7 +10,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.BombSimulations.EMPTY_SETTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.BLUE;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.GREEN;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.ORANGE;

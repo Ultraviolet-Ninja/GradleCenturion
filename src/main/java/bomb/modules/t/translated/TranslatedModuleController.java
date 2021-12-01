@@ -9,7 +9,6 @@ import bomb.modules.t.translated.solutions.password.PasswordComponent;
 import bomb.modules.t.translated.solutions.wof.WOFComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.opencsv.exceptions.CsvException;
-import com.opencsv.exceptions.CsvValidationException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

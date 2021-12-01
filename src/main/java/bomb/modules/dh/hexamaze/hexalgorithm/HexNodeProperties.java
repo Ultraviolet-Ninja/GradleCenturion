@@ -1,6 +1,6 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
-import bomb.tools.Base91;
+import bomb.tools.string.Base91;
 
 import java.util.EnumSet;
 import java.util.HashMap;

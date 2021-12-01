@@ -2,7 +2,7 @@ package bomb.tools.filter;
 
 import java.util.regex.Pattern;
 
-public class Filter {
+public class RegexFilter {
     public static final String LOGIC_REGEX = "[∧∨↓⊻←→↔|]";
 
     public static final Regex SERIAL_CODE_PATTERN = new Regex("\\b[a-zA-Z0-9]{6}\\b"),
@@ -14,7 +14,7 @@ public class Filter {
             CHAR_FILTER = new Regex("[a-zæąåàêęèéîïôöóøœûüŭ]+?", Pattern.CASE_INSENSITIVE),
             ALL_CHAR_FILTER = new Regex("[a-z0-9æąåàêęèéîïôöóøœûüŭ]+?", Pattern.CASE_INSENSITIVE);
 
-    public static String ultimateFilter(String input, Regex pattern) {
+    public static String filter(String input, Regex pattern) {
         pattern.loadText(input);
         return pattern.createFilteredString();
     }
