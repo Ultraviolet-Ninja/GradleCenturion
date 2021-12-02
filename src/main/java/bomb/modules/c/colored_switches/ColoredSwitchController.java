@@ -1,7 +1,7 @@
 package bomb.modules.c.colored_switches;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.ring.ArrayRing;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXToggleButton;
@@ -26,7 +26,7 @@ import static bomb.modules.c.colored_switches.SwitchColor.RED;
 import static bomb.tools.string.StringFormat.ARROW;
 
 public class ColoredSwitchController implements Resettable {
-    private final ReadOnlyRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
+    private final ArrayRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
             fifthButtonRing;
 
     @FXML
@@ -58,8 +58,8 @@ public class ColoredSwitchController implements Resettable {
         fifthButtonRing = createColorCycle();
     }
 
-    private ReadOnlyRing<SwitchColor> createColorCycle() {
-        return new ReadOnlyRing<>(NEUTRAL, RED, ORANGE, GREEN, CYAN, BLUE, MAGENTA);
+    private ArrayRing<SwitchColor> createColorCycle() {
+        return new ArrayRing<>(NEUTRAL, RED, ORANGE, GREEN, CYAN, BLUE, MAGENTA);
     }
 
     public void initialize() {
@@ -84,14 +84,14 @@ public class ColoredSwitchController implements Resettable {
 
     private void setSwitchActions() {
         MFXToggleButton[] buttonArray = getAllSwitches();
-        ReadOnlyRing<SwitchColor>[] rings = getAssociatedRings();
+        ArrayRing<SwitchColor>[] rings = getAssociatedRings();
 
         for (int i = 0; i < buttonArray.length; i++) {
             createSwitchAction(buttonArray[i], rings[i]);
         }
     }
 
-    private void createSwitchAction(MFXToggleButton toggleSwitch, ReadOnlyRing<SwitchColor> associatedRing) {
+    private void createSwitchAction(MFXToggleButton toggleSwitch, ArrayRing<SwitchColor> associatedRing) {
         EventHandler<ActionEvent> action = event -> {
             if (colorModeButton.isSelected()) {
                 MFXToggleButton source = (MFXToggleButton) event.getSource();
@@ -122,8 +122,8 @@ public class ColoredSwitchController implements Resettable {
     }
 
     @SuppressWarnings("unchecked")
-    private ReadOnlyRing<SwitchColor>[] getAssociatedRings() {
-        return new ReadOnlyRing[]{firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
+    private ArrayRing<SwitchColor>[] getAssociatedRings() {
+        return new ArrayRing[]{firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
                 fifthButtonRing};
     }
 
@@ -173,7 +173,7 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private SwitchColor[] getCurrentSwitchColors() {
-        ReadOnlyRing<SwitchColor>[] rings = getAssociatedRings();
+        ArrayRing<SwitchColor>[] rings = getAssociatedRings();
         SwitchColor[] output = new SwitchColor[rings.length];
 
         for (int i = 0; i < rings.length; i++) {
@@ -220,7 +220,7 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void resetRings() {
-        for (ReadOnlyRing<SwitchColor> ring : getAssociatedRings()) {
+        for (ArrayRing<SwitchColor> ring : getAssociatedRings()) {
             ring.reset();
         }
     }

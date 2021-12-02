@@ -13,7 +13,7 @@ public class AVLTreeTest {
         tree = new AVLTree<>();
     }
 
-    @Test(expectedExceptions = UnbalancedEntriesException.class)
+    @Test(enabled = false, expectedExceptions = UnbalancedEntriesException.class)
     public void exceptionTest() throws UnbalancedEntriesException {
         tree = new AVLTree<>(setupList(10), setupStringArray(15));
         tree = new AVLTree<>(setupArray(11), setupStringArray(14));

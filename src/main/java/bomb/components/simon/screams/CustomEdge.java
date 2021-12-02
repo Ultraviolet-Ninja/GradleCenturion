@@ -2,7 +2,7 @@ package bomb.components.simon.screams;
 
 import bomb.abstractions.Resettable;
 import bomb.modules.s.simon.SimonColors.ScreamColor;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.ring.ArrayRing;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.animation.FadeTransition;
 import javafx.animation.ScaleTransition;
@@ -20,12 +20,12 @@ public class CustomEdge extends Polygon implements Resettable {
     private boolean selectorMode;
     private List<CustomEdge> internalReference;
 
-    private final ReadOnlyRing<ScreamColor> colors;
+    private final ArrayRing<ScreamColor> colors;
 
     public CustomEdge(){
         super();
         selectorMode = false;
-        colors = new ReadOnlyRing<>(6);
+        colors = new ArrayRing<>(6);
         fill();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("edge.fxml"));
         loader.setRoot(this);

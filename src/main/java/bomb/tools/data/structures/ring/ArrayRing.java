@@ -1,44 +1,38 @@
 package bomb.tools.data.structures.ring;
 
-import java.nio.BufferOverflowException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class ReadOnlyRing<E> implements Iterable<E> {
+public class ArrayRing<E> implements Iterable<E> {
     private final List<E> internalStructure;
-    private final int capacity;
 
     private int headIndex;
 
-    public ReadOnlyRing(int capacity) {
+    public ArrayRing(int capacity) {
         if (capacity < 1)
             throw new IllegalArgumentException();
         internalStructure = new ArrayList<>(capacity);
-        this.capacity = capacity;
         headIndex = 0;
     }
 
     @SafeVarargs
-    public ReadOnlyRing(E... elements) {
+    public ArrayRing(E... elements) {
         this(elements.length);
         for (E element : elements)
             add(element);
     }
 
-    public ReadOnlyRing(Collection<E> c) {
+    public ArrayRing(Collection<E> c) {
         if (c.size() < 1)
             throw new IllegalArgumentException();
         internalStructure = new ArrayList<>(c);
-        capacity = c.size();
         headIndex = 0;
     }
 
-    public void add(E element) throws BufferOverflowException {
-        if (internalStructure.size() == capacity)
-            throw new BufferOverflowException();
+    public void add(E element) {
         internalStructure.add(element);
     }
 
@@ -52,34 +46,35 @@ public class ReadOnlyRing<E> implements Iterable<E> {
             return foundIndex;
         if (foundIndex >= headIndex)
             return foundIndex - headIndex;
-        return (capacity - Math.abs(foundIndex - headIndex)) % capacity;
+        int size = internalStructure.size();
+        return (size - Math.abs(foundIndex - headIndex)) % size;
     }
 
     public E getHeadData() {
         return internalStructure.get(headIndex);
     }
 
-    public int getCapacity() {
-        return capacity;
+    public int getSize() {
+        return internalStructure.size();
     }
 
     public void rotateClockwise() {
         headIndex++;
-        headIndex %= capacity;
+        headIndex %= internalStructure.size();
     }
 
     public void rotateClockwise(int rotations) {
         headIndex += rotations;
-        headIndex %= capacity;
+        headIndex %= internalStructure.size();
     }
 
     public void rotateCounterClockwise() {
-        if (--headIndex < 0) headIndex += capacity;
+        if (--headIndex < 0) headIndex += internalStructure.size();
     }
 
     public void rotateCounterClockwise(int rotations) {
         headIndex -= rotations;
-        while (headIndex < 0) headIndex += capacity;
+        while (headIndex < 0) headIndex += internalStructure.size();
     }
 
     @Override
@@ -96,7 +91,7 @@ public class ReadOnlyRing<E> implements Iterable<E> {
     }
 
     private List<E> reorderList() {
-        List<E> temp = internalStructure.subList(headIndex, capacity);
+        List<E> temp = internalStructure.subList(headIndex, internalStructure.size());
         temp.addAll(internalStructure.subList(0, headIndex));
         return temp;
     }

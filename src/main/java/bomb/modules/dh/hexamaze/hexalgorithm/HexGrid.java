@@ -3,7 +3,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.ring.ArrayRing;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -17,14 +17,14 @@ import java.util.List;
 public class HexGrid extends AbstractHexagon {
     public static final byte STANDARD_SIDE_LENGTH = 4;
 
-    private final ReadOnlyRing<Color> colorRing;
+    private final ArrayRing<Color> colorRing;
 
     /**
      * Initializes a Hex object with a side length of 4, representing what the Defuser sees on thr bomb
      */
     public HexGrid() {
         super(new HexagonDataStructure(STANDARD_SIDE_LENGTH));
-        colorRing = new ReadOnlyRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
+        colorRing = new ArrayRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
     }
 
     /**
@@ -37,7 +37,7 @@ public class HexGrid extends AbstractHexagon {
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
 
         hexagon = grid;
-        colorRing = new ReadOnlyRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
+        colorRing = new ArrayRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
         for (int i = 0; i < neededRotations; i++) rotateColorOrder();
     }
 
@@ -71,7 +71,7 @@ public class HexGrid extends AbstractHexagon {
         colorRing.rotateCounterClockwise();
     }
 
-    public ReadOnlyRing<Color> getRing() {
+    public ArrayRing<Color> getRing() {
         return colorRing;
     }
 
