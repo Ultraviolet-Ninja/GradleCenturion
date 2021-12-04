@@ -181,7 +181,7 @@ public class WidgetController {
     }
 
     private void unselectPortToggles() {
-        FacadeFX.unselectFromMultipleToggleGroup(
+        FacadeFX.resetToggleGroups(
                 bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup,
                 msaGroup, nsaGroup, sigGroup, sndGroup, trnGroup
         );

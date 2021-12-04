@@ -86,6 +86,6 @@ public class TheBulbController implements Resettable {
     public void reset() {
         FacadeFX.disable(submitButton);
         FacadeFX.clearText(bulbResults);
-        FacadeFX.unselectFromMultipleToggleGroup(colorGroup, opacityGroup, luminosityGroup);
+        FacadeFX.resetToggleGroups(colorGroup, opacityGroup, luminosityGroup);
     }
 }

@@ -165,7 +165,7 @@ public class HexamazeController implements Resettable {
     public void reset() {
         FacadeFX.clearText(exitDirectionLabel);
         Hexamaze.resetHexPanelList();
-        FacadeFX.unselectFromMultipleToggleGroup(hexGroup, hexColorGroup);
+        FacadeFX.resetToggleGroups(hexGroup, hexColorGroup);
         FacadeFX.disableMultiple(redButton, yellowButton, greenButton, cyanButton, blueButton, pinkButton);
     }
 }

@@ -91,6 +91,11 @@ public class FacadeFX {
         group.selectToggle(null);
     }
 
+    public static void resetToggleGroups(ToggleGroup... groups) {
+        for (ToggleGroup group : groups)
+            resetToggleGroup(group);
+    }
+
     public static void resetSliderValues(Slider... sliders) {
         for (Slider slider : sliders)
             slider.setValue(0.0);
@@ -110,17 +115,5 @@ public class FacadeFX {
     public static void setToggleButtonsUnselected(ToggleButton... toggleButtons) {
         for (ToggleButton button : toggleButtons)
             button.setSelected(false);
-    }
-
-    //TODO Check if these do the same thing
-    public static void unselectFromToggleGroup(ToggleGroup group) {
-        Toggle temp = group.getSelectedToggle();
-        if (temp != null)
-            temp.setSelected(false);
-    }
-
-    public static void unselectFromMultipleToggleGroup(ToggleGroup... groups) {
-        for (ToggleGroup group : groups)
-            unselectFromToggleGroup(group);
     }
 }
