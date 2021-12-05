@@ -204,19 +204,21 @@ public class ColoredSwitchController implements Resettable {
         resetSwitches();
         ColoredSwitches.reset();
         detectRadioButtonChanges();
+        colorModeButton.setSelected(false);
+        colorModeButton.setText("Normal Switch Flip");
         FacadeFX.disable(finalMoveSubmitButton);
         FacadeFX.clearMultipleTextFields(preemptiveOutputField, finalMoveOutputField);
-        FacadeFX.unselectFromMultipleToggleGroup(firstLightGroup, secondLightGroup, thirdLightGroup, fourthLightGroup,
+        FacadeFX.resetToggleGroups(firstLightGroup, secondLightGroup, thirdLightGroup, fourthLightGroup,
                 fifthLightGroup);
     }
 
     private void resetSwitches() {
         MFXToggleButton[] buttons = getAllSwitches();
-        FacadeFX.setToggleButtonsUnselected(buttons);
         for (MFXToggleButton button : buttons) {
             button.setId(NEUTRAL.getCssId());
             button.applyCss();
         }
+        FacadeFX.setToggleButtonsUnselected(buttons);
     }
 
     private void resetRings() {
