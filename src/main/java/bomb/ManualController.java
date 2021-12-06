@@ -1,6 +1,7 @@
 package bomb;
 
 import bomb.tools.filter.Regex;
+import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
@@ -20,7 +21,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -177,13 +177,8 @@ public class ManualController {
         return loadToObserver(loader, resetObserver);
     }
 
-    private Region loadToObserver(FXMLLoader loader, ResetObserver resetObserver) {
-        Region output;
-        try {
-            output = loader.load();
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e);
-        }
+    private Region loadToObserver(FXMLLoader loader, ResetObserver resetObserver) throws IllegalArgumentException {
+        Region output = FacadeFX.load(loader);
 
         String location = loader.getLocation().toString();
         if (!location.contains("widget")) resetObserver.addController(loader);

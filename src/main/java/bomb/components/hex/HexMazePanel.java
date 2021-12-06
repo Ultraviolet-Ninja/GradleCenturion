@@ -3,6 +3,7 @@ package bomb.components.hex;
 import bomb.abstractions.Resettable;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -12,7 +13,6 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
-import java.io.IOException;
 import java.util.EnumSet;
 
 public class HexMazePanel extends Pane implements Resettable {
@@ -31,13 +31,10 @@ public class HexMazePanel extends Pane implements Resettable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("panel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-            makeWallsTransparent();
-            peg.setFill(DEFAULT_PEG_COLOR);
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
+
+        makeWallsTransparent();
+        peg.setFill(DEFAULT_PEG_COLOR);
     }
 
     public void fillPeg(Color toFill) {

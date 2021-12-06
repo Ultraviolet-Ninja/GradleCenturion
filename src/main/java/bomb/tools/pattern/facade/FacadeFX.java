@@ -4,6 +4,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,7 +15,9 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
 
+import java.io.IOException;
 import java.util.function.Function;
 
 public class FacadeFX {
@@ -85,6 +88,22 @@ public class FacadeFX {
 
     public static boolean hasSelectedToggle(ToggleGroup group) {
         return group.getSelectedToggle() != null;
+    }
+
+    public static Region load(FXMLLoader loader) throws IllegalArgumentException {
+        try {
+            return loader.load();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static void loadComponent(FXMLLoader loader) throws IllegalArgumentException {
+        try {
+            loader.load();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
     }
 
     public static void resetToggleGroup(ToggleGroup group) {

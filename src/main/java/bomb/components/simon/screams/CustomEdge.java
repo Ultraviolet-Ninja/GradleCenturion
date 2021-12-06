@@ -11,7 +11,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
 
-import java.io.IOException;
 import java.util.List;
 
 import static javafx.scene.paint.Color.WHITE;
@@ -30,11 +29,7 @@ public class CustomEdge extends Polygon implements Resettable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("edge.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
     }
 
     private void fill(){

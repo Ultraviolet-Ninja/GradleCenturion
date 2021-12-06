@@ -1,9 +1,10 @@
 package bomb.modules.t.two_bit;
 
 import bomb.Widget;
-import bomb.enumerations.Port;
 import bomb.modules.s.souvenir.Souvenir;
 
+import static bomb.enumerations.Port.RCA;
+import static bomb.enumerations.Port.RJ45;
 import static bomb.modules.t.two_bit.TwoBitState.SECOND_QUERY;
 import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
@@ -27,7 +28,8 @@ public class TwoBit extends Widget {
             {"de", "dd", "ev", "te", "zd", "bb", "pc", "bd", "kc", "zb"},
             {"eg", "bc", "tc", "ze", "zc", "gp", "et", "vc", "tb", "vz"},
             {"ez", "ek", "dv", "cg", "ve", "dp", "bk", "pg", "gk", "gz"},
-            {"kt", "ct", "zz", "vg", "gd", "cp", "be", "zt", "vk", "dc"}};
+            {"kt", "ct", "zz", "vg", "gd", "cp", "be", "zt", "vk", "dc"}
+    };
 
     private static TwoBitState currentState = SECOND_QUERY;
 
@@ -49,9 +51,10 @@ public class TwoBit extends Widget {
                 numbersInSerialCode.substring(numbersInSerialCode.length() - 1)
         );
 
-        if (getPortQuantity(Port.RCA) > 0 && getPortQuantity(Port.RJ45) == 0) alphabetBaseValue *= 2;
+        if (getPortQuantity(RCA) > 0 && getPortQuantity(RJ45) == 0) alphabetBaseValue *= 2;
 
         int[] bits = translateToBitCoordinates(String.valueOf(alphabetBaseValue % 100));
+
         if (isSouvenirActive)
             Souvenir.addRelic("TwoBit Initial Query", CODE_GRID[bits[0]][bits[1]]);
 

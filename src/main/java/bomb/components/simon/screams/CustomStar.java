@@ -3,12 +3,12 @@ package bomb.components.simon.screams;
 import bomb.abstractions.Resettable;
 import bomb.modules.s.simon.SimonColors.ScreamColor;
 import bomb.tools.event.HoverHandler;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -25,11 +25,7 @@ public class CustomStar extends Pane implements Resettable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("star.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
         initializeEdges();
     }
 

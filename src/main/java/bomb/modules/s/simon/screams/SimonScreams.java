@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
  *
  */
 public class SimonScreams extends Widget {
+    private static final int MAX_OUTPUT_RULES = 6;
     private static final List<Integer> CURRENT_OUTPUT_NUMBERS;
     private static final String[][]
             // The output colors that depend on the edgework conditions and enum Letter
@@ -33,7 +34,7 @@ public class SimonScreams extends Widget {
     static {
         initialized = false;
         stage = 0;
-        CURRENT_OUTPUT_NUMBERS = new ArrayList<>();
+        CURRENT_OUTPUT_NUMBERS = new ArrayList<>(MAX_OUTPUT_RULES);
     }
 
     /**

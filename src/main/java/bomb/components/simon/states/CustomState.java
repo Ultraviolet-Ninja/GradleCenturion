@@ -1,14 +1,13 @@
 package bomb.components.simon.states;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
 import javafx.util.Duration;
-
-import java.io.IOException;
 
 public class CustomState extends Pane implements Resettable {
     @FXML private Arc button;
@@ -18,11 +17,7 @@ public class CustomState extends Pane implements Resettable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("state.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
         button.setOnMouseClicked(event -> press());
     }
 
