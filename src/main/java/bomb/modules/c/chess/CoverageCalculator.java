@@ -11,12 +11,13 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import static bomb.modules.c.chess.ChessBoard.BOARD_LENGTH;
 import static bomb.modules.c.chess.ChessPiece.BISHOP;
 
 public class CoverageCalculator {
     public static Coordinates findNonCoveredTileLocation(ChessBoard board) {
-        for (int x = 0; x < ChessBoard.BOARD_LENGTH; x++) {
-            for (int y = 0; y < ChessBoard.BOARD_LENGTH; y++) {
+        for (int x = 0; x < BOARD_LENGTH; x++) {
+            for (int y = 0; y < BOARD_LENGTH; y++) {
                 Coordinates currentLocation = new Coordinates(x, y);
                 ChessPiece currentPiece = board.getTile(currentLocation).getCurrentPiece();
 
@@ -33,8 +34,8 @@ public class CoverageCalculator {
     private static Coordinates findNonCoveredTile(ChessBoard board) throws IllegalStateException {
         List<Coordinates> uncoveredTiles = new ArrayList<>();
 
-        for (int x = 0; x < ChessBoard.BOARD_LENGTH; x++) {
-            for (int y = 0; y < ChessBoard.BOARD_LENGTH; y++) {
+        for (int x = 0; x < BOARD_LENGTH; x++) {
+            for (int y = 0; y < BOARD_LENGTH; y++) {
                 if (!board.isTileCovered(x, y))
                     uncoveredTiles.add(new Coordinates(x, y));
             }
@@ -86,7 +87,7 @@ public class CoverageCalculator {
                 downwardMoveList = new ArrayList<>(),
                 upwardMoveList = new ArrayList<>();
 
-        for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
+        for (int i = 1; i < BOARD_LENGTH; i++) {
             leftwardMoveList.add(originalPosition.immutableAdd(-i, 0));
             rightwardMoveList.add(originalPosition.immutableAdd(i, 0));
             upwardMoveList.add(originalPosition.immutableAdd(0, -i));
@@ -108,7 +109,7 @@ public class CoverageCalculator {
                 downLeftMoveList = new ArrayList<>(),
                 downRightMoveList = new ArrayList<>();
 
-        for (int i = 1; i < ChessBoard.BOARD_LENGTH; i++) {
+        for (int i = 1; i < BOARD_LENGTH; i++) {
             upLeftMoveList.add(originalPosition.immutableAdd(-i, -i));
             upRightMoveList.add(originalPosition.immutableAdd(i, -i));
             downLeftMoveList.add(originalPosition.immutableAdd(-i, i));
@@ -162,8 +163,8 @@ public class CoverageCalculator {
 
     private static List<Coordinates> filterOutOfBoundsMoves(Collection<Coordinates> moveList) {
         return moveList.stream()
-                .filter(coordinates -> coordinates.getX() >= 0 && coordinates.getX() < ChessBoard.BOARD_LENGTH)
-                .filter(coordinates -> coordinates.getY() >= 0 && coordinates.getY() < ChessBoard.BOARD_LENGTH)
+                .filter(coordinates -> coordinates.getX() >= 0 && coordinates.getX() < BOARD_LENGTH)
+                .filter(coordinates -> coordinates.getY() >= 0 && coordinates.getY() < BOARD_LENGTH)
                 .collect(Collectors.toList());
     }
 

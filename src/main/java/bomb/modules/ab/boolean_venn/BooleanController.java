@@ -23,8 +23,8 @@ public class BooleanController implements Resettable {
     private StringBuilder currentOperation;
 
     @FXML
-    private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor, booleanXnor,
-            booleanImpliedBy;
+    private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand,
+            booleanNor, booleanXnor, booleanImpliedBy;
 
     @FXML
     private Circle a, b, c, ab, bc, ac, all, not;
@@ -151,8 +151,9 @@ public class BooleanController implements Resettable {
     private void resetModule() {
         overwriteOperationText(DEFAULT_TEXT);
         writeOutToTextField();
-        FacadeFX.enableMultiple(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
-                booleanXnor, booleanImpliedBy);
+        FacadeFX.enableMultiple(
+                booleanAnd, booleanOr, booleanXor, booleanImplies,
+                booleanNand, booleanNor, booleanXnor, booleanImpliedBy);
         priorityToggle.setSelected(false);
         priorityToggle.setText("AB Priority");
 

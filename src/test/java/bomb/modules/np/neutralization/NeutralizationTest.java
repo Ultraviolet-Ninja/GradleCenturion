@@ -13,9 +13,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
-import static bomb.modules.np.neutralization.Chemical.Base.Ammonia;
-import static bomb.modules.np.neutralization.Chemical.Base.Lithium_Hydroxide;
-import static bomb.modules.np.neutralization.Chemical.Base.Potassium_Hydroxide;
+import static bomb.modules.np.neutralization.Chemical.Base.AMMONIA;
+import static bomb.modules.np.neutralization.Chemical.Base.LITHIUM_HYDROXIDE;
+import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Neutralization.FILTER_TEXT;
 import static bomb.modules.np.neutralization.Neutralization.NO_FILTER_TEXT;
 import static org.testng.Assert.assertEquals;
@@ -43,7 +43,7 @@ public class NeutralizationTest {
     @Test
     public void trainingVideoTestOne() {
         setupOne();
-        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", FILTER_TEXT});
+        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", AMMONIA.getFormula(), "8", FILTER_TEXT});
     }
 
     private void setupOne() {
@@ -61,7 +61,7 @@ public class NeutralizationTest {
     @Test
     public void trainingVideoTestTwo() {
         setupTwo();
-        assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
+        assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", LITHIUM_HYDROXIDE.getFormula(),
                 "48", NO_FILTER_TEXT});
     }
 
@@ -80,11 +80,11 @@ public class NeutralizationTest {
         ConditionSetter second = BombSimulations::theGreatBerateVideoTwo;
         ConditionSetter third = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
-                {first, 5, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
+                {first, 5, Color.BLUE, new String[]{"Lithium Hydroxide", LITHIUM_HYDROXIDE.getFormula(),
                         "12", NO_FILTER_TEXT}},
-                {second, 5, Color.RED, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
+                {second, 5, Color.RED, new String[]{"Lithium Hydroxide", LITHIUM_HYDROXIDE.getFormula(),
                         "4", FILTER_TEXT}},
-                {third, 10, Color.YELLOW, new String[]{"Potassium Hydroxide", Potassium_Hydroxide.getFormula(),
+                {third, 10, Color.YELLOW, new String[]{"Potassium Hydroxide", POTASSIUM_HYDROXIDE.getFormula(),
                         "4", NO_FILTER_TEXT}}
         };
     }
@@ -98,7 +98,7 @@ public class NeutralizationTest {
     private void assertEqual(int volume, Color color, String[] expected) {
         String[] actual = Neutralization.titrate(volume, color).split("-");
         for (int i = 0; i < expected.length; i++)
-            assertEquals(expected[i], actual[i]);
+            assertEquals(expected[i].toLowerCase(), actual[i].toLowerCase());
     }
 
     @AfterClass

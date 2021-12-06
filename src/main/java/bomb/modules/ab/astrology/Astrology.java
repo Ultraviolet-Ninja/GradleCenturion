@@ -56,9 +56,9 @@ public class Astrology extends Widget {
         checkInputHasAllThreeTypes(symbols);
         Arrays.sort(symbols);
 
-        int first = ELEMENT_CELESTIAL_GRID[symbols[ELEMENT_INDEX].getIndex()][symbols[CELESTIAL_INDEX].getIndex()],
-                second = ELEMENT_ZODIAC_GRID[symbols[ELEMENT_INDEX].getIndex()][symbols[ZODIAC_INDEX].getIndex()],
-                third = CELESTIAL_ZODIAC_GRID[symbols[CELESTIAL_INDEX].getIndex()][symbols[ZODIAC_INDEX].getIndex()];
+        int first = ELEMENT_CELESTIAL_GRID[symbols[ELEMENT_INDEX].getIndex()][symbols[CELESTIAL_INDEX].getIndex()];
+        int second = ELEMENT_ZODIAC_GRID[symbols[ELEMENT_INDEX].getIndex()][symbols[ZODIAC_INDEX].getIndex()];
+        int third = CELESTIAL_ZODIAC_GRID[symbols[CELESTIAL_INDEX].getIndex()][symbols[ZODIAC_INDEX].getIndex()];
 
         int results = first + second + third;
         results = checkMatchingSerialCodeLetters(results, symbols);

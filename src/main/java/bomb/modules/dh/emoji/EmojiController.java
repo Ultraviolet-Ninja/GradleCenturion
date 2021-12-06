@@ -46,7 +46,7 @@ public class EmojiController implements Resettable {
     private Consumer<ActionEvent> createEmojiButtonAction() {
         return event -> {
             String emojiText = BUTTON_NAME_FROM_EVENT.apply(event);
-            Emojis current = Emojis.getEmojiFromText(emojiText);
+            Emoji current = Emoji.getEmojiFromText(emojiText);
             internalEquation.append(Objects.requireNonNull(current).getLabel());
             exportToUI();
             handleState();

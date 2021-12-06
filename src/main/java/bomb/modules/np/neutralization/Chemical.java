@@ -2,10 +2,10 @@ package bomb.modules.np.neutralization;
 
 public class Chemical {
     public enum Acid {
-        Hydrofluoric_Acid(9, "HF", "F"),
-        Hydrochoric_Acid(17, "HCl", "Cl"),
-        Hydrobromic_Acid(35, "HBr", "Br"),
-        Hydroiodic_Acid(53, "HI", "I");
+        HYDROFLUORIC_ACID(9, "HF", "F"),
+        HYDROCHORIC_ACID(17, "HCl", "Cl"),
+        HYDROBROMIC_ACID(35, "HBr", "Br"),
+        HYDROIODIC_ACID(53, "HI", "I");
 
         public String getFormula() {
             return formula;
@@ -30,10 +30,10 @@ public class Chemical {
     }
 
     public enum Base {
-        Ammonia(1, "NH3", "H"),
-        Lithium_Hydroxide(3, "LiOH", "Li"),
-        Sodium_Hydroxide(11, "NaOH", "Na"),
-        Potassium_Hydroxide(19, "KOH", "K");
+        AMMONIA(1, "NH3", "H"),
+        LITHIUM_HYDROXIDE(3, "LiOH", "Li"),
+        SODIUM_HYDROXIDE(11, "NaOH", "Na"),
+        POTASSIUM_HYDROXIDE(19, "KOH", "K");
 
         public String getFormula() {
             return formula;

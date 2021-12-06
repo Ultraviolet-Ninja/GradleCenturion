@@ -1,12 +1,13 @@
 package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.tools.logic.LogicOperator;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.NSA;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
 
@@ -62,13 +63,13 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] thirdBits() {
-        return new boolean[]{hasLitIndicator(Indicator.NSA), numHolders > 1};
+        return new boolean[]{hasLitIndicator(NSA), numHolders > 1};
     }
 
     private static boolean[] forthBits() throws IllegalArgumentException {
         if (numModules == 0 || numStartingMinutes == 0) throw new IllegalArgumentException(
                 "Number of starting modules and minutes should be filled!");
-        return new boolean[]{numModules > numStartingMinutes, hasLitIndicator(Indicator.BOB)};
+        return new boolean[]{numModules > numStartingMinutes, hasLitIndicator(BOB)};
     }
 
     private static boolean[] fifthBits() {

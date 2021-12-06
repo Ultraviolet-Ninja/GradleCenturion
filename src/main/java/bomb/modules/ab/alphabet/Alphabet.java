@@ -53,8 +53,7 @@ public class Alphabet extends Widget {
     }
 
     private static void validateInput(String input) throws IllegalArgumentException {
-        Regex regex = new Regex("[a-zA-Z]{4}", input);
-        if (!regex.matchesRegex())
+        if (!input.matches("[a-zA-Z]{4}"))
             throw new IllegalArgumentException("Input is not 4 letters");
         if (hasRepeatedCharacters(input))
             throw new IllegalArgumentException("Input can't have repeated characters");

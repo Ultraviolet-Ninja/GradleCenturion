@@ -1,8 +1,6 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.tools.filter.Regex;
 import bomb.tools.filter.RegexFilter;
 
@@ -12,12 +10,14 @@ import java.util.function.IntUnaryOperator;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Port.SERIAL;
 
 public class ForgetMeNot extends Widget {
     private static final IntUnaryOperator LEAST_SIG_DIGIT = num -> num % 10;
     private static final IntUnaryOperator MOST_SIG_DIGIT =
             num -> (int) (num / Math.pow(10, Math.floor(Math.log10(num))));
-    private static final List<Byte> FINAL_CODE = new ArrayList<>();
+    private static final List<Byte> FINAL_CODE = new ArrayList<>(100);
 
     private static byte largestSerialCodeNumber = -1;
 
@@ -45,20 +45,23 @@ public class ForgetMeNot extends Widget {
     }
 
     private static int createFirstNumber(int stageNumber) {
-        if (hasUnlitIndicator(Indicator.CAR))
+        if (hasUnlitIndicator(CAR))
             return stageNumber + 2;
 
-        if (countIndicators(UNLIT) > countIndicators(LIT))
+        int numLitIndicators = countIndicators(LIT);
+        int numUnlitIndicators = countIndicators(UNLIT);
+
+        if (numUnlitIndicators > numLitIndicators)
             return stageNumber + 7;
 
-        if (countIndicators(UNLIT) == 0)
-            return stageNumber + countIndicators(LIT);
+        if (numUnlitIndicators == 0)
+            return stageNumber + numLitIndicators;
 
         return stageNumber + getSerialCodeLastDigit();
     }
 
     private static int createSecondNumber(int stageNumber) {
-        if (doesPortExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
+        if (doesPortExists(SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
         return stageNumber + FINAL_CODE.get(0) +

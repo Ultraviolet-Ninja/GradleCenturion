@@ -14,6 +14,10 @@ import javafx.scene.paint.Color;
 import static bomb.modules.np.neutralization.Neutralization.OUTPUT_SEPARATOR;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
+import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.GREEN;
+import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.YELLOW;
 
 public class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;
@@ -77,19 +81,19 @@ public class NeutralizationController implements Resettable {
         switch (FacadeFX.getToggleName(acidColors)) {
             case "Red" -> {
                 testTube.setStyle(RED_STYLE);
-                solutionColor = Color.RED;
+                solutionColor = RED;
             }
             case "Yellow" -> {
                 testTube.setStyle(YELLOW_STYLE);
-                solutionColor = Color.YELLOW;
+                solutionColor = YELLOW;
             }
             case "Green" -> {
                 testTube.setStyle(GREEN_STYLE);
-                solutionColor = Color.GREEN;
+                solutionColor = GREEN;
             }
             default -> {
                 testTube.setStyle(BLUE_STYLE);
-                solutionColor = Color.BLUE;
+                solutionColor = BLUE;
             }
         }
         toggleLock();

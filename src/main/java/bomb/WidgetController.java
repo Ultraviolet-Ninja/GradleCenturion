@@ -37,7 +37,8 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOG
 
 public class WidgetController {
     @FXML
-    private MFXSlider dviPortSlider, parallelPortSlider, psPortSlider, rjPortSlider, serialPortSlider, rcaPortSlider;
+    private MFXSlider dviPortSlider, parallelPortSlider, psPortSlider, rjPortSlider,
+            serialPortSlider, rcaPortSlider;
 
     @FXML
     private MFXSlider doubleABatteries, dBatteries, batteryHolders, portPlates;
@@ -49,8 +50,8 @@ public class WidgetController {
     private MFXTextField serialCodeField, numberOfMinutesField, numberOfModulesField;
 
     @FXML
-    private ToggleGroup bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup, msaGroup, nsaGroup, sigGroup,
-            sndGroup, trnGroup;
+    private ToggleGroup bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup,
+            msaGroup, nsaGroup, sigGroup, sndGroup, trnGroup;
 
     public void initialize() {
         injectTextFormatter();

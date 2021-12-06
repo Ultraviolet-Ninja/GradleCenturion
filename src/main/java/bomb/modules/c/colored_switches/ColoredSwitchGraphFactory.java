@@ -26,10 +26,7 @@ public class ColoredSwitchGraphFactory {
         CSVReader csvReader = createReader();
         Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])]");
 
-        String[] nextRecord;
-        while ((nextRecord = csvReader.readNext()) != null) {
-            nodeList.add(buildNode(nextRecord, connectionFinder));
-        }
+        csvReader.forEach(record -> nodeList.add(buildNode(record, connectionFinder)));
         csvReader.close();
     }
 

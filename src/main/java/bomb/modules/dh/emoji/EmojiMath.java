@@ -8,10 +8,13 @@ import bomb.tools.filter.Regex;
  * It's simple math, but replacing numbers with text emojis.
  */
 public class EmojiMath extends Widget {
-    private static final String EMOJI_REGEX = Emojis.generateCaptureGroup();
-    private static final Regex VALIDATION = new Regex("(?<![:|()=])" + EMOJI_REGEX + "([+\\-])" + EMOJI_REGEX +
-            "(?![:|()=])");
+    private static final String EMOJI_REGEX;
+    private static final Regex VALIDATION;
 
+    static {
+        EMOJI_REGEX = Emoji.generateCaptureGroup();
+        VALIDATION = new Regex("(?<![:|()=])" + EMOJI_REGEX + "([+\\-])" + EMOJI_REGEX + "(?![:|()=])");
+    }
 
     /**
      * Calculates the sum/difference from the equation of emojis
@@ -49,7 +52,7 @@ public class EmojiMath extends Widget {
     }
 
     private static String findEmoji(String emoji) {
-        for (Emojis emo : Emojis.values()) {
+        for (Emoji emo : Emoji.values()) {
             if (emo.getLabel().equals(emoji)) {
                 return String.valueOf(emo.ordinal());
             }

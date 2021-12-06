@@ -26,8 +26,8 @@ import static bomb.modules.c.colored_switches.SwitchColor.RED;
 import static bomb.tools.string.StringFormat.ARROW;
 
 public class ColoredSwitchController implements Resettable {
-    private final ArrayRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
-            fifthButtonRing;
+    private final ArrayRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing,
+            fourthButtonRing, fifthButtonRing;
 
     @FXML
     private JFXRadioButton firstOnLight, secondOnLight, thirdOnLight, fourthOnLight, fifthOnLight;

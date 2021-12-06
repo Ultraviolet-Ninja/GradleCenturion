@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.asList;
+
 public class ArrayRing<E> implements Iterable<E> {
     private final List<E> internalStructure;
 
@@ -21,8 +23,7 @@ public class ArrayRing<E> implements Iterable<E> {
     @SafeVarargs
     public ArrayRing(E... elements) {
         this(elements.length);
-        for (E element : elements)
-            add(element);
+        internalStructure.addAll(asList(elements));
     }
 
     public ArrayRing(Collection<E> c) {
