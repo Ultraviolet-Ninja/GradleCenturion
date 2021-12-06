@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import bomb.components.hex.HexTile?>
+<?import javafx.scene.layout.Pane?>
+<fx:root type="javafx.scene.layout.Pane" prefHeight="200.0" prefWidth="200.0"
+         stylesheets="@../../css/dh/hexamaze.css" xmlns="http://javafx.com/javafx/15.0.1"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <HexTile fx:id="fourOne" layoutX="328.0" layoutY="26.0"/>
+    <HexTile fx:id="fourTwo" layoutX="328.0" layoutY="126.0"/>
+    <HexTile fx:id="fourThree" layoutX="328.0" layoutY="226.0"/>
+    <HexTile fx:id="fourFour" layoutX="328.0" layoutY="326.0"/>
+    <HexTile fx:id="fourFive" layoutX="328.0" layoutY="426.0"/>
+    <HexTile fx:id="fourSix" layoutX="328.0" layoutY="526.0"/>
+    <HexTile fx:id="fourSeven" layoutX="328.0" layoutY="626.0"/>
+    <HexTile fx:id="threeOne" layoutX="248.0" layoutY="77.0"/>
+    <HexTile fx:id="twoOne" layoutX="168.0" layoutY="128.0"/>
+    <HexTile fx:id="oneOne" layoutX="88.0" layoutY="179.0"/>
+    <HexTile fx:id="fiveOne" layoutX="408.0" layoutY="76.0"/>
+    <HexTile fx:id="threeTwo" layoutX="248.0" layoutY="177.0"/>
+    <HexTile fx:id="twoTwo" layoutX="168.0" layoutY="228.0"/>
+    <HexTile fx:id="threeThree" layoutX="248.0" layoutY="277.0"/>
+    <HexTile fx:id="threeSix" layoutX="248.0" layoutY="577.0"/>
+    <HexTile fx:id="threeFour" layoutX="248.0" layoutY="377.0"/>
+    <HexTile fx:id="oneTwo" layoutX="88.0" layoutY="279.0"/>
+    <HexTile fx:id="twoThree" layoutX="168.0" layoutY="328.0"/>
+    <HexTile fx:id="oneThree" layoutX="88.0" layoutY="379.0"/>
+    <HexTile fx:id="oneFour" layoutX="88.0" layoutY="479.0"/>
+    <HexTile fx:id="twoFour" layoutX="168.0" layoutY="428.0"/>
+    <HexTile fx:id="threeFive" layoutX="248.0" layoutY="477.0"/>
+    <HexTile fx:id="twoFive" layoutX="168.0" layoutY="528.0"/>
+    <HexTile fx:id="fiveTwo" layoutX="408.0" layoutY="176.0"/>
+    <HexTile fx:id="fiveThree" layoutX="408.0" layoutY="276.0"/>
+    <HexTile fx:id="fiveFour" layoutX="408.0" layoutY="376.0"/>
+    <HexTile fx:id="fiveFive" layoutX="408.0" layoutY="476.0"/>
+    <HexTile fx:id="fiveSix" layoutX="408.0" layoutY="576.0"/>
+    <HexTile fx:id="sixFive" layoutX="488.0" layoutY="526.0"/>
+    <HexTile fx:id="sevenFour" layoutX="568.0" layoutY="476.0"/>
+    <HexTile fx:id="sixFour" layoutX="488.0" layoutY="426.0"/>
+    <HexTile fx:id="sevenThree" layoutX="568.0" layoutY="376.0"/>
+    <HexTile fx:id="sixThree" layoutX="488.0" layoutY="326.0"/>
+    <HexTile fx:id="sixTwo" layoutX="488.0" layoutY="226.0"/>
+    <HexTile fx:id="sixOne" layoutX="488.0" layoutY="126.0"/>
+    <HexTile fx:id="sevenOne" layoutX="568.0" layoutY="176.0"/>
+    <HexTile fx:id="sevenTwo" layoutX="568.0" layoutY="276.0"/>
+</fx:root>

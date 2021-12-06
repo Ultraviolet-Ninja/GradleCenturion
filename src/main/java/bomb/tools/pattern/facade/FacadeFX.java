@@ -135,4 +135,22 @@ public class FacadeFX {
         for (ToggleButton button : toggleButtons)
             button.setSelected(false);
     }
+
+    public static void setVisible(Node node) {
+        node.setOpacity(1.0);
+    }
+
+    public static void setNodesVisible(Node ... nodes) {
+        for (Node node : nodes)
+            setVisible(node);
+    }
+
+    public static void setInvisible(Node node) {
+        node.setOpacity(0.0);
+    }
+
+    public static void setNodesInvisible(Node ... nodes) {
+        for (Node node : nodes)
+            setInvisible(node);
+    }
 }
