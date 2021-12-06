@@ -27,7 +27,8 @@ public class ColoredSwitchesTest {
         };
     }
 
-    @Test(dataProvider = "preemptiveMoveExceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "preemptiveMoveExceptionTestProvider",
+            expectedExceptions = IllegalArgumentException.class)
     public void preemptiveMoveTest(byte startingState) {
         ColoredSwitches.producePreemptiveMoveList(startingState);
     }
@@ -41,7 +42,8 @@ public class ColoredSwitchesTest {
         };
     }
 
-    @Test(dataProvider = "finalMoveListExceptionTestProvider", expectedExceptions = {IllegalStateException.class, IllegalArgumentException.class})
+    @Test(dataProvider = "finalMoveListExceptionTestProvider",
+            expectedExceptions = {IllegalStateException.class, IllegalArgumentException.class})
     public void finalMoveListExceptionTest(SwitchColor[] switchArray, int desiredState) {
         ColoredSwitches.produceFinalMoveList(switchArray, (byte) desiredState);
     }
@@ -49,7 +51,8 @@ public class ColoredSwitchesTest {
     @DataProvider
     public Object[][] validPreemptiveMoveTestProvider() {
         return new Object[][]{
-                {0, new String[]{"1", "5", "2"}}, {31, new String[]{"3", "1", "2"}}, {7, new String[]{"2", "1", "3"}}
+                {0, new String[]{"1", "5", "2"}}, {31, new String[]{"3", "1", "2"}},
+                {7, new String[]{"2", "1", "3"}}
         };
     }
 

@@ -39,7 +39,8 @@ public class MicroControllerTest {
     }
 
     @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(String serialCode, String moduleSerialNumbers, AbstractController controller) {
+    public void exceptionTest(String serialCode, String moduleSerialNumbers,
+                              AbstractController controller) {
         Widget.setSerialCode(serialCode);
 
         MicroController.getPinColors(moduleSerialNumbers, controller);

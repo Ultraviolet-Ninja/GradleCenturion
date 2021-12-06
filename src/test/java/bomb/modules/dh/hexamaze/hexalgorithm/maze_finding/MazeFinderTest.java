@@ -21,8 +21,9 @@ public class MazeFinderTest {
 
     @Test
     public void nullTest() {
-        HexGrid nullState =
-                hexagonFromLine("n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n");
+        HexGrid nullState = hexagonFromLine(
+                "n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n"
+        );
         assertNull(HexHashLibrary.find(nullState));
     }
 

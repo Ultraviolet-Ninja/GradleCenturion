@@ -2,9 +2,6 @@ package bomb.modules.ab.battleship;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
-import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -14,6 +11,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static bomb.enumerations.Indicator.FRQ;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.SERIAL;
+import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.modules.ab.battleship.Tile.CLEAR;
 import static bomb.modules.ab.battleship.Tile.RADAR;
 import static bomb.modules.ab.battleship.Tile.SHIP;
@@ -101,7 +102,8 @@ public class BattleshipTest {
     @Test(dataProvider = "solveOceanFourthBranchExceptionTestProvider",
             expectedExceptions = IllegalArgumentException.class,
             expectedExceptionsMessageRegExp = "The number of Ships has not been set")
-    public void solveOceanFourthBranchExceptionTest(int[] validDummyCounter, Tile[] confirmedRadarSpots) {
+    public void solveOceanFourthBranchExceptionTest(int[] validDummyCounter,
+                                                    Tile[] confirmedRadarSpots) {
         setVideoEdgework();
         Battleship.calculateRadarPositions();
         Battleship.setColumnCounters(validDummyCounter);
@@ -114,15 +116,18 @@ public class BattleshipTest {
     @DataProvider
     public Object[][] solveOceanFifthBranchExceptionTestProvider() {
         return new Object[][]{
-                {new int[]{1, 2, 3, 0, 3}, new int[]{3, 1, 2, 1, 3}, new int[]{1, 1, 1, 1}, new Tile[]{CLEAR, CLEAR, SHIP}}
+                {
+                    new int[]{1, 2, 3, 0, 3}, new int[]{3, 1, 2, 1, 3},
+                        new int[]{1, 1, 1, 1}, new Tile[]{CLEAR, CLEAR, SHIP}
+                }
         };
     }
 
     @Test(dataProvider = "solveOceanFifthBranchExceptionTestProvider",
             expectedExceptions = IllegalArgumentException.class,
             expectedExceptionsMessageRegExp = "Values don't match\\..*")
-    public void solveOceanFifthBranchExceptionTest(int[] rowCounters, int[] columnCounters, int[] shipQuantities,
-                                                   Tile[] confirmedRadarSpots) {
+    public void solveOceanFifthBranchExceptionTest(int[] rowCounters, int[] columnCounters,
+                                                   int[] shipQuantities, Tile[] confirmedRadarSpots) {
         setShipQuantities(shipQuantities);
         setVideoEdgework();
         Battleship.calculateRadarPositions();
@@ -194,10 +199,10 @@ public class BattleshipTest {
         Widget.setDBatteries(2);
         Widget.setDoubleAs(2);
         Widget.setNumHolders(3);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.FRQ);
+        Widget.setIndicator(ON, FRQ);
         Widget.setNumberOfPlates(1);
-        Widget.setPortValue(Port.PARALLEL, 1);
-        Widget.setPortValue(Port.SERIAL, 1);
+        Widget.setPortValue(PARALLEL, 1);
+        Widget.setPortValue(SERIAL, 1);
     }
 
     private static void setShipQuantities(int[] shipQuantities) {

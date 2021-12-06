@@ -39,7 +39,8 @@ public class AstrologyTest {
     @DataProvider
     public Object[][] exceptionTestProvider() {
         return new Object[][]{
-                {ARIES, ARIES, ARIES}, {VENUS, VENUS, VENUS}, {FIRE, FIRE, FIRE}, {ARIES, MARS, EARTH, EARTH}, {VENUS}
+                {ARIES, ARIES, ARIES}, {VENUS, VENUS, VENUS}, {FIRE, FIRE, FIRE},
+                {ARIES, MARS, EARTH, EARTH}, {VENUS}
         };
     }
 
@@ -67,8 +68,9 @@ public class AstrologyTest {
     public Object[][] interchangeabilityTestProvider() {
         String expected = POOR_OMEN + 4;
         return new Object[][]{
-                {expected, EARTH, MARS, ARIES}, {expected, MARS, EARTH, ARIES}, {expected, MARS, ARIES, EARTH},
-                {expected, ARIES, MARS, EARTH}, {expected, ARIES, EARTH, MARS}
+                {expected, EARTH, MARS, ARIES}, {expected, MARS, EARTH, ARIES},
+                {expected, MARS, ARIES, EARTH}, {expected, ARIES, MARS, EARTH},
+                {expected, ARIES, EARTH, MARS}
         };
     }
 
@@ -85,13 +87,15 @@ public class AstrologyTest {
         ConditionSetter second = BombSimulations::theGreatBerateVideoTwo;
         ConditionSetter third = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
-                {first, (POOR_OMEN + 1), URANUS, FIRE, ARIES}, {second, (POOR_OMEN + 2), WATER, URANUS, VIRGO},
+                {first, (POOR_OMEN + 1), URANUS, FIRE, ARIES},
+                {second, (POOR_OMEN + 2), WATER, URANUS, VIRGO},
                 {third, (GOOD_OMEN + 6), JUPITER, EARTH, GEMINI}
         };
     }
 
     @Test(dataProvider = "theGreatBerateSimulationProvider")
-    public void theGreatBerateVideoTest(ConditionSetter cond, String expected, AstrologySymbol... set) {
+    public void theGreatBerateVideoTest(ConditionSetter cond, String expected,
+                                        AstrologySymbol... set) {
         cond.setCondition();
 
         assertEquals(Astrology.calculate(set), expected);

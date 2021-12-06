@@ -41,9 +41,14 @@ public class LaundryTest {
         ConditionSetter setFirst = this::setupOne;
         ConditionSetter setSecond = this::setupTwo;
         return new Object[][]{
-                {setFirst, new String[]{"80F", "Low Heat", "300", "Non-Chlorine", "LEATHER - PEARL - CORSET"}, "0", "0"},
-                {setSecond, new String[]{"120F", "Tumble", "No Steam", "No Tetrachlorethylene",
-                        "POLYESTER - SAPPHIRE - SHIRT"}, "0", "0"}
+                {
+                    setFirst, new String[]{"80F", "Low Heat", "300", "Non-Chlorine", "LEATHER - PEARL - CORSET"},
+                        "0", "0"
+                },
+                {
+                    setSecond, new String[]{"120F", "Tumble", "No Steam", "No Tetrachlorethylene",
+                        "POLYESTER - SAPPHIRE - SHIRT"}, "0", "0"
+                }
         };
     }
 
@@ -80,15 +85,20 @@ public class LaundryTest {
         ConditionSetter setSecond = BombSimulations::theGreatBerateVideoTwo;
         ConditionSetter setThird = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
-                {setSecond, new String[]{"105F", "Medium Heat", "110", "Wet Cleaning", "CORDUROY - MALINITE - SCARF"},
-                        "0", "1"},
-                {setThird, new String[]{"80F", "Medium Heat", "300", "No Tetrachlorethylene",
-                        "LEATHER - MALINITE - CORSET"}, "0", "1"}
+                {
+                    setSecond, new String[]{"105F", "Medium Heat", "110", "Wet Cleaning", "CORDUROY - MALINITE - SCARF"},
+                        "0", "1"
+                },
+                {
+                    setThird, new String[]{"80F", "Medium Heat", "300", "No Tetrachlorethylene",
+                        "LEATHER - MALINITE - CORSET"}, "0", "1"
+                }
         };
     }
 
     @Test(dataProvider = "theGreatBerateSimulationProvider")
-    public void theGreatBerate(ConditionSetter setter, String[] expectedArr, String solved, String needy) {
+    public void theGreatBerate(ConditionSetter setter, String[] expectedArr,
+                               String solved, String needy) {
         setter.setCondition();
         assertContains(expectedArr, solved, needy);
     }
@@ -97,7 +107,10 @@ public class LaundryTest {
     public void thanksBobTest() {
         BombSimulations.thanksBobCenturion();
         String[] actual = Laundry.clean("0", "0");
-        String[] expected = {"105F", "Don't Tumble Dry", "300", "Bleach", "CORDUROY - JADE - CORSET", Laundry.THANKS_BOB};
+        String[] expected = {
+                "105F", "Don't Tumble Dry", "300", "Bleach",
+                "CORDUROY - JADE - CORSET", Laundry.THANKS_BOB
+        };
 
         if (actual.length != expected.length) fail("Size mismatch");
         else {

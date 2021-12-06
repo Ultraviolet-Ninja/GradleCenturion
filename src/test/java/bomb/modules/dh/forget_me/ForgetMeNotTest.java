@@ -2,15 +2,19 @@ package bomb.modules.dh.forget_me;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
-import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.SIG;
+import static bomb.enumerations.Indicator.TRN;
+import static bomb.enumerations.Port.DVI;
+import static bomb.enumerations.TrinarySwitch.OFF;
+import static bomb.enumerations.TrinarySwitch.ON;
 import static org.testng.Assert.assertEquals;
 
 public class ForgetMeNotTest {
@@ -49,9 +53,9 @@ public class ForgetMeNotTest {
             Widget.setDoubleAs(4);
             Widget.setNumHolders(2);
             Widget.setNumberOfPlates(1);
-            Widget.setIndicator(TrinarySwitch.ON, Indicator.TRN);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.SIG);
-            Widget.setPortValue(Port.DVI, 1);
+            Widget.setIndicator(ON, TRN);
+            Widget.setIndicator(OFF, SIG);
+            Widget.setPortValue(DVI, 1);
             Widget.setNumModules(NUMBER_OF_MODULES);
             Widget.setStartTime(20);
         };
@@ -83,13 +87,13 @@ public class ForgetMeNotTest {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.CAR);
+            Widget.setIndicator(OFF, CAR);
         };
         ConditionSetter setupSigIndicatorUnlit = () -> {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
             Widget.setNumModules(NUMBER_OF_MODULES);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.SIG);
+            Widget.setIndicator(OFF, SIG);
         };
         ConditionSetter setupNoIndicators = () -> {
             Widget.setIsForgetMeNotActive(true);
@@ -98,7 +102,8 @@ public class ForgetMeNotTest {
         };
 
         return new Object[][]{
-                {setupCarIndicatorUnlit, 0, "2"}, {setupSigIndicatorUnlit, 0, "7"}, {setupNoIndicators, 0, "0"}
+                {setupCarIndicatorUnlit, 0, "2"}, {setupSigIndicatorUnlit, 0, "7"},
+                {setupNoIndicators, 0, "0"}
         };
     }
 

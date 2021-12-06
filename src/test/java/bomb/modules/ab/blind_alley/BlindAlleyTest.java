@@ -1,16 +1,23 @@
 package bomb.modules.ab.blind_alley;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.BombSimulations;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Port.DVI;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.PS2;
+import static bomb.enumerations.Port.RCA;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.enumerations.Port.SERIAL;
+import static bomb.enumerations.TrinarySwitch.ON;
 import static org.testng.Assert.assertEquals;
 
 public class BlindAlleyTest {
@@ -35,12 +42,12 @@ public class BlindAlleyTest {
         Widget.setSerialCode("bu7we6");
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.CAR);
-        Widget.setPortValue(Port.DVI, 1);
-        Widget.setPortValue(Port.RJ45, 1);
-        Widget.setPortValue(Port.PS2, 1);
-        Widget.setPortValue(Port.PARALLEL, 1);
-        Widget.setPortValue(Port.SERIAL, 1);
+        Widget.setIndicator(ON, CAR);
+        Widget.setPortValue(DVI, 1);
+        Widget.setPortValue(RJ45, 1);
+        Widget.setPortValue(PS2, 1);
+        Widget.setPortValue(PARALLEL, 1);
+        Widget.setPortValue(SERIAL, 1);
         Widget.setNumberOfPlates(2);
     }
 
@@ -54,13 +61,13 @@ public class BlindAlleyTest {
         Widget.setNumHolders(1);
         Widget.setDoubleAs(2);
         Widget.setNumberOfPlates(2);
-        Widget.setPortValue(Port.DVI, 1);
-        Widget.setPortValue(Port.RJ45, 1);
-        Widget.setPortValue(Port.PS2, 1);
-        Widget.setPortValue(Port.PARALLEL, 1);
-        Widget.setPortValue(Port.RCA, 1);
+        Widget.setPortValue(DVI, 1);
+        Widget.setPortValue(RJ45, 1);
+        Widget.setPortValue(PS2, 1);
+        Widget.setPortValue(PARALLEL, 1);
+        Widget.setPortValue(RCA, 1);
         Widget.setSerialCode("718pz5");
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.SND);
+        Widget.setIndicator(ON, Indicator.SND);
         Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRQ);
     }
 
