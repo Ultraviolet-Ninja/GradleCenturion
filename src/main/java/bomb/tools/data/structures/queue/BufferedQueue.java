@@ -7,6 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
+import java.util.stream.Stream;
+
+import static java.util.Arrays.asList;
 
 /**
  * This class acts as a finite stack with an array as the internal storage
@@ -96,7 +99,12 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
 
     @Override
     public Iterator<E> iterator() {
-        return Arrays.asList(data).iterator();
+        return asList(data).iterator();
+    }
+
+    @Override
+    public Stream<E> stream() {
+        return Arrays.stream(data);
     }
 
     @Override
@@ -146,7 +154,7 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
 
     @Override
     public ListIterator<E> listIterator() {
-        return Arrays.asList(data).listIterator();
+        return asList(data).listIterator();
     }
 
     @Override

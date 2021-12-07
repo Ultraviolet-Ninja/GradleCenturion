@@ -48,7 +48,7 @@ public class HexNode extends EquatableObject {
         if (obj == this) return true;
         if (!(obj instanceof HexNode)) return false;
         HexNode other = (HexNode) obj;
-        return other.hexShape == this.hexShape && hasMatchingWalls(other.walls);
+        return other.hexShape == this.hexShape && walls.equals(other.walls);
     }
 
     @Override
@@ -57,17 +57,11 @@ public class HexNode extends EquatableObject {
                 ((walls != null) ? walls.hashCode() : 0);
     }
 
-    private boolean hasMatchingWalls(EnumSet<HexWall> toCompare) {
-        if (this.walls.size() != toCompare.size()) return false;
-        for (HexWall wall : toCompare) {
-            if (!this.walls.contains(wall)) return false;
-        }
-        return true;
-    }
-
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder().append(hexShape != null ? hexShape.toString() : "No Shape");
+        StringBuilder sb = new StringBuilder(
+                hexShape != null ? hexShape.toString() : "No Shape"
+        );
         sb.append("-");
         if (walls == null) return sb.append("No walls").toString();
         sb.append(
@@ -78,11 +72,11 @@ public class HexNode extends EquatableObject {
         return sb.toString();
     }
 
-    public enum HexWall {
+    public enum HexShape {
         CIRCLE, HEXAGON, LEFT_TRIANGLE, RIGHT_TRIANGLE, UP_TRIANGLE, DOWN_TRIANGLE
     }
 
-    public enum HexShape {
+    public enum HexWall {
         TOP_LEFT, TOP, TOP_RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT
     }
 }

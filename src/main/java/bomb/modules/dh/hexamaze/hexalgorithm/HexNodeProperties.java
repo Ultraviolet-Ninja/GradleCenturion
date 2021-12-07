@@ -61,4 +61,9 @@ public enum HexNodeProperties {
             return toHashCode.getOrDefault(walls, "-1");
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

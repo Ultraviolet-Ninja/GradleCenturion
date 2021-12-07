@@ -27,7 +27,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.To
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
  * using individual HexNodes to represent what a tile contains.
  */
-public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataStructure.HexNode>>{
+public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataStructure.HexNode>> {
     /**
      * This class is the backing node to a given hexagon data structure.
      */

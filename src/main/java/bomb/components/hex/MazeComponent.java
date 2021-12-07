@@ -42,7 +42,6 @@ public class MazeComponent extends Pane implements Resettable {
 
     public MazeComponent() {
         super();
-        //TODO Make file
         FXMLLoader loader = new FXMLLoader(getClass().getResource("maze_component.fxml"));
         loader.setRoot(this);
         loader.setController(this);
