@@ -1,6 +1,9 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm;
+package bomb.modules.dh.hexamaze_redesign.hexalgorithm.factory;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
@@ -33,7 +36,7 @@ public class MazeFactory {
                 .collect(toList());
     }
 
-    public static HexNode.HexShape decodeShape(String code) {
+    public static HexShape decodeShape(String code) {
         return switch(code) {
             case "c" -> CIRCLE;
             case "h" -> HEXAGON;
@@ -45,12 +48,12 @@ public class MazeFactory {
         };
     }
 
-    public static EnumSet<HexNode.HexWall> decodeWalls(String code) {
-        HexNode.HexWall[] allWalls = HexNode.HexWall.values();
+    public static EnumSet<HexWall> decodeWalls(String code) {
+        HexWall[] allWalls = HexWall.values();
 
         return stream(code.split(""))
                 .mapToInt(Integer::parseInt)
                 .mapToObj(num -> allWalls[num])
-                .collect(Collectors.toCollection(() -> EnumSet.noneOf(HexNode.HexWall.class)));
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(HexWall.class)));
     }
 }
