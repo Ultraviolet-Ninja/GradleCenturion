@@ -1,4 +1,4 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm;
+package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.factory.MazeFactory;
 import com.opencsv.exceptions.CsvException;

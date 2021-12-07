@@ -1,4 +1,4 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm;
+package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
 import bomb.tools.Coordinates;
 
@@ -23,11 +23,11 @@ public abstract class AbstractHexagon {
         return hexagon.findAtCoordinate(coordinates);
     }
 
-    public static int[] calculateColumnLengths(int sideLength) {
+    public static IntStream calculateColumnLengthStream(int sideLength) {
         int span = HexagonDataStructure.CALCULATE_SPAN.applyAsInt(sideLength);
         return IntStream.concat(
                 IntStream.rangeClosed(sideLength, span),
                 IntStream.rangeClosed(span - 1, sideLength)
-        ).toArray();
+        );
     }
 }

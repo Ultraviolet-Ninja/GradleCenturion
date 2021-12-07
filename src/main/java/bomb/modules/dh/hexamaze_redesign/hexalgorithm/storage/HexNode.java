@@ -1,4 +1,4 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm;
+package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
 import bomb.abstractions.EquatableObject;
 
@@ -24,7 +24,7 @@ public class HexNode extends EquatableObject {
     public boolean isPathClear(int wallTag) {
         return walls.stream()
                 .mapToInt(Enum::ordinal)
-                .anyMatch(ordinal -> ordinal == wallTag);
+                .noneMatch(ordinal -> ordinal == wallTag);
     }
 
     public EnumSet<HexWall> getWalls() {

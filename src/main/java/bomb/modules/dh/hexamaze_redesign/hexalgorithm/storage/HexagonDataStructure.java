@@ -1,7 +1,7 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm;
+package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 
@@ -10,20 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.CIRCLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.DOWN_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.HEXAGON;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.LEFT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.RIGHT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.UP_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall.BOTTOM;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall.BOTTOM_LEFT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall.BOTTOM_RIGHT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall.TOP;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall.TOP_LEFT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall.TOP_RIGHT;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_LEFT;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 import static java.util.stream.Collectors.toList;
 
 public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
@@ -31,8 +31,8 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
             NODAL_AREA = length -> (int)(3 * Math.pow(length, 2)) - (3 * length) + 1,
             NODAL_SIDE_LENGTH = area -> {
                 double result = (3 + Math.sqrt(12 * area - 3)) / 6;
-                //If is not an integer
                 return result % 1 != 0.0 ? -1 : (int) result;
+                //If is not an integer
             };
 
 
@@ -82,10 +82,7 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
             throw new IllegalArgumentException("Size is too small");
         int span = CALCULATE_SPAN.applyAsInt(sideLength);
         BufferedQueue<BufferedQueue<HexNode>> hex = new BufferedQueue<>(span);
-        IntStream.concat(
-                IntStream.rangeClosed(sideLength, span),
-                IntStream.rangeClosed(span - 1, sideLength)
-                )
+        calculateColumnLengthStream(sideLength)
                 .mapToObj(size -> new BufferedQueue<HexNode>(size))
                 .forEach(hex::add);
         return hex;

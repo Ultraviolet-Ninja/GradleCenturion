@@ -1,9 +1,9 @@
 package bomb.modules.dh.hexamaze_redesign.hexalgorithm.factory;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexWall;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
@@ -16,12 +16,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.CIRCLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.DOWN_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.HEXAGON;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.LEFT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.RIGHT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.HexNode.HexShape.UP_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
