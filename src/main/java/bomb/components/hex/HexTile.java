@@ -1,9 +1,9 @@
 package bomb.components.hex;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +15,10 @@ import javafx.scene.shape.Polygon;
 
 import java.util.EnumSet;
 
-public class HexTile extends Pane implements Resettable {
-    public static final Color DEFAULT_PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
+import static bomb.modules.dh.hexamaze_redesign.Hexamaze.COLOR_MAP;
+import static bomb.modules.dh.hexamaze_redesign.Hexamaze.PEG_COLOR;
 
+public class HexTile extends Pane implements Resettable {
     private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
 
     private HexNode internalNode;
@@ -31,7 +32,7 @@ public class HexTile extends Pane implements Resettable {
 
     public HexTile() {
         super();
-        internalNode = new HexNode(null, EnumSet.noneOf(HexWall.class));
+        internalNode = new HexNode(null, EnumSet.noneOf(HexNode.HexWall.class));
         FXMLLoader loader = new FXMLLoader(getClass().getResource("panel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -50,16 +51,16 @@ public class HexTile extends Pane implements Resettable {
 
     private void scanShape() {
         FacadeFX.setNodesInvisible(circle, hexagon, upTriangle, downTriangle, leftTriangle, rightTriangle);
-        HexShape shape = internalNode.getFill();
+        HexNode.HexShape shape = internalNode.getHexShape();
         if (shape == null)
             return;
 
         switch (shape) {
-            case Circle -> FacadeFX.setVisible(circle);
-            case Hexagon -> FacadeFX.setVisible(hexagon);
-            case UpTriangle -> FacadeFX.setVisible(upTriangle);
-            case DownTriangle -> FacadeFX.setVisible(downTriangle);
-            case LeftTriangle -> FacadeFX.setVisible(leftTriangle);
+            case CIRCLE -> FacadeFX.setVisible(circle);
+            case HEXAGON -> FacadeFX.setVisible(hexagon);
+            case UP_TRIANGLE -> FacadeFX.setVisible(upTriangle);
+            case DOWN_TRIANGLE -> FacadeFX.setVisible(downTriangle);
+            case LEFT_TRIANGLE -> FacadeFX.setVisible(leftTriangle);
             default -> FacadeFX.setVisible(rightTriangle);
         }
     }
@@ -72,11 +73,11 @@ public class HexTile extends Pane implements Resettable {
 
         for (HexWall wall : walls) {
             switch (wall) {
-                case TopLeft -> FacadeFX.setVisible(northWest);
-                case Top -> FacadeFX.setVisible(north);
-                case TopRight -> FacadeFX.setVisible(northEast);
-                case BottomLeft -> FacadeFX.setVisible(southWest);
-                case Bottom -> FacadeFX.setVisible(south);
+                case TOP_LEFT -> FacadeFX.setVisible(northWest);
+                case TOP -> FacadeFX.setVisible(north);
+                case TOP_RIGHT -> FacadeFX.setVisible(northEast);
+                case BOTTOM_LEFT -> FacadeFX.setVisible(southWest);
+                case BOTTOM -> FacadeFX.setVisible(south);
                 default -> FacadeFX.setVisible(southEast);
             }
         }
@@ -84,6 +85,12 @@ public class HexTile extends Pane implements Resettable {
 
     public void setPegFill(Color color) {
         peg.setFill(color);
+        setInternalNodeColor(color);
+    }
+
+    public void clearPeg() {
+        peg.setFill(PEG_COLOR);
+        internalNode.clearColor();
     }
 
     public void setShape(HexShape shape) {
@@ -104,7 +111,13 @@ public class HexTile extends Pane implements Resettable {
         internalNode = new HexNode(null, EnumSet.noneOf(HexWall.class));
         scanShape();
         scanWalls();
-        peg.setFill(DEFAULT_PEG_COLOR);
+        peg.setFill(PEG_COLOR);
         hexagonalFill.setFill(DEFAULT_BACKGROUND_COLOR);
     }
+
+    private void setInternalNodeColor(Color color) {
+        internalNode.setColor(COLOR_MAP.get(color));
+    }
+
+
 }

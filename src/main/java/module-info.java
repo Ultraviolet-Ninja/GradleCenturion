@@ -33,6 +33,8 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.dh.forget_me to javafx.fxml;
     exports bomb.modules.dh.hexamaze to javafx.fxml;
     exports bomb.modules.dh.hexamaze.hexalgorithm to javafx.fxml;
+    exports bomb.modules.dh.hexamaze_redesign to javafx.fxml;
+    exports bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage to javafx.fxml;
     exports bomb.modules.il.ice_cream to javafx.fxml;
     exports bomb.modules.il.laundry to javafx.fxml;
     exports bomb.modules.il.led_encryption to javafx.fxml;
@@ -88,6 +90,8 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.dh.forget_me;
     opens bomb.modules.dh.hexamaze;
     opens bomb.modules.dh.hexamaze.hexalgorithm;
+    opens bomb.modules.dh.hexamaze_redesign;
+    opens bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
     opens bomb.modules.il.ice_cream;
     opens bomb.modules.il.laundry;
     opens bomb.modules.il.led_encryption;

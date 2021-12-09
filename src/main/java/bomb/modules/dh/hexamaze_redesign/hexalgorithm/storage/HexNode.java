@@ -10,21 +10,22 @@ import static java.util.stream.Collectors.joining;
 public class HexNode extends EquatableObject {
     private EnumSet<HexWall> walls;
     private HexShape hexShape;
+    private int color;
 
     public HexNode(HexShape hexShape, EnumSet<HexWall> constructs) {
         walls = constructs;
         this.hexShape = hexShape;
+        color = -1;
     }
 
     public HexNode(HexNode toCopy) {
         walls = EnumSet.copyOf(toCopy.walls);
         hexShape = toCopy.hexShape;
+        color = -1;
     }
 
-    public boolean isPathClear(int wallTag) {
-        return walls.stream()
-                .mapToInt(Enum::ordinal)
-                .noneMatch(ordinal -> ordinal == wallTag);
+    public boolean isPathClear(HexWall testWall) {
+        return !walls.contains(testWall);
     }
 
     public EnumSet<HexWall> getWalls() {
@@ -41,6 +42,18 @@ public class HexNode extends EquatableObject {
 
     public void setHexShape(HexShape hexShape) {
         this.hexShape = hexShape;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
+
+    public void clearColor() {
+        color = -1;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
+import bomb.tools.Coordinates;
+
 import java.util.stream.IntStream;
 
 import static java.util.Arrays.copyOf;
@@ -17,6 +19,10 @@ public abstract class AbstractHexagon {
 
     public HexagonDataStructure getHexagon() {
         return hexagon;
+    }
+
+    public HexNode getAtCoordinates(Coordinates coordinates) {
+        return hexagon.findAtCoordinate(coordinates);
     }
 
     public static int[] calculateColumnLengthStream(int sideLength) {

@@ -3,6 +3,7 @@ package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
+import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 
 import java.util.EnumSet;
@@ -172,6 +173,15 @@ public class HexagonDataStructure extends EquatableObject implements Iterable<Bu
         return hexagon.stream()
                 .flatMap(BufferedQueue::stream)
                 .collect(toList());
+    }
+
+    public HexNode findAtCoordinate(Coordinates coordinates) {
+        int x = coordinates.getX();
+        if (x < 0 || x >= getSpan()) return null;
+
+        BufferedQueue<HexNode> column = hexagon.get(x);
+        int y = coordinates.getY();
+        return y < 0 || y >= column.getCapacity() ? null : column.get(y);
     }
 
     public void readInNodeList(List<HexNode> stream) {

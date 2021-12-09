@@ -1,8 +1,8 @@
 package bomb.components.hex;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
-import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
 import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
@@ -14,12 +14,13 @@ import javafx.scene.paint.Color;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.Circle;
-import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.DownTriangle;
-import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.Hexagon;
-import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.LeftTriangle;
-import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.RightTriangle;
-import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.UpTriangle;
+import static bomb.modules.dh.hexamaze_redesign.Hexamaze.PEG_COLOR;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
 import static java.util.stream.Collectors.toList;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.CYAN;
@@ -30,6 +31,7 @@ import static javafx.scene.paint.Color.YELLOW;
 
 public class MazeComponent extends Pane implements Resettable {
     private String shapeSelection, colorSelection;
+    private HexTile playerLocation;
 
     @FXML
     private HexTile oneOne, oneTwo, oneThree, oneFour,
@@ -61,6 +63,9 @@ public class MazeComponent extends Pane implements Resettable {
             HexTile tile = (HexTile) event.getSource();
             if (shapeSelection.equals("Peg")) {
                 tile.setPegFill(pickColor(colorSelection));
+                if (playerLocation != null)
+                    playerLocation.clearPeg();
+                playerLocation = tile;
                 return;
             }
             tile.setShape(pickShape(shapeSelection));
@@ -75,18 +80,18 @@ public class MazeComponent extends Pane implements Resettable {
             case "Cyan" -> CYAN;
             case "Blue" -> BLUE;
             case "Pink" -> PINK;
-            default -> HexTile.DEFAULT_PEG_COLOR;
+            default -> PEG_COLOR;
         };
     }
 
     private HexShape pickShape(String shapeName) {
         return switch (shapeName) {
-            case "Down Triangle" -> DownTriangle;
-            case "Circle" -> Circle;
-            case "Hexagon" -> Hexagon;
-            case "Left Triangle" -> LeftTriangle;
-            case "Right Triangle" -> RightTriangle;
-            case "Up Triangle" -> UpTriangle;
+            case "Down Triangle" -> DOWN_TRIANGLE;
+            case "Circle" -> CIRCLE;
+            case "Hexagon" -> HEXAGON;
+            case "Left Triangle" -> LEFT_TRIANGLE;
+            case "Right Triangle" -> RIGHT_TRIANGLE;
+            case "Up Triangle" -> UP_TRIANGLE;
             default -> null;
         };
     }
