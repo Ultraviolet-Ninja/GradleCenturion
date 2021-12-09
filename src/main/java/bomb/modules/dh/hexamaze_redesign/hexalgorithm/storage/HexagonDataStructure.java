@@ -1,8 +1,8 @@
 package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
+import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
-import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 
 import java.util.EnumSet;
@@ -24,9 +24,10 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
-public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
+public class HexagonDataStructure extends EquatableObject implements Iterable<BufferedQueue<HexNode>> {
     public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
             NODAL_AREA = length -> (int)(3 * Math.pow(length, 2)) - (3 * length) + 1,
             NODAL_SIDE_LENGTH = area -> {
@@ -35,9 +36,9 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
                 //If is not an integer
             };
 
+    private final int sideLength;
 
     private BufferedQueue<BufferedQueue<HexNode>> hexagon;
-    private final int sideLength;
 
     public HexagonDataStructure(int sideLength) {
         this.sideLength = sideLength;
@@ -81,16 +82,17 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
         if (sideLength <= 2)
             throw new IllegalArgumentException("Size is too small");
         int span = CALCULATE_SPAN.applyAsInt(sideLength);
-        BufferedQueue<BufferedQueue<HexNode>> hex = new BufferedQueue<>(span);
-        calculateColumnLengthStream(sideLength)
+        BufferedQueue<BufferedQueue<HexNode>> output = new BufferedQueue<>(span);
+        int[] columnLengths = calculateColumnLengthStream(sideLength);
+        stream(columnLengths)
                 .mapToObj(size -> new BufferedQueue<HexNode>(size))
-                .forEach(hex::add);
-        return hex;
+                .forEach(output::add);
+        return output;
     }
 
     public void rotate() {
         int span = CALCULATE_SPAN.applyAsInt(sideLength);
-        BufferedQueue<BufferedQueue<HexNode>> output = new BufferedQueue<>(span);
+        BufferedQueue<BufferedQueue<HexNode>> output = createHexagon(sideLength);
 
         for (int columnIndex = 0; columnIndex < span; columnIndex++) {
             addLeftHalf(output, columnIndex);
@@ -107,6 +109,7 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
                     node.setHexShape(newShape);
                     node.setWalls(newWalls);
                 });
+        hexagon = output;
     }
 
     private void addLeftHalf(BufferedQueue<BufferedQueue<HexNode>> output, int columnIndex) {
@@ -165,15 +168,6 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
         };
     }
 
-    public HexNode findAtCoordinate(Coordinates coordinates) {
-        int x = coordinates.getX();
-        if (x < 0 || x >= getSpan()) return null;
-
-        BufferedQueue<HexNode> column = hexagon.get(x);
-        int y = coordinates.getY();
-        return y < 0 || y >= column.getCapacity() ? null : column.get(y);
-    }
-
     public List<HexNode> asList() {
         return hexagon.stream()
                 .flatMap(BufferedQueue::stream)
@@ -199,5 +193,18 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexNode>> {
     @Override
     public Iterator<BufferedQueue<HexNode>> iterator() {
         return hexagon.iterator();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HexagonDataStructure)) return false;
+        HexagonDataStructure other = (HexagonDataStructure) o;
+        return hexagon.equals(other.hexagon);
+    }
+
+    @Override
+    public int hashCode() {
+        return hexagon.hashCode();
     }
 }

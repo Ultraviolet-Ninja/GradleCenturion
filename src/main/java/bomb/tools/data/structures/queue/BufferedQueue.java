@@ -1,56 +1,56 @@
 package bomb.tools.data.structures.queue;
 
+import bomb.abstractions.EquatableObject;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.RandomAccess;
 import java.util.stream.Stream;
 
-import static java.util.Arrays.asList;
-
-/**
- * This class acts as a finite stack with an array as the internal storage
- * to contain a specified set of objects.
- *
- * @param <E> Any object
- */
-public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, RandomAccess {
+@SuppressWarnings("unchecked")
+public class BufferedQueue<E> extends EquatableObject implements List<E>, Iterable<E>, RandomAccess {
     private final int capacity;
-    private final E[] data;
-    private final LinkedList<E> linkedData;
+    private final ArrayDeque<E> dataDeque;
 
-    private int size;
+    private WeakReference<E[]> dataCache;
 
-    @SuppressWarnings("unchecked")
     public BufferedQueue(int capacity) {
         this.capacity = capacity;
-        data = (E[]) new Object[capacity];
-        linkedData = new LinkedList<>();
-        size = 0;
+        dataDeque = new ArrayDeque<>(capacity);
+        dataCache = new WeakReference<>(null);
+    }
+
+    public BufferedQueue(Collection<E> c) {
+        this.capacity = c.size();
+        dataDeque = new ArrayDeque<>(c);
+        dataCache = new WeakReference<>(null);
     }
 
     @Override
     public E get(int index) throws ArrayIndexOutOfBoundsException {
         if (index >= 0)
-            return data[index];
+            return cachedGet()[index];
         throw new ArrayIndexOutOfBoundsException();
     }
 
     public int size() {
-        return size;
+        return dataDeque.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return size == 0;
+        return dataDeque.isEmpty();
     }
 
     @Override
     public boolean contains(Object o) {
-        return linkedData.contains(o);
+        return dataDeque.contains(o);
     }
 
     public int getCapacity() {
@@ -58,58 +58,43 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
     }
 
     public boolean isFull() {
-        return size == capacity;
+        return dataDeque.size() == capacity;
     }
 
     @Override
     public boolean add(E o) {
-        if (!isFull()) {
-            data[size++] = o;
-            linkedData.add(o);
-        }
+        if (!isFull()) dataDeque.add(o);
         return isFull();
     }
 
-    /**
-     * Removes a number of elements from array of data
-     *
-     * @param numberOfElements The number of elements to remove
-     */
-    public void removeFromHead(int numberOfElements) throws IllegalArgumentException {
-        if (numberOfElements <= 0) return;
-        if (numberOfElements < capacity) {
-            removeElements(numberOfElements);
-            overwrite();
-        } else
-            throw new IllegalArgumentException("The removal number is larger than the capacity");
+    public E removeFirst() {
+        return dataDeque.pollFirst();
     }
 
-    private void removeElements(int num) {
-        for (int i = 0; i < num; i++) {
-            linkedData.removeFirst();
-            data[size-- - 1] = null;
-        }
-    }
+    public List<E> removeCount(int count) throws IllegalArgumentException {
+        if (count >= dataDeque.size() || count <= 0)
+            throw new IllegalArgumentException("Invalid count");
+        List<E> removalList = new ArrayList<>();
 
-    private void overwrite() {
-        int index = 0;
-        for (E element : linkedData)
-            data[index++] = element;
+        for (int i = 0; i < count; i++)
+            removalList.add(dataDeque.pollFirst());
+
+        return removalList;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return asList(data).iterator();
+        return dataDeque.iterator();
     }
 
     @Override
     public Stream<E> stream() {
-        return Arrays.stream(data);
+        return dataDeque.stream();
     }
 
     @Override
     public Object[] toArray() {
-        return data;
+        return dataDeque.toArray();
     }
 
     @Override
@@ -153,8 +138,8 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
     }
 
     @Override
-    public ListIterator<E> listIterator() {
-        return asList(data).listIterator();
+    public ListIterator<E> listIterator() throws UnsupportedOperationException {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -190,5 +175,27 @@ public class BufferedQueue<E> implements Collection<E>, List<E>, Iterable<E>, Ra
     @Override
     public <T> T[] toArray(T[] a) throws UnsupportedOperationException {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof BufferedQueue)) return false;
+        BufferedQueue<E> other = (BufferedQueue<E>) o;
+        return Arrays.equals(cachedGet(), other.cachedGet());
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(cachedGet());
+    }
+
+    private E[] cachedGet() {
+        E[] output = dataCache.get();
+        if (output == null) {
+            output = (E[]) dataDeque.toArray();
+            dataCache = new WeakReference<>(output);
+        }
+        return output;
     }
 }
