@@ -118,6 +118,4 @@ public class HexTile extends Pane implements Resettable {
     private void setInternalNodeColor(Color color) {
         internalNode.setColor(COLOR_MAP.get(color));
     }
-
-
 }

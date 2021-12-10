@@ -14,6 +14,8 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.AbstractHex
 import static java.util.stream.Collectors.toList;
 
 public class MazeSearch {
+    public static final int ROTATION_COUNT = 6;
+
     public static Grid search(Maze maze, Grid grid) {
         int gridSpan = grid.getHexagon().getSpan();
         int lastIndex = maze.getHexagon().getSpan() - gridSpan;
@@ -124,7 +126,7 @@ public class MazeSearch {
             if (originalShapes.equals(convertToHexShapes(copy)))
                 return new Grid(copy, rotation);
             copy.rotate();
-        } while(++rotation != 6);//Full rotation
+        } while(++rotation != ROTATION_COUNT);
         return null;
     }
 
