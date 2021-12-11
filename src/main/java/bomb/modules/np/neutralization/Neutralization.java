@@ -1,6 +1,8 @@
 package bomb.modules.np.neutralization;
 
 import bomb.Widget;
+import bomb.modules.np.neutralization.Chemical.Acid;
+import bomb.modules.np.neutralization.Chemical.Base;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
@@ -39,8 +41,8 @@ public class Neutralization extends Widget {
 
     static final String OUTPUT_SEPARATOR = "-";
 
-    private static Chemical.Acid currentAcid;
-    private static Chemical.Base currentBase;
+    private static Acid currentAcid;
+    private static Base currentBase;
 
     /**
      * @param acidVol The volume of the acid.

@@ -1,7 +1,6 @@
 package bomb.modules.c.colored_switches;
 
 import bomb.modules.s.switches.Switches;
-import com.opencsv.exceptions.CsvValidationException;
 import org.javatuples.Pair;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.interfaces.AStarAdmissibleHeuristic;
@@ -21,11 +20,9 @@ public class ColoredSwitches extends Switches {
     private static byte secondaryStartLocation = -1;
 
     static {
-        ColoredSwitchGraphFactory factory;
         try {
-            factory = new ColoredSwitchGraphFactory();
-            INTERNAL_GRAPH = factory.constructGraph();
-        } catch (CsvValidationException | IOException e) {
+            INTERNAL_GRAPH = ColoredSwitchGraphFactory.makeGraph();
+        } catch (IOException e) {
             throw new IllegalStateException(e.getMessage());
         }
     }

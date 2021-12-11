@@ -3,7 +3,7 @@ package bomb;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding.MazeSearch;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonDataStructure;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Maze;
 import bomb.tools.filter.Regex;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonDataStructure.NODAL_AREA;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane.NODAL_AREA;
 
 public class TestingArea {
     public static DecimalFormat format = new DecimalFormat("###,###,###,###");
@@ -47,6 +47,6 @@ public class TestingArea {
                 nodes.add(new HexNode(null, EnumSet.noneOf(HexNode.HexWall.class)));
         }
 
-        return new Grid(new HexagonDataStructure(nodes));
+        return new Grid(new HexagonalPlane(nodes));
     }
 }

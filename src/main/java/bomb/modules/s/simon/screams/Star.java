@@ -19,7 +19,7 @@ public class Star {
         for (ScreamColor instance : order) colorOrder.add(instance);
     }
 
-    private void checkUniqueColors(ScreamColor[] order) {
+    private static void checkUniqueColors(ScreamColor[] order) {
         Set<ScreamColor> set = new HashSet<>(Arrays.asList(order));
         if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }

@@ -65,6 +65,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.wz.zoo to javafx.fxml;
     exports bomb.tools to javafx.fxml;
     exports bomb.tools.data.structures.queue to javafx.fxml;
+    exports bomb.tools.data.structures.ring to javafx.fxml;
     exports bomb.tools.logic to javafx.fxml;
     exports bomb.tools.note to javafx.fxml;
 
@@ -121,6 +122,7 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.wz.zoo;
     opens bomb.tools;
     opens bomb.tools.data.structures.queue;
+    opens bomb.tools.data.structures.ring;
     opens bomb.tools.logic;
     opens bomb.tools.note;
 }

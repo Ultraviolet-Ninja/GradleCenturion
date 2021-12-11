@@ -58,10 +58,6 @@ public class ColoredSwitchController implements Resettable {
         fifthButtonRing = createColorCycle();
     }
 
-    private ArrayRing<SwitchColor> createColorCycle() {
-        return new ArrayRing<>(NEUTRAL, RED, ORANGE, GREEN, CYAN, BLUE, MAGENTA);
-    }
-
     public void initialize() {
         colorModeButton.setOnAction(setColorModeAction());
         setSwitchActions();
@@ -176,14 +172,13 @@ public class ColoredSwitchController implements Resettable {
         ArrayRing<SwitchColor>[] rings = getAssociatedRings();
         SwitchColor[] output = new SwitchColor[rings.length];
 
-        for (int i = 0; i < rings.length; i++) {
+        for (int i = 0; i < rings.length; i++)
             output[i] = rings[i].getHeadData();
-        }
 
         return output;
     }
 
-    private void sendToOutputField(MFXTextField field, List<String> outputList) {
+    private static void sendToOutputField(MFXTextField field, List<String> outputList) {
         String output = String.join(ARROW, outputList);
         field.setText(output);
     }
@@ -222,8 +217,11 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void resetRings() {
-        for (ArrayRing<SwitchColor> ring : getAssociatedRings()) {
+        for (ArrayRing<SwitchColor> ring : getAssociatedRings())
             ring.reset();
-        }
+    }
+
+    private static ArrayRing<SwitchColor> createColorCycle() {
+        return new ArrayRing<>(NEUTRAL, RED, ORANGE, GREEN, CYAN, BLUE, MAGENTA);
     }
 }

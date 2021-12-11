@@ -61,26 +61,6 @@ public class CustomEdge extends Polygon implements Resettable {
         );
     }
 
-    private FadeTransition setupFade(){
-        FadeTransition fade = new FadeTransition(Duration.millis(200));
-        fade.setFromValue(0.5);
-        fade.setToValue(1);
-        fade.setCycleCount(1);
-        fade.setAutoReverse(true);
-        return fade;
-    }
-
-    private ScaleTransition setupPressAnimation(){
-        ScaleTransition scale = new ScaleTransition(Duration.millis(50));
-        scale.setFromX(1.0);
-        scale.setFromY(1.0);
-        scale.setToX(0.85);
-        scale.setToY(0.85);
-        scale.setCycleCount(2);
-        scale.setAutoReverse(true);
-        return scale;
-    }
-
     public ScreamColor exportColor(){
         if (getFill() == WHITE)
             return null;
@@ -96,5 +76,25 @@ public class CustomEdge extends Polygon implements Resettable {
         setFill(WHITE);
         while (colors.getHeadData() != ScreamColor.PURPLE) colors.rotateClockwise();
         selectorMode = false;
+    }
+
+    private static FadeTransition setupFade(){
+        FadeTransition fade = new FadeTransition(Duration.millis(200));
+        fade.setFromValue(0.5);
+        fade.setToValue(1);
+        fade.setCycleCount(1);
+        fade.setAutoReverse(true);
+        return fade;
+    }
+
+    private static ScaleTransition setupPressAnimation(){
+        ScaleTransition scale = new ScaleTransition(Duration.millis(50));
+        scale.setFromX(1.0);
+        scale.setFromY(1.0);
+        scale.setToX(0.85);
+        scale.setToY(0.85);
+        scale.setCycleCount(2);
+        scale.setAutoReverse(true);
+        return scale;
     }
 }
