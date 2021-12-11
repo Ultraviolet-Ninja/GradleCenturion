@@ -156,8 +156,7 @@ public class HexagonalPlane extends EquatableObject implements Iterable<Buffered
 
     public static <T> BufferedQueue<BufferedQueue<T>> convertFromList(List<T> list) {
         int sideLength = NODAL_SIDE_LENGTH.applyAsInt(list.size());
-        int span = CALCULATE_SPAN.applyAsInt(sideLength);
-        BufferedQueue<BufferedQueue<T>> output = new BufferedQueue<>(span);
+        BufferedQueue<BufferedQueue<T>> output = createHexagon(sideLength);
 
         for (T element : list) {
             if (!add(output, element))
@@ -178,14 +177,14 @@ public class HexagonalPlane extends EquatableObject implements Iterable<Buffered
         return false;
     }
 
-    private static BufferedQueue<BufferedQueue<HexNode>> createHexagon(int sideLength) {
+    private static <T> BufferedQueue<BufferedQueue<T>> createHexagon(int sideLength) {
         if (sideLength <= 2)
             throw new IllegalArgumentException("Size is too small");
         int span = CALCULATE_SPAN.applyAsInt(sideLength);
-        BufferedQueue<BufferedQueue<HexNode>> output = new BufferedQueue<>(span);
+        BufferedQueue<BufferedQueue<T>> output = new BufferedQueue<>(span);
         int[] columnLengths = calculateColumnLengthStream(sideLength);
         stream(columnLengths)
-                .mapToObj(size -> new BufferedQueue<HexNode>(size))
+                .mapToObj(size -> new BufferedQueue<T>(size))
                 .forEach(output::add);
         return output;
     }

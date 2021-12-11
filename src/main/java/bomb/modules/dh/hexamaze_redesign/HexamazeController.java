@@ -40,7 +40,11 @@ public class HexamazeController implements Resettable {
     private void solveMaze() {
         try {
             String exitDirectionText = Hexamaze.solve(mazeComponent.createTileList());
-            exitDirectionLabel.setText("Exit out of the " + exitDirectionText + " side");
+            exitDirectionLabel.setText(
+                    exitDirectionText.isEmpty() ?
+                            exitDirectionText :
+                            "Exit out of the " + exitDirectionText + " side"
+            );
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }
