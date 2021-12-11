@@ -125,10 +125,17 @@ public class ExitChecker {
         return list.stream()
                 .filter(coordinates -> {
                     HexNode node = grid.getAtCoordinates(coordinates);
-                    wallsToFind.removeAll(node.getWalls());
-                    return wallsToFind.size() != 0;
+                    return isOneWallClear(node, wallsToFind);
                 })
                 .collect(toList());
+    }
+
+    private static boolean isOneWallClear(HexNode node, EnumSet<HexWall> wallsToFind) {
+        for (HexWall wall : wallsToFind) {
+            if (!node.isPathBlocked(wall))
+                return true;
+        }
+        return false;
     }
 
     private static int countPegsOnGrid(BufferedQueue<BufferedQueue<HexNode>> gridQueues) {
@@ -141,7 +148,7 @@ public class ExitChecker {
         return counter;
     }
 
-    private static int getSideToExit(Grid grid) {
+    private static int getSideToExit(Grid grid) throws IllegalArgumentException {
         int pegValue = getPegValue(grid.getHexagon().getBufferedQueues());
         Color pegColor = getPegColor(pegValue);
 
@@ -149,7 +156,7 @@ public class ExitChecker {
                 .findRelativeIndex(pegColor);
     }
 
-    private static Color getPegColor(int pegValue) {
+    private static Color getPegColor(int pegValue) throws IllegalArgumentException {
         for (Map.Entry<Color, Integer> entry : COLOR_MAP.entrySet()) {
             if (entry.getValue() == pegValue)
                 return entry.getKey();
@@ -157,7 +164,8 @@ public class ExitChecker {
         throw new IllegalArgumentException();
     }
 
-    private static int getPegValue(BufferedQueue<BufferedQueue<HexNode>> gridQueues) {
+    private static int getPegValue(BufferedQueue<BufferedQueue<HexNode>> gridQueues)
+            throws IllegalArgumentException {
         int pegValue;
         for (BufferedQueue<HexNode> queue : gridQueues) {
             for (HexNode node : queue) {

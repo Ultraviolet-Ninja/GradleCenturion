@@ -11,6 +11,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import static org.testng.Assert.assertNotNull;
@@ -45,10 +46,10 @@ public class MazeSearchTest {
         assertNotNull(MazeSearch.search(maze, hexagonFromLine(line)));
     }
 
-    private static Grid hexagonFromLine(String line) {
+    public static Grid hexagonFromLine(String line) {
         List<HexNode> list = new ArrayList<>();
         for (String shape : line.split(","))
-            list.add(new HexNode(MazeFactory.decodeShape(shape), null));
+            list.add(new HexNode(MazeFactory.decodeShape(shape), EnumSet.noneOf(HexNode.HexWall.class)));
         return new Grid(new HexagonalPlane(list));
     }
 }
