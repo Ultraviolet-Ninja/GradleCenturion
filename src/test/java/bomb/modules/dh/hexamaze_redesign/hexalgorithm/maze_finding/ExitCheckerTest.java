@@ -67,7 +67,7 @@ public class ExitCheckerTest {
         assertEquals(results.getValue1().size(), 2);
     }
 
-    private static void setPegLocations(Grid grid, Set<Integer> locations) {
+    static void setPegLocations(Grid grid, Set<Integer> locations) {
         BufferedQueue<BufferedQueue<HexNode>> gridQueues = grid.getHexagon().getBufferedQueues();
 
         int locationCounter = 0;

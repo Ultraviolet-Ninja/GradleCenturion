@@ -14,6 +14,8 @@ import org.jgrapht.graph.SimpleGraph;
 import java.util.Comparator;
 import java.util.List;
 
+import static bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon.calculateColumnLengths;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid.GRID_SIDE_LENGTH;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
@@ -41,12 +43,15 @@ public class MazeRunner {
     }
 
     private static Graph<Coordinates, DefaultEdge> convertGridToGraph(Grid grid) {
-        BufferedQueue<BufferedQueue<HexNode>> internals = grid.getHexagon().getBufferedQueues();
         Graph<Coordinates, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-        for (int x = 0; x < internals.getCapacity(); x++) {
-            for (int y = 0; y < internals.get(x).getCapacity(); y++) {
+        int[] columnLengths = calculateColumnLengths(GRID_SIDE_LENGTH);
+        int x = 0;
+
+        for (int columnLength : columnLengths) {
+            for (int y = 0; y < columnLength; y++) {
                 mapAdjacentNodes(grid, graph, new Coordinates(x, y));
             }
+            x++;
         }
         return graph;
     }
