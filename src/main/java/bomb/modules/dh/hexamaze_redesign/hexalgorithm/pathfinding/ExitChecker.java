@@ -23,7 +23,7 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonDataStructure.CALCULATE_SPAN;
+import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
 import static java.util.stream.Collectors.toList;
 
 public class ExitChecker {

@@ -19,7 +19,7 @@ import static bomb.modules.dh.hexamaze_redesign.Hexamaze.COLOR_MAP;
 import static bomb.modules.dh.hexamaze_redesign.Hexamaze.PEG_COLOR;
 
 public class HexTile extends Pane implements Resettable {
-    private static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
+    public static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
 
     private HexNode internalNode;
 
@@ -94,7 +94,7 @@ public class HexTile extends Pane implements Resettable {
     }
 
     public void setShape(HexShape shape) {
-        internalNode = new HexNode(shape, EnumSet.noneOf(HexWall.class));
+        internalNode.setHexShape(shape);
         scanShape();
     }
 

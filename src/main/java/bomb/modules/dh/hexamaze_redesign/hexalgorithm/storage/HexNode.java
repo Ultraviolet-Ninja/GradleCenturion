@@ -24,8 +24,8 @@ public class HexNode extends EquatableObject {
         color = -1;
     }
 
-    public boolean isPathClear(HexWall testWall) {
-        return !walls.contains(testWall);
+    public boolean isPathBlocked(HexWall testWall) {
+        return walls.contains(testWall);
     }
 
     public EnumSet<HexWall> getWalls() {

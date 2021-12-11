@@ -3,7 +3,7 @@ package bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonDataStructure;
+import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Maze;
 import bomb.tools.data.structures.queue.BufferedQueue;
 
@@ -52,9 +52,9 @@ public class MazeSearch {
     private static Grid searchPillar(BufferedQueue<BufferedQueue<HexNode>> pillar, Grid grid) {
         int gridSideLength = grid.getHexagon().getSideLength();
         trimPillar(pillar);
-        HexagonDataStructure copiedHexagon = new HexagonDataStructure(
+        HexagonalPlane copiedHexagon = new HexagonalPlane(
                 createInitialCopy(pillar, gridSideLength), gridSideLength);
-        HexagonDataStructure originalGrid = grid.getHexagon();
+        HexagonalPlane originalGrid = grid.getHexagon();
 
         Grid output = compareFullRotation(originalGrid, copiedHexagon);
 
@@ -119,7 +119,7 @@ public class MazeSearch {
         return copiedGrid;
     }
 
-    private static Grid compareFullRotation(HexagonDataStructure original, HexagonDataStructure copy) {
+    private static Grid compareFullRotation(HexagonalPlane original, HexagonalPlane copy) {
         int rotation = 0;
         final List<HexShape> originalShapes = convertToHexShapes(original);
         do {
@@ -130,7 +130,7 @@ public class MazeSearch {
         return null;
     }
 
-    private static List<HexShape> convertToHexShapes(HexagonDataStructure structure) {
+    private static List<HexShape> convertToHexShapes(HexagonalPlane structure) {
         return structure.getBufferedQueues()
                 .stream()
                 .flatMap(Collection::stream)
@@ -139,7 +139,7 @@ public class MazeSearch {
     }
 
     private static void moveToNextSegment(BufferedQueue<BufferedQueue<HexNode>> pillar,
-                                          HexagonDataStructure copy) {
+                                          HexagonalPlane copy) {
         BufferedQueue<BufferedQueue<HexNode>> copiedQueues = copy.getBufferedQueues();
         for (BufferedQueue<HexNode> column : copiedQueues)
             column.removeFirst();

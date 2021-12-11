@@ -1,7 +1,6 @@
 package bomb.components.hex;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
 import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
@@ -21,7 +20,6 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
-import static java.util.stream.Collectors.toList;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.CYAN;
 import static javafx.scene.paint.Color.GREEN;
@@ -96,12 +94,6 @@ public class MazeComponent extends Pane implements Resettable {
         };
     }
 
-    public List<HexNode> transportNodes() {
-        return createTileList().stream()
-                .map(HexTile::getInternalNode)
-                .collect(toList());
-    }
-
     public void setShapeSelection(String shapeSelection) {
         this.shapeSelection = shapeSelection;
     }
@@ -111,7 +103,7 @@ public class MazeComponent extends Pane implements Resettable {
         this.colorSelection = colorSelection;
     }
 
-    private List<HexTile> createTileList() {
+    public List<HexTile> createTileList() {
         return List.of(
                 oneOne, oneTwo, oneThree, oneFour,
                 twoOne, twoTwo, twoThree, twoFour, twoFive,

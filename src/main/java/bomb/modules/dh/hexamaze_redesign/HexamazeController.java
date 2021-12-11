@@ -4,6 +4,7 @@ import bomb.abstractions.Resettable;
 import bomb.components.hex.MazeComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -33,6 +34,16 @@ public class HexamazeController implements Resettable {
     private void setPegFill() {
         String color = GET_TOGGLE_NAME.apply(hexColorGroup.getSelectedToggle());
         mazeComponent.setColorSelection(color);
+    }
+
+    @FXML
+    private void solveMaze() {
+        try {
+            String exitDirectionText = Hexamaze.solve(mazeComponent.createTileList());
+            exitDirectionLabel.setText("Exit out of the " + exitDirectionText + " side");
+        } catch (IllegalArgumentException illegal) {
+            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+        }
     }
 
     @Override

@@ -16,11 +16,11 @@ public class Grid extends AbstractHexagon {
     private final ArrayRing<Color> colorRing;
 
     public Grid() {
-        super(new HexagonDataStructure(GRID_SIDE_LENGTH));
+        super(new HexagonalPlane(GRID_SIDE_LENGTH));
         colorRing = new ArrayRing<>(RED, YELLOW, GREEN, CYAN, BLUE, PINK);
     }
 
-    public Grid(HexagonDataStructure internalGrid, int neededRotations) {
+    public Grid(HexagonalPlane internalGrid, int neededRotations) {
         if (internalGrid.getSideLength() != GRID_SIDE_LENGTH)
             throw new IllegalArgumentException("Grid doesn't have required side length");
 
@@ -29,7 +29,7 @@ public class Grid extends AbstractHexagon {
         colorRing.rotateCounterClockwise(neededRotations);
     }
 
-    public Grid(HexagonDataStructure grid) {
+    public Grid(HexagonalPlane grid) {
         this(grid, 0);
     }
 
@@ -40,9 +40,5 @@ public class Grid extends AbstractHexagon {
 
     public ArrayRing<Color> getColorRing() {
         return colorRing;
-    }
-
-    public void resetColorRing() {
-        colorRing.setToIndex(RED);
     }
 }

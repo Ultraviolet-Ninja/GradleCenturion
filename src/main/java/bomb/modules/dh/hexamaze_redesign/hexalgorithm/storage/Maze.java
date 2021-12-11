@@ -9,7 +9,7 @@ public class Maze extends AbstractHexagon {
     private static final int FULL_MAZE_SIDE_LENGTH = 12;
 
     public Maze() throws IllegalArgumentException {
-        super(new HexagonDataStructure(FULL_MAZE_SIDE_LENGTH));
+        super(new HexagonalPlane(FULL_MAZE_SIDE_LENGTH));
 
         try {
             hexagon.readInNodeList(MazeFactory.createMaze());

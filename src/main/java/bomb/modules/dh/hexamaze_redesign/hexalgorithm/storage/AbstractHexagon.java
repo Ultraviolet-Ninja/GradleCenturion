@@ -7,17 +7,17 @@ import java.util.stream.IntStream;
 import static java.util.Arrays.copyOf;
 
 public abstract class AbstractHexagon {
-    protected HexagonDataStructure hexagon;
+    protected HexagonalPlane hexagon;
 
     public AbstractHexagon() {
         hexagon = null;
     }
 
-    public AbstractHexagon(HexagonDataStructure hexagon) {
+    public AbstractHexagon(HexagonalPlane hexagon) {
         this.hexagon = hexagon;
     }
 
-    public HexagonDataStructure getHexagon() {
+    public HexagonalPlane getHexagon() {
         return hexagon;
     }
 
@@ -26,7 +26,7 @@ public abstract class AbstractHexagon {
     }
 
     public static int[] calculateColumnLengthStream(int sideLength) {
-        int span = HexagonDataStructure.CALCULATE_SPAN.applyAsInt(sideLength);
+        int span = HexagonalPlane.CALCULATE_SPAN.applyAsInt(sideLength);
         int[] firstHalf = IntStream.rangeClosed(sideLength, span).toArray();
         int[] secondHalf = reverseOrder(IntStream.rangeClosed(sideLength, span - 1).toArray());
 

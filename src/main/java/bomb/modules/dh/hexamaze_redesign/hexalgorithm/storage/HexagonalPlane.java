@@ -28,7 +28,7 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
-public class HexagonDataStructure extends EquatableObject implements Iterable<BufferedQueue<HexNode>> {
+public class HexagonalPlane extends EquatableObject implements Iterable<BufferedQueue<HexNode>> {
     public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
             NODAL_AREA = length -> (int)(3 * Math.pow(length, 2)) - (3 * length) + 1,
             NODAL_SIDE_LENGTH = area -> {
@@ -41,54 +41,21 @@ public class HexagonDataStructure extends EquatableObject implements Iterable<Bu
 
     private BufferedQueue<BufferedQueue<HexNode>> hexagon;
 
-    public HexagonDataStructure(int sideLength) {
+    public HexagonalPlane(int sideLength) {
         this.sideLength = sideLength;
         hexagon = createHexagon(sideLength);
     }
 
-    public HexagonDataStructure(BufferedQueue<BufferedQueue<HexNode>> hexagon, int sideLength) {
+    public HexagonalPlane(BufferedQueue<BufferedQueue<HexNode>> hexagon, int sideLength) {
         this.sideLength = sideLength;
         this.hexagon = hexagon;
     }
 
-    public HexagonDataStructure(List<HexNode> nodeList) throws IllegalArgumentException {
+    public HexagonalPlane(List<HexNode> nodeList) throws IllegalArgumentException {
         sideLength = NODAL_SIDE_LENGTH.applyAsInt(nodeList.size());
         if (sideLength == -1)
             throw new IllegalArgumentException("Given List would not create a complete Hexagon");
-        hexagon = generateFromList(nodeList);
-    }
-
-    private BufferedQueue<BufferedQueue<HexNode>> generateFromList(List<HexNode> nodeList) {
-        BufferedQueue<BufferedQueue<HexNode>> temp = createHexagon(sideLength);
-        for (HexNode hexNode : nodeList) {
-            if (!add(temp, hexNode))
-                throw new IllegalArgumentException("We have extra nodes being added");
-        }
-        return temp;
-    }
-
-    private boolean add(BufferedQueue<BufferedQueue<HexNode>> toFill, HexNode toAdd) {
-        int capacity = toFill.getCapacity();
-        for (int i = 0; i < capacity; i++) {
-            BufferedQueue<HexNode> column = toFill.get(i);
-            if (!column.isFull()) {
-                column.add(toAdd);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private BufferedQueue<BufferedQueue<HexNode>> createHexagon(int sideLength) {
-        if (sideLength <= 2)
-            throw new IllegalArgumentException("Size is too small");
-        int span = CALCULATE_SPAN.applyAsInt(sideLength);
-        BufferedQueue<BufferedQueue<HexNode>> output = new BufferedQueue<>(span);
-        int[] columnLengths = calculateColumnLengthStream(sideLength);
-        stream(columnLengths)
-                .mapToObj(size -> new BufferedQueue<HexNode>(size))
-                .forEach(output::add);
-        return output;
+        hexagon = convertFromList(nodeList);
     }
 
     public void rotate() {
@@ -138,37 +105,6 @@ public class HexagonDataStructure extends EquatableObject implements Iterable<Bu
         }
     }
 
-    private HexShape rotateShape(HexShape currentShape) {
-        if (currentShape == null || currentShape == CIRCLE || currentShape == HEXAGON)
-            return currentShape;
-
-        return switch (currentShape) {
-            case UP_TRIANGLE -> DOWN_TRIANGLE;
-            case DOWN_TRIANGLE -> UP_TRIANGLE;
-            case LEFT_TRIANGLE -> RIGHT_TRIANGLE;
-            default -> LEFT_TRIANGLE;
-        };
-    }
-
-    private EnumSet<HexWall> rotateWalls(EnumSet<HexWall> walls) {
-        if (walls.isEmpty()) return walls;
-
-        return walls.stream()
-                .map(this::rotateSingleWall)
-                .collect(Collectors.toCollection(() -> EnumSet.noneOf(HexWall.class)));
-    }
-
-    private HexWall rotateSingleWall(HexWall wall) {
-        return switch (wall) {
-            case TOP_LEFT -> TOP;
-            case TOP -> TOP_RIGHT;
-            case TOP_RIGHT -> BOTTOM_RIGHT;
-            case BOTTOM_RIGHT -> BOTTOM;
-            case BOTTOM -> BOTTOM_LEFT;
-            default -> TOP_LEFT;
-        };
-    }
-
     public List<HexNode> asList() {
         return hexagon.stream()
                 .flatMap(BufferedQueue::stream)
@@ -185,7 +121,7 @@ public class HexagonDataStructure extends EquatableObject implements Iterable<Bu
     }
 
     public void readInNodeList(List<HexNode> stream) {
-        hexagon = generateFromList(stream);
+        hexagon = convertFromList(stream);
     }
 
     public BufferedQueue<BufferedQueue<HexNode>> getBufferedQueues() {
@@ -208,13 +144,80 @@ public class HexagonDataStructure extends EquatableObject implements Iterable<Bu
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof HexagonDataStructure)) return false;
-        HexagonDataStructure other = (HexagonDataStructure) o;
+        if (!(o instanceof HexagonalPlane)) return false;
+        HexagonalPlane other = (HexagonalPlane) o;
         return hexagon.equals(other.hexagon);
     }
 
     @Override
     public int hashCode() {
         return hexagon.hashCode();
+    }
+
+    public static <T> BufferedQueue<BufferedQueue<T>> convertFromList(List<T> list) {
+        int sideLength = NODAL_SIDE_LENGTH.applyAsInt(list.size());
+        int span = CALCULATE_SPAN.applyAsInt(sideLength);
+        BufferedQueue<BufferedQueue<T>> output = new BufferedQueue<>(span);
+
+        for (T element : list) {
+            if (!add(output, element))
+                throw new IllegalArgumentException("We have extra nodes being added");
+        }
+        return output;
+    }
+
+    private static <T> boolean add(BufferedQueue<BufferedQueue<T>> toFill, T toAdd) {
+        int capacity = toFill.getCapacity();
+        for (int i = 0; i < capacity; i++) {
+            BufferedQueue<T> column = toFill.get(i);
+            if (!column.isFull()) {
+                column.add(toAdd);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static BufferedQueue<BufferedQueue<HexNode>> createHexagon(int sideLength) {
+        if (sideLength <= 2)
+            throw new IllegalArgumentException("Size is too small");
+        int span = CALCULATE_SPAN.applyAsInt(sideLength);
+        BufferedQueue<BufferedQueue<HexNode>> output = new BufferedQueue<>(span);
+        int[] columnLengths = calculateColumnLengthStream(sideLength);
+        stream(columnLengths)
+                .mapToObj(size -> new BufferedQueue<HexNode>(size))
+                .forEach(output::add);
+        return output;
+    }
+
+    private static HexShape rotateShape(HexShape currentShape) {
+        if (currentShape == null || currentShape == CIRCLE || currentShape == HEXAGON)
+            return currentShape;
+
+        return switch (currentShape) {
+            case UP_TRIANGLE -> DOWN_TRIANGLE;
+            case DOWN_TRIANGLE -> UP_TRIANGLE;
+            case LEFT_TRIANGLE -> RIGHT_TRIANGLE;
+            default -> LEFT_TRIANGLE;
+        };
+    }
+
+    private static EnumSet<HexWall> rotateWalls(EnumSet<HexWall> walls) {
+        if (walls.isEmpty()) return walls;
+
+        return walls.stream()
+                .map(HexagonalPlane::rotateSingleWall)
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(HexWall.class)));
+    }
+
+    private static HexWall rotateSingleWall(HexWall wall) {
+        return switch (wall) {
+            case TOP_LEFT -> TOP;
+            case TOP -> TOP_RIGHT;
+            case TOP_RIGHT -> BOTTOM_RIGHT;
+            case BOTTOM_RIGHT -> BOTTOM;
+            case BOTTOM -> BOTTOM_LEFT;
+            default -> TOP_LEFT;
+        };
     }
 }
