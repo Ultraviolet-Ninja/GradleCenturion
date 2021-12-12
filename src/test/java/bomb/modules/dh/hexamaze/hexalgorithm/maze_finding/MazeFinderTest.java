@@ -19,7 +19,7 @@ public class MazeFinderTest {
         HexHashLibrary.initialize(maze, (2 * HexGrid.STANDARD_SIDE_LENGTH) - 1);
     }
 
-    @Test
+    @Test(enabled = false)
     public void nullTest() {
         HexGrid nullState = hexagonFromLine(
                 "n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n"
@@ -35,7 +35,7 @@ public class MazeFinderTest {
         };
     }
 
-    @Test(dataProvider = "comparatorTestProvider")
+    @Test(enabled = false, dataProvider = "comparatorTestProvider")
     public void comparatorTest(String line) {
         assertNotNull(HexHashLibrary.find(hexagonFromLine(line)));
     }

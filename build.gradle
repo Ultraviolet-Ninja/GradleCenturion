@@ -46,7 +46,6 @@ dependencies {
 }
 
 test {
-    maxParallelForks = Runtime.runtime.availableProcessors()
     useTestNG()
     finalizedBy(jacocoTestReport)
 }
