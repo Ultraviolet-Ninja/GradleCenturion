@@ -12,9 +12,6 @@ version '0.21.0'
 
 mainClassName = 'bomb.Main'
 
-sourceCompatibility = 15
-targetCompatibility = 15
-
 compileJava {
     options.encoding("UTF-8")
 }
@@ -49,6 +46,7 @@ dependencies {
 }
 
 test {
+    maxParallelForks = Runtime.runtime.availableProcessors()
     useTestNG()
     finalizedBy(jacocoTestReport)
 }
