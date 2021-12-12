@@ -122,7 +122,7 @@ public class BooleanController implements Resettable {
             circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }
 
-    private String getMathSymbol(MFXButton button) {
+    private static String getMathSymbol(MFXButton button) {
         return String.valueOf(button.getText().charAt(0));
     }
 

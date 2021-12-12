@@ -89,7 +89,7 @@ public class MicroControllerController implements Resettable {
         };
     }
 
-    private AbstractChipComponent createFrontEndChip(int pinCount) {
+    private static AbstractChipComponent createFrontEndChip(int pinCount) {
         return switch (pinCount) {
             case SixPinController.PIN_COUNT -> new SixPinController();
             case EightPinController.PIN_COUNT -> new EightPinController();

@@ -39,7 +39,6 @@ dependencies {
     implementation 'org.javatuples:javatuples:1.2'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
     implementation 'eu.hansolo:Medusa:11.7'
-    implementation 'org.fxmisc.richtext:richtextfx:0.10.6'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
     implementation('io.github.palexdev:materialfx:11.12.0') {
         transitive(true)

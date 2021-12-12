@@ -10,23 +10,28 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.Circle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.DownTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.Hexagon;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.LeftTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.RightTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.UpTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.Bottom;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.BottomLeft;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.BottomRight;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.Top;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopLeft;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopRight;
+
 /**
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
  * using individual HexNodes to represent what a tile contains.
  */
-public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataStructure.HexNode>>{
+public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataStructure.HexNode>> {
     /**
      * This class is the backing node to a given hexagon data structure.
      */
     public static final class HexNode extends EquatableObject {
-        public EnumSet<HexWall> getWalls() {
-            return walls;
-        }
-
-        public HexShape getFill() {
-            return fill;
-        }
-
         private EnumSet<HexWall> walls;
         private HexShape fill;
 
@@ -43,24 +48,8 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
         }
 
         public HexNode(HexNode toCopy) {
-            walls = deepCopyWalls(toCopy.walls);
-            fill = deepCopyShape(toCopy.fill);
-        }
-
-        private EnumSet<HexWall> deepCopyWalls(EnumSet<HexWall> constructs) {
-            return EnumSet.copyOf(constructs);
-        }
-
-        private HexShape deepCopyShape(HexShape shape) {
-            if (shape == null) return null;
-            return switch (shape) {
-                case Circle -> HexShape.Circle;
-                case Hexagon -> HexShape.Hexagon;
-                case LeftTriangle -> HexShape.LeftTriangle;
-                case RightTriangle -> HexShape.RightTriangle;
-                case UpTriangle -> HexShape.UpTriangle;
-                default -> HexShape.DownTriangle;
-            };
+            walls = EnumSet.copyOf(toCopy.walls);
+            fill = toCopy.fill;
         }
 
         /**
@@ -105,7 +94,7 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
         }
 
         public void recreateWallsFromHash(char letter) {
-            walls = deepCopyWalls(HexWall.fromHash(String.valueOf(letter)));
+            walls = EnumSet.copyOf(HexWall.fromHash(String.valueOf(letter)));
         }
 
         @Override
@@ -116,6 +105,14 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
             for (HexWall wall : this.walls)
                 sb.append(wall.toString()).append(" ");
             return sb.toString();
+        }
+
+        public EnumSet<HexWall> getWalls() {
+            return walls;
+        }
+
+        public HexShape getFill() {
+            return fill;
         }
     }
 
@@ -304,12 +301,12 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
 
         for (HexWall wall : walls) {
             switch (wall) {
-                case TopLeft -> temp.add(HexWall.Top);
-                case Top -> temp.add(HexWall.TopRight);
-                case TopRight -> temp.add(HexWall.BottomRight);
-                case BottomRight -> temp.add(HexWall.Bottom);
-                case Bottom -> temp.add(HexWall.BottomLeft);
-                default -> temp.add(HexWall.TopLeft);
+                case TopLeft -> temp.add(Top);
+                case Top -> temp.add(TopRight);
+                case TopRight -> temp.add(BottomRight);
+                case BottomRight -> temp.add(Bottom);
+                case Bottom -> temp.add(BottomLeft);
+                default -> temp.add(TopLeft);
             }
         }
         return temp;
@@ -324,14 +321,13 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
      */
     private HexShape rotateShape(HexShape currentShape) {
         if (currentShape == null) return null;
-        if (currentShape == HexShape.Circle) return HexShape.Circle;
-        if (currentShape == HexShape.Hexagon) return HexShape.Hexagon;
+        if (currentShape == Circle || currentShape == Hexagon) return currentShape;
 
         return switch (currentShape) {
-            case UpTriangle -> HexShape.DownTriangle;
-            case DownTriangle -> HexShape.UpTriangle;
-            case LeftTriangle -> HexShape.RightTriangle;
-            default -> HexShape.LeftTriangle;
+            case UpTriangle -> DownTriangle;
+            case DownTriangle -> UpTriangle;
+            case LeftTriangle -> RightTriangle;
+            default -> LeftTriangle;
         };
     }
 
@@ -352,12 +348,12 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
      */
     public static HexShape decodeShape(String letter) {
         return switch (letter.toLowerCase()) {
-            case "c" -> HexShape.Circle;
-            case "h" -> HexShape.Hexagon;
-            case "lt" -> HexShape.LeftTriangle;
-            case "rt" -> HexShape.RightTriangle;
-            case "ut" -> HexShape.UpTriangle;
-            case "dt" -> HexShape.DownTriangle;
+            case "c" -> Circle;
+            case "h" -> Hexagon;
+            case "lt" -> LeftTriangle;
+            case "rt" -> RightTriangle;
+            case "ut" -> UpTriangle;
+            case "dt" -> DownTriangle;
             default -> null;
         };
     }
