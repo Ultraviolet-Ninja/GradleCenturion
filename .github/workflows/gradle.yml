@@ -25,7 +25,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
+      - name: Assemble with Gradle
         run: ./gradlew assemble
 
       - name: Set up QEMU
