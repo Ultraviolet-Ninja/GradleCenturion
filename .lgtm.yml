@@ -1,5 +1,4 @@
 extraction:
   java:
     index:
-      gradle:
-        version: 6.8.1
+      java_version: 15
