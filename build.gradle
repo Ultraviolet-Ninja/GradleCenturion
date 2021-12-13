@@ -47,6 +47,7 @@ dependencies {
 
 def firstSuite = project.hasProperty("suite0")
 def secondSuite = project.hasProperty("suite1")
+def thirdSuite = project.hasProperty("suite2")
 
 test {
     useTestNG() {
@@ -54,6 +55,8 @@ test {
             suites "src/test/resources/suites/suiteOne.xml"
         } else if (secondSuite) {
             suites "src/test/resources/suites/suiteTwo.xml"
+        } else if (thirdSuite) {
+            suites "src/test/resources/suites/suiteThree.xml"
         }
     }
     finalizedBy(jacocoTestReport)
