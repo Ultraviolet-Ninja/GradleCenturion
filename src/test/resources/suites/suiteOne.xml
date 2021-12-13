@@ -1,0 +1,19 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite One">
+    <test name="A Module Tests">
+        <classes>
+            <class name="bomb.modules.ab.alphabet.AlphabetTest"/>
+            <class name="bomb.modules.ab.astrology.AstrologyTest"/>
+        </classes>
+    </test>
+
+    <test name="B Module Tests">
+        <classes>
+            <class name="bomb.modules.ab.bitwise.BitwiseTest"/>
+            <class name="bomb.modules.ab.blind_alley.BlindAlleyTest"/>
+            <class name="bomb.modules.ab.boolean_venn.BooleanVennTest"/>
+        </classes>
+    </test>
+</suite>
