@@ -45,7 +45,7 @@ jobs:
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
 
       # run tests!
-      - run: ./gradlew test -Psuite1
+      - run: ./gradlew test -Psuite${{ CIRCLE_NODE_INDEX }}
       - store_test_results:
           path: ./build/test-results/test
       - store_artifacts:

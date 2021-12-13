@@ -45,16 +45,14 @@ dependencies {
     testImplementation 'org.testng:testng:7.4.0'
 }
 
-def suite1 = project.hasProperty("suite1")
-def suite2 = project.hasProperty("suite2")
+def firstSuite = project.hasProperty("suite0")
+def secondSuite = project.hasProperty("suite1")
 
 test {
     useTestNG() {
-        if(suite1) {
+        if(firstSuite) {
             suites "src/test/resources/suites/suiteOne.xml"
-        }
-
-        if (suite2) {
+        } else if (secondSuite) {
             suites "src/test/resources/suites/suiteTwo.xml"
         }
     }
