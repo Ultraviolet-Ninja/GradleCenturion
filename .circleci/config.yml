@@ -13,6 +13,7 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
+    parallelism: 2
     resource_class: large
 
     working_directory: ~/repo
@@ -44,7 +45,7 @@ jobs:
           key: gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
 
       # run tests!
-      - run: ./gradlew test
+      - run: ./gradlew test -Psuite1
       - store_test_results:
           path: ./build/test-results/test
       - store_artifacts:
