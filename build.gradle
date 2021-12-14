@@ -46,11 +46,11 @@ dependencies {
     testImplementation 'org.testng:testng:7.4.0'
 }
 
-def firstSuite = project.hasProperty("suite0")
-def secondSuite = project.hasProperty("suite1")
-def thirdSuite = project.hasProperty("suite2")
-def firstMutationTest = project.hasProperty("suite3")
-def secondMutationTest = project.hasProperty("suite4")
+def firstInstance = project.hasProperty("thread0")
+def secondInstance = project.hasProperty("thread1")
+def thirdInstance = project.hasProperty("thread2")
+def fourthInstance = project.hasProperty("thread3")
+def fifthInstance = project.hasProperty("thread4")
 
 def includedDirectories = [
         'bomb/tools/data/**', 'bomb/tools/*', 'bomb/tools/logic/*'
@@ -58,19 +58,19 @@ def includedDirectories = [
 
 test {
     useTestNG() {
-        if(firstSuite) {
+        if(firstInstance) {
             suites "src/test/resources/suites/suiteOne.xml"
             includedDirectories.addAll([
                     'bomb/modules/ab/**', 'bomb/modules/c/**',
                     'bomb/modules/dh/**', 'bomb/modules/il/**',
             ])
-        } else if (secondSuite) {
+        } else if (secondInstance) {
             suites "src/test/resources/suites/suiteTwo.xml"
             includedDirectories.addAll([
                     'bomb/modules/m/**', 'bomb/modules/np/**',
                     'bomb/modules/r/**', 'bomb/modules/s/**'
             ])
-        } else if (thirdSuite) {
+        } else if (thirdInstance) {
             suites "src/test/resources/suites/suiteThree.xml"
             includedDirectories.addAll([
                     'bomb', 'bomb/tools/filter/*',
@@ -78,12 +78,7 @@ test {
             ])
         }
     }
-    boolean isMutationTest = firstMutationTest || secondMutationTest
-
-    finalizedBy(isMutationTest ?
-            tasks.getByName('pitest') :
-            jacocoTestReport
-    )
+    finalizedBy(jacocoTestReport)
 }
 
 jacocoTestReport {
@@ -98,14 +93,25 @@ jacocoTestReport {
     }
 }
 
-static List<String> getTargetClasses(boolean mutationTest) {
-    if (mutationTest)
+static List<String> getTargetClasses(boolean firstInstance, boolean secondInstance,
+                                     boolean thirdInstance, boolean fourthInstance,
+                                     boolean fifthInstance) {
+    if (firstInstance)
         return ['bomb.modules.ab.**', 'bomb.modules.c.**']
-    return ['bomb.modules.dh.**', 'bomb.modules.il.**']
+    else if (secondInstance)
+        return ['bomb.modules.dh.**', 'bomb.modules.il.**']
+    else if (thirdInstance)
+        return ['bomb.modules.m.**', 'bomb.modules.np.**']
+    else if (fourthInstance)
+        return ['bomb.modules.r.**', 'bomb.modules.s.**']
+    else if (fifthInstance)
+        return ['bomb.modules.t.**', 'bomb.tools.filter.*']
+    return ['bomb.*']
 }
 
 pitest {
-    targetClasses = getTargetClasses(firstMutationTest)
+    targetClasses = getTargetClasses(firstInstance, secondInstance, thirdInstance,
+            fourthInstance, fifthInstance)
     outputFormats = ['HTML']
     testPlugin = 'testng'
 }
