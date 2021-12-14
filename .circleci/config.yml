@@ -25,24 +25,24 @@ jobs:
 
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+#      - setup_remote_docker:
+#          docker_layer_caching: true
       - run: chmod +x gradlew
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
-            - gradle-repo-v1-{{ .Branch }}-
-            - gradle-repo-v1-
+#      # Download and cache dependencies
+#      - restore_cache:
+#          keys:
+#            # when lock file changes, use increasingly general patterns to restore cache
+#            - gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
+#            - gradle-repo-v1-{{ .Branch }}-
+#            - gradle-repo-v1-
 
       - run: ./gradlew dependencies
 
-      - save_cache:
-          paths:
-            - ~/.cache
-          key: gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
+#      - save_cache:
+#          paths:
+#            - ~/.cache
+#          key: gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
 
       # run tests!
       - run: ./gradlew test -Pthread$CIRCLE_NODE_INDEX
