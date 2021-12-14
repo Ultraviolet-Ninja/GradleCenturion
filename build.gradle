@@ -98,11 +98,11 @@ static List<String> getTargetClasses(boolean firstInstance, boolean secondInstan
                                      boolean thirdInstance, boolean fourthInstance,
                                      boolean fifthInstance, boolean sixthInstance) {
     if (firstInstance)
-        return ['bomb.modules.ab.**', 'bomb.modules.c.**']
+        return ['bomb.modules.ab.**']
     else if (secondInstance)
-        return ['bomb.modules.dh.**']
+        return ['bomb.modules.c.**']
     else if (thirdInstance)
-        return ['bomb.modules.il.**']
+        return ['bomb.modules.dh.**', 'bomb.modules.il.**']
     else if (fourthInstance)
         return ['bomb.modules.m.**', 'bomb.modules.np.**']
     else if (fifthInstance)
