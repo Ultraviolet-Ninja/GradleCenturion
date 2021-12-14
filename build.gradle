@@ -49,14 +49,34 @@ def firstSuite = project.hasProperty("suite0")
 def secondSuite = project.hasProperty("suite1")
 def thirdSuite = project.hasProperty("suite2")
 
+List<String> directoryInclusion = []
+
 test {
     useTestNG() {
         if(firstSuite) {
             suites "src/test/resources/suites/suiteOne.xml"
+            directoryInclusion.addAll([
+                    'bomb/modules/ab/**',
+                    'bomb/modules/c/**',
+                    'bomb/modules/dh/**',
+                    'bomb/modules/il/**',
+                    'bomb/modules/m/**'
+            ])
         } else if (secondSuite) {
             suites "src/test/resources/suites/suiteTwo.xml"
+            directoryInclusion.addAll([
+                    'bomb/modules/np/**',
+                    'bomb/modules/r/**',
+                    'bomb/modules/s/**',
+                    'bomb/modules/t/**',
+                    'bomb/modules/wz/**'
+            ])
         } else if (thirdSuite) {
             suites "src/test/resources/suites/suiteThree.xml"
+            directoryInclusion.addAll([
+                    'bomb',
+                    'bomb/tools/filter/*'
+            ])
         }
     }
     finalizedBy(jacocoTestReport)
@@ -64,6 +84,14 @@ test {
 
 jacocoTestReport {
     reports.xml.enabled(true)
+
+    if (!directoryInclusion.isEmpty()) {
+        afterEvaluate {
+            classDirectories.setFrom(files(classDirectories.files.collect {
+                fileTree(dir: it, include: directoryInclusion)
+            }))
+        }
+    }
 }
 
 javafx {

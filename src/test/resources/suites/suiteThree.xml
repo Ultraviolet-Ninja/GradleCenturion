@@ -2,8 +2,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite Three">
-    <test name="Tools">
+    <test name="Widget and Tools">
         <classes>
+            <class name="bomb.WidgetTest"/>
             <class name="bomb.tools.filter.RegexFilterTest"/>
         </classes>
     </test>
