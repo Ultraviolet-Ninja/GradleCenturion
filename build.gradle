@@ -51,6 +51,7 @@ def secondInstance = project.hasProperty("thread1")
 def thirdInstance = project.hasProperty("thread2")
 def fourthInstance = project.hasProperty("thread3")
 def fifthInstance = project.hasProperty("thread4")
+def sixthInstance = project.hasProperty("thread5")
 
 def includedDirectories = [
         'bomb/tools/data/**', 'bomb/tools/*', 'bomb/tools/logic/*'
@@ -95,23 +96,25 @@ jacocoTestReport {
 
 static List<String> getTargetClasses(boolean firstInstance, boolean secondInstance,
                                      boolean thirdInstance, boolean fourthInstance,
-                                     boolean fifthInstance) {
+                                     boolean fifthInstance, boolean sixthInstance) {
     if (firstInstance)
         return ['bomb.modules.ab.**', 'bomb.modules.c.**']
     else if (secondInstance)
-        return ['bomb.modules.dh.**', 'bomb.modules.il.**']
+        return ['bomb.modules.dh.**']
     else if (thirdInstance)
-        return ['bomb.modules.m.**', 'bomb.modules.np.**']
+        return ['bomb.modules.il.**']
     else if (fourthInstance)
-        return ['bomb.modules.r.**', 'bomb.modules.s.**']
+        return ['bomb.modules.m.**', 'bomb.modules.np.**']
     else if (fifthInstance)
+        return ['bomb.modules.r.**', 'bomb.modules.s.**']
+    else if (sixthInstance)
         return ['bomb.modules.t.**', 'bomb.tools.filter.*']
     return ['bomb.*']
 }
 
 pitest {
     targetClasses = getTargetClasses(firstInstance, secondInstance, thirdInstance,
-            fourthInstance, fifthInstance)
+            fourthInstance, fifthInstance, sixthInstance)
     outputFormats = ['HTML']
     testPlugin = 'testng'
 }
