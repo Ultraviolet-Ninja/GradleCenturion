@@ -12,8 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
-import static bomb.tools.filter.Filter.LOGIC_SYMBOL_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
+import static bomb.tools.filter.RegexFilter.filter;
 
 public class BooleanController implements Resettable {
     private static final String PRESS_COLOR, DO_NOT_PRESS_COLOR, DEFAULT_TEXT;
@@ -23,8 +23,8 @@ public class BooleanController implements Resettable {
     private StringBuilder currentOperation;
 
     @FXML
-    private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor, booleanXnor,
-            booleanImpliedBy;
+    private MFXButton booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand,
+            booleanNor, booleanXnor, booleanImpliedBy;
 
     @FXML
     private Circle a, b, c, ab, bc, ac, all, not;
@@ -51,11 +51,10 @@ public class BooleanController implements Resettable {
     public void initialize() {
         MFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
                 booleanXnor, booleanImpliedBy};
-        int i = 0;
         EventHandler<ActionEvent> onActionEvent = createButtonAction();
-        while (i < buttonArray.length) {
-            buttonArray[i].setOnAction(onActionEvent);
-            i++;
+
+        for (MFXButton mfxButton : buttonArray) {
+            mfxButton.setOnAction(onActionEvent);
         }
     }
 
@@ -74,7 +73,9 @@ public class BooleanController implements Resettable {
         if (currentOperation.toString().length() != DEFAULT_TEXT.length()) {
             currentOperation = shiftPriority(currentOperation.toString());
             solveEquation();
-        } else overwriteOperationText(priorityToggle.isSelected() ? "A(BC)" : DEFAULT_TEXT);
+        } else {
+            overwriteOperationText(priorityToggle.isSelected() ? "A(BC)" : DEFAULT_TEXT);
+        }
 
         writeOutToTextField();
     }
@@ -108,7 +109,7 @@ public class BooleanController implements Resettable {
     }
 
     private void solveEquation() {
-        if (ultimateFilter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2) {
+        if (filter(currentOperation.toString(), LOGIC_SYMBOL_FILTER).length() == 2) {
             String code = BooleanVenn.resultCode(currentOperation.toString());
             setCircleFill(new Circle[]{not, c, b, a, bc, ac, ab, all}, code.toCharArray());
             FacadeFX.disableMultiple(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
@@ -121,7 +122,7 @@ public class BooleanController implements Resettable {
             circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }
 
-    private String getMathSymbol(MFXButton button) {
+    private static String getMathSymbol(MFXButton button) {
         return String.valueOf(button.getText().charAt(0));
     }
 
@@ -150,8 +151,9 @@ public class BooleanController implements Resettable {
     private void resetModule() {
         overwriteOperationText(DEFAULT_TEXT);
         writeOutToTextField();
-        FacadeFX.enableMultiple(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
-                booleanXnor, booleanImpliedBy);
+        FacadeFX.enableMultiple(
+                booleanAnd, booleanOr, booleanXor, booleanImplies,
+                booleanNand, booleanNor, booleanXnor, booleanImpliedBy);
         priorityToggle.setSelected(false);
         priorityToggle.setText("AB Priority");
 

@@ -3,13 +3,16 @@ package bomb.modules.dh.fast_math;
 import bomb.ConditionSetter;
 import bomb.Widget;
 import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.enumerations.Port.SERIAL;
 import static org.testng.Assert.assertEquals;
 
 public class FastMathTest {
@@ -20,11 +23,9 @@ public class FastMathTest {
 
     @DataProvider
     public Object[][] exceptionTestProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter setSerialCode = () -> Widget.setSerialCode("fr4op2");
         return new Object[][]{
-                {empty, ""}, {empty, null}, {empty, "AZ"}, {setSerialCode, "AY"}
+                {EMPTY_SETTER, ""}, {EMPTY_SETTER, null}, {EMPTY_SETTER, "AZ"}, {setSerialCode, "AY"}
         };
     }
 
@@ -43,8 +44,8 @@ public class FastMathTest {
 
     @Test(dataProvider = "allPreconditionTestProvider")
     public void allPreconditionTest(String expected, String input) {
-        Widget.setPortValue(Port.SERIAL, 1);
-        Widget.setPortValue(Port.RJ45, 1);
+        Widget.setPortValue(SERIAL, 1);
+        Widget.setPortValue(RJ45, 1);
         Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
         Widget.setDBatteries(4);
         Widget.setSerialCode("fr4op2"); //In total, adds 41 to the count
@@ -84,8 +85,8 @@ public class FastMathTest {
     @Test
     public void zeroWithOneDigitTest() {
         Widget.setSerialCode("l33vi5");
-        Widget.setPortValue(Port.PARALLEL, 2);
-        Widget.setPortValue(Port.SERIAL, 2);
+        Widget.setPortValue(PARALLEL, 2);
+        Widget.setPortValue(SERIAL, 2);
         Widget.setNumberOfPlates(3);
 
         assertEquals(FastMath.solve("ZE"), "06");

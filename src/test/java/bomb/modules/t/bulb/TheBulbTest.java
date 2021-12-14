@@ -2,7 +2,6 @@ package bomb.modules.t.bulb;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicator;
 import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
@@ -12,6 +11,14 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.FRK;
+import static bomb.enumerations.Indicator.FRQ;
+import static bomb.enumerations.Indicator.IND;
+import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.Indicator.SIG;
 import static bomb.modules.t.bulb.Bulb.Color.BLUE;
 import static bomb.modules.t.bulb.Bulb.Color.GREEN;
 import static bomb.modules.t.bulb.Bulb.Color.PURPLE;
@@ -44,7 +51,8 @@ public class TheBulbTest {
     }
 
     @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(Bulb.Position position, Bulb.Light inputLight, Bulb.Color inputColor, Bulb.Opacity inputOpacity) {
+    public void exceptionTest(Bulb.Position position, Bulb.Light inputLight,
+                              Bulb.Color inputColor, Bulb.Opacity inputOpacity) {
         Bulb testBulb = new Bulb();
         testBulb.setPosition(position);
         testBulb.setOpacity(inputOpacity);
@@ -57,18 +65,18 @@ public class TheBulbTest {
     @DataProvider
     public Object[][] trainingVideoTestProvider() {
         ConditionSetter trainingVideoConditions = () -> {
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.BOB);
-            Widget.setIndicator(TrinarySwitch.ON, Indicator.FRQ);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
-            Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
+            Widget.setIndicator(TrinarySwitch.OFF, BOB);
+            Widget.setIndicator(TrinarySwitch.ON, FRQ);
+            Widget.setIndicator(TrinarySwitch.OFF, FRK);
+            Widget.setIndicator(TrinarySwitch.ON, NSA);
         };
 
-        ConditionSetter secondTrainingVideoConditions = () -> Widget.setIndicator(TrinarySwitch.ON, Indicator.SIG);
+        ConditionSetter secondTrainingVideoConditions = () -> Widget.setIndicator(TrinarySwitch.ON, SIG);
 
         ConditionSetter thirdTrainingVideoConditions = () -> {
-            Widget.setIndicator(TrinarySwitch.ON, Indicator.IND);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.NSA);
+            Widget.setIndicator(TrinarySwitch.ON, IND);
+            Widget.setIndicator(TrinarySwitch.OFF, FRK);
+            Widget.setIndicator(TrinarySwitch.OFF, NSA);
         };
 
         return new Object[][]{
@@ -79,7 +87,9 @@ public class TheBulbTest {
     }
 
     @Test(dataProvider = "trainingVideoTestProvider")
-    public void trainingVideoTest(ConditionSetter bombConditions, Bulb.Light inputLight, Bulb.Color inputColor, Bulb.Opacity inputOpacity, String[] expectedResults) {
+    public void trainingVideoTest(ConditionSetter bombConditions, Bulb.Light inputLight,
+                                  Bulb.Color inputColor, Bulb.Opacity inputOpacity,
+                                  String[] expectedResults) {
         bombConditions.setCondition();
 
         Bulb testBulb = new Bulb();
@@ -95,21 +105,37 @@ public class TheBulbTest {
 
     @DataProvider
     public Object[][] writtenTestProvider() {
-        ConditionSetter testConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, Indicator.FRK);
-        ConditionSetter secondTestConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, Indicator.CAR);
-        ConditionSetter emptyCondition = () -> {};
+        ConditionSetter testConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, FRK);
+        ConditionSetter secondTestConditions = () -> Widget.setIndicator(TrinarySwitch.OFF, CAR);
 
         return new Object[][]{
-                {testConditions, ON, YELLOW, OPAQUE, new String[]{PRESS_O, UNSCREW, PRESS_O, PRESS_I, SCREW}},
-                {testConditions, ON, WHITE, OPAQUE, new String[]{PRESS_O, UNSCREW, PRESS_I, PRESS_O, SCREW}},
-                {secondTestConditions, OFF, YELLOW, TRANSLUCENT, new String[]{UNSCREW, PRESS_I, PRESS_O, PRESS_I, SCREW}},
-                {secondTestConditions, OFF, BLUE, OPAQUE, new String[]{UNSCREW, PRESS_I, PRESS_I, PRESS_I, SCREW}},
-                {emptyCondition, OFF, PURPLE, TRANSLUCENT, new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}}
+                {
+                    testConditions, ON, YELLOW, OPAQUE,
+                        new String[]{PRESS_O, UNSCREW, PRESS_O, PRESS_I, SCREW}
+                },
+                {
+                    testConditions, ON, WHITE, OPAQUE,
+                        new String[]{PRESS_O, UNSCREW, PRESS_I, PRESS_O, SCREW}
+                },
+                {
+                    secondTestConditions, OFF, YELLOW, TRANSLUCENT,
+                        new String[]{UNSCREW, PRESS_I, PRESS_O, PRESS_I, SCREW}
+                },
+                {
+                    secondTestConditions, OFF, BLUE, OPAQUE,
+                        new String[]{UNSCREW, PRESS_I, PRESS_I, PRESS_I, SCREW}
+                },
+                {
+                    EMPTY_SETTER, OFF, PURPLE, TRANSLUCENT,
+                        new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}
+                }
         };
     }
 
     @Test(dataProvider = "writtenTestProvider")
-    public void writtenTest(ConditionSetter bombConditions, Bulb.Light inputLight, Bulb.Color inputColor, Bulb.Opacity inputOpacity, String[] expectedResults) {
+    public void writtenTest(ConditionSetter bombConditions, Bulb.Light inputLight,
+                            Bulb.Color inputColor, Bulb.Opacity inputOpacity,
+                            String[] expectedResults) {
         bombConditions.setCondition();
 
         Bulb testBulb = new Bulb();

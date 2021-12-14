@@ -4,7 +4,7 @@
 #
 version: 2
 jobs:
-  build:
+  jacoco:
     docker:
       # specify the version you desire here
       - image: cimg/openjdk:15.0.2
@@ -13,6 +13,8 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # - image: circleci/postgres:9.4
+    parallelism: 3
+    resource_class: large
 
     working_directory: ~/repo
 
@@ -25,24 +27,40 @@ jobs:
       - checkout
       - run: chmod +x gradlew
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            # when lock file changes, use increasingly general patterns to restore cache
-            - gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
-            - gradle-repo-v1-{{ .Branch }}-
-            - gradle-repo-v1-
-
       - run: ./gradlew dependencies
 
-      - save_cache:
-          paths:
-            - ~/.cache
-          key: gradle-repo-v1-{{ .Branch }}-{{ checksum ".cache/dependencies.lockfile" }}
-
       # run tests!
-      - run: ./gradlew test
+      - run: ./gradlew test -Pthread$CIRCLE_NODE_INDEX
       - store_test_results:
           path: ./build/test-results/test
       - store_artifacts:
           path: ./build/reports
+  pitest:
+    docker:
+     - image: cimg/openjdk:15.0.2
+    parallelism: 6
+    resource_class: large
+
+    working_directory: ~/repo
+
+    environment:
+      JVM_OPTS: -Xmx3200m
+      TERM: dumb
+
+    steps:
+     - checkout
+     - run: chmod +x gradlew
+     - run: ./gradlew dependencies
+
+     - run: ./gradlew pitest -Pthread$CIRCLE_NODE_INDEX
+     - store_test_results:
+         path: ./build/test-results/test
+     - store_artifacts:
+         path: ./build/reports
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - jacoco
+      - pitest

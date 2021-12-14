@@ -30,7 +30,8 @@ public class Switches extends Widget {
             SPECIAL_CONDITIONS.put(specialConditionsSource[i], specialConditionsOutputs[i]);
     }
 
-    public static List<String> produceMoveList(byte startingState, byte desiredState) {
+    public static List<String> produceMoveList(byte startingState, byte desiredState)
+            throws IllegalArgumentException {
         validateInput(startingState, desiredState);
         List<String> outputList = new ArrayList<>();
         setToZero(outputList, startingState);
@@ -39,11 +40,12 @@ public class Switches extends Widget {
         return outputList;
     }
 
-    private static void validateInput(byte startingState, byte desiredState) throws IllegalArgumentException {
+    private static void validateInput(byte startingState, byte desiredState)
+            throws IllegalArgumentException {
         if (isForbiddenMove(startingState))
-            throw new IllegalArgumentException("The switches are in an illegal move");
+            throw new IllegalArgumentException("The switches are in an illegal position");
         if (isForbiddenMove(desiredState))
-            throw new IllegalArgumentException("The lights are in an illegal move");
+            throw new IllegalArgumentException("The lights are in an illegal position");
         if (startingState == desiredState)
             throw new IllegalArgumentException("You're already at the desired state");
         if (inputOutOfRange(startingState) || inputOutOfRange(desiredState))

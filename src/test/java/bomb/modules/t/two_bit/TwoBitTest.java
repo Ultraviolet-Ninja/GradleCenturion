@@ -30,7 +30,7 @@ public class TwoBitTest {
         };
     }
 
-    @Test( dataProvider = "nextCodeExceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "nextCodeExceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void nextCodeExceptionTest(String input) {
         TwoBit.nextCode(input);
     }
@@ -45,8 +45,14 @@ public class TwoBitTest {
     public Object[][] trainingVideoTestProvider() {
         widgetSetupOne();
         return new Object[][]{
-                {new String[]{QUERY_TEXT + "gv", QUERY_TEXT + "vt", SUBMIT_TEXT + "gz"}, new String[]{"02", "07", "89"}},
-                {new String[]{QUERY_TEXT + "vc", QUERY_TEXT + "bd", SUBMIT_TEXT + "vg"}, new String[]{"77", "67", "93"}}
+                {
+                    new String[]{QUERY_TEXT + "gv", QUERY_TEXT + "vt", SUBMIT_TEXT + "gz"},
+                        new String[]{"02", "07", "89"}
+                },
+                {
+                    new String[]{QUERY_TEXT + "vc", QUERY_TEXT + "bd", SUBMIT_TEXT + "vg"},
+                        new String[]{"77", "67", "93"}
+                }
         };
     }
 

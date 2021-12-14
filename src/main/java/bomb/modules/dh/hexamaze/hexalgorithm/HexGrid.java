@@ -2,29 +2,29 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.BufferedQueue;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.queue.BufferedQueue;
+import bomb.tools.data.structures.ring.ArrayRing;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class creates a representation of what hte defuser sees on the Bomb.
+ * This class creates a representation of what hte Defuser sees on the Bomb.
  * It encapsulates a Hex class and contains data that's appropriate for that puzzle that
  * wouldn't be needed for all Hex objects
  */
 public class HexGrid extends AbstractHexagon {
     public static final byte STANDARD_SIDE_LENGTH = 4;
 
-    private final ReadOnlyRing<Color> colorRing;
+    private final ArrayRing<Color> colorRing;
 
     /**
-     * Initializes a Hex object with a side length of 4, representing what the defuser sees on thr bomb
+     * Initializes a Hex object with a side length of 4, representing what the Defuser sees on thr bomb
      */
     public HexGrid() {
         super(new HexagonDataStructure(STANDARD_SIDE_LENGTH));
-        colorRing = new ReadOnlyRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
+        colorRing = new ArrayRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
     }
 
     /**
@@ -35,8 +35,9 @@ public class HexGrid extends AbstractHexagon {
     public HexGrid(HexagonDataStructure grid, int neededRotations) throws IllegalArgumentException {
         if (grid.getSideLength() != STANDARD_SIDE_LENGTH)
             throw new IllegalArgumentException("Grid doesn't have a side length of 4");
+
         hexagon = grid;
-        colorRing = new ReadOnlyRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
+        colorRing = new ArrayRing<>(Color.RED, Color.YELLOW, Color.GREEN, Color.CYAN, Color.BLUE, Color.PINK);
         for (int i = 0; i < neededRotations; i++) rotateColorOrder();
     }
 
@@ -47,16 +48,16 @@ public class HexGrid extends AbstractHexagon {
     /**
      * Fills an ArrayList with HexNodes from one of HexShapes
      *
-     * @param shapeList The ArrayList of shapes to fill the HexGrid
+     * @param shapeList The List of shapes to fill the HexGrid
      */
     public void fillWithShapes(List<HexNodeProperties.HexShape> shapeList) {
-        ArrayList<HexNode> nodeList = new ArrayList<>();
+        List<HexNode> nodeList = new ArrayList<>();
+
         for (HexNodeProperties.HexShape shape : shapeList)
             nodeList.add(new HexNode(shape, null));
         hexagon.readInNodeList(nodeList);
     }
 
-    @Override
     public void rotate() {
         hexagon.rotate();
         rotateColorOrder();
@@ -70,20 +71,22 @@ public class HexGrid extends AbstractHexagon {
         colorRing.rotateCounterClockwise();
     }
 
-    public ReadOnlyRing<Color> getRing() {
+    public ArrayRing<Color> getRing() {
         return colorRing;
     }
 
     public void addWallsToHexagon(String wallHash) {
         String[] splits = wallHash.split(":");
+
         for (int i = 0; i < Integer.parseInt(splits[1]); i++)
             rotateColorOrder();
-        List<HexNode> stream = hexagon.exportToList();
-        for (int i = 0; i < stream.size(); i++) {
-            stream.get(i).recreateWallsFromHash(splits[0].charAt(i));
+
+        int index = 0;
+        List<HexNode> nodeList = hexagon.exportToList();
+        for (HexNode node : nodeList) {
+            node.recreateWallsFromHash(splits[0].charAt(index++));
         }
     }
-
 
     /**
      * Gets the HexNode from a specific set of coordinates
@@ -95,7 +98,7 @@ public class HexGrid extends AbstractHexagon {
         if (pair.getX() < 0 || pair.getX() >= hexagon.getSpan()) return null;
         BufferedQueue<HexNode> column = exportTo2DQueue().get(pair.getX());
 
-        if (pair.getY() < 0 || pair.getY() >= column.cap()) return null;
+        if (pair.getY() < 0 || pair.getY() >= column.getCapacity()) return null;
         return column.get(pair.getY());
     }
 
@@ -107,12 +110,11 @@ public class HexGrid extends AbstractHexagon {
     public List<String> createHashStrings() {
         List<String> outputs = new ArrayList<>(2);
         StringBuilder shapeHash = new StringBuilder(), wallHash = new StringBuilder();
-        BufferedQueue<BufferedQueue<HexNode>> queues = hexagon.exportTo2DQueue();
 
-        for (int x = 0; x < queues.cap(); x++) {
-            for (int y = 0; y < queues.get(x).cap(); y++) {
-                shapeHash.append(queues.get(x).get(y).getShapeHash());
-                wallHash.append(queues.get(x).get(y).getWallHash());
+        for (BufferedQueue<HexNode> column : hexagon) {
+            for (HexNode node : column) {
+                shapeHash.append(node.getShapeHash());
+                wallHash.append(node.getWallHash());
             }
         }
         wallHash.append(":").append(colorRing.findRelativeIndex(Color.RED));

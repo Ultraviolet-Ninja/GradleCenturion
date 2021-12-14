@@ -16,6 +16,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.components.microcontroller to javafx.fxml;
     exports bomb.components.simon.screams to javafx.fxml;
     exports bomb.components.simon.states to javafx.fxml;
+    exports bomb.enumerations to javafx.fxml;
     exports bomb.modules.ab.alphabet to javafx.fxml;
     exports bomb.modules.ab.astrology to javafx.fxml;
     exports bomb.modules.ab.bitwise to javafx.fxml;
@@ -31,10 +32,14 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.dh.fast_math to javafx.fxml;
     exports bomb.modules.dh.forget_me to javafx.fxml;
     exports bomb.modules.dh.hexamaze to javafx.fxml;
+    exports bomb.modules.dh.hexamaze.hexalgorithm to javafx.fxml;
+    exports bomb.modules.dh.hexamaze_redesign to javafx.fxml;
+    exports bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage to javafx.fxml;
     exports bomb.modules.il.ice_cream to javafx.fxml;
     exports bomb.modules.il.laundry to javafx.fxml;
     exports bomb.modules.il.led_encryption to javafx.fxml;
     exports bomb.modules.m.microcontroller to javafx.fxml;
+    exports bomb.modules.m.microcontroller.chip to javafx.fxml;
     exports bomb.modules.m.monsplode to javafx.fxml;
     exports bomb.modules.np.neutralization to javafx.fxml;
     exports bomb.modules.np.number_pad to javafx.fxml;
@@ -42,6 +47,7 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.s.seashells to javafx.fxml;
     exports bomb.modules.s.semaphore to javafx.fxml;
     exports bomb.modules.s.shape_shift to javafx.fxml;
+    exports bomb.modules.s.simon to javafx.fxml;
     exports bomb.modules.s.simon.screams to javafx.fxml;
     exports bomb.modules.s.simon.states to javafx.fxml;
     exports bomb.modules.s.souvenir to javafx.fxml;
@@ -49,8 +55,18 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.modules.t.bulb to javafx.fxml;
     exports bomb.modules.t.three_d_maze to javafx.fxml;
     exports bomb.modules.t.translated to javafx.fxml;
+    exports bomb.modules.t.translated.solutions to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.button to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.gas to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.morse to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.password to javafx.fxml;
+    exports bomb.modules.t.translated.solutions.wof to javafx.fxml;
     exports bomb.modules.t.two_bit to javafx.fxml;
     exports bomb.modules.wz.zoo to javafx.fxml;
+    exports bomb.tools to javafx.fxml;
+    exports bomb.tools.data.structures.queue to javafx.fxml;
+    exports bomb.tools.data.structures.ring to javafx.fxml;
+    exports bomb.tools.logic to javafx.fxml;
     exports bomb.tools.note to javafx.fxml;
 
     opens bomb;
@@ -74,10 +90,14 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.dh.fast_math;
     opens bomb.modules.dh.forget_me;
     opens bomb.modules.dh.hexamaze;
+    opens bomb.modules.dh.hexamaze.hexalgorithm;
+    opens bomb.modules.dh.hexamaze_redesign;
+    opens bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
     opens bomb.modules.il.ice_cream;
     opens bomb.modules.il.laundry;
     opens bomb.modules.il.led_encryption;
     opens bomb.modules.m.microcontroller;
+    opens bomb.modules.m.microcontroller.chip;
     opens bomb.modules.m.monsplode;
     opens bomb.modules.np.neutralization;
     opens bomb.modules.np.number_pad;
@@ -92,7 +112,17 @@ module jasmine.jragon.GradleCenturion.main {
     opens bomb.modules.t.bulb;
     opens bomb.modules.t.three_d_maze;
     opens bomb.modules.t.translated;
+    opens bomb.modules.t.translated.solutions;
+    opens bomb.modules.t.translated.solutions.button;
+    opens bomb.modules.t.translated.solutions.morse;
+    opens bomb.modules.t.translated.solutions.password;
+    opens bomb.modules.t.translated.solutions.gas;
+    opens bomb.modules.t.translated.solutions.wof;
     opens bomb.modules.t.two_bit;
     opens bomb.modules.wz.zoo;
+    opens bomb.tools;
+    opens bomb.tools.data.structures.queue;
+    opens bomb.tools.data.structures.ring;
+    opens bomb.tools.logic;
     opens bomb.tools.note;
 }

@@ -27,8 +27,8 @@ public class FastController implements Resettable {
     }
 
     public void initialize() {
-        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initializeAction()), alfa, bravo, charlie, delta, echo,
-                golf, kilo, november, papa, sierra, tango, xRay, zulu);
+        FacadeFX.bindHandlerToButtons(new HoverHandler<>(initializeAction()), alfa, bravo, charlie,
+                delta, echo, golf, kilo, november, papa, sierra, tango, xRay, zulu);
     }
 
     private Consumer<ActionEvent> initializeAction() {

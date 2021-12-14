@@ -24,11 +24,10 @@ public class ChordController implements Resettable {
     private Consumer<Set<String>> createListener() {
         return set -> {
             if (set.size() == NoteCircleComponent.SELECTED_NOTE_LIMIT) {
-                StringBuilder sb = new StringBuilder();
-                for (String note : set) sb.append(note).append(" ");
+                String output = String.join(" ", set);
 
                 try {
-                    outputField.setText(ChordQualities.solve(sb.toString().trim()));
+                    outputField.setText(ChordQualities.solve(output.trim()));
                 } catch (IllegalArgumentException illegal) {
                     FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
                     FacadeFX.clearText(outputField);

@@ -1,7 +1,7 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 
 public abstract class AbstractHexagon {
     protected HexagonDataStructure hexagon;
@@ -28,10 +28,6 @@ public abstract class AbstractHexagon {
 
     public BufferedQueue<BufferedQueue<HexNode>> exportTo2DQueue() {
         return hexagon.exportTo2DQueue();
-    }
-
-    public void rotate() {
-        hexagon.rotate();
     }
 
     public static int[] calculateColumnLengths(int sideLength) {

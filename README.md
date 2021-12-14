@@ -3,7 +3,7 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
-![Project Version](https://img.shields.io/badge/version-0.21.0-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.21.1-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
@@ -16,6 +16,7 @@ This is a huge project for one man to tackle, but I've learned a lot from the ch
 ### Plugins
 - Jacoco
 - JavaFX
+- Pitest
 - Palantir Docker
 - Breadmoirai GitHub Release
 ### Dependencies
@@ -50,8 +51,8 @@ Widgets are important details about the bomb such that many modules depend on wh
 not. The list of details includes Port Types, Number of Port Plates, Lit and Unlit Indicators, Number of Batteries,
 Number of Battery Holders, Two-Factor Authentication, and the Serial Code.
 ![WidgetOne](markdown/Widget1.jpg)
-One D Battery in one holder and a lit NSA indicator
+**One D Battery** in **one holder** and a **lit NSA indicator**
 
 ![WidgetTwo](markdown/Widget2.jpg)
-One port plate with a PS/2 port, another D battery in one holder and a serial code "PN4XC5".<br>
-Overall, this edgework would be given as "1 PS2 port in 1 plate, a lit NSA, 2 in 2 (2 batteries in 2 holders), and serial is Papa November 4 X-ray Charlie 5" (Using the Nato Phonetic Alphabet)
+**One port plate** with a **PS/2 port**, another **D battery in one holder** and a serial code **"PN4XC5"**.<br>
+Overall, this edgework would be given as "1 PS2 port in 1 plate, a lit November SA, 2 in 2 (2 batteries in 2 holders), and serial is Papa November 4 X-ray Charlie 5" (Using the Nato Phonetic Alphabet)

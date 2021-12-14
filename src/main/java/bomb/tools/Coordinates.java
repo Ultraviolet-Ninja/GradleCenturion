@@ -10,11 +10,6 @@ public class Coordinates extends EquatableObject implements Comparable<Coordinat
         this.y = y;
     }
 
-    public Coordinates(Coordinates original) {
-        this.x = original.x;
-        this.y = original.y;
-    }
-
     public int getX() {
         return x;
     }
@@ -40,12 +35,13 @@ public class Coordinates extends EquatableObject implements Comparable<Coordinat
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof Coordinates)) return false;
-        return ((Coordinates) o).x == this.x && ((Coordinates) o).y == this.y;
+        Coordinates other = (Coordinates) o;
+        return other.x == this.x && other.y == this.y;
     }
 
     @Override
     public String toString() {
-        return "(" + x + "," + y + ")";
+        return String.format("(%d,%d)", x, y);
     }
 
     @SuppressWarnings("NullableProblems")

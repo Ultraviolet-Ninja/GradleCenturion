@@ -7,11 +7,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.modules.r.round_keypads.Keypad.A_T;
-import static bomb.modules.r.round_keypads.Keypad.SPANISH_QUESTION1;
 import static bomb.modules.r.round_keypads.Keypad.COPYRIGHT;
-import static bomb.modules.r.round_keypads.Keypad.SPANISH_QUESTION2;
 import static bomb.modules.r.round_keypads.Keypad.PSI1;
 import static bomb.modules.r.round_keypads.Keypad.PUZZLE;
+import static bomb.modules.r.round_keypads.Keypad.SPANISH_QUESTION1;
+import static bomb.modules.r.round_keypads.Keypad.SPANISH_QUESTION2;
 
 public class RoundKeypadTest {
     @BeforeMethod
@@ -27,7 +27,8 @@ public class RoundKeypadTest {
     @DataProvider
     public Object[][] columnTestProvider() {
         return new Object[][]{
-                {A_T, 0}, {SPANISH_QUESTION1, 1}, {COPYRIGHT, 2}, {SPANISH_QUESTION2, 3}, {PSI1, 4}, {PUZZLE, 5}
+                {A_T, 0}, {SPANISH_QUESTION1, 1}, {COPYRIGHT, 2}, {SPANISH_QUESTION2, 3},
+                {PSI1, 4}, {PUZZLE, 5}
         };
     }
 

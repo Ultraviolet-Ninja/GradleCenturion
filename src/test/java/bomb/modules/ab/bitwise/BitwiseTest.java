@@ -2,24 +2,31 @@ package bomb.modules.ab.bitwise;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.TrinarySwitch;
+import bomb.tools.logic.LogicOperator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.CLR;
+import static bomb.enumerations.Indicator.NSA;
 import static bomb.enumerations.Port.PARALLEL;
-import static bomb.modules.ab.bitwise.BitwiseOps.AND;
-import static bomb.modules.ab.bitwise.BitwiseOps.NOT;
-import static bomb.modules.ab.bitwise.BitwiseOps.OR;
-import static bomb.modules.ab.bitwise.BitwiseOps.XOR;
+import static bomb.enumerations.TrinarySwitch.OFF;
+import static bomb.enumerations.TrinarySwitch.ON;
+import static bomb.tools.logic.LogicOperator.AND;
+import static bomb.tools.logic.LogicOperator.NOT;
+import static bomb.tools.logic.LogicOperator.OR;
+import static bomb.tools.logic.LogicOperator.XOR;
 import static org.testng.Assert.assertEquals;
 
 public class BitwiseTest {
     private static final int DEFAULT_START_TIME = 5;
-    private static final String MIN_AND = "00000001", MIN_OR = "00000011", MIN_XOR = "00000010", MIN_NOT = "11111100",
-            MAX_AND = "11111110", MAX_OR = "11111111", MAX_XOR = "00000001", MAX_NOT = "00000000",
+    private static final String MIN_AND = "00000001", MIN_OR = "00000011", MIN_XOR = "00000010",
+            MIN_NOT = "11111100", MAX_AND = "11111110", MAX_OR = "11111111", MAX_XOR = "00000001",
+            MAX_NOT = "00000000",
             LAST_DIGIT_EVEN = "ask412", LAST_DIGIT_ODD = "wo24l5";
 
     @BeforeMethod
@@ -31,7 +38,7 @@ public class BitwiseTest {
     public Object[][] exceptionTestProvider() {
         return new ConditionSetter[][]{
                 {
-                    () -> {}
+                    EMPTY_SETTER
                 },
                 {
                     () -> Widget.setNumModules(1)
@@ -59,7 +66,7 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "minimumConditionTestProvider")
-    public void minimumConditionTest(String expected, BitwiseOps operation) {
+    public void minimumConditionTest(String expected, LogicOperator operation) {
         setEssentialFalseConditions();
         Widget.setDoubleAs(2);
 
@@ -74,7 +81,7 @@ public class BitwiseTest {
     }
 
     @Test(dataProvider = "maximumConditionTestProvider")
-    public void maximumConditionTest(String expected, BitwiseOps operation) {
+    public void maximumConditionTest(String expected, LogicOperator operation) {
         setEssentialTrueConditions();
         maximizeConditions();
 
@@ -95,10 +102,10 @@ public class BitwiseTest {
 
     private void maximizeConditions() {
         Widget.setPortValue(PARALLEL, 3);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.BOB);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
-        Widget.setIndicator(TrinarySwitch.OFF, Indicator.CLR);
-        Widget.setIndicator(TrinarySwitch.OFF, Indicator.CAR);
+        Widget.setIndicator(ON, BOB);
+        Widget.setIndicator(ON, NSA);
+        Widget.setIndicator(OFF, CLR);
+        Widget.setIndicator(OFF, CAR);
         Widget.setDBatteries(1);
         Widget.setNumHolders(2);
     }
