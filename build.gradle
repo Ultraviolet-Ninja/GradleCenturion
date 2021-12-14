@@ -50,7 +50,7 @@ def secondSuite = project.hasProperty("suite1")
 def thirdSuite = project.hasProperty("suite2")
 
 def directoryInclusion = [
-        'bomb/tools/data/**', 'bomb/tools/Coordinates.java',
+        'bomb/tools/data/**', 'bomb/tools/*',
         'bomb/tools/logic/*'
 ]
 
@@ -91,7 +91,7 @@ jacocoTestReport {
     if (directoryInclusion.size() != 3) {
         afterEvaluate {
             classDirectories.setFrom(files(classDirectories.files.collect {
-                fileTree(dir: it, include: directoryInclusion)
+                fileTree(dir: it, include: directoryInclusion, exclude: ['**/*Controller.*'])
             }))
         }
     }
