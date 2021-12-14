@@ -16,6 +16,7 @@ This is a huge project for one man to tackle, but I've learned a lot from the ch
 ### Plugins
 - Jacoco
 - JavaFX
+- Pitest
 - Palantir Docker
 - Breadmoirai GitHub Release
 ### Dependencies
