@@ -50,7 +50,7 @@ jobs:
           path: ./build/test-results/test
       - store_artifacts:
           path: ./build/reports
-  mutate:
+  pitest:
     docker:
      - image: cimg/openjdk:15.0.2
     parallelism: 5
@@ -73,13 +73,10 @@ jobs:
          path: ./build/test-results/test
      - store_artifacts:
          path: ./build/reports
-         
-    requires:
-     - jacoco
 
 workflows:
   version: 2
   workflow:
     jobs:
       - jacoco
-      - mutate
+      - pitest
