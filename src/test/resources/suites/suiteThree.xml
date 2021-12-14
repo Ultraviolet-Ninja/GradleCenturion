@@ -2,6 +2,20 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite Three">
+    <test name="T Module Tests">
+        <classes>
+            <class name="bomb.modules.t.bulb.TheBulbTest"/>
+            <class name="bomb.modules.t.translated.solutions.button.ButtonTest"/>
+            <class name="bomb.modules.t.translated.solutions.password.PasswordTest"/>
+            <class name="bomb.modules.t.two_bit.TwoBitTest"/>
+        </classes>
+    </test>
+
+    <test name="W-Z Module Tests">
+        <classes>
+        </classes>
+    </test>
+
     <test name="Widget and Tools">
         <classes>
             <class name="bomb.WidgetTest"/>

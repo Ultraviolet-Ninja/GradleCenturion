@@ -37,10 +37,4 @@
             <class name="bomb.modules.il.laundry.LaundryTest"/>
         </classes>
     </test>
-
-    <test name="M Module Tests">
-        <classes>
-            <class name="bomb.modules.m.microcontroller.MicroControllerTest"/>
-        </classes>
-    </test>
 </suite>
