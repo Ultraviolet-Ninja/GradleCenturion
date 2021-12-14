@@ -82,3 +82,9 @@ jobs:
           path: ./build/reports
     requires:
       - build
+
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - mutations
