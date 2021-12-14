@@ -3,6 +3,7 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'com.palantir.docker' version '0.28.0'
+    id 'info.solidsoft.pitest' version '1.7.0'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
@@ -48,53 +49,65 @@ dependencies {
 def firstSuite = project.hasProperty("suite0")
 def secondSuite = project.hasProperty("suite1")
 def thirdSuite = project.hasProperty("suite2")
+def firstMutationTest = project.hasProperty("suite3")
+def secondMutationTest = project.hasProperty("suite4")
 
-def directoryInclusion = [
-        'bomb/tools/data/**', 'bomb/tools/*',
-        'bomb/tools/logic/*'
+def includedDirectories = [
+        'bomb/tools/data/**', 'bomb/tools/*', 'bomb/tools/logic/*'
 ]
 
 test {
     useTestNG() {
         if(firstSuite) {
             suites "src/test/resources/suites/suiteOne.xml"
-            directoryInclusion.addAll([
-                    'bomb/modules/ab/**',
-                    'bomb/modules/c/**',
-                    'bomb/modules/dh/**',
-                    'bomb/modules/il/**',
+            includedDirectories.addAll([
+                    'bomb/modules/ab/**', 'bomb/modules/c/**',
+                    'bomb/modules/dh/**', 'bomb/modules/il/**',
             ])
         } else if (secondSuite) {
             suites "src/test/resources/suites/suiteTwo.xml"
-            directoryInclusion.addAll([
-                    'bomb/modules/m/**',
-                    'bomb/modules/np/**',
-                    'bomb/modules/r/**',
-                    'bomb/modules/s/**'
+            includedDirectories.addAll([
+                    'bomb/modules/m/**', 'bomb/modules/np/**',
+                    'bomb/modules/r/**', 'bomb/modules/s/**'
             ])
         } else if (thirdSuite) {
             suites "src/test/resources/suites/suiteThree.xml"
-            directoryInclusion.addAll([
-                    'bomb',
-                    'bomb/tools/filter/*',
-                    'bomb/modules/t/**',
-                    'bomb/modules/wz/**'
+            includedDirectories.addAll([
+                    'bomb', 'bomb/tools/filter/*',
+                    'bomb/modules/t/**', 'bomb/modules/wz/**'
             ])
         }
     }
-    finalizedBy(jacocoTestReport)
+    boolean isMutationTest = firstMutationTest || secondMutationTest
+
+    finalizedBy(isMutationTest ?
+            tasks.getByName('pitest') :
+            jacocoTestReport
+    )
 }
 
 jacocoTestReport {
     reports.xml.enabled(true)
 
-    if (directoryInclusion.size() != 3) {
+    if (includedDirectories.size() != 3) {
         afterEvaluate {
             classDirectories.setFrom(files(classDirectories.files.collect {
-                fileTree(dir: it, include: directoryInclusion, exclude: ['**/*Controller.*'])
+                fileTree(dir: it, include: includedDirectories, exclude: ['**/*Controller.*'])
             }))
         }
     }
+}
+
+static List<String> getTargetClasses(boolean mutationTest) {
+    if (mutationTest)
+        return ['bomb.modules.ab.**', 'bomb.modules.c.**']
+    return ['bomb.modules.dh.**', 'bomb.modules.il.**']
+}
+
+pitest {
+    targetClasses = getTargetClasses(firstMutationTest)
+    outputFormats = ['HTML']
+    testPlugin = 'testng'
 }
 
 javafx {
