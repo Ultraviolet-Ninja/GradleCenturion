@@ -25,3 +25,5 @@ hs_err_pid*
 /build/
 /.gradle/
 Dockafile - Copy
+/.project
+/.settings/org.eclipse.buildship.core.prefs

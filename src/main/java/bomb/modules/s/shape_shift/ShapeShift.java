@@ -1,24 +1,35 @@
 package bomb.modules.s.shape_shift;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.tools.data.structures.graph.list.ListGraph;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.ToIntFunction;
 
-//TODO Eventually document the code
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.FRQ;
+import static bomb.enumerations.Indicator.IND;
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Indicator.SIG;
+import static bomb.enumerations.Indicator.SND;
+import static bomb.enumerations.Port.DVI;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.PS2;
+import static bomb.enumerations.Port.RCA;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.tools.logic.BitConverter.TO_INT;
+
 public class ShapeShift extends Widget {
-    private static final int[][] COUNT_TRACKER = new int[4][4];
-    private static final ToIntFunction<Boolean> CONVERTER = bool -> bool ? 1 : 0;
+    private static final int[][] COUNT_TRACKER;
 
     private static ListGraph<Pair<ShapeEnd, ShapeEnd>> graph;
 
     //<editor-fold desc="Init methods">
     static {
+        int size = ShapeEnd.values().length;
+        COUNT_TRACKER = new int[size][size];
         zeroOutArray();
         initializeGraph();
     }
@@ -64,10 +75,11 @@ public class ShapeShift extends Widget {
         initializePairs(list.get(15), list.get(11), list.get(14));
     }
 
-    @SafeVarargs
-    private static void initializePairs(Pair<ShapeEnd, ShapeEnd>... trios) {
-        graph.addEdge(trios[0], trios[1]);
-        graph.addEdge(trios[0], trios[2]);
+    private static void initializePairs(Pair<ShapeEnd, ShapeEnd> firstPair,
+                                        Pair<ShapeEnd, ShapeEnd> secondPair,
+                                        Pair<ShapeEnd, ShapeEnd> thirdPair) {
+        graph.addEdge(firstPair, secondPair);
+        graph.addEdge(firstPair, thirdPair);
     }
     //</editor-fold>
 
@@ -77,7 +89,7 @@ public class ShapeShift extends Widget {
         if (checkIfVisitedTwice(left, right)) {
             Pair<ShapeEnd, ShapeEnd> pair = graph.get(
                             new Pair<>(left, right))
-                    .get(CONVERTER.applyAsInt(conditionMap(left, right)));
+                    .get(TO_INT.apply(conditionMap(left, right)));
             return solve(pair.getValue0(), pair.getValue1());
         }
         resetMod();
@@ -109,35 +121,35 @@ public class ShapeShift extends Widget {
     private static boolean roundedOptions(ShapeEnd right) {
         return switch (right) {
             case ROUND -> hasVowelInSerialCode();
-            case FLAT -> hasLitIndicator(Indicator.SND);
-            case POINT -> hasLitIndicator(Indicator.SIG);
+            case FLAT -> hasLitIndicator(SND);
+            case POINT -> hasLitIndicator(SIG);
             default -> numDoubleAs > 1;
         };
     }
 
     private static boolean rectangularOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMorePortsThan(Port.DVI, 0);
+            case ROUND -> hasMorePortsThanSpecified(DVI, 0);
             case FLAT -> getSerialCodeLastDigit() % 2 == 1;
-            case POINT -> hasLitIndicator(Indicator.MSA);
-            default -> hasUnlitIndicator(Indicator.BOB);
+            case POINT -> hasLitIndicator(MSA);
+            default -> hasUnlitIndicator(BOB);
         };
     }
 
     private static boolean triangularOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMorePortsThan(Port.PARALLEL, 0);
-            case FLAT -> hasUnlitIndicator(Indicator.CAR);
-            case POINT -> hasLitIndicator(Indicator.IND);
-            default -> hasMorePortsThan(Port.RJ45, 0);
+            case ROUND -> hasMorePortsThanSpecified(PARALLEL, 0);
+            case FLAT -> hasUnlitIndicator(CAR);
+            case POINT -> hasLitIndicator(IND);
+            default -> hasMorePortsThanSpecified(RJ45, 0);
         };
     }
 
     private static boolean ticketOptions(ShapeEnd right) {
         return switch (right) {
-            case ROUND -> hasMorePortsThan(Port.RCA, 0);
-            case FLAT -> hasUnlitIndicator(Indicator.FRQ);
-            case POINT -> hasMorePortsThan(Port.PS2, 0);
+            case ROUND -> hasMorePortsThanSpecified(RCA, 0);
+            case FLAT -> hasUnlitIndicator(FRQ);
+            case POINT -> hasMorePortsThanSpecified(PS2, 0);
             default -> getAllBatteries() >= 3;
         };
     }

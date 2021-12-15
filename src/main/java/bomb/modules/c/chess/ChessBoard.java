@@ -2,6 +2,9 @@ package bomb.modules.c.chess;
 
 import bomb.tools.Coordinates;
 
+import static bomb.modules.c.chess.Tile.TileColor.BLACK;
+import static bomb.modules.c.chess.Tile.TileColor.WHITE;
+
 public class ChessBoard {
     public static final byte BOARD_LENGTH = 6;
 
@@ -15,7 +18,7 @@ public class ChessBoard {
     private void setUpBoard() {
         for (int x = 0; x < BOARD_LENGTH; x++) {
             for (int y = 0; y < BOARD_LENGTH; y++) {
-                board[x][y] = new Tile((x + y) % 2 == 0 ? Tile.TileColor.WHITE : Tile.TileColor.BLACK);
+                board[x][y] = new Tile((x + y) % 2 == 0 ? WHITE : BLACK);
             }
         }
     }

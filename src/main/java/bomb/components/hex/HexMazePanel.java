@@ -3,6 +3,7 @@ package bomb.components.hex;
 import bomb.abstractions.Resettable;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -12,8 +13,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 
-import java.io.IOException;
-import java.util.List;
+import java.util.EnumSet;
 
 public class HexMazePanel extends Pane implements Resettable {
     public static final Color DEFAULT_PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
@@ -31,13 +31,10 @@ public class HexMazePanel extends Pane implements Resettable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("panel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-            makeWallsTransparent();
-            peg.setFill(DEFAULT_PEG_COLOR);
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
+
+        makeWallsTransparent();
+        peg.setFill(DEFAULT_PEG_COLOR);
     }
 
     public void fillPeg(Color toFill) {
@@ -45,8 +42,8 @@ public class HexMazePanel extends Pane implements Resettable {
     }
 
     public void setup(HexagonDataStructure.HexNode currentNode) {
-        setupLines(currentNode.walls);
-        setupShape(currentNode.fill);
+        setupLines(currentNode.getWalls());
+        setupShape(currentNode.getFill());
     }
 
     private void setupShape(HexNodeProperties.HexShape shape) {
@@ -97,7 +94,7 @@ public class HexMazePanel extends Pane implements Resettable {
         }
     }
 
-    private void setupLines(List<HexNodeProperties.HexWall> walls) {
+    private void setupLines(EnumSet<HexNodeProperties.HexWall> walls) {
         String remove = "123456";
         if (walls != null) {
             for (HexNodeProperties.HexWall wall : walls) {

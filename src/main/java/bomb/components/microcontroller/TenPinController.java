@@ -1,11 +1,11 @@
 package bomb.components.microcontroller;
 
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.io.IOException;
 import java.util.List;
 
 public class TenPinController extends AbstractChipComponent {
@@ -19,11 +19,7 @@ public class TenPinController extends AbstractChipComponent {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("ten_pin.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try{
-            loader.load();
-        } catch(IOException ioe){
-            ioe.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
     }
 
     @Override

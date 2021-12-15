@@ -1,7 +1,7 @@
 package bomb.modules.c.colored_switches;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.ring.ArrayRing;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXToggleButton;
@@ -16,17 +16,18 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
-import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 import static bomb.modules.c.colored_switches.SwitchColor.BLUE;
 import static bomb.modules.c.colored_switches.SwitchColor.CYAN;
 import static bomb.modules.c.colored_switches.SwitchColor.GREEN;
-import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.MAGENTA;
+import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
+import static bomb.modules.c.colored_switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored_switches.SwitchColor.RED;
+import static bomb.tools.string.StringFormat.ARROW;
 
 public class ColoredSwitchController implements Resettable {
-    private final ReadOnlyRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
-            fifthButtonRing;
+    private final ArrayRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing,
+            fourthButtonRing, fifthButtonRing;
 
     @FXML
     private JFXRadioButton firstOnLight, secondOnLight, thirdOnLight, fourthOnLight, fifthOnLight;
@@ -57,10 +58,6 @@ public class ColoredSwitchController implements Resettable {
         fifthButtonRing = createColorCycle();
     }
 
-    private ReadOnlyRing<SwitchColor> createColorCycle() {
-        return new ReadOnlyRing<>(NEUTRAL, RED, ORANGE, GREEN, CYAN, BLUE, MAGENTA);
-    }
-
     public void initialize() {
         colorModeButton.setOnAction(setColorModeAction());
         setSwitchActions();
@@ -82,15 +79,15 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void setSwitchActions() {
-        MFXToggleButton[] buttonArray = getAllSwitches();
-        ReadOnlyRing<SwitchColor>[] rings = getAssociatedRings();
+        List<MFXToggleButton> buttonArray = getAllSwitches();
+        List<ArrayRing<SwitchColor>> rings = getAssociatedRings();
 
-        for (int i = 0; i < buttonArray.length; i++) {
-            createSwitchAction(buttonArray[i], rings[i]);
+        for (int i = 0; i < buttonArray.size(); i++) {
+            createSwitchAction(buttonArray.get(i), rings.get(i));
         }
     }
 
-    private void createSwitchAction(MFXToggleButton toggleSwitch, ReadOnlyRing<SwitchColor> associatedRing) {
+    private void createSwitchAction(MFXToggleButton toggleSwitch, ArrayRing<SwitchColor> associatedRing) {
         EventHandler<ActionEvent> action = event -> {
             if (colorModeButton.isSelected()) {
                 MFXToggleButton source = (MFXToggleButton) event.getSource();
@@ -116,22 +113,22 @@ public class ColoredSwitchController implements Resettable {
         return new JFXRadioButton[]{firstOffLight, secondOffLight, thirdOffLight, fourthOffLight, fifthOffLight};
     }
 
-    private MFXToggleButton[] getAllSwitches() {
-        return new MFXToggleButton[]{firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch};
+    private List<MFXToggleButton> getAllSwitches() {
+        return List.of(firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch);
     }
 
-    private ReadOnlyRing<SwitchColor>[] getAssociatedRings() {
-        return new ReadOnlyRing[]{firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
-                fifthButtonRing};
+    private List<ArrayRing<SwitchColor>> getAssociatedRings() {
+        return List.of(firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
+                fifthButtonRing);
     }
 
     @FXML
     private void getPreemptiveMoveList() {
         byte startingState = 0;
-        MFXToggleButton[] switches = getAllSwitches();
-        for (int i = 0; i < switches.length; i++) {
-            if (switches[i].isSelected())
-                startingState |= 1 << (switches.length - 1 - i);
+        List<MFXToggleButton> switches = getAllSwitches();
+        for (int i = 0; i < switches.size(); i++) {
+            if (switches.get(i).isSelected())
+                startingState |= 1 << (switches.size() - 1 - i);
         }
         try {
             List<String> resultingSwitches = ColoredSwitches.producePreemptiveMoveList(startingState);
@@ -171,24 +168,18 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private SwitchColor[] getCurrentSwitchColors() {
-        ReadOnlyRing<SwitchColor>[] rings = getAssociatedRings();
-        SwitchColor[] output = new SwitchColor[rings.length];
+        List<ArrayRing<SwitchColor>> rings = getAssociatedRings();
+        SwitchColor[] output = new SwitchColor[rings.size()];
 
-        for (int i = 0; i < rings.length; i++) {
-            output[i] = rings[i].getHeadData();
-        }
+        for (int i = 0; i < rings.size(); i++)
+            output[i] = rings.get(i).getHeadData();
 
         return output;
     }
 
-    private void sendToOutputField(MFXTextField field, List<String> outputList) {
-        final String arrow = " -> ";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < outputList.size(); i++) {
-            sb.append(outputList.get(i));
-            if (i != outputList.size() - 1) sb.append(arrow);
-        }
-        field.setText(sb.toString());
+    private static void sendToOutputField(MFXTextField field, List<String> outputList) {
+        String output = String.join(ARROW, outputList);
+        field.setText(output);
     }
 
     private void detectRadioButtonChanges() {
@@ -207,24 +198,29 @@ public class ColoredSwitchController implements Resettable {
         resetSwitches();
         ColoredSwitches.reset();
         detectRadioButtonChanges();
+        colorModeButton.setSelected(false);
+        colorModeButton.setText("Normal Switch Flip");
         FacadeFX.disable(finalMoveSubmitButton);
         FacadeFX.clearMultipleTextFields(preemptiveOutputField, finalMoveOutputField);
-        FacadeFX.unselectFromMultipleToggleGroup(firstLightGroup, secondLightGroup, thirdLightGroup, fourthLightGroup,
+        FacadeFX.resetToggleGroups(firstLightGroup, secondLightGroup, thirdLightGroup, fourthLightGroup,
                 fifthLightGroup);
     }
 
     private void resetSwitches() {
-        MFXToggleButton[] buttons = getAllSwitches();
-        FacadeFX.setToggleButtonsUnselected(buttons);
+        List<MFXToggleButton> buttons = getAllSwitches();
         for (MFXToggleButton button : buttons) {
             button.setId(NEUTRAL.getCssId());
             button.applyCss();
         }
+        buttons.forEach(button -> button.setSelected(false));
     }
 
     private void resetRings() {
-        for (ReadOnlyRing<SwitchColor> ring : getAssociatedRings()) {
-            ring.rotateClockwise(ring.findRelativeIndex(NEUTRAL));
-        }
+        for (ArrayRing<SwitchColor> ring : getAssociatedRings())
+            ring.reset();
+    }
+
+    private static ArrayRing<SwitchColor> createColorCycle() {
+        return new ArrayRing<>(NEUTRAL, RED, ORANGE, GREEN, CYAN, BLUE, MAGENTA);
     }
 }

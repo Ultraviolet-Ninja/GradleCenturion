@@ -1,10 +1,8 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
-import bomb.tools.filter.Filter;
 import bomb.tools.filter.Regex;
+import bomb.tools.filter.RegexFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,12 +10,14 @@ import java.util.function.IntUnaryOperator;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Port.SERIAL;
 
 public class ForgetMeNot extends Widget {
     private static final IntUnaryOperator LEAST_SIG_DIGIT = num -> num % 10;
     private static final IntUnaryOperator MOST_SIG_DIGIT =
             num -> (int) (num / Math.pow(10, Math.floor(Math.log10(num))));
-    private static final List<Byte> FINAL_CODE = new ArrayList<>();
+    private static final List<Byte> FINAL_CODE = new ArrayList<>(100);
 
     private static byte largestSerialCodeNumber = -1;
 
@@ -45,20 +45,23 @@ public class ForgetMeNot extends Widget {
     }
 
     private static int createFirstNumber(int stageNumber) {
-        if (hasUnlitIndicator(Indicator.CAR))
+        if (hasUnlitIndicator(CAR))
             return stageNumber + 2;
 
-        if (countIndicators(UNLIT) > countIndicators(LIT))
+        int numLitIndicators = countIndicators(LIT);
+        int numUnlitIndicators = countIndicators(UNLIT);
+
+        if (numUnlitIndicators > numLitIndicators)
             return stageNumber + 7;
 
-        if (countIndicators(UNLIT) == 0)
-            return stageNumber + countIndicators(LIT);
+        if (numUnlitIndicators == 0)
+            return stageNumber + numLitIndicators;
 
         return stageNumber + getSerialCodeLastDigit();
     }
 
     private static int createSecondNumber(int stageNumber) {
-        if (portExists(Port.SERIAL) && countNumbersInSerialCode() > 2)
+        if (doesPortExists(SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
         return stageNumber + FINAL_CODE.get(0) +
@@ -80,28 +83,30 @@ public class ForgetMeNot extends Widget {
 
     private static boolean bothPreviousNumbersAreEven() {
         int length = FINAL_CODE.size();
-        return FINAL_CODE.get(length - 1) % 2 == 0 && FINAL_CODE.get(length - 2) % 2 == 0;
+        int firstPrevious = FINAL_CODE.get(length - 1);
+        int secondPrevious = FINAL_CODE.get(length - 2);
+        return  firstPrevious% 2 == 0 && secondPrevious % 2 == 0;
     }
 
     private static int smallestOddDigitInSerialCode() {
-        int compare = 10;
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        for (String num : singleNumberRegex) {
-            if (Integer.parseInt(num) < compare)
-                compare = Integer.parseInt(num);
-        }
-        return (compare % 2 == 1) ? compare : 9;
+        return singleNumberRegex.stream()
+                .mapToInt(Integer::parseInt)
+                .filter(num -> num % 2 == 1)
+                .min()
+                .orElse(9);
     }
 
     public static void updateLargestValueInSerial() {
-        Filter.SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (!Filter.SERIAL_CODE_PATTERN.matchesRegex()) {
+        RegexFilter.SERIAL_CODE_PATTERN.loadText(serialCode);
+        if (!RegexFilter.SERIAL_CODE_PATTERN.matchesRegex()) {
             largestSerialCodeNumber = -1;
             return;
         }
 
         Regex singleNumberRegex = new Regex("\\d", serialCode);
-        if (!singleNumberRegex.findAllMatches().isEmpty()) {
+
+        if (singleNumberRegex.hasMatch()) {
             for (String num : singleNumberRegex) {
                 if (Integer.parseInt(num) > largestSerialCodeNumber)
                     largestSerialCodeNumber = Byte.parseByte(num);
@@ -110,17 +115,17 @@ public class ForgetMeNot extends Widget {
     }
 
     public static void undoLastStage() {
-        if (FINAL_CODE.size() != 0) {
-            FINAL_CODE.remove(FINAL_CODE.size() - 1);
-        }
+        int size = FINAL_CODE.size();
+        if (size != 0)
+            FINAL_CODE.remove(size - 1);
     }
 
     public static String stringifyFinalCode() {
         StringBuilder sb = new StringBuilder();
 
-        for (int i = 1; i <= FINAL_CODE.size(); i++) {
-            sb.append(FINAL_CODE.get(i - 1));
-            if (i % 3 == 0 && i != FINAL_CODE.size())
+        for (int i = 0; i < FINAL_CODE.size(); i++) {
+            sb.append(FINAL_CODE.get(i));
+            if (i % 3 == 2)
                 sb.append("-");
         }
         return sb.toString();

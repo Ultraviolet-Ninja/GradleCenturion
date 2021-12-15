@@ -1,16 +1,15 @@
 package bomb.modules.t.two_bit;
 
-import bomb.modules.s.souvenir.Souvenir;
 import bomb.Widget;
-import bomb.enumerations.Port;
+import bomb.modules.s.souvenir.Souvenir;
 
+import static bomb.enumerations.Port.RCA;
+import static bomb.enumerations.Port.RJ45;
 import static bomb.modules.t.two_bit.TwoBitState.SECOND_QUERY;
 import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
-
-//TODO - Probably change var names, finish Javadocs and break down a few methods
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.filter;
 
 /**
  *
@@ -29,7 +28,8 @@ public class TwoBit extends Widget {
             {"de", "dd", "ev", "te", "zd", "bb", "pc", "bd", "kc", "zb"},
             {"eg", "bc", "tc", "ze", "zc", "gp", "et", "vc", "tb", "vz"},
             {"ez", "ek", "dv", "cg", "ve", "dp", "bk", "pg", "gk", "gz"},
-            {"kt", "ct", "zz", "vg", "gd", "cp", "be", "zt", "vk", "dc"}};
+            {"kt", "ct", "zz", "vg", "gd", "cp", "be", "zt", "vk", "dc"}
+    };
 
     private static TwoBitState currentState = SECOND_QUERY;
 
@@ -41,8 +41,8 @@ public class TwoBit extends Widget {
      */
     public static String initialCode() throws IllegalArgumentException {
         checkSerialCode();
-        String numbersInSerialCode = ultimateFilter(serialCode, NUMBER_PATTERN);
-        String first = ultimateFilter(serialCode, CHAR_FILTER).toLowerCase();
+        String numbersInSerialCode = filter(serialCode, NUMBER_PATTERN);
+        String first = filter(serialCode, CHAR_FILTER).toLowerCase();
         int alphabetBaseValue = !first.isEmpty() ?
                 first.charAt(0) - LETTER_TO_NUMBER_CONVERTER :
                 0;
@@ -51,9 +51,10 @@ public class TwoBit extends Widget {
                 numbersInSerialCode.substring(numbersInSerialCode.length() - 1)
         );
 
-        if (getPortQuantity(Port.RCA) > 0 && getPortQuantity(Port.RJ45) == 0) alphabetBaseValue *= 2;
+        if (getPortQuantity(RCA) > 0 && getPortQuantity(RJ45) == 0) alphabetBaseValue *= 2;
 
         int[] bits = translateToBitCoordinates(String.valueOf(alphabetBaseValue % 100));
+
         if (isSouvenirActive)
             Souvenir.addRelic("TwoBit Initial Query", CODE_GRID[bits[0]][bits[1]]);
 
@@ -64,12 +65,12 @@ public class TwoBit extends Widget {
     /**
      * Gets the next code in the {@link TwoBit#CODE_GRID}
      *
-     * @param code The next number code received from the defuser
+     * @param code The next number code received from the Defuser
      * @return The next letter code along with a Query or Submit phrase
      * @throws IllegalArgumentException The given input was not 2 numbers
      */
     public static String nextCode(String code) throws IllegalArgumentException {
-        String newCode = ultimateFilter(code, NUMBER_PATTERN);
+        String newCode = filter(code, NUMBER_PATTERN);
         validateNextCode(code, newCode);
         int[] coords = translateToBitCoordinates(newCode);
 
@@ -100,10 +101,12 @@ public class TwoBit extends Widget {
         int[] codeOut = new int[2];
         if (code.length() == 1) {
             codeOut[1] = Integer.parseInt(code);
-        } else {
-            codeOut[0] = Integer.parseInt(code.substring(0, 1));
-            codeOut[1] = Integer.parseInt(code.substring(1));
+            return codeOut;
         }
+
+        codeOut[0] = Integer.parseInt(code.substring(0, 1));
+        codeOut[1] = Integer.parseInt(code.substring(1));
+
         return codeOut;
     }
 

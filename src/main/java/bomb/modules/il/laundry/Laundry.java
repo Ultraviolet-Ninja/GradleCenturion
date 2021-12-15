@@ -1,15 +1,38 @@
 package bomb.modules.il.laundry;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
 
+import java.util.Set;
+import java.util.stream.Stream;
+
+import static bomb.enumerations.Indicator.BOB;
 import static bomb.modules.il.laundry.Clothing.ARTICLE;
-import static bomb.tools.filter.Filter.CHAR_FILTER;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.modules.il.laundry.Clothing.Color.JADE;
+import static bomb.modules.il.laundry.Clothing.Color.MALINITE;
+import static bomb.modules.il.laundry.Clothing.Color.PEARL;
+import static bomb.modules.il.laundry.Clothing.Color.RUBY;
+import static bomb.modules.il.laundry.Clothing.Color.SAPPHIRE;
+import static bomb.modules.il.laundry.Clothing.Color.STAR;
+import static bomb.modules.il.laundry.Clothing.Item.CORSET;
+import static bomb.modules.il.laundry.Clothing.Item.SCARF;
+import static bomb.modules.il.laundry.Clothing.Item.SHIRT;
+import static bomb.modules.il.laundry.Clothing.Item.SHORTS;
+import static bomb.modules.il.laundry.Clothing.Item.SKIRT;
+import static bomb.modules.il.laundry.Clothing.Item.SKORT;
+import static bomb.modules.il.laundry.Clothing.Material.CORDUROY;
+import static bomb.modules.il.laundry.Clothing.Material.COTTON;
+import static bomb.modules.il.laundry.Clothing.Material.LEATHER;
+import static bomb.modules.il.laundry.Clothing.Material.NYLON;
+import static bomb.modules.il.laundry.Clothing.Material.POLYESTER;
+import static bomb.modules.il.laundry.Clothing.Material.WOOL;
+import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.filter;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toSet;
 
 /**
  * This class deals with the Laundry module. The module requires a plethora of conditions that involve the
- * widget data, the number of solved modules, and the number of needy bomb.modules to determine the clothing
+ * widget data, the number of solved modules, and the number of needy bomb modules to determine the clothing
  * item, material, and color. These will lead to the instructions for washing, drying, ironing,
  * and dry cleaning your clothing.
  */
@@ -42,11 +65,11 @@ public class Laundry extends Widget {
      */
     private static void validateInput(String solved, String needy) throws IllegalArgumentException {
         if (serialCode.isEmpty()) throw new
-                IllegalArgumentException("Serial Code must be typed in.");
+                IllegalArgumentException("Serial Code must be typed in");
         else if (needy.isEmpty()) throw new
                 IllegalArgumentException("This module needs to know about the number of needy modules");
         else if (solved.isEmpty()) throw new
-                IllegalArgumentException("This module needs the number of currently solved modules.");
+                IllegalArgumentException("This module needs the number of currently solved modules");
     }
 
     /**
@@ -56,7 +79,7 @@ public class Laundry extends Widget {
      */
     private static void setClothing(int solved) throws IllegalArgumentException {
         if (numModules == 0)
-            throw new IllegalArgumentException("This needs the number of modules to function.");
+            throw new IllegalArgumentException("This needs the number of modules to function");
 
         setMaterial(solved);
         setColor();
@@ -70,13 +93,13 @@ public class Laundry extends Widget {
      * @param solved The number of solved modules
      */
     private static void setMaterial(int solved) {
-        switch (balance(solved + getTotalPorts() - numHolders)) {
-            case 0 -> ARTICLE.setMaterial(Clothing.Material.POLYESTER);
-            case 1 -> ARTICLE.setMaterial(Clothing.Material.COTTON);
-            case 2 -> ARTICLE.setMaterial(Clothing.Material.WOOL);
-            case 3 -> ARTICLE.setMaterial(Clothing.Material.NYLON);
-            case 4 -> ARTICLE.setMaterial(Clothing.Material.CORDUROY);
-            default -> ARTICLE.setMaterial(Clothing.Material.LEATHER);
+        switch (balance(solved + calculateTotalPorts() - numHolders)) {
+            case 0 -> ARTICLE.setMaterial(POLYESTER);
+            case 1 -> ARTICLE.setMaterial(COTTON);
+            case 2 -> ARTICLE.setMaterial(WOOL);
+            case 3 -> ARTICLE.setMaterial(NYLON);
+            case 4 -> ARTICLE.setMaterial(CORDUROY);
+            default -> ARTICLE.setMaterial(LEATHER);
         }
     }
 
@@ -86,12 +109,12 @@ public class Laundry extends Widget {
      */
     private static void setColor() {
         switch (balance(getSerialCodeLastDigit() + getAllBatteries())) {
-            case 0 -> ARTICLE.setColor(Clothing.Color.RUBY);
-            case 1 -> ARTICLE.setColor(Clothing.Color.STAR);
-            case 2 -> ARTICLE.setColor(Clothing.Color.SAPPHIRE);
-            case 3 -> ARTICLE.setColor(Clothing.Color.JADE);
-            case 4 -> ARTICLE.setColor(Clothing.Color.PEARL);
-            default -> ARTICLE.setColor(Clothing.Color.MALINITE);
+            case 0 -> ARTICLE.setColor(RUBY);
+            case 1 -> ARTICLE.setColor(STAR);
+            case 2 -> ARTICLE.setColor(SAPPHIRE);
+            case 3 -> ARTICLE.setColor(JADE);
+            case 4 -> ARTICLE.setColor(PEARL);
+            default -> ARTICLE.setColor(MALINITE);
         }
     }
 
@@ -102,13 +125,13 @@ public class Laundry extends Widget {
      * @param unsolved The number of unsolved modules
      */
     private static void setItem(int unsolved) {
-        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL))) {
-            case 0 -> ARTICLE.setItem(Clothing.Item.CORSET);
-            case 1 -> ARTICLE.setItem(Clothing.Item.SHIRT);
-            case 2 -> ARTICLE.setItem(Clothing.Item.SKIRT);
-            case 3 -> ARTICLE.setItem(Clothing.Item.SKORT);
-            case 4 -> ARTICLE.setItem(Clothing.Item.SHORTS);
-            default -> ARTICLE.setItem(Clothing.Item.SCARF);
+        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL_PRESENT))) {
+            case 0 -> ARTICLE.setItem(CORSET);
+            case 1 -> ARTICLE.setItem(SHIRT);
+            case 2 -> ARTICLE.setItem(SKIRT);
+            case 3 -> ARTICLE.setItem(SKORT);
+            case 4 -> ARTICLE.setItem(SHORTS);
+            default -> ARTICLE.setItem(SCARF);
         }
     }
 
@@ -118,15 +141,15 @@ public class Laundry extends Widget {
      * @return The array of Strings for the solve conditions
      */
     private static String[] conditions() {
-        if (thanksBob()) return done();
+        if (thanksBob()) return returnBob();
 
         String[] attributes = new String[5];
         fillThird(attributes);
 
-        if (ARTICLE.getMaterial() == Clothing.Material.LEATHER || ARTICLE.getColor() == Clothing.Color.JADE)
+        if (ARTICLE.getMaterial() == LEATHER || ARTICLE.getColor() == JADE)
             attributes[0] = "wash/80F.png";
 
-        if (ARTICLE.getMaterial() == Clothing.Material.WOOL || ARTICLE.getColor() == Clothing.Color.STAR)
+        if (ARTICLE.getMaterial() == WOOL || ARTICLE.getColor() == STAR)
             attributes[1] = "dry/High Heat.png";
 
         attributes[4] = ARTICLE.getMaterial().name() + " - " + ARTICLE.getColor().name()
@@ -140,7 +163,7 @@ public class Laundry extends Widget {
      *
      * @return The win conditions
      */
-    private static String[] done() {
+    private static String[] returnBob() {
         return new String[]{ARTICLE.getMaterial().getLabel(), ARTICLE.getColor().getLabel(),
                 ARTICLE.getItem().getWords()[0], ARTICLE.getItem().getWords()[1],
                 ARTICLE.getMaterial().name() + " - " + ARTICLE.getColor().name() + " - " + ARTICLE.getItem().name()
@@ -153,9 +176,9 @@ public class Laundry extends Widget {
      * @param att The array of attributes to fill
      */
     private static void fillThird(String[] att) {
-        if (ARTICLE.getColor() == Clothing.Color.PEARL)
+        if (ARTICLE.getColor() == PEARL)
             att[3] = "Non-Chlorine Bleach";
-        else if (ARTICLE.getItem() == Clothing.Item.CORSET || ARTICLE.getMaterial() == Clothing.Material.CORDUROY)
+        else if (ARTICLE.getItem() == CORSET || ARTICLE.getMaterial() == CORDUROY)
             att[3] = ARTICLE.getMaterial().getSpecialInstr();
         else if (letterMatch())
             att[3] = ARTICLE.getColor().getSpecialInstr();
@@ -199,7 +222,7 @@ public class Laundry extends Widget {
      * @return True if the edgework matches the BOB conditions
      */
     private static boolean thanksBob() {
-        return getAllBatteries() == 4 && numHolders == 2 && hasLitIndicator(Indicator.BOB);
+        return getAllBatteries() == 4 && numHolders == 2 && hasLitIndicator(BOB);
     }
 
     /**
@@ -209,9 +232,11 @@ public class Laundry extends Widget {
      * @return True if a letter from the Serial Code matches a letter in the clothing material
      */
     private static boolean letterMatch() {
-        String letters = ultimateFilter(serialCode, CHAR_FILTER);
-        for (char instance : letters.toCharArray())
-            if (ARTICLE.getMaterial().name().toLowerCase().indexOf(instance) != -1) return true;
-        return false;
+        Set<String> clothingArticleLetters = stream(ARTICLE.getMaterial().name().split(""))
+                .map(String::toLowerCase)
+                .collect(toSet());
+
+        return Stream.of(filter(serialCode, CHAR_FILTER).split(""))
+                .anyMatch(clothingArticleLetters::contains);
     }
 }

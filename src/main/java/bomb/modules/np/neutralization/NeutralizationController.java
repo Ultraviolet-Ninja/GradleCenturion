@@ -11,8 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 
-import static bomb.tools.filter.Filter.NUMBER_PATTERN;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.modules.np.neutralization.Neutralization.OUTPUT_SEPARATOR;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.filter;
+import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.GREEN;
+import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.YELLOW;
 
 public class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;
@@ -44,7 +49,7 @@ public class NeutralizationController implements Resettable {
     private void titrate() {
         //TODO - For GUI Overhaul, TextFields get cyan text with black background
         try {
-            String[] answers = Neutralization.titrate((int) volume, solutionColor).split("-");
+            String[] answers = Neutralization.titrate((int) volume, solutionColor).split(OUTPUT_SEPARATOR);
             chemName.setText(answers[0]);
             chemForm.setText(answers[1]);
             dropCount.setText(answers[2]);
@@ -62,7 +67,7 @@ public class NeutralizationController implements Resettable {
 
     @FXML
     private void volume() {
-        String sample = ultimateFilter(acidVolume.getText(), NUMBER_PATTERN);
+        String sample = filter(acidVolume.getText(), NUMBER_PATTERN);
         if (!sample.isEmpty()) {
             volume = Double.parseDouble(sample);
             testTube.setProgress(volume / MAX_VOLUME);
@@ -76,19 +81,19 @@ public class NeutralizationController implements Resettable {
         switch (FacadeFX.getToggleName(acidColors)) {
             case "Red" -> {
                 testTube.setStyle(RED_STYLE);
-                solutionColor = Color.RED;
+                solutionColor = RED;
             }
             case "Yellow" -> {
                 testTube.setStyle(YELLOW_STYLE);
-                solutionColor = Color.YELLOW;
+                solutionColor = YELLOW;
             }
             case "Green" -> {
                 testTube.setStyle(GREEN_STYLE);
-                solutionColor = Color.GREEN;
+                solutionColor = GREEN;
             }
             default -> {
                 testTube.setStyle(BLUE_STYLE);
-                solutionColor = Color.BLUE;
+                solutionColor = BLUE;
             }
         }
         toggleLock();

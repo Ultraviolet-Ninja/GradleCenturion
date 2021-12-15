@@ -3,23 +3,37 @@ package bomb.modules.dh.hexamaze.hexalgorithm;
 import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.List;
+
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.Circle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.DownTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.Hexagon;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.LeftTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.RightTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape.UpTriangle;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.Bottom;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.BottomLeft;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.BottomRight;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.Top;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopLeft;
+import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopRight;
 
 /**
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
  * using individual HexNodes to represent what a tile contains.
  */
-public class HexagonDataStructure {
+public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataStructure.HexNode>> {
     /**
      * This class is the backing node to a given hexagon data structure.
      */
     public static final class HexNode extends EquatableObject {
-        public List<HexWall> walls;
-        public HexShape fill;
+        private EnumSet<HexWall> walls;
+        private HexShape fill;
 
         /**
          * Initializes a HexNode with the important info:
@@ -28,41 +42,14 @@ public class HexagonDataStructure {
          * @param hexShape   The shape within the HexNode
          * @param constructs Which walls are present in this HexNode
          */
-        public HexNode(HexShape hexShape, List<HexWall> constructs) {
+        public HexNode(HexShape hexShape, EnumSet<HexWall> constructs) {
             walls = constructs;
             fill = hexShape;
         }
 
         public HexNode(HexNode toCopy) {
-            walls = deepCopyWalls(toCopy.walls);
-            fill = deepCopyShape(toCopy.fill);
-        }
-
-        private ArrayList<HexWall> deepCopyWalls(List<HexWall> constructs) {
-            ArrayList<HexWall> newWalls = new ArrayList<>();
-            for (HexWall construct : constructs) {
-                switch (construct) {
-                    case Top -> newWalls.add(HexWall.Top);
-                    case TopLeft -> newWalls.add(HexWall.TopLeft);
-                    case TopRight -> newWalls.add(HexWall.TopRight);
-                    case Bottom -> newWalls.add(HexWall.Bottom);
-                    case BottomLeft -> newWalls.add(HexWall.BottomLeft);
-                    default -> newWalls.add(HexWall.BottomRight);
-                }
-            }
-            return newWalls;
-        }
-
-        private HexShape deepCopyShape(HexShape shape) {
-            if (shape == null) return null;
-            return switch (shape) {
-                case Circle -> HexShape.Circle;
-                case Hexagon -> HexShape.Hexagon;
-                case LeftTriangle -> HexShape.LeftTriangle;
-                case RightTriangle -> HexShape.RightTriangle;
-                case UpTriangle -> HexShape.UpTriangle;
-                default -> HexShape.DownTriangle;
-            };
+            walls = EnumSet.copyOf(toCopy.walls);
+            fill = toCopy.fill;
         }
 
         /**
@@ -90,7 +77,7 @@ public class HexagonDataStructure {
             return HASHING_NUMBER * getShapeHash() + ((walls != null) ? getWallHash().hashCode() : 0);
         }
 
-        private boolean hasMatchingWalls(List<HexWall> toCompare) {
+        private boolean hasMatchingWalls(EnumSet<HexWall> toCompare) {
             if (this.walls.size() != toCompare.size()) return false;
             for (HexWall wall : toCompare) {
                 if (!this.walls.contains(wall)) return false;
@@ -103,12 +90,11 @@ public class HexagonDataStructure {
         }
 
         public String getWallHash() {
-            Collections.sort(walls);
             return HexWall.toHash(walls);
         }
 
         public void recreateWallsFromHash(char letter) {
-            walls = deepCopyWalls(HexWall.fromHash(String.valueOf(letter)));
+            walls = EnumSet.copyOf(HexWall.fromHash(String.valueOf(letter)));
         }
 
         @Override
@@ -120,10 +106,18 @@ public class HexagonDataStructure {
                 sb.append(wall.toString()).append(" ");
             return sb.toString();
         }
+
+        public EnumSet<HexWall> getWalls() {
+            return walls;
+        }
+
+        public HexShape getFill() {
+            return fill;
+        }
     }
 
     private BufferedQueue<BufferedQueue<HexNode>> hexagon;
-    private final byte sideLength;
+    private final int sideLength;
     private final int span;
 
     /**
@@ -134,8 +128,8 @@ public class HexagonDataStructure {
      */
     public HexagonDataStructure(int sideLength) throws IllegalArgumentException {
         if (sideLength < Byte.MAX_VALUE) {
-            hexagon = createHexagonStructure((byte) sideLength);
-            this.sideLength = (byte) sideLength;
+            hexagon = createHexagonStructure(sideLength);
+            this.sideLength = sideLength;
             span = calculateHexagonalSpan();
         } else throw new IllegalArgumentException("Side length was too large");
     }
@@ -157,14 +151,14 @@ public class HexagonDataStructure {
      * Initializes a hexagonal storage system based on a simple ArrayList of HexNodes,
      * taking the size of the list before sending it to the stream method
      *
-     * @param imports The Arraylist of HexNodes
+     * @param nodeList The List of HexNodes
      * @throws IllegalArgumentException The side length didn't given an integer value
      */
-    public HexagonDataStructure(List<HexNode> imports) throws IllegalArgumentException {
-        sideLength = nodalSideLength(imports.size());
+    public HexagonDataStructure(List<HexNode> nodeList) throws IllegalArgumentException {
+        sideLength = nodalSideLength(nodeList.size());
         if (sideLength == 0)
             throw new IllegalArgumentException("Given List would not create a complete Hexagon");
-        hexagon = interpretListToQueues(imports);
+        hexagon = convertFromList(nodeList);
         span = calculateHexagonalSpan();
     }
 
@@ -174,7 +168,7 @@ public class HexagonDataStructure {
      * @param sideLength The given side length of a hexagon
      * @return The FinalList of FinalLists
      */
-    private BufferedQueue<BufferedQueue<HexNode>> createHexagonStructure(byte sideLength) {
+    private BufferedQueue<BufferedQueue<HexNode>> createHexagonStructure(int sideLength) {
         BufferedQueue<BufferedQueue<HexNode>> hex;
         if (sideLength > 2) {
             //Initializing the horizontal size of the hex to be 2n-1
@@ -198,22 +192,22 @@ public class HexagonDataStructure {
      * @param stream The ArrayList of HexNodes
      */
     public void readInNodeList(List<HexNode> stream) {
-        hexagon = interpretListToQueues(stream);
+        hexagon = convertFromList(stream);
     }
 
     /**
      * Takes in an ArrayList of HexNodes and converts to a hexagonal representation
      *
-     * @param newStream The ArrayList of HexNodes
+     * @param newList The ArrayList of HexNodes
      * @return A successfully streamed FinalList of FinalLists
      * @throws IllegalArgumentException Too few or too many HexNodes were given
      */
-    private BufferedQueue<BufferedQueue<HexNode>> interpretListToQueues(List<HexNode> newStream)
+    private BufferedQueue<BufferedQueue<HexNode>> convertFromList(List<HexNode> newList)
             throws IllegalArgumentException {
-        if (nodalSideLength(newStream.size()) == 0)
-            throw new IllegalArgumentException("Too few nodes were sent: " + newStream.size());
+        if (nodalSideLength(newList.size()) == 0)
+            throw new IllegalArgumentException("Too few nodes were sent: " + newList.size());
         BufferedQueue<BufferedQueue<HexNode>> temp = createHexagonStructure(sideLength);
-        for (HexNode hexNode : newStream)
+        for (HexNode hexNode : newList)
             if (!add(temp, hexNode)) throw new IllegalArgumentException("We have extra nodes being added");
         return temp;
     }
@@ -226,8 +220,8 @@ public class HexagonDataStructure {
      * @return False if full
      */
     private boolean add(BufferedQueue<BufferedQueue<HexNode>> toFill, HexNode toAdd) {
-        for (int i = 0; i < toFill.cap(); i++) {
-            if (!toFill.get(i).full()) {
+        for (int i = 0; i < toFill.getCapacity(); i++) {
+            if (!toFill.get(i).isFull()) {
                 toFill.get(i).add(toAdd);
                 return true;
             }
@@ -235,33 +229,18 @@ public class HexagonDataStructure {
         return false;
     }
 
-    /**
-     * Returns the side length of the hexagon
-     *
-     * @return The length of one side of the hexagon
-     */
     public int getSideLength() {
         return sideLength;
     }
 
-    /**
-     * Returns the span of the columns
-     *
-     * @return The length of the columns
-     */
     public int getSpan() {
         return span;
     }
 
-    /**
-     * Creates an ArrayList of HexNodes from the FinalList of FinalLists
-     *
-     * @return The ArrayList containing HexNodes
-     */
     public List<HexNode> exportToList() {
-        ArrayList<HexNode> output = new ArrayList<>();
-        for (int i = 0; i < hexagon.cap(); i++)
-            output.addAll(hexagon.get(i));
+        List<HexNode> output = new ArrayList<>();
+        for (BufferedQueue<HexNode> queue : hexagon)
+            output.addAll(queue);
         return output;
     }
 
@@ -271,41 +250,43 @@ public class HexagonDataStructure {
      * @throws IllegalArgumentException If extra nodes were being added to the new hexagon
      */
     public void rotate() throws IllegalArgumentException {
-        ArrayList<HexNode> linearOrder = new ArrayList<>();
-        //TODO - Needs to be broken down
+        List<HexNode> newLinearOrder = new ArrayList<>();
         //For loop for the entire algorithm
-        for (int columnIndex = 0; columnIndex < hexagon.cap(); columnIndex++) {
-            //For loop for 1st half of the hexagon and its center
-            for (int firstHalfIndex = 0; firstHalfIndex < sideLength; firstHalfIndex++) {
-                //If the row capacity - a is less than zero,
-                // that means we can't draw from that FinalList row anymore
-                if (hexagon.get(firstHalfIndex).cap() - columnIndex > 0) {
-                    int lastIndex = hexagon.get(firstHalfIndex).cap() - 1;
-                    linearOrder.add(hexagon.get(firstHalfIndex).get(lastIndex - columnIndex));
-                }
-            }
+        for (int columnIndex = 0; columnIndex < hexagon.getCapacity(); columnIndex++) {
+            addLeftHalf(newLinearOrder, columnIndex);
 
-            int rowCounter = sideLength;
-            //If loop prevents the 2nd half from running on the first total algorithm run
-            if (columnIndex != 0) {
-                //For loop for 2nd half copies value from a and decreases for each row past Center
-                for (int secondHalfIndex = columnIndex; secondHalfIndex > 0; secondHalfIndex--) {
-                    //If statement prevents excess instances from being copied over to the new hexagon
-                    if (rowCounter < hexagon.cap()) {
-                        int lastIndex = hexagon.get(rowCounter).cap() - secondHalfIndex;
-                        linearOrder.add(hexagon.get(rowCounter).get(lastIndex));
-                        rowCounter++;
-                    } else secondHalfIndex = 0;
-                }
+            if (columnIndex != 0) { //If loop prevents the 2nd half from running on the first total algorithm run
+                addRightHalf(newLinearOrder, columnIndex, sideLength);
             }
         }
 
-        for (HexNode hexNode : linearOrder) {
+        for (HexNode hexNode : newLinearOrder) {
             hexNode.walls = rotateWallPositions(hexNode.walls);
             hexNode.fill = rotateShape(hexNode.fill);
         }
 
-        hexagon = interpretListToQueues(linearOrder);
+        hexagon = convertFromList(newLinearOrder);
+    }
+
+    private void addLeftHalf(List<HexNode> newLinearOrder, int columnIndex) {
+        for (int firstHalfIndex = 0; firstHalfIndex < sideLength; firstHalfIndex++) {
+            //If the row capacity - a is less than zero, that means we can't draw from that BufferedQueue row anymore
+            if (hexagon.get(firstHalfIndex).getCapacity() - columnIndex > 0) {
+                int lastIndex = hexagon.get(firstHalfIndex).getCapacity() - 1;
+                newLinearOrder.add(hexagon.get(firstHalfIndex).get(lastIndex - columnIndex));
+            }
+        }
+    }
+
+    private void addRightHalf(List<HexNode> newLinearOrder, int columnIndex, int rowCounter) {
+        for (int secondHalfIndex = columnIndex; secondHalfIndex > 0; secondHalfIndex--) {
+            //If statement prevents excess instances from being copied over to the new hexagon
+            if (rowCounter < hexagon.getCapacity()) {
+                int lastIndex = hexagon.get(rowCounter).getCapacity() - secondHalfIndex;
+                newLinearOrder.add(hexagon.get(rowCounter).get(lastIndex));
+                rowCounter++;
+            } else secondHalfIndex = 0;
+        }
     }
 
     /**
@@ -314,18 +295,18 @@ public class HexagonDataStructure {
      * @param walls The array needing to be rotated
      * @return The newly rotated wall array
      */
-    private List<HexWall> rotateWallPositions(List<HexWall> walls) {
-        if (walls == null || walls.get(0) == null) return null;
-        List<HexWall> temp = new ArrayList<>();
+    private EnumSet<HexWall> rotateWallPositions(EnumSet<HexWall> walls) {
+        if (walls == null || walls.isEmpty()) return null;
+        EnumSet<HexWall> temp = EnumSet.noneOf(HexWall.class);
 
         for (HexWall wall : walls) {
             switch (wall) {
-                case TopLeft -> temp.add(HexWall.Top);
-                case Top -> temp.add(HexWall.TopRight);
-                case TopRight -> temp.add(HexWall.BottomRight);
-                case BottomRight -> temp.add(HexWall.Bottom);
-                case Bottom -> temp.add(HexWall.BottomLeft);
-                default -> temp.add(HexWall.TopLeft);
+                case TopLeft -> temp.add(Top);
+                case Top -> temp.add(TopRight);
+                case TopRight -> temp.add(BottomRight);
+                case BottomRight -> temp.add(Bottom);
+                case Bottom -> temp.add(BottomLeft);
+                default -> temp.add(TopLeft);
             }
         }
         return temp;
@@ -340,14 +321,13 @@ public class HexagonDataStructure {
      */
     private HexShape rotateShape(HexShape currentShape) {
         if (currentShape == null) return null;
-        if (currentShape == HexShape.Circle) return HexShape.Circle;
-        if (currentShape == HexShape.Hexagon) return HexShape.Hexagon;
+        if (currentShape == Circle || currentShape == Hexagon) return currentShape;
 
         return switch (currentShape) {
-            case UpTriangle -> HexShape.DownTriangle;
-            case DownTriangle -> HexShape.UpTriangle;
-            case LeftTriangle -> HexShape.RightTriangle;
-            default -> HexShape.LeftTriangle;
+            case UpTriangle -> DownTriangle;
+            case DownTriangle -> UpTriangle;
+            case LeftTriangle -> RightTriangle;
+            default -> LeftTriangle;
         };
     }
 
@@ -368,12 +348,12 @@ public class HexagonDataStructure {
      */
     public static HexShape decodeShape(String letter) {
         return switch (letter.toLowerCase()) {
-            case "c" -> HexShape.Circle;
-            case "h" -> HexShape.Hexagon;
-            case "lt" -> HexShape.LeftTriangle;
-            case "rt" -> HexShape.RightTriangle;
-            case "ut" -> HexShape.UpTriangle;
-            case "dt" -> HexShape.DownTriangle;
+            case "c" -> Circle;
+            case "h" -> Hexagon;
+            case "lt" -> LeftTriangle;
+            case "rt" -> RightTriangle;
+            case "ut" -> UpTriangle;
+            case "dt" -> DownTriangle;
             default -> null;
         };
     }
@@ -385,8 +365,8 @@ public class HexagonDataStructure {
      * @param numbers The string of numbers representing the walls
      * @return The array containing all existing walls in a HexNode
      */
-    public static ArrayList<HexNodeProperties.HexWall> decodeWalls(String numbers) {
-        ArrayList<HexNodeProperties.HexWall> constructs = new ArrayList<>(6);
+    public static EnumSet<HexNodeProperties.HexWall> decodeWalls(String numbers) {
+        EnumSet<HexNodeProperties.HexWall> constructs = EnumSet.noneOf(HexWall.class);
 
         for (HexNodeProperties.HexWall index : HexNodeProperties.HexWall.values())
             if (numbers.contains(String.valueOf(index.ordinal())))
@@ -413,11 +393,11 @@ public class HexagonDataStructure {
      * @param area The area of a hexagon
      * @return The length of one side of a hexagon or 0
      */
-    private byte nodalSideLength(int area) {
+    private int nodalSideLength(int area) {
         double math = (3 + Math.sqrt(12 * area - 3)) / 6;
         if (notAnInteger(math))
             return 0;
-        return (byte) math;
+        return (int) math;
     }
 
     /**
@@ -436,11 +416,16 @@ public class HexagonDataStructure {
 
     public String hashString() {
         StringBuilder sb = new StringBuilder();
-        for (int x = 0; x < hexagon.cap(); x++) {
-            for (int y = 0; y < hexagon.get(x).cap(); y++) {
+        for (int x = 0; x < hexagon.getCapacity(); x++) {
+            for (int y = 0; y < hexagon.get(x).getCapacity(); y++) {
                 sb.append(hexagon.get(x).get(y).getShapeHash());
             }
         }
         return sb.toString();
+    }
+
+    @Override
+    public Iterator<BufferedQueue<HexNode>> iterator() {
+        return hexagon.iterator();
     }
 }

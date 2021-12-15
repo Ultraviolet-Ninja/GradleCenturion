@@ -9,8 +9,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 
 import java.util.List;
+import java.util.function.IntUnaryOperator;
+
+import static bomb.modules.s.switches.Switches.BIT_LENGTH;
+import static bomb.tools.string.StringFormat.ARROW;
 
 public class SwitchesController implements Resettable {
+    private static final IntUnaryOperator SHIFT_BIT = index -> 1 << (BIT_LENGTH - index - 1);
+
     @FXML
     private JFXRadioButton firstLight, secondLight, thirdLight, fourthLight, fifthLight;
 
@@ -22,16 +28,16 @@ public class SwitchesController implements Resettable {
 
     @FXML
     private void submitStates() {
-        JFXRadioButton[] allLights = getAllLights();
-        MFXToggleButton[] allSwitches = getAllSwitches();
+        List<JFXRadioButton> allLights = getAllLights();
+        List<MFXToggleButton> allSwitches = getAllSwitches();
         byte startingState = 0;
         byte desiredState = 0;
 
-        for (int i = 0; i < Switches.BIT_LENGTH; i++) {
-            if (allSwitches[i].isSelected())
-                startingState |= 1 << i;
-            if (allLights[i].isSelected())
-                desiredState |= 1 << i;
+        for (int i = 0; i < BIT_LENGTH; i++) {
+            if (allSwitches.get(i).isSelected())
+                startingState |= SHIFT_BIT.applyAsInt(i);
+            if (allLights.get(i).isSelected())
+                desiredState |= SHIFT_BIT.applyAsInt(i);
         }
 
         try {
@@ -44,27 +50,22 @@ public class SwitchesController implements Resettable {
     }
 
     private void sendToOutputField(List<String> outputList) {
-        final String arrow = " -> ";
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < outputList.size(); i++) {
-            sb.append(outputList.get(i));
-            if (i != outputList.size() - 1) sb.append(arrow);
-        }
-        outputField.setText(sb.toString());
+        String outputText = String.join(ARROW, outputList);
+        outputField.setText(outputText);
     }
 
-    private JFXRadioButton[] getAllLights() {
-        return new JFXRadioButton[]{firstLight, secondLight, thirdLight, fourthLight, fifthLight};
+    private List<JFXRadioButton> getAllLights() {
+        return List.of(firstLight, secondLight, thirdLight, fourthLight, fifthLight);
     }
 
-    private MFXToggleButton[] getAllSwitches() {
-        return new MFXToggleButton[]{firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch};
+    private List<MFXToggleButton> getAllSwitches() {
+        return List.of(firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch);
     }
 
     @Override
     public void reset() {
         FacadeFX.clearText(outputField);
-        FacadeFX.setToggleButtonsUnselected(getAllSwitches());
-        FacadeFX.setToggleButtonsUnselected(getAllLights());
+        getAllLights().forEach(button -> button.setSelected(false));
+        getAllSwitches().forEach(button -> button.setSelected(false));
     }
 }

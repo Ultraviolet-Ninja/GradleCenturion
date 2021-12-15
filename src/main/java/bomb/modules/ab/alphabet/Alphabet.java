@@ -7,12 +7,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.Regex.CREATE_NEGATED_SET;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
 
 /**
  * This class deals with the Alphabet module. The module comprises a 2x2 square containing 4 tiles
- * with letters on them. The order in which they're pressed is based on the given sets if the letters appear
- * in those 4 tiles. But if no set matches the 4 tiles, they are to be pressed in alphabetical order.
+ * with letters on them. The order in which they're pressed is based on the given sets in the {@link #WORD_BANK}
+ * if the letters appear in those 4 tiles.
+ * But if no set matches the 4 tiles, the tiles are to be pressed in alphabetical order.
  */
 public class Alphabet extends Widget {
     private static final String[] WORD_BANK = {"JQXZ", "QEW", "AC", "ZNY", "TJL",
@@ -29,15 +31,15 @@ public class Alphabet extends Widget {
         validateInput(input);
         input = input.toUpperCase();
         StringBuilder output = new StringBuilder();
-        Regex filterRegex = new Regex("[^" + input + "]");
+        Regex filterRegex = CREATE_NEGATED_SET.apply(input);
 
         for (String letterSet : WORD_BANK) {
-            if (ultimateFilter(letterSet, filterRegex).isEmpty()) {
+            if (EMPTY_FILTER.test(letterSet, filterRegex)) {
                 output.append(letterSet);
                 input = input.replaceAll("[" + letterSet + "]", "");
                 if (input.isEmpty())
                     return output.toString();
-                filterRegex = new Regex("[^" + input + "]");
+                filterRegex = CREATE_NEGATED_SET.apply(input);
             }
         }
 
@@ -51,8 +53,7 @@ public class Alphabet extends Widget {
     }
 
     private static void validateInput(String input) throws IllegalArgumentException {
-        Regex regex = new Regex("[a-zA-Z]{4}", input);
-        if (!regex.matchesRegex())
+        if (!input.matches("[a-zA-Z]{4}"))
             throw new IllegalArgumentException("Input is not 4 letters");
         if (hasRepeatedCharacters(input))
             throw new IllegalArgumentException("Input can't have repeated characters");

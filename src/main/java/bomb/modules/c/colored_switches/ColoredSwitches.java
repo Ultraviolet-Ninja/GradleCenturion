@@ -1,7 +1,6 @@
 package bomb.modules.c.colored_switches;
 
 import bomb.modules.s.switches.Switches;
-import com.opencsv.exceptions.CsvValidationException;
 import org.javatuples.Pair;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.interfaces.AStarAdmissibleHeuristic;
@@ -12,6 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
+
 public class ColoredSwitches extends Switches {
     private static final double WRONG_PATH_VALUE = Double.MAX_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;
@@ -19,11 +20,9 @@ public class ColoredSwitches extends Switches {
     private static byte secondaryStartLocation = -1;
 
     static {
-        ColoredSwitchGraphFactory factory;
         try {
-            factory = new ColoredSwitchGraphFactory();
-            INTERNAL_GRAPH = factory.constructGraph();
-        } catch (CsvValidationException | IOException e) {
+            INTERNAL_GRAPH = ColoredSwitchGraphFactory.makeGraph();
+        } catch (IOException e) {
             throw new IllegalStateException(e.getMessage());
         }
     }
@@ -34,9 +33,8 @@ public class ColoredSwitches extends Switches {
         List<String> outputList = new ArrayList<>();
         secondaryStartLocation = makePreemptiveMove(startingState, outputList);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 2; i++)
             secondaryStartLocation = makePreemptiveMove(secondaryStartLocation, outputList);
-        }
 
         return outputList;
     }
@@ -67,6 +65,7 @@ public class ColoredSwitches extends Switches {
     public static List<String> produceFinalMoveList(SwitchColor[] startingColors, byte desiredState) throws IllegalStateException, IllegalArgumentException {
         validateByte(desiredState);
         validateSwitchColors(startingColors);
+
         if (startingColors.length != BIT_LENGTH)
             throw new IllegalArgumentException("There should be 5 switches");
         if (!isFirstStepDone())
@@ -126,13 +125,13 @@ public class ColoredSwitches extends Switches {
 
     private static void validateSwitchColors(SwitchColor[] startingColors) {
         for (SwitchColor switchColor : startingColors) {
-            if (switchColor == SwitchColor.NEUTRAL)
+            if (switchColor == NEUTRAL)
                 throw new IllegalArgumentException("All switches must have a color");
         }
     }
 
     private static boolean isBlackPath(SwitchColor[] connectionConditions) {
-        return connectionConditions.length == 1 && connectionConditions[0] == SwitchColor.NEUTRAL;
+        return connectionConditions.length == 1 && connectionConditions[0] == NEUTRAL;
     }
 
     private static void validateByte(byte state) throws IllegalArgumentException {

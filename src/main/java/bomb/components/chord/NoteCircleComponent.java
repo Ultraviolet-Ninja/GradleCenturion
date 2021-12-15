@@ -1,6 +1,7 @@
 package bomb.components.chord;
 
 import bomb.abstractions.Resettable;
+import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,11 +41,7 @@ public class NoteCircleComponent extends Pane implements Resettable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("wheel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        FacadeFX.loadComponent(loader);
     }
 
     public void initialize() {

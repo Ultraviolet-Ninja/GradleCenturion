@@ -1,22 +1,31 @@
 package bomb.modules.np.neutralization;
 
+import bomb.BombSimulations;
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.WidgetSimulations;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
-import bomb.enumerations.TrinarySwitch;
 import javafx.scene.paint.Color;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.modules.np.neutralization.Chemical.Base.Ammonia;
-import static bomb.modules.np.neutralization.Chemical.Base.Lithium_Hydroxide;
-import static bomb.modules.np.neutralization.Chemical.Base.Potassium_Hydroxide;
-import static bomb.modules.np.neutralization.Neutralization.FILTER;
-import static bomb.modules.np.neutralization.Neutralization.NO_FILTER;
+import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.Port.PARALLEL;
+import static bomb.enumerations.Port.PS2;
+import static bomb.enumerations.Port.RJ45;
+import static bomb.enumerations.Port.SERIAL;
+import static bomb.enumerations.TrinarySwitch.ON;
+import static bomb.modules.np.neutralization.Chemical.Base.AMMONIA;
+import static bomb.modules.np.neutralization.Chemical.Base.LITHIUM_HYDROXIDE;
+import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
+import static bomb.modules.np.neutralization.Neutralization.FILTER_TEXT;
+import static bomb.modules.np.neutralization.Neutralization.NO_FILTER_TEXT;
+import static javafx.scene.paint.Color.BLUE;
+import static javafx.scene.paint.Color.CYAN;
+import static javafx.scene.paint.Color.RED;
+import static javafx.scene.paint.Color.YELLOW;
 import static org.testng.Assert.assertEquals;
 
 public class NeutralizationTest {
@@ -27,11 +36,9 @@ public class NeutralizationTest {
 
     @DataProvider
     public Object[][] exceptionTestProvider() {
-        ConditionSetter empty = () -> {
-        };
         ConditionSetter validSetup = this::setupOne;
         return new Object[][]{
-                {empty, 0, Color.RED}, {validSetup, 0, Color.CYAN}
+                {EMPTY_SETTER, 0, RED}, {validSetup, 0, CYAN}
         };
     }
 
@@ -44,16 +51,16 @@ public class NeutralizationTest {
     @Test
     public void trainingVideoTestOne() {
         setupOne();
-        assertEqual(10, Color.YELLOW, new String[]{"Ammonia", Ammonia.getFormula(), "8", FILTER});
+        assertEqual(10, YELLOW, new String[]{"Ammonia", AMMONIA.getFormula(), "8", FILTER_TEXT});
     }
 
     private void setupOne() {
         Widget.setNumberOfPlates(1);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
-        Widget.setPortValue(Port.PARALLEL, 2);
-        Widget.setPortValue(Port.SERIAL, 1);
-        Widget.setPortValue(Port.PS2, 1);
-        Widget.setPortValue(Port.RJ45, 1);
+        Widget.setIndicator(ON, NSA);
+        Widget.setPortValue(PARALLEL, 2);
+        Widget.setPortValue(SERIAL, 1);
+        Widget.setPortValue(PS2, 1);
+        Widget.setPortValue(RJ45, 1);
         Widget.setDBatteries(1);
         Widget.setNumHolders(1);
         Widget.setSerialCode("2u3mr1");
@@ -62,31 +69,31 @@ public class NeutralizationTest {
     @Test
     public void trainingVideoTestTwo() {
         setupTwo();
-        assertEqual(20, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                "48", NO_FILTER});
+        assertEqual(20, BLUE, new String[]{"Lithium Hydroxide", LITHIUM_HYDROXIDE.getFormula(),
+                "48", NO_FILTER_TEXT});
     }
 
     private void setupTwo() {
         Widget.setNumberOfPlates(3);
-        Widget.setPortValue(Port.PARALLEL, 2);
-        Widget.setPortValue(Port.SERIAL, 1);
+        Widget.setPortValue(PARALLEL, 2);
+        Widget.setPortValue(SERIAL, 1);
         Widget.setSerialCode("ew7qw5");
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.NSA);
+        Widget.setIndicator(ON, MSA);
+        Widget.setIndicator(ON, NSA);
     }
 
     @DataProvider
     public Object[][] theGreatBerateSimulationProvider() {
-        ConditionSetter first = WidgetSimulations::theGreatBerateVideoOne;
-        ConditionSetter second = WidgetSimulations::theGreatBerateVideoTwo;
-        ConditionSetter third = WidgetSimulations::videoTwoTakeTwo;
+        ConditionSetter first = BombSimulations::theGreatBerateVideoOne;
+        ConditionSetter second = BombSimulations::theGreatBerateVideoTwo;
+        ConditionSetter third = BombSimulations::videoTwoTakeTwo;
         return new Object[][]{
-                {first, 5, Color.BLUE, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                        "12", NO_FILTER}},
-                {second, 5, Color.RED, new String[]{"Lithium Hydroxide", Lithium_Hydroxide.getFormula(),
-                        "4", FILTER}},
-                {third, 10, Color.YELLOW, new String[]{"Potassium Hydroxide", Potassium_Hydroxide.getFormula(),
-                        "4", NO_FILTER}}
+                {first, 5, BLUE, new String[]{"Lithium Hydroxide", LITHIUM_HYDROXIDE.getFormula(),
+                        "12", NO_FILTER_TEXT}},
+                {second, 5, Color.RED, new String[]{"Lithium Hydroxide", LITHIUM_HYDROXIDE.getFormula(),
+                        "4", FILTER_TEXT}},
+                {third, 10, YELLOW, new String[]{"Potassium Hydroxide", POTASSIUM_HYDROXIDE.getFormula(),
+                        "4", NO_FILTER_TEXT}}
         };
     }
 
@@ -99,7 +106,7 @@ public class NeutralizationTest {
     private void assertEqual(int volume, Color color, String[] expected) {
         String[] actual = Neutralization.titrate(volume, color).split("-");
         for (int i = 0; i < expected.length; i++)
-            assertEquals(expected[i], actual[i]);
+            assertEquals(expected[i].toLowerCase(), actual[i].toLowerCase());
     }
 
     @AfterClass

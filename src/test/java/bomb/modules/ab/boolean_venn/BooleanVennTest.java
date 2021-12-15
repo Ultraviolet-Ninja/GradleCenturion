@@ -9,7 +9,8 @@ public class BooleanVennTest {
     @DataProvider
     public Object[][] exceptionTestProvider() {
         return new String[][]{
-                {""}, {"AB"}, {"ABC"}, {"AABC"}, {"A(BC)"}, {"A(B↓C)"}, {"A↓(BC)"}, {"A↓↓(BC)"}, {"A↓(A↓C)"}
+                {""}, {"AB"}, {"ABC"}, {"AABC"}, {"A(BC)"}, {"A(B↓C)"}, {"A↓(BC)"},
+                {"A↓↓(BC)"}, {"A↓(A↓C)"}
         };
     }
 
@@ -21,9 +22,10 @@ public class BooleanVennTest {
     @DataProvider
     public Object[][] trainingVideoTestProvider() {
         return new String[][]{
-                {"(A∨B)↔C", "10001101"}, {"(A→B)↓C", "00010000"}, {"A∧(B⊻C)", "00000110"}, {"(A|B)↔C", "01001110"},
-                {"(A∧B)∧C", "00000001"}, {"(A∨B)←C", "10111111"}, {"(A|B)→C", "01001111"}, {"A∨(B⊻C)", "01110111"},
-                {"(A⊻B)↓C", "10000010"}, {"(A←B)|C", "10111010"}, {"(A∨B)→C", "11001101"}, {"A⊻(B↓C)", "10000111"}
+                {"(A∨B)↔C", "10001101"}, {"(A→B)↓C", "00010000"}, {"A∧(B⊻C)", "00000110"},
+                {"(A|B)↔C", "01001110"}, {"(A∧B)∧C", "00000001"}, {"(A∨B)←C", "10111111"},
+                {"(A|B)→C", "01001111"}, {"A∨(B⊻C)", "01110111"}, {"(A⊻B)↓C", "10000010"},
+                {"(A←B)|C", "10111010"}, {"(A∨B)→C", "11001101"}, {"A⊻(B↓C)", "10000111"}
         };
     }
 

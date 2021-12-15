@@ -4,6 +4,7 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,8 +15,18 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Region;
+
+import java.io.IOException;
+import java.util.function.Function;
 
 public class FacadeFX {
+    public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
+            ((Button) actionEvent.getSource()).getText();
+
+    public static final Function<Toggle, String> GET_TOGGLE_NAME = toggle ->
+            ((ToggleButton)toggle).getText();
+
     private FacadeFX() {
     }
 
@@ -79,8 +90,29 @@ public class FacadeFX {
         return group.getSelectedToggle() != null;
     }
 
+    public static Region load(FXMLLoader loader) throws IllegalArgumentException {
+        try {
+            return loader.load();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static void loadComponent(FXMLLoader loader) throws IllegalArgumentException {
+        try {
+            loader.load();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
     public static void resetToggleGroup(ToggleGroup group) {
         group.selectToggle(null);
+    }
+
+    public static void resetToggleGroups(ToggleGroup... groups) {
+        for (ToggleGroup group : groups)
+            resetToggleGroup(group);
     }
 
     public static void resetSliderValues(Slider... sliders) {
@@ -104,15 +136,21 @@ public class FacadeFX {
             button.setSelected(false);
     }
 
-    //TODO Check if these do the same thing
-    public static void unselectFromToggleGroup(ToggleGroup group) {
-        Toggle temp = group.getSelectedToggle();
-        if (temp != null)
-            temp.setSelected(false);
+    public static void setVisible(Node node) {
+        node.setOpacity(1.0);
     }
 
-    public static void unselectFromMultipleToggleGroup(ToggleGroup... groups) {
-        for (ToggleGroup group : groups)
-            unselectFromToggleGroup(group);
+    public static void setNodesVisible(Node ... nodes) {
+        for (Node node : nodes)
+            setVisible(node);
+    }
+
+    public static void setInvisible(Node node) {
+        node.setOpacity(0.0);
+    }
+
+    public static void setNodesInvisible(Node ... nodes) {
+        for (Node node : nodes)
+            setInvisible(node);
     }
 }

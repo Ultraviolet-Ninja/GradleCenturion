@@ -43,12 +43,13 @@ public class Hexamaze extends Widget {
      * Sets all elements of the representation to null
      */
     private static void setToNull() {
-        for (int i = 0; i < nodalArea(HexGrid.STANDARD_SIDE_LENGTH); i++)
+        int nodalArea = nodalArea(HexGrid.STANDARD_SIDE_LENGTH);
+        for (int i = 0; i < nodalArea; i++)
             HEX_SHAPE_TRACKER.add(null);
     }
 
     /**
-     * Sets up the variables for the Hexamaze. This includes setting up the full maze, the defuser's grid
+     * Sets up the variables for the Hexamaze. This includes setting up the full maze, the Defuser's grid
      * and an ArrayList representation of the grid
      */
     public static void setupVariables(List<HexMazePanel> panelArray) {

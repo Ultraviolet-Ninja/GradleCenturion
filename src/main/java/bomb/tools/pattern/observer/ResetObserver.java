@@ -4,9 +4,10 @@ import bomb.abstractions.Resettable;
 import javafx.fxml.FXMLLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ResetObserver implements Observer {
-    private final ArrayList<Resettable> controllerList;
+    private final List<Resettable> controllerList;
 
     public ResetObserver() {
         controllerList = new ArrayList<>();
@@ -19,10 +20,7 @@ public class ResetObserver implements Observer {
 
     @Override
     public void update() {
-        int i = 0;
-        while (i < controllerList.size()) {
-            controllerList.get(i).reset();
-            i++;
-        }
+        controllerList.parallelStream()
+                .forEach(Resettable::reset);
     }
 }

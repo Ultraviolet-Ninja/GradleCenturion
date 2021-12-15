@@ -5,7 +5,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.HexGrid;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.Maze;
-import bomb.tools.data.structures.BufferedQueue;
+import bomb.tools.data.structures.queue.BufferedQueue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class HexHashLibrary {
 
     public static void initialize(Maze fullMaze, int userGridSpan) {
         int iterations = fullMaze.getSpan() - userGridSpan;
-        ArrayList<Integer> columnList = new ArrayList<>();
+        List<Integer> columnList = new ArrayList<>();
         for (int i = 0; i <= iterations; i++)
             columnList.add(i);
 
@@ -54,7 +54,7 @@ class HashingThread extends RecursiveAction {
     @Override
     protected void compute() {
         if (colList.size() != 1) {
-            ArrayList<ArrayList<Integer>> splitList = splitList(colList);
+            List<List<Integer>> splitList = splitList(colList);
             HashingThread taskOne = new HashingThread(splitList.get(0), maze, userGridSpan);
             HashingThread taskTwo = new HashingThread(splitList.get(1), maze, userGridSpan);
 
@@ -62,15 +62,15 @@ class HashingThread extends RecursiveAction {
         } else sequentialWork(colList.get(0));
     }
 
-    private ArrayList<ArrayList<Integer>> splitList(List<Integer> list) {
-        int split = list.size() / 2;
-        ArrayList<ArrayList<Integer>> output = new ArrayList<>();
-        output.add(new ArrayList<>(list.subList(0, split)));
-        output.add(new ArrayList<>(list.subList(split, list.size())));
+    private List<List<Integer>> splitList(List<Integer> list) {
+        int splitIndex = list.size() / 2;
+        List<List<Integer>> output = new ArrayList<>();
+        output.add(new ArrayList<>(list.subList(0, splitIndex)));
+        output.add(new ArrayList<>(list.subList(splitIndex, list.size())));
         return output;
     }
 
-    public HashingThread(ArrayList<Integer> columnList, Maze maze, int userGridSpan) {
+    public HashingThread(List<Integer> columnList, Maze maze, int userGridSpan) {
         colList = columnList;
         this.maze = maze;
         this.userGridSpan = userGridSpan;
@@ -96,18 +96,21 @@ class HashingThread extends RecursiveAction {
     }
 
     private static BufferedQueue<HexNode> deepCopyList(BufferedQueue<HexNode> input) {
-        BufferedQueue<HexNode> output = new BufferedQueue<>(input.cap());
-        for (int i = 0; i < output.cap(); i++)
-            output.add(new HexNode(input.get(i)));
+        BufferedQueue<HexNode> output = new BufferedQueue<>(input.getCapacity());
+        for (HexNode node : input)
+            output.add(new HexNode(node));
         return output;
     }
 
     private static int[] calculateStartPositions(BufferedQueue<BufferedQueue<HexNode>> columns) {
-        int[] positions = new int[columns.cap()];
-        int middleValue = columns.get(columns.cap() / 2).cap();
-        for (int i = 0; i < columns.cap(); i++) {
-            int placeholderValue = columns.get(i).cap() - middleValue;
-            positions[i] = Math.max(placeholderValue, 0);
+        int[] positions = new int[columns.getCapacity()];
+        int middleIndex = columns.getCapacity() / 2;
+        int middleValue = columns.get(middleIndex).getCapacity();
+
+        int index = 0;
+        for (BufferedQueue<HexNode> column : columns) {
+            int placeholderValue = column.getCapacity() - middleValue;
+            positions[index++] = Math.max(placeholderValue, 0);
         }
 
         if (arrayIsAllZero(positions))
@@ -170,8 +173,8 @@ class HashingThread extends RecursiveAction {
     }
 
     private boolean notDone(BufferedQueue<BufferedQueue<HexNode>> columns, int[] endPositions) {
-        for (int i = 0; i < columns.cap(); i++)
-            if (endPositions[i] > columns.get(i).cap()) return false;
+        for (int i = 0; i < columns.getCapacity(); i++)
+            if (endPositions[i] > columns.get(i).getCapacity()) return false;
         return true;
     }
 

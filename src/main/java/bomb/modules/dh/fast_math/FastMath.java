@@ -6,7 +6,7 @@ import bomb.tools.filter.Regex;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
-import static bomb.tools.filter.Filter.ultimateFilter;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
 
 public class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID = new int[][]{
@@ -19,7 +19,7 @@ public class FastMath extends Widget {
             {13, 23, 26, 85, 92, 12, 73, 56, 81, 7, 75, 47, 99}
     };
 
-    public static String solve(String letters) {
+    public static String solve(String letters) throws IllegalArgumentException {
         if (letters == null || letters.length() != 2)
             throw new IllegalArgumentException("Input 2 letters, please");
         checkSerialCode();
@@ -52,10 +52,10 @@ public class FastMath extends Widget {
 
     private static int edgework() {
         int output = hasLitIndicator(MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
-        output += portExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
+        output += doesPortExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
         //If the serial number has the letters F A S T
-        output -= !ultimateFilter(serialCode, new Regex("[fast]")).isEmpty() ? 5 : 0;
-        output += portExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
+        output -= !EMPTY_FILTER.test(serialCode, new Regex("[fast]")) ? 5 : 0;
+        output += doesPortExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
         output -= getAllBatteries() > 3 ? 15 : 0; //If the bomb has more than 3 batteries
         return output;
     }

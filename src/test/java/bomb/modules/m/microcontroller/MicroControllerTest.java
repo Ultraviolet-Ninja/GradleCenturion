@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static bomb.ConditionSetter.EMPTY_SETTER;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.MAGENTA;
@@ -38,7 +39,8 @@ public class MicroControllerTest {
     }
 
     @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(String serialCode, String moduleSerialNumbers, AbstractController controller) {
+    public void exceptionTest(String serialCode, String moduleSerialNumbers,
+                              AbstractController controller) {
         Widget.setSerialCode(serialCode);
 
         MicroController.getPinColors(moduleSerialNumbers, controller);
@@ -46,8 +48,6 @@ public class MicroControllerTest {
 
     @DataProvider
     public Object[][] validBranchTestProvider() {
-        ConditionSetter emptyCondition = () -> {
-        };
         ConditionSetter secondBranchCondition = () -> {
             Widget.setIndicator(TrinarySwitch.ON, Indicator.SIG);
             Widget.setPortValue(Port.RJ45, 1);
@@ -61,15 +61,15 @@ public class MicroControllerTest {
         String containsOne = "12";
 
         return new Object[][]{
-                {emptyCondition, normalSerialCode, containsOne, new StrikeController(6),
+                {EMPTY_SETTER, normalSerialCode, containsOne, new StrikeController(6),
                         new Color[]{MAGENTA, YELLOW, RED, GREEN, BLUE, WHITE}},
                 {secondBranchCondition, normalSerialCode, moduleSerialNumber, new StrikeController(6),
                         new Color[]{RED, YELLOW, BLUE, MAGENTA, GREEN, WHITE}},
-                {emptyCondition, serialCodeContainsC, moduleSerialNumber, new StrikeController(6),
+                {EMPTY_SETTER, serialCodeContainsC, moduleSerialNumber, new StrikeController(6),
                         new Color[]{MAGENTA, RED, YELLOW, GREEN, BLUE, WHITE}},
                 {fourthBranchCondition, normalSerialCode, moduleSerialNumber, new StrikeController(6),
                         new Color[]{BLUE, RED, MAGENTA, YELLOW, GREEN, WHITE}},
-                {emptyCondition, normalSerialCode, moduleSerialNumber, new StrikeController(6),
+                {EMPTY_SETTER, normalSerialCode, moduleSerialNumber, new StrikeController(6),
                         new Color[]{RED, GREEN, MAGENTA, YELLOW, BLUE, WHITE}}
         };
     }

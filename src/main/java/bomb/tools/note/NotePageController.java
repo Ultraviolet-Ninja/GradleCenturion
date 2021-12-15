@@ -1,12 +1,13 @@
 package bomb.tools.note;
 
 import bomb.Main;
+import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.List;
 
 public class NotePageController extends Stage {
@@ -21,13 +22,11 @@ public class NotePageController extends Stage {
         loader.setController(this);
         setTitle("Extra Note");
         getIcons().add(new Image(String.valueOf(Main.class.getResource("KTANE logo.png"))));
-        try {
-            setScene(new Scene(loader.load(), WIDTH, HEIGHT));
-            setOnCloseRequest(event -> close());
-            show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        Parent parent = FacadeFX.load(loader);
+        setScene(new Scene(parent, WIDTH, HEIGHT));
+        setOnCloseRequest(event -> close());
+        show();
     }
 
     @Override

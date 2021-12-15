@@ -1,15 +1,15 @@
 package bomb.modules.s.shape_shift;
 
 import bomb.abstractions.Resettable;
-import bomb.tools.data.structures.ring.ReadOnlyRing;
+import bomb.tools.data.structures.ring.ArrayRing;
 import javafx.fxml.FXML;
 
 public class ShapeShiftController implements Resettable {
-    private final ReadOnlyRing<ShapeEnd> leftSide, rightSide;
+    private final ArrayRing<ShapeEnd> leftSide, rightSide;
 
     public ShapeShiftController() {
-        leftSide = new ReadOnlyRing<>(ShapeEnd.values());
-        rightSide = new ReadOnlyRing<>(ShapeEnd.values());
+        leftSide = new ArrayRing<>(ShapeEnd.values());
+        rightSide = new ArrayRing<>(ShapeEnd.values());
     }
 
     public void initialize() {

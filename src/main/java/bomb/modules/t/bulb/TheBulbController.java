@@ -78,21 +78,14 @@ public class TheBulbController implements Resettable {
     }
 
     private void outputToTextArea(List<String> results) {
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < results.size(); i++) {
-            sb.append(results.get(i));
-            if (i != results.size() - 1)
-                sb.append("\n");
-        }
-
-        bulbResults.setText(sb.toString());
+        String outputText = String.join("\n", results);
+        bulbResults.setText(outputText);
     }
 
     @Override
     public void reset() {
         FacadeFX.disable(submitButton);
         FacadeFX.clearText(bulbResults);
-        FacadeFX.unselectFromMultipleToggleGroup(colorGroup, opacityGroup, luminosityGroup);
+        FacadeFX.resetToggleGroups(colorGroup, opacityGroup, luminosityGroup);
     }
 }
