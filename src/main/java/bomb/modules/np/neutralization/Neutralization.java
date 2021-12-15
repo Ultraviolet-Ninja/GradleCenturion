@@ -24,8 +24,8 @@ import static bomb.modules.np.neutralization.Chemical.Base.AMMONIA;
 import static bomb.modules.np.neutralization.Chemical.Base.LITHIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.SODIUM_HYDROXIDE;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
-import static bomb.tools.filter.RegexFilter.filter;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;
@@ -117,8 +117,8 @@ public class Neutralization extends Widget {
         String acidSymbol = currentAcid.getSymbol();
         String baseSymbol = currentBase.getSymbol();
 
-        if (!filter(acidSymbol, VOWEL_FILTER).isEmpty() ||
-                !filter(baseSymbol, VOWEL_FILTER).isEmpty())
+        if (!EMPTY_FILTER.test(acidSymbol, VOWEL_FILTER) ||
+                !EMPTY_FILTER.test(baseSymbol, VOWEL_FILTER))
             //Either the cation or the anion contains a vowel
             concentrate -= 4;
 

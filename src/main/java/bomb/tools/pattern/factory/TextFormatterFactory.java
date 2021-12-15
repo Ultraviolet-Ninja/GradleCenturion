@@ -1,9 +1,10 @@
 package bomb.tools.pattern.factory;
 
-import bomb.tools.filter.RegexFilter;
 import javafx.scene.control.TextFormatter;
 
 import java.util.function.Function;
+
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 
 public class TextFormatterFactory {
     private static final Function<String, TextFormatter<String>> REGEX_MATCH_FORMATTER = regex ->
@@ -32,9 +33,9 @@ public class TextFormatterFactory {
             if (!change.isContentChange()) return change;
 
             String text = change.getControlNewText();
-            RegexFilter.NUMBER_PATTERN.loadText(text);
+            NUMBER_PATTERN.loadText(text);
             if (text.isEmpty()) return change;
-            return RegexFilter.NUMBER_PATTERN.matchesRegex() ? change : null;
+            return NUMBER_PATTERN.matchesRegex() ? change : null;
         });
     }
 

@@ -120,13 +120,13 @@ public class ManualController {
                 (filePathMap, radioButtonMap) -> createRegionMap(radioButtonMap, filePathMap));
     }
 
-    private CompletableFuture<Map<String, Region>> createFilePathFuture() {
+    private static CompletableFuture<Map<String, Region>> createFilePathFuture() {
         Regex filenamePattern = new Regex("\\w+\\.");
         ResetObserver resetObserver = new ResetObserver();
 
         CompletableFuture<Map<String, Region>> future = CompletableFuture.supplyAsync(
                 () -> ManualController.class.getResource("fxml"))
-                .thenApply(this::toURI)
+                .thenApply(ManualController::toURI)
                 .handle((path, ex) -> {
                     if (ex != null){
                         ex.printStackTrace();
@@ -135,7 +135,7 @@ public class ManualController {
                     return path;
                 })
                 .thenApply(File::new)
-                .thenApply(this::getFilesFromDirectory)
+                .thenApply(ManualController::getFilesFromDirectory)
                 .thenApply(Collection::stream)
                 .thenApply(stream -> stream.filter(location -> !location.contains("solutions")))
                 .thenApply(stream -> stream.filter(location -> !location.contains("old")))
@@ -150,7 +150,7 @@ public class ManualController {
         return future;
     }
 
-    private CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
+    private static CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
         String newRegex = ALL_CHAR_FILTER.getOriginalPattern()
                 .replace("]", "_]");
         Regex regex = new Regex(newRegex);
@@ -163,7 +163,7 @@ public class ManualController {
                         )));
     }
 
-    private String formatRadioButtonName(Toggle toggle, Regex regex) {
+    private static String formatRadioButtonName(Toggle toggle, Regex regex) {
         String buttonName = GET_TOGGLE_NAME.apply(toggle)
                 .replaceAll("[ -]", "_")
                 .toLowerCase();
@@ -171,13 +171,13 @@ public class ManualController {
         return filter(buttonName, regex);
     }
 
-    private Region createSingleRegion(String fileLocation, ResetObserver resetObserver) {
+    private static Region createSingleRegion(String fileLocation, ResetObserver resetObserver) {
         URI path = Paths.get(fileLocation).toUri();
         FXMLLoader loader = new FXMLLoader(toURL(path));
         return loadToObserver(loader, resetObserver);
     }
 
-    private Region loadToObserver(FXMLLoader loader, ResetObserver resetObserver) throws IllegalArgumentException {
+    private static Region loadToObserver(FXMLLoader loader, ResetObserver resetObserver) throws IllegalArgumentException {
         Region output = FacadeFX.load(loader);
 
         String location = loader.getLocation().toString();
@@ -188,15 +188,15 @@ public class ManualController {
         return output;
     }
 
-    private void loadBlindAlleyController(FXMLLoader loader) {
+    private static void loadBlindAlleyController(FXMLLoader loader) {
         ObserverHub.addObserver(new BlindAlleyPaneObserver(loader.getController()));
     }
 
-    private void loadSouvenirController(FXMLLoader loader) {
+    private static void loadSouvenirController(FXMLLoader loader) {
         ObserverHub.addObserver(new SouvenirPaneObserver(loader.getController()));
     }
 
-    private List<String> getFilesFromDirectory(final File topLevelDirectory) throws NullPointerException {
+    private static List<String> getFilesFromDirectory(final File topLevelDirectory) throws NullPointerException {
         List<String> list = new ArrayList<>();
         for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())) {
             if (fileEntry.isDirectory())
@@ -207,7 +207,7 @@ public class ManualController {
         return list;
     }
 
-    private Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
+    private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                 Map<String, Region> filePathMap) {
         Map<Toggle, Region> regionMap = new IdentityHashMap<>();
         radioButtonMap.keySet()
@@ -218,7 +218,7 @@ public class ManualController {
         return regionMap;
     }
 
-    private URI toURI(URL url) throws IllegalArgumentException {
+    private static URI toURI(URL url) throws IllegalArgumentException {
         try {
             return url.toURI();
         } catch (URISyntaxException e) {
@@ -226,7 +226,7 @@ public class ManualController {
         }
     }
 
-    private URL toURL(URI uri) throws IllegalArgumentException {
+    private static URL toURL(URI uri) throws IllegalArgumentException {
         try {
             return uri.toURL();
         } catch (MalformedURLException e) {

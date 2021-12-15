@@ -7,10 +7,10 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 import java.util.Map;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import static java.util.Arrays.stream;
+import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
@@ -24,7 +24,7 @@ public class RoundKeypads extends Widget {
                 .filter(Flaggable::getFlag)
                 .mapToInt(Enum::ordinal)
                 .mapToObj(num -> Math.floorDiv(num, IMAGES_PER_COLUMN))
-                .collect(groupingBy(Function.identity(), counting()));
+                .collect(groupingBy(identity(), counting()));
 
         return frequencyCounter.entrySet().stream()
                 .max((entryOne, entryTwo) -> {

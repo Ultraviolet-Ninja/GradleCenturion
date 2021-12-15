@@ -78,7 +78,7 @@ public class WidgetController {
         rcaPortSlider.setOnMouseClicked(createPortSliderEvent(RCA));
     }
 
-    private EventHandler<MouseEvent> createPortSliderEvent(Port port) {
+    private static EventHandler<MouseEvent> createPortSliderEvent(Port port) {
         return event -> {
             MFXSlider source = (MFXSlider) event.getSource();
             Widget.setPortValue(port, (int) source.getValue());
@@ -119,12 +119,12 @@ public class WidgetController {
         }
     }
 
-    private void indicatorAction(Indicator indicator, ToggleGroup group) {
+    private static void indicatorAction(Indicator indicator, ToggleGroup group) {
         TrinarySwitch state = determineState(group.getSelectedToggle());
         Widget.setIndicator(state, indicator);
     }
 
-    private TrinarySwitch determineState(Toggle selected) {
+    private static TrinarySwitch determineState(Toggle selected) {
         if (selected == null) return UNKNOWN;
         return GET_TOGGLE_NAME.apply(selected).equals("Lit") ? ON : OFF;
     }

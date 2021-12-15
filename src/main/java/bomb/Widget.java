@@ -14,6 +14,7 @@ import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.TrinarySwitch.UNKNOWN;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
@@ -171,7 +172,7 @@ public class Widget {
     }
 
     public static boolean hasVowelInSerialCode(){
-        return !filter(serialCode, VOWEL_FILTER).isEmpty();
+        return !EMPTY_FILTER.test(serialCode, VOWEL_FILTER);
     }
 
     /**
