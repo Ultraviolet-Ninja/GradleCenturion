@@ -62,7 +62,8 @@ public class SimonScreams extends Widget {
         if (flashingOrder == null || flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
-        return findColors(Letters.getFromChar(getStringLetter(flashingOrder)));
+        String letter = String.valueOf(getStringLetter(flashingOrder));
+        return findColors(Letters.valueOf(letter));
     }
 
     /**
@@ -132,11 +133,6 @@ public class SimonScreams extends Widget {
     }
 
     private enum Letters {
-        A, C, D, E, F, H;
-
-        private static Letters getFromChar(char letter) {
-            String sample = String.valueOf(letter);
-            return valueOf(sample);
-        }
+        A, C, D, E, F, H
     }
 }

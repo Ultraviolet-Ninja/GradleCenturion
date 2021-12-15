@@ -99,7 +99,9 @@ public class Neutralization extends Widget {
     private static boolean doesIndicatorLetterMatch() {
         Set<String> uniqueCharacterSet = getFilteredSetOfIndicators(ALL_PRESENT)
                 .stream()
-                .map(indicator -> indicator.name().toLowerCase().split(""))
+                .map(Enum::name)
+                .map(String::toLowerCase)
+                .map(name -> name.split(""))
                 .flatMap(Arrays::stream)
                 .collect(Collectors.toSet());
 
@@ -112,13 +114,15 @@ public class Neutralization extends Widget {
 
     private static double acidConcentration(int acidVol) {
         double concentrate = currentAcid.getAtomicNum() - currentBase.getAtomicNum();
+        String acidSymbol = currentAcid.getSymbol();
+        String baseSymbol = currentBase.getSymbol();
 
-        if (!filter(currentAcid.getSymbol(), VOWEL_FILTER).isEmpty() ||
-                !filter(currentBase.getSymbol(), VOWEL_FILTER).isEmpty())
+        if (!filter(acidSymbol, VOWEL_FILTER).isEmpty() ||
+                !filter(baseSymbol, VOWEL_FILTER).isEmpty())
             //Either the cation or the anion contains a vowel
             concentrate -= 4;
 
-        if (currentAcid.getSymbol().length() == currentBase.getSymbol().length())
+        if (acidSymbol.length() == baseSymbol.length())
             //Length of characters for the anion is equal to the cation symbol length
             concentrate *= 3;
         concentrate = Math.abs(concentrate) % 10;
@@ -128,17 +132,17 @@ public class Neutralization extends Widget {
     }
 
     private static int baseConcentration() {
-        if (!overrule()) {
-            int allIndicators = countIndicators(ALL_PRESENT);
-            if (numHolders > countPortTypes() && numHolders > allIndicators)
-                return 5;
-            else if (countPortTypes() > numHolders && countPortTypes() > allIndicators)
-                return 10;
-            else if (allIndicators > numHolders && allIndicators > countPortTypes())
-                return 20;
-            return closestNum();
-        }
-        return 20;
+        if (overrule()) return 20;
+        int allIndicators = countIndicators(ALL_PRESENT);
+        int portTypeCount = countPortTypes();
+
+        if (numHolders > portTypeCount && numHolders > allIndicators)
+            return 5;
+        else if (portTypeCount > numHolders && portTypeCount > allIndicators)
+            return 10;
+        else if (allIndicators > numHolders && allIndicators > portTypeCount)
+            return 20;
+        return closestNum();
     }
 
     private static boolean overrule() {

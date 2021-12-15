@@ -1,13 +1,13 @@
 package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
-import bomb.enumerations.Port;
 import bomb.tools.logic.LogicOperator;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.Port.PARALLEL;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
 
@@ -59,7 +59,7 @@ public class Bitwise extends Widget {
     }
 
     private static boolean[] secondBits() {
-        return new boolean[]{hasMorePortsThanSpecified(Port.PARALLEL, 0), calculateTotalPorts() > 2};
+        return new boolean[]{hasMorePortsThanSpecified(PARALLEL, 0), calculateTotalPorts() > 2};
     }
 
     private static boolean[] thirdBits() {

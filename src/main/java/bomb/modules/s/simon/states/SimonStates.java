@@ -118,8 +118,8 @@ public class SimonStates extends Widget {
     }
 
     private static boolean historyContainsAnyFlashed(EnumSet<StateColor> colorsFlashed) {
-        return colorsFlashed.stream()
-                .map(PRESSED_COLOR_HISTORY::contains)
+        return PRESSED_COLOR_HISTORY.stream()
+                .map(colorsFlashed::contains)
                 .reduce((boolOne, boolTwo) -> boolOne || boolTwo)
                 .orElse(false);
     }
