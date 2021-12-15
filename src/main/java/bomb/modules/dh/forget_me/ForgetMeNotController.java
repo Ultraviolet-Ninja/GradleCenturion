@@ -56,25 +56,27 @@ public class ForgetMeNotController implements Resettable {
     }
 
     private void setButtonPrivileges() {
-        if (ForgetMeNot.getStage() > 2)
+        int currentStage = ForgetMeNot.getStage();
+        if (currentStage > 2)
             FacadeFX.enable(outputButton);
 
-        if (ForgetMeNot.getStage() >= Widget.getNumModules() - 2)
+        if (currentStage >= Widget.getNumModules() - 2)
             FacadeFX.disableMultiple(one, two, three, four, five, six, seven, eight, nine, zero);
     }
 
     @FXML
     private void undoLastStage() {
+        int currentStage = ForgetMeNot.getStage();
         ForgetMeNot.undoLastStage();
         synchronizeStageNumber();
         confirmationField.setText("Undid Last Stage");
-        if (ForgetMeNot.getStage() == 0)
+        if (currentStage == 0)
             FacadeFX.disableMultiple(resetButton, undoButton, outputButton);
 
-        if (ForgetMeNot.getStage() < 2)
+        if (currentStage < 2)
             FacadeFX.disable(outputButton);
 
-        if (ForgetMeNot.getStage() < Widget.getNumModules() - 2)
+        if (currentStage < Widget.getNumModules() - 2)
             FacadeFX.enableMultiple(one, two, three, four, five, six, seven, eight, nine, zero);
     }
 

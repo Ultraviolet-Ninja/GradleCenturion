@@ -40,7 +40,7 @@ public class BlindAlleyController implements Resettable {
         bottomRight.setStyle(style(array[2][2]));
     }
 
-    private String style(int number) {
+    private static String style(int number) {
         return switch (number) {
             case 0 -> "-fx-text-fill: black";
             case 1 -> "-fx-text-fill: green";

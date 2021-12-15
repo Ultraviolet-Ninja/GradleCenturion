@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Circle;
 
+import java.util.List;
+
 import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
 import static javafx.scene.paint.Paint.valueOf;
@@ -49,8 +51,8 @@ public class BooleanController implements Resettable {
     }
 
     public void initialize() {
-        MFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
-                booleanXnor, booleanImpliedBy};
+        List<MFXButton> buttonArray = List.of(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
+                booleanXnor, booleanImpliedBy);
         EventHandler<ActionEvent> onActionEvent = createButtonAction();
 
         for (MFXButton mfxButton : buttonArray) {
@@ -117,7 +119,7 @@ public class BooleanController implements Resettable {
         }
     }
 
-    private void setCircleFill(Circle[] circles, char[] bits) {
+    private static void setCircleFill(Circle[] circles, char[] bits) {
         for (int i = 0; i < circles.length; i++)
             circles[i].setFill(valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }

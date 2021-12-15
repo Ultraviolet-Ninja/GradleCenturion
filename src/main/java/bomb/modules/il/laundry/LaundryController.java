@@ -57,14 +57,14 @@ public class LaundryController implements Resettable {
         }
     }
 
-    private String separateText(String filename) {
+    private static String separateText(String filename) {
         Regex filenamePattern = new Regex("\\w+(?: \\w+)?\\.", filename);
         return filenamePattern.createFilteredString()
                 .replace(".", "")
                 .replace("F", "°F");
     }
 
-    private String reformatClothingOutput(String in) {
+    private static String reformatClothingOutput(String in) {
         final String delimiter = " - ";
         return stream(in.split(delimiter))
                 .map(FIRST_LETTER_CAPITAL)
