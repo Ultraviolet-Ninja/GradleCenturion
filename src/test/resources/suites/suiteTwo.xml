@@ -5,6 +5,7 @@
     <test name="M Module Tests">
         <classes>
             <class name="bomb.modules.m.microcontroller.MicroControllerTest"/>
+            <class name="bomb.modules.m.murder.MurderTest"/>
         </classes>
     </test>
 

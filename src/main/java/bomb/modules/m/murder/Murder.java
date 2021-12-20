@@ -30,7 +30,7 @@ import static java.util.stream.Collectors.toMap;
 public class Murder extends Widget {
     public static String solve(Location bodyFoundRoom, EnumSet<Weapon> possibleWeapons,
                                EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
-        validateInput(possibleWeapons, possibleSuspects);
+        validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);
 
         Pair<EnumMap<Suspect, List<Location>>, EnumMap<Weapon, List<Location>>> mapPair;
 
@@ -41,9 +41,9 @@ public class Murder extends Widget {
         }
 
         EnumMap<Location, Suspect> locationsToSuspect = getLocationsToType(mapPair.getValue0(),
-                possibleSuspects, getSuspectRow(bodyFoundRoom));
+                possibleSuspects, getSuspectRow(bodyFoundRoom) - 1);
         EnumMap<Location, Weapon> locationsToWeapon = getLocationsToType(mapPair.getValue1(),
-                possibleWeapons, getWeaponRow(bodyFoundRoom));
+                possibleWeapons, getWeaponRow(bodyFoundRoom) - 1);
 
         Triplet<Suspect, Weapon, Location> tuple = findIntersection(locationsToSuspect, locationsToWeapon);
         return Stream.of(tuple.getValue0(), tuple.getValue1(), tuple.getValue2())
@@ -103,9 +103,11 @@ public class Murder extends Widget {
         return 8;
     }
 
-    private static void validateInput(EnumSet<Weapon> possibleWeapons, EnumSet<Suspect> possibleSuspects)
-            throws IllegalArgumentException {
+    private static void validateInput(EnumSet<Weapon> possibleWeapons, EnumSet<Suspect> possibleSuspects,
+                                      Location bodyFoundRoom) throws IllegalArgumentException {
         if (possibleSuspects.size() != 4 || possibleWeapons.size() != 4)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Insufficient amount of possible weapons and/or suspects");
+        if (bodyFoundRoom == null)
+            throw new IllegalArgumentException("The room where the body was found is needed");
     }
 }

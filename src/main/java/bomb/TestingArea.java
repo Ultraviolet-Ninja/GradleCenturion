@@ -27,12 +27,15 @@ public class TestingArea {
 //        String[] moveArray = {"c5", "D5", "a-1", "F-3", "d1", "e4"};
 //        List<String> moves = Arrays.asList(moveArray);
 //        System.out.println(Chess.solve(moves));
-        Maze maze = new Maze();
-        Grid grid = createGrid();
-        long start = System.nanoTime();
-        System.out.println(MazeSearch.search(maze, grid));
-        long stop = System.nanoTime();
-        System.out.printf("Time: %,d", stop - start);
+        int sum = 0;
+        for (int i = 2; i < 8; i+=2) {
+            for (int j = 8; j > i; j-=2) {
+                if (i < j / 2) {
+                    sum += i + j;
+                }
+            }
+        }
+        System.out.println(sum);
     }
 
     private static Grid createGrid() {
