@@ -25,11 +25,12 @@
 
 ### Incomplete Modules
 - Battleship
+- Murder
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 
-4/100
+5/100
 
 ### Untouched Modules
 - 3D Maze
@@ -72,7 +73,6 @@
 - Monsplode Fight
 - Morsematics
 - Mouse in the Maze
-- Murder
 - Mystic Square
 - Number Pad
 - Perspective Pegs
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-77/100
+76/100
