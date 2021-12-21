@@ -22,7 +22,8 @@ public class TextFormatterFactory {
             if (!change.isContentChange()) return change;
 
             String text = change.getControlNewText();
-            if (text.contains("\n") || text.length() > 6) return null;
+            if (text.contains("\t") || text.contains("\n") || text.contains("y") ||
+                    text.contains("Y") || text.length() > 6) return null;
 
             return change;
         });

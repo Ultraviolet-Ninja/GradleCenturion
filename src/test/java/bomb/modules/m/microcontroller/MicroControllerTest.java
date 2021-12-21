@@ -54,8 +54,8 @@ public class MicroControllerTest {
         };
         ConditionSetter fourthBranchCondition = () -> Widget.setDoubleAs(2);
 
-        String normalSerialCode = "223asd";
-        String serialCodeContainsC = "c22dkf";
+        String normalSerialCode = "223as5";
+        String serialCodeContainsC = "c22dk5";
 
         String moduleSerialNumber = "22";
         String containsOne = "12";

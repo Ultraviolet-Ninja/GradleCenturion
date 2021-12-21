@@ -3,7 +3,6 @@ package bomb;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
-import bomb.tools.filter.RegexFilter;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.facade.MaterialFacade;
 import bomb.tools.pattern.factory.TextFormatterFactory;
@@ -14,6 +13,7 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -30,6 +30,7 @@ import static bomb.enumerations.Port.SERIAL;
 import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.TrinarySwitch.UNKNOWN;
+import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT_TOGGLE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
@@ -132,10 +133,13 @@ public class WidgetController {
     @FXML
     private void detectSerialCodeAreaChange() {
         String serialCode = serialCodeField.getText();
-        RegexFilter.SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (RegexFilter.SERIAL_CODE_PATTERN.matchesRegex()) {
+        SERIAL_CODE_PATTERN.loadText(serialCode);
+        if (SERIAL_CODE_PATTERN.matchesRegex()) {
             Widget.setSerialCode(serialCode);
-            FacadeFX.disable(serialCodeField);
+        } else if (serialCode.length() == 6) {
+            FacadeFX.setAlert(Alert.AlertType.INFORMATION, """
+                    Given code doesn't meet serial code specs
+                    (4th and 5th characters are letters, the 3rd and 6th are numbers)""");
         }
     }
 
