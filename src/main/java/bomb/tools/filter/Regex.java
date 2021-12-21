@@ -1,5 +1,7 @@
 package bomb.tools.filter;
 
+import org.intellij.lang.annotations.Language;
+
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -26,36 +28,36 @@ public class Regex implements Iterable<String> {
     private final Pattern regPattern;
     private final Matcher textMatcher;
 
-    public Regex(String regex) {
+    public Regex(@Language("regexp") String regex) {
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int flag) throws IllegalArgumentException {
+    public Regex(@Language("regexp") String regex, int flag) throws IllegalArgumentException {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, int... flags) throws IllegalArgumentException {
+    public Regex(@Language("regexp") String regex, int... flags) throws IllegalArgumentException {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(String regex, String matchText) {
+    public Regex(@Language("regexp") String regex, String matchText) {
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int flag) throws IllegalArgumentException {
+    public Regex(@Language("regexp") String regex, String matchText, int flag) throws IllegalArgumentException {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(String regex, String matchText, int... flags) throws IllegalArgumentException {
+    public Regex(@Language("regexp") String regex, String matchText, int... flags) throws IllegalArgumentException {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);

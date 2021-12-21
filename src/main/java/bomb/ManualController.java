@@ -19,6 +19,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.intellij.lang.annotations.Language;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -91,6 +92,7 @@ public class ManualController {
 
     @FXML
     public void search() {
+        @Language("regexp")
         String searchTerm = searchBar.getText();
         radioButtonHouse.getChildren().clear();
 
@@ -151,6 +153,7 @@ public class ManualController {
     }
 
     private static CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
+        @Language("regexp")
         String newRegex = ALL_CHAR_FILTER.getOriginalPattern()
                 .replace("]", "_]");
         Regex regex = new Regex(newRegex);

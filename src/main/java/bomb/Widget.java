@@ -14,7 +14,7 @@ import static bomb.enumerations.TrinarySwitch.OFF;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.enumerations.TrinarySwitch.UNKNOWN;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
-import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
@@ -172,7 +172,7 @@ public class Widget {
     }
 
     public static boolean hasVowelInSerialCode(){
-        return !EMPTY_FILTER.test(serialCode, VOWEL_FILTER);
+        return !EMPTY_FILTER_RESULTS.test(serialCode, VOWEL_FILTER);
     }
 
     /**
@@ -274,7 +274,9 @@ public class Widget {
 
     public static void checkSerialCode(){
         SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (!SERIAL_CODE_PATTERN.matchesRegex()) throw new IllegalArgumentException("Serial Code is required");
+        if (!SERIAL_CODE_PATTERN.matchesRegex()) throw new IllegalArgumentException("""
+                Serial Code is required
+                Please check formatting on Widget page""");
     }
 
     public static void resetProperties(){

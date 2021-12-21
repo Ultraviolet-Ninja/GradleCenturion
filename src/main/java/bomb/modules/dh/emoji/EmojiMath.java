@@ -8,12 +8,11 @@ import bomb.tools.filter.Regex;
  * It's simple math, but replacing numbers with text emojis.
  */
 public class EmojiMath extends Widget {
-    private static final String EMOJI_REGEX;
     private static final Regex VALIDATION;
 
     static {
-        EMOJI_REGEX = Emoji.generateCaptureGroup();
-        VALIDATION = new Regex("(?<![:|()=])" + EMOJI_REGEX + "([+\\-])" + EMOJI_REGEX + "(?![:|()=])");
+        String emojiRegex = Emoji.generateCaptureGroup();
+        VALIDATION = new Regex("(?<![:|()=])" + emojiRegex + "([+\\-])" + emojiRegex + "(?![:|()=])");
     }
 
     /**

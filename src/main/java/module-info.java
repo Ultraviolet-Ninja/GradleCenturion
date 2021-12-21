@@ -9,6 +9,7 @@ module jasmine.jragon.GradleCenturion.main {
     requires org.jgrapht.core;
     requires javatuples;
     requires MaterialFX;
+    requires org.jetbrains.annotations;
 
     exports bomb to javafx.fxml;
     exports bomb.components.chord to javafx.fxml;

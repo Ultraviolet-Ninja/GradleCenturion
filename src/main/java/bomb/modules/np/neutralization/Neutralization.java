@@ -6,6 +6,7 @@ import bomb.modules.np.neutralization.Chemical.Base;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
+import org.intellij.lang.annotations.Language;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -24,7 +25,7 @@ import static bomb.modules.np.neutralization.Chemical.Base.AMMONIA;
 import static bomb.modules.np.neutralization.Chemical.Base.LITHIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.SODIUM_HYDROXIDE;
-import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
@@ -105,6 +106,7 @@ public class Neutralization extends Widget {
                 .flatMap(Arrays::stream)
                 .collect(Collectors.toSet());
 
+        @Language("regexp")
         String regex = uniqueCharacterSet.toString().replaceAll(", ", "");
         String acidFormula = currentAcid.getFormula().toLowerCase();
         Regex indicatorLetterMatch = new Regex(regex, acidFormula);
@@ -117,8 +119,8 @@ public class Neutralization extends Widget {
         String acidSymbol = currentAcid.getSymbol();
         String baseSymbol = currentBase.getSymbol();
 
-        if (!EMPTY_FILTER.test(acidSymbol, VOWEL_FILTER) ||
-                !EMPTY_FILTER.test(baseSymbol, VOWEL_FILTER))
+        if (!EMPTY_FILTER_RESULTS.test(acidSymbol, VOWEL_FILTER) ||
+                !EMPTY_FILTER_RESULTS.test(baseSymbol, VOWEL_FILTER))
             //Either the cation or the anion contains a vowel
             concentrate -= 4;
 
