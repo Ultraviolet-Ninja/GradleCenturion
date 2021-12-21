@@ -27,29 +27,5 @@ public class TestingArea {
 //        String[] moveArray = {"c5", "D5", "a-1", "F-3", "d1", "e4"};
 //        List<String> moves = Arrays.asList(moveArray);
 //        System.out.println(Chess.solve(moves));
-        int sum = 0;
-        for (int i = 2; i < 8; i+=2) {
-            for (int j = 8; j > i; j-=2) {
-                if (i < j / 2) {
-                    sum += i + j;
-                }
-            }
-        }
-        System.out.println(sum);
-    }
-
-    private static Grid createGrid() {
-        List<HexNode> nodes = new ArrayList<>();
-        int area = NODAL_AREA.applyAsInt(Grid.GRID_SIDE_LENGTH);
-        for (int i = 0; i < area; i++) {
-//            if (i == 3)
-//                nodes.add(new HexNode(HexNode.HexShape.RIGHT_TRIANGLE, EnumSet.noneOf(HexNode.HexWall.class)));
-//            if (i == 32)
-//                nodes.add(new HexNode(HexNode.HexShape.CIRCLE, EnumSet.noneOf(HexNode.HexWall.class)));
-//            else
-                nodes.add(new HexNode(null, EnumSet.noneOf(HexNode.HexWall.class)));
-        }
-
-        return new Grid(new HexagonalPlane(nodes));
     }
 }

@@ -1,10 +1,12 @@
 package bomb.tools.data.structures.graph.list;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> {
-    private final LinkedHashMap<E, LinkedList<E>> list;
+    private final LinkedHashMap<E, ArrayList<E>> list;
 
     public ListGraph(boolean biDirectional) {
         super(biDirectional);
@@ -14,7 +16,7 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
     @Override
     public boolean addVertex(E vertex) {
         if (list.containsKey(vertex)) return false;
-        list.put(vertex, new LinkedList<>());
+        list.put(vertex, new ArrayList<>());
         return true;
     }
 
@@ -31,7 +33,7 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
         return true;
     }
 
-    public LinkedList<E> get(E vertex) {
+    public List<E> get(E vertex) {
         return list.get(vertex);
     }
 
@@ -45,13 +47,13 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
     }
 
     @Override
-    public LinkedList<E> removeVertex(E vertex) {
+    public List<E> removeVertex(E vertex) {
         if (!list.containsKey(vertex)) return null;
         if (biDirectional) removeReferences(vertex, list.get(vertex));
         return list.remove(vertex);
     }
 
-    private void removeReferences(E vertex, LinkedList<E> refList) {
+    private void removeReferences(E vertex, List<E> refList) {
         for (E reference : refList)
             list.get(reference).remove(vertex);
     }
