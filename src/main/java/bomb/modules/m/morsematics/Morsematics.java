@@ -46,7 +46,7 @@ public class Morsematics extends Widget {
                     \ta combination of the 2""");
 
         for (String input : inputSet) {
-            if (!graph.containsVertex(input.toUpperCase()))
+            if (!graph.containsVertex(input) && !input.matches("\\b[a-zA-Z]|[.-]{1,4}"))
                 throw new IllegalArgumentException("Invalid character in the set: " + input);
         }
 
