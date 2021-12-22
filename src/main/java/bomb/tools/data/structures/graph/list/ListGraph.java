@@ -15,16 +15,16 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
 
     @Override
     public boolean addVertex(E vertex) {
-        if (list.containsKey(vertex)) return false;
+        if (containsVertex(vertex)) return false;
         list.put(vertex, new ArrayList<>());
         return true;
     }
 
     @Override
     public boolean addEdge(E vertex, E edge) {
-        if (!list.containsKey(vertex))
+        if (!containsVertex(vertex))
             addVertex(vertex);
-        if (biDirectional && !list.containsKey(edge))
+        if (biDirectional && !containsVertex(edge))
             addVertex(edge);
         if (isNotDuplicate(vertex, edge))
             list.get(vertex).add(edge);
@@ -33,7 +33,11 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
         return true;
     }
 
-    public List<E> get(E vertex) {
+    public boolean containsVertex(E vertex) {
+        return list.containsKey(vertex);
+    }
+
+    public List<E> getTargetVertices(E vertex) {
         return list.get(vertex);
     }
 
@@ -48,7 +52,7 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
 
     @Override
     public List<E> removeVertex(E vertex) {
-        if (!list.containsKey(vertex)) return null;
+        if (!containsVertex(vertex)) return null;
         if (biDirectional) removeReferences(vertex, list.get(vertex));
         return list.remove(vertex);
     }
@@ -60,7 +64,7 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
 
     @Override
     public boolean removeEdge(E vertex, E edge) {
-        if (list.containsKey(vertex))
+        if (containsVertex(vertex))
             return list.get(vertex).remove(edge);
         return false;
     }

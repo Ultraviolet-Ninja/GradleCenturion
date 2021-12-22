@@ -15,7 +15,7 @@ public class MorseCodeGraphFactory {
 
     private MorseCodeGraphFactory() {}
 
-    public static ListGraph<String> createGraph() throws IOException {
+    public static ListGraph<String> createGraph() throws IllegalStateException {
         ListGraph<String> graph = new ListGraph<>(true);
         InputStream in = MorseCodeGraphFactory.class.getResourceAsStream(FILENAME);
         CSVReader reader = new CSVReader(new InputStreamReader(requireNonNull(in), UTF_8));
@@ -26,7 +26,12 @@ public class MorseCodeGraphFactory {
                 graph.addEdge(line[0], letter);
             }
         }
-        reader.close();
+
+        try {
+            reader.close();
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
         return graph;
     }
 

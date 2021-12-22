@@ -87,7 +87,7 @@ public class ShapeShift extends Widget {
         checkSerialCode();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {
-            Pair<ShapeEnd, ShapeEnd> pair = graph.get(
+            Pair<ShapeEnd, ShapeEnd> pair = graph.getTargetVertices(
                             new Pair<>(left, right))
                     .get(TO_INT.apply(conditionMap(left, right)));
             return solve(pair.getValue0(), pair.getValue1());
