@@ -35,8 +35,9 @@ public class Morsematics extends Widget {
         return morseGraph.getTargetVertices(createOutputLetter(rotatingLetters)).get(0);
     }
 
-    private static List<String> validate(Set<String> inputSet, ListGraph<String> graph) {
-        if (inputSet.size() != 3)
+    private static List<String> validate(Set<String> inputSet, ListGraph<String> graph)
+            throws IllegalArgumentException {
+        if (inputSet == null || inputSet.size() != 3)
             throw new IllegalArgumentException("""
                     Must have...
                     \t3 morse code segments

@@ -53,7 +53,7 @@ public class MorsematicsTest {
         };
 
         return new Object[][] {
-                {EMPTY_SETTER, nullSet}, {setSerialCode, insufficientSet},
+                {EMPTY_SETTER, nullSet}, {setSerialCode, nullSet}, {setSerialCode, insufficientSet},
                 {setSerialCode, invalidCharSet}, {setSerialCode, duplicateCharSet}
         };
     }
