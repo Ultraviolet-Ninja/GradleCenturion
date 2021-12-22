@@ -25,12 +25,13 @@
 
 ### Incomplete Modules
 - Battleship
+- Morsematics
 - Murder
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
 
-5/100
+6/100
 
 ### Untouched Modules
 - 3D Maze
@@ -71,7 +72,6 @@
 - MineSweeper
 - Modules Against Humanity
 - Monsplode Fight
-- Morsematics
 - Mouse in the Maze
 - Mystic Square
 - Number Pad
@@ -108,4 +108,4 @@
 - Yahtzee
 - Zoo
 
-76/100
+75/100
