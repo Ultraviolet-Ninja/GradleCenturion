@@ -54,7 +54,10 @@ public class SimonStates extends Widget {
     public static List<StateColor> calculateNextColorPress(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)
-            Souvenir.addRelic("Simon States - Stage " + currentStage.getIndex(), writeOutToSouvenir(colorsFlashed));
+            Souvenir.addRelic(
+                    "Simon States - Stage " + currentStage.getStageNum(),
+                    writeOutToSouvenir(colorsFlashed)
+            );
         resetHistory();
 
         StateColor colorToPress = switch (currentStage) {

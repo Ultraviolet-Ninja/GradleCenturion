@@ -5,23 +5,21 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> {
+public class ListGraph<E> {
     private final LinkedHashMap<E, ArrayList<E>> list;
+    private final boolean biDirectional;
 
     public ListGraph(boolean biDirectional) {
-        super(biDirectional);
+        this.biDirectional = biDirectional;
         list = new LinkedHashMap<>();
     }
 
-    @Override
-    public boolean addVertex(E vertex) {
-        if (containsVertex(vertex)) return false;
+    public void addVertex(E vertex) {
+        if (containsVertex(vertex)) return;
         list.put(vertex, new ArrayList<>());
-        return true;
     }
 
-    @Override
-    public boolean addEdge(E vertex, E edge) {
+    public void addEdge(E vertex, E edge) {
         if (!containsVertex(vertex))
             addVertex(vertex);
         if (biDirectional && !containsVertex(edge))
@@ -30,7 +28,6 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
             list.get(vertex).add(edge);
         if (biDirectional && isNotDuplicate(edge, vertex))
             list.get(edge).add(vertex);
-        return true;
     }
 
     public boolean containsVertex(E vertex) {
@@ -41,16 +38,10 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
         return list.get(vertex);
     }
 
-    @Override
-    public LinkedList<E> shortestPath(E start, E end) {
-        return null;
-    }
-
     private boolean isNotDuplicate(E vertex, E edge) {
         return !list.get(vertex).contains(edge);
     }
 
-    @Override
     public List<E> removeVertex(E vertex) {
         if (!containsVertex(vertex)) return null;
         if (biDirectional) removeReferences(vertex, list.get(vertex));
@@ -62,7 +53,6 @@ public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> 
             list.get(reference).remove(vertex);
     }
 
-    @Override
     public boolean removeEdge(E vertex, E edge) {
         if (containsVertex(vertex))
             return list.get(vertex).remove(edge);

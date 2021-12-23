@@ -1,6 +1,5 @@
 package bomb.modules.t.translated;
 
-import bomb.abstractions.Index;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 
@@ -17,7 +16,7 @@ public class LanguageCSVReader {
             throws CsvException, IOException, IllegalArgumentException {
         if (languageColumn == null) throw new IllegalArgumentException("Language is null");
 
-        int columnIndex = languageColumn.getIndex();
+        int columnIndex = languageColumn.getColumnIndex();
         InputStream in = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
         CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in), StandardCharsets.UTF_8));
         List<String> dictionaryContent = csvReader.readAll()
@@ -29,36 +28,21 @@ public class LanguageCSVReader {
         return dictionaryContent;
     }
 
-    public enum LanguageRow implements Index {
-        YES_ROW(1), NO_ROW(2), FANCY_CHAR_ROW(3), MODULE_LABEL_ROW(4), BUTTON_LABEL_ROW(5),
-        PASSWORD_ROW(6), FREQUENCY_ROW(7), WOF_ROW(8);
+    public enum LanguageRow {
+        YES_ROW, NO_ROW, FANCY_CHAR_ROW, MODULE_LABEL_ROW, BUTTON_LABEL_ROW, PASSWORD_ROW,
+        FREQUENCY_ROW, WOF_ROW;
 
-        private final byte index;
-
-        LanguageRow(int index) {
-            this.index = (byte) index;
-        }
-
-        @Override
-        public int getIndex() {
-            return index;
+        public int getRowIndex() {
+            return ordinal() + 1;
         }
     }
 
-    public enum LanguageColumn implements Index {
-        BRAZILIAN(1), CZECH(2), DANISH(3), DUTCH(4), ENGLISH(5), ESPERANTO(6),
-        FRENCH(7), FINNISH(8), GERMAN(9), ITALIAN(10), NORWEGIAN(11), POLISH(12),
-        SPANISH(13), SWEDISH(14);
+    public enum LanguageColumn {
+        BRAZILIAN, CZECH, DANISH, DUTCH, ENGLISH, ESPERANTO, FRENCH, FINNISH,
+        GERMAN, ITALIAN, NORWEGIAN, POLISH, SPANISH, SWEDISH;
 
-        private final byte index;
-
-        LanguageColumn(int index) {
-            this.index = (byte) index;
-        }
-
-        @Override
-        public int getIndex() {
-            return index;
+        public int getColumnIndex() {
+            return ordinal() + 1;
         }
     }
 }

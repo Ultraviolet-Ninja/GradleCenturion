@@ -71,7 +71,7 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
 
     @Override
     public void setContent(List<String> languageContent) {
-        String[] buttonLabels = languageContent.get(BUTTON_LABEL_ROW.getIndex()).split("\\|");
+        String[] buttonLabels = languageContent.get(BUTTON_LABEL_ROW.getRowIndex()).split("\\|");
         redButton.setText(buttonLabels[0]);
         blueButton.setText(buttonLabels[1]);
         yellowButton.setText(buttonLabels[2]);
