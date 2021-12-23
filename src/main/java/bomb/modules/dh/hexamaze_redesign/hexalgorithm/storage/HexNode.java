@@ -1,13 +1,12 @@
 package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
-import bomb.abstractions.EquatableObject;
-
 import java.util.EnumSet;
 import java.util.Objects;
 
+import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 import static java.util.stream.Collectors.joining;
 
-public class HexNode extends EquatableObject {
+public class HexNode {
     private EnumSet<HexWall> walls;
     private HexShape hexShape;
     private int color;

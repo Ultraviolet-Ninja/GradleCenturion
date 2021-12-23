@@ -1,6 +1,5 @@
 package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
-import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
@@ -28,9 +27,8 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
-public class HexagonalPlane extends EquatableObject implements Iterable<BufferedQueue<HexNode>> {
+public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
     public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
-            NODAL_AREA = length -> (int)(3 * Math.pow(length, 2)) - (3 * length) + 1,
             NODAL_SIDE_LENGTH = area -> {
                 double result = (3 + Math.sqrt(12 * area - 3)) / 6;
                 return result % 1 != 0.0 ? -1 : (int) result;

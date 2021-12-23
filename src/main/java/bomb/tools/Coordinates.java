@@ -1,8 +1,8 @@
 package bomb.tools;
 
-import bomb.abstractions.EquatableObject;
+import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 
-public class Coordinates extends EquatableObject implements Comparable<Coordinates> {
+public class Coordinates implements Comparable<Coordinates> {
     private final int x, y;
 
     public Coordinates(int x, int y) {

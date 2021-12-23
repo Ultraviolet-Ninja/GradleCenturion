@@ -1,6 +1,8 @@
 package bomb.tools.number;
 
 public class MathUtils {
+    public static final int HASHING_NUMBER = 5501;
+
     public static boolean isPerfectSquare(int num) {
         double root = Math.sqrt(num);
         return (root - Math.floor(root)) == 0;
