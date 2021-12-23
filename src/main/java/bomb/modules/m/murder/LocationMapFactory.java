@@ -10,10 +10,10 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Objects;
 
 import static java.util.stream.Collectors.toList;
 
+@SuppressWarnings("ConstantConditions")
 public class LocationMapFactory {
     private static final String FILENAME = "location_list.csv";
 
@@ -39,7 +39,7 @@ public class LocationMapFactory {
 
     private static List<List<Location>> createLocationLists() throws IOException, CsvException {
         InputStream in = Location.class.getResourceAsStream(FILENAME);
-        CSVReader reader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in)));
+        CSVReader reader = new CSVReader(new InputStreamReader(in));
 
         return reader.readAll()
                 .stream()

@@ -47,9 +47,10 @@ public class ColoredSwitchGraphFactory {
         return output;
     }
 
+    @SuppressWarnings("ConstantConditions")
     private static CSVReader createReader() {
         InputStream in = ColoredSwitchGraphFactory.class.getResourceAsStream(FILENAME);
-        Reader reader = new InputStreamReader(Objects.requireNonNull(in));
+        Reader reader = new InputStreamReader(in);
         return new CSVReader(reader);
     }
 

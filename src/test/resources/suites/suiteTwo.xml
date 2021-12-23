@@ -27,6 +27,7 @@
             <class name="bomb.modules.s.shape_shift.ShapeShiftTest"/>
             <class name="bomb.modules.s.simon.screams.SimonScreamsTest"/>
             <class name="bomb.modules.s.simon.states.SimonStatesTest"/>
+            <class name="bomb.modules.s.square.SquareButtonTest"/>
             <class name="bomb.modules.s.switches.SwitchesTest"/>
         </classes>
     </test>
