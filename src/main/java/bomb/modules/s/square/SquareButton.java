@@ -4,6 +4,7 @@ import bomb.Widget;
 import bomb.tools.number.MathUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -14,6 +15,8 @@ import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.modules.t.translated.solutions.button.Button.HOLD;
 import static bomb.modules.t.translated.solutions.button.Button.TAP;
+import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
+import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
@@ -32,8 +35,8 @@ public class SquareButton extends Widget {
         buttonText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
         if (buttonColor == BLUE && numDoubleAs > numDBatteries) return HOLD;
-        String textLength = String.valueOf(buttonText.length());
-        if ((buttonColor == BLUE || buttonColor == YELLOW) && serialCode.contains(textLength)) return TAP;
+        if ((buttonColor == BLUE || buttonColor == YELLOW) && matchesGreatestSerialCodeNumber(buttonText))
+            return TAP;
         if ((buttonColor == BLUE || buttonColor == YELLOW) && COLOR_WORDS.contains(buttonText)) return HOLD;
         if (buttonText.isEmpty()) return TAP + " when the the two seconds digits on the timer match";
         if (
@@ -51,6 +54,13 @@ public class SquareButton extends Widget {
             throw new IllegalArgumentException("Text cannot be null");
     }
 
+    private static boolean matchesGreatestSerialCodeNumber(String buttonText) {
+        return Arrays.stream(filter(serialCode, NUMBER_PATTERN).split(""))
+                .mapToInt(Integer::parseInt)
+                .max()
+                .orElse(0) == buttonText.length();
+    }
+
     public static String solveForHeldButton(boolean isFlashing, int lightColor) throws IllegalArgumentException {
         if (lightColor < ORANGE || lightColor > CYAN)
             throw new IllegalArgumentException("Invalid light color");
@@ -65,11 +75,11 @@ public class SquareButton extends Widget {
             return "Release when the number of seconds is 0 or prime\nPossible number combos: 0, " +
                     generatePrimeSeconds();
         if (lightColor == GREEN)
-            return "Release one second after two seconds digits add up to add up " +
-                    "to a multiple 4\nPossible number combos: " +
-                    possibleCombinations(sum -> sum % 4 == 3);
-        return "Release when the number of seconds remaining is a multiple of 7\n" +
-                "Possible combos: " + generateMultiplesOfSeven();
+            return "Release one second after two seconds digits add up to a multiple 4\n" +
+                    "Possible number combos: " + possibleCombinations(sum -> sum % 4 == 3);
+
+        return "Release when the number of seconds remaining is a multiple of 7\n"
+                + generateMultiplesOfSeven();
     }
 
     private static String handleSolidLight(int lightColor) {
@@ -115,7 +125,7 @@ public class SquareButton extends Widget {
         if (numStartingMinutes == 0) return "Number of starting minutes not set.\n" +
                 "Cannot discern valid multiples of 7";
 
-        return IntStream.rangeClosed(1, numStartingMinutes * 60)
+        return "Possible combos: " + IntStream.rangeClosed(1, numStartingMinutes * 60)
                 .filter(second -> second % 7 == 0)
                 .mapToObj(second -> (second/60) + ":" + (second%60))
                 .collect(joining(", "));

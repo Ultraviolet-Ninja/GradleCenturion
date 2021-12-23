@@ -82,7 +82,7 @@ public class BombSimulations {
         centurionDefaults();
     }
 
-    private static void centurionDefaults() {
+    public static void centurionDefaults() {
         Widget.setStartTime(CENTURION_START_TIME);
         Widget.setNumModules(CENTURION_MODULE_NUM);
     }
