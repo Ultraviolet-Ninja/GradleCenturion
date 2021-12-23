@@ -8,7 +8,7 @@
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
 
-This is a huge project for one man to tackle, but I've learned a lot from the challenges I've faced.
+This is a huge project for one man to tackle, but I've [learned a lot](Learned.md) from the challenges I've faced.
 
 ## Technologies
 - Java 15
