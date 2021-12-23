@@ -8,8 +8,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.Objects.requireNonNull;
 
+@SuppressWarnings("ConstantConditions")
 public class MorseCodeGraphFactory {
     private static final String FILENAME = "morseCode.csv";
 
@@ -18,7 +18,7 @@ public class MorseCodeGraphFactory {
     public static ListGraph<String> createGraph() throws IllegalStateException {
         ListGraph<String> graph = new ListGraph<>(true);
         InputStream in = MorseCodeGraphFactory.class.getResourceAsStream(FILENAME);
-        CSVReader reader = new CSVReader(new InputStreamReader(requireNonNull(in), UTF_8));
+        CSVReader reader = new CSVReader(new InputStreamReader(in, UTF_8));
 
         for (String[] line : reader) {
             String letters = line[1];

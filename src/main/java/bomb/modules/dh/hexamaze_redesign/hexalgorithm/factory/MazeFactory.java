@@ -13,7 +13,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
@@ -25,10 +24,11 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
+@SuppressWarnings("ConstantConditions")
 public class MazeFactory {
     public static List<HexNode> createMaze() throws IOException, CsvException {
         InputStream in = Maze.class.getResourceAsStream("maze.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in)));
+        CSVReader csvReader = new CSVReader(new InputStreamReader(in));
         return csvReader.readAll().stream()
                 .flatMap(Arrays::stream)
                 .map(line -> line.split(" "))
