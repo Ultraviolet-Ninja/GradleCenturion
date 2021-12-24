@@ -2,6 +2,7 @@ package bomb.modules.il.ice_cream;
 
 import com.opencsv.CSVReader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
@@ -17,7 +18,7 @@ public enum Person {
 
     private static final String FILENAME = "allergyTable.csv";
 
-    public static EnumMap<Person, EnumSet<Allergen>> getPersonAllergens(int index) {
+    public static EnumMap<Person, EnumSet<Allergen>> getPersonAllergens(int index) throws IllegalStateException {
         InputStream in = Person.class.getResourceAsStream(FILENAME);
         CSVReader reader = new CSVReader(new InputStreamReader(in));
         EnumMap<Person, EnumSet<Allergen>> output = new EnumMap<>(Person.class);
@@ -32,7 +33,11 @@ public enum Person {
                             .collect(toCollection(() -> EnumSet.noneOf(Allergen.class)))
             );
         }
-
+        try {
+            reader.close();
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
         return output;
     }
 
