@@ -1,6 +1,7 @@
 package bomb.tools.data.structures.trie;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -12,6 +13,11 @@ public class Trie {
 
     public Trie() {
         root = new TrieNode();
+    }
+
+    public void addWords(Collection<String> words) {
+        for (String word : words)
+            addWord(word);
     }
 
     public void addWord(final String word) {
@@ -108,7 +114,7 @@ public class Trie {
         private boolean isEndOfWord;
 
         public TrieNode() {
-            children = new HashMap<>();
+            children = new HashMap<>(5);
             isEndOfWord = false;
         }
 
