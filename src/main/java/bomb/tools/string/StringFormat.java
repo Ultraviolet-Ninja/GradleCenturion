@@ -11,8 +11,8 @@ public class StringFormat {
             sample.substring(0, 1).toUpperCase() + sample.substring(1).toLowerCase() :
             sample.toUpperCase();
 
-    public static final UnaryOperator<String> FROM_SNAKE_CASE = text ->
-            Arrays.stream(text.split("_"))
+    public static final UnaryOperator<String> TO_TITLE_CASE = text ->
+            Arrays.stream(text.split("[-_ ]"))
                     .map(FIRST_LETTER_CAPITAL)
                     .collect(joining(" "));
 }

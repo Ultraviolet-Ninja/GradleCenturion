@@ -23,7 +23,7 @@ import static bomb.modules.m.murder.Location.DINING_ROOM;
 import static bomb.modules.m.murder.Location.HALL;
 import static bomb.modules.m.murder.Location.LOUNGE;
 import static bomb.modules.m.murder.Location.STUDY;
-import static bomb.tools.string.StringFormat.FROM_SNAKE_CASE;
+import static bomb.tools.string.StringFormat.TO_TITLE_CASE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
@@ -48,7 +48,7 @@ public class Murder extends Widget {
         Triplet<Suspect, Weapon, Location> tuple = findIntersection(locationsToSuspect, locationsToWeapon);
         return Stream.of(tuple.getValue0(), tuple.getValue1(), tuple.getValue2())
                 .map(Enum::name)
-                .map(FROM_SNAKE_CASE)
+                .map(TO_TITLE_CASE)
                 .collect(joining(" - "));
     }
 
