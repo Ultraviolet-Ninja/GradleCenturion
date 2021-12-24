@@ -17,20 +17,42 @@ import static bomb.modules.il.ice_cream.Flavor.RASPBERRY_RIPPLE;
 import static bomb.modules.il.ice_cream.Flavor.ROCKY_ROAD;
 import static bomb.modules.il.ice_cream.Flavor.THE_CLASSIC;
 import static bomb.modules.il.ice_cream.Flavor.TUTTI_FRUTTI;
+import static bomb.modules.il.ice_cream.Flavor.VANILLA;
 
 public class IceCream extends Widget {
-    public static void solve(Person person, EnumSet<Flavor> possibleFlavors, boolean hasEmptyPortPlate)
-            throws IllegalArgumentException {
-        checkSerialCode();
+    public static Flavor findFlavor(Person person, EnumSet<Flavor> possibleFlavors, boolean hasEmptyPortPlate)
+            throws IllegalArgumentException, IllegalStateException {
+        validateInput(possibleFlavors);
+
         int index = createIndexFromSerialCode();
         List<Flavor> popularityRanking = createPopularFlavorList(hasEmptyPortPlate);
         EnumMap<Person, EnumSet<Allergen>> personMap = Person.getPersonAllergens(index);
+        EnumSet<Allergen> personAllergens = personMap.get(person);
+        possibleFlavors.removeIf(flavor ->
+                doesFlavorHaveAllergens(flavor.getAllergens(), personAllergens));
 
+        if (possibleFlavors.isEmpty()) return VANILLA;
+        if (possibleFlavors.size() == 1) return possibleFlavors.iterator().next();
 
+        int choice = possibleFlavors.stream()
+                .mapToInt(popularityRanking::indexOf)
+                .min()
+                .orElseThrow(IllegalStateException::new);
+
+        return popularityRanking.get(choice);
     }
 
     private static int createIndexFromSerialCode() {
         return (serialCode.charAt(5) - '0') / 2;
+    }
+
+    private static boolean doesFlavorHaveAllergens(EnumSet<Allergen> flavorAllergens,
+                                                   EnumSet<Allergen> personAllergens) {
+        for (Allergen personAllergen : personAllergens) {
+            if (personAllergen.test(flavorAllergens))
+                return true;
+        }
+        return false;
     }
 
     private static List<Flavor> createPopularFlavorList(boolean hasEmptyPortPlate) {
@@ -55,5 +77,13 @@ public class IceCream extends Widget {
                     DOUBLE_CHOCOLATE, TUTTI_FRUTTI, RASPBERRY_RIPPLE, MINT_CHIP
             );
         }
+    }
+
+    private static void validateInput(EnumSet<Flavor> possibleFlavors) throws IllegalArgumentException {
+        checkSerialCode();
+        if (possibleFlavors.contains(VANILLA))
+            throw new IllegalArgumentException("Cannot have Vanilla in the set");
+        if (possibleFlavors.size() != 4)
+            throw new IllegalArgumentException("Need 4 flavors to work");
     }
 }

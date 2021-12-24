@@ -26,6 +26,7 @@
 
 ### Incomplete Modules
 - Battleship
+- Ice Cream
 - Morsematics
 - Murder
 - Translated Vanilla Modules (9/15 Supported languages)
@@ -33,7 +34,7 @@
 - Shape Shift
 - Square Button
 
-7/100
+8/100
 
 ### Untouched Modules
 - 3D Maze
@@ -64,7 +65,6 @@
 - Follow the Leader
 - Foreign Exchange Rates
 - Friendship
-- Ice Cream
 - LED Encryption
 - Letter Keys
 - Light Cycle
@@ -109,4 +109,4 @@
 - Yahtzee
 - Zoo
 
-74/100
+73/100

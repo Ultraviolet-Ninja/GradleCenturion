@@ -34,6 +34,7 @@
 
     <test name="I-L Module Tests">
         <classes>
+            <class name="bomb.modules.il.ice_cream.IceCreamTest"/>
             <class name="bomb.modules.il.laundry.LaundryTest"/>
         </classes>
     </test>
