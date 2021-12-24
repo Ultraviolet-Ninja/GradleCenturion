@@ -15,6 +15,11 @@ public class Trie {
         root = new TrieNode();
     }
 
+    public Trie(Collection<String> startWords) {
+        this();
+        addWords(startWords);
+    }
+
     public void addWords(Collection<String> words) {
         for (String word : words)
             addWord(word);

@@ -33,7 +33,7 @@ public class Widget {
     protected static String serialCode = "", twoFactor = "";
     protected static final Indicator[] indicatorArray = Indicator.values();
 
-    private static int[] portArray = {0,0,0,0,0,0};
+    private static int[] portArray = {0, 0, 0, 0, 0, 0};
 
     public static void setNumHolders(int numHolders) {
         if (numHolders >= 0) {
@@ -42,7 +42,7 @@ public class Widget {
         }
     }
 
-    public static void setStartTime(int startTime){
+    public static void setStartTime(int startTime) {
         if (startTime >= 0)
             numStartingMinutes = startTime;
     }
@@ -52,7 +52,7 @@ public class Widget {
         updatesModules();
     }
 
-    private static void updatesModules(){
+    private static void updatesModules() {
         BlindAlley.alleyUpdate();
         if (isForgetMeNotActive) ForgetMeNot.updateLargestValueInSerial();
     }
@@ -64,14 +64,14 @@ public class Widget {
         }
     }
 
-    public static void setDBatteries(int dBatteries){
+    public static void setDBatteries(int dBatteries) {
         if (dBatteries >= 0) {
             numDBatteries = dBatteries;
             BlindAlley.alleyUpdate();
         }
     }
 
-    public static void setIndicator(TrinarySwitch state, Indicator which){
+    public static void setIndicator(TrinarySwitch state, Indicator which) {
         indicatorArray[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
@@ -88,28 +88,26 @@ public class Widget {
         }
     }
 
-    public static void setTwoFactor(String twoFactor){
+    public static void setTwoFactor(String twoFactor) {
         Widget.twoFactor = twoFactor;
     }
 
-    public static void setIsSouvenirActive(boolean set){
+    public static void setIsSouvenirActive(boolean set) {
         isSouvenirActive = set;
     }
 
-    public static void setIsForgetMeNotActive(boolean set){
+    public static void setIsForgetMeNotActive(boolean set) {
         isForgetMeNotActive = set;
         updatesModules();
     }
 
-    public static void setPortValue(Port which, int newValue){
+    public static void setPortValue(Port which, int newValue) {
         portArray[which.ordinal()] = newValue;
         BlindAlley.alleyUpdate();
     }
 
-    public static boolean hasEvenNumberInSerialCode(){
+    public static boolean hasEvenNumberInSerialCode() {
         String sample = filter(serialCode, NUMBER_PATTERN);
-        if (sample.isEmpty())
-            return false;
 
         for (char numberChar : sample.toCharArray()) {
             if (numberChar % 2 == 0)
@@ -123,9 +121,9 @@ public class Widget {
      *
      * @return An int of the last digit from a String
      */
-    public static int getSerialCodeLastDigit(){
+    public static int getSerialCodeLastDigit() {
         String buffer = filter(serialCode, NUMBER_PATTERN);
-        return Integer.parseInt(buffer.substring(buffer.length()-1));
+        return Integer.parseInt(buffer.substring(buffer.length() - 1));
     }
 
     /**
@@ -134,8 +132,8 @@ public class Widget {
      * @param indicators The array of possible Indicators
      * @return True if any Indicator is found
      */
-    public static boolean hasFollowingIndicators(Indicator...indicators){
-        for (Indicator current : indicators){
+    public static boolean hasFollowingIndicators(Indicator... indicators) {
+        for (Indicator current : indicators) {
             if (hasIndicator(current)) return true;
         }
         return false;
@@ -147,7 +145,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the Indicator is found
      */
-    public static boolean hasIndicator(Indicator ind){
+    public static boolean hasIndicator(Indicator ind) {
         return hasLitIndicator(ind) || hasUnlitIndicator(ind);
     }
 
@@ -157,7 +155,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the lit Indicator is found
      */
-    public static boolean hasLitIndicator(Indicator ind){
+    public static boolean hasLitIndicator(Indicator ind) {
         return indicatorArray[ind.ordinal()].getState() == ON;
     }
 
@@ -167,11 +165,11 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the unlit Indicator is found
      */
-    public static boolean hasUnlitIndicator(Indicator ind){
+    public static boolean hasUnlitIndicator(Indicator ind) {
         return indicatorArray[ind.ordinal()].getState() == OFF;
     }
 
-    public static boolean hasVowelInSerialCode(){
+    public static boolean hasVowelInSerialCode() {
         return !EMPTY_FILTER_RESULTS.test(serialCode, VOWEL_FILTER);
     }
 
@@ -180,7 +178,7 @@ public class Widget {
      *
      * @return The number of letters
      */
-    public static int countLettersInSerialCode(){
+    public static int countLettersInSerialCode() {
         return filter(serialCode, CHAR_FILTER).length();
     }
 
@@ -189,18 +187,18 @@ public class Widget {
      *
      * @return The number of numbers
      */
-    public static int countNumbersInSerialCode(){
+    public static int countNumbersInSerialCode() {
         return filter(serialCode, NUMBER_PATTERN).length();
     }
 
     /**
      * Checks to see if the bomb contains more that the required amount of a specified ports
      *
-     * @param port The port to check
+     * @param port    The port to check
      * @param howMany The required amount
      * @return True if the bomb contains more the required amount
      */
-    public static boolean hasMorePortsThanSpecified(Port port, int howMany){
+    public static boolean hasMorePortsThanSpecified(Port port, int howMany) {
         return portArray[port.ordinal()] > howMany;
     }
 
@@ -208,36 +206,36 @@ public class Widget {
         return numHolders;
     }
 
-    public static int getNumModules(){
+    public static int getNumModules() {
         return numModules;
     }
 
-    public static int getPortQuantity(Port which){
+    public static int getPortQuantity(Port which) {
         return portArray[which.ordinal()];
     }
 
-    public static int calculateTotalPorts(){
-        return  stream(portArray).sum();
+    public static int calculateTotalPorts() {
+        return stream(portArray).sum();
     }
 
-    public static int countPortTypes(){
+    public static int countPortTypes() {
         return (int) stream(portArray)
                 .filter(port -> port > 0)
                 .count();
     }
 
-    public static boolean getIsForgetMeNotActive(){
+    public static boolean getIsForgetMeNotActive() {
         return isForgetMeNotActive;
     }
 
-    public static boolean getIsSouvenirActive(){
+    public static boolean getIsSouvenirActive() {
         return isSouvenirActive;
     }
 
     public static EnumSet<Indicator> getFilteredSetOfIndicators(IndicatorFilter filter) {
         EnumSet<Indicator> allIndicators = EnumSet.allOf(Indicator.class);
 
-        List<Indicator> tempList =  allIndicators.stream()
+        List<Indicator> tempList = allIndicators.stream()
                 .filter(indicator -> filter.test(indicator.getState()))
                 .collect(toList());
 
@@ -252,11 +250,11 @@ public class Widget {
      * @param filter Indicates what indicators should be counted, whether ON, OFF or both
      * @return The number of indicators
      */
-    public static int countIndicators(IndicatorFilter filter){
+    public static int countIndicators(IndicatorFilter filter) {
         return getFilteredSetOfIndicators(filter).size();
     }
 
-    public static int getAllBatteries(){
+    public static int getAllBatteries() {
         return numDBatteries + numDoubleAs;
     }
 
@@ -268,18 +266,18 @@ public class Widget {
         return twoFactor;
     }
 
-    public static boolean doesPortExists(Port port){
+    public static boolean doesPortExists(Port port) {
         return portArray[port.ordinal()] > 0;
     }
 
-    public static void checkSerialCode(){
+    public static void checkSerialCode() {
         SERIAL_CODE_PATTERN.loadText(serialCode);
         if (!SERIAL_CODE_PATTERN.matchesRegex()) throw new IllegalArgumentException("""
                 Serial Code is required
                 Please check formatting on Widget page""");
     }
 
-    public static void resetProperties(){
+    public static void resetProperties() {
         numDoubleAs = 0;
         numDBatteries = 0;
         numHolders = 0;
@@ -288,11 +286,11 @@ public class Widget {
         numStartingMinutes = 0;
         serialCode = "";
         twoFactor = "";
-        portArray = new int[]{0,0,0,0,0,0};
+        portArray = new int[]{0, 0, 0, 0, 0, 0};
         setAllUnknown();
     }
 
-    private static void setAllUnknown(){
+    private static void setAllUnknown() {
         for (Indicator ind : indicatorArray)
             ind.setState(UNKNOWN);
     }
@@ -302,11 +300,11 @@ public class Widget {
 
         private final Predicate<TrinarySwitch> condition;
 
-        IndicatorFilter(Predicate<TrinarySwitch> condition){
+        IndicatorFilter(Predicate<TrinarySwitch> condition) {
             this.condition = condition;
         }
 
-        public boolean test(TrinarySwitch state){
+        public boolean test(TrinarySwitch state) {
             return condition.test(state);
         }
     }
