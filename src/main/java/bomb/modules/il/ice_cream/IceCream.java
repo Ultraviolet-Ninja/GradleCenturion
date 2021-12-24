@@ -25,8 +25,7 @@ public class IceCream extends Widget {
         validateInput(possibleFlavors);
 
         List<Flavor> popularityRanking = createPopularFlavorList(hasEmptyPortPlate);
-        EnumMap<Person, EnumSet<Allergen>> personMap = Person.getPersonAllergens(
-                (serialCode.charAt(5) - '0') / 2);
+        EnumMap<Person, EnumSet<Allergen>> personMap = Person.getPersonAllergens(createIndexFromSerialCode());
         EnumSet<Allergen> personAllergens = personMap.get(person);
         possibleFlavors.removeIf(flavor ->
                 doesFlavorHaveAllergens(flavor.getAllergens(), personAllergens));
@@ -40,6 +39,10 @@ public class IceCream extends Widget {
                 .orElseThrow(IllegalStateException::new);
 
         return popularityRanking.get(choice);
+    }
+
+    private static int createIndexFromSerialCode() {
+        return (serialCode.charAt(5) - '0') / 2;
     }
 
     private static boolean doesFlavorHaveAllergens(EnumSet<Allergen> flavorAllergens,
