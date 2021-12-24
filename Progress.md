@@ -33,8 +33,9 @@
 - Simon States
 - Shape Shift
 - Square Button
+- Word Search
 
-8/100
+9/100
 
 ### Untouched Modules
 - 3D Maze
@@ -105,8 +106,7 @@
 - Web Design
 - Wire Placement
 - Word Scramble
-- Word Search
 - Yahtzee
 - Zoo
 
-73/100
+72/100
