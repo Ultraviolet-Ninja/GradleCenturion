@@ -93,19 +93,19 @@ public class IceCreamTest {
             Widget.setDoubleAs(2);
             Widget.setNumHolders(3);
             Widget.setIndicator(ON, FRQ);
-            Widget.setIndicator(OFF,CLR);
+            Widget.setIndicator(OFF, CLR);
             Widget.setSerialCode("343JQ2");
         };
 
         return new Object[][]{
-            {
-                edgeWork, EnumSet.of(DOUBLE_CHOCOLATE, DOUBLE_STRAWBERRY, NEAPOLITAN, ROCKY_ROAD),
+                {
+                        edgeWork, EnumSet.of(DOUBLE_CHOCOLATE, DOUBLE_STRAWBERRY, NEAPOLITAN, ROCKY_ROAD),
                         JESSICA, false, DOUBLE_CHOCOLATE
-            },
-            {
-                edgeWork, EnumSet.of(NEAPOLITAN, DOUBLE_STRAWBERRY, MINT_CHIP, ROCKY_ROAD),
+                },
+                {
+                        edgeWork, EnumSet.of(NEAPOLITAN, DOUBLE_STRAWBERRY, MINT_CHIP, ROCKY_ROAD),
                         DAVE, false, VANILLA
-            }
+                }
         };
     }
 

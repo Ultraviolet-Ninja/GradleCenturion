@@ -24,9 +24,9 @@ public class IceCream extends Widget {
             throws IllegalArgumentException, IllegalStateException {
         validateInput(possibleFlavors);
 
-        int index = createIndexFromSerialCode();
         List<Flavor> popularityRanking = createPopularFlavorList(hasEmptyPortPlate);
-        EnumMap<Person, EnumSet<Allergen>> personMap = Person.getPersonAllergens(index);
+        EnumMap<Person, EnumSet<Allergen>> personMap = Person.getPersonAllergens(
+                (serialCode.charAt(5) - '0') / 2);
         EnumSet<Allergen> personAllergens = personMap.get(person);
         possibleFlavors.removeIf(flavor ->
                 doesFlavorHaveAllergens(flavor.getAllergens(), personAllergens));
@@ -40,10 +40,6 @@ public class IceCream extends Widget {
                 .orElseThrow(IllegalStateException::new);
 
         return popularityRanking.get(choice);
-    }
-
-    private static int createIndexFromSerialCode() {
-        return (serialCode.charAt(5) - '0') / 2;
     }
 
     private static boolean doesFlavorHaveAllergens(EnumSet<Allergen> flavorAllergens,
@@ -61,22 +57,23 @@ public class IceCream extends Widget {
                     COOKIES_N_CREAM, NEAPOLITAN, TUTTI_FRUTTI, THE_CLASSIC, ROCKY_ROAD,
                     DOUBLE_CHOCOLATE, MINT_CHIP, DOUBLE_STRAWBERRY, RASPBERRY_RIPPLE
             );
-        } else if (hasEmptyPortPlate) {
+        }
+        if (hasEmptyPortPlate) {
             return List.of(
                     DOUBLE_CHOCOLATE, MINT_CHIP, NEAPOLITAN, ROCKY_ROAD, TUTTI_FRUTTI,
                     DOUBLE_STRAWBERRY, COOKIES_N_CREAM, RASPBERRY_RIPPLE, THE_CLASSIC
             );
-        } else if (getAllBatteries() > 3) {
+        }
+        if (getAllBatteries() > 3) {
             return List.of(
                     NEAPOLITAN, TUTTI_FRUTTI, COOKIES_N_CREAM, RASPBERRY_RIPPLE,
                     DOUBLE_STRAWBERRY, MINT_CHIP, DOUBLE_CHOCOLATE, THE_CLASSIC, ROCKY_ROAD
             );
-        } else {
-            return List.of(
-                    DOUBLE_STRAWBERRY, COOKIES_N_CREAM, ROCKY_ROAD, NEAPOLITAN,
-                    DOUBLE_CHOCOLATE, TUTTI_FRUTTI, RASPBERRY_RIPPLE, MINT_CHIP
-            );
         }
+        return List.of(
+                DOUBLE_STRAWBERRY, COOKIES_N_CREAM, ROCKY_ROAD, NEAPOLITAN,
+                DOUBLE_CHOCOLATE, TUTTI_FRUTTI, RASPBERRY_RIPPLE, MINT_CHIP
+        );
     }
 
     private static void validateInput(EnumSet<Flavor> possibleFlavors) throws IllegalArgumentException {
