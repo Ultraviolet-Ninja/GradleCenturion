@@ -40,5 +40,4 @@ public enum Person {
             throw new IllegalStateException(e);
         }
     }
-
 }
