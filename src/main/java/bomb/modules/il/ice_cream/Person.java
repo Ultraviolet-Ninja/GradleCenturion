@@ -35,10 +35,10 @@ public enum Person {
         }
         try {
             reader.close();
+            return output;
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-        return output;
     }
 
 }

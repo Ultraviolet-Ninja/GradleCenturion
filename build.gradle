@@ -11,7 +11,10 @@ plugins {
 group 'jasmine.jragon'
 version '0.21.1'
 
-mainClassName = 'bomb.Main'
+application {
+    mainClassName = 'bomb.Main'
+    mainModule.set('bomb')
+}
 
 compileJava {
     options.encoding("UTF-8")
@@ -33,13 +36,16 @@ dependencies {
     compile 'org.jetbrains:annotations:22.0.0'
 
     implementation 'com.opencsv:opencsv:5.5.2'
-    implementation 'com.jfoenix:jfoenix:9.0.4'
     implementation 'org.javatuples:javatuples:1.2'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
-    implementation 'eu.hansolo:Medusa:11.7'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
+    implementation('com.jfoenix:jfoenix:9.0.4') {
+        exclude group: "org.javafx"
+    }
     implementation('io.github.palexdev:materialfx:11.12.0') {
-        transitive(true)
+        exclude group: "org.javafx"
+    }
+    implementation ('eu.hansolo:Medusa:11.7') {
         exclude group: "org.javafx"
     }
 
@@ -121,7 +127,7 @@ pitest {
 
 javafx {
     version = '15'
-    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
+    modules = ['javafx.controls', 'javafx.fxml']
 }
 
 jar.manifest.attributes(['Main-Class': "${mainClassName}"])
