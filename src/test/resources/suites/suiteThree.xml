@@ -13,6 +13,7 @@
 
     <test name="W-Z Module Tests">
         <classes>
+            <class name="bomb.modules.wz.word_search.WordFinderTest"/>
         </classes>
     </test>
 
