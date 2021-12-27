@@ -45,9 +45,6 @@ dependencies {
     implementation('io.github.palexdev:materialfx:11.12.0') {
         exclude group: "org.javafx"
     }
-    implementation ('eu.hansolo:Medusa:11.7') {
-        exclude group: "org.javafx"
-    }
 
     testImplementation 'org.testng:testng:7.4.0'
 }
@@ -126,7 +123,6 @@ pitest {
 }
 
 javafx {
-    version = '15'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
