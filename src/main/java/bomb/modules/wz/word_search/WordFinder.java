@@ -6,11 +6,12 @@ import org.javatuples.Pair;
 
 import java.util.Set;
 
+@SuppressWarnings("SuspiciousNameCombination")
 public class WordFinder {
     private static int currentGridLength, longestWordLength;
 
     public static Pair<Coordinates, Coordinates> findWordCoordinates(char[][] grid, Set<String> possibleWords) {
-        validateGrid(grid);
+        validate(grid, possibleWords);
 
         Coordinates startPosition, endPosition;
         Trie trie = new Trie(possibleWords);
@@ -23,7 +24,7 @@ public class WordFinder {
 
         for (int i = 0; i < currentGridLength; i++) {
             for (int j = 0; j < currentGridLength; j++) {
-                startPosition = new Coordinates(i, j);
+                startPosition = new Coordinates(j, i);
                 endPosition = searchLocation(grid, i, j, trie);
 
                 if (endPosition != null)
@@ -34,7 +35,8 @@ public class WordFinder {
         return null;
     }
 
-    private static void validateGrid(char[][] grid) throws IllegalArgumentException {
+    private static void validate(char[][] grid, Set<String> possibleWords) throws IllegalArgumentException {
+        if (possibleWords == null) throw new IllegalArgumentException("Cannot have a null set");
         int width = grid.length;
 
         for (char[] row : grid) {
@@ -47,7 +49,7 @@ public class WordFinder {
         StringBuilder constructedWord = new StringBuilder().append(grid[x][y]);
 
         if (trie.containsWord(constructedWord.toString()))
-            return new Coordinates(x, y);
+            return new Coordinates(y, x);
 
         Coordinates result;
         for (int dX = -1; dX <= 1; dX++) {
@@ -74,7 +76,7 @@ public class WordFinder {
         if (constructedWord.length() > longestWordLength)
             return null;
         if (trie.containsWord(constructedWord.toString()))
-            return new Coordinates(x, y);
+            return new Coordinates(y, x);
 
         return searchWithVector(grid, x, y, dX, dY, constructedWord, trie);
     }
