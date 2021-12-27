@@ -114,7 +114,7 @@ static List<String> getTargetClasses(boolean firstInstance, boolean secondInstan
     else if (fifthInstance)
         return ['bomb.modules.r.**', 'bomb.modules.s.**']
     else if (sixthInstance)
-        return ['bomb.modules.t.**', 'bomb.tools.filter.*']
+        return ['bomb.modules.t.**', 'bomb.modules.wz.**','bomb.tools.filter.*']
     return ['bomb.*']
 }
 
