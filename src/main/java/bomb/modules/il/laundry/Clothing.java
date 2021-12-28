@@ -1,7 +1,6 @@
 package bomb.modules.il.laundry;
 
 import bomb.abstractions.Labeled;
-import bomb.abstractions.Listed;
 
 public enum Clothing {
     ARTICLE;
@@ -34,7 +33,7 @@ public enum Clothing {
         this.color = color;
     }
 
-    public enum Item implements Listed {
+    public enum Item {
         CORSET("300°F", "Bleach"), SHIRT("No Steam", "No Tetrachlorethylene"),
         SKIRT("Iron", "Reduced Moisture"), SKORT("200°C", "Reduced Moisture"),
         SHORTS("300°F", "Do Not Bleach"), SCARF("110°C", "Do Not Dry Clean");
@@ -45,8 +44,7 @@ public enum Clothing {
             conditions = new String[]{ironing, special};
         }
 
-        @Override
-        public String[] getWords() {
+        public String[] getIroningAndSpecialWords() {
             return conditions;
         }
     }

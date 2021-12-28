@@ -13,10 +13,10 @@ public class ArrayRing<E> implements Iterable<E> {
 
     private int headIndex;
 
-    public ArrayRing(int capacity) {
-        if (capacity < 1)
+    public ArrayRing(int startingCapacity) {
+        if (startingCapacity < 1)
             throw new IllegalArgumentException();
-        internalStructure = new ArrayList<>(capacity);
+        internalStructure = new ArrayList<>(startingCapacity);
         headIndex = 0;
     }
 
@@ -29,7 +29,9 @@ public class ArrayRing<E> implements Iterable<E> {
     public ArrayRing(Collection<E> c) {
         if (c.size() < 1)
             throw new IllegalArgumentException();
-        internalStructure = new ArrayList<>(c);
+        internalStructure = c instanceof ArrayList ?
+                (List<E>) c :
+                new ArrayList<>(c);
         headIndex = 0;
     }
 
@@ -49,6 +51,10 @@ public class ArrayRing<E> implements Iterable<E> {
             return foundIndex - headIndex;
         int size = internalStructure.size();
         return (size - Math.abs(foundIndex - headIndex)) % size;
+    }
+
+    public int getCurrentIndex() {
+        return headIndex;
     }
 
     public E getHeadData() {
@@ -80,15 +86,15 @@ public class ArrayRing<E> implements Iterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        if (headIndex == 0)
-            return internalStructure.iterator();
-        return reorderList().iterator();
+        return headIndex == 0 ?
+                internalStructure.iterator() :
+                reorderList().iterator();
     }
 
     public Stream<E> stream() {
-        if (headIndex == 0)
-            return internalStructure.stream();
-        return reorderList().stream();
+        return headIndex == 0 ?
+                internalStructure.stream() :
+                reorderList().stream();
     }
 
     private List<E> reorderList() {

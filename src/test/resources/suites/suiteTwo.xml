@@ -5,6 +5,8 @@
     <test name="M Module Tests">
         <classes>
             <class name="bomb.modules.m.microcontroller.MicroControllerTest"/>
+            <class name="bomb.modules.m.morsematics.MorsematicsTest"/>
+            <class name="bomb.modules.m.murder.MurderTest"/>
         </classes>
     </test>
 
@@ -25,6 +27,7 @@
             <class name="bomb.modules.s.shape_shift.ShapeShiftTest"/>
             <class name="bomb.modules.s.simon.screams.SimonScreamsTest"/>
             <class name="bomb.modules.s.simon.states.SimonStatesTest"/>
+            <class name="bomb.modules.s.square.SquareButtonTest"/>
             <class name="bomb.modules.s.switches.SwitchesTest"/>
         </classes>
     </test>

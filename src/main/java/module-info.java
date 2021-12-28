@@ -1,14 +1,13 @@
-module jasmine.jragon.GradleCenturion.main {
-    requires transitive javafx.base;
+open module bomb {
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.graphics;
 
     requires com.opencsv;
     requires com.jfoenix;
     requires org.jgrapht.core;
     requires javatuples;
     requires MaterialFX;
+    requires org.jetbrains.annotations;
 
     exports bomb to javafx.fxml;
     exports bomb.components.chord to javafx.fxml;
@@ -68,61 +67,4 @@ module jasmine.jragon.GradleCenturion.main {
     exports bomb.tools.data.structures.ring to javafx.fxml;
     exports bomb.tools.logic to javafx.fxml;
     exports bomb.tools.note to javafx.fxml;
-
-    opens bomb;
-    opens bomb.components.chord;
-    opens bomb.components.hex;
-    opens bomb.components.microcontroller;
-    opens bomb.components.simon.screams;
-    opens bomb.components.simon.states;
-    opens bomb.modules.ab.alphabet;
-    opens bomb.modules.ab.astrology;
-    opens bomb.modules.ab.bitwise;
-    opens bomb.modules.ab.blind_alley;
-    opens bomb.modules.ab.boolean_venn;
-    opens bomb.modules.c.caesar;
-    opens bomb.modules.c.cheap_checkout;
-    opens bomb.modules.c.chess;
-    opens bomb.modules.c.chords;
-    opens bomb.modules.c.color_flash;
-    opens bomb.modules.c.colored_switches;
-    opens bomb.modules.dh.emoji;
-    opens bomb.modules.dh.fast_math;
-    opens bomb.modules.dh.forget_me;
-    opens bomb.modules.dh.hexamaze;
-    opens bomb.modules.dh.hexamaze.hexalgorithm;
-    opens bomb.modules.dh.hexamaze_redesign;
-    opens bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
-    opens bomb.modules.il.ice_cream;
-    opens bomb.modules.il.laundry;
-    opens bomb.modules.il.led_encryption;
-    opens bomb.modules.m.microcontroller;
-    opens bomb.modules.m.microcontroller.chip;
-    opens bomb.modules.m.monsplode;
-    opens bomb.modules.np.neutralization;
-    opens bomb.modules.np.number_pad;
-    opens bomb.modules.r.round_keypads;
-    opens bomb.modules.s.seashells;
-    opens bomb.modules.s.semaphore;
-    opens bomb.modules.s.shape_shift;
-    opens bomb.modules.s.simon.screams;
-    opens bomb.modules.s.simon.states;
-    opens bomb.modules.s.souvenir;
-    opens bomb.modules.s.switches;
-    opens bomb.modules.t.bulb;
-    opens bomb.modules.t.three_d_maze;
-    opens bomb.modules.t.translated;
-    opens bomb.modules.t.translated.solutions;
-    opens bomb.modules.t.translated.solutions.button;
-    opens bomb.modules.t.translated.solutions.morse;
-    opens bomb.modules.t.translated.solutions.password;
-    opens bomb.modules.t.translated.solutions.gas;
-    opens bomb.modules.t.translated.solutions.wof;
-    opens bomb.modules.t.two_bit;
-    opens bomb.modules.wz.zoo;
-    opens bomb.tools;
-    opens bomb.tools.data.structures.queue;
-    opens bomb.tools.data.structures.ring;
-    opens bomb.tools.logic;
-    opens bomb.tools.note;
 }

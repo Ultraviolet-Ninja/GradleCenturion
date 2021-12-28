@@ -12,15 +12,14 @@ import java.util.List;
 import static bomb.tools.filter.RegexFilter.filter;
 
 public class MicroController extends Widget {
-    private static final String THIRD_CONDITION_REGEX = "[clrx18]";
-
-    public static List<Color> getPinColors(String moduleSerialNumbers, AbstractController controller) throws IllegalArgumentException {
+    public static List<Color> getPinColors(String moduleSerialNumbers, AbstractController controller)
+            throws IllegalArgumentException {
         validateInput(moduleSerialNumbers, controller);
         if (containsRequiredNumbers(moduleSerialNumbers))
             return controller.traversePins(0);
         else if (hasLitIndicator(Indicator.SIG) || doesPortExists(Port.RJ45))
             return controller.traversePins(1);
-        else if (filter(serialCode, new Regex(THIRD_CONDITION_REGEX)).length() > 0)
+        else if (filter(serialCode, new Regex("[clrx18]")).length() > 0)
             return controller.traversePins(2);
         else if (numbersMatch(moduleSerialNumbers))
             return controller.traversePins(3);

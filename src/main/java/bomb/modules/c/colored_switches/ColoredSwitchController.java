@@ -79,11 +79,11 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void setSwitchActions() {
-        MFXToggleButton[] buttonArray = getAllSwitches();
-        ArrayRing<SwitchColor>[] rings = getAssociatedRings();
+        List<MFXToggleButton> buttonArray = getAllSwitches();
+        List<ArrayRing<SwitchColor>> rings = getAssociatedRings();
 
-        for (int i = 0; i < buttonArray.length; i++) {
-            createSwitchAction(buttonArray[i], rings[i]);
+        for (int i = 0; i < buttonArray.size(); i++) {
+            createSwitchAction(buttonArray.get(i), rings.get(i));
         }
     }
 
@@ -113,23 +113,22 @@ public class ColoredSwitchController implements Resettable {
         return new JFXRadioButton[]{firstOffLight, secondOffLight, thirdOffLight, fourthOffLight, fifthOffLight};
     }
 
-    private MFXToggleButton[] getAllSwitches() {
-        return new MFXToggleButton[]{firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch};
+    private List<MFXToggleButton> getAllSwitches() {
+        return List.of(firstSwitch, secondSwitch, thirdSwitch, fourthSwitch, fifthSwitch);
     }
 
-    @SuppressWarnings("unchecked")
-    private ArrayRing<SwitchColor>[] getAssociatedRings() {
-        return new ArrayRing[]{firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
-                fifthButtonRing};
+    private List<ArrayRing<SwitchColor>> getAssociatedRings() {
+        return List.of(firstButtonRing, secondButtonRing, thirdButtonRing, fourthButtonRing,
+                fifthButtonRing);
     }
 
     @FXML
     private void getPreemptiveMoveList() {
         byte startingState = 0;
-        MFXToggleButton[] switches = getAllSwitches();
-        for (int i = 0; i < switches.length; i++) {
-            if (switches[i].isSelected())
-                startingState |= 1 << (switches.length - 1 - i);
+        List<MFXToggleButton> switches = getAllSwitches();
+        for (int i = 0; i < switches.size(); i++) {
+            if (switches.get(i).isSelected())
+                startingState |= 1 << (switches.size() - 1 - i);
         }
         try {
             List<String> resultingSwitches = ColoredSwitches.producePreemptiveMoveList(startingState);
@@ -169,11 +168,11 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private SwitchColor[] getCurrentSwitchColors() {
-        ArrayRing<SwitchColor>[] rings = getAssociatedRings();
-        SwitchColor[] output = new SwitchColor[rings.length];
+        List<ArrayRing<SwitchColor>> rings = getAssociatedRings();
+        SwitchColor[] output = new SwitchColor[rings.size()];
 
-        for (int i = 0; i < rings.length; i++)
-            output[i] = rings[i].getHeadData();
+        for (int i = 0; i < rings.size(); i++)
+            output[i] = rings.get(i).getHeadData();
 
         return output;
     }
@@ -208,12 +207,12 @@ public class ColoredSwitchController implements Resettable {
     }
 
     private void resetSwitches() {
-        MFXToggleButton[] buttons = getAllSwitches();
+        List<MFXToggleButton> buttons = getAllSwitches();
         for (MFXToggleButton button : buttons) {
             button.setId(NEUTRAL.getCssId());
             button.applyCss();
         }
-        FacadeFX.setToggleButtonsUnselected(buttons);
+        buttons.forEach(button -> button.setSelected(false));
     }
 
     private void resetRings() {

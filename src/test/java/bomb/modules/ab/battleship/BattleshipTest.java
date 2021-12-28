@@ -29,7 +29,7 @@ public class BattleshipTest {
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class,
-            expectedExceptionsMessageRegExp = "Serial Code is required")
+            expectedExceptionsMessageRegExp = "Serial Code is required\nPlease check formatting on Widget page")
     public void calculateRadarPositionsExceptionTest() {
         Battleship.calculateRadarPositions();
     }

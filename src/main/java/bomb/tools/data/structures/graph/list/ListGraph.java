@@ -1,64 +1,59 @@
 package bomb.tools.data.structures.graph.list;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.List;
 
-public class ListGraph<E> extends AbstractGraph<E> implements UnweightedEdge<E> {
-    private final LinkedHashMap<E, LinkedList<E>> list;
+public class ListGraph<E> {
+    private final LinkedHashMap<E, ArrayList<E>> list;
+    private final boolean biDirectional;
 
     public ListGraph(boolean biDirectional) {
-        super(biDirectional);
+        this.biDirectional = biDirectional;
         list = new LinkedHashMap<>();
     }
 
-    @Override
-    public boolean addVertex(E vertex) {
-        if (list.containsKey(vertex)) return false;
-        list.put(vertex, new LinkedList<>());
-        return true;
+    public void addVertex(E vertex) {
+        if (containsVertex(vertex)) return;
+        list.put(vertex, new ArrayList<>());
     }
 
-    @Override
-    public boolean addEdge(E vertex, E edge) {
-        if (!list.containsKey(vertex))
+    public void addEdge(E vertex, E edge) {
+        if (!containsVertex(vertex))
             addVertex(vertex);
-        if (biDirectional && !list.containsKey(edge))
+        if (biDirectional && !containsVertex(edge))
             addVertex(edge);
         if (isNotDuplicate(vertex, edge))
             list.get(vertex).add(edge);
         if (biDirectional && isNotDuplicate(edge, vertex))
             list.get(edge).add(vertex);
-        return true;
     }
 
-    public LinkedList<E> get(E vertex) {
+    public boolean containsVertex(E vertex) {
+        return list.containsKey(vertex);
+    }
+
+    public List<E> getTargetVertices(E vertex) {
         return list.get(vertex);
-    }
-
-    @Override
-    public LinkedList<E> shortestPath(E start, E end) {
-        return null;
     }
 
     private boolean isNotDuplicate(E vertex, E edge) {
         return !list.get(vertex).contains(edge);
     }
 
-    @Override
-    public LinkedList<E> removeVertex(E vertex) {
-        if (!list.containsKey(vertex)) return null;
+    public List<E> removeVertex(E vertex) {
+        if (!containsVertex(vertex)) return null;
         if (biDirectional) removeReferences(vertex, list.get(vertex));
         return list.remove(vertex);
     }
 
-    private void removeReferences(E vertex, LinkedList<E> refList) {
+    private void removeReferences(E vertex, List<E> refList) {
         for (E reference : refList)
             list.get(reference).remove(vertex);
     }
 
-    @Override
     public boolean removeEdge(E vertex, E edge) {
-        if (list.containsKey(vertex))
+        if (containsVertex(vertex))
             return list.get(vertex).remove(edge);
         return false;
     }

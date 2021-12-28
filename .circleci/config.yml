@@ -7,7 +7,7 @@ jobs:
   jacoco:
     docker:
       # specify the version you desire here
-      - image: cimg/openjdk:15.0.2
+      - image: cimg/openjdk:17.0.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -37,7 +37,7 @@ jobs:
           path: ./build/reports
   pitest:
     docker:
-     - image: cimg/openjdk:15.0.2
+     - image: cimg/openjdk:17.0.1
     parallelism: 6
     resource_class: large
 
@@ -53,8 +53,6 @@ jobs:
      - run: ./gradlew dependencies
 
      - run: ./gradlew pitest -Pthread$CIRCLE_NODE_INDEX
-     - store_test_results:
-         path: ./build/test-results/test
      - store_artifacts:
          path: ./build/reports
 

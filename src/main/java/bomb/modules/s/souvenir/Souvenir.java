@@ -2,10 +2,11 @@ package bomb.modules.s.souvenir;
 
 import org.javatuples.Pair;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 public class Souvenir {
     private static final Map<String, String> MODULE_ARTIFACTS;
@@ -19,10 +20,10 @@ public class Souvenir {
     }
 
     public static List<Pair<String, String>> getPuzzleArtifacts() {
-        List<Pair<String, String>> output = new ArrayList<>();
-        for (String key : MODULE_ARTIFACTS.keySet())
-            output.add(new Pair<>(key, MODULE_ARTIFACTS.get(key)));
-        return output;
+        return MODULE_ARTIFACTS.entrySet()
+                .stream()
+                .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
+                .collect(toList());
     }
 
     public static void reset() {

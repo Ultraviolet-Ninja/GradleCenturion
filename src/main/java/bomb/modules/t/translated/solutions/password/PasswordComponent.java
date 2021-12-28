@@ -77,7 +77,7 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
 
     @Override
     public void setContent(List<String> languageContent) {
-        String[] passwords = languageContent.get(PASSWORD_ROW.getIndex()).split("\\|");
+        String[] passwords = languageContent.get(PASSWORD_ROW.getRowIndex()).split("\\|");
         Password.setPossiblePasswords(passwords);
     }
 

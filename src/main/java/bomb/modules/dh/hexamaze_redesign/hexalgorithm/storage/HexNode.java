@@ -1,13 +1,12 @@
 package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
 
-import bomb.abstractions.EquatableObject;
-
 import java.util.EnumSet;
 import java.util.Objects;
 
+import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 import static java.util.stream.Collectors.joining;
 
-public class HexNode extends EquatableObject {
+public class HexNode {
     private EnumSet<HexWall> walls;
     private HexShape hexShape;
     private int color;
@@ -59,8 +58,7 @@ public class HexNode extends EquatableObject {
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
-        if (!(obj instanceof HexNode)) return false;
-        HexNode other = (HexNode) obj;
+        if (!(obj instanceof HexNode other)) return false;
         return other.hexShape == this.hexShape && walls.equals(other.walls);
     }
 

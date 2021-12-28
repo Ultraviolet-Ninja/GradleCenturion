@@ -1,6 +1,5 @@
 package bomb.modules.dh.hexamaze.hexalgorithm;
 
-import bomb.abstractions.EquatableObject;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexShape;
 import bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall;
 import bomb.tools.data.structures.queue.BufferedQueue;
@@ -22,6 +21,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.Bo
 import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.Top;
 import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopLeft;
 import static bomb.modules.dh.hexamaze.hexalgorithm.HexNodeProperties.HexWall.TopRight;
+import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 
 /**
  * Hex is a full interpretation of a hexagonal data structure that contains data on a given Hexamaze
@@ -31,7 +31,7 @@ public class HexagonDataStructure implements Iterable<BufferedQueue<HexagonDataS
     /**
      * This class is the backing node to a given hexagon data structure.
      */
-    public static final class HexNode extends EquatableObject {
+    public static final class HexNode {
         private EnumSet<HexWall> walls;
         private HexShape fill;
 

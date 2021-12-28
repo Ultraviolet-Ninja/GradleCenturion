@@ -31,7 +31,7 @@ public class ForgetMeNotTest {
         ConditionSetter activatedForgetMeNot = () -> Widget.setIsForgetMeNotActive(true);
         ConditionSetter triggerNoModule = () -> {
             Widget.setIsForgetMeNotActive(true);
-            Widget.setSerialCode("12sk23");
+            Widget.setSerialCode("1s2k23");
         };
         return new Object[][]{
                 {EMPTY_SETTER}, {activatedForgetMeNot}, {triggerNoModule}
@@ -82,7 +82,7 @@ public class ForgetMeNotTest {
 
     @DataProvider
     public Object[][] createFirstNumberBranchTestProvider() {
-        String serialCode = "12jaw3";
+        String serialCode = "123aw3";
         ConditionSetter setupCarIndicatorUnlit = () -> {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
@@ -116,7 +116,7 @@ public class ForgetMeNotTest {
 
     @DataProvider
     public Object[][] createSecondNumberBranchTestProvider() {
-        String serialCode = "00iu00";
+        String serialCode = "0i0uh0";
         ConditionSetter setupFirstBranch = () -> {
             Widget.setIsForgetMeNotActive(true);
             Widget.setSerialCode(serialCode);
@@ -145,7 +145,7 @@ public class ForgetMeNotTest {
     @Test
     public void undoLastStageTest() {
         Widget.setIsForgetMeNotActive(true);
-        Widget.setSerialCode("12lak2");
+        Widget.setSerialCode("1l2ak2");
         Widget.setNumModules(NUMBER_OF_MODULES);
 
         ForgetMeNot.undoLastStage();

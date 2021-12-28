@@ -18,10 +18,13 @@ public class ChordQualities extends Widget {
 
     public static String solve(String input) throws IllegalArgumentException {
         Set<String> sortedSet = validateInput(input);
-        if (isSouvenirActive) Souvenir.addRelic("Chord Quality Original Notes", input);
+        if (isSouvenirActive)
+            Souvenir.addRelic("Chord Quality Original Notes", input);
+
         String[] chordQuality = getNextChordQuality(sortedSet);
         if (chordQuality == null || chordQuality[1] == null)
             throw new IllegalArgumentException("The received notes didn't make a new chord quality");
+
         return NEW_CHORD + chordQuality[0] + " " + chordQuality[1];
     }
 
@@ -46,11 +49,12 @@ public class ChordQualities extends Widget {
     }
 
     private static ArrayRing<String> createNoteDistanceRing(ArrayRing<String> inputNoteRing) {
-        ArrayRing<String> output = new ArrayRing<>(inputNoteRing.getSize());
+        int inputNoteRingSize = inputNoteRing.getSize();
+        ArrayRing<String> output = new ArrayRing<>(inputNoteRingSize);
         ALL_NOTES.rotateClockwise(ALL_NOTES.findRelativeIndex(inputNoteRing.getHeadData()));
         inputNoteRing.rotateClockwise();
 
-        for (int i = 0; i < inputNoteRing.getSize(); i++) {
+        for (int i = 0; i < inputNoteRingSize; i++) {
             int distance = ALL_NOTES.findRelativeIndex(inputNoteRing.getHeadData());
             output.add(String.valueOf(distance));
             ALL_NOTES.rotateClockwise(distance);
@@ -73,11 +77,12 @@ public class ChordQualities extends Widget {
 
     private static String[] runOneRotation(ArrayRing<String> inputNoteRing, ArrayRing<String> noteDistanceRing) {
         StringBuilder attemptedDistances = new StringBuilder();
+        int ringSize = noteDistanceRing.getSize() - 1;
 
-        for (int distanceRingCount = 0; distanceRingCount < noteDistanceRing.getSize() - 1; distanceRingCount++) {
+        for (int distanceRingCount = 0; distanceRingCount < ringSize; distanceRingCount++) {
             attemptedDistances.append(noteDistanceRing.getHeadData());
             noteDistanceRing.rotateClockwise();
-            if (distanceRingCount < noteDistanceRing.getSize() - 2)
+            if (distanceRingCount < ringSize - 1)
                 attemptedDistances.append(",");
         }
 
@@ -85,7 +90,8 @@ public class ChordQualities extends Widget {
 
         for (Quality quality : Quality.values()) {
             if (quality.getRelatedDistance().equals(resultingDistanceString)) {
-                if (isSouvenirActive) Souvenir.addRelic("Chord Quality Original Chord", quality.getLabel());
+                if (isSouvenirActive)
+                    Souvenir.addRelic("Chord Quality Original Chord", quality.getLabel());
                 return new String[]{quality.getNextNote(), Root.getNewDistances(inputNoteRing.getHeadData())};
             }
         }

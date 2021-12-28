@@ -37,7 +37,7 @@ public class VentGasComponent extends Pane implements Resettable, TranslationCom
 
     @Override
     public void setContent(List<String> languageContent) {
-        yesLabel.setText(languageContent.get(YES_ROW.getIndex()));
-        noLabel.setText(languageContent.get(NO_ROW.getIndex()));
+        yesLabel.setText(languageContent.get(YES_ROW.getRowIndex()));
+        noLabel.setText(languageContent.get(NO_ROW.getRowIndex()));
     }
 }

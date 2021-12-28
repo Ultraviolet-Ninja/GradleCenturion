@@ -9,11 +9,13 @@ import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+
+import java.util.List;
 
 import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
+import static javafx.scene.paint.Paint.valueOf;
 
 public class BooleanController implements Resettable {
     private static final String PRESS_COLOR, DO_NOT_PRESS_COLOR, DEFAULT_TEXT;
@@ -49,8 +51,8 @@ public class BooleanController implements Resettable {
     }
 
     public void initialize() {
-        MFXButton[] buttonArray = {booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
-                booleanXnor, booleanImpliedBy};
+        List<MFXButton> buttonArray = List.of(booleanAnd, booleanOr, booleanXor, booleanImplies, booleanNand, booleanNor,
+                booleanXnor, booleanImpliedBy);
         EventHandler<ActionEvent> onActionEvent = createButtonAction();
 
         for (MFXButton mfxButton : buttonArray) {
@@ -117,9 +119,9 @@ public class BooleanController implements Resettable {
         }
     }
 
-    private void setCircleFill(Circle[] circles, char[] bits) {
+    private static void setCircleFill(Circle[] circles, char[] bits) {
         for (int i = 0; i < circles.length; i++)
-            circles[i].setFill(Paint.valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
+            circles[i].setFill(valueOf(bits[i] == '1' ? PRESS_COLOR : DO_NOT_PRESS_COLOR));
     }
 
     private static String getMathSymbol(MFXButton button) {
@@ -158,14 +160,14 @@ public class BooleanController implements Resettable {
         priorityToggle.setText("AB Priority");
 
         String transparent = "rgba(130,130,130,0)";
-        a.setFill(Paint.valueOf(transparent));
-        b.setFill(Paint.valueOf(transparent));
-        c.setFill(Paint.valueOf(transparent));
-        ab.setFill(Paint.valueOf(transparent));
-        ac.setFill(Paint.valueOf(transparent));
-        bc.setFill(Paint.valueOf(transparent));
-        all.setFill(Paint.valueOf(transparent));
-        not.setFill(Paint.valueOf(transparent));
+        a.setFill(valueOf(transparent));
+        b.setFill(valueOf(transparent));
+        c.setFill(valueOf(transparent));
+        ab.setFill(valueOf(transparent));
+        ac.setFill(valueOf(transparent));
+        bc.setFill(valueOf(transparent));
+        all.setFill(valueOf(transparent));
+        not.setFill(valueOf(transparent));
     }
 
     @Override

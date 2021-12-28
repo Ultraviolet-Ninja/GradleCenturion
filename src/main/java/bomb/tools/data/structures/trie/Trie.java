@@ -1,6 +1,7 @@
 package bomb.tools.data.structures.trie;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -14,11 +15,21 @@ public class Trie {
         root = new TrieNode();
     }
 
+    public Trie(Collection<String> startWords) {
+        this();
+        addWords(startWords);
+    }
+
+    public void addWords(Collection<String> words) {
+        for (String word : words)
+            addWord(word);
+    }
+
     public void addWord(final String word) {
         addWord(word.toLowerCase(), 0, root);
     }
 
-    private void addWord(final String word, int index, TrieNode currentNode) {
+    private static void addWord(final String word, int index, TrieNode currentNode) {
         if (index == word.length()) {
             currentNode.setEndOfWord(true);
             return;
@@ -31,7 +42,7 @@ public class Trie {
         addWord(word, index + 1, currentNode.getNextNode(nextChar));
     }
 
-    public Set<String> getWordsWithPrefix(String prefix) {
+    public Set<String> getWordsStartingWith(String prefix) {
         List<String> words = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         TrieNode currentNode = root;
@@ -48,12 +59,12 @@ public class Trie {
         }
 
         if (!currentNode.hasNoChild())
-            words.addAll(getWordsWithPrefix(currentNode, builder));
+            words.addAll(getWordsStartingWith(currentNode, builder));
 
         return new LinkedHashSet<>(words);
     }
 
-    private List<String> getWordsWithPrefix(TrieNode currentNode, StringBuilder builder) {
+    private static List<String> getWordsStartingWith(TrieNode currentNode, StringBuilder builder) {
         List<String> words = new ArrayList<>();
 
         if (currentNode.hasNoChild())
@@ -65,7 +76,7 @@ public class Trie {
             builder.append(nextChar);
 
             addIfIsWord(words, builder, currentNode);
-            words.addAll(getWordsWithPrefix(currentNode, builder));
+            words.addAll(getWordsStartingWith(currentNode, builder));
             return words;
         }
 
@@ -74,20 +85,21 @@ public class Trie {
             TrieNode nextNode = currentNode.getNextNode(nextChar);
 
             addIfIsWord(words, clonedBuilder, nextNode);
-            words.addAll(getWordsWithPrefix(nextNode, clonedBuilder));
+            words.addAll(getWordsStartingWith(nextNode, clonedBuilder));
         }
 
         return words;
     }
 
-    private void addIfIsWord(List<String> words, StringBuilder builder, TrieNode currentNode) {
+    private static void addIfIsWord(List<String> words, StringBuilder builder, TrieNode currentNode) {
         if (currentNode.isEndOfWord)
             words.add(builder.toString());
     }
 
-    public boolean search(String word) {
+    public boolean containsWord(String word) {
         if (word == null || word.isEmpty())
             return false;
+        word = word.toLowerCase();
 
         TrieNode currentNode = root;
         for (char letter : word.toCharArray()) {
@@ -100,7 +112,7 @@ public class Trie {
 
     @Override
     public String toString() {
-        return getWordsWithPrefix("").toString();
+        return getWordsStartingWith("").toString();
     }
 
     private static class TrieNode {
@@ -108,7 +120,7 @@ public class Trie {
         private boolean isEndOfWord;
 
         public TrieNode() {
-            children = new HashMap<>();
+            children = new HashMap<>(5);
             isEndOfWord = false;
         }
 

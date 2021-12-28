@@ -6,6 +6,7 @@ import bomb.modules.np.neutralization.Chemical.Base;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
+import org.intellij.lang.annotations.Language;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -24,8 +25,8 @@ import static bomb.modules.np.neutralization.Chemical.Base.AMMONIA;
 import static bomb.modules.np.neutralization.Chemical.Base.LITHIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.SODIUM_HYDROXIDE;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
-import static bomb.tools.filter.RegexFilter.filter;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;
@@ -99,10 +100,13 @@ public class Neutralization extends Widget {
     private static boolean doesIndicatorLetterMatch() {
         Set<String> uniqueCharacterSet = getFilteredSetOfIndicators(ALL_PRESENT)
                 .stream()
-                .map(indicator -> indicator.name().toLowerCase().split(""))
+                .map(Enum::name)
+                .map(String::toLowerCase)
+                .map(name -> name.split(""))
                 .flatMap(Arrays::stream)
                 .collect(Collectors.toSet());
 
+        @Language("regexp")
         String regex = uniqueCharacterSet.toString().replaceAll(", ", "");
         String acidFormula = currentAcid.getFormula().toLowerCase();
         Regex indicatorLetterMatch = new Regex(regex, acidFormula);
@@ -112,13 +116,15 @@ public class Neutralization extends Widget {
 
     private static double acidConcentration(int acidVol) {
         double concentrate = currentAcid.getAtomicNum() - currentBase.getAtomicNum();
+        String acidSymbol = currentAcid.getSymbol();
+        String baseSymbol = currentBase.getSymbol();
 
-        if (!filter(currentAcid.getSymbol(), VOWEL_FILTER).isEmpty() ||
-                !filter(currentBase.getSymbol(), VOWEL_FILTER).isEmpty())
+        if (!EMPTY_FILTER_RESULTS.test(acidSymbol, VOWEL_FILTER) ||
+                !EMPTY_FILTER_RESULTS.test(baseSymbol, VOWEL_FILTER))
             //Either the cation or the anion contains a vowel
             concentrate -= 4;
 
-        if (currentAcid.getSymbol().length() == currentBase.getSymbol().length())
+        if (acidSymbol.length() == baseSymbol.length())
             //Length of characters for the anion is equal to the cation symbol length
             concentrate *= 3;
         concentrate = Math.abs(concentrate) % 10;
@@ -128,17 +134,17 @@ public class Neutralization extends Widget {
     }
 
     private static int baseConcentration() {
-        if (!overrule()) {
-            int allIndicators = countIndicators(ALL_PRESENT);
-            if (numHolders > countPortTypes() && numHolders > allIndicators)
-                return 5;
-            else if (countPortTypes() > numHolders && countPortTypes() > allIndicators)
-                return 10;
-            else if (allIndicators > numHolders && allIndicators > countPortTypes())
-                return 20;
-            return closestNum();
-        }
-        return 20;
+        if (overrule()) return 20;
+        int allIndicators = countIndicators(ALL_PRESENT);
+        int portTypeCount = countPortTypes();
+
+        if (numHolders > portTypeCount && numHolders > allIndicators)
+            return 5;
+        else if (portTypeCount > numHolders && portTypeCount > allIndicators)
+            return 10;
+        else if (allIndicators > numHolders && allIndicators > portTypeCount)
+            return 20;
+        return closestNum();
     }
 
     private static boolean overrule() {

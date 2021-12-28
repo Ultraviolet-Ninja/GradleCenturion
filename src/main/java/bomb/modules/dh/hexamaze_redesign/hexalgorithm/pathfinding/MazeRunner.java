@@ -57,12 +57,12 @@ public class MazeRunner {
     }
 
     private static void mapAdjacentNodes(Grid grid, Graph<Coordinates, DefaultEdge> graph, Coordinates location) {
-        boolean notHalfWay = location.getX() < grid.getHexagon().getSideLength() - 1;
+        boolean notHalfWay = location.x() < grid.getHexagon().getSideLength() - 1;
         mapSingleNode(grid, graph, TOP_RIGHT, location,
-                location.immutableAdd(notHalfWay ? MOVE_RIGHT : RIGHT_SIDE_MOVE_TOP_RIGHT));
-        mapSingleNode(grid, graph, BOTTOM_RIGHT, location, location.immutableAdd(notHalfWay ?
+                location.add(notHalfWay ? MOVE_RIGHT : RIGHT_SIDE_MOVE_TOP_RIGHT));
+        mapSingleNode(grid, graph, BOTTOM_RIGHT, location, location.add(notHalfWay ?
                 LEFT_SIDE_MOVE_DOWN_RIGHT : MOVE_RIGHT));
-        mapSingleNode(grid, graph, BOTTOM, location, location.immutableAdd(MOVE_DOWN));
+        mapSingleNode(grid, graph, BOTTOM, location, location.add(MOVE_DOWN));
     }
 
     private static void mapSingleNode(Grid grid, Graph<Coordinates, DefaultEdge> graph,

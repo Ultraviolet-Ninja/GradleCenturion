@@ -1,7 +1,5 @@
 package bomb.tools.data.structures.queue;
 
-import bomb.abstractions.EquatableObject;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ import java.util.RandomAccess;
 import java.util.stream.Stream;
 
 @SuppressWarnings("unchecked")
-public class BufferedQueue<E> extends EquatableObject implements List<E>, Iterable<E>, RandomAccess {
+public class BufferedQueue<E> implements List<E>, Iterable<E>, RandomAccess {
     private final int capacity;
     private final ArrayDeque<E> dataDeque;
 
