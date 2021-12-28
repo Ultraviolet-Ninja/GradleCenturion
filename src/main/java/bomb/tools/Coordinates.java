@@ -2,22 +2,7 @@ package bomb.tools;
 
 import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 
-public class Coordinates implements Comparable<Coordinates> {
-    private final int x, y;
-
-    public Coordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
+public record Coordinates(int x, int y) implements Comparable<Coordinates> {
     public Coordinates add(Coordinates vector) {
         return new Coordinates(this.x + vector.x, this.y + vector.y);
     }
@@ -29,14 +14,6 @@ public class Coordinates implements Comparable<Coordinates> {
     @Override
     public int hashCode() {
         return x * HASHING_NUMBER + y;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Coordinates)) return false;
-        Coordinates other = (Coordinates) o;
-        return other.x == this.x && other.y == this.y;
     }
 
     @Override

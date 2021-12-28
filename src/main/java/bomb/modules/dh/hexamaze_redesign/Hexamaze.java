@@ -84,7 +84,7 @@ public class Hexamaze extends Widget {
         BufferedQueue<BufferedQueue<HexTile>> tileQueues = convertFromList(tileList);
 
         coordinatesList.stream()
-                .map(c -> tileQueues.get(c.getX()).get(c.getY()))
+                .map(c -> tileQueues.get(c.x()).get(c.y()))
                 .forEach(System.out::println);
     }
 }

@@ -81,8 +81,8 @@ public class ShipFinder {
 
             for (int xOffset = -1; xOffset <= 1; xOffset++) {
                 for (int yOffset = -1; yOffset <= 1; yOffset++) {
-                    x = location.getX() + xOffset;
-                    y = location.getY() + yOffset;
+                    x = location.x() + xOffset;
+                    y = location.y() + yOffset;
 
                     if (!isOutOfBounds(x, y) && ocean.getTileState(x, y) == UNKNOWN)
                         return false;

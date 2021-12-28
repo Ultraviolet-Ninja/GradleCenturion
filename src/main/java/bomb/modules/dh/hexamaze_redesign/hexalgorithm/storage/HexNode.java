@@ -58,8 +58,7 @@ public class HexNode {
     @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
-        if (!(obj instanceof HexNode)) return false;
-        HexNode other = (HexNode) obj;
+        if (!(obj instanceof HexNode other)) return false;
         return other.hexShape == this.hexShape && walls.equals(other.walls);
     }
 

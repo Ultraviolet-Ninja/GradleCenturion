@@ -8,9 +8,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
+@SuppressWarnings("ConstantConditions")
 public class LanguageCSVReader {
     public static List<String> getLanguageContent(LanguageColumn languageColumn)
             throws CsvException, IOException, IllegalArgumentException {
@@ -18,7 +18,7 @@ public class LanguageCSVReader {
 
         int columnIndex = languageColumn.getColumnIndex();
         InputStream in = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in), StandardCharsets.UTF_8));
+        CSVReader csvReader = new CSVReader(new InputStreamReader(in, StandardCharsets.UTF_8));
         List<String> dictionaryContent = csvReader.readAll()
                 .stream()
                 .map(array -> array[columnIndex])

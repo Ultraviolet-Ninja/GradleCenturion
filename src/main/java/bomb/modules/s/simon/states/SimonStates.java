@@ -3,12 +3,12 @@ package bomb.modules.s.simon.states;
 import bomb.Widget;
 import bomb.modules.s.simon.SimonColors.StateColor;
 import bomb.modules.s.souvenir.Souvenir;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
@@ -47,11 +47,12 @@ public class SimonStates extends Widget {
         DID_NOT_FLASH = FLASHED.negate();
     }
 
-    public static void setDominantColor(StateColor dominantColor) {
-        dominantColorIndex = Objects.requireNonNull(dominantColor).ordinal();
+    public static void setDominantColor(@NotNull StateColor dominantColor) {
+        dominantColorIndex = dominantColor.ordinal();
     }
 
-    public static List<StateColor> calculateNextColorPress(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+    public static List<StateColor> calculateNextColorPress(EnumSet<StateColor> colorsFlashed)
+            throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)
             Souvenir.addRelic(

@@ -163,8 +163,8 @@ public class CoverageCalculator {
 
     private static List<Coordinates> filterOutOfBoundsMoves(Collection<Coordinates> moveList) {
         return moveList.stream()
-                .filter(coordinates -> coordinates.getX() >= 0 && coordinates.getX() < BOARD_LENGTH)
-                .filter(coordinates -> coordinates.getY() >= 0 && coordinates.getY() < BOARD_LENGTH)
+                .filter(coordinates -> coordinates.x() >= 0 && coordinates.x() < BOARD_LENGTH)
+                .filter(coordinates -> coordinates.y() >= 0 && coordinates.y() < BOARD_LENGTH)
                 .collect(Collectors.toList());
     }
 

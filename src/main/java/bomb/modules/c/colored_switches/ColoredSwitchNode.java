@@ -39,9 +39,8 @@ public class ColoredSwitchNode {
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
-        if (!(o instanceof ColoredSwitchNode)) return false;
+        if (!(o instanceof ColoredSwitchNode node)) return false;
 
-        ColoredSwitchNode node = (ColoredSwitchNode) o;
         return this.state == node.state;
     }
 

@@ -23,7 +23,7 @@ public class HexPanelFiller {
     private static int coordinateToIndex(Coordinates originalCoordinates, int sideLength) {
         int counter = 0;
         int[] columnLengths = AbstractHexagon.calculateColumnLengths(sideLength);
-        for (int i = 0; i < originalCoordinates.getX(); i++) counter += columnLengths[i];
-        return counter + originalCoordinates.getY();
+        for (int i = 0; i < originalCoordinates.x(); i++) counter += columnLengths[i];
+        return counter + originalCoordinates.y();
     }
 }
