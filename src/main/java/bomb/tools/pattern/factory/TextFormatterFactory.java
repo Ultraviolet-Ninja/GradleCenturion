@@ -66,4 +66,8 @@ public class TextFormatterFactory {
     public static TextFormatter<String> createBattleshipCounterTextFormatter() {
         return REGEX_MATCH_FORMATTER.apply("\\b[0-4]\\b");
     }
+
+    public static TextFormatter<String> createDecimalNumberTextFormatter(int significantDigits) {
+        return REGEX_MATCH_FORMATTER.apply(String.format("\\b\\d\\.?\\d{0,%d}\\b", significantDigits));
+    }
 }
