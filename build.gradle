@@ -6,16 +6,18 @@ plugins {
     id 'com.palantir.docker' version '0.28.0'
     id 'info.solidsoft.pitest' version '1.7.0'
     id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.javamodularity.moduleplugin' version '1.8.10'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
-    id 'org.javamodularity.moduleplugin' version '1.8.10' apply false
 }
 
 group 'jasmine.jragon'
 version '0.21.1'
 
 application {
-    mainClassName = 'bomb.Main'
-//    mainClassName = 'bomb.TestingArea'
+    mainClassName = project.hasProperty('testingArea') ?
+            'bomb.TestingArea' :
+            'bomb.Main'
+
     mainModule.set('bomb')
 }
 
@@ -52,12 +54,12 @@ dependencies {
     testImplementation 'org.testng:testng:7.4.0'
 }
 
-def firstInstance = project.hasProperty("thread0")
-def secondInstance = project.hasProperty("thread1")
-def thirdInstance = project.hasProperty("thread2")
-def fourthInstance = project.hasProperty("thread3")
-def fifthInstance = project.hasProperty("thread4")
-def sixthInstance = project.hasProperty("thread5")
+def firstInstance = project.hasProperty('thread0')
+def secondInstance = project.hasProperty('thread1')
+def thirdInstance = project.hasProperty('thread2')
+def fourthInstance = project.hasProperty('thread3')
+def fifthInstance = project.hasProperty('thread4')
+def sixthInstance = project.hasProperty('thread5')
 
 def includedDirectories = [
         'bomb/tools/data/**', 'bomb/tools/*', 'bomb/tools/logic/*'

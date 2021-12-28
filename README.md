@@ -12,7 +12,7 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 
 ## Technologies
 - Java 17
-- Gradle 7.3
+- Gradle 7.3.3
 ### Plugins
 - Jacoco
 - JavaFX
