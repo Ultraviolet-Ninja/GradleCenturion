@@ -88,10 +88,10 @@ public class CoverageCalculator {
                 upwardMoveList = new ArrayList<>();
 
         for (int i = 1; i < BOARD_LENGTH; i++) {
-            leftwardMoveList.add(originalPosition.immutableAdd(-i, 0));
-            rightwardMoveList.add(originalPosition.immutableAdd(i, 0));
-            upwardMoveList.add(originalPosition.immutableAdd(0, -i));
-            downwardMoveList.add(originalPosition.immutableAdd(0, i));
+            leftwardMoveList.add(originalPosition.add(-i, 0));
+            rightwardMoveList.add(originalPosition.add(i, 0));
+            upwardMoveList.add(originalPosition.add(0, -i));
+            downwardMoveList.add(originalPosition.add(0, i));
         }
 
         List<Coordinates> out = new ArrayList<>(removeAllIllegalMoves(board, leftwardMoveList, false));
@@ -110,10 +110,10 @@ public class CoverageCalculator {
                 downRightMoveList = new ArrayList<>();
 
         for (int i = 1; i < BOARD_LENGTH; i++) {
-            upLeftMoveList.add(originalPosition.immutableAdd(-i, -i));
-            upRightMoveList.add(originalPosition.immutableAdd(i, -i));
-            downLeftMoveList.add(originalPosition.immutableAdd(-i, i));
-            downRightMoveList.add(originalPosition.immutableAdd(i, i));
+            upLeftMoveList.add(originalPosition.add(-i, -i));
+            upRightMoveList.add(originalPosition.add(i, -i));
+            downLeftMoveList.add(originalPosition.add(-i, i));
+            downRightMoveList.add(originalPosition.add(i, i));
         }
 
         List<Coordinates> out = new ArrayList<>();
@@ -131,7 +131,7 @@ public class CoverageCalculator {
 
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 1; y++) {
-                Coordinates newCoordinates = originalPosition.immutableAdd(x, y);
+                Coordinates newCoordinates = originalPosition.add(x, y);
                 outputList.add(newCoordinates);
             }
         }
@@ -147,10 +147,10 @@ public class CoverageCalculator {
         };
 
         for (int[] moveOutline : moveOutlines) {
-            outputList.add(originalPosition.immutableAdd(moveOutline[0], -moveOutline[1]));
-            outputList.add(originalPosition.immutableAdd(moveOutline[0], moveOutline[1]));
-            outputList.add(originalPosition.immutableAdd(-moveOutline[0], -moveOutline[1]));
-            outputList.add(originalPosition.immutableAdd(-moveOutline[0], moveOutline[1]));
+            outputList.add(originalPosition.add(moveOutline[0], -moveOutline[1]));
+            outputList.add(originalPosition.add(moveOutline[0], moveOutline[1]));
+            outputList.add(originalPosition.add(-moveOutline[0], -moveOutline[1]));
+            outputList.add(originalPosition.add(-moveOutline[0], moveOutline[1]));
         }
 
         return outputList;

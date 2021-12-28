@@ -18,11 +18,11 @@ public class Coordinates implements Comparable<Coordinates> {
         return y;
     }
 
-    public Coordinates immutableAdd(Coordinates vector) {
+    public Coordinates add(Coordinates vector) {
         return new Coordinates(this.x + vector.x, this.y + vector.y);
     }
 
-    public Coordinates immutableAdd(int x, int y) {
+    public Coordinates add(int x, int y) {
         return new Coordinates(this.x + x, this.y + y);
     }
 

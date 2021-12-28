@@ -174,11 +174,11 @@ public class MazeRunner {
 
     private static void mapAdjacentNodes(HexGrid grid, Graph<Coordinates, DefaultEdge> graph, Coordinates location) {
         boolean notHalfWay = location.getX() < grid.sideLength() - 1;
-        mapSingleNode(grid, graph, TopRight, location, location.immutableAdd(notHalfWay ?
+        mapSingleNode(grid, graph, TopRight, location, location.add(notHalfWay ?
                 MOVE_RIGHT : RIGHT_SIDE_MOVE_TOP_RIGHT));
-        mapSingleNode(grid, graph, BottomRight, location, location.immutableAdd(notHalfWay ?
+        mapSingleNode(grid, graph, BottomRight, location, location.add(notHalfWay ?
                 LEFT_SIDE_MOVE_DOWN_RIGHT : MOVE_RIGHT));
-        mapSingleNode(grid, graph, Bottom, location, location.immutableAdd(MOVE_DOWN));
+        mapSingleNode(grid, graph, Bottom, location, location.add(MOVE_DOWN));
     }
 
     private static void mapSingleNode(HexGrid grid, Graph<Coordinates, DefaultEdge> graph,
