@@ -110,11 +110,11 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
     }
 
     public HexNode findAtCoordinate(Coordinates coordinates) {
-        int x = coordinates.getX();
+        int x = coordinates.x();
         if (x < 0 || x >= getSpan()) return null;
 
         BufferedQueue<HexNode> column = hexagon.get(x);
-        int y = coordinates.getY();
+        int y = coordinates.y();
         return y < 0 || y >= column.getCapacity() ? null : column.get(y);
     }
 

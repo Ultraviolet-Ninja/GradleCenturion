@@ -11,8 +11,8 @@ This project is designed to solve all puzzles found on the Centurion Bomb from K
 This is a huge project for one man to tackle, but I've [learned a lot](Learned.md) from the challenges I've faced.
 
 ## Technologies
-- Java 15
-- Gradle 6.8.1
+- Java 16
+- Gradle 7.0
 ### Plugins
 - Jacoco
 - JavaFX

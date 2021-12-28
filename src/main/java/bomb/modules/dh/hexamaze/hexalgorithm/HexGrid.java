@@ -95,11 +95,11 @@ public class HexGrid extends AbstractHexagon {
      * @return The result HexNode
      */
     public HexNode retrieveNode(Coordinates pair) {
-        if (pair.getX() < 0 || pair.getX() >= hexagon.getSpan()) return null;
-        BufferedQueue<HexNode> column = exportTo2DQueue().get(pair.getX());
+        if (pair.x() < 0 || pair.x() >= hexagon.getSpan()) return null;
+        BufferedQueue<HexNode> column = exportTo2DQueue().get(pair.x());
 
-        if (pair.getY() < 0 || pair.getY() >= column.getCapacity()) return null;
-        return column.get(pair.getY());
+        if (pair.y() < 0 || pair.y() >= column.getCapacity()) return null;
+        return column.get(pair.y());
     }
 
     public void resetColorRing() {

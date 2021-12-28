@@ -140,8 +140,8 @@ public class Chess extends Widget {
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
-        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.getX());
-        String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.getY());
+        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.x());
+        String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.y());
         return horizontal + "-" + vertical;
     }
 

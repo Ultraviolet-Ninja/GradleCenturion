@@ -3,14 +3,6 @@ package bomb.tools;
 import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 
 public record Coordinates(int x, int y) implements Comparable<Coordinates> {
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public Coordinates add(Coordinates vector) {
         return new Coordinates(this.x + vector.x, this.y + vector.y);
     }
