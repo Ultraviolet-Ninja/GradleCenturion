@@ -28,7 +28,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +45,8 @@ import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
 public class ManualController {
+    private static final String FXML_DIRECTORY = "fxml";
+
     private Map<Toggle, Region> regionMap;
     private final List<Node> allRadioButtons;
 
@@ -72,7 +73,10 @@ public class ManualController {
         allRadioButtons.addAll(radioButtonHouse.getChildren());
         ObserverHub.addObserver(new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(new SouvenirToggleObserver(souvenir));
+        long start = System.nanoTime();
         regionMap = setupRegionMap().get();
+        long stop = System.nanoTime();
+        System.out.printf("Timer: %,d", stop - start);
     }
 
     @FXML
@@ -126,10 +130,10 @@ public class ManualController {
         ResetObserver resetObserver = new ResetObserver();
 
         CompletableFuture<Map<String, Region>> future = CompletableFuture.supplyAsync(
-                () -> ManualController.class.getResource("fxml"))
+                () -> ManualController.class.getResource(FXML_DIRECTORY))
                 .thenApply(ManualController::toURI)
                 .handle((path, ex) -> {
-                    if (ex != null){
+                    if (ex != null) {
                         ex.printStackTrace();
                         System.exit(-1);
                     }
@@ -137,18 +141,22 @@ public class ManualController {
                 })
                 .thenApply(File::new)
                 .thenApply(ManualController::getFilesFromDirectory)
-                .thenApply(Collection::stream)
-                .thenApply(stream -> stream.filter(location -> !location.contains("solutions")))
-                .thenApply(stream -> stream.filter(location -> !location.contains("old")))
-                .thenApply(stream -> stream.filter(location -> !location.contains("new")))
-                .thenApply(stream -> stream.collect(toMap(
-                        location -> filter(location, filenamePattern)
-                                .replace(".", ""),
-                        location -> createSingleRegion(location, resetObserver)
-                )));
+                .thenApply(list -> convertFilesToRegions(list, resetObserver, filenamePattern));
 
         ObserverHub.addObserver(resetObserver);
         return future;
+    }
+
+    private static Map<String, Region> convertFilesToRegions(List<String> fileList, ResetObserver resetObserver,
+                                                             Regex filenamePattern) {
+        return fileList.stream()
+                .filter(location -> !location.contains("solutions")
+                        && !location.contains("old") && !location.contains("new"))
+                .collect(toMap(
+                        location -> filter(location, filenamePattern)
+                                .replace(".", ""),
+                        location -> createSingleRegion(location, resetObserver)
+                ));
     }
 
     private static CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
@@ -210,13 +218,14 @@ public class ManualController {
     }
 
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
-                                                Map<String, Region> filePathMap) {
+                                                       Map<String, Region> filePathMap) {
         Map<Toggle, Region> regionMap = new IdentityHashMap<>();
-        radioButtonMap.keySet()
-                .forEach(key -> regionMap.put(
-                        radioButtonMap.get(key),
-                        filePathMap.get(key)
-                        ));
+
+        for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
+            regionMap.put(
+                    entry.getValue(),
+                    filePathMap.get(entry.getKey())
+            );
         return regionMap;
     }
 
