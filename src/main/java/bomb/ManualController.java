@@ -32,7 +32,6 @@ import java.util.Collection;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
@@ -45,6 +44,7 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PAN
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
+@SuppressWarnings("ConstantConditions")
 public class ManualController {
     private Map<Toggle, Region> regionMap;
     private final List<Node> allRadioButtons;
@@ -200,7 +200,7 @@ public class ManualController {
 
     private static List<String> getFilesFromDirectory(final File topLevelDirectory) throws NullPointerException {
         List<String> list = new ArrayList<>();
-        for (final File fileEntry : Objects.requireNonNull(topLevelDirectory.listFiles())) {
+        for (final File fileEntry : topLevelDirectory.listFiles()) {
             if (fileEntry.isDirectory())
                 list.addAll(getFilesFromDirectory(fileEntry));
             else

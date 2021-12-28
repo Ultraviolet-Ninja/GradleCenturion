@@ -2,10 +2,12 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
+    id 'org.beryx.jlink' version '2.24.4'
     id 'com.palantir.docker' version '0.28.0'
     id 'info.solidsoft.pitest' version '1.7.0'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
+    id 'org.javamodularity.moduleplugin' version '1.8.10' apply false
 }
 
 group 'jasmine.jragon'
@@ -123,10 +125,18 @@ pitest {
 }
 
 javafx {
+    version = '17'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 jar.manifest.attributes(['Main-Class': "${mainClassName}"])
+
+jlink {
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = "${project.name}"
+    }
+}
 
 //task fatJar(type: Jar) {
 //    manifest.from jar.manifest

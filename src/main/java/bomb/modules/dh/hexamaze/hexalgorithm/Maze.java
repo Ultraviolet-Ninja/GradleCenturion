@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.decodeShape;
 import static bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.decodeWalls;
@@ -21,6 +20,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.HexagonDataStructure.decodeW
  * This class represents the entire maze that the expert sees on the manual page.The class takes in a file
  * that has contains data pertaining to the walls and shape for each HexNode.
  */
+@SuppressWarnings("ConstantConditions")
 public class Maze extends AbstractHexagon {
     private static final byte WALLS_INDEX = 0, SHAPE_INDEX = 1;
     private static final byte FULL_MAZE_SIDE_LENGTH = 12;
@@ -48,7 +48,7 @@ public class Maze extends AbstractHexagon {
         List<HexNode> nodes = new ArrayList<>();
 
         InputStream in = Maze.class.getResourceAsStream("maze.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in)));
+        CSVReader csvReader = new CSVReader(new InputStreamReader(in));
         String[] rowOfNodes;
         while ((rowOfNodes = csvReader.readNext()) != null) {
             for (String node : rowOfNodes) {
