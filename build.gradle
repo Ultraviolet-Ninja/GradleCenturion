@@ -15,6 +15,7 @@ version '0.21.1'
 
 application {
     mainClassName = 'bomb.Main'
+//    mainClassName = 'bomb.TestingArea'
     mainModule.set('bomb')
 }
 

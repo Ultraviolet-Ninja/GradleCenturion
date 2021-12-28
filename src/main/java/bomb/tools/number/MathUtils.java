@@ -16,6 +16,6 @@ public class MathUtils {
             if (n % i == 0 || n % (i + 2) == 0)
                 return false;
         }
-        return true;
+        return n != 1;
     }
 }
