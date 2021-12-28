@@ -7,7 +7,8 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public abstract class AbstractChipComponent extends Pane {
+public abstract sealed class AbstractChipComponent extends Pane
+        permits SixPinController, EightPinController, TenPinController {
     @FXML
     protected Label type, serialNumbers;
 
