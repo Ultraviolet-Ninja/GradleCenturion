@@ -30,8 +30,7 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - LGTM Code Quality
 - CodeMR Free Trial
 
-## Status
-In progress<br>
+## Status - In progress
 See the running list of modules [here](Progress.md)
 
 ## Inspiration
