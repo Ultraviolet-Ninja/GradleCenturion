@@ -287,10 +287,7 @@ public class Widget {
         serialCode = "";
         twoFactor = "";
         portArray = new int[]{0, 0, 0, 0, 0, 0};
-        setAllUnknown();
-    }
 
-    private static void setAllUnknown() {
         for (Indicator ind : indicatorArray)
             ind.setState(UNKNOWN);
     }

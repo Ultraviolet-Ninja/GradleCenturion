@@ -29,10 +29,10 @@ public class MorseCodeGraphFactory {
 
         try {
             reader.close();
+            return graph;
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
-        return graph;
     }
 
 

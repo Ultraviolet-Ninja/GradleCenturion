@@ -37,9 +37,9 @@ repositories {
 dependencies {
     implementation 'com.opencsv:opencsv:5.5.2'
     implementation 'org.javatuples:javatuples:1.2'
-    //implementation 'io.github.fvarrui:javpackager:1.5.1'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
     implementation 'org.jetbrains:annotations:22.0.0'
+    //implementation 'io.github.fvarrui:javpackager:1.5.1'
 
     implementation('com.jfoenix:jfoenix:9.0.4') {
         exclude group: "org.javafx"
