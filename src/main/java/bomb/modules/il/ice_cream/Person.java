@@ -33,11 +33,11 @@ public enum Person {
                             .collect(toCollection(() -> EnumSet.noneOf(Allergen.class)))
             );
         }
-//        try {
-//            reader.close();
+        try {
+            reader.close();
             return output;
-//        } catch (IOException e) {
-//            throw new IllegalStateException(e);
-//        }
+        } catch (IOException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }
