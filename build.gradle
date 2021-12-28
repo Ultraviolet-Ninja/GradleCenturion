@@ -11,7 +11,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.21.1'
+version '0.21.2'
 
 application {
     mainClassName = project.hasProperty('testingArea') ?
@@ -128,6 +128,7 @@ pitest {
 }
 
 javafx {
+    version = '17'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
