@@ -5,26 +5,28 @@ import bomb.Widget;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
 public class WordSearch extends Widget {
+    private static final int ARRAY_SIZE = 4;
     private static final String FILENAME = "words.txt";
 
     public static Set<String> findPossibleWords(char[] letters) throws IllegalArgumentException {
         checkSerialCode();
         validate(letters);
 
-        Set<String> possibleWords = new HashSet<>();
+        reverse(letters);
+        Set<String> possibleWords = new TreeSet<>();
         int makeOdd = getSerialCodeLastDigit() % 2;
         Map<Character, List<String>> wordMap = createWordMap();
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < ARRAY_SIZE; i++) {
             int index = (2 * i) + makeOdd;
             possibleWords.add(wordMap.get(letters[i]).get(index));
         }
@@ -32,10 +34,22 @@ public class WordSearch extends Widget {
         return possibleWords;
     }
 
-    private static void validate(char[] letters) throws IllegalArgumentException {
-        if (letters == null || letters.length != 4) {
-            throw new IllegalArgumentException("The input does not contain 4 letters");
+
+    private static void reverse(char[] letters) {
+        char temp;
+        int size = letters.length;
+        int halfSize = size / 2;
+        for (int i = 0; i < halfSize; i++) {
+            temp = letters[i];
+            letters[i] = letters[size - i - 1];
+            letters[size - i - 1] = temp;
         }
+    }
+
+    private static void validate(char[] letters) throws IllegalArgumentException {
+        if (letters == null || letters.length != ARRAY_SIZE)
+            throw new IllegalArgumentException("The input does not contain 4 letters");
+
         for (int i = 0; i < letters.length; i++) {
             char letter = letters[i];
             if (!Character.isLetter(letter))
