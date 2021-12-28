@@ -43,7 +43,6 @@ import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 import static java.util.function.UnaryOperator.identity;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 public class ManualController {
@@ -103,14 +102,14 @@ public class ManualController {
 
         Regex searchPattern = new Regex(searchTerm, Pattern.CASE_INSENSITIVE);
 
-        List<Node> resultingButtons = allRadioButtons.stream()
-                .filter(radioButton -> {
-                    String name = ((RadioButton) radioButton).getText();
-                    searchPattern.loadText(name);
-                    return searchPattern.hasMatch();
-                })
-                .collect(toList());
-        radioButtonHouse.getChildren().addAll(resultingButtons);
+        radioButtonHouse.getChildren().addAll(
+                allRadioButtons.stream()
+                        .filter(radioButton -> {
+                            String name = ((RadioButton) radioButton).getText();
+                            searchPattern.loadText(name);
+                            return searchPattern.hasMatch();
+                        }).toList()
+        );
     }
 
     private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {

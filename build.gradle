@@ -33,12 +33,12 @@ repositories {
 }
 
 dependencies {
-    compile 'org.jetbrains:annotations:22.0.0'
-
     implementation 'com.opencsv:opencsv:5.5.2'
     implementation 'org.javatuples:javatuples:1.2'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
+    implementation 'org.jetbrains:annotations:22.0.0'
+
     implementation('com.jfoenix:jfoenix:9.0.4') {
         exclude group: "org.javafx"
     }
@@ -128,20 +128,20 @@ javafx {
 
 jar.manifest.attributes(['Main-Class': "${mainClassName}"])
 
-task fatJar(type: Jar) {
-    manifest.from jar.manifest
-    from {
-        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
-    } {
-        exclude "META-INF/*.SF"
-        exclude "META-INF/*.DSA"
-        exclude "META-INF/*.RSA"
-    }
-}
-
-artifacts {
-    archives fatJar
-}
+//task fatJar(type: Jar) {
+//    manifest.from jar.manifest
+//    from {
+//        configurations.runtimeClasspath.collect {it.isDirectory() ? it : zipTree(it)}
+//    } {
+//        exclude "META-INF/*.SF"
+//        exclude "META-INF/*.DSA"
+//        exclude "META-INF/*.RSA"
+//    }
+//}
+//
+//artifacts {
+//    archives fatJar
+//}
 
 docker {
     dependsOn(jar)

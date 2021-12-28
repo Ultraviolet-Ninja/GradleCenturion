@@ -2,7 +2,6 @@ package bomb.tools.data.structures.graph.list;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class ListGraph<E> {
