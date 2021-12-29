@@ -57,6 +57,10 @@ public enum CheckoutItem implements Resettable {
                 || (this.category == VEGETABLE && this != PASTA_SAUCE);
     }
 
+    public double getBasePrice() {
+        return basePrice;
+    }
+
     public double getCurrentPiece() {
         return currentPrice;
     }

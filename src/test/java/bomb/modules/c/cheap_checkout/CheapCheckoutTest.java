@@ -1,9 +1,11 @@
 package bomb.modules.c.cheap_checkout;
 
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.DayOfWeek;
+import java.util.EnumSet;
 import java.util.List;
 
 import static bomb.modules.c.cheap_checkout.CheckoutItem.BANANAS;
@@ -60,20 +62,30 @@ public class CheapCheckoutTest {
     public Object[][] allWeekTestProvider() {
         List<CheckoutItem> items = List.of(HONEY, COFFEE_BEANS, TEA, CHEESE, STEAK, ORANGES);
         double[] weights = {0.5, 1.0};
+        double givenCash = 25.00;
 
         return new Object[][]{
-                {items, SUNDAY, weights, }, {items, MONDAY, weights, },
-                {items, TUESDAY, weights, }, {items, WEDNESDAY, weights, },
-                {items, THURSDAY, weights, }, {items, FRIDAY, weights, },
-                {items, SATURDAY, weights, }
+                {items, SUNDAY, weights, givenCash, "$30.53 Must get more money from customer"},
+                {items, MONDAY, weights, givenCash, "$24.52"},
+                {items, TUESDAY, weights, givenCash, "$43.23 Must get more money from customer"},
+                {items, WEDNESDAY, weights, givenCash, "$43.19 Must get more money from customer"},
+                {items, THURSDAY, weights, givenCash, "$19.68"},
+                {items, FRIDAY, weights, givenCash, "$26.43 Must get more money from customer"},
+                {items, SATURDAY, weights, givenCash, "$23.34"}
         };
     }
 
-    @Test(dataProvider = "allWeekTestProvider", enabled = false)
+    @Test(dataProvider = "allWeekTestProvider")
     public void allWeekTest(List<CheckoutItem> items, DayOfWeek dayOfWeek, double[] perPoundWeights,
                             double givenCash, String expectedText) {
         String results = CheapCheckout.calculateTotalPrice(items, dayOfWeek, perPoundWeights, givenCash);
 
         assertEquals(results, expectedText);
+    }
+
+    @AfterTest
+    public void verifyReset() {
+        EnumSet.allOf(CheckoutItem.class)
+                .forEach(item -> assertEquals(item.getBasePrice(), item.getCurrentPiece()));
     }
 }

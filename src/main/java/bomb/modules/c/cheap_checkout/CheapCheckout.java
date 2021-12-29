@@ -10,8 +10,11 @@ import java.util.function.ToDoubleFunction;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.FRUIT;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.SWEET;
 import static bomb.tools.number.MathUtils.digitalRoot;
+import static bomb.tools.number.MathUtils.roundToNPlaces;
 
 public class CheapCheckout extends Widget {
+    private static final double SUNDAY_ADDITION = 2.15, THURSDAY_SALE = 0.5,
+            FRIDAY_MARK_UP = 1.25, SATURDAY_SALE = 0.65;
     private static final int REQUIRED_ITEM_COUNT = 6, REQUIRED_WEIGHT_COUNT = 2;
     private static final ToDoubleFunction<List<CheckoutItem>> TO_SUM = items -> items.stream()
             .mapToDouble(CheckoutItem::getCurrentPiece)
@@ -28,7 +31,7 @@ public class CheapCheckout extends Widget {
 
         CheckoutItem.resetAlteredItems(items);
 
-        return String.format("$%.2f ", total) + (needsMoreMoney ? "Must get more money from customer" : "");
+        return String.format("$%.2f", total) + (needsMoreMoney ? " Must get more money from customer" : "");
     }
 
     private static void validateInput(List<CheckoutItem> items, double[] perPoundWeights)
@@ -63,7 +66,7 @@ public class CheapCheckout extends Widget {
         return items.stream()
                 .peek(item -> {
                     if (!item.isByThePound() && item.name().contains("S"))
-                        item.addToPrice(2.15);
+                        item.addToPrice(SUNDAY_ADDITION);
                 })
                 .mapToDouble(CheckoutItem::getCurrentPiece)
                 .sum();
@@ -82,7 +85,7 @@ public class CheapCheckout extends Widget {
     private static double calculateTroublesomeTuesday(List<CheckoutItem> items) {
         int counter = 0;
         for (CheckoutItem item : items) {
-            int digRoot = digitalRoot((int) item.getCurrentPiece());
+            int digRoot = digitalRoot(item.getCurrentPiece());
             item.addToPrice(digRoot);
             if (++counter == 4)
                 break;
@@ -94,6 +97,7 @@ public class CheapCheckout extends Widget {
     private static double calculateWackyWednesday(List<CheckoutItem> items) {
         return items.stream()
                 .mapToDouble(CheckoutItem::getCurrentPiece)
+                .map(value -> roundToNPlaces(value, 2))
                 .map(CheapCheckout::swapMinMaxDigits)
                 .sum();
     }
@@ -101,8 +105,8 @@ public class CheapCheckout extends Widget {
     private static double calculateThrillingThursday(List<CheckoutItem> items) {
         //Half off odd-indexed items
         int size = items.size();
-        for (int i = 1; i < size; i += 2)
-            items.get(i).applyMultiplicand(0.5);
+        for (int i = 0; i < size; i += 2)
+            items.get(i).applyMultiplicand(THURSDAY_SALE);
 
         return TO_SUM.applyAsDouble(items);
     }
@@ -111,7 +115,7 @@ public class CheapCheckout extends Widget {
         return items.stream()
                 .peek(item -> {
                     if (item.matchesCategory(FRUIT))
-                        item.applyMultiplicand(1.25);
+                        item.applyMultiplicand(FRIDAY_MARK_UP);
                 })
                 .mapToDouble(CheckoutItem::getCurrentPiece)
                 .sum();
@@ -121,15 +125,19 @@ public class CheapCheckout extends Widget {
         return items.stream()
                 .peek(item -> {
                     if (item.matchesCategory(SWEET))
-                        item.applyMultiplicand(0.65);
+                        item.applyMultiplicand(SATURDAY_SALE);
                 })
                 .mapToDouble(CheckoutItem::getCurrentPiece)
                 .sum();
     }
 
     private static double swapMinMaxDigits(double number) {
-        String digit = String.valueOf(number);
-        char[] letters = digit.toCharArray();
+        number = roundToNPlaces(number, 2);
+        StringBuilder digit = new StringBuilder().append(number);
+        if (digit.length() == 3)
+            digit.append(0);
+
+        char[] letters = digit.toString().toCharArray();
         char min = findMinDigit(letters);
         char max = findMaxDigit(letters);
         StringBuilder output = new StringBuilder();
