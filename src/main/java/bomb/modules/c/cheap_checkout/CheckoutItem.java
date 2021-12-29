@@ -1,6 +1,7 @@
 package bomb.modules.c.cheap_checkout;
 
 import bomb.abstractions.Resettable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -14,7 +15,6 @@ import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.PROTEIN;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.SWEET;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.VEGETABLE;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.WATER;
-import static java.util.Arrays.stream;
 
 public enum CheckoutItem implements Resettable {
     BANANAS(FRUIT, 0.87), BROCCOLI(VEGETABLE, 1.39),
@@ -53,7 +53,8 @@ public enum CheckoutItem implements Resettable {
     }
 
     public boolean isByThePound() {
-        return this.category == FRUIT || (this.category == PROTEIN && this != PEANUT_BUTTER);
+        return this.category == FRUIT || (this.category == PROTEIN && this != PEANUT_BUTTER)
+                || (this.category == VEGETABLE && this != PASTA_SAUCE);
     }
 
     public double getCurrentPiece() {
@@ -62,10 +63,6 @@ public enum CheckoutItem implements Resettable {
 
     public boolean matchesCategory(Category toCompare) {
         return category == toCompare;
-    }
-
-    public void setCurrentPiece(double currentPrice) {
-        this.currentPrice = currentPrice;
     }
 
     public void addToPrice(double addition) {
@@ -81,11 +78,11 @@ public enum CheckoutItem implements Resettable {
         currentPrice = basePrice;
     }
 
-    public static void resetAlteredItems(List<CheckoutItem> alteredItems) {
+    public static void resetAlteredItems(@NotNull List<CheckoutItem> alteredItems) {
         alteredItems.forEach(Resettable::reset);
     }
 
     public enum Category {
-        DAIRY, FRUIT, VEGETABLE, GRAIN, PROTEIN, OIL, GRAIN_OIL, SWEET, CLOTHING, CARE, WATER, BEAN, OTHER
+        DAIRY, FRUIT, VEGETABLE, GRAIN, PROTEIN, OIL, SWEET, CARE, WATER, OTHER
     }
 }

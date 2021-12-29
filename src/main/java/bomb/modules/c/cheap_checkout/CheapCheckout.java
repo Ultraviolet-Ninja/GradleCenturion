@@ -35,7 +35,7 @@ public class CheapCheckout extends Widget {
             throws IllegalArgumentException {
         long distinct = items.stream().distinct().count();
         if (distinct != REQUIRED_ITEM_COUNT)
-            throw new IllegalArgumentException("Must have 6 items");
+            throw new IllegalArgumentException("Must have 6 distinct items");
         if (perPoundWeights.length != REQUIRED_WEIGHT_COUNT)
             throw new IllegalArgumentException("Must have 2 weights for the 2 items that are \"by-the-pound\"");
         if (!(items.get(4).isByThePound() && items.get(5).isByThePound()))
@@ -92,10 +92,14 @@ public class CheapCheckout extends Widget {
     }
 
     private static double calculateWackyWednesday(List<CheckoutItem> items) {
-        return 0.0;
+        return items.stream()
+                .mapToDouble(CheckoutItem::getCurrentPiece)
+                .map(CheapCheckout::swapMinMaxDigits)
+                .sum();
     }
 
     private static double calculateThrillingThursday(List<CheckoutItem> items) {
+        //Half off odd-indexed items
         int size = items.size();
         for (int i = 1; i < size; i += 2)
             items.get(i).applyMultiplicand(0.5);
@@ -123,5 +127,37 @@ public class CheapCheckout extends Widget {
                 .sum();
     }
 
+    private static double swapMinMaxDigits(double number) {
+        String digit = String.valueOf(number);
+        char[] letters = digit.toCharArray();
+        char min = findMinDigit(letters);
+        char max = findMaxDigit(letters);
+        StringBuilder output = new StringBuilder();
 
+        for (char letter : letters) {
+            if (letter == min) letter = max;
+            else if (letter == max) letter = min;
+            output.append(letter);
+        }
+
+        return Double.parseDouble(output.toString());
+    }
+
+    private static char findMinDigit(char[] letters) {
+        char min = '9';
+        for (char letter : letters) {
+            if (letter < min && Character.isDigit(letter))
+                min = letter;
+        }
+        return min;
+    }
+
+    private static char findMaxDigit(char[] letters) {
+        char max = '0';
+        for (char letter : letters) {
+            if (letter > max)
+                max = letter;
+        }
+        return max;
+    }
 }
