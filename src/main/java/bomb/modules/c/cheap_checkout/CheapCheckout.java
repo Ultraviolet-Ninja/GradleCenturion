@@ -26,7 +26,9 @@ public class CheapCheckout extends Widget {
         double total = calculateByDay(items, dayOfWeek);
         boolean needsMoreMoney = total > givenCash;
 
-        return String.format("$%.2f ", total) + (needsMoreMoney ? "Must get money change" : "");
+        CheckoutItem.resetAlteredItems(items);
+
+        return String.format("$%.2f ", total) + (needsMoreMoney ? "Must get more money from customer" : "");
     }
 
     private static void validateInput(List<CheckoutItem> items, double[] perPoundWeights)
@@ -114,4 +116,6 @@ public class CheapCheckout extends Widget {
                 .mapToDouble(CheckoutItem::getCurrentPiece)
                 .sum();
     }
+
+
 }

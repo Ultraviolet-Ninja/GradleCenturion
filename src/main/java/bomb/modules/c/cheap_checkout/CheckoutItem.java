@@ -2,6 +2,8 @@ package bomb.modules.c.cheap_checkout;
 
 import bomb.abstractions.Resettable;
 
+import java.util.List;
+
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.CARE;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.DAIRY;
 import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.FRUIT;
@@ -51,10 +53,7 @@ public enum CheckoutItem implements Resettable {
     }
 
     public boolean isByThePound() {
-        if (this == PEANUT_BUTTER)
-            return false;
-
-        return this.category == PROTEIN || this.category == FRUIT;
+        return this.category == FRUIT || (this.category == PROTEIN && this != PEANUT_BUTTER);
     }
 
     public double getCurrentPiece() {
@@ -63,6 +62,10 @@ public enum CheckoutItem implements Resettable {
 
     public boolean matchesCategory(Category toCompare) {
         return category == toCompare;
+    }
+
+    public void setCurrentPiece(double currentPrice) {
+        this.currentPrice = currentPrice;
     }
 
     public void addToPrice(double addition) {
@@ -78,8 +81,8 @@ public enum CheckoutItem implements Resettable {
         currentPrice = basePrice;
     }
 
-    public static void resetAllItems() {
-        stream(values()).forEach(Resettable::reset);
+    public static void resetAlteredItems(List<CheckoutItem> alteredItems) {
+        alteredItems.forEach(Resettable::reset);
     }
 
     public enum Category {
