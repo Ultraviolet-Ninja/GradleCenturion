@@ -10,6 +10,7 @@ import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.string.StringFormat.createOrdinalNumber;
 
 /**
  *
@@ -81,8 +82,8 @@ public class TwoBit extends Widget {
 
         if (isSouvenirActive) {
             Souvenir.addRelic(
-                    "TwoBit" + determineSouvenirOrdinal() + " Query", newCode + " - " +
-                            CODE_GRID[coords[0]][coords[1]]
+                    String.format("TwoBit %s Query", createOrdinalNumber(currentState.ordinal())),
+                    String.format("%s - %s", newCode, CODE_GRID[coords[0]][coords[1]])
             );
         }
         currentState = currentState.nextState();
@@ -108,10 +109,6 @@ public class TwoBit extends Widget {
         codeOut[1] = Integer.parseInt(code.substring(1));
 
         return codeOut;
-    }
-
-    private static String determineSouvenirOrdinal() {
-        return (currentState == SECOND_QUERY) ? "2nd" : "3rd";
     }
 
     public static void resetStage() {
