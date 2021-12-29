@@ -33,12 +33,18 @@ public class CheapCheckout extends Widget {
 
     private static void validateInput(List<CheckoutItem> items, double[] perPoundWeights)
             throws IllegalArgumentException {
-        if (items.size() != REQUIRED_ITEM_COUNT)
+        long distinct = items.stream().distinct().count();
+        if (distinct != REQUIRED_ITEM_COUNT)
             throw new IllegalArgumentException("Must have 6 items");
         if (perPoundWeights.length != REQUIRED_WEIGHT_COUNT)
             throw new IllegalArgumentException("Must have 2 weights for the 2 items that are \"by-the-pound\"");
         if (!(items.get(4).isByThePound() && items.get(5).isByThePound()))
-            throw new IllegalArgumentException("The 4th and 5th items must be \"by-the-pound\"");
+            throw new IllegalArgumentException("The 5th and 6th items must be \"by-the-pound\"");
+
+        for (int i = 0; i < 4; i++) {
+            if (items.get(i).isByThePound())
+                throw new IllegalArgumentException("Items 1-4 shouldn't be weighted");
+        }
     }
 
     private static double calculateByDay(List<CheckoutItem> items, DayOfWeek dayOfWeek) {
