@@ -22,7 +22,7 @@
 - The Bulb
 - TwoBit
 
-20/100 + Colored Switches
+21/100
 
 ### Incomplete Modules
 - Battleship
@@ -109,4 +109,4 @@
 - Yahtzee
 - Zoo
 
-70/100
+69/100

@@ -24,6 +24,7 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.Hex
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
 import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
+import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;
 
@@ -31,8 +32,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
     public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
             NODAL_SIDE_LENGTH = area -> {
                 double result = (3 + Math.sqrt(12 * area - 3)) / 6;
-                return result % 1 != 0.0 ? -1 : (int) result;
-                //If is not an integer
+                return isAnInteger(result) ? (int) result : -1;
             };
 
     private final int sideLength;
