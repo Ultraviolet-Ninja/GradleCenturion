@@ -8,7 +8,7 @@ import javafx.scene.shape.Circle;
 
 import java.util.List;
 
-public final class EightPinController extends AbstractChipComponent {
+public class EightPinController extends AbstractChipComponent {
     public static final int PIN_COUNT = 8;
 
     @FXML
