@@ -38,13 +38,16 @@ public class CaesarTest {
             Widget.setIndicator(ON, CAR);
         };
 
-        ConditionSetter thirdBranchCondition = () -> Widget.setSerialCode("BJ3WL1");
+        ConditionSetter thirdBranchCondition = () -> {
+            Widget.setSerialCode("BJ3WL1");
+            Widget.setDoubleAs(2);
+        };
         ConditionSetter fourthBranchCondition = () -> Widget.setSerialCode("A65WU7");
 
         String text = "ANWMDL";
         return new Object[][]{
                 {firstBranchCondition, text, text}, {secondBranchCondition, text, "ZMVLCK"},
-                {thirdBranchCondition, text, text}, {fourthBranchCondition, "ZAJRMF", "ABKSNG"}
+                {thirdBranchCondition, text, "YLUKBJ"}, {fourthBranchCondition, "ZAJRMF", "ABKSNG"}
         };
     }
 
