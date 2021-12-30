@@ -35,12 +35,14 @@ public class CaesarTest {
 
         ConditionSetter secondBranchCondition = () -> {
             Widget.setSerialCode(serialCode);
+            Widget.setIndicator(ON, NSA);
             Widget.setIndicator(ON, CAR);
         };
 
         ConditionSetter thirdBranchCondition = () -> {
             Widget.setSerialCode("BJ3WL1");
             Widget.setDoubleAs(2);
+            Widget.setPortValue(PARALLEL, 1);
         };
         ConditionSetter fourthBranchCondition = () -> Widget.setSerialCode("A65WU7");
 
