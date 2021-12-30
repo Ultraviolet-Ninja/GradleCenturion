@@ -25,7 +25,8 @@
 21/100
 
 ### Incomplete Modules
-- Battleship
+- Battleship 
+- Caesar Cipher
 - Cheap Checkout
 - Ice Cream
 - Morsematics
@@ -36,7 +37,7 @@
 - Square Button
 - Word Search
 
-10/100
+11/100
 
 ### Untouched Modules
 - 3D Maze
@@ -46,7 +47,6 @@
 - Binary LEDs
 - BitMaps
 - Broken Button
-- Caesar Cipher
 - Color Flash
 - Color Math
 - Color Squares
@@ -109,4 +109,4 @@
 - Yahtzee
 - Zoo
 
-69/100
+68/100

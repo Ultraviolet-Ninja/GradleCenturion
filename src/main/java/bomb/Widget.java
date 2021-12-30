@@ -5,6 +5,7 @@ import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
 import bomb.modules.ab.blind_alley.BlindAlley;
 import bomb.modules.dh.forget_me.ForgetMeNot;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -71,7 +72,7 @@ public class Widget {
         }
     }
 
-    public static void setIndicator(TrinarySwitch state, Indicator which) {
+    public static void setIndicator(@NotNull TrinarySwitch state, @NotNull Indicator which) {
         indicatorArray[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
@@ -101,7 +102,7 @@ public class Widget {
         updatesModules();
     }
 
-    public static void setPortValue(Port which, int newValue) {
+    public static void setPortValue(@NotNull Port which, int newValue) {
         portArray[which.ordinal()] = newValue;
         BlindAlley.alleyUpdate();
     }
@@ -122,8 +123,7 @@ public class Widget {
      * @return An int of the last digit from a String
      */
     public static int getSerialCodeLastDigit() {
-        String buffer = filter(serialCode, NUMBER_PATTERN);
-        return Integer.parseInt(buffer.substring(buffer.length() - 1));
+        return Character.getNumericValue(serialCode.charAt(serialCode.length() - 1));
     }
 
     /**
@@ -132,7 +132,7 @@ public class Widget {
      * @param indicators The array of possible Indicators
      * @return True if any Indicator is found
      */
-    public static boolean hasFollowingIndicators(Indicator... indicators) {
+    public static boolean hasFollowingIndicators(Indicator @NotNull ... indicators) {
         for (Indicator current : indicators) {
             if (hasIndicator(current)) return true;
         }
@@ -145,7 +145,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the Indicator is found
      */
-    public static boolean hasIndicator(Indicator ind) {
+    public static boolean hasIndicator(@NotNull Indicator ind) {
         return hasLitIndicator(ind) || hasUnlitIndicator(ind);
     }
 
@@ -155,7 +155,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the lit Indicator is found
      */
-    public static boolean hasLitIndicator(Indicator ind) {
+    public static boolean hasLitIndicator(@NotNull Indicator ind) {
         return indicatorArray[ind.ordinal()].getState() == ON;
     }
 
@@ -165,7 +165,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the unlit Indicator is found
      */
-    public static boolean hasUnlitIndicator(Indicator ind) {
+    public static boolean hasUnlitIndicator(@NotNull Indicator ind) {
         return indicatorArray[ind.ordinal()].getState() == OFF;
     }
 
@@ -198,7 +198,7 @@ public class Widget {
      * @param howMany The required amount
      * @return True if the bomb contains more the required amount
      */
-    public static boolean hasMorePortsThanSpecified(Port port, int howMany) {
+    public static boolean hasMorePortsThanSpecified(@NotNull Port port, int howMany) {
         return portArray[port.ordinal()] > howMany;
     }
 
@@ -210,7 +210,7 @@ public class Widget {
         return numModules;
     }
 
-    public static int getPortQuantity(Port which) {
+    public static int getPortQuantity(@NotNull Port which) {
         return portArray[which.ordinal()];
     }
 
@@ -219,9 +219,7 @@ public class Widget {
     }
 
     public static int countPortTypes() {
-        return (int) stream(portArray)
-                .filter(port -> port > 0)
-                .count();
+        return (int) stream(portArray).count();
     }
 
     public static boolean getIsForgetMeNotActive() {
@@ -266,7 +264,7 @@ public class Widget {
         return twoFactor;
     }
 
-    public static boolean doesPortExists(Port port) {
+    public static boolean doesPortExists(@NotNull Port port) {
         return portArray[port.ordinal()] > 0;
     }
 
