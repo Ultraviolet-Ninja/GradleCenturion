@@ -1,4 +1,10 @@
 package bomb.modules.m.morsematics;
 
-public class MorsematicsController {
+import bomb.abstractions.Resettable;
+
+public class MorsematicsController implements Resettable {
+    @Override
+    public void reset() {
+
+    }
 }

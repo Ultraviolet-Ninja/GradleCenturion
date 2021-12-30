@@ -1,5 +1,7 @@
 package bomb.tools.pattern.observer;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ public class ObserverHub {
         OBSERVER_LIST.add(observer);
     }
 
-    public static void updateAtIndex(ObserverIndex index) {
+    public static void updateAtIndex(@NotNull ObserverIndex index) {
         OBSERVER_LIST.get(index.ordinal()).update();
     }
 }

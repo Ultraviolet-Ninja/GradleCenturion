@@ -1,5 +1,7 @@
 package bomb.tools.data.structures.trie;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -20,12 +22,12 @@ public class Trie {
         addWords(startWords);
     }
 
-    public void addWords(Collection<String> words) {
+    public void addWords(@NotNull Collection<String> words) {
         for (String word : words)
             addWord(word);
     }
 
-    public void addWord(final String word) {
+    public void addWord(final @NotNull String word) {
         addWord(word.toLowerCase(), 0, root);
     }
 
@@ -42,7 +44,7 @@ public class Trie {
         addWord(word, index + 1, currentNode.getNextNode(nextChar));
     }
 
-    public Set<String> getWordsStartingWith(String prefix) {
+    public Set<String> getWordsStartingWith(@NotNull String prefix) {
         List<String> words = new ArrayList<>();
         StringBuilder builder = new StringBuilder();
         TrieNode currentNode = root;
@@ -96,8 +98,8 @@ public class Trie {
             words.add(builder.toString());
     }
 
-    public boolean containsWord(String word) {
-        if (word == null || word.isEmpty())
+    public boolean containsWord(@NotNull String word) {
+        if (word.isEmpty())
             return false;
         word = word.toLowerCase();
 
