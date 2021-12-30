@@ -219,7 +219,9 @@ public class Widget {
     }
 
     public static int countPortTypes() {
-        return (int) stream(portArray).count();
+        return (int) stream(portArray)
+                .filter(port -> port > 0)
+                .count();
     }
 
     public static boolean getIsForgetMeNotActive() {
