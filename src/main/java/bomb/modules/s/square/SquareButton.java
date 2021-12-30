@@ -2,6 +2,7 @@ package bomb.modules.s.square;
 
 import bomb.Widget;
 import bomb.tools.number.MathUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,9 +30,9 @@ public class SquareButton extends Widget {
 
     private static final Set<String> COLOR_WORDS = new TreeSet<>(asList("Purple", "Indigo", "Maroon", "Jade"));
 
-    public static String solve(int buttonColor, String buttonText) throws IllegalArgumentException {
+    public static String solve(int buttonColor, @NotNull String buttonText) throws IllegalArgumentException {
         checkSerialCode();
-        validateButtonInput(buttonColor, buttonText);
+        validateButtonColor(buttonColor);
         buttonText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
         if (buttonColor == BLUE && numDoubleAs > numDBatteries) return HOLD;
@@ -47,11 +48,9 @@ public class SquareButton extends Widget {
         return HOLD;
     }
 
-    private static void validateButtonInput(int buttonColor, String buttonText) throws IllegalArgumentException {
+    private static void validateButtonColor(int buttonColor) throws IllegalArgumentException {
         if (buttonColor < BLUE || buttonColor > WHITE)
             throw new IllegalArgumentException("Invalid button color");
-        if (buttonText == null)
-            throw new IllegalArgumentException("Text cannot be null");
     }
 
     private static boolean matchesGreatestSerialCodeNumber(String buttonText) {

@@ -2,6 +2,7 @@ package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
 import bomb.tools.logic.LogicOperator;
+import org.jetbrains.annotations.NotNull;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
@@ -25,7 +26,7 @@ public class Bitwise extends Widget {
      * @throws IllegalArgumentException - The serial code, number of timer minutes and modules
      *                                  are needed for this module to work
      */
-    public static String getByte(LogicOperator logicOps) throws IllegalArgumentException {
+    public static String getByte(@NotNull LogicOperator logicOps) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < 8; i++)
             builder.append(solve(i, logicOps));

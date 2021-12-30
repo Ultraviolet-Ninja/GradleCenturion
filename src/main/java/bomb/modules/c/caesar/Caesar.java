@@ -1,13 +1,16 @@
 package bomb.modules.c.caesar;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
+import org.jetbrains.annotations.NotNull;
+
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.Port.PARALLEL;
 
 public class Caesar extends Widget {
 
-    public static String reshuffle(String input) {
-        return restructure(input, offset());
+    public static String reshuffle(@NotNull String input) {
+        return restructure(input, createOffset());
     }
 
     private static String restructure(String encoded, int numbShift) {
@@ -26,13 +29,15 @@ public class Caesar extends Widget {
         return result.toString();
     }
 
-    private static int offset() {
-        if (hasLitIndicator(Indicator.NSA) && getPortQuantity(Port.PARALLEL) > 0) return 0;
+    private static int createOffset() {
+        if (hasLitIndicator(NSA) && hasMorePortsThanSpecified(PARALLEL, 0))
+            return 0;
+
         int out = 0;
         out += getAllBatteries();
         if (hasVowelInSerialCode()) out--;
         if (hasEvenNumberInSerialCode()) out++;
-        if (hasIndicator(Indicator.CAR)) out++;
+        if (hasIndicator(CAR)) out++;
         return out;
     }
 }

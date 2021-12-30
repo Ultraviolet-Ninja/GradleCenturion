@@ -1,6 +1,7 @@
 package bomb.tools.filter;
 
 import org.intellij.lang.annotations.Language;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -68,7 +69,7 @@ public class Regex implements Iterable<String> {
         textMatcher.reset(text);
     }
 
-    public List<String> loadCollection(Collection<String> textCollections) {
+    public List<String> loadCollection(@NotNull Collection<String> textCollections) {
         return textCollections.stream()
                 .map(regPattern::matcher)
                 .map(RESULT_STREAM)
@@ -110,7 +111,7 @@ public class Regex implements Iterable<String> {
                 .collect(Collectors.joining());
     }
 
-    public boolean collectionMatches(Collection<String> c) {
+    public boolean collectionMatches(@NotNull Collection<String> c) {
         String pattern = regPattern.pattern();
 
         return c.stream()

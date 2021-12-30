@@ -3,6 +3,8 @@ package bomb.modules.wz.word_search;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.trie.Trie;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
@@ -10,8 +12,9 @@ import java.util.Set;
 public class WordFinder {
     private static int currentGridLength, longestWordLength;
 
-    public static Pair<Coordinates, Coordinates> findWordCoordinates(char[][] grid, Set<String> possibleWords) {
-        validate(grid, possibleWords);
+    public static @Nullable Pair<Coordinates, Coordinates> findWordCoordinates(char[][] grid,
+                                                                               @NotNull Set<String> possibleWords) {
+        validate(grid);
 
         Coordinates startPosition, endPosition;
         Trie trie = new Trie(possibleWords);
@@ -35,8 +38,7 @@ public class WordFinder {
         return null;
     }
 
-    private static void validate(char[][] grid, Set<String> possibleWords) throws IllegalArgumentException {
-        if (possibleWords == null) throw new IllegalArgumentException("Cannot have a null set");
+    private static void validate(char[][] grid) throws IllegalArgumentException {
         int width = grid.length;
 
         for (char[] row : grid) {

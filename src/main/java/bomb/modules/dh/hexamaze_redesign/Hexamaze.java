@@ -13,6 +13,7 @@ import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import javafx.scene.paint.Color;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Hexamaze extends Widget {
         COLOR_MAP.put(MAGENTA, 5);
     }
 
-    public static String solve(List<HexTile> tileList) throws IllegalArgumentException {
+    public static String solve(@NotNull List<HexTile> tileList) throws IllegalArgumentException {
         Maze maze = new Maze();
         List<HexNode> nodeList = tileList.stream()
                 .map(HexTile::getInternalNode)

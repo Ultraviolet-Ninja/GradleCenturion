@@ -23,18 +23,6 @@ public class WordFinderTest {
         WordFinder.findWordCoordinates(grid, Set.of("MATH", "SEE", "HELP", "FOUND"));
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class,
-            expectedExceptionsMessageRegExp = "Cannot have a null set")
-    public void nullSetValidationTest() {
-        int length = 3;
-        char[][] grid = new char[length][];
-
-        for (int i = 0; i < length; i++) {
-            grid[i] = new char[length];
-        }
-        WordFinder.findWordCoordinates(grid, null);
-    }
-
     @DataProvider
     public Object[][] nonNullTestProvider() {
         return new Object[][]{

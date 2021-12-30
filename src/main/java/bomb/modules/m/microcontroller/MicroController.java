@@ -6,13 +6,14 @@ import bomb.enumerations.Port;
 import bomb.modules.m.microcontroller.chip.AbstractController;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 import static bomb.tools.filter.RegexFilter.filter;
 
 public class MicroController extends Widget {
-    public static List<Color> getPinColors(String moduleSerialNumbers, AbstractController controller)
+    public static List<Color> getPinColors(@NotNull String moduleSerialNumbers, AbstractController controller)
             throws IllegalArgumentException {
         validateInput(moduleSerialNumbers, controller);
         if (containsRequiredNumbers(moduleSerialNumbers))

@@ -2,6 +2,9 @@ package bomb.modules.dh.emoji;
 
 import bomb.Widget;
 import bomb.tools.filter.Regex;
+import org.jetbrains.annotations.NotNull;
+
+import static bomb.modules.dh.emoji.Emoji.EMOJI_ARRAY;
 
 /**
  * This class deals with the Emoji Math module.
@@ -21,7 +24,7 @@ public class EmojiMath extends Widget {
      * @param input The equation from the TextField
      * @return The values gathered from the emoji equation
      */
-    public static int calculate(String input) {
+    public static int calculate(@NotNull String input) {
         VALIDATION.loadText(input);
         if (!VALIDATION.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
 
@@ -51,7 +54,7 @@ public class EmojiMath extends Widget {
     }
 
     private static String findEmoji(String emoji) {
-        for (Emoji emo : Emoji.values()) {
+        for (Emoji emo : EMOJI_ARRAY) {
             if (emo.getLabel().equals(emoji)) {
                 return String.valueOf(emo.ordinal());
             }

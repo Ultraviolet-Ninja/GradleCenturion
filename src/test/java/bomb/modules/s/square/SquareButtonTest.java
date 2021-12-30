@@ -35,8 +35,7 @@ public class SquareButtonTest {
     @DataProvider
     public Object[][] exceptionSolveTestProvider() {
         return new Object[][]{
-                {"", 0, ""}, {VALID_SERIAL_CODE, -1, null},
-                {VALID_SERIAL_CODE, 5, null}, {VALID_SERIAL_CODE, 1, null}
+                {"", 0, ""}, {VALID_SERIAL_CODE, -1, null}, {VALID_SERIAL_CODE, 5, null}
         };
     }
 

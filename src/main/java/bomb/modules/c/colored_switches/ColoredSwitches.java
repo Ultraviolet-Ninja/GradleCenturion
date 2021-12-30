@@ -2,6 +2,7 @@ package bomb.modules.c.colored_switches;
 
 import bomb.modules.s.switches.Switches;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.jgrapht.Graph;
 import org.jgrapht.alg.interfaces.AStarAdmissibleHeuristic;
 import org.jgrapht.alg.shortestpath.AStarShortestPath;
@@ -62,7 +63,8 @@ public class ColoredSwitches extends Switches {
         throw new IllegalStateException();
     }
 
-    public static List<String> produceFinalMoveList(SwitchColor[] startingColors, byte desiredState) throws IllegalStateException, IllegalArgumentException {
+    public static List<String> produceFinalMoveList(@NotNull SwitchColor[] startingColors, byte desiredState)
+            throws IllegalStateException, IllegalArgumentException {
         validateByte(desiredState);
         validateSwitchColors(startingColors);
 

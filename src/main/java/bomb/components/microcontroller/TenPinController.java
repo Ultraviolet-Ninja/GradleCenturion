@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class TenPinController extends AbstractChipComponent {
     }
 
     @Override
-    public void setColors(List<Color> results) {
+    public void setColors(@NotNull List<Color> results) {
         Circle[] array = new Circle[]{pinOne, pinTwo, pinThree, pinFour, pinFive,
                 pinSix, pinSeven, pinEight, pinNine, pinTen};
         if (results.size() == PIN_COUNT) {

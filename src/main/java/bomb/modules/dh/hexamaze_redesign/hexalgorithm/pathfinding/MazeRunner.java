@@ -5,6 +5,7 @@ import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
 import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
+import org.jetbrains.annotations.NotNull;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
@@ -28,7 +29,7 @@ public class MazeRunner {
             LEFT_SIDE_MOVE_DOWN_RIGHT = new Coordinates(1, 1),
             RIGHT_SIDE_MOVE_TOP_RIGHT = new Coordinates(1, -1);
 
-    public static List<Coordinates> runMaze(Grid grid, List<Coordinates> possibleExits)
+    public static List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
             throws IllegalArgumentException {
         Coordinates startingLocation = findStartingLocation(grid);
         Graph<Coordinates, DefaultEdge> mappedGraph = convertGridToGraph(grid);

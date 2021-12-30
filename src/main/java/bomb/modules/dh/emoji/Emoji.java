@@ -11,6 +11,8 @@ public enum Emoji implements Labeled {
     EQUAL_CLOSED("=)"), OPEN_EQUAL("(="), COLON_BAR(":|"),
     BAR_COLON("|:");
 
+    static final Emoji[] EMOJI_ARRAY = values();
+
     private final String label;
 
     @Override
@@ -19,7 +21,7 @@ public enum Emoji implements Labeled {
     }
 
     public static Emoji getEmojiFromText(String incoming) {
-        return stream(values())
+        return stream(EMOJI_ARRAY)
                 .filter(emoji -> emoji.label.equals(incoming))
                 .findFirst()
                 .orElse(null);
@@ -27,7 +29,7 @@ public enum Emoji implements Labeled {
 
     public static String generateCaptureGroup() {
         StringBuilder sb = new StringBuilder("(?:");
-        String expression = stream(values())
+        String expression = stream(EMOJI_ARRAY)
                 .map(Labeled::getLabel)
                 .map(symbol -> symbol.replace("(", "\\("))
                 .map(symbol -> symbol.replace(")", "\\)"))

@@ -1,6 +1,7 @@
 package bomb.modules.il.ice_cream;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
@@ -20,7 +21,8 @@ import static bomb.modules.il.ice_cream.Flavor.TUTTI_FRUTTI;
 import static bomb.modules.il.ice_cream.Flavor.VANILLA;
 
 public class IceCream extends Widget {
-    public static Flavor findFlavor(Person person, EnumSet<Flavor> possibleFlavors, boolean hasEmptyPortPlate)
+    public static Flavor findFlavor(@NotNull Person person, @NotNull EnumSet<Flavor> possibleFlavors,
+                                    boolean hasEmptyPortPlate)
             throws IllegalArgumentException, IllegalStateException {
         validateInput(possibleFlavors);
 

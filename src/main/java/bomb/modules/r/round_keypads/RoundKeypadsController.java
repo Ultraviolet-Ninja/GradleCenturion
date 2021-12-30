@@ -21,6 +21,7 @@ import static bomb.modules.r.round_keypads.Keypad.DISNEY_Q2;
 import static bomb.modules.r.round_keypads.Keypad.HARRY_POTTER;
 import static bomb.modules.r.round_keypads.Keypad.HOLLOW_STAR1;
 import static bomb.modules.r.round_keypads.Keypad.HOLLOW_STAR2;
+import static bomb.modules.r.round_keypads.Keypad.KEYPAD_ARRAY;
 import static bomb.modules.r.round_keypads.Keypad.NOT_THREE;
 import static bomb.modules.r.round_keypads.Keypad.OMEGA;
 import static bomb.modules.r.round_keypads.Keypad.PARAGRAPH1;
@@ -169,7 +170,7 @@ public class RoundKeypadsController implements Resettable {
                 russianSix1, paragraph1, tB1, russianCat2, russianX2, spanishQuestion2, smile1,
                 psi1, smile2, tB2, cDot, paragraph2, shrekThree, star,
                 russianSix2, backEuro2, puzzlePiece, aeyyLmao, psi2, russianHN, omega);
-        List<Keypad> keypads = asList(Keypad.values());
+        List<Keypad> keypads = asList(KEYPAD_ARRAY);
         int size = keypads.size();
 
         for (int i = 0; i < size; i++) {

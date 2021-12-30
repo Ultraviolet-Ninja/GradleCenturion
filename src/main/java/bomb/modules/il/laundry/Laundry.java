@@ -1,6 +1,7 @@
 package bomb.modules.il.laundry;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -49,7 +50,7 @@ public class Laundry extends Widget {
      * @return The array of Strings containing the solve conditions
      * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
      */
-    public static String[] clean(String solved, String needy) throws IllegalArgumentException {
+    public static String[] clean(@NotNull String solved, @NotNull String needy) throws IllegalArgumentException {
         validateInput(solved, needy);
         Laundry.needy = Integer.parseInt(needy);
         setClothing(Integer.parseInt(solved));

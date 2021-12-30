@@ -4,6 +4,7 @@ import bomb.Widget;
 import com.opencsv.exceptions.CsvException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.EnumMap;
@@ -28,8 +29,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 public class Murder extends Widget {
-    public static String solve(Location bodyFoundRoom, EnumSet<Weapon> possibleWeapons,
-                               EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
+    public static String solve(Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
+                               @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
         validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);
 
         Pair<EnumMap<Suspect, List<Location>>, EnumMap<Weapon, List<Location>>> mapPair;

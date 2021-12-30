@@ -2,6 +2,7 @@ package bomb.modules.c.cheap_checkout;
 
 import bomb.abstractions.Resettable;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.VisibleForTesting;
 
 import java.util.List;
 
@@ -57,6 +58,7 @@ public enum CheckoutItem implements Resettable {
                 || (this.category == VEGETABLE && this != PASTA_SAUCE);
     }
 
+    @VisibleForTesting
     public double getBasePrice() {
         return basePrice;
     }

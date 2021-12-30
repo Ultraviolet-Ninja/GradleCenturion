@@ -51,7 +51,7 @@ public class SimonStates extends Widget {
         dominantColorIndex = dominantColor.ordinal();
     }
 
-    public static List<StateColor> calculateNextColorPress(EnumSet<StateColor> colorsFlashed)
+    public static List<StateColor> calculateNextColorPress(@NotNull EnumSet<StateColor> colorsFlashed)
             throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)
@@ -154,7 +154,7 @@ public class SimonStates extends Widget {
     }
 
     private static StateColor getFirstInOrder(BiPredicate<EnumSet<StateColor>, StateColor> condition,
-                                              EnumSet<StateColor> colorsFlashed, List<StateColor> priorityOrder) throws IllegalArgumentException {
+                                              EnumSet<StateColor> colorsFlashed, List<StateColor> priorityOrder)throws IllegalArgumentException {
         return filter(condition, colorsFlashed, priorityOrder)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE));
@@ -191,7 +191,7 @@ public class SimonStates extends Widget {
     private static void validate(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
         if (dominantColorIndex == -1)
             throw new IllegalArgumentException("Priority has not been set");
-        if (colorsFlashed == null || colorsFlashed.isEmpty())
+        if (colorsFlashed.isEmpty())
             throw new IllegalArgumentException("Empty set is not allowed");
     }
 

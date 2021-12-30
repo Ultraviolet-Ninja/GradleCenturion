@@ -45,13 +45,6 @@ public class SimonScreamsTest {
         SimonScreams.initialize(arr);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void nextSolveExceptionTest() {
-        testReset();
-
-        SimonScreams.nextSolve(null);
-    }
-
     @DataProvider
     public Object[][] trainingVideoTestProviderOne() {
         testReset();
@@ -62,7 +55,6 @@ public class SimonScreamsTest {
                 {new ScreamColor[]{BLUE, ORANGE, BLUE, GREEN, RED}, "Red,Orange"} //Otherwise Rule
         };
     }
-
 
     @Test(dataProvider = "trainingVideoTestProviderOne")
     public void trainingVideoTestOne(ScreamColor[] flashOrder, String expected) {

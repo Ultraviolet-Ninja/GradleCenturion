@@ -2,6 +2,7 @@ package bomb.modules.t.two_bit;
 
 import bomb.Widget;
 import bomb.modules.s.souvenir.Souvenir;
+import org.jetbrains.annotations.NotNull;
 
 import static bomb.enumerations.Port.RCA;
 import static bomb.enumerations.Port.RJ45;
@@ -70,7 +71,7 @@ public class TwoBit extends Widget {
      * @return The next letter code along with a Query or Submit phrase
      * @throws IllegalArgumentException The given input was not 2 numbers
      */
-    public static String nextCode(String code) throws IllegalArgumentException {
+    public static String nextCode(@NotNull String code) throws IllegalArgumentException {
         String newCode = filter(code, NUMBER_PATTERN);
         validateNextCode(code, newCode);
         int[] coords = translateToBitCoordinates(newCode);

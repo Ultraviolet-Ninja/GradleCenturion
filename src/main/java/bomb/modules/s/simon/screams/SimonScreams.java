@@ -2,14 +2,12 @@ package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
 import bomb.modules.s.simon.SimonColors.ScreamColor;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- *
- */
 public class SimonScreams extends Widget {
     private static final int MAX_OUTPUT_RULES = 6;
     private static final List<Integer> CURRENT_OUTPUT_NUMBERS;
@@ -44,7 +42,7 @@ public class SimonScreams extends Widget {
      * @throws IllegalArgumentException - The serial code isn't 6 characters long OR
      *                                  The array is not 6 elements long
      */
-    public static void initialize(ScreamColor[] order) throws IllegalArgumentException {
+    public static void initialize(@NotNull ScreamColor[] order) throws IllegalArgumentException {
         checkSerialCode();
         initialized = true;
         setOutputRules();
@@ -58,8 +56,8 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(ScreamColor[] flashingOrder) throws IllegalArgumentException {
-        if (flashingOrder == null || flashingOrder.length == 0)
+    public static String nextSolve(@NotNull ScreamColor[] flashingOrder) throws IllegalArgumentException {
+        if (flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
         String letter = String.valueOf(getStringLetter(flashingOrder));
