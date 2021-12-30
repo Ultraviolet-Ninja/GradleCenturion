@@ -2,6 +2,7 @@ package bomb.modules.dh.emoji;
 
 import bomb.Widget;
 import bomb.tools.filter.Regex;
+import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
 import static bomb.modules.dh.emoji.Emoji.EMOJI_ARRAY;
@@ -11,11 +12,12 @@ import static bomb.modules.dh.emoji.Emoji.EMOJI_ARRAY;
  * It's simple math, but replacing numbers with text emojis.
  */
 public class EmojiMath extends Widget {
+    @Language("regexp")
+    private static final String EMOJI_PATTERN = "(?:[=:][|()]|[|()][=:]){1,2}";
     private static final Regex VALIDATION;
 
     static {
-        String emojiRegex = Emoji.generateCaptureGroup();
-        VALIDATION = new Regex("(?<![:|()=])" + emojiRegex + "([+\\-])" + emojiRegex + "(?![:|()=])");
+        VALIDATION = new Regex("^" + EMOJI_PATTERN + "([+\\-])" + EMOJI_PATTERN + "$");
     }
 
     /**

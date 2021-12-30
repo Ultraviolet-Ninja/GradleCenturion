@@ -27,18 +27,6 @@ public enum Emoji implements Labeled {
                 .orElse(null);
     }
 
-    public static String generateCaptureGroup() {
-        StringBuilder sb = new StringBuilder("(?:");
-        String expression = stream(EMOJI_ARRAY)
-                .map(Labeled::getLabel)
-                .map(symbol -> symbol.replace("(", "\\("))
-                .map(symbol -> symbol.replace(")", "\\)"))
-                .map(symbol -> symbol.replace("|", "\\|"))
-                .collect(joining("|"));
-
-        return sb.append(expression).append("){1,2}").toString();
-    }
-
     Emoji(String label) {
         this.label = label;
     }

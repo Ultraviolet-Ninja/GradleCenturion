@@ -13,65 +13,68 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.stream.Collectors.toList;
 
 @SuppressWarnings("MagicConstant")
 public class Regex implements Iterable<String> {
     public static final Function<String, Regex> CREATE_INSENSITIVE_SET =
-            input -> new Regex("[" + input + "]", Pattern.CASE_INSENSITIVE),
+            input -> new Regex("[" + input + "]", CASE_INSENSITIVE),
             CREATE_NEGATED_SET = input -> new Regex("[^" + input + "]");
 
     private static final Function<Matcher, Stream<String>> RESULT_STREAM = matcher ->
-            matcher.results().map(MatchResult::group);
+            matcher.reset().results().map(MatchResult::group);
 
     private static final int MAX_FLAG_SIZE = 0x1ff;
 
     private final Pattern regPattern;
     private final Matcher textMatcher;
 
-    public Regex(@Language("regexp") String regex) {
+    public Regex(@Language("regexp") @NotNull String regex) {
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(@Language("regexp") String regex, int flag) throws IllegalArgumentException {
+    public Regex(@Language("regexp") @NotNull String regex, int flag) throws IllegalArgumentException {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(@Language("regexp") String regex, int... flags) throws IllegalArgumentException {
+    public Regex(@Language("regexp") @NotNull String regex, int... flags) throws IllegalArgumentException {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
         textMatcher = regPattern.matcher("");
     }
 
-    public Regex(@Language("regexp") String regex, String matchText) {
+    public Regex(@Language("regexp") @NotNull String regex, @NotNull String matchText) {
         regPattern = Pattern.compile(regex);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(@Language("regexp") String regex, String matchText, int flag) throws IllegalArgumentException {
+    public Regex(@Language("regexp") @NotNull String regex, @NotNull String matchText, int flag)
+            throws IllegalArgumentException {
         maxFlagCheck(flag);
         regPattern = Pattern.compile(regex, flag);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public Regex(@Language("regexp") String regex, String matchText, int... flags) throws IllegalArgumentException {
+    public Regex(@Language("regexp") @NotNull String regex, @NotNull String matchText, int... flags)
+            throws IllegalArgumentException {
         int value = orMask(flags);
         maxFlagCheck(value);
         regPattern = Pattern.compile(regex, value);
         textMatcher = regPattern.matcher(matchText);
     }
 
-    public void loadText(String text) {
+    public void loadText(@NotNull String text) {
         textMatcher.reset(text);
     }
 
-    public List<String> loadCollection(@NotNull Collection<String> textCollections) {
+    public List<String> filterCollection(@NotNull Collection<String> textCollections) {
         return textCollections.stream()
-                .map(regPattern::matcher)
+                .map(textMatcher::reset)
                 .map(RESULT_STREAM)
                 .map(stream -> stream.collect(Collectors.joining()))
                 .collect(toList());
@@ -89,7 +92,7 @@ public class Regex implements Iterable<String> {
         return textMatcher.group(group);
     }
 
-    public String captureGroup(String customGroup) {
+    public String captureGroup(@NotNull String customGroup) {
         return textMatcher.group(customGroup);
     }
 
@@ -111,7 +114,7 @@ public class Regex implements Iterable<String> {
                 .collect(Collectors.joining());
     }
 
-    public boolean collectionMatches(@NotNull Collection<String> c) {
+    public boolean doesCollectionMatch(@NotNull Collection<String> c) {
         String pattern = regPattern.pattern();
 
         return c.stream()
@@ -136,6 +139,10 @@ public class Regex implements Iterable<String> {
     @Override
     public Iterator<String> iterator() {
         return findAllMatches().iterator();
+    }
+
+    public Regex appendToPattern(@Language("regexp") @NotNull String pattern) {
+        return new Regex(this.regPattern.pattern() + pattern, regPattern.flags());
     }
 
     private static void maxFlagCheck(int flags) {
