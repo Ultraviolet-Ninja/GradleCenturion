@@ -10,10 +10,10 @@ import java.util.function.Function;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 @SuppressWarnings("MagicConstant")
@@ -76,7 +76,7 @@ public class Regex implements Iterable<String> {
         return textCollections.stream()
                 .map(textMatcher::reset)
                 .map(RESULT_STREAM)
-                .map(stream -> stream.collect(Collectors.joining()))
+                .map(stream -> stream.collect(joining()))
                 .collect(toList());
     }
 
@@ -111,7 +111,7 @@ public class Regex implements Iterable<String> {
 
     public String createFilteredString() {
         return RESULT_STREAM.apply(textMatcher)
-                .collect(Collectors.joining());
+                .collect(joining());
     }
 
     public boolean doesCollectionMatch(@NotNull Collection<String> c) {
