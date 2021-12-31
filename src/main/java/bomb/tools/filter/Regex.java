@@ -138,7 +138,7 @@ public class Regex implements Iterable<String> {
 
     @Override
     public Iterator<String> iterator() {
-        return findAllMatches().iterator();
+        return RESULT_STREAM.apply(textMatcher).iterator();
     }
 
     public Regex appendToPattern(@Language("regexp") @NotNull String pattern) {
