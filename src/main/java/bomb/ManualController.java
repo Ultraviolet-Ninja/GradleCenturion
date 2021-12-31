@@ -18,7 +18,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import org.intellij.lang.annotations.Language;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -85,43 +84,6 @@ public class ManualController {
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
         long start = System.nanoTime();
         regionMap = setupRegionMap().get();
-        long stop = System.nanoTime();
-        System.out.printf("Timer: %,d%n", stop - start);
-    }
-
-    @FXML
-    public void buttonPress() {
-        Toggle selected = options.getSelectedToggle();
-        String selectedName = GET_TOGGLE_NAME.apply(selected);
-        if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
-        else if (selectedName.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
-        paneSwitch(regionMap.get(selected));
-    }
-
-    private void paneSwitch(final Region pane) {
-        if (base.getChildren().size() != 1) base.getChildren().retainAll(menuVBox);
-        base.add(pane, 0, 0);
-    }
-
-    @FXML
-    public void search() {
-        @Language("regexp")
-        String searchTerm = searchBar.getText().toLowerCase();
-        radioButtonHouse.getChildren().clear();
-        if (searchTerm.isEmpty()) {
-            radioButtonHouse.getChildren().addAll(allRadioButtons);
-            return;
-        }
-        String pattern = "[\\w ]*" + searchTerm + "[\\w ]*";
-
-        long start = System.nanoTime();
-        radioButtonHouse.getChildren().addAll(
-                allRadioButtons.stream()
-                        .filter(radioButton -> GET_TOGGLE_NAME.apply(radioButton)
-                                .toLowerCase()
-                                .matches(pattern)
-                        ).toList()
-        );
         long stop = System.nanoTime();
         System.out.printf("Timer: %,d%n", stop - start);
     }
@@ -219,21 +181,13 @@ public class ManualController {
 
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                        Map<String, Region> filePathMap) {
-//        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
-//        for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
-//            regionMap.put(
-//                    entry.getValue(),
-//                    filePathMap.get(entry.getKey())
-//            );
-//        return regionMap;
-
-        return radioButtonMap.entrySet().parallelStream()
-                .collect(toMap(
-                        Map.Entry::getValue,
-                        entry -> filePathMap.get(entry.getKey()),
-                        (l, r) -> {throw new IllegalArgumentException();},
-                        IdentityHashMap::new
-                ));
+        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
+        for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
+            regionMap.put(
+                    entry.getValue(),
+                    filePathMap.get(entry.getKey())
+            );
+        return regionMap;
     }
 
     private static URI toURI(URL url) throws IllegalArgumentException {
@@ -242,5 +196,38 @@ public class ManualController {
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    @FXML
+    public void buttonPress() {
+        Toggle selected = options.getSelectedToggle();
+        String selectedName = GET_TOGGLE_NAME.apply(selected);
+        if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
+        else if (selectedName.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
+        paneSwitch(regionMap.get(selected));
+    }
+
+    private void paneSwitch(final Region pane) {
+        if (base.getChildren().size() != 1) base.getChildren().retainAll(menuVBox);
+        base.add(pane, 0, 0);
+    }
+
+    @FXML
+    public void search() {
+        String searchTerm = searchBar.getText().toLowerCase();
+        radioButtonHouse.getChildren().clear();
+        if (searchTerm.isEmpty()) {
+            radioButtonHouse.getChildren().addAll(allRadioButtons);
+            return;
+        }
+
+        String pattern = "[\\w ]*" + searchTerm + "[\\w ]*";
+        radioButtonHouse.getChildren().addAll(
+                allRadioButtons.stream()
+                        .filter(radioButton -> GET_TOGGLE_NAME.apply(radioButton)
+                                .toLowerCase()
+                                .matches(pattern)
+                        ).toList()
+        );
     }
 }

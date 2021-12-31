@@ -19,8 +19,8 @@ public class RegexFilter {
 
     public static final Regex VOWEL_FILTER = new Regex("[aæąåàeêęèéiîïoôöóøœuûüŭ]+?", CASE_INSENSITIVE),
             LOGIC_SYMBOL_FILTER = new Regex(LOGIC_REGEX),
-            CHAR_FILTER = new Regex("[a-zæąåàêęèéîïôöóøœûüŭ]+?", CASE_INSENSITIVE),
-            ALL_CHAR_FILTER = new Regex("[a-z\\dæąåàêęèéîïôöóøœûüŭ]+?", CASE_INSENSITIVE);
+            CHAR_FILTER = new Regex("[a-zæąåàêęèéîïôöóøœûüŭ]+?", CASE_INSENSITIVE);
+//            ALL_CHAR_FILTER = new Regex("[a-z\\dæąåàêęèéîïôöóøœûüŭ]+?", CASE_INSENSITIVE);
 
     public static String filter(String input, Regex pattern) {
         pattern.loadText(input);
