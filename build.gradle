@@ -13,6 +13,12 @@ plugins {
 group 'jasmine.jragon'
 version '0.21.2'
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 application {
     mainClassName = project.hasProperty('testingArea') ?
             'bomb.TestingArea' :
@@ -172,16 +178,16 @@ distZip {
     from projectDir
     include 'src/main/**/*'
     include 'gradle/wrapper/*'
-    include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+    include 'instructions/*'
+    include 'build.gradle', 'gradlew', 'gradlew.bat'
 }
 
 distTar {
     from projectDir
     include 'src/main/**/*'
     include 'gradle/wrapper/*'
-    include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+    include 'instructions/*'
+    include 'build.gradle', 'gradlew', 'gradlew.bat'
 }
 
 githubRelease {

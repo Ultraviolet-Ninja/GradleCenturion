@@ -99,7 +99,7 @@ public class ManualController {
     }
 
     private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
-        Regex filenamePattern = new Regex("\\w+(?=\\.)");
+        Regex filenamePattern = new Regex("\\w+(?=\\.fxml)");
         ResetObserver resetObserver = new ResetObserver();
         URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
 
