@@ -1,5 +1,7 @@
 package bomb;
 
+import bomb.modules.ab.blind_alley.BlindAlleyController;
+import bomb.modules.s.souvenir.SouvenirController;
 import bomb.tools.filter.Regex;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
@@ -24,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -77,7 +80,7 @@ public class ManualController {
         searchBar.setTextFormatter(createSearchBarFormatter());
         allRadioButtons.addAll(
                 radioButtonHouse.getChildren().stream()
-                        .map(node -> (RadioButton)node)
+                        .map(node -> (RadioButton) node)
                         .toList()
         );
         ObserverHub.addObserver(FORGET_ME_NOT_TOGGLE, new ForgetMeNotToggleObserver(forgetMeNot));
@@ -98,35 +101,6 @@ public class ManualController {
                 .get();
     }
 
-    private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
-        Regex filenamePattern = new Regex("\\w+(?=\\.fxml)");
-        ResetObserver resetObserver = new ResetObserver();
-        URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
-
-        CompletableFuture<CompletableFuture<Map<String, Region>>> future = supplyAsync(() -> new File(uri))
-                .thenApply(ManualController::getFilesFromDirectory)
-                .thenApply(list -> convertFilesToRegions(list, resetObserver, filenamePattern));
-
-        ObserverHub.addObserver(RESET, resetObserver);
-        return future;
-    }
-
-    private static CompletableFuture<Map<String, Region>> convertFilesToRegions(List<String> fileList,
-                                                                                ResetObserver resetObserver,
-                                                                                Regex filenamePattern) {
-        fileList.removeIf(location -> location.contains("old") || location.contains("new"));
-
-        CompletableFuture<List<Region>> regionListFuture = supplyAsync(fileList::parallelStream)
-                .thenApply(stream -> stream.map(location -> createSingleRegion(location, resetObserver)))
-                .thenApply(stream -> stream.collect(toList()));
-
-        return supplyAsync(() -> filenamePattern.filterCollection(fileList))
-                .thenCombine(regionListFuture, (fileNameList, regionList) ->
-                        IntStream.range(0, fileNameList.size())
-                                .boxed()
-                                .collect(toMap(fileNameList::get, regionList::get)));
-    }
-
     private static CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
         return supplyAsync(radioButtonList::stream)
                 .thenApply(stream -> stream.collect(toMap(
@@ -138,12 +112,43 @@ public class ManualController {
                 )));
     }
 
-    private static Region createSingleRegion(String fileLocation, ResetObserver resetObserver)
+    private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
+        URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
+        File file = new File(uri);
+
+        return supplyAsync(() -> getFilesFromDirectory(file))
+                .thenApply(ManualController::convertFilesToRegions);
+    }
+
+    private static CompletableFuture<Map<String, Region>> convertFilesToRegions(List<String> fileList) {
+        ResetObserver resetObserver = new ResetObserver();
+        Regex filenamePattern = new Regex("\\w+(?=\\.fxml)");
+        fileList.removeIf(location -> location.contains("old") || location.contains("new"));
+
+        CompletableFuture<List<Region>> regionListFuture = supplyAsync(fileList::parallelStream)
+                .thenApply(stream -> stream.map(Paths::get)
+                        .map(Path::toUri)
+                        .map(uri -> createSingleRegion(uri, resetObserver))
+                        .collect(toList())
+                );
+
+        CompletableFuture<Map<String, Region>> fileToRegionMapFuture =
+                supplyAsync(() -> filenamePattern.filterCollection(fileList))
+                        .thenCombine(regionListFuture,
+                                (fileNameList, regionList) -> IntStream.range(0, fileNameList.size())
+                                        .boxed()
+                                        .collect(toMap(fileNameList::get, regionList::get))
+                        );
+
+        ObserverHub.addObserver(RESET, resetObserver);
+        return fileToRegionMapFuture;
+    }
+
+    private static Region createSingleRegion(URI uri, ResetObserver resetObserver)
             throws IllegalArgumentException {
-        URI path = Paths.get(fileLocation).toUri();
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(path.toURL());
+            loader = new FXMLLoader(uri.toURL());
         } catch (MalformedURLException e) {
             throw new IllegalArgumentException(e);
         }
@@ -152,17 +157,17 @@ public class ManualController {
 
         if (!location.contains("widget")) resetObserver.addController(loader);
 
-        if (location.contains("souvenir")) loadSouvenirController(loader);
-        else if (location.contains("blind_alley")) loadBlindAlleyController(loader);
+        if (location.contains("souvenir")) loadSouvenirController(loader.getController());
+        else if (location.contains("blind_alley")) loadBlindAlleyController(loader.getController());
         return output;
     }
 
-    private static void loadBlindAlleyController(FXMLLoader loader) {
-        ObserverHub.addObserver(BLIND_ALLEY_PANE, new BlindAlleyPaneObserver(loader.getController()));
+    private static void loadBlindAlleyController(BlindAlleyController controller) {
+        ObserverHub.addObserver(BLIND_ALLEY_PANE, new BlindAlleyPaneObserver(controller));
     }
 
-    private static void loadSouvenirController(FXMLLoader loader) {
-        ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(loader.getController()));
+    private static void loadSouvenirController(SouvenirController controller) {
+        ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
     }
 
     private static List<String> getFilesFromDirectory(final File topLevelDirectory) {
