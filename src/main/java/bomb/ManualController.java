@@ -116,7 +116,7 @@ public class ManualController {
                                                                                 Regex filenamePattern) {
         fileList.removeIf(location -> location.contains("old") || location.contains("new"));
 
-        CompletableFuture<List<Region>> regionListFuture = supplyAsync(fileList::stream)
+        CompletableFuture<List<Region>> regionListFuture = supplyAsync(fileList::parallelStream)
                 .thenApply(stream -> stream.map(location -> createSingleRegion(location, resetObserver)))
                 .thenApply(stream -> stream.collect(toList()));
 
