@@ -25,7 +25,7 @@ public class FastMathTest {
     public Object[][] exceptionTestProvider() {
         ConditionSetter setSerialCode = () -> Widget.setSerialCode("fr4op2");
         return new Object[][]{
-                {EMPTY_SETTER, ""}, {EMPTY_SETTER, null}, {EMPTY_SETTER, "AZ"}, {setSerialCode, "AY"}
+                {EMPTY_SETTER, ""}, {EMPTY_SETTER, "AZ"}, {setSerialCode, "AY"}
         };
     }
 

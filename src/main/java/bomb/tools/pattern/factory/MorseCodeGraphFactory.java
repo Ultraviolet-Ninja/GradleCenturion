@@ -34,6 +34,4 @@ public class MorseCodeGraphFactory {
             throw new IllegalStateException(e);
         }
     }
-
-
 }

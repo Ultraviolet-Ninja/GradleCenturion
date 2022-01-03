@@ -1,8 +1,8 @@
 package bomb.tools.string;
 
-import java.util.Arrays;
 import java.util.function.UnaryOperator;
 
+import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
 public class StringFormat {
@@ -12,7 +12,22 @@ public class StringFormat {
             sample.toUpperCase();
 
     public static final UnaryOperator<String> TO_TITLE_CASE = text ->
-            Arrays.stream(text.split("[-_ ]"))
+            stream(text.split("[-_ ]"))
                     .map(FIRST_LETTER_CAPITAL)
                     .collect(joining(" "));
+
+    public static final UnaryOperator<String> TO_SCREAM_SNAKE_CASE = text ->
+            stream(text.split("[- ]"))
+                    .map(String::toUpperCase)
+                    .collect(joining("_"));
+
+    public static String createOrdinalNumber(int number) {
+        if (number % 10 == 1)
+            return number + "st";
+        if (number % 10 == 2)
+            return number + "nd";
+        if (number % 10 == 3)
+            return number + "rd";
+        return number + "th";
+    }
 }

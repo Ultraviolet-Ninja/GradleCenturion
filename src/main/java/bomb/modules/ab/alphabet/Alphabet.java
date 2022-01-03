@@ -2,6 +2,7 @@ package bomb.modules.ab.alphabet;
 
 import bomb.Widget;
 import bomb.tools.filter.Regex;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -27,7 +28,7 @@ public class Alphabet extends Widget {
      * @param input The given letter order of tiles
      * @return The letters in the way they should be pressed
      */
-    public static String order(String input) throws IllegalArgumentException {
+    public static String order(@NotNull String input) throws IllegalArgumentException {
         validateInput(input);
         input = input.toUpperCase();
         StringBuilder output = new StringBuilder();

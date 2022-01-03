@@ -14,8 +14,9 @@ public class ResetObserver implements Observer {
     }
 
     public void addController(FXMLLoader loader) {
-        if (loader.getController() == null) return;
-        controllerList.add(loader.getController());
+        Object controller = loader.getController();
+        if (controller == null) return;
+        controllerList.add((Resettable) controller);
     }
 
     @Override

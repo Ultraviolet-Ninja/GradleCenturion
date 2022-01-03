@@ -2,25 +2,27 @@ package bomb.modules.s.simon.screams;
 
 import bomb.modules.s.simon.SimonColors.ScreamColor;
 import bomb.tools.data.structures.ring.ArrayRing;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.EnumSet;
 import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 public class Star {
     private static final byte LIMIT = 6;
 
     private final ArrayRing<ScreamColor> colorOrder;
 
-    public Star(ScreamColor[] order) {
+    public Star(@NotNull ScreamColor[] order) {
         checkUniqueColors(order);
         colorOrder = new ArrayRing<>(LIMIT);
         for (ScreamColor instance : order) colorOrder.add(instance);
     }
 
     private static void checkUniqueColors(ScreamColor[] order) {
-        Set<ScreamColor> set = new HashSet<>(Arrays.asList(order));
+        Set<ScreamColor> set = EnumSet.copyOf(asList(order));
         if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }
 
@@ -54,7 +56,7 @@ public class Star {
 
     //If there are one or less primary colors are flashing
     public boolean primaryRule(ScreamColor[] flashOrder) {
-        Set<ScreamColor> unique = new HashSet<>();
+        Set<ScreamColor> unique = EnumSet.noneOf(ScreamColor.class);
         Collections.addAll(unique, flashOrder);
 
         int counter = 0;

@@ -1,5 +1,8 @@
 package bomb.tools.number;
 
+import static java.lang.Math.pow;
+import static java.lang.Math.round;
+
 public class MathUtils {
     public static final int HASHING_NUMBER = 5501;
 
@@ -17,5 +20,34 @@ public class MathUtils {
                 return false;
         }
         return n != 1;
+    }
+
+    public static int digitalRoot(long number) {
+        long root = 0;
+
+        while (number > 0 || root > 9) {
+            if (number == 0) {
+                number = root;
+                root = 0;
+            }
+
+            root += number % 10;
+            number /= 10;
+        }
+        return (int) root;
+    }
+
+    public static int digitalRoot(double number) {
+        number = Double.parseDouble(String.valueOf(number).replace(".", ""));
+        return digitalRoot((long) number);
+    }
+
+    public static boolean isAnInteger(double number) {
+        return number % 1 == 0.0;
+    }
+
+    public static double roundToNPlaces(double number, int places) {
+        double factor = pow(10.0, places);
+        return round(number * factor) / factor;
     }
 }

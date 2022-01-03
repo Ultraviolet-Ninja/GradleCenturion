@@ -7,6 +7,7 @@ public enum Ship {
 
     /** Minimum number of ships on a given board */
     private static final int MINIMUM_NUMBER_OF_SHIPS = 4;
+    private static final Ship[] SHIPS = values();
 
     private final byte shipSize;
 
@@ -46,24 +47,24 @@ public enum Ship {
     }
 
     public static int getNumberOfShipSpaces() {
-        return stream(values())
+        return stream(SHIPS)
                 .mapToInt(ship -> ship.shipSize * ship.currentQuantity)
                 .sum();
     }
 
     public static boolean areQuantitiesSet() {
-        return stream(values())
+        return stream(SHIPS)
                 .mapToInt(Ship::getCurrentQuantity)
                 .sum() >= MINIMUM_NUMBER_OF_SHIPS;
     }
 
     public static void clearAllQuantities() {
-        for (Ship ship : values())
+        for (Ship ship : SHIPS)
             ship.setCurrentQuantity((byte) 0);
     }
 
     public static Ship getCurrentLargestShip() {
-        for (Ship ship : values()) {
+        for (Ship ship : SHIPS) {
             if (ship.currentQuantity > ship.foundShips)
                 return ship;
         }
@@ -71,7 +72,7 @@ public enum Ship {
     }
 
     public static Ship matchShipToSize(int size) {
-        for (Ship ship : values()) {
+        for (Ship ship : SHIPS) {
             if (ship.shipSize == size)
                 return ship;
         }

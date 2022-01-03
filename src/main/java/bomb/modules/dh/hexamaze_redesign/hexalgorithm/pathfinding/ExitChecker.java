@@ -7,6 +7,7 @@ import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import javafx.scene.paint.Color;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -27,7 +28,8 @@ import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPl
 import static java.util.stream.Collectors.toList;
 
 public class ExitChecker {
-    public static Pair<String, List<Coordinates>> findPossibleExits(Grid grid) throws IllegalArgumentException {
+    public static Pair<String, List<Coordinates>> findPossibleExits(@NotNull Grid grid)
+            throws IllegalArgumentException {
         int pegCount = countPegsOnGrid(grid.getHexagon().getBufferedQueues());
         if (pegCount == 0)
             return null;

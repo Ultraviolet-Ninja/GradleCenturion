@@ -47,6 +47,10 @@ public class TextFormatterFactory {
                         null);
     }
 
+    public static TextFormatter<String> createSearchBarFormatter() {
+        return REGEX_MATCH_FORMATTER.apply("[A-Za-z3 ]{1,32}");
+    }
+
     public static TextFormatter<String> createOneLetterFormatter() {
         return REGEX_MATCH_FORMATTER.apply("\\b[a-zA-Z]\\b");
     }
@@ -65,5 +69,9 @@ public class TextFormatterFactory {
 
     public static TextFormatter<String> createBattleshipCounterTextFormatter() {
         return REGEX_MATCH_FORMATTER.apply("\\b[0-4]\\b");
+    }
+
+    public static TextFormatter<String> createDecimalNumberTextFormatter(int significantDigits) {
+        return REGEX_MATCH_FORMATTER.apply(String.format("\\b\\d\\.?\\d{0,%d}\\b", significantDigits));
     }
 }

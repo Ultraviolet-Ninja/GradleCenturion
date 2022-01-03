@@ -2,6 +2,7 @@ package bomb.modules.t.two_bit;
 
 import bomb.Widget;
 import bomb.modules.s.souvenir.Souvenir;
+import org.jetbrains.annotations.NotNull;
 
 import static bomb.enumerations.Port.RCA;
 import static bomb.enumerations.Port.RJ45;
@@ -10,6 +11,7 @@ import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.string.StringFormat.createOrdinalNumber;
 
 /**
  *
@@ -69,7 +71,7 @@ public class TwoBit extends Widget {
      * @return The next letter code along with a Query or Submit phrase
      * @throws IllegalArgumentException The given input was not 2 numbers
      */
-    public static String nextCode(String code) throws IllegalArgumentException {
+    public static String nextCode(@NotNull String code) throws IllegalArgumentException {
         String newCode = filter(code, NUMBER_PATTERN);
         validateNextCode(code, newCode);
         int[] coords = translateToBitCoordinates(newCode);
@@ -81,8 +83,8 @@ public class TwoBit extends Widget {
 
         if (isSouvenirActive) {
             Souvenir.addRelic(
-                    "TwoBit" + determineSouvenirOrdinal() + " Query", newCode + " - " +
-                            CODE_GRID[coords[0]][coords[1]]
+                    String.format("TwoBit %s Query", createOrdinalNumber(currentState.ordinal())),
+                    String.format("%s - %s", newCode, CODE_GRID[coords[0]][coords[1]])
             );
         }
         currentState = currentState.nextState();
@@ -108,10 +110,6 @@ public class TwoBit extends Widget {
         codeOut[1] = Integer.parseInt(code.substring(1));
 
         return codeOut;
-    }
-
-    private static String determineSouvenirOrdinal() {
-        return (currentState == SECOND_QUERY) ? "2nd" : "3rd";
     }
 
     public static void resetStage() {

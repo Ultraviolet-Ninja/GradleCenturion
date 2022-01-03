@@ -1,5 +1,7 @@
 package bomb.tools.data.structures.ring;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -21,12 +23,12 @@ public class ArrayRing<E> implements Iterable<E> {
     }
 
     @SafeVarargs
-    public ArrayRing(E... elements) {
+    public ArrayRing(E @NotNull ... elements) {
         this(elements.length);
         internalStructure.addAll(asList(elements));
     }
 
-    public ArrayRing(Collection<E> c) {
+    public ArrayRing(@NotNull Collection<E> c) {
         if (c.size() < 1)
             throw new IllegalArgumentException();
         internalStructure = c instanceof ArrayList ?

@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 
+import static bomb.modules.r.round_keypads.Keypad.KEYPAD_ARRAY;
 import static java.util.Arrays.stream;
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.counting;
@@ -20,7 +21,7 @@ public class RoundKeypads extends Widget {
             new Color(0, previousColor.getGreen(), previousColor.getBlue(), 1);
 
     public static int determineBadColumn() {
-        Map<Integer, Long> frequencyCounter = stream(Keypad.values())
+        Map<Integer, Long> frequencyCounter = stream(KEYPAD_ARRAY)
                 .filter(Flaggable::getFlag)
                 .mapToInt(Enum::ordinal)
                 .mapToObj(num -> Math.floorDiv(num, IMAGES_PER_COLUMN))
@@ -63,7 +64,7 @@ public class RoundKeypads extends Widget {
     }
 
     public static void reset() {
-        for (Keypad currentKeypad : Keypad.values())
+        for (Keypad currentKeypad : KEYPAD_ARRAY)
             currentKeypad.setFlag(false);
     }
 }

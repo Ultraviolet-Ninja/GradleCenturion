@@ -19,6 +19,7 @@ import static bomb.enumerations.Port.PARALLEL;
 import static bomb.enumerations.Port.PS2;
 import static bomb.enumerations.Port.RCA;
 import static bomb.enumerations.Port.RJ45;
+import static bomb.modules.s.shape_shift.ShapeEnd.END_ARRAY;
 import static bomb.tools.logic.BitConverter.TO_INT;
 
 public class ShapeShift extends Widget {
@@ -28,15 +29,15 @@ public class ShapeShift extends Widget {
 
     //<editor-fold desc="Init methods">
     static {
-        int size = ShapeEnd.values().length;
+        int size = END_ARRAY.length;
         COUNT_TRACKER = new int[size][size];
         zeroOutArray();
         initializeGraph();
     }
 
     private static void zeroOutArray() {
-        for (ShapeEnd leftSide : ShapeEnd.values()) {
-            for (ShapeEnd rightSide : ShapeEnd.values())
+        for (ShapeEnd leftSide : END_ARRAY) {
+            for (ShapeEnd rightSide : END_ARRAY)
                 COUNT_TRACKER[leftSide.ordinal()][rightSide.ordinal()] = 0;
         }
     }
@@ -48,8 +49,8 @@ public class ShapeShift extends Widget {
 
     private static List<Pair<ShapeEnd, ShapeEnd>> createList() {
         List<Pair<ShapeEnd, ShapeEnd>> list = new ArrayList<>();
-        for (ShapeEnd left : ShapeEnd.values()) {
-            for (ShapeEnd right : ShapeEnd.values())
+        for (ShapeEnd left : END_ARRAY) {
+            for (ShapeEnd right : END_ARRAY)
                 list.add(new Pair<>(left, right));
         }
         return list;
