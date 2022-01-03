@@ -38,7 +38,9 @@ See the running list of modules [here](Progress.md)
 and the JAVA_HOME is set.
 1. Grab the latest .zip/tar of the GradleCenturion-X.X.X and unzip it
 2. Using the command line, navigate to the unzipped directory
-3. Run the command `./gradlew run`
+3. Run the command
+   - Windows: `gradlew run`
+   - Linux: `./gradlew run`
 
 ## Inspiration
 After my first manual turning out to be successful in solving the main-game bombs, I thought "Why stop there?".
