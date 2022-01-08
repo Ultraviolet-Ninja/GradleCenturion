@@ -1,4 +1,4 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
+package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
 import bomb.tools.data.structures.ring.ArrayRing;
 import javafx.scene.paint.Color;

@@ -1,7 +1,7 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
+package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 
@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.Collectors;
 
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_LEFT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_LEFT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toList;

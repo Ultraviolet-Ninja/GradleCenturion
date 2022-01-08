@@ -31,9 +31,7 @@ open module bomb {
     exports bomb.modules.dh.fast_math to javafx.fxml;
     exports bomb.modules.dh.forget_me to javafx.fxml;
     exports bomb.modules.dh.hexamaze to javafx.fxml;
-    exports bomb.modules.dh.hexamaze.hexalgorithm to javafx.fxml;
-    exports bomb.modules.dh.hexamaze_redesign to javafx.fxml;
-    exports bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage to javafx.fxml;
+    exports bomb.modules.dh.hexamaze.hexalgorithm.storage to javafx.fxml;
     exports bomb.modules.il.ice_cream to javafx.fxml;
     exports bomb.modules.il.laundry to javafx.fxml;
     exports bomb.modules.il.led_encryption to javafx.fxml;

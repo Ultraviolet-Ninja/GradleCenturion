@@ -1,11 +1,11 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.pathfinding;
+package bomb.modules.dh.hexamaze.hexalgorithm.pathfinding;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.factory.MazeFactory;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding.MazeSearch;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Maze;
+import bomb.modules.dh.hexamaze.hexalgorithm.factory.MazeFactory;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeSearch;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Maze;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
