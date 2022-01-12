@@ -1,17 +1,17 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding;
+package bomb.modules.dh.hexamaze.hexalgorithm.maze_finding;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Maze;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Maze;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
 
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
 import static java.util.stream.Collectors.toList;
 
 public class MazeSearch {

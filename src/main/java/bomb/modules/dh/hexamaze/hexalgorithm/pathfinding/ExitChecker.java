@@ -1,8 +1,8 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.pathfinding;
+package bomb.modules.dh.hexamaze.hexalgorithm.pathfinding;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import javafx.scene.paint.Color;
@@ -15,16 +15,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
-import static bomb.modules.dh.hexamaze.hexalgorithm.AbstractHexagon.calculateColumnLengths;
-import static bomb.modules.dh.hexamaze_redesign.Hexamaze.COLOR_MAP;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid.GRID_SIDE_LENGTH;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_LEFT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
+import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid.GRID_SIDE_LENGTH;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_LEFT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
 import static java.util.stream.Collectors.toList;
 
 public class ExitChecker {
@@ -76,7 +76,7 @@ public class ExitChecker {
     }
 
     private static List<Coordinates> getRightSideExits() {
-        int[] columnCapacities = calculateColumnLengths(GRID_SIDE_LENGTH);
+        int[] columnCapacities = calculateColumnLengthStream(GRID_SIDE_LENGTH);
         int lastIndex = columnCapacities.length - 1;
         int finalColumnCapacity = columnCapacities[lastIndex];
 
@@ -88,7 +88,7 @@ public class ExitChecker {
     private static List<Coordinates> getBottomRightSideExits() {
         int gridSpan = CALCULATE_SPAN.applyAsInt(GRID_SIDE_LENGTH);
         List<Coordinates> list = new ArrayList<>();
-        int[] columnCapacities = calculateColumnLengths(GRID_SIDE_LENGTH);
+        int[] columnCapacities = calculateColumnLengthStream(GRID_SIDE_LENGTH);
 
         for (int i = GRID_SIDE_LENGTH - 1; i < gridSpan; i++) {
             list.add( new Coordinates(i, columnCapacities[i] - 1));
@@ -98,7 +98,7 @@ public class ExitChecker {
 
     private static List<Coordinates> getBottomLeftSideExits() {
         List<Coordinates> output = new ArrayList<>();
-        int[] columnCapacities = calculateColumnLengths(GRID_SIDE_LENGTH);
+        int[] columnCapacities = calculateColumnLengthStream(GRID_SIDE_LENGTH);
 
         for (int i = 0; i < GRID_SIDE_LENGTH; i++) {
             output.add(new Coordinates(i, columnCapacities[i] - 1));

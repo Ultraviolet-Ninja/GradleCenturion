@@ -29,9 +29,9 @@
             <class name="bomb.modules.dh.emoji.EmojiMathTest"/>
             <class name="bomb.modules.dh.fast_math.FastMathTest"/>
             <class name="bomb.modules.dh.forget_me.ForgetMeNotTest"/>
-            <class name="bomb.modules.dh.hexamaze_redesign.hexalgorithm.pathfinding.MazeSearchTest"/>
-            <class name="bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding.ExitCheckerTest"/>
-            <class name="bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding.MazeRunnerTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitCheckerTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeRunnerTest"/>
         </classes>
     </test>
 

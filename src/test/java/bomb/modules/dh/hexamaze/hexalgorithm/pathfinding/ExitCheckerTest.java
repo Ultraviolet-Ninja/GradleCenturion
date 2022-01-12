@@ -1,9 +1,9 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding;
+package bomb.modules.dh.hexamaze.hexalgorithm.pathfinding;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.pathfinding.ExitChecker;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Grid;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.Maze;
+import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeSearch;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.Maze;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import org.javatuples.Pair;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.pathfinding.MazeSearchTest.hexagonFromLine;
+import static bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest.hexagonFromLine;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
@@ -67,7 +67,7 @@ public class ExitCheckerTest {
         assertEquals(results.getValue1().size(), 2);
     }
 
-    static void setPegLocations(Grid grid, Set<Integer> locations) {
+    public static void setPegLocations(Grid grid, Set<Integer> locations) {
         BufferedQueue<BufferedQueue<HexNode>> gridQueues = grid.getHexagon().getBufferedQueues();
 
         int locationCounter = 0;

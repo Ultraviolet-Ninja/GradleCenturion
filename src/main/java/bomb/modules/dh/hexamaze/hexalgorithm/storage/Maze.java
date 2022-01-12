@@ -1,6 +1,6 @@
-package bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage;
+package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.factory.MazeFactory;
+import bomb.modules.dh.hexamaze.hexalgorithm.factory.MazeFactory;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.IOException;
