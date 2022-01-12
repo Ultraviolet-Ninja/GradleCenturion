@@ -179,7 +179,7 @@ distZip {
     include 'src/main/**/*'
     include 'gradle/wrapper/*'
     include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
 }
 
 distTar {
@@ -187,7 +187,7 @@ distTar {
     include 'src/main/**/*'
     include 'gradle/wrapper/*'
     include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
 }
 
 githubRelease {
