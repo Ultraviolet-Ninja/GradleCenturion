@@ -57,7 +57,7 @@ dependencies {
         exclude group: "org.javafx"
     }
 
-    testImplementation 'org.testng:testng:7.5'
+    testImplementation 'org.testng:testng:7.4.0'
 }
 
 def firstInstance = project.hasProperty('thread0')
