@@ -58,9 +58,9 @@ dependencies {
     }
 
     testImplementation 'org.testng:testng:7.5'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.8.2'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.32'
     testImplementation 'org.slf4j:slf4j-api:1.7.32'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.32'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.8.2'
 }
 
 def firstInstance = project.hasProperty('thread0')
