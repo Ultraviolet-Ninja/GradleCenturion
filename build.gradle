@@ -57,7 +57,10 @@ dependencies {
         exclude group: "org.javafx"
     }
 
-    testImplementation 'org.testng:testng:7.4.0'
+    testImplementation 'org.testng:testng:7.5'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.8.2'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.32'
+    testImplementation 'org.slf4j:slf4j-api:1.7.32'
 }
 
 def firstInstance = project.hasProperty('thread0')
@@ -179,7 +182,7 @@ distZip {
     include 'src/main/**/*'
     include 'gradle/wrapper/*'
     include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
 }
 
 distTar {
@@ -187,7 +190,7 @@ distTar {
     include 'src/main/**/*'
     include 'gradle/wrapper/*'
     include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md'
+    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
 }
 
 githubRelease {
