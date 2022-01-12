@@ -9,6 +9,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.IntUnaryOperator;
+import java.util.stream.Collectors;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
@@ -25,7 +26,6 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
 public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
@@ -203,7 +203,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
 
         return walls.stream()
                 .map(HexagonalPlane::rotateSingleWall)
-                .collect(toCollection(() -> EnumSet.noneOf(HexWall.class)));
+                .collect(Collectors.toCollection(() -> EnumSet.noneOf(HexWall.class)));
     }
 
     private static HexWall rotateSingleWall(HexWall wall) {
