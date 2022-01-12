@@ -1,9 +1,12 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.EnumSet;
 import java.util.Objects;
 
 import static bomb.tools.number.MathUtils.HASHING_NUMBER;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 
 public class HexNode {
@@ -11,13 +14,14 @@ public class HexNode {
     private HexShape hexShape;
     private int color;
 
-    public HexNode(HexShape hexShape, EnumSet<HexWall> constructs) {
+    public HexNode(HexShape hexShape, @NotNull EnumSet<HexWall> constructs) {
+        requireNonNull(constructs);
         walls = constructs;
         this.hexShape = hexShape;
         color = -1;
     }
 
-    public HexNode(HexNode toCopy) {
+    public HexNode(@NotNull HexNode toCopy) {
         walls = EnumSet.copyOf(toCopy.walls);
         hexShape = toCopy.hexShape;
         color = -1;
@@ -31,7 +35,8 @@ public class HexNode {
         return walls;
     }
 
-    public void setWalls(EnumSet<HexWall> walls) {
+    public void setWalls(@NotNull EnumSet<HexWall> walls) {
+        requireNonNull(walls);
         this.walls = walls;
     }
 
@@ -65,7 +70,7 @@ public class HexNode {
     @Override
     public int hashCode() {
         return HASHING_NUMBER * (hexShape != null ? hexShape.hashCode() : 1) +
-                ((walls != null) ? walls.hashCode() : 0);
+                walls.hashCode();
     }
 
     @Override

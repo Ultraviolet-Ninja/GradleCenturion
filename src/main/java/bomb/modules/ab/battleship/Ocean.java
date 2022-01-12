@@ -1,5 +1,7 @@
 package bomb.modules.ab.battleship;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +21,7 @@ public class Ocean {
         initializeBoard();
     }
 
-    public Ocean(Tile[][] board) {
+    public Ocean(@NotNull Tile[][] board) {
         gameBoard = board;
     }
 
