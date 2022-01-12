@@ -143,7 +143,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof HexagonalPlane other)) return false;
-        return hexagon.equals(other.hexagon);
+        return sideLength == other.sideLength && hexagon.equals(other.hexagon);
     }
 
     @Override
