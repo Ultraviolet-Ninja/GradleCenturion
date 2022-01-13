@@ -21,6 +21,7 @@
     <test name="Widget and Tools">
         <classes>
             <class name="bomb.WidgetTest"/>
+            <class name="bomb.tools.CoordinatesEqTest"/>
             <class name="bomb.tools.filter.RegexFilterTest"/>
         </classes>
     </test>
