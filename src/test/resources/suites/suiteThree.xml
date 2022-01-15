@@ -2,27 +2,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite Three">
-    <test name="T Module Tests">
+    <test name="N-P Module Tests">
         <classes>
-            <class name="bomb.modules.t.bulb.TheBulbTest"/>
-            <class name="bomb.modules.t.translated.solutions.button.ButtonTest"/>
-            <class name="bomb.modules.t.translated.solutions.password.PasswordTest"/>
-            <class name="bomb.modules.t.two_bit.TwoBitTest"/>
+            <class name="bomb.modules.np.neutralization.NeutralizationTest"/>
         </classes>
     </test>
 
-    <test name="W-Z Module Tests">
+    <test name="R Module Tests">
         <classes>
-            <class name="bomb.modules.wz.word_search.WordSearchTest"/>
-            <class name="bomb.modules.wz.word_search.WordFinderTest"/>
-        </classes>
-    </test>
-
-    <test name="Widget and Tools">
-        <classes>
-            <class name="bomb.WidgetTest"/>
-            <class name="bomb.tools.CoordinatesEqTest"/>
-            <class name="bomb.tools.filter.RegexFilterTest"/>
+            <class name="bomb.modules.r.round_keypads.RoundKeypadTest"/>
         </classes>
     </test>
 </suite>

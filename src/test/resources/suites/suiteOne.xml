@@ -25,23 +25,4 @@
             <class name="bomb.modules.c.colored_switches.ColoredSwitchNodeEqTest"/>
         </classes>
     </test>
-
-    <test name="D-H Module Tests">
-        <classes>
-            <class name="bomb.modules.dh.emoji.EmojiMathTest"/>
-            <class name="bomb.modules.dh.fast_math.FastMathTest"/>
-            <class name="bomb.modules.dh.forget_me.ForgetMeNotTest"/>
-            <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest"/>
-            <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitCheckerTest"/>
-            <class name="bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeRunnerTest"/>
-            <class name="bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNodeEqTest"/>
-        </classes>
-    </test>
-
-    <test name="I-L Module Tests">
-        <classes>
-            <class name="bomb.modules.il.ice_cream.IceCreamTest"/>
-            <class name="bomb.modules.il.laundry.LaundryTest"/>
-        </classes>
-    </test>
 </suite>

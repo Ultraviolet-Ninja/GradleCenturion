@@ -79,20 +79,27 @@ test {
         if(firstInstance) {
             suites "src/test/resources/suites/suiteOne.xml"
             includedDirectories.addAll([
-                    'bomb/modules/ab/**', 'bomb/modules/c/**',
-                    'bomb/modules/dh/**', 'bomb/modules/il/**',
+                    'bomb/modules/ab/**', 'bomb/modules/c/**'
             ])
         } else if (secondInstance) {
             suites "src/test/resources/suites/suiteTwo.xml"
             includedDirectories.addAll([
-                    'bomb/modules/m/**', 'bomb/modules/np/**',
-                    'bomb/modules/r/**', 'bomb/modules/s/**'
+                    'bomb/modules/dh/**', 'bomb/modules/il/**', 'bomb/modules/m/**'
             ])
         } else if (thirdInstance) {
             suites "src/test/resources/suites/suiteThree.xml"
             includedDirectories.addAll([
-                    'bomb', 'bomb/tools/filter/*',
-                    'bomb/modules/t/**', 'bomb/modules/wz/**'
+                    'bomb/modules/np/**', 'bomb/modules/r/**'
+            ])
+        } else if (fourthInstance) {
+            suites "src/test/resources/suites/suiteFour.xml"
+            includedDirectories.addAll([
+                    'bomb/modules/s/**', 'bomb/modules/t/**'
+            ])
+        } else if (fifthInstance) {
+            suites "src/test/resources/suites/suiteFive.xml"
+            includedDirectories.addAll([
+                    'bomb', 'bomb/tools/filter/*', 'bomb/modules/wz/**'
             ])
         }
     }
