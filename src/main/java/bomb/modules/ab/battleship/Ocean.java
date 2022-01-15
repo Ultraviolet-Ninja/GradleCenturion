@@ -85,7 +85,7 @@ public class Ocean {
     }
 
     public int[] countByTile() {
-        int[] counters = new int[Tile.values().length];
+        int[] counters = new int[UNKNOWN.ordinal() + 1];
         for (Tile[] column : gameBoard) {
             for (Tile tile : column) {
                 counters[tile.ordinal()]++;

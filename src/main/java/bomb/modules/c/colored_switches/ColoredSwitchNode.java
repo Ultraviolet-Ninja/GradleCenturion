@@ -7,12 +7,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class ColoredSwitchNode {
+    private static final int SIZE_LIMIT = 3;
+
     private final byte state;
     private final Map<Byte, Pair<SwitchColor[], Byte>> outgoingConnections;
 
     public ColoredSwitchNode(byte state) {
         this.state = state;
-        outgoingConnections = new LinkedHashMap<>();
+        outgoingConnections = new LinkedHashMap<>(SIZE_LIMIT);
     }
 
     public byte getState() {
@@ -33,14 +35,13 @@ public class ColoredSwitchNode {
 
     @Override
     public int hashCode() {
-        return Byte.hashCode(state);
+        return state;
     }
 
     @Override
     public boolean equals(Object o) {
         if (o == this) return true;
         if (!(o instanceof ColoredSwitchNode node)) return false;
-
         return this.state == node.state;
     }
 

@@ -32,7 +32,8 @@ public class Widget {
     protected static boolean isSouvenirActive, isForgetMeNotActive;
     protected static int numDoubleAs, numDBatteries, numHolders, numModules, numPortPlates, numStartingMinutes;
     protected static String serialCode = "", twoFactor = "";
-    protected static final Indicator[] indicatorArray = Indicator.values();
+
+    protected static final Indicator[] INDICATOR_ARRAY = Indicator.values();
 
     private static int[] portArray = {0, 0, 0, 0, 0, 0};
 
@@ -73,7 +74,7 @@ public class Widget {
     }
 
     public static void setIndicator(@NotNull TrinarySwitch state, @NotNull Indicator which) {
-        indicatorArray[which.ordinal()].setState(state);
+        INDICATOR_ARRAY[which.ordinal()].setState(state);
         BlindAlley.alleyUpdate();
     }
 
@@ -201,7 +202,7 @@ public class Widget {
      * @return True if the lit Indicator is found
      */
     protected static boolean hasLitIndicator(@NotNull Indicator ind) {
-        return indicatorArray[ind.ordinal()].getState() == ON;
+        return INDICATOR_ARRAY[ind.ordinal()].getState() == ON;
     }
 
     /**
@@ -211,7 +212,7 @@ public class Widget {
      * @return True if the unlit Indicator is found
      */
     protected static boolean hasUnlitIndicator(@NotNull Indicator ind) {
-        return indicatorArray[ind.ordinal()].getState() == OFF;
+        return INDICATOR_ARRAY[ind.ordinal()].getState() == OFF;
     }
 
     protected static boolean hasVowelInSerialCode() {
@@ -288,7 +289,7 @@ public class Widget {
         twoFactor = "";
         portArray = new int[]{0, 0, 0, 0, 0, 0};
 
-        for (Indicator ind : indicatorArray)
+        for (Indicator ind : INDICATOR_ARRAY)
             ind.setState(UNKNOWN);
     }
 

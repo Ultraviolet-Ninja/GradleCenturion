@@ -18,6 +18,8 @@ public enum Allergen implements Predicate<EnumSet<Allergen>> {
 
     CHERRY, MARSHMALLOW;
 
+    private static final Allergen[] ALLERGENS = values();
+
     @Override
     public boolean test(EnumSet<Allergen> allergens) {
         return allergens.contains(this);
@@ -26,6 +28,6 @@ public enum Allergen implements Predicate<EnumSet<Allergen>> {
     public static Allergen getByIndex(int index) {
         return index < 0 || index > 9 ?
                 null :
-                values()[index];
+                ALLERGENS[index];
     }
 }

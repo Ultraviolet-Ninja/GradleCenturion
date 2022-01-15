@@ -11,12 +11,31 @@ import org.jgrapht.graph.DefaultEdge;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiFunction;
 
 import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 
 public class ColoredSwitches extends Switches {
     private static final double WRONG_PATH_VALUE = Double.MAX_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;
+    private static final BiFunction<SwitchColor[], Byte, AStarAdmissibleHeuristic<ColoredSwitchNode>>
+            HEURISTIC_FUNCTION = (startingColors, desiredState) ->
+            ((sourceVertex, targetVertex) -> {
+                //Weight from source to target
+                double gX = Math.abs(sourceVertex.getState() - targetVertex.getState());
+                //Weight from target to desired state
+                double hX = Math.abs(desiredState - targetVertex.getState());
+
+                Pair<SwitchColor[], Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
+                if (edgeData == null)
+                    return WRONG_PATH_VALUE;
+                SwitchColor switchToFlip = startingColors[edgeData.getValue1()];
+
+                if (!canFollowPath(edgeData.getValue0(), switchToFlip))
+                    return WRONG_PATH_VALUE;
+
+                return gX + hX;
+            });
 
     private static byte secondaryStartLocation = -1;
 
@@ -73,9 +92,10 @@ public class ColoredSwitches extends Switches {
         if (!isFirstStepDone())
             throw new IllegalStateException("Must flip 3 switches before producing the final list");
 
-        AStarAdmissibleHeuristic<ColoredSwitchNode> heuristic = createFinalMoveHeuristic(startingColors, desiredState);
-        AStarShortestPath<ColoredSwitchNode, DefaultEdge> aStarShortestPath =
-                new AStarShortestPath<>(INTERNAL_GRAPH, heuristic);
+        AStarShortestPath<ColoredSwitchNode, DefaultEdge> aStarShortestPath = new AStarShortestPath<>(
+                INTERNAL_GRAPH,
+                HEURISTIC_FUNCTION.apply(startingColors, desiredState)
+        );
 
         ColoredSwitchNode startNode = getNodeByState(secondaryStartLocation);
         ColoredSwitchNode destination = getNodeByState(desiredState);
@@ -83,25 +103,6 @@ public class ColoredSwitches extends Switches {
         List<ColoredSwitchNode> nodeList = aStarShortestPath.getPath(startNode, destination).getVertexList();
 
         return createSwitchToFlipList(nodeList);
-    }
-
-    private static AStarAdmissibleHeuristic<ColoredSwitchNode> createFinalMoveHeuristic(SwitchColor[] startingColors, byte desiredState) {
-        return ((sourceVertex, targetVertex) -> {
-            //Weight from source to target
-            double gX = Math.abs(sourceVertex.getState() - targetVertex.getState());
-            //Weight from target to desired state
-            double hX = Math.abs(desiredState - targetVertex.getState());
-
-            Pair<SwitchColor[], Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
-            if (edgeData == null)
-                return WRONG_PATH_VALUE;
-            SwitchColor switchToFlip = startingColors[edgeData.getValue1()];
-
-            if (!canFollowPath(edgeData.getValue0(), switchToFlip))
-                return WRONG_PATH_VALUE;
-
-            return gX + hX;
-        });
     }
 
     private static List<String> createSwitchToFlipList(List<ColoredSwitchNode> path) {

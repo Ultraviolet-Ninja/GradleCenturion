@@ -206,7 +206,7 @@ public class BattleshipTest {
     }
 
     private static void setShipQuantities(int[] shipQuantities) {
-        Ship[] ships = Ship.values();
+        Ship[] ships = Ship.SHIPS;
         for (int i = 0; i < shipQuantities.length; i++) {
             ships[i].setCurrentQuantity((byte) shipQuantities[i]);
         }

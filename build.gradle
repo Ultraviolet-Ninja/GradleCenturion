@@ -137,8 +137,8 @@ static List<String> getTargetClasses(boolean firstInstance, boolean secondInstan
 }
 
 pitest {
-    targetClasses = getTargetClasses(firstInstance, secondInstance, thirdInstance,
-            fourthInstance, fifthInstance, sixthInstance)
+    targetClasses = getTargetClasses(firstInstance, secondInstance, thirdInstance, fourthInstance,
+            fifthInstance, sixthInstance)
     outputFormats = ['HTML']
     testPlugin = 'testng'
 }

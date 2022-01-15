@@ -4,6 +4,8 @@ public enum SwitchColor {
     RED("red-switch"), ORANGE("orange-switch"), GREEN("green-switch"), CYAN("cyan-switch"),
     BLUE("blue-switch"), MAGENTA("magenta-switch"), NEUTRAL("reset-state");
 
+    private static final SwitchColor[] COLORS = values();
+
     private final String cssId;
 
     SwitchColor(String cssId) {
@@ -15,6 +17,6 @@ public enum SwitchColor {
     }
 
     public static SwitchColor getByIndex(int index) {
-        return values()[index];
+        return COLORS[index];
     }
 }
