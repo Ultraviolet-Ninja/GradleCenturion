@@ -3,6 +3,7 @@ package bomb.modules.s.souvenir;
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.factory.TextFormatterFactory;
+import bomb.tools.pattern.observer.Observer;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +14,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.javatuples.Pair;
 
-public class SouvenirController implements Resettable {
+public class SouvenirController implements Observer, Resettable {
     private final ObservableList<Pair<String, String>> souvenirData;
     private final FilteredList<Pair<String, String>> filteredData;
 
@@ -49,15 +50,6 @@ public class SouvenirController implements Resettable {
         });
     }
 
-    public void liveUpdate() {
-        souvenirData.clear();
-        souvenirData.addAll(Souvenir.getPuzzleArtifacts());
-        artifactView.setItems(souvenirData);
-
-        if (searchField.isDisable() && !souvenirData.isEmpty())
-            FacadeFX.enable(searchField);
-    }
-
     @Override
     public void reset() {
         Souvenir.reset();
@@ -65,5 +57,15 @@ public class SouvenirController implements Resettable {
         FacadeFX.disable(searchField);
         souvenirData.clear();
         artifactView.setItems(filteredData);
+    }
+
+    @Override
+    public void update() {
+        souvenirData.clear();
+        souvenirData.addAll(Souvenir.getPuzzleArtifacts());
+        artifactView.setItems(souvenirData);
+
+        if (searchField.isDisable() && !souvenirData.isEmpty())
+            FacadeFX.enable(searchField);
     }
 }

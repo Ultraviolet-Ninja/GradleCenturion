@@ -1,14 +1,10 @@
 package bomb;
 
-import bomb.modules.ab.blind_alley.BlindAlleyController;
-import bomb.modules.s.souvenir.SouvenirController;
 import bomb.tools.filter.Regex;
 import bomb.tools.pattern.facade.FacadeFX;
-import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
 import bomb.tools.pattern.observer.ResetObserver;
-import bomb.tools.pattern.observer.SouvenirPaneObserver;
 import bomb.tools.pattern.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
@@ -30,7 +26,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -157,17 +153,11 @@ public class ManualController {
 
         if (!location.contains("widget")) resetObserver.addController(loader);
 
-        if (location.contains("souvenir")) loadSouvenirController(loader.getController());
-        else if (location.contains("blind_alley")) loadBlindAlleyController(loader.getController());
+        if (location.contains("souvenir"))
+            ObserverHub.addObserver(SOUVENIR_PANE, loader.getController());
+        else if (location.contains("blind_alley"))
+            ObserverHub.addObserver(BLIND_ALLEY_PANE, loader.getController());
         return output;
-    }
-
-    private static void loadBlindAlleyController(BlindAlleyController controller) {
-        ObserverHub.addObserver(BLIND_ALLEY_PANE, new BlindAlleyPaneObserver(controller));
-    }
-
-    private static void loadSouvenirController(SouvenirController controller) {
-        ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
     }
 
     private static List<String> getFilesFromDirectory(final File topLevelDirectory) {
@@ -186,7 +176,7 @@ public class ManualController {
 
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                        Map<String, Region> filePathMap) {
-        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
+        Map<Toggle, Region> regionMap = new HashMap<>();
         for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
             regionMap.put(
                     entry.getValue(),
