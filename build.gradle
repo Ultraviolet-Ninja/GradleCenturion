@@ -5,7 +5,7 @@ plugins {
     id 'org.beryx.jlink' version '2.24.4'
     id 'com.palantir.docker' version '0.28.0'
     id 'info.solidsoft.pitest' version '1.7.0'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.openjfx.javafxplugin' version '0.0.11'
     id 'org.javamodularity.moduleplugin' version '1.8.10'
     id 'com.github.breadmoirai.github-release' version '2.2.12'
 }
@@ -70,7 +70,7 @@ def fourthInstance = project.hasProperty('thread3')
 def fifthInstance = project.hasProperty('thread4')
 def sixthInstance = project.hasProperty('thread5')
 
-def includedDirectories = [
+def includedTestDirectories = [
         'bomb/tools/data/**', 'bomb/tools/*', 'bomb/tools/logic/*'
 ]
 
@@ -78,27 +78,27 @@ test {
     useTestNG() {
         if(firstInstance) {
             suites "src/test/resources/suites/suiteOne.xml"
-            includedDirectories.addAll([
+            includedTestDirectories.addAll([
                     'bomb/modules/ab/**', 'bomb/modules/c/**'
             ])
         } else if (secondInstance) {
             suites "src/test/resources/suites/suiteTwo.xml"
-            includedDirectories.addAll([
+            includedTestDirectories.addAll([
                     'bomb/modules/dh/**', 'bomb/modules/il/**', 'bomb/modules/m/**'
             ])
         } else if (thirdInstance) {
             suites "src/test/resources/suites/suiteThree.xml"
-            includedDirectories.addAll([
+            includedTestDirectories.addAll([
                     'bomb/modules/np/**', 'bomb/modules/r/**'
             ])
         } else if (fourthInstance) {
             suites "src/test/resources/suites/suiteFour.xml"
-            includedDirectories.addAll([
+            includedTestDirectories.addAll([
                     'bomb/modules/s/**', 'bomb/modules/t/**'
             ])
         } else if (fifthInstance) {
             suites "src/test/resources/suites/suiteFive.xml"
-            includedDirectories.addAll([
+            includedTestDirectories.addAll([
                     'bomb', 'bomb/tools/filter/*', 'bomb/modules/wz/**'
             ])
         }
@@ -109,10 +109,10 @@ test {
 jacocoTestReport {
     reports.xml.enabled(true)
 
-    if (includedDirectories.size() != 3) {
+    if (includedTestDirectories.size() != 3) {
         afterEvaluate {
             classDirectories.setFrom(files(classDirectories.files.collect {
-                fileTree(dir: it, include: includedDirectories, exclude: ['**/*Controller.*'])
+                fileTree(dir: it, include: includedTestDirectories, exclude: ['**/*Controller.*'])
             }))
         }
     }
@@ -132,7 +132,7 @@ static List<String> getTargetClasses(boolean firstInstance, boolean secondInstan
     else if (fifthInstance)
         return ['bomb.modules.r.**', 'bomb.modules.s.**']
     else if (sixthInstance)
-        return ['bomb.modules.t.**', 'bomb.modules.wz.**','bomb.tools.filter.*']
+        return ['bomb.modules.t.**', 'bomb.modules.wz.**', 'bomb.tools.filter.*']
     return ['bomb.*']
 }
 
