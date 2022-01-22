@@ -158,6 +158,7 @@ public class WidgetController {
     @FXML
     private void fullBombReset() {
         widgetPageReset();
+        FacadeFX.enable(serialCodeField);
         forgetMeNot.setSelected(false);
         souvenir.setSelected(false);
         forgetMeToggle();
