@@ -6,14 +6,14 @@
 
 package bomb.modules.t.translated;
 
+import bomb.abstractions.ButtonType;
 import bomb.enumerations.Indicator;
 
 /**
  * Button class deals with a button module
  */
-public class Button extends TranslationCenter {
+public class Button extends TranslationCenter implements ButtonType {
     private static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
-    private static final String HOLD = "Hold", TAP = "Tap";
 
     /**
      * Sorts through the conditions of the current bomb and tells either to hold or tap the button

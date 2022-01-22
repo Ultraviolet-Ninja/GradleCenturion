@@ -1,6 +1,7 @@
 package bomb.modules.s.square;
 
 import bomb.Widget;
+import bomb.abstractions.ButtonType;
 import bomb.tools.number.MathUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,15 +15,13 @@ import java.util.stream.IntStream;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
-import static bomb.modules.t.translated.solutions.button.Button.HOLD;
-import static bomb.modules.t.translated.solutions.button.Button.TAP;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
-public class SquareButton extends Widget {
+public class SquareButton extends Widget implements ButtonType {
     //Button colors
     public static final int BLUE = 0, YELLOW = 1, DARK_GRAY = 2, WHITE = 3;
     //Held button light colors
