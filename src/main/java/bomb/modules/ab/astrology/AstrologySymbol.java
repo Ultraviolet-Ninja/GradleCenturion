@@ -28,7 +28,7 @@ public enum AstrologySymbol {
     }
 
     /**
-     * AstroSymbols constructor
+     * AstrologySymbols constructor
      *
      * @param index Its index number found in the bomb manual page for Astrology
      */

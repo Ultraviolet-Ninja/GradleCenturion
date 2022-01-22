@@ -3,7 +3,6 @@ package bomb.modules.dh.emoji;
 import bomb.abstractions.Labeled;
 
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.joining;
 
 public enum Emoji implements Labeled {
     COLON_CLOSE(":)"), EQUAL_OPEN("=("), OPEN_COLON("(:"),

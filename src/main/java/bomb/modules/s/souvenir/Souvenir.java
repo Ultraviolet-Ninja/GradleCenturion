@@ -1,5 +1,6 @@
 package bomb.modules.s.souvenir;
 
+import bomb.Widget;
 import org.javatuples.Pair;
 
 import java.util.LinkedHashMap;
@@ -8,7 +9,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-public class Souvenir {
+public class Souvenir extends Widget {
     private static final Map<String, String> MODULE_ARTIFACTS;
 
     static {
