@@ -2,6 +2,7 @@ package bomb.tools.pattern.observer;
 
 import bomb.modules.s.souvenir.SouvenirController;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class SouvenirPaneObserver implements Observer {
     private final SouvenirController controller;
 

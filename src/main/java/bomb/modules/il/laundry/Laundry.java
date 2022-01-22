@@ -1,6 +1,7 @@
 package bomb.modules.il.laundry;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 import java.util.stream.Stream;
@@ -49,7 +50,7 @@ public class Laundry extends Widget {
      * @return The array of Strings containing the solve conditions
      * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
      */
-    public static String[] clean(String solved, String needy) throws IllegalArgumentException {
+    public static String[] clean(@NotNull String solved, @NotNull String needy) throws IllegalArgumentException {
         validateInput(solved, needy);
         Laundry.needy = Integer.parseInt(needy);
         setClothing(Integer.parseInt(solved));
@@ -165,7 +166,7 @@ public class Laundry extends Widget {
      */
     private static String[] returnBob() {
         return new String[]{ARTICLE.getMaterial().getLabel(), ARTICLE.getColor().getLabel(),
-                ARTICLE.getItem().getWords()[0], ARTICLE.getItem().getWords()[1],
+                ARTICLE.getItem().getIroningAndSpecialWords()[0], ARTICLE.getItem().getIroningAndSpecialWords()[1],
                 ARTICLE.getMaterial().name() + " - " + ARTICLE.getColor().name() + " - " + ARTICLE.getItem().name()
                 , THANKS_BOB};
     }
@@ -196,8 +197,8 @@ public class Laundry extends Widget {
                 switch (i) {
                     case 0 -> att[i] = ARTICLE.getMaterial().getLabel();
                     case 1 -> att[i] = ARTICLE.getColor().getLabel();
-                    case 2 -> att[i] = ARTICLE.getItem().getWords()[0];
-                    default -> att[i] = ARTICLE.getItem().getWords()[1];
+                    case 2 -> att[i] = ARTICLE.getItem().getIroningAndSpecialWords()[0];
+                    default -> att[i] = ARTICLE.getItem().getIroningAndSpecialWords()[1];
                 }
             }
         }

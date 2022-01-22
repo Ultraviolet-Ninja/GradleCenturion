@@ -24,15 +24,15 @@ public class ChessBoard {
     }
 
     public void setTileCovered(Coordinates location) {
-        board[location.getX()][location.getY()].coverTile();
+        board[location.x()][location.y()].coverTile();
     }
 
     public void setPieceAtLocation(ChessPiece piece, Coordinates location) {
-        board[location.getX()][location.getY()].setCurrentPiece(piece);
+        board[location.x()][location.y()].setCurrentPiece(piece);
     }
 
     public Tile getTile(Coordinates location) {
-        return board[location.getX()][location.getY()];
+        return board[location.x()][location.y()];
     }
 
     public boolean isTileCovered(int x, int y) {

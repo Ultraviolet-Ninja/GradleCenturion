@@ -1,9 +1,9 @@
 package bomb.components.hex;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexWall;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +12,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 
-import static bomb.modules.dh.hexamaze_redesign.Hexamaze.COLOR_MAP;
-import static bomb.modules.dh.hexamaze_redesign.Hexamaze.PEG_COLOR;
+import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
+import static bomb.modules.dh.hexamaze.Hexamaze.PEG_COLOR;
 
 public class HexTile extends Pane implements Resettable {
     public static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
@@ -37,6 +38,10 @@ public class HexTile extends Pane implements Resettable {
         loader.setRoot(this);
         loader.setController(this);
         FacadeFX.loadComponent(loader);
+    }
+
+    public void initialize() {
+        scanWalls();
     }
 
     public HexNode getInternalNode() {
@@ -98,7 +103,7 @@ public class HexTile extends Pane implements Resettable {
         scanShape();
     }
 
-    public void setBackgroundFill(Color color) {
+    public void setBackgroundFill(@NotNull Color color) {
         double newRed = (color.getRed() + DEFAULT_BACKGROUND_COLOR.getRed()) / 2;
         double newGreen = (color.getGreen() + DEFAULT_BACKGROUND_COLOR.getGreen()) / 2;
         double newBlue = (color.getBlue() + DEFAULT_BACKGROUND_COLOR.getBlue()) / 2;

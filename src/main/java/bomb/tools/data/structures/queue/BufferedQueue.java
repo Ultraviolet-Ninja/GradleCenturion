@@ -1,6 +1,6 @@
 package bomb.tools.data.structures.queue;
 
-import bomb.abstractions.EquatableObject;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
@@ -13,8 +13,8 @@ import java.util.ListIterator;
 import java.util.RandomAccess;
 import java.util.stream.Stream;
 
-@SuppressWarnings("unchecked")
-public class BufferedQueue<E> extends EquatableObject implements List<E>, Iterable<E>, RandomAccess {
+@SuppressWarnings({"unchecked", "NullableProblems"})
+public class BufferedQueue<E> implements List<E>, Iterable<E>, RandomAccess {
     private final int capacity;
     private final ArrayDeque<E> dataDeque;
 
@@ -26,7 +26,7 @@ public class BufferedQueue<E> extends EquatableObject implements List<E>, Iterab
         dataCache = new WeakReference<>(null);
     }
 
-    public BufferedQueue(Collection<E> c) {
+    public BufferedQueue(@NotNull Collection<E> c) {
         this.capacity = c.size();
         dataDeque = new ArrayDeque<>(c);
         dataCache = new WeakReference<>(null);

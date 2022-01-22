@@ -176,7 +176,7 @@ public class OldMazeRunner {
 
     private static Coordinates calculateMove(String direction, HexGrid gatedGrid){
         if ("14".contains(direction)) return upOrDown(direction);
-        int x = currentLocation.getX();
+        int x = currentLocation.x();
         if (x == gatedGrid.sideLength() - 1)
             return centerColumnNextMove(direction);
         else if (x < gatedGrid.sideLength() - 1)

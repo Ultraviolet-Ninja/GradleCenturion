@@ -6,6 +6,7 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class TheBulb extends Widget {
     private static boolean isLightOffAtStepOne;
     private static Indicator rememberedIndicator = null;
 
-    public static List<String> solve(Bulb bulb) {
+    public static List<String> solve(@NotNull Bulb bulb) {
         validateBulb(bulb);
         List<String> outputList = new ArrayList<>();
         stepOne(bulb, outputList);
@@ -305,7 +306,7 @@ public class TheBulb extends Widget {
 
     private static void sendInfoToSouvenir(List<String> outputList) {
         Regex findButtonPresses = new Regex("Press [IO]");
-        List<String> matches = findButtonPresses.loadCollection(outputList);
+        List<String> matches = findButtonPresses.filterCollection(outputList);
         String outputText = String.join("\n", matches);
         Souvenir.addRelic("The Bulb button presses", outputText);
     }

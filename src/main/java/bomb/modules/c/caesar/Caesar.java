@@ -1,38 +1,57 @@
 package bomb.modules.c.caesar;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.stream.IntStream;
+
+import static bomb.enumerations.Indicator.CAR;
+import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.Port.PARALLEL;
 
 public class Caesar extends Widget {
+    private static final int MAX_LETTER_COUNT = 26;
 
-    public static String reshuffle(String input) {
-        return restructure(input, offset());
+    public static String reshuffle(@NotNull String input) throws IllegalArgumentException {
+        checkSerialCode();
+        return shift(input, createOffset());
     }
 
-    private static String restructure(String encoded, int numbShift) {
-        char extract;
+    private static String shift(String encoded, int offset) {
         encoded = encoded.toUpperCase();
         StringBuilder result = new StringBuilder();
 
-        for (char letter : encoded.toCharArray()) {
-            extract = (char) (letter - numbShift);
-            if (extract < 'A') {
-                extract = (char) ('[' - (numbShift - (letter - 'A')));
-            }
-            result.append(extract);
-        }
+        IntStream.range(0, encoded.length())
+                .map(encoded::charAt)
+                .map(letter -> letter - offset)
+                .map(Caesar::moduloUpperBound)
+                .map(Caesar::moduloLowerBound)
+                .forEach(result::appendCodePoint);
 
         return result.toString();
     }
 
-    private static int offset() {
-        if (hasLitIndicator(Indicator.NSA) && getPortQuantity(Port.PARALLEL) > 0) return 0;
+    private static int createOffset() {
+        if (hasLitIndicator(NSA) && doesPortExists(PARALLEL))
+            return 0;
+
         int out = 0;
         out += getAllBatteries();
         if (hasVowelInSerialCode()) out--;
-        if (hasEvenNumberInSerialCode()) out++;
-        if (hasIndicator(Indicator.CAR)) out++;
+        if (getSerialCodeLastDigit() % 2 == 0) out++;
+        if (hasIndicator(CAR)) out++;
         return out;
+    }
+
+    private static int moduloUpperBound(int value) {
+        return value <= 'Z' ?
+                value :
+                value - MAX_LETTER_COUNT;
+    }
+
+    private static int moduloLowerBound(int value) {
+        return  value - 'A' >= 0 ?
+                value :
+                value + MAX_LETTER_COUNT;
     }
 }

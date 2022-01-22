@@ -30,10 +30,7 @@ import static bomb.tools.logic.BitConverter.TO_INT;
 public class BlindAlley extends Widget {
     private static int[][] alleyCat = new int[3][3];
 
-    /**
-     * Updates all fields every time an appropriate change is made to the edgework
-     */
-    public static void alleyUpdate() {
+    private static void alleyUpdate() {
         topLeft();
         topMid();
         left();
@@ -46,7 +43,7 @@ public class BlindAlley extends Widget {
 
     private static void topLeft() {
         alleyCat[0][0] = TO_INT.apply(hasUnlitIndicator(BOB)) + TO_INT.apply(hasLitIndicator(CAR)) +
-                TO_INT.apply(hasLitIndicator(IND)) + TO_INT.apply(getNumHolders() % 2 == 0);
+                TO_INT.apply(hasLitIndicator(IND)) + TO_INT.apply(numHolders % 2 == 0 && numHolders != 0);
     }
 
     private static void topMid() {
@@ -60,8 +57,9 @@ public class BlindAlley extends Widget {
     }
 
     private static void middle() {
+        int batterySum = getAllBatteries();
         alleyCat[1][1] = TO_INT.apply(hasUnlitIndicator(SIG)) + TO_INT.apply(hasUnlitIndicator(SND)) +
-                TO_INT.apply(hasLitIndicator(NSA)) + TO_INT.apply(getAllBatteries() % 2 == 0);
+                TO_INT.apply(hasLitIndicator(NSA)) + TO_INT.apply(batterySum % 2 == 0 && batterySum != 0);
     }
 
     private static void right() {
@@ -90,6 +88,7 @@ public class BlindAlley extends Widget {
      * @return A 2D array with the information
      */
     public static int[][] getAlleyCat() {
+        alleyUpdate();
         return alleyCat;
     }
 

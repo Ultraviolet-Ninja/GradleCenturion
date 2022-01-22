@@ -3,6 +3,7 @@ package bomb.modules.c.chess;
 import bomb.Widget;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class Chess extends Widget {
 
     private static final char INT_CONVERSION_LETTER = 'A';
 
-    public static String solve(List<String> inputCoordinateList)
+    public static String solve(@NotNull List<String> inputCoordinateList)
             throws IllegalArgumentException, IllegalStateException {
         checkSerialCode();
         validateList(inputCoordinateList);
@@ -140,8 +141,8 @@ public class Chess extends Widget {
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
-        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.getX());
-        String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.getY());
+        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.x());
+        String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.y());
         return horizontal + "-" + vertical;
     }
 

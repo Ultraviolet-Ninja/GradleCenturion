@@ -3,6 +3,7 @@ package bomb.modules.ab.boolean_venn;
 import bomb.Widget;
 import bomb.tools.filter.Regex;
 import bomb.tools.logic.LogicOperator;
+import org.jetbrains.annotations.NotNull;
 
 import static bomb.tools.filter.RegexFilter.LOGIC_REGEX;
 import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
@@ -46,7 +47,7 @@ public class BooleanVenn extends Widget {
      * The output order is not, c, b, a, bc, ac, ab, all
      * @throws IllegalArgumentException Format mismatch for the input equation
      */
-    public static String resultCode(String operation) throws IllegalArgumentException {
+    public static String resultCode(@NotNull String operation) throws IllegalArgumentException {
         if (operation.isEmpty()) throw new IllegalArgumentException("Cannot have empty String");
         return checkFormat(operation) ?
                 interpretAB(operation) :

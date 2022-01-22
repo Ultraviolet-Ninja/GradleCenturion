@@ -1,42 +1,34 @@
 package bomb.modules.s.simon.states;
 
-import bomb.abstractions.Index;
 import bomb.abstractions.State;
 
-public enum StageState implements State<StageState>, Index {
-    FIRST(1) {
+public enum StageState implements State<StageState> {
+    FIRST {
         @Override
         public StageState nextState() {
             return SECOND;
         }
     },
-    SECOND(2) {
+    SECOND {
         @Override
         public StageState nextState() {
             return THIRD;
         }
     },
-    THIRD(3) {
+    THIRD {
         @Override
         public StageState nextState() {
             return FOURTH;
         }
     },
-    FOURTH(4) {
+    FOURTH {
         @Override
         public StageState nextState() {
             return FIRST;
         }
     };
 
-    private final byte index;
-
-    StageState(int index) {
-        this.index = (byte) index;
-    }
-
-    @Override
-    public int getIndex() {
-        return index;
+    public int getStageNum() {
+        return ordinal() + 1;
     }
 }

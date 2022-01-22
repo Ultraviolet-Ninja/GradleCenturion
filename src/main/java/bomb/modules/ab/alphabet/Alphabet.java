@@ -2,13 +2,14 @@ package bomb.modules.ab.alphabet;
 
 import bomb.Widget;
 import bomb.tools.filter.Regex;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import static bomb.tools.filter.Regex.CREATE_NEGATED_SET;
-import static bomb.tools.filter.RegexFilter.EMPTY_FILTER;
+import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 
 /**
  * This class deals with the Alphabet module. The module comprises a 2x2 square containing 4 tiles
@@ -27,14 +28,14 @@ public class Alphabet extends Widget {
      * @param input The given letter order of tiles
      * @return The letters in the way they should be pressed
      */
-    public static String order(String input) throws IllegalArgumentException {
+    public static String order(@NotNull String input) throws IllegalArgumentException {
         validateInput(input);
         input = input.toUpperCase();
         StringBuilder output = new StringBuilder();
         Regex filterRegex = CREATE_NEGATED_SET.apply(input);
 
         for (String letterSet : WORD_BANK) {
-            if (EMPTY_FILTER.test(letterSet, filterRegex)) {
+            if (EMPTY_FILTER_RESULTS.test(letterSet, filterRegex)) {
                 output.append(letterSet);
                 input = input.replaceAll("[" + letterSet + "]", "");
                 if (input.isEmpty())

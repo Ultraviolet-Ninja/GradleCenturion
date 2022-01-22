@@ -1,3 +1,4 @@
+# Module Progress
 ### Finished Modules
 - Alphabet
 - Astrology
@@ -21,15 +22,22 @@
 - The Bulb
 - TwoBit
 
-20/100 + Colored Switches
+21/100
 
 ### Incomplete Modules
-- Battleship
+- Battleship 
+- Caesar Cipher
+- Cheap Checkout
+- Ice Cream
+- Morsematics
+- Murder
 - Translated Vanilla Modules (9/15 Supported languages)
 - Simon States
 - Shape Shift
+- Square Button
+- Word Search
 
-4/100
+11/100
 
 ### Untouched Modules
 - 3D Maze
@@ -39,8 +47,6 @@
 - Binary LEDs
 - BitMaps
 - Broken Button
-- Caesar Cipher
-- Cheap Checkout
 - Color Flash
 - Color Math
 - Color Squares
@@ -60,7 +66,6 @@
 - Follow the Leader
 - Foreign Exchange Rates
 - Friendship
-- Ice Cream
 - LED Encryption
 - Letter Keys
 - Light Cycle
@@ -70,9 +75,7 @@
 - MineSweeper
 - Modules Against Humanity
 - Monsplode Fight
-- Morsematics
 - Mouse in the Maze
-- Murder
 - Mystic Square
 - Number Pad
 - Perspective Pegs
@@ -92,7 +95,6 @@
 - Semaphore
 - Silly Slots
 - Skewed Slots
-- Square Button
 - Symbolic Password
 - Text Field
 - The Clock
@@ -104,8 +106,7 @@
 - Web Design
 - Wire Placement
 - Word Scramble
-- Word Search
 - Yahtzee
 - Zoo
 
-77/100
+68/100

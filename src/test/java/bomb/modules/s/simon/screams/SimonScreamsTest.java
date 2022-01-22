@@ -20,7 +20,7 @@ import static bomb.modules.s.simon.SimonColors.ScreamColor.YELLOW;
 import static org.testng.Assert.assertEquals;
 
 public class SimonScreamsTest {
-    private static final String MORE_LETTERS = "akwj43", MORE_NUMBERS = "1259wi";
+    private static final String MORE_LETTERS = "akwj43";
 
     private void testReset() {
         Widget.resetProperties();
@@ -45,13 +45,6 @@ public class SimonScreamsTest {
         SimonScreams.initialize(arr);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
-    public void nextSolveExceptionTest() {
-        testReset();
-
-        SimonScreams.nextSolve(null);
-    }
-
     @DataProvider
     public Object[][] trainingVideoTestProviderOne() {
         testReset();
@@ -62,7 +55,6 @@ public class SimonScreamsTest {
                 {new ScreamColor[]{BLUE, ORANGE, BLUE, GREEN, RED}, "Red,Orange"} //Otherwise Rule
         };
     }
-
 
     @Test(dataProvider = "trainingVideoTestProviderOne")
     public void trainingVideoTestOne(ScreamColor[] flashOrder, String expected) {

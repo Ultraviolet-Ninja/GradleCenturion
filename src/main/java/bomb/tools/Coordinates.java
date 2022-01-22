@@ -1,42 +1,19 @@
 package bomb.tools;
 
-import bomb.abstractions.EquatableObject;
+import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 
-public class Coordinates extends EquatableObject implements Comparable<Coordinates> {
-    private final int x, y;
-
-    public Coordinates(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public Coordinates immutableAdd(Coordinates vector) {
+public record Coordinates(int x, int y) implements Comparable<Coordinates> {
+    public Coordinates add(Coordinates vector) {
         return new Coordinates(this.x + vector.x, this.y + vector.y);
     }
 
-    public Coordinates immutableAdd(int x, int y) {
+    public Coordinates add(int x, int y) {
         return new Coordinates(this.x + x, this.y + y);
     }
 
     @Override
     public int hashCode() {
         return x * HASHING_NUMBER + y;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Coordinates)) return false;
-        Coordinates other = (Coordinates) o;
-        return other.x == this.x && other.y == this.y;
     }
 
     @Override

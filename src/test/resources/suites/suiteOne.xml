@@ -7,6 +7,7 @@
             <class name="bomb.modules.ab.alphabet.AlphabetTest"/>
             <class name="bomb.modules.ab.astrology.AstrologyTest"/>
             <class name="bomb.modules.ab.battleship.BattleshipTest"/>
+            <class name="bomb.modules.ab.battleship.OceanEqTest"/>
             <class name="bomb.modules.ab.bitwise.BitwiseTest"/>
             <class name="bomb.modules.ab.blind_alley.BlindAlleyTest"/>
             <class name="bomb.modules.ab.boolean_venn.BooleanVennTest"/>
@@ -15,26 +16,13 @@
 
     <test name="C Module Tests">
         <classes>
+            <class name="bomb.modules.c.caesar.CaesarTest"/>
+            <class name="bomb.modules.c.cheap_checkout.CheapCheckoutTest"/>
+            <class name="bomb.modules.c.cheap_checkout.CheckoutItemTest"/>
             <class name="bomb.modules.c.chess.ChessTest"/>
             <class name="bomb.modules.c.chords.ChordQualitiesTest"/>
             <class name="bomb.modules.c.colored_switches.ColoredSwitchesTest"/>
-        </classes>
-    </test>
-
-    <test name="D-H Module Tests">
-        <classes>
-            <class name="bomb.modules.dh.emoji.EmojiMathTest"/>
-            <class name="bomb.modules.dh.fast_math.FastMathTest"/>
-            <class name="bomb.modules.dh.forget_me.ForgetMeNotTest"/>
-            <class name="bomb.modules.dh.hexamaze_redesign.hexalgorithm.pathfinding.MazeSearchTest"/>
-            <class name="bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding.ExitCheckerTest"/>
-            <class name="bomb.modules.dh.hexamaze_redesign.hexalgorithm.maze_finding.MazeRunnerTest"/>
-        </classes>
-    </test>
-
-    <test name="I-L Module Tests">
-        <classes>
-            <class name="bomb.modules.il.laundry.LaundryTest"/>
+            <class name="bomb.modules.c.colored_switches.ColoredSwitchNodeEqTest"/>
         </classes>
     </test>
 </suite>

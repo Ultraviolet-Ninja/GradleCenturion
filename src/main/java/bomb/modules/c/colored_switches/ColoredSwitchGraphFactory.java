@@ -11,8 +11,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class ColoredSwitchGraphFactory {
     private static final byte OUTGOING_STATE = 1, COLOR_CONDITIONS = 2, SWITCH_TO_FLIP = 3;
@@ -47,9 +47,10 @@ public class ColoredSwitchGraphFactory {
         return output;
     }
 
+    @SuppressWarnings("ConstantConditions")
     private static CSVReader createReader() {
         InputStream in = ColoredSwitchGraphFactory.class.getResourceAsStream(FILENAME);
-        Reader reader = new InputStreamReader(Objects.requireNonNull(in));
+        Reader reader = new InputStreamReader(in);
         return new CSVReader(reader);
     }
 
@@ -72,11 +73,9 @@ public class ColoredSwitchGraphFactory {
     }
 
     private static SwitchColor[] createConditions(String ordinals) {
-        SwitchColor[] output = new SwitchColor[ordinals.length()];
-        int i = 0;
-        for (String ordinal : ordinals.split(""))
-            output[i++] = SwitchColor.getByIndex(Integer.parseInt(ordinal));
-
-        return output;
+        return Arrays.stream(ordinals.split(""))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(SwitchColor::getByIndex)
+                .toArray(SwitchColor[]::new);
     }
 }

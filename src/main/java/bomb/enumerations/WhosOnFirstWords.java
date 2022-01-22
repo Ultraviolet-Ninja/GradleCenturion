@@ -1,9 +1,8 @@
 package bomb.enumerations;
 
 import bomb.abstractions.Labeled;
-import bomb.abstractions.Listed;
 
-public enum WhosOnFirstWords implements Labeled, Listed {
+public enum WhosOnFirstWords implements Labeled {
     READY("READY", "YES", "OKAY", "WHAT", "MIDDLE", "LEFT", "PRESS", "RIGHT", "BLANK", "READY"),
     FIRST("FIRST", "LEFT", "OKAY", "YES", "MIDDLE", "NO", "RIGHT", "NOTHING", "UHHH", "WAIT", "READY",
             "BLANK", "WHAT", "PRESS", "FIRST"),
@@ -48,7 +47,6 @@ public enum WhosOnFirstWords implements Labeled, Listed {
         return label;
     }
 
-    @Override
     public String[] getWords() {
         return stream;
     }

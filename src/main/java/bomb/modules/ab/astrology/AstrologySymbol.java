@@ -1,12 +1,10 @@
 package bomb.modules.ab.astrology;
 
-import bomb.abstractions.Index;
-
 /**
  * This enum deals with the symbols from Astrology, each containing an index in arrays
  * when used in the Astrology class
  */
-public enum AstrologySymbol implements Index {
+public enum AstrologySymbol {
     /**
      * The Elemental symbols
      */
@@ -25,13 +23,12 @@ public enum AstrologySymbol implements Index {
 
     private final byte index;
 
-    @Override
     public int getIndex() {
         return index;
     }
 
     /**
-     * AstroSymbols constructor
+     * AstrologySymbols constructor
      *
      * @param index Its index number found in the bomb manual page for Astrology
      */

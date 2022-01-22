@@ -2,6 +2,7 @@ package bomb.tools.pattern.observer;
 
 import bomb.modules.ab.blind_alley.BlindAlleyController;
 
+@SuppressWarnings("ClassCanBeRecord")
 public class BlindAlleyPaneObserver implements Observer {
     private final BlindAlleyController controller;
 

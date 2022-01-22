@@ -3,12 +3,12 @@ package bomb.modules.s.simon.states;
 import bomb.Widget;
 import bomb.modules.s.simon.SimonColors.StateColor;
 import bomb.modules.s.souvenir.Souvenir;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
 
@@ -47,14 +47,18 @@ public class SimonStates extends Widget {
         DID_NOT_FLASH = FLASHED.negate();
     }
 
-    public static void setDominantColor(StateColor dominantColor) {
-        dominantColorIndex = Objects.requireNonNull(dominantColor).ordinal();
+    public static void setDominantColor(@NotNull StateColor dominantColor) {
+        dominantColorIndex = dominantColor.ordinal();
     }
 
-    public static List<StateColor> calculateNextColorPress(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
+    public static List<StateColor> calculateNextColorPress(@NotNull EnumSet<StateColor> colorsFlashed)
+            throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)
-            Souvenir.addRelic("Simon States - Stage " + currentStage.getIndex(), writeOutToSouvenir(colorsFlashed));
+            Souvenir.addRelic(
+                    "Simon States - Stage " + currentStage.getStageNum(),
+                    writeOutToSouvenir(colorsFlashed)
+            );
         resetHistory();
 
         StateColor colorToPress = switch (currentStage) {
@@ -150,7 +154,7 @@ public class SimonStates extends Widget {
     }
 
     private static StateColor getFirstInOrder(BiPredicate<EnumSet<StateColor>, StateColor> condition,
-                                              EnumSet<StateColor> colorsFlashed, List<StateColor> priorityOrder) throws IllegalArgumentException {
+                                              EnumSet<StateColor> colorsFlashed, List<StateColor> priorityOrder)throws IllegalArgumentException {
         return filter(condition, colorsFlashed, priorityOrder)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE));
@@ -187,7 +191,7 @@ public class SimonStates extends Widget {
     private static void validate(EnumSet<StateColor> colorsFlashed) throws IllegalArgumentException {
         if (dominantColorIndex == -1)
             throw new IllegalArgumentException("Priority has not been set");
-        if (colorsFlashed == null || colorsFlashed.isEmpty())
+        if (colorsFlashed.isEmpty())
             throw new IllegalArgumentException("Empty set is not allowed");
     }
 

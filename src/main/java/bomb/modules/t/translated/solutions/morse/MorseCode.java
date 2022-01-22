@@ -12,9 +12,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
+@SuppressWarnings("ConstantConditions")
 public class MorseCode {
+    private static final String FILENAME = "morseCode.csv";
     private static final Map<String, String> MORSE_CIPHER_MAP;
     private static final Map<String, Double> FREQUENCY_MAP;
 
@@ -29,8 +30,8 @@ public class MorseCode {
     }
 
     private static void loadMorseCode() throws CsvValidationException, IOException {
-        InputStream in = LanguageCSVReader.class.getResourceAsStream("morseCode.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(Objects.requireNonNull(in), StandardCharsets.UTF_8));
+        InputStream in = LanguageCSVReader.class.getResourceAsStream(FILENAME);
+        CSVReader csvReader = new CSVReader(new InputStreamReader(in, StandardCharsets.UTF_8));
         String[] dataRow;
         while ((dataRow = csvReader.readNext()) != null) {
             MORSE_CIPHER_MAP.put(dataRow[0], dataRow[1]);
