@@ -1,13 +1,17 @@
 package bomb;
 
 import bomb.enumerations.Indicator;
-import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Indicator.BOB;
+import static bomb.enumerations.Indicator.MSA;
+import static bomb.enumerations.Indicator.NSA;
+import static bomb.enumerations.TrinarySwitch.OFF;
+import static bomb.enumerations.TrinarySwitch.ON;
 import static org.testng.Assert.assertEquals;
 
 public class WidgetTest {
@@ -111,13 +115,13 @@ public class WidgetTest {
     @DataProvider
     public Object[][] indicatorProvider() {
         ConditionSetter trueSetter = () -> {
-            Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
-            Widget.setIndicator(TrinarySwitch.OFF, Indicator.NSA);
+            Widget.setIndicator(ON, MSA);
+            Widget.setIndicator(OFF, NSA);
         };
 
         return new Object[][]{
-                {EMPTY_SETTER, Indicator.BOB, false}, {trueSetter, Indicator.MSA, true},
-                {trueSetter, Indicator.NSA, true}
+                {EMPTY_SETTER, BOB, false}, {trueSetter, MSA, true},
+                {trueSetter, NSA, true}
         };
     }
 

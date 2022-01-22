@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ColoredSwitchGraphFactory {
@@ -72,11 +73,9 @@ public class ColoredSwitchGraphFactory {
     }
 
     private static SwitchColor[] createConditions(String ordinals) {
-        SwitchColor[] output = new SwitchColor[ordinals.length()];
-        int i = 0;
-        for (String ordinal : ordinals.split(""))
-            output[i++] = SwitchColor.getByIndex(Integer.parseInt(ordinal));
-
-        return output;
+        return Arrays.stream(ordinals.split(""))
+                .mapToInt(Integer::parseInt)
+                .mapToObj(SwitchColor::getByIndex)
+                .toArray(SwitchColor[]::new);
     }
 }

@@ -30,7 +30,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -186,7 +186,7 @@ public class ManualController {
 
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                        Map<String, Region> filePathMap) {
-        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
+        Map<Toggle, Region> regionMap = new HashMap<>();
         for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
             regionMap.put(
                     entry.getValue(),

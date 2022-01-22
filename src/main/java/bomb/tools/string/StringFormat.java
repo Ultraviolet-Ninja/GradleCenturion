@@ -22,12 +22,11 @@ public class StringFormat {
                     .collect(joining("_"));
 
     public static String createOrdinalNumber(int number) {
-        if (number % 10 == 1)
-            return number + "st";
-        if (number % 10 == 2)
-            return number + "nd";
-        if (number % 10 == 3)
-            return number + "rd";
+        int mod = number % 100;
+
+        if (mod == 1) return number + "st";
+        if (mod == 2) return number + "nd";
+        if (mod == 3) return number + "rd";
         return number + "th";
     }
 }

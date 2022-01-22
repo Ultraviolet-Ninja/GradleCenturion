@@ -1,6 +1,7 @@
 package bomb.modules.t.translated.solutions.button;
 
 import bomb.Widget;
+import bomb.abstractions.ButtonType;
 
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.FRK;
@@ -13,9 +14,8 @@ import static bomb.modules.t.translated.solutions.button.ButtonProperty.WHITE;
 /**
  * Button class deals with a button module
  */
-public class Button extends Widget {
+public class Button extends Widget implements ButtonType {
     public static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
-    public static final String HOLD = "Hold", TAP = "Tap";
 
     /**
      * Sorts through the conditions of the current bomb and tells either to hold or tap the button
