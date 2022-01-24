@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import bomb.components.simon.screams.*?>
-<?import javafx.scene.layout.*?>
 
 <fx:root prefHeight="273.0" prefWidth="267.0" type="javafx.scene.layout.Pane"
          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">

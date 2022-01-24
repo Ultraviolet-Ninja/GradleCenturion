@@ -114,9 +114,8 @@ public class ManualController {
 
     private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
         URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
-        File file = new File(uri);
 
-        return supplyAsync(() -> getFilesFromDirectory(file))
+        return supplyAsync(() -> getFilesFromDirectory(new File(uri)))
                 .thenApply(ManualController::convertFilesToRegions);
     }
 
