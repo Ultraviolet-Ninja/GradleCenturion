@@ -37,7 +37,7 @@
         </MenuBar>
         <ScrollPane hbarPolicy="NEVER">
             <VBox fx:id="radioButtonHouse">
-                <JFXRadioButton id="puzzle-radio-button" onAction="#buttonPress" prefHeight="25.0" prefWidth="122.0"
+                <JFXRadioButton id="puzzle-radio-button" onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="122.0"
                                 text="Widget">
                     <toggleGroup>
                         <ToggleGroup fx:id="options"/>
@@ -47,612 +47,612 @@
                     </VBox.margin>
                 </JFXRadioButton>
                 <JFXRadioButton id="puzzle-radio-button" fx:id="forgetMeNot" disable="true" layoutX="10.0"
-                                layoutY="10.0" onAction="#buttonPress" prefHeight="28.0" prefWidth="164.0"
+                                layoutY="10.0" onAction="#switchPaneByButtonPress" prefHeight="28.0" prefWidth="164.0"
                                 text="Forget Me Not" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
                 <JFXRadioButton id="puzzle-radio-button" fx:id="souvenir" disable="true" layoutX="10.0" layoutY="10.0"
-                                onAction="#buttonPress" prefHeight="25.0" prefWidth="159.0" text="Souvenir"
+                                onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="159.0" text="Souvenir"
                                 toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="27.0" prefWidth="145.0" text="Extra Notes" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="27.0" prefWidth="250.0" text="3D Maze" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="250.0" text="Adjacent Letters" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="250.0" text="Adventure Game" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Alphabet" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Anagrams" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Astrology" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Battleship" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Binary LEDs" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="BitMaps" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Bitwise Ops" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Blind Alley" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="280.0" text="Boolean Venn Diagram" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Broken Button" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="185.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="185.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="280.0" text="Caesar Cipher" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="280.0" text="Cheap Checkout" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Chess" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="280.0" text="Chord Qualities" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Color Flash" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Color Math" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="280.0" text="Colored Squares" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="28.0" prefWidth="280.0" text="Colored Switches" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="185.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="185.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Combination Lock" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="210.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="210.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Complicated Buttons" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="235.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="235.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Connection Check" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="260.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="260.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Coordinates" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="285.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="285.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Crazy Talk" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="310.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="310.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Creation" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="335.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="335.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Crossover" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="360.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="360.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Crypto" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="385.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="385.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Double Oh" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Emoji Math" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="English Test" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Fast Math" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Filibuster" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="FizzBuzz" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Flags" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Follow the Leader" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="210.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="210.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Foreign Exchange Rates"
                                 toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="235.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="235.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Friendship" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="260.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="260.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Hexamaze" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="285.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="285.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Ice Cream" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="310.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="310.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="LED Encryption" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="335.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="335.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Laundry" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="360.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="360.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Letter Keys" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="385.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="385.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Light Cycle" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="410.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="410.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Listening" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="435.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="435.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Logic Gates" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="460.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="460.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Math is Hard" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="485.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="485.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="MicroController" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="510.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="510.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="MineSweeper" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="535.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="535.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="308.0" text="Modules Against Humanity"
                                 toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="560.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="560.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Monsplode Fight" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="585.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="585.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Morsematics" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="610.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="610.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Mouse in the Maze" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="635.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="635.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Murder" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="660.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="660.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Mystic Squares" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="685.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="685.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Neutralization" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="710.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="710.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Number Pad" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="735.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="735.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Only Connect" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="760.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="760.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Orientation" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="785.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="785.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Perspective Pegs" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="10.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Piano Keys" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="35.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Piano Keys (Cruel)" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Plumbing" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="85.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Point of Order" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="110.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Probing" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="135.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Resistors" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="160.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Rhythms" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="185.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="185.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="308.0" text="Rock Paper Scissors Lizard Spock"
                                 toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="210.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="210.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Round Keypads" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="235.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="235.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Rubik's Cube" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="260.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="260.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Safety Safe" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="285.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="285.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Seashells" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="310.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="310.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Semaphore" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="335.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="335.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Shape Shift" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="360.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="360.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Silly Slots" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="385.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="385.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Simon Screams" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="410.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="410.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Simon States" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="435.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="435.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Skewed Slots" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="460.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="460.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Square Button" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="485.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="485.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Switches" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="510.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="510.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Symbolic Password" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="535.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="535.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Text Field" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="560.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="560.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="The Bulb" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="585.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="585.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="The Clock" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="610.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="610.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="The Gamepad" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="635.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="635.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="The Screw" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="60.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Third Base" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="660.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="660.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="280.0" text="Tic-Tac-Toe" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
                 <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="685.0" minWidth="300"
-                                onAction="#buttonPress" prefHeight="25.0" prefWidth="308.0"
+                                onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="308.0"
                                 text="Translated Vanilla Modules" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="710.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="710.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Turn the Keys" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="735.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="735.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Two Bit" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="760.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="760.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Web Design" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="785.0" onAction="#buttonPress"
+                <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="785.0" onAction="#switchPaneByButtonPress"
                                 prefHeight="25.0" prefWidth="250.0" text="Wire Placement" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" onAction="#buttonPress" prefHeight="25.0" prefWidth="250.0"
+                <JFXRadioButton id="puzzle-radio-button" onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="250.0"
                                 text="Word Scramble" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" onAction="#buttonPress" prefHeight="25.0" prefWidth="250.0"
+                <JFXRadioButton id="puzzle-radio-button" onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="250.0"
                                 text="Word Search" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" onAction="#buttonPress" prefHeight="25.0" prefWidth="236.0"
+                <JFXRadioButton id="puzzle-radio-button" onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="236.0"
                                 text="Yahtzee" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
-                <JFXRadioButton id="puzzle-radio-button" onAction="#buttonPress" prefHeight="25.0" prefWidth="236.0"
+                <JFXRadioButton id="puzzle-radio-button" onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="236.0"
                                 text="Zoo" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>

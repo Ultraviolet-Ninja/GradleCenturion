@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
+
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -30,7 +31,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -185,7 +186,7 @@ public class ManualController {
 
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                        Map<String, Region> filePathMap) {
-        Map<Toggle, Region> regionMap = new HashMap<>();
+        Map<Toggle, Region> regionMap = new LinkedHashMap<>();
         for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
             regionMap.put(
                     entry.getValue(),
@@ -203,7 +204,7 @@ public class ManualController {
     }
 
     @FXML
-    public void buttonPress() {
+    public void switchPaneByButtonPress() {
         Toggle selected = options.getSelectedToggle();
         String selectedName = GET_TOGGLE_NAME.apply(selected);
         if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
@@ -233,5 +234,48 @@ public class ManualController {
                                 .matches(pattern)
                         ).toList()
         );
+    }
+
+    public void switchPaneByIndex(final int index) {
+        int counter = 0;
+        for (RadioButton radioButton : allRadioButtons) {
+            if (counter++ == index && !radioButton.isDisabled()) {
+                radioButton.fire();
+                return;
+            }
+        }
+    }
+
+    public void switchPaneByUpArrow() {
+        RadioButton selected = (RadioButton) options.getSelectedToggle();
+        if (selected == null) return;
+        int index = allRadioButtons.indexOf(selected) - 1;
+        int size = allRadioButtons.size();
+        if (index < 0) index += size;
+
+        RadioButton nextButton = allRadioButtons.get(index);
+        while (nextButton.isDisabled()) {
+            index--;
+            if (index < 0) index += size;
+            nextButton = allRadioButtons.get(index);
+        }
+
+        nextButton.fire();
+    }
+
+    public void switchPaneByDownArrow() {
+        RadioButton selected = (RadioButton) options.getSelectedToggle();
+        if (selected == null) return;
+        int index = allRadioButtons.indexOf(selected);
+        int mod = allRadioButtons.size();
+        index = (index + 1) % mod;
+        RadioButton nextButton = allRadioButtons.get(index);
+        while (nextButton.isDisabled()) {
+            index++;
+            index %= mod;
+            nextButton = allRadioButtons.get(index);
+        }
+
+        nextButton.fire();
     }
 }
