@@ -133,8 +133,7 @@ public class WidgetController {
     @FXML
     private void detectSerialCodeAreaChange() {
         String serialCode = serialCodeField.getText();
-        SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (SERIAL_CODE_PATTERN.matchesRegex()) {
+        if (serialCode.matches(SERIAL_CODE_PATTERN.getOriginalPattern())) {
             Widget.setSerialCode(serialCode);
         } else if (serialCode.length() == 6) {
             FacadeFX.setAlert(Alert.AlertType.INFORMATION, """
