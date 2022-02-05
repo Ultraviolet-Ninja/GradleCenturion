@@ -28,6 +28,7 @@
 - Battleship 
 - Caesar Cipher
 - Cheap Checkout
+- Color Flash
 - Ice Cream
 - Morsematics
 - Murder
@@ -37,7 +38,7 @@
 - Square Button
 - Word Search
 
-11/100
+12/100
 
 ### Untouched Modules
 - 3D Maze
@@ -47,7 +48,6 @@
 - Binary LEDs
 - BitMaps
 - Broken Button
-- Color Flash
 - Color Math
 - Color Squares
 - Combination Lock
@@ -109,4 +109,4 @@
 - Yahtzee
 - Zoo
 
-68/100
+67/100
