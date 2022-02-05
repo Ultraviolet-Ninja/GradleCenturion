@@ -11,18 +11,6 @@ import java.util.List;
 import java.util.function.IntUnaryOperator;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_LEFT;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toCollection;
@@ -187,33 +175,16 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
     }
 
     private static HexShape rotateShape(HexShape currentShape) {
-        if (currentShape == null || currentShape == CIRCLE || currentShape == HEXAGON)
-            return currentShape;
-
-        return switch (currentShape) {
-            case UP_TRIANGLE -> DOWN_TRIANGLE;
-            case DOWN_TRIANGLE -> UP_TRIANGLE;
-            case LEFT_TRIANGLE -> RIGHT_TRIANGLE;
-            default -> LEFT_TRIANGLE;
-        };
+        return currentShape == null ?
+                null :
+                currentShape.nextState();
     }
 
     private static EnumSet<HexWall> rotateWalls(EnumSet<HexWall> walls) {
         if (walls.isEmpty()) return walls;
 
         return walls.stream()
-                .map(HexagonalPlane::rotateSingleWall)
+                .map(HexWall::nextState)
                 .collect(toCollection(() -> EnumSet.noneOf(HexWall.class)));
-    }
-
-    private static HexWall rotateSingleWall(HexWall wall) {
-        return switch (wall) {
-            case TOP_LEFT -> TOP;
-            case TOP -> TOP_RIGHT;
-            case TOP_RIGHT -> BOTTOM_RIGHT;
-            case BOTTOM_RIGHT -> BOTTOM;
-            case BOTTOM -> BOTTOM_LEFT;
-            default -> TOP_LEFT;
-        };
     }
 }

@@ -1,5 +1,6 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
+import bomb.abstractions.State;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
@@ -88,11 +89,66 @@ public class HexNode {
         return sb.toString();
     }
 
-    public enum HexShape {
-        CIRCLE, HEXAGON, LEFT_TRIANGLE, RIGHT_TRIANGLE, UP_TRIANGLE, DOWN_TRIANGLE
+    public enum HexShape implements State<HexShape> {
+        CIRCLE, HEXAGON, LEFT_TRIANGLE {
+            @Override
+            public HexShape nextState() {
+                return RIGHT_TRIANGLE;
+            }
+        }, RIGHT_TRIANGLE {
+            @Override
+            public HexShape nextState() {
+                return LEFT_TRIANGLE;
+            }
+        }, UP_TRIANGLE {
+            @Override
+            public HexShape nextState() {
+                return DOWN_TRIANGLE;
+            }
+        }, DOWN_TRIANGLE {
+            @Override
+            public HexShape nextState() {
+                return UP_TRIANGLE;
+            }
+        };
+
+        @Override
+        public HexShape nextState() {
+            return this;
+        }
     }
 
-    public enum HexWall {
-        TOP_LEFT, TOP, TOP_RIGHT, BOTTOM_LEFT, BOTTOM, BOTTOM_RIGHT
+    public enum HexWall implements State<HexWall> {
+        TOP_LEFT {
+            @Override
+            public HexWall nextState() {
+                return TOP;
+            }
+        }, TOP {
+            @Override
+            public HexWall nextState() {
+                return TOP_RIGHT;
+            }
+        }, TOP_RIGHT {
+            @Override
+            public HexWall nextState() {
+                return BOTTOM_RIGHT;
+            }
+        }, BOTTOM_LEFT {
+            @Override
+            public HexWall nextState() {
+                return TOP_LEFT;
+            }
+        }, BOTTOM {
+            @Override
+            public HexWall nextState() {
+                return BOTTOM_LEFT;
+            }
+        }, BOTTOM_RIGHT {
+            @Override
+            public HexWall nextState() {
+                return BOTTOM;
+            }
+        }
     }
 }
