@@ -139,9 +139,10 @@ public class Widget {
         return twoFactor;
     }
 
-    public static void checkSerialCode() {
+    public static void checkSerialCode() throws IllegalArgumentException {
         SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (!SERIAL_CODE_PATTERN.matchesRegex()) throw new IllegalArgumentException("""
+        if (!SERIAL_CODE_PATTERN.matchesRegex())
+            throw new IllegalArgumentException("""
                 Serial Code is required
                 Please check formatting on Widget page""");
     }

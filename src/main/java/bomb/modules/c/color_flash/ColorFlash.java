@@ -19,7 +19,8 @@ public class ColorFlash extends Widget {
 
     private static final String RESULT_IS_COLOR_OR_WORD = "is either the word or color";
 
-    public static String decipher(@NotNull ColorFlashColor[] words, @NotNull ColorFlashColor[] colors) {
+    public static String decipher(@NotNull ColorFlashColor[] words, @NotNull ColorFlashColor[] colors)
+            throws IllegalArgumentException {
         validateInput(words, colors);
         var comboList = forgeCombos(words, colors);
         ColorFlashColor lastColor = comboList.get(comboList.size() - 1).getValue1();
@@ -93,8 +94,18 @@ public class ColorFlash extends Widget {
                 .anyMatch(pair -> pair.getValue0() == word && pair.getValue1() == color);
     }
 
-    private static void validateInput(ColorFlashColor[] words, ColorFlashColor[] colors) {
+    private static void validateInput(ColorFlashColor[] words, ColorFlashColor[] colors)
+            throws IllegalArgumentException {
         if (words.length != colors.length && words.length != COMBO_LIMIT)
-            throw new IllegalArgumentException("Input is not of the specified length: 8");
+            throw new IllegalArgumentException("One of the inputs is not of the specified length: 8");
+        for (var word : words) {
+            if (word == null)
+                throw new IllegalArgumentException("Null element found in words");
+        }
+
+        for (var color : colors) {
+            if (color == null)
+                throw new IllegalArgumentException("Null element found in colors");
+        }
     }
 }
