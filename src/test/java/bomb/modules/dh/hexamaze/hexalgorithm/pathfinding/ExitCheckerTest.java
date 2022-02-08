@@ -7,6 +7,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.Maze;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -67,7 +68,7 @@ public class ExitCheckerTest {
         assertEquals(results.getValue1().size(), 2);
     }
 
-    public static void setPegLocations(Grid grid, Set<Integer> locations) {
+    public static void setPegLocations(@NotNull Grid grid, Set<Integer> locations) {
         BufferedQueue<BufferedQueue<HexNode>> gridQueues = grid.getHexagon().getBufferedQueues();
 
         int locationCounter = 0;

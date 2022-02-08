@@ -40,8 +40,11 @@ public class Hexamaze extends Widget {
         COLOR_MAP.put(PINK, 5);
     }
 
-    public static Quartet<@NotNull Grid,  @Nullable String, @Nullable Integer, @Nullable List<Coordinates>> solve(
-            @NotNull List<HexNode> nodeList) {
+    public static @NotNull Quartet<
+            @NotNull Grid,
+            @Nullable String,
+            @Nullable Integer,
+            @Nullable List<Coordinates>>solve(@NotNull List<HexNode> nodeList) throws IllegalArgumentException {
         Maze maze = new Maze();
         Grid original = new Grid(new HexagonalPlane(nodeList));
 

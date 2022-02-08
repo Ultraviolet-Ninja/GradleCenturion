@@ -1,22 +1,19 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
-import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape;
-import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
 import bomb.tools.data.structures.queue.BufferedQueue;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.IntUnaryOperator;
 
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
-public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
+public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatable {
     public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
             NODAL_SIDE_LENGTH = area -> {
                 double result = (3 + Math.sqrt(12 * area - 3)) / 6;
@@ -37,13 +34,14 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
         this.hexagon = hexagon;
     }
 
-    public HexagonalPlane(List<HexNode> nodeList) throws IllegalArgumentException {
+    public HexagonalPlane(@NotNull List<HexNode> nodeList) throws IllegalArgumentException {
         sideLength = NODAL_SIDE_LENGTH.applyAsInt(nodeList.size());
         if (sideLength == -1)
             throw new IllegalArgumentException("Given List would not create a complete Hexagon");
         hexagon = convertFromList(nodeList);
     }
 
+    @Override
     public void rotate() {
         int span = CALCULATE_SPAN.applyAsInt(sideLength);
         BufferedQueue<BufferedQueue<HexNode>> output = createHexagon(sideLength);
@@ -57,12 +55,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
 
         output.stream()
                 .flatMap(BufferedQueue::stream)
-                .forEach(node -> {
-                    HexShape newShape = rotateShape(node.getHexShape());
-                    EnumSet<HexWall> newWalls = rotateWalls(node.getWalls());
-                    node.setHexShape(newShape);
-                    node.setWalls(newWalls);
-                });
+                .forEach(Rotatable::rotate);
         hexagon = output;
     }
 
@@ -97,7 +90,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
                 .collect(toList());
     }
 
-    public HexNode findAtCoordinate(Coordinates coordinates) {
+    public HexNode findAtCoordinate(@NotNull Coordinates coordinates) {
         int x = coordinates.x();
         if (x < 0 || x >= getSpan()) return null;
 
@@ -139,7 +132,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
         return hexagon.hashCode();
     }
 
-    public static <T> BufferedQueue<BufferedQueue<T>> convertFromList(List<T> list) {
+    public static <T> BufferedQueue<BufferedQueue<T>> convertFromList(@NotNull List<T> list) {
         int sideLength = NODAL_SIDE_LENGTH.applyAsInt(list.size());
         BufferedQueue<BufferedQueue<T>> output = createHexagon(sideLength);
 
@@ -163,28 +156,15 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>> {
     }
 
     private static <T> BufferedQueue<BufferedQueue<T>> createHexagon(int sideLength) {
-        if (sideLength <= 2)
-            throw new IllegalArgumentException("Size is too small");
+        if (sideLength <= 2) throw new IllegalArgumentException("Size is too small");
+
         int span = CALCULATE_SPAN.applyAsInt(sideLength);
         BufferedQueue<BufferedQueue<T>> output = new BufferedQueue<>(span);
-        int[] columnLengths = calculateColumnLengthStream(sideLength);
-        stream(columnLengths)
+
+        stream(calculateColumnLengthArray(sideLength))
                 .mapToObj(size -> new BufferedQueue<T>(size))
                 .forEach(output::add);
+
         return output;
-    }
-
-    private static HexShape rotateShape(HexShape currentShape) {
-        return currentShape == null ?
-                null :
-                currentShape.nextState();
-    }
-
-    private static EnumSet<HexWall> rotateWalls(EnumSet<HexWall> walls) {
-        if (walls.isEmpty()) return walls;
-
-        return walls.stream()
-                .map(HexWall::nextState)
-                .collect(toCollection(() -> EnumSet.noneOf(HexWall.class)));
     }
 }

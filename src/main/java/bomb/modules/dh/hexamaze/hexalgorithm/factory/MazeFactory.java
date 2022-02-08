@@ -21,7 +21,6 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIG
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toCollection;
-import static java.util.stream.Collectors.toList;
 
 @SuppressWarnings("ConstantConditions")
 public class MazeFactory {
@@ -32,7 +31,7 @@ public class MazeFactory {
                 .flatMap(Arrays::stream)
                 .map(line -> line.split(" "))
                 .map(data -> new HexNode(decodeShape(data[1]), decodeWalls(data[0])))
-                .collect(toList());
+                .toList();
     }
 
     public static HexShape decodeShape(String code) {

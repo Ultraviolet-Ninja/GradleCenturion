@@ -9,8 +9,9 @@ import java.util.Objects;
 import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toCollection;
 
-public class HexNode {
+public class HexNode implements Rotatable {
     private EnumSet<HexWall> walls;
     private HexShape hexShape;
     private int color;
@@ -34,11 +35,6 @@ public class HexNode {
 
     public EnumSet<HexWall> getWalls() {
         return walls;
-    }
-
-    public void setWalls(@NotNull EnumSet<HexWall> walls) {
-        requireNonNull(walls);
-        this.walls = walls;
     }
 
     public HexShape getHexShape() {
@@ -87,6 +83,17 @@ public class HexNode {
                 .collect(joining(" "))
         );
         return sb.toString();
+    }
+
+    @Override
+    public void rotate() {
+        if (!walls.isEmpty()) {
+            walls = walls.stream()
+                    .map(State::nextState)
+                    .collect(toCollection(() -> EnumSet.noneOf(HexWall.class)));
+        }
+
+        if (hexShape != null) hexShape = hexShape.nextState();
     }
 
     public enum HexShape implements State<HexShape> {

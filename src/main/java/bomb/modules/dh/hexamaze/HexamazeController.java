@@ -77,7 +77,6 @@ public class HexamazeController implements Resettable {
 
                 fillHexTiles(hexTileList, exitInfo.getValue3(), exitInfo.getValue2());
             }
-
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
         }

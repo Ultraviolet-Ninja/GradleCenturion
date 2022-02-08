@@ -11,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.List;
 
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
-import static java.util.stream.Collectors.toList;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 
 public class MazeSearch {
     public static final int ROTATION_COUNT = 6;
@@ -107,7 +106,7 @@ public class MazeSearch {
 
     private static BufferedQueue<BufferedQueue<HexNode>> createInitialCopy(
             BufferedQueue<BufferedQueue<HexNode>> pillar, int gridSideLength) {
-        int[] columnLengths = calculateColumnLengthStream(gridSideLength);
+        int[] columnLengths = calculateColumnLengthArray(gridSideLength);
         BufferedQueue<BufferedQueue<HexNode>> copiedGrid = new BufferedQueue<>(columnLengths.length);
 
         int index = 0;
@@ -136,7 +135,7 @@ public class MazeSearch {
                 .stream()
                 .flatMap(Collection::stream)
                 .map(HexNode::getHexShape)
-                .collect(toList());
+                .toList();
     }
 
     private static void moveToNextSegment(BufferedQueue<BufferedQueue<HexNode>> pillar,

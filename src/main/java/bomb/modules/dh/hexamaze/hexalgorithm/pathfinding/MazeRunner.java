@@ -15,7 +15,7 @@ import org.jgrapht.graph.SimpleGraph;
 import java.util.Comparator;
 import java.util.List;
 
-import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthStream;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid.GRID_SIDE_LENGTH;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
@@ -45,7 +45,7 @@ public class MazeRunner {
 
     private static Graph<Coordinates, DefaultEdge> convertGridToGraph(Grid grid) {
         Graph<Coordinates, DefaultEdge> graph = new SimpleGraph<>(DefaultEdge.class);
-        int[] columnLengths = calculateColumnLengthStream(GRID_SIDE_LENGTH);
+        int[] columnLengths = calculateColumnLengthArray(GRID_SIDE_LENGTH);
         int x = 0;
 
         for (int columnLength : columnLengths) {

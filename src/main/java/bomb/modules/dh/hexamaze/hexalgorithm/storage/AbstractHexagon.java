@@ -25,7 +25,7 @@ public abstract class AbstractHexagon {
         return hexagon.findAtCoordinate(coordinates);
     }
 
-    public static int[] calculateColumnLengthStream(int sideLength) {
+    public static int[] calculateColumnLengthArray(int sideLength) {
         int span = HexagonalPlane.CALCULATE_SPAN.applyAsInt(sideLength);
         int[] firstHalf = IntStream.rangeClosed(sideLength, span).toArray();
         int[] secondHalf = reverseOrder(IntStream.rangeClosed(sideLength, span - 1).toArray());
