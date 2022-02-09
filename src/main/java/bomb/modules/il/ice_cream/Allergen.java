@@ -18,7 +18,11 @@ public enum Allergen implements Predicate<EnumSet<Allergen>> {
 
     CHERRY, MARSHMALLOW;
 
-    private static final Allergen[] ALLERGENS = values();
+    private static final Allergen[] ALLERGENS;
+
+    static {
+        ALLERGENS = values();
+    }
 
     @Override
     public boolean test(EnumSet<Allergen> allergens) {

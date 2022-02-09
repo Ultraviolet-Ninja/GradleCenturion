@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static bomb.modules.c.chess.ChessBoard.BOARD_LENGTH;
 import static bomb.modules.c.chess.ChessPiece.BISHOP;
@@ -18,11 +17,16 @@ import static bomb.modules.c.chess.ChessPiece.QUEEN;
 import static bomb.modules.c.chess.ChessPiece.ROOK;
 import static bomb.modules.c.chess.Tile.TileColor.WHITE;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 public class Chess extends Widget {
-    public static final String VALIDITY_REGEX = "[A-Fa-f]-?[1-6]";
+    public static final String VALIDITY_PATTERN;
 
     private static final char INT_CONVERSION_LETTER = 'A';
+
+    static {
+        VALIDITY_PATTERN = "[A-Fa-f]-?[1-6]";
+    }
 
     public static String solve(@NotNull List<String> inputCoordinateList)
             throws IllegalArgumentException, IllegalStateException {
@@ -127,7 +131,7 @@ public class Chess extends Widget {
             throw new IllegalArgumentException("Every space must be filled with a move");
 
         for (String chessCoordinate : inputCoordinateList) {
-            if (!chessCoordinate.matches(VALIDITY_REGEX))
+            if (!chessCoordinate.matches(VALIDITY_PATTERN))
                 throw new IllegalArgumentException("Coordinate doesn't match the specified format");
         }
     }
@@ -135,7 +139,7 @@ public class Chess extends Widget {
     private static void checkUniqueness(List<String> inputCoordinateList) {
         Set<String> uniqueCoordinateChecker = inputCoordinateList.stream()
                 .map(chessCoordinate -> chessCoordinate.toUpperCase().replace("-", ""))
-                .collect(Collectors.toSet());
+                .collect(toUnmodifiableSet());
         if (uniqueCoordinateChecker.size() != BOARD_LENGTH)
             throw new IllegalArgumentException("Not all positions were unique. Please remove duplicates");
     }

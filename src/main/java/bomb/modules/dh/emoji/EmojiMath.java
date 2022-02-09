@@ -13,12 +13,11 @@ import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
  */
 public class EmojiMath extends Widget {
     @Language("regexp")
-    private static final String EMOJI_PATTERN;
-    private static final Regex VALIDATION;
+    private static final String EMOJI_PATTERN, VALIDATION_PATTERN;
 
     static {
         EMOJI_PATTERN = "(?:[=:][|()]|[|()][=:]){1,2}";
-        VALIDATION = new Regex("^" + EMOJI_PATTERN + "([+\\-])" + EMOJI_PATTERN + "$");
+        VALIDATION_PATTERN = "^" + EMOJI_PATTERN + "([+\\-])" + EMOJI_PATTERN + "$";
     }
 
     /**
@@ -28,10 +27,10 @@ public class EmojiMath extends Widget {
      * @return The values gathered from the emoji equation
      */
     public static int calculate(@NotNull String input) throws IllegalArgumentException {
-        VALIDATION.loadText(input);
-        if (!VALIDATION.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
+        Regex validationRegex = new Regex(VALIDATION_PATTERN, input);
+        if (!validationRegex.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
 
-        boolean toAdd = VALIDATION.captureGroup(1).equals("+");
+        boolean toAdd = validationRegex.captureGroup(1).equals("+");
         int[] results = convertEmojis(input.split(toAdd ? "\\+" : "-"));
 
         return toAdd ?

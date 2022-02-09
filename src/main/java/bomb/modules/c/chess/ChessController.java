@@ -60,7 +60,7 @@ public class ChessController implements Resettable {
     private EventHandler<KeyEvent> createTextFieldEvent() {
         return event -> {
             String positionInput = positionTextField.getText();
-            String inputToSet = positionInput.matches(Chess.VALIDITY_REGEX) ? positionInput : "";
+            String inputToSet = positionInput.matches(Chess.VALIDITY_PATTERN) ? positionInput : "";
             positionList.set(previousPosition, inputToSet);
 
             submitButton.setDisable(areAnyPositionsInvalid());
@@ -69,7 +69,7 @@ public class ChessController implements Resettable {
 
     private boolean areAnyPositionsInvalid() {
         return positionList.stream()
-                .anyMatch(position -> position == null || !position.matches(Chess.VALIDITY_REGEX));
+                .anyMatch(position -> position == null || !position.matches(Chess.VALIDITY_PATTERN));
     }
 
     @FXML

@@ -16,7 +16,11 @@ public enum Person {
     MIKE, TIM, TOM, DAVE, ADAM, CHERYL, SEAN, ASHLEY, JESSICA, TAYLOR, SIMON, SALLY, JADE, SAM,
     GARY, VICTOR, GEORGE, JACOB, PAT, BOB;
 
-    private static final String FILENAME = "allergyTable.csv";
+    private static final String FILENAME;
+
+    static {
+        FILENAME = "allergyTable.csv";
+    }
 
     public static EnumMap<Person, EnumSet<Allergen>> getPersonAllergens(int index) throws IllegalStateException {
         InputStream in = Person.class.getResourceAsStream(FILENAME);

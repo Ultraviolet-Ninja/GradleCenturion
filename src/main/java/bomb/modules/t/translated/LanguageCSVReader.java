@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("ConstantConditions")
 public class LanguageCSVReader {
@@ -22,7 +21,7 @@ public class LanguageCSVReader {
         List<String> dictionaryContent = csvReader.readAll()
                 .stream()
                 .map(array -> array[columnIndex])
-                .collect(Collectors.toList());
+                .toList();
 
         csvReader.close();
         return dictionaryContent;

@@ -23,11 +23,20 @@ import static java.util.stream.Collectors.joining;
 
 public class SquareButton extends Widget implements ButtonType {
     //Button colors
-    public static final int BLUE = 0, YELLOW = 1, DARK_GRAY = 2, WHITE = 3;
+    public static final int BLUE, YELLOW, DARK_GRAY, WHITE;
     //Held button light colors
-    public static final int ORANGE = 0, GREEN = 1, CYAN = 2;
+    public static final int ORANGE, GREEN, CYAN;
 
-    private static final Set<String> COLOR_WORDS = new TreeSet<>(asList("Purple", "Indigo", "Maroon", "Jade"));
+    private static final Set<String> COLOR_WORDS;
+
+    static {
+        BLUE  = ORANGE = 0;
+        YELLOW = GREEN = 1;
+        DARK_GRAY = CYAN = 2;
+        WHITE = 3;
+
+        COLOR_WORDS = new TreeSet<>(asList("Purple", "Indigo", "Maroon", "Jade"));
+    }
 
     public static String solve(int buttonColor, @NotNull String buttonText) throws IllegalArgumentException {
         checkSerialCode();

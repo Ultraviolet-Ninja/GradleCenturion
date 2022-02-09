@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 import static java.util.Arrays.stream;
@@ -110,7 +109,7 @@ public class Ocean {
     private List<Tile> createBoardList(Tile[][] board) {
         return stream(board)
                 .flatMap(Arrays::stream)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

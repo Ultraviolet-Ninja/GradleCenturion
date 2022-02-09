@@ -26,7 +26,7 @@ import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.SODIUM_HYDROXIDE;
 import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;
@@ -38,12 +38,18 @@ import static javafx.scene.paint.Color.YELLOW;
  * drop count and determine if the titration needs a filter or not.
  */
 public class Neutralization extends Widget {
-    public static final String NO_FILTER_TEXT = "No Filter", FILTER_TEXT = "Filter";
+    public static final String NO_FILTER_TEXT, FILTER_TEXT;
 
-    static final String OUTPUT_SEPARATOR = "-";
+    static final String OUTPUT_SEPARATOR;
 
     private static Acid currentAcid;
     private static Base currentBase;
+
+    static {
+        OUTPUT_SEPARATOR = "-";
+        NO_FILTER_TEXT = "No Filter";
+        FILTER_TEXT = "Filter";
+    }
 
     /**
      * @param acidVol The volume of the acid.
@@ -104,7 +110,7 @@ public class Neutralization extends Widget {
                 .map(String::toLowerCase)
                 .map(name -> name.split(""))
                 .flatMap(Arrays::stream)
-                .collect(toSet());
+                .collect(toUnmodifiableSet());
 
         @Language("regexp")
         String regex = uniqueCharacterSet.toString().replaceAll(", ", "");

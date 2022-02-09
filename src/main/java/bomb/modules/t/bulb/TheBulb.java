@@ -34,8 +34,14 @@ import static bomb.modules.t.bulb.Bulb.Position.SCREWED;
 import static bomb.modules.t.bulb.Bulb.Position.UNSCREWED;
 
 public class TheBulb extends Widget {
-    public static final String PRESS_I = "Press I", PRESS_O = "Press O",
-            UNSCREW = "Unscrew it", SCREW = "Screw it back in";
+    public static final String PRESS_I, PRESS_O, SCREW, UNSCREW;
+
+    static {
+        PRESS_I = "Press I";
+        PRESS_O = "Press O";
+        UNSCREW = "Unscrew it";
+        SCREW = "Screw it back in";
+    }
 
     private static boolean isLightOffAtStepOne;
     private static Indicator rememberedIndicator = null;

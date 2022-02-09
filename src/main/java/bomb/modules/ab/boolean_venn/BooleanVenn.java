@@ -3,6 +3,7 @@ package bomb.modules.ab.boolean_venn;
 import bomb.Widget;
 import bomb.tools.filter.Regex;
 import bomb.tools.logic.LogicOperator;
+import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
 import static bomb.tools.filter.RegexFilter.LOGIC_REGEX;
@@ -23,19 +24,26 @@ import static bomb.tools.logic.LogicOperator.XOR;
  * to determine the state of each section of the triple venn diagram, green being true and red for false.
  */
 public class BooleanVenn extends Widget {
-    private static final boolean[][] TEST_CASES = {
-            {false, false, false},
-            {false, false, true},
-            {false, true, false},
-            {true, false, false},
-            {false, true, true},
-            {true, false, true},
-            {true, true, false},
-            {true, true, true}};
+    private static final boolean[][] TEST_CASES;
     private static final byte A = 0, B = 1, C = 2;
 
-    private static final Regex AB_PRIORITY = new Regex("\\(A" + LOGIC_REGEX + "B\\)" + LOGIC_REGEX + "C"),
-            BC_PRIORITY = new Regex("A" + LOGIC_REGEX + "\\(B" + LOGIC_REGEX + "C\\)");
+    @Language("regexp")
+    private static final String AB_PRIORITY_PATTERN, BC_PRIORITY_PATTERN;
+
+    static {
+        AB_PRIORITY_PATTERN = "\\(A" + LOGIC_REGEX + "B\\)" + LOGIC_REGEX + "C";
+        BC_PRIORITY_PATTERN = "A" + LOGIC_REGEX + "\\(B" + LOGIC_REGEX + "C\\)";
+
+        TEST_CASES = new boolean[][]{
+                {false, false, false},
+                {false, false, true},
+                {false, true, false},
+                {true, false, false},
+                {false, true, true},
+                {true, false, true},
+                {true, true, false},
+                {true, true, true}};
+    }
 
     /**
      * Turns the String operation into a String code for the Venn Diagram to decode by choosing
@@ -63,8 +71,8 @@ public class BooleanVenn extends Widget {
      * @throws IllegalArgumentException Format mismatch for the input equation
      */
     private static boolean checkFormat(String equation) throws IllegalArgumentException {
-        String abPriority = filter(equation, AB_PRIORITY);
-        String bcPriority = filter(equation, BC_PRIORITY);
+        String abPriority = filter(equation, new Regex(AB_PRIORITY_PATTERN));
+        String bcPriority = filter(equation, new Regex(BC_PRIORITY_PATTERN));
 
         if (XNOR.test(abPriority.isEmpty(), bcPriority.isEmpty()))
             throw new IllegalArgumentException("Format mismatch!!");

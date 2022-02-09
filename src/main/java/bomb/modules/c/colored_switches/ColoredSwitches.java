@@ -16,30 +16,14 @@ import java.util.function.BiFunction;
 import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 
 public class ColoredSwitches extends Switches {
-    private static final double WRONG_PATH_VALUE = Double.MAX_VALUE;
+    private static final double WRONG_PATH_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;
-    private static final BiFunction<SwitchColor[], Byte, AStarAdmissibleHeuristic<ColoredSwitchNode>>
-            HEURISTIC_FUNCTION = (startingColors, desiredState) ->
-            ((sourceVertex, targetVertex) -> {
-                //Weight from source to target
-                double gX = Math.abs(sourceVertex.getState() - targetVertex.getState());
-                //Weight from target to desired state
-                double hX = Math.abs(desiredState - targetVertex.getState());
-
-                Pair<SwitchColor[], Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
-                if (edgeData == null)
-                    return WRONG_PATH_VALUE;
-                SwitchColor switchToFlip = startingColors[edgeData.getValue1()];
-
-                if (!canFollowPath(edgeData.getValue0(), switchToFlip))
-                    return WRONG_PATH_VALUE;
-
-                return gX + hX;
-            });
+    private static final BiFunction<SwitchColor[], Byte, AStarAdmissibleHeuristic<ColoredSwitchNode>> HEURISTIC_FUNCTION;
 
     private static byte secondaryStartLocation = -1;
 
     static {
+        WRONG_PATH_VALUE = Double.MAX_VALUE;
         try {
             INTERNAL_GRAPH = ColoredSwitchGraphFactory.makeGraph();
         } catch (IOException e) {
@@ -148,5 +132,25 @@ public class ColoredSwitches extends Switches {
 
     public static void reset() {
         secondaryStartLocation = -1;
+    }
+
+    static {
+        HEURISTIC_FUNCTION = (startingColors, desiredState) ->
+                ((sourceVertex, targetVertex) -> {
+                    //Weight from source to target
+                    double gX = Math.abs(sourceVertex.getState() - targetVertex.getState());
+                    //Weight from target to desired state
+                    double hX = Math.abs(desiredState - targetVertex.getState());
+
+                    Pair<SwitchColor[], Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
+                    if (edgeData == null)
+                        return WRONG_PATH_VALUE;
+                    SwitchColor switchToFlip = startingColors[edgeData.getValue1()];
+
+                    if (!canFollowPath(edgeData.getValue0(), switchToFlip))
+                        return WRONG_PATH_VALUE;
+
+                    return gX + hX;
+                });
     }
 }

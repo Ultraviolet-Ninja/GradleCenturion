@@ -17,21 +17,10 @@ import static bomb.tools.string.StringFormat.createOrdinalNumber;
  *
  */
 public class TwoBit extends Widget {
-    public static final String QUERY_TEXT = "Query: ", SUBMIT_TEXT = "Submit: ";
+    public static final String QUERY_TEXT, SUBMIT_TEXT;
 
     private static final char LETTER_TO_NUMBER_CONVERTER = '`';
-    private static final String[][] CODE_GRID = {
-            {"kb", "dk", "gv", "tk", "pv", "kp", "bv", "vt", "pz", "dt"},
-            {"ee", "zk", "ke", "ck", "zp", "pp", "tp", "tg", "pd", "pt"},
-            {"tz", "eb", "ec", "cc", "cz", "zv", "cv", "gc", "bt", "gt"},
-            {"bz", "pk", "kz", "kg", "vd", "ce", "vb", "kd", "gg", "dg"},
-            {"pb", "vv", "ge", "kv", "dz", "pe", "db", "cd", "td", "cb"},
-            {"gb", "tv", "kk", "bg", "bp", "vp", "ep", "tt", "ed", "zg"},
-            {"de", "dd", "ev", "te", "zd", "bb", "pc", "bd", "kc", "zb"},
-            {"eg", "bc", "tc", "ze", "zc", "gp", "et", "vc", "tb", "vz"},
-            {"ez", "ek", "dv", "cg", "ve", "dp", "bk", "pg", "gk", "gz"},
-            {"kt", "ct", "zz", "vg", "gd", "cp", "be", "zt", "vk", "dc"}
-    };
+    private static final String[][] CODE_GRID;
 
     private static TwoBitState currentState = SECOND_QUERY;
 
@@ -114,5 +103,23 @@ public class TwoBit extends Widget {
 
     public static void resetStage() {
         currentState = SECOND_QUERY;
+    }
+
+    static {
+        CODE_GRID = new String[][]{
+                {"kb", "dk", "gv", "tk", "pv", "kp", "bv", "vt", "pz", "dt"},
+                {"ee", "zk", "ke", "ck", "zp", "pp", "tp", "tg", "pd", "pt"},
+                {"tz", "eb", "ec", "cc", "cz", "zv", "cv", "gc", "bt", "gt"},
+                {"bz", "pk", "kz", "kg", "vd", "ce", "vb", "kd", "gg", "dg"},
+                {"pb", "vv", "ge", "kv", "dz", "pe", "db", "cd", "td", "cb"},
+                {"gb", "tv", "kk", "bg", "bp", "vp", "ep", "tt", "ed", "zg"},
+                {"de", "dd", "ev", "te", "zd", "bb", "pc", "bd", "kc", "zb"},
+                {"eg", "bc", "tc", "ze", "zc", "gp", "et", "vc", "tb", "vz"},
+                {"ez", "ek", "dv", "cg", "ve", "dp", "bk", "pg", "gk", "gz"},
+                {"kt", "ct", "zz", "vg", "gd", "cp", "be", "zt", "vk", "dc"}
+        };
+
+        QUERY_TEXT = "Query: ";
+        SUBMIT_TEXT = "Submit: ";
     }
 }

@@ -26,23 +26,7 @@ public class Astrology extends Widget {
     public static final byte ELEMENT_INDEX = 0, CELESTIAL_INDEX = 1, ZODIAC_INDEX = 2, EXPECTED_SIZE = 3;
     public static final String GOOD_OMEN = "Good Omen at ", POOR_OMEN = "Poor Omen at ", NO_OMEN = "No Omen";
 
-    private static final byte[][] ELEMENT_CELESTIAL_GRID = {
-            {0, 0, 1, -1, 0, 1, -2, 2, 0, -1}, {-2, 0, -1, 0, 2, 0, -2, 2, 0, 1},
-            {-1, -1, 0, -1, 1, 2, 0, 2, 1, -2}, {-1, 2, -1, 0, -2, -1, 0, 2, -2, 2}
-    },
-
-    ELEMENT_ZODIAC_GRID = {
-            {1, 0, -1, 0, 0, 2, 2, 0, 1, 0, 1, 0}, {2, 2, -1, 2, -1, -1, -2, 1, 2, 0, 0, 2},
-            {-2, -1, 0, 0, 1, 0, 1, 2, -1, -2, 1, 1}, {1, 1, -2, -2, 2, 0, -1, 1, 0, 0, -1, -1}
-    },
-
-    CELESTIAL_ZODIAC_GRID = {
-            {-1, -1, 2, 0, -1, 0, -1, 1, 0, 0, -2, -2}, {-2, 0, 1, 0, 2, 0, -1, 1, 2, 0, 1, 0},
-            {-2, -2, -1, -1, 1, -1, 0, -2, 0, 0, -1, 1}, {-2, 2, -2, 0, 0, 1, -1, 0, 2, -2, -1, 1},
-            {-2, 0, -1, -2, -2, -2, -1, 1, 1, 1, 0, -1}, {-1, -2, 1, -1, 0, 0, 0, 1, 0, -1, 2, 0},
-            {-1, -1, 0, 0, 1, 1, 0, 0, 0, 0, -1, -1}, {-1, 2, 0, 0, 1, -2, 1, 0, 2, -1, 1, 0},
-            {1, 0, 2, 1, -1, 1, 1, 1, 0, -2, 2, 0}, {-1, 0, 0, -1, -2, 1, 2, 1, 1, 0, 0, -1}
-    };
+    private static final byte[][] ELEMENT_CELESTIAL_GRID, ELEMENT_ZODIAC_GRID, CELESTIAL_ZODIAC_GRID;
 
     /**
      * Calculates the phrase composed of the Omen to press and when to press it
@@ -114,5 +98,25 @@ public class Astrology extends Widget {
 
         if (zodiacCount != celestialCount && zodiacCount != elementalCount)
             throw new IllegalArgumentException("There are too many of one type of Astrology Symbol");
+    }
+
+    static {
+        ELEMENT_CELESTIAL_GRID = new byte[][]{
+                {0, 0, 1, -1, 0, 1, -2, 2, 0, -1}, {-2, 0, -1, 0, 2, 0, -2, 2, 0, 1},
+                {-1, -1, 0, -1, 1, 2, 0, 2, 1, -2}, {-1, 2, -1, 0, -2, -1, 0, 2, -2, 2}
+        };
+
+        ELEMENT_ZODIAC_GRID = new byte[][]{
+                {1, 0, -1, 0, 0, 2, 2, 0, 1, 0, 1, 0}, {2, 2, -1, 2, -1, -1, -2, 1, 2, 0, 0, 2},
+                {-2, -1, 0, 0, 1, 0, 1, 2, -1, -2, 1, 1}, {1, 1, -2, -2, 2, 0, -1, 1, 0, 0, -1, -1}
+        };
+
+        CELESTIAL_ZODIAC_GRID = new byte[][]{
+                {-1, -1, 2, 0, -1, 0, -1, 1, 0, 0, -2, -2}, {-2, 0, 1, 0, 2, 0, -1, 1, 2, 0, 1, 0},
+                {-2, -2, -1, -1, 1, -1, 0, -2, 0, 0, -1, 1}, {-2, 2, -2, 0, 0, 1, -1, 0, 2, -2, -1, 1},
+                {-2, 0, -1, -2, -2, -2, -1, 1, 1, 1, 0, -1}, {-1, -2, 1, -1, 0, 0, 0, 1, 0, -1, 2, 0},
+                {-1, -1, 0, 0, 1, 1, 0, 0, 0, 0, -1, -1}, {-1, 2, 0, 0, 1, -2, 1, 0, 2, -1, 1, 0},
+                {1, 0, 2, 1, -1, 1, 1, 1, 0, -2, 2, 0}, {-1, 0, 0, -1, -2, 1, 2, 1, 1, 0, 0, -1}
+        };
     }
 }

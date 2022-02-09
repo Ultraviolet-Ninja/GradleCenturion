@@ -15,9 +15,14 @@ import static bomb.tools.string.StringFormat.NO;
 import static bomb.tools.string.StringFormat.YES;
 
 public class ColorFlash extends Widget {
-    private static final int COMBO_LIMIT = 8;
+    private static final int COMBO_LIMIT;
 
-    private static final String RESULT_IS_COLOR_OR_WORD = "is either the word or color";
+    private static final String RESULT_IS_COLOR_OR_WORD;
+
+    static {
+        COMBO_LIMIT = 8;
+        RESULT_IS_COLOR_OR_WORD = "is either the word or color";
+    }
 
     public static String decipher(@NotNull ColorFlashColor[] words, @NotNull ColorFlashColor[] colors)
             throws IllegalArgumentException {

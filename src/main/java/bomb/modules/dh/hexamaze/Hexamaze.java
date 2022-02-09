@@ -27,10 +27,13 @@ import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
 public class Hexamaze extends Widget {
-    public static final Map<Color, Integer> COLOR_MAP = new HashMap<>();
-    public static final Color PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
+    public static final Map<Color, Integer> COLOR_MAP;
+    public static final Color PEG_COLOR;
 
     static {
+        PEG_COLOR = new Color(0.65, 0.65, 0.65, 1.0);
+
+        COLOR_MAP = new HashMap<>();
         COLOR_MAP.put(PEG_COLOR, -1);
         COLOR_MAP.put(RED, 0);
         COLOR_MAP.put(YELLOW, 1);

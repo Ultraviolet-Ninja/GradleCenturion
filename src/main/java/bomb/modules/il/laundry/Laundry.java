@@ -29,7 +29,7 @@ import static bomb.modules.il.laundry.Clothing.Material.WOOL;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 /**
  * This class deals with the Laundry module. The module requires a plethora of conditions that involve the
@@ -235,7 +235,7 @@ public class Laundry extends Widget {
     private static boolean letterMatch() {
         Set<String> clothingArticleLetters = stream(ARTICLE.getMaterial().name().split(""))
                 .map(String::toLowerCase)
-                .collect(toSet());
+                .collect(toUnmodifiableSet());
 
         return Stream.of(filter(serialCode, CHAR_FILTER).split(""))
                 .anyMatch(clothingArticleLetters::contains);

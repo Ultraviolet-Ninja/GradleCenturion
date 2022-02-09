@@ -10,10 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleButton;
 
-import java.util.stream.Collectors;
-
 import static bomb.tools.string.StringFormat.BULLET_POINT;
 import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.joining;
 
 public class ScreamsController implements Resettable {
     @FXML
@@ -58,7 +57,7 @@ public class ScreamsController implements Resettable {
 
             String outputText = stream(output.split(","))
                     .map(sample -> BULLET_POINT + sample)
-                    .collect(Collectors.joining("\n"));
+                    .collect(joining("\n"));
 
             resultArea.setText(outputText);
             star.resetClicks();

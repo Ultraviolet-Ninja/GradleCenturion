@@ -9,11 +9,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class ChordQualities extends Widget {
-    public static final String NEW_CHORD = "New Chord: ";
+    public static final String NEW_CHORD;
 
     private static final ArrayRing<String> ALL_NOTES;
 
     static {
+        NEW_CHORD = "New Chord: ";
         ALL_NOTES = new ArrayRing<>("A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#");
     }
 

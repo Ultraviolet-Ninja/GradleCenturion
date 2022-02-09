@@ -16,9 +16,13 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 public class RoundKeypads extends Widget {
-    private static final byte IMAGES_PER_COLUMN = 7;
-    private static final UnaryOperator<Color> HIGHLIGHT_COMMAND = previousColor ->
-            new Color(0, previousColor.getGreen(), previousColor.getBlue(), 1);
+    private static final int IMAGES_PER_COLUMN = 7;
+    private static final UnaryOperator<Color> HIGHLIGHT_COMMAND;
+
+    static {
+        HIGHLIGHT_COMMAND = previousColor ->
+                new Color(0, previousColor.getGreen(), previousColor.getBlue(), 1);
+    }
 
     public static int determineBadColumn() {
         Map<Integer, Long> frequencyCounter = stream(KEYPAD_ARRAY)

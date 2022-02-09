@@ -3,13 +3,14 @@ package bomb.modules.s.switches;
 import bomb.Widget;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import static java.util.Arrays.asList;
 
 public class Switches extends Widget {
     protected static final byte BIT_LENGTH = 5;
@@ -18,7 +19,7 @@ public class Switches extends Widget {
 
     static {
         Byte[] forbiddenMoveSource = {4, 11, 15, 18, 19, 23, 24, 26, 28, 30};
-        FORBIDDEN_MOVES = new HashSet<>(Arrays.asList(forbiddenMoveSource));
+        FORBIDDEN_MOVES = new HashSet<>(asList(forbiddenMoveSource));
         SPECIAL_CONDITIONS = new HashMap<>();
         setUpSpecialConditions();
     }
@@ -66,7 +67,7 @@ public class Switches extends Widget {
 
     private static void setToZero(List<String> moveList, byte startingState) {
         if (isSpecialCondition(startingState)) {
-            moveList.addAll(Arrays.asList(SPECIAL_CONDITIONS.get(startingState)));
+            moveList.addAll(asList(SPECIAL_CONDITIONS.get(startingState)));
             return;
         }
 
@@ -80,7 +81,7 @@ public class Switches extends Widget {
 
     private static void setNeededSwitchesOn(List<String> moveList, byte desiredState) {
         if (isSpecialCondition(desiredState)) {
-            List<String> tempList = Arrays.asList(SPECIAL_CONDITIONS.get(desiredState).clone());
+            List<String> tempList = asList(SPECIAL_CONDITIONS.get(desiredState).clone());
             Collections.reverse(tempList);
             moveList.addAll(tempList);
             return;

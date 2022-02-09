@@ -13,12 +13,23 @@ import static bomb.tools.number.MathUtils.digitalRoot;
 import static bomb.tools.number.MathUtils.roundToNPlaces;
 
 public class CheapCheckout extends Widget {
-    private static final double SUNDAY_ADDITION = 2.15, THURSDAY_SALE = 0.5,
-            FRIDAY_MARK_UP = 1.25, SATURDAY_SALE = 0.65;
-    private static final int REQUIRED_ITEM_COUNT = 6, REQUIRED_WEIGHT_COUNT = 2;
-    private static final ToDoubleFunction<List<CheckoutItem>> TO_SUM = items -> items.stream()
-            .mapToDouble(CheckoutItem::getCurrentPiece)
-            .sum();
+    private static final double SUNDAY_ADDITION, THURSDAY_SALE, FRIDAY_MARK_UP, SATURDAY_SALE;
+    private static final int REQUIRED_ITEM_COUNT, REQUIRED_WEIGHT_COUNT;
+    private static final ToDoubleFunction<List<CheckoutItem>> TO_SUM;
+
+    static {
+        SUNDAY_ADDITION = 2.15;
+        THURSDAY_SALE = 0.5;
+        FRIDAY_MARK_UP = 1.25;
+        SATURDAY_SALE = 0.65;
+
+        REQUIRED_ITEM_COUNT = 6;
+        REQUIRED_WEIGHT_COUNT = 2;
+
+        TO_SUM = items -> items.stream()
+                .mapToDouble(CheckoutItem::getCurrentPiece)
+                .sum();
+    }
 
     public static String calculateTotalPrice(@NotNull List<CheckoutItem> items, @NotNull DayOfWeek dayOfWeek,
                                              double[] perPoundWeights, double givenCash) throws IllegalArgumentException {
