@@ -2,17 +2,17 @@ package bomb.modules.dh.fast_math;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.TrinarySwitch;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Port.PARALLEL;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
+import static bomb.enumerations.TrinarySwitch.ON;
 import static org.testng.Assert.assertEquals;
 
 public class FastMathTest {
@@ -29,7 +29,8 @@ public class FastMathTest {
         };
     }
 
-    @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
+    @Test(dataProvider = "exceptionTestProvider",
+            expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(ConditionSetter setter, String input) {
         setter.setCondition();
         FastMath.solve(input);
@@ -46,7 +47,7 @@ public class FastMathTest {
     public void allPreconditionTest(String expected, String input) {
         Widget.setPortValue(SERIAL, 1);
         Widget.setPortValue(RJ45, 1);
-        Widget.setIndicator(TrinarySwitch.ON, Indicator.MSA);
+        Widget.setIndicator(ON, MSA);
         Widget.setDBatteries(4);
         Widget.setSerialCode("fr4op2"); //In total, adds 41 to the count
 

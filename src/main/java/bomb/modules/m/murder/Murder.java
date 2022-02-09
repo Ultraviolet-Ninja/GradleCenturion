@@ -29,7 +29,7 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 public class Murder extends Widget {
-    public static String solve(Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
+    public static String solve(@NotNull Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
                                @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
         validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);
 

@@ -18,7 +18,6 @@ import java.util.stream.IntStream;
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.tools.number.MathUtils.isPerfectSquare;
-import static java.util.stream.Collectors.toList;
 
 public class Morsematics extends Widget {
     public static String solve(LinkedHashSet<String> inputSet) throws IllegalArgumentException {
@@ -27,7 +26,7 @@ public class Morsematics extends Widget {
         List<String> inputLetter = validate(inputSet, morseGraph);
         List<String> letterList = IntStream.rangeClosed('A', 'Z')
                 .mapToObj(number -> String.valueOf((char) number))
-                .collect(toList());
+                .toList();
 
         Pair<ArrayRing<String>, ArrayRing<String>> rotatingLetters = createStartingLetters(letterList);
         findFinalLetter(rotatingLetters, inputLetter);
@@ -56,7 +55,7 @@ public class Morsematics extends Widget {
                         input.toUpperCase()
                 )
                 .distinct()
-                .collect(toList());
+                .toList();
         if (inputLetters.size() != 3)
             throw new IllegalArgumentException(
                     "Repeated value detected in both morse code and the letter form"

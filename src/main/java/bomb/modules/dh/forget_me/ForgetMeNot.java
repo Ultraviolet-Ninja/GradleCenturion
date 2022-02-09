@@ -3,6 +3,7 @@ package bomb.modules.dh.forget_me;
 import bomb.Widget;
 import bomb.tools.filter.Regex;
 import bomb.tools.filter.RegexFilter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +121,7 @@ public class ForgetMeNot extends Widget {
             FINAL_CODE.remove(size - 1);
     }
 
-    public static String stringifyFinalCode() {
+    public static @NotNull String stringifyFinalCode() {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < FINAL_CODE.size(); i++) {

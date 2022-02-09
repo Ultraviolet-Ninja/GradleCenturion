@@ -20,11 +20,12 @@ public class FastMath extends Widget {
             {13, 23, 26, 85, 92, 12, 73, 56, 81, 7, 75, 47, 99}
     };
 
-    public static String solve(@NotNull String letters) throws IllegalArgumentException {
-        if (letters.length() != 2)
-            throw new IllegalArgumentException("Input 2 letters, please");
+    public static @NotNull String solve(@NotNull String letters) throws IllegalArgumentException {
         checkSerialCode();
-        int preconditions = edgework();
+        letters = letters.toUpperCase();
+        if (!letters.matches("[ABCDEGKNPSTXZ]{2}"))
+            throw new IllegalArgumentException("Input 2 of the following letters: [A B C D E G K N P S T X Z]");
+        int preconditions = evaluateEdgework();
         int leftNum = translateLetter(letters.substring(0, 1));
         int rightNum = translateLetter(letters.substring(1));
 
@@ -33,7 +34,7 @@ public class FastMath extends Widget {
     }
 
     private static int translateLetter(String letter) throws IllegalArgumentException {
-        return switch (letter.toUpperCase()) {
+        return switch (letter) {
             case "A" -> 0;
             case "B" -> 1;
             case "C" -> 2;
@@ -46,18 +47,16 @@ public class FastMath extends Widget {
             case "S" -> 9;
             case "T" -> 10;
             case "X" -> 11;
-            case "Z" -> 12;
-            default -> throw new IllegalArgumentException("Illegal letter given");
+            default -> 12;
         };
     }
 
-    private static int edgework() {
-        int output = hasLitIndicator(MSA) ? 20 : 0; //If the bomb has a lit MSA indicator
-        output += doesPortExists(SERIAL) ? 14 : 0; //If the bomb has a Serial Port
-        //If the serial number has the letters F A S T
+    private static int evaluateEdgework() {
+        int output = hasLitIndicator(MSA) ? 20 : 0;
+        output += doesPortExists(SERIAL) ? 14 : 0;
         output -= !EMPTY_FILTER_RESULTS.test(serialCode, new Regex("[fast]")) ? 5 : 0;
-        output += doesPortExists(RJ45) ? 27 : 0; //If the bomb has an RJ-45 Port
-        output -= getAllBatteries() > 3 ? 15 : 0; //If the bomb has more than 3 batteries
+        output += doesPortExists(RJ45) ? 27 : 0;
+        output -= getAllBatteries() > 3 ? 15 : 0;
         return output;
     }
 

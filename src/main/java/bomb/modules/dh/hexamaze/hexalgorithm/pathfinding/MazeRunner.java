@@ -29,7 +29,7 @@ public class MazeRunner {
             LEFT_SIDE_MOVE_DOWN_RIGHT = new Coordinates(1, 1),
             RIGHT_SIDE_MOVE_TOP_RIGHT = new Coordinates(1, -1);
 
-    public static List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
+    public static @NotNull List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
             throws IllegalArgumentException {
         Coordinates startingLocation = findStartingLocation(grid);
         Graph<Coordinates, DefaultEdge> mappedGraph = convertGridToGraph(grid);

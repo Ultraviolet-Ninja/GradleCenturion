@@ -7,6 +7,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.Maze;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,7 +17,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calc
 public class MazeSearch {
     public static final int ROTATION_COUNT = 6;
 
-    public static Grid search(@NotNull Maze maze, @NotNull Grid grid) {
+    public static @Nullable Grid search(@NotNull Maze maze, @NotNull Grid grid) {
         int gridSpan = grid.getHexagon().getSpan();
         int lastIndex = maze.getHexagon().getSpan() - gridSpan;
         BufferedQueue<BufferedQueue<HexNode>> pillar;

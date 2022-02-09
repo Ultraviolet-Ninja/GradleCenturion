@@ -12,7 +12,7 @@ import static bomb.enumerations.Port.PARALLEL;
 public class Caesar extends Widget {
     private static final int MAX_LETTER_COUNT = 26;
 
-    public static String reshuffle(@NotNull String input) throws IllegalArgumentException {
+    public static @NotNull String reshuffle(@NotNull String input) throws IllegalArgumentException {
         checkSerialCode();
         return shift(input, createOffset());
     }

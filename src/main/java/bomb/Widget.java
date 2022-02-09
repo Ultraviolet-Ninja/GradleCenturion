@@ -20,7 +20,6 @@ import static bomb.tools.filter.RegexFilter.SERIAL_CODE_PATTERN;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toList;
 
 /**
  * Widget class carries all the important widgets of the current bomb.
@@ -251,7 +250,7 @@ public class Widget {
 
         List<Indicator> tempList = allIndicators.stream()
                 .filter(indicator -> filter.test(indicator.getState()))
-                .collect(toList());
+                .toList();
 
         return tempList.isEmpty() ?
                 EnumSet.noneOf(Indicator.class) :

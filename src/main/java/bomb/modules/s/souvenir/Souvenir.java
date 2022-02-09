@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.toList;
-
 public class Souvenir extends Widget {
     private static final Map<String, String> MODULE_ARTIFACTS;
 
@@ -24,7 +22,7 @@ public class Souvenir extends Widget {
         return MODULE_ARTIFACTS.entrySet()
                 .stream()
                 .map(entry -> new Pair<>(entry.getKey(), entry.getValue()))
-                .collect(toList());
+                .toList();
     }
 
     public static void reset() {

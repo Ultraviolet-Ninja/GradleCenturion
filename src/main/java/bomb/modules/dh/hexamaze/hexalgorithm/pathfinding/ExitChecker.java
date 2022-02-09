@@ -26,7 +26,6 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_LEFT;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
-import static java.util.stream.Collectors.toList;
 
 public class ExitChecker {
     public static @Nullable Pair<String, List<Coordinates>> findPossibleExits(@NotNull Grid grid)
@@ -65,7 +64,7 @@ public class ExitChecker {
     private static List<Coordinates> getTopLeftSideExits() {
         return IntStream.range(0, GRID_SIDE_LENGTH)
                 .mapToObj(i -> new Coordinates(i, 0))
-                .collect(toList());
+                .toList();
     }
 
     private static List<Coordinates> getTopRightSideExits() {
@@ -73,7 +72,7 @@ public class ExitChecker {
 
         return IntStream.range(GRID_SIDE_LENGTH - 1, gripSpan)
                 .mapToObj(index -> new Coordinates(index, 0))
-                .collect(toList());
+                .toList();
     }
 
     private static List<Coordinates> getRightSideExits() {
@@ -83,7 +82,7 @@ public class ExitChecker {
 
         return IntStream.range(0, finalColumnCapacity)
                 .mapToObj(i -> new Coordinates(lastIndex, i))
-                .collect(toList());
+                .toList();
     }
 
     private static List<Coordinates> getBottomRightSideExits() {
@@ -130,7 +129,7 @@ public class ExitChecker {
                     HexNode node = grid.getAtCoordinates(coordinates);
                     return isAtLeastOneWallClear(node, wallsToFind);
                 })
-                .collect(toList());
+                .toList();
     }
 
     private static boolean isAtLeastOneWallClear(HexNode node, EnumSet<HexWall> wallsToFind) {

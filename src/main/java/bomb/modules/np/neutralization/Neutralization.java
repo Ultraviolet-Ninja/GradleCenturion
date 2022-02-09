@@ -10,7 +10,6 @@ import org.intellij.lang.annotations.Language;
 
 import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static bomb.Widget.IndicatorFilter.ALL_PRESENT;
 import static bomb.enumerations.Indicator.CAR;
@@ -27,6 +26,7 @@ import static bomb.modules.np.neutralization.Chemical.Base.POTASSIUM_HYDROXIDE;
 import static bomb.modules.np.neutralization.Chemical.Base.SODIUM_HYDROXIDE;
 import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 import static bomb.tools.filter.RegexFilter.VOWEL_FILTER;
+import static java.util.stream.Collectors.toSet;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;
@@ -104,7 +104,7 @@ public class Neutralization extends Widget {
                 .map(String::toLowerCase)
                 .map(name -> name.split(""))
                 .flatMap(Arrays::stream)
-                .collect(Collectors.toSet());
+                .collect(toSet());
 
         @Language("regexp")
         String regex = uniqueCharacterSet.toString().replaceAll(", ", "");

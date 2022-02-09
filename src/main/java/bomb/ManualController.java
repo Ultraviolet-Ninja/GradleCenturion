@@ -48,7 +48,6 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOG
 import static java.util.Arrays.asList;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.function.UnaryOperator.identity;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
@@ -129,7 +128,7 @@ public class ManualController {
                 .thenApply(stream -> stream.map(Paths::get)
                         .map(Path::toUri)
                         .map(uri -> createSingleRegion(uri, resetObserver))
-                        .collect(toList())
+                        .toList()
                 );
 
         CompletableFuture<Map<String, Region>> fileToRegionMapFuture =

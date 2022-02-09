@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
 import static bomb.modules.dh.emoji.EmojiControllerState.END;
 import static bomb.modules.dh.emoji.EmojiControllerState.FIRST_EMOJI_PRESS;
 import static bomb.modules.dh.emoji.EmojiControllerState.MATH_SYMBOL_PRESS;
@@ -46,7 +47,7 @@ public class EmojiController implements Resettable {
     private Consumer<ActionEvent> createEmojiButtonAction() {
         return event -> {
             String emojiText = BUTTON_NAME_FROM_EVENT.apply(event);
-            Emoji current = Emoji.getEmojiFromText(emojiText);
+            Emoji current = EMOJI_MAP.get(emojiText);
             internalEquation.append(Objects.requireNonNull(current).getLabel());
             exportToUI();
             handleState();

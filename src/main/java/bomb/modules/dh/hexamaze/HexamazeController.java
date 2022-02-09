@@ -68,6 +68,7 @@ public class HexamazeController implements Resettable {
             Quartet<Grid, String, Integer, List<Coordinates>> exitInfo = Hexamaze.solve(nodeList);
             setHexTileWalls(hexTileList, exitInfo.getValue0());
             String exitDirectionText = exitInfo.getValue1();
+
             if (exitDirectionText != null) {
                 exitDirectionLabel.setText(
                         exitDirectionText.isEmpty() ?

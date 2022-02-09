@@ -11,7 +11,6 @@ import java.util.function.IntUnaryOperator;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toList;
 
 public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatable {
     public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
@@ -87,7 +86,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatab
     public List<HexNode> asList() {
         return hexagon.stream()
                 .flatMap(BufferedQueue::stream)
-                .collect(toList());
+                .toList();
     }
 
     public HexNode findAtCoordinate(@NotNull Coordinates coordinates) {

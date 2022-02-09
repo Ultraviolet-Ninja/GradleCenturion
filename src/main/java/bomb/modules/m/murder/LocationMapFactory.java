@@ -11,8 +11,6 @@ import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 @SuppressWarnings("ConstantConditions")
 public class LocationMapFactory {
     private static final String FILENAME = "location_list.csv";
@@ -46,8 +44,8 @@ public class LocationMapFactory {
                 .map(Arrays::stream)
                 .map(stream -> stream
                         .map(Location::valueOf)
-                        .collect(toList())
+                        .toList()
                 )
-                .collect(toList());
+                .toList();
     }
 }
