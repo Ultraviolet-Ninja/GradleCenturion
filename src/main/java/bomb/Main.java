@@ -44,8 +44,8 @@ public class Main extends Application {
     }
 
     private static void setSceneKeyboardEvents(Scene scene, ManualController controller) {
-        List<KeyCodeCombination> digitList = Stream.of(DIGIT1, DIGIT2, DIGIT3, DIGIT4, DIGIT5,
-                        DIGIT6, DIGIT7, DIGIT8, DIGIT9, DIGIT0)
+        List<KeyCodeCombination> digitList = Stream.of(DIGIT1, DIGIT2, DIGIT3, DIGIT4, DIGIT5, DIGIT6, DIGIT7,
+                        DIGIT8, DIGIT9, DIGIT0)
                         .map(code -> new KeyCodeCombination(code, CONTROL_DOWN))
                         .toList();
 
@@ -60,7 +60,6 @@ public class Main extends Application {
                     }
             );
         }
-
     }
 
     private static void setSceneArrowEvents(Scene scene, ManualController controller) {

@@ -218,7 +218,9 @@ public class ManualController {
 
     @FXML
     public void search() {
-        String searchTerm = searchBar.getText().toLowerCase();
+        String searchTerm = searchBar.getText()
+                .toLowerCase()
+                .replaceAll("[^a-z0-9]", "");
         radioButtonHouse.getChildren().clear();
         if (searchTerm.isEmpty()) {
             radioButtonHouse.getChildren().addAll(allRadioButtons);
