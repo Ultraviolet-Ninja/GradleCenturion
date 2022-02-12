@@ -243,18 +243,24 @@ public class ManualController {
     }
 
     void switchPaneByUpArrow() {
-        RadioButton selected = (RadioButton) options.getSelectedToggle();
         int size = allRadioButtons.size();
-        if (selected == null || allRadioButtons.size() != observableRadioList.size()) return;
+        if (size != observableRadioList.size()) return;
+
+        RadioButton selected = (RadioButton) options.getSelectedToggle();
+        if (selected == null) return;
+
         int index = allRadioButtons.indexOf(selected) - 1;
         if (index < 0) index += size;
         switchPaneByIndex(index);
     }
 
     void switchPaneByDownArrow() {
-        RadioButton selected = (RadioButton) options.getSelectedToggle();
         int size = allRadioButtons.size();
-        if (selected == null || size != observableRadioList.size()) return;
+        if (size != observableRadioList.size()) return;
+
+        RadioButton selected = (RadioButton) options.getSelectedToggle();
+        if (selected == null) return;
+
         int index = allRadioButtons.indexOf(selected) + 1;
         index %= size;
         switchPaneByIndex(index);
