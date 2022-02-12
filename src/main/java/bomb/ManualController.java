@@ -13,6 +13,7 @@ import bomb.tools.pattern.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
@@ -55,6 +56,7 @@ public class ManualController {
     private static final String FXML_DIRECTORY = "fxml";
 
     private Map<Toggle, Region> regionMap;
+    private List<Node> observableRadioList;
     private final List<RadioButton> allRadioButtons;
 
     @FXML
@@ -78,8 +80,9 @@ public class ManualController {
 
     public void initialize() throws ExecutionException, InterruptedException {
         searchBar.setTextFormatter(createSearchBarFormatter());
+        observableRadioList = radioButtonHouse.getChildren();
         allRadioButtons.addAll(
-                radioButtonHouse.getChildren().stream()
+                observableRadioList.stream()
                         .map(node -> (RadioButton) node)
                         .toList()
         );
@@ -218,16 +221,14 @@ public class ManualController {
 
     @FXML
     public void search() {
-        String searchTerm = searchBar.getText()
-                .toLowerCase()
-                .replaceAll("[^a-z0-9]", "");
+        String searchTerm = searchBar.getText().toLowerCase();
         radioButtonHouse.getChildren().clear();
         if (searchTerm.isEmpty()) {
             radioButtonHouse.getChildren().addAll(allRadioButtons);
             return;
         }
 
-        String pattern = "[\\w ]*" + searchTerm + "[\\w ]*";
+        String pattern = "[a-z3 ]*" + searchTerm + "[a-z3 ]*";
         radioButtonHouse.getChildren().addAll(
                 allRadioButtons.stream()
                         .filter(radioButton -> GET_TOGGLE_NAME.apply(radioButton)
@@ -237,46 +238,25 @@ public class ManualController {
         );
     }
 
-    public void switchPaneByIndex(final int index) {
-        int counter = 0;
-        for (RadioButton radioButton : allRadioButtons) {
-            if (counter++ == index && !radioButton.isDisabled()) {
-                radioButton.fire();
-                return;
-            }
-        }
+    void switchPaneByIndex(final int index) {
+        ((RadioButton)observableRadioList.get(index)).fire();
     }
 
-    public void switchPaneByUpArrow() {
+    void switchPaneByUpArrow() {
         RadioButton selected = (RadioButton) options.getSelectedToggle();
-        if (selected == null) return;
-        int index = allRadioButtons.indexOf(selected) - 1;
         int size = allRadioButtons.size();
+        if (selected == null || allRadioButtons.size() != observableRadioList.size()) return;
+        int index = allRadioButtons.indexOf(selected) - 1;
         if (index < 0) index += size;
-
-        RadioButton nextButton = allRadioButtons.get(index);
-        while (nextButton.isDisabled()) {
-            index--;
-            if (index < 0) index += size;
-            nextButton = allRadioButtons.get(index);
-        }
-
-        nextButton.fire();
+        switchPaneByIndex(index);
     }
 
-    public void switchPaneByDownArrow() {
+    void switchPaneByDownArrow() {
         RadioButton selected = (RadioButton) options.getSelectedToggle();
-        if (selected == null) return;
-        int index = allRadioButtons.indexOf(selected);
-        int mod = allRadioButtons.size();
-        index = (index + 1) % mod;
-        RadioButton nextButton = allRadioButtons.get(index);
-        while (nextButton.isDisabled()) {
-            index++;
-            index %= mod;
-            nextButton = allRadioButtons.get(index);
-        }
-
-        nextButton.fire();
+        int size = allRadioButtons.size();
+        if (selected == null || size != observableRadioList.size()) return;
+        int index = allRadioButtons.indexOf(selected) + 1;
+        index %= size;
+        switchPaneByIndex(index);
     }
 }
