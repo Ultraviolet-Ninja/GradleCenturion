@@ -50,7 +50,8 @@ public class Laundry extends Widget {
      * @return The array of Strings containing the solve conditions
      * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
      */
-    public static String[] clean(@NotNull String solved, @NotNull String needy) throws IllegalArgumentException {
+    public static @NotNull String[] clean(@NotNull String solved, @NotNull String needy)
+            throws IllegalArgumentException {
         validateInput(solved, needy);
         Laundry.needy = Integer.parseInt(needy);
         setClothing(Integer.parseInt(solved));
@@ -94,14 +95,16 @@ public class Laundry extends Widget {
      * @param solved The number of solved modules
      */
     private static void setMaterial(int solved) {
-        switch (balance(solved + calculateTotalPorts() - numHolders)) {
-            case 0 -> ARTICLE.setMaterial(POLYESTER);
-            case 1 -> ARTICLE.setMaterial(COTTON);
-            case 2 -> ARTICLE.setMaterial(WOOL);
-            case 3 -> ARTICLE.setMaterial(NYLON);
-            case 4 -> ARTICLE.setMaterial(CORDUROY);
-            default -> ARTICLE.setMaterial(LEATHER);
-        }
+        Clothing.Material foundMaterial = switch (balance(solved + calculateTotalPorts() - numHolders)) {
+            case 0 -> POLYESTER;
+            case 1 -> COTTON;
+            case 2 -> WOOL;
+            case 3 -> NYLON;
+            case 4 -> CORDUROY;
+            default -> LEATHER;
+        };
+
+        ARTICLE.setMaterial(foundMaterial);
     }
 
     /**
@@ -109,14 +112,16 @@ public class Laundry extends Widget {
      * Last Digit of the Serial Code + the No. of All Batteries
      */
     private static void setColor() {
-        switch (balance(getSerialCodeLastDigit() + getAllBatteries())) {
-            case 0 -> ARTICLE.setColor(RUBY);
-            case 1 -> ARTICLE.setColor(STAR);
-            case 2 -> ARTICLE.setColor(SAPPHIRE);
-            case 3 -> ARTICLE.setColor(JADE);
-            case 4 -> ARTICLE.setColor(PEARL);
-            default -> ARTICLE.setColor(MALINITE);
-        }
+        Clothing.Color foundColor = switch (balance(getSerialCodeLastDigit() + getAllBatteries())) {
+            case 0 -> RUBY;
+            case 1 -> STAR;
+            case 2 -> SAPPHIRE;
+            case 3 -> JADE;
+            case 4 -> PEARL;
+            default -> MALINITE;
+        };
+
+        ARTICLE.setColor(foundColor);
     }
 
     /**
@@ -126,14 +131,16 @@ public class Laundry extends Widget {
      * @param unsolved The number of unsolved modules
      */
     private static void setItem(int unsolved) {
-        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL_PRESENT))) {
-            case 0 -> ARTICLE.setItem(CORSET);
-            case 1 -> ARTICLE.setItem(SHIRT);
-            case 2 -> ARTICLE.setItem(SKIRT);
-            case 3 -> ARTICLE.setItem(SKORT);
-            case 4 -> ARTICLE.setItem(SHORTS);
-            default -> ARTICLE.setItem(SCARF);
-        }
+        Clothing.Item foundItem = switch (balance(unsolved + countIndicators(IndicatorFilter.ALL_PRESENT))) {
+            case 0 -> CORSET;
+            case 1 -> SHIRT;
+            case 2 -> SKIRT;
+            case 3 -> SKORT;
+            case 4 -> SHORTS;
+            default -> SCARF;
+        };
+
+        ARTICLE.setItem(foundItem);
     }
 
     /**
@@ -142,7 +149,7 @@ public class Laundry extends Widget {
      * @return The array of Strings for the solve conditions
      */
     private static String[] conditions() {
-        if (thanksBob()) return returnBob();
+        if (checkBobConditions()) return returnBob();
 
         String[] attributes = new String[5];
         fillThird(attributes);
@@ -222,7 +229,7 @@ public class Laundry extends Widget {
      *
      * @return True if the edgework matches the BOB conditions
      */
-    private static boolean thanksBob() {
+    private static boolean checkBobConditions() {
         return getAllBatteries() == 4 && numHolders == 2 && hasLitIndicator(BOB);
     }
 

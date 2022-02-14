@@ -1,6 +1,7 @@
 package bomb.modules.s.switches;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class Switches extends Widget {
             SPECIAL_CONDITIONS.put(specialConditionsSource[i], specialConditionsOutputs[i]);
     }
 
-    public static List<String> produceMoveList(byte startingState, byte desiredState)
+    public static @NotNull List<String> produceMoveList(byte startingState, byte desiredState)
             throws IllegalArgumentException {
         validateInput(startingState, desiredState);
         List<String> outputList = new ArrayList<>();

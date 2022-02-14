@@ -54,7 +54,7 @@ public class SimonStates extends Widget {
         dominantColorIndex = dominantColor.ordinal();
     }
 
-    public static List<StateColor> calculateNextColorPress(@NotNull EnumSet<StateColor> colorsFlashed)
+    public static @NotNull List<StateColor> calculateNextColorPress(@NotNull EnumSet<StateColor> colorsFlashed)
             throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)

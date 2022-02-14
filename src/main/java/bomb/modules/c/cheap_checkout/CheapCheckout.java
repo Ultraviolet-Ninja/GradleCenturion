@@ -31,8 +31,8 @@ public class CheapCheckout extends Widget {
                 .sum();
     }
 
-    public static String calculateTotalPrice(@NotNull List<CheckoutItem> items, @NotNull DayOfWeek dayOfWeek,
-                                             double[] perPoundWeights, double givenCash) throws IllegalArgumentException {
+    public static @NotNull String calculateTotalPrice(@NotNull List<CheckoutItem> items, @NotNull DayOfWeek dayOfWeek,
+                                                      double[] perPoundWeights, double givenCash) throws IllegalArgumentException {
         validateInput(items, perPoundWeights);
         items.get(4).applyMultiplicand(perPoundWeights[0]);
         items.get(5).applyMultiplicand(perPoundWeights[1]);

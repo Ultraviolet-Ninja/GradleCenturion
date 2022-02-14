@@ -46,7 +46,7 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(@NotNull ScreamColor[] flashingOrder) throws IllegalArgumentException {
+    public static String nextSolve(@NotNull ScreamColor @NotNull [] flashingOrder) throws IllegalArgumentException {
         if (flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");

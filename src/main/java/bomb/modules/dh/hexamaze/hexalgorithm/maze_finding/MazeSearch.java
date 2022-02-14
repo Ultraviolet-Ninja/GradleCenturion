@@ -7,17 +7,17 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.Maze;
 import bomb.tools.data.structures.queue.BufferedQueue;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 
 public class MazeSearch {
     public static final int ROTATION_COUNT = 6;
 
-    public static @Nullable Grid search(@NotNull Maze maze, @NotNull Grid grid) {
+    public static Optional<Grid> search(@NotNull Maze maze, @NotNull Grid grid) {
         int gridSpan = grid.getHexagon().getSpan();
         int lastIndex = maze.getHexagon().getSpan() - gridSpan;
         BufferedQueue<BufferedQueue<HexNode>> pillar;
@@ -27,9 +27,9 @@ public class MazeSearch {
             pillar = generatePillar(maze, gridSpan, offset);
             output = searchPillar(pillar, grid);
             if (output != null)
-                return output;
+                return Optional.of(output);
         }
-        return null;
+        return Optional.empty();
     }
 
     private static BufferedQueue<BufferedQueue<HexNode>> generatePillar(Maze maze, int gridSpan, int offset) {

@@ -3,6 +3,7 @@ package bomb.modules.s.shape_shift;
 import bomb.Widget;
 import bomb.tools.data.structures.graph.list.ListGraph;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,7 @@ public class ShapeShift extends Widget {
     }
     //</editor-fold>
 
-    public static ShapeEnd[] solve(ShapeEnd left, ShapeEnd right) {
+    public static ShapeEnd[] solve(@NotNull ShapeEnd left, @NotNull ShapeEnd right) {
         checkSerialCode();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {

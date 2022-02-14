@@ -13,9 +13,10 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 
 import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
 public class MazeSearchTest {
     private Maze maze;
@@ -30,7 +31,8 @@ public class MazeSearchTest {
         Grid nullState = hexagonFromLine(
                 "n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n"
         );
-        assertNull(MazeSearch.search(maze, nullState));
+        Optional<Grid> emptyOptional = MazeSearch.search(maze, nullState);
+        assertTrue(emptyOptional.isEmpty());
     }
 
     @DataProvider

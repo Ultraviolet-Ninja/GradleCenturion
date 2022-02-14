@@ -13,7 +13,8 @@ import java.util.List;
 import static bomb.tools.filter.RegexFilter.filter;
 
 public class MicroController extends Widget {
-    public static List<Color> getPinColors(@NotNull String moduleSerialNumbers, AbstractController controller)
+    public static @NotNull List<Color> getPinColors(@NotNull String moduleSerialNumbers,
+                                                    @NotNull AbstractController controller)
             throws IllegalArgumentException {
         validateInput(moduleSerialNumbers, controller);
         if (containsRequiredNumbers(moduleSerialNumbers))

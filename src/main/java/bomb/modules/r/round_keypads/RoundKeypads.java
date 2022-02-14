@@ -5,6 +5,7 @@ import bomb.abstractions.Flaggable;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.function.UnaryOperator;
@@ -42,7 +43,7 @@ public class RoundKeypads extends Widget {
                 .orElse(-1);
     }
 
-    public static Image toggleImageColor(Keypad toEdit, Image original) {
+    public static Image toggleImageColor(@NotNull Keypad toEdit, @NotNull Image original) {
         if (toEdit.getFlag()) {
             toEdit.setFlag(false);
             return toEdit.getMemory();

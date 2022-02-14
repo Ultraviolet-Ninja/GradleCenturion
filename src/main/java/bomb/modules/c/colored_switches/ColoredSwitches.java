@@ -31,7 +31,7 @@ public class ColoredSwitches extends Switches {
         }
     }
 
-    public static List<String> producePreemptiveMoveList(byte startingState) throws IllegalArgumentException {
+    public static @NotNull List<String> producePreemptiveMoveList(byte startingState) throws IllegalArgumentException {
         validateByte(startingState);
 
         List<String> outputList = new ArrayList<>();
@@ -66,7 +66,7 @@ public class ColoredSwitches extends Switches {
         throw new IllegalStateException();
     }
 
-    public static List<String> produceFinalMoveList(@NotNull SwitchColor[] startingColors, byte desiredState)
+    public static @NotNull List<String> produceFinalMoveList(@NotNull SwitchColor[] startingColors, byte desiredState)
             throws IllegalStateException, IllegalArgumentException {
         validateByte(desiredState);
         validateSwitchColors(startingColors);

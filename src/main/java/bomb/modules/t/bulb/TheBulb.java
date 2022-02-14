@@ -46,7 +46,7 @@ public class TheBulb extends Widget {
     private static boolean isLightOffAtStepOne;
     private static Indicator rememberedIndicator = null;
 
-    public static List<String> solve(@NotNull Bulb bulb) {
+    public static @NotNull List<String> solve(@NotNull Bulb bulb) {
         validateBulb(bulb);
         List<String> outputList = new ArrayList<>();
         stepOne(bulb, outputList);

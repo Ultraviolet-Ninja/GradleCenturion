@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.CYAN;
@@ -51,15 +52,17 @@ public class Hexamaze extends Widget {
         Maze maze = new Maze();
         Grid original = new Grid(new HexagonalPlane(nodeList));
 
-        Grid found = MazeSearch.search(maze, original);
-        if (found == null)
-            throw new IllegalArgumentException("Could not find maze from given shapes");
+        Grid found = MazeSearch.search(maze, original)
+                .orElseThrow(() -> {
+                    throw new IllegalArgumentException("Could not find maze from given shapes");
+                });
 
         int colorValue = copyPegLocation(original, found);
-        Pair<String, List<Coordinates>> exitInfo = ExitChecker.findPossibleExits(found);
-        if (exitInfo == null)
+        Optional<Pair<String, List<Coordinates>>> exitInfoOptional = ExitChecker.findPossibleExits(found);
+        if (exitInfoOptional.isEmpty())
             return new Quartet<>(found, null, null, null);
 
+        Pair<String, List<Coordinates>> exitInfo = exitInfoOptional.get();
         return new Quartet<>(
                 found,
                 exitInfo.getValue0(),

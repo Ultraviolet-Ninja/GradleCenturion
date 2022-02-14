@@ -2,6 +2,7 @@ package bomb.modules.ab.astrology;
 
 import bomb.Widget;
 import bomb.tools.filter.Regex;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -35,7 +36,7 @@ public class Astrology extends Widget {
      * @return The String command
      * @throws IllegalArgumentException Serial code is empty or there's an issue with the amount or type of symbols
      */
-    public static String calculate(AstrologySymbol... symbols) throws IllegalArgumentException {
+    public static @NotNull String calculate(AstrologySymbol... symbols) throws IllegalArgumentException {
         checkSerialCode();
         checkInputHasAllThreeTypes(symbols);
         Arrays.sort(symbols);

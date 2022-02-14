@@ -38,7 +38,7 @@ public class SquareButton extends Widget implements ButtonType {
         COLOR_WORDS = new TreeSet<>(asList("Purple", "Indigo", "Maroon", "Jade"));
     }
 
-    public static String solve(int buttonColor, @NotNull String buttonText) throws IllegalArgumentException {
+    public static @NotNull String solve(int buttonColor, @NotNull String buttonText) throws IllegalArgumentException {
         checkSerialCode();
         validateButtonColor(buttonColor);
         buttonText = FIRST_LETTER_CAPITAL.apply(buttonText);

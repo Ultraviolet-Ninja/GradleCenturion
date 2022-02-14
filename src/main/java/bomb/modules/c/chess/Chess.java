@@ -28,7 +28,7 @@ public class Chess extends Widget {
         VALIDITY_PATTERN = "[A-Fa-f]-?[1-6]";
     }
 
-    public static String solve(@NotNull List<String> inputCoordinateList)
+    public static @NotNull String solve(@NotNull List<String> inputCoordinateList)
             throws IllegalArgumentException, IllegalStateException {
         checkSerialCode();
         validateList(inputCoordinateList);

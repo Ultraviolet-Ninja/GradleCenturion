@@ -13,12 +13,12 @@ import org.testng.annotations.Test;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest.hexagonFromLine;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 
 public class ExitCheckerTest {
     private static final int RED_PEG_VALUE = 0;
@@ -46,10 +46,10 @@ public class ExitCheckerTest {
 
     @Test
     public void nullTest() {
-        assertNull(ExitChecker.findPossibleExits(grid));
+        Optional<Pair<String, List<Coordinates>>> emptyOptional = ExitChecker.findPossibleExits(grid);
+        assertTrue(emptyOptional.isEmpty());
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Test
     public void validLocationTest() {
         Maze maze = new Maze();
@@ -58,12 +58,18 @@ public class ExitCheckerTest {
 
         setPegLocations(grid, locations);
 
-        grid = MazeSearch.search(maze, grid);
+        Optional<Grid> optional = MazeSearch.search(maze, grid);
+
+        assertTrue(optional.isPresent());
+
+        grid = optional.get();
 
         setPegLocations(grid, locations);
 
-        Pair<String, List<Coordinates>> results = ExitChecker.findPossibleExits(grid);
-        assertNotNull(results);
+        Optional<Pair<String, List<Coordinates>>> resultsOptional = ExitChecker.findPossibleExits(grid);
+        assertTrue(resultsOptional.isPresent());
+
+        Pair<String, List<Coordinates>> results = resultsOptional.get();
         assertEquals(results.getValue0(), "Top Left");
         assertEquals(results.getValue1().size(), 2);
     }

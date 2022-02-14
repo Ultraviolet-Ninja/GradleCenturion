@@ -7,6 +7,7 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
 import org.intellij.lang.annotations.Language;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -57,7 +58,7 @@ public class Neutralization extends Widget {
      * @param acidColor The color of acid
      * @return The name and formula of the base, the drop count and whether the titration needs a filter
      */
-    public static String titrate(int acidVol, Color acidColor) throws IllegalArgumentException {
+    public static @NotNull String titrate(int acidVol, @NotNull Color acidColor) throws IllegalArgumentException {
         checkSerialCode();
 
         if (isSouvenirActive)

@@ -31,7 +31,7 @@ public class Alphabet extends Widget {
      * @param input The given letter order of tiles
      * @return The letters in the way they should be pressed
      */
-    public static String order(@NotNull String input) throws IllegalArgumentException {
+    public static @NotNull String order(@NotNull String input) throws IllegalArgumentException {
         validateInput(input);
         input = input.toUpperCase();
         StringBuilder output = new StringBuilder();

@@ -29,8 +29,8 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
 public class Murder extends Widget {
-    public static String solve(@NotNull Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
-                               @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
+    public static @NotNull String solve(@NotNull Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
+                                        @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
         validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);
 
         Pair<EnumMap<Suspect, List<Location>>, EnumMap<Weapon, List<Location>>> mapPair;

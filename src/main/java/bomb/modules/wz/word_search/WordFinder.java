@@ -4,15 +4,15 @@ import bomb.tools.Coordinates;
 import bomb.tools.data.structures.trie.Trie;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.Optional;
 import java.util.Set;
 
 @SuppressWarnings("SuspiciousNameCombination")
 public class WordFinder {
     private static int currentGridLength, longestWordLength;
 
-    public static @Nullable Pair<Coordinates, Coordinates> findWordCoordinates(char[][] grid,
+    public static Optional<Pair<Coordinates, Coordinates>> findWordCoordinates(char[][] grid,
                                                                                @NotNull Set<String> possibleWords) {
         validate(grid);
 
@@ -31,11 +31,11 @@ public class WordFinder {
                 endPosition = searchLocation(grid, i, j, trie);
 
                 if (endPosition != null)
-                    return new Pair<>(startPosition, endPosition);
+                    return Optional.of(new Pair<>(startPosition, endPosition));
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     private static void validate(char[][] grid) throws IllegalArgumentException {

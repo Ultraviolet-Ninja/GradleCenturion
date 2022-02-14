@@ -55,7 +55,7 @@ public class BooleanVenn extends Widget {
      * The output order is not, c, b, a, bc, ac, ab, all
      * @throws IllegalArgumentException Format mismatch for the input equation
      */
-    public static String resultCode(@NotNull String operation) throws IllegalArgumentException {
+    public static @NotNull String resultCode(@NotNull String operation) throws IllegalArgumentException {
         if (operation.isEmpty()) throw new IllegalArgumentException("Cannot have empty String");
         return checkFormat(operation) ?
                 interpretAB(operation) :

@@ -7,6 +7,7 @@ import bomb.tools.data.structures.ring.ArrayRing;
 import bomb.tools.number.MathUtils;
 import bomb.tools.pattern.factory.MorseCodeGraphFactory;
 import org.javatuples.Pair;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
 import java.util.LinkedHashSet;
@@ -20,7 +21,7 @@ import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.tools.number.MathUtils.isPerfectSquare;
 
 public class Morsematics extends Widget {
-    public static String solve(LinkedHashSet<String> inputSet) throws IllegalArgumentException {
+    public static @NotNull String solve(@NotNull LinkedHashSet<String> inputSet) throws IllegalArgumentException {
         checkSerialCode();
         ListGraph<String> morseGraph = MorseCodeGraphFactory.createGraph();
         List<String> inputLetter = validate(inputSet, morseGraph);

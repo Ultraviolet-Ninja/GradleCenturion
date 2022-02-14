@@ -8,12 +8,12 @@ import bomb.tools.data.structures.queue.BufferedQueue;
 import javafx.scene.paint.Color;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
@@ -28,16 +28,16 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
 
 public class ExitChecker {
-    public static @Nullable Pair<String, List<Coordinates>> findPossibleExits(@NotNull Grid grid)
+    public static Optional<Pair<String, List<Coordinates>>> findPossibleExits(@NotNull Grid grid)
             throws IllegalArgumentException {
         int pegCount = countPegsOnGrid(grid.getHexagon().getBufferedQueues());
         if (pegCount == 0)
-            return null;
+            return Optional.empty();
         if (pegCount > 1)
             throw new IllegalArgumentException("Cannot have more than one peg on the board");
 
         int sideToExit = getSideToExit(grid);
-        return getPossibleExits(grid, sideToExit);
+        return Optional.of(getPossibleExits(grid, sideToExit));
     }
 
     private static Pair<String, List<Coordinates>> getPossibleExits(Grid grid, int sideToExit) {

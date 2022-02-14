@@ -11,13 +11,14 @@ import org.testng.annotations.Test;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitCheckerTest.setPegLocations;
 import static bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest.hexagonFromLine;
 import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
-@SuppressWarnings("ALL")
 public class MazeRunnerTest {
     private Maze maze;
     private Grid grid;
@@ -37,11 +38,18 @@ public class MazeRunnerTest {
 
         setPegLocations(grid, locations);
 
-        grid = MazeSearch.search(maze, grid);
+        Optional<Grid> optional = MazeSearch.search(maze, grid);
+
+        assertTrue(optional.isPresent());
+
+        grid = optional.get();
 
         setPegLocations(grid, locations);
 
-        Pair<String, List<Coordinates>> pair = ExitChecker.findPossibleExits(grid);
+        Optional<Pair<String, List<Coordinates>>> pairOptional = ExitChecker.findPossibleExits(grid);
+        assertTrue(pairOptional.isPresent());
+
+        Pair<String, List<Coordinates>> pair = pairOptional.get();
         assertNotNull(MazeRunner.runMaze(grid, pair.getValue1()));
     }
 }

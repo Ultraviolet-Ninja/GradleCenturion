@@ -30,7 +30,7 @@ public class TwoBit extends Widget {
      * @return The value in the {@link TwoBit#CODE_GRID}
      * @throws IllegalArgumentException The serial code was not set
      */
-    public static String initialCode() throws IllegalArgumentException {
+    public static @NotNull String initialCode() throws IllegalArgumentException {
         checkSerialCode();
         String numbersInSerialCode = filter(serialCode, NUMBER_PATTERN);
         String first = filter(serialCode, CHAR_FILTER).toLowerCase();
@@ -60,7 +60,7 @@ public class TwoBit extends Widget {
      * @return The next letter code along with a Query or Submit phrase
      * @throws IllegalArgumentException The given input was not 2 numbers
      */
-    public static String nextCode(@NotNull String code) throws IllegalArgumentException {
+    public static @NotNull String nextCode(@NotNull String code) throws IllegalArgumentException {
         String newCode = filter(code, NUMBER_PATTERN);
         validateNextCode(code, newCode);
         int[] coords = translateToBitCoordinates(newCode);

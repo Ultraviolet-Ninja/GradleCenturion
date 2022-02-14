@@ -18,7 +18,7 @@ public class ChordQualities extends Widget {
         ALL_NOTES = new ArrayRing<>("A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#");
     }
 
-    public static String solve(@NotNull String input) throws IllegalArgumentException {
+    public static @NotNull String solve(@NotNull String input) throws IllegalArgumentException {
         Set<String> sortedSet = validateInput(input);
         if (isSouvenirActive)
             Souvenir.addRelic("Chord Quality Original Notes", input);

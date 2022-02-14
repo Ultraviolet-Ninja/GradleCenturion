@@ -1,6 +1,7 @@
 package bomb.modules.wz.word_search;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -22,7 +23,7 @@ public class WordSearch extends Widget {
         FILENAME = "words.txt";
     }
 
-    public static Set<String> findPossibleWords(char[] letters) throws IllegalArgumentException {
+    public static @NotNull Set<String> findPossibleWords(char[] letters) throws IllegalArgumentException {
         checkSerialCode();
         validate(letters);
 
