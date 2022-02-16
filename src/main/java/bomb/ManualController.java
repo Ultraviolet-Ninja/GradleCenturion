@@ -39,6 +39,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.IntStream;
 
+import static bomb.tools.number.MathUtils.negativeSafeModulo;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createSearchBarFormatter;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
@@ -249,8 +250,7 @@ public class ManualController {
         RadioButton selected = (RadioButton) options.getSelectedToggle();
         if (selected == null) return;
 
-        int index = allRadioButtons.indexOf(selected) - 1;
-        if (index < 0) index += size;
+        int index = negativeSafeModulo(allRadioButtons.indexOf(selected) - 1, size);
         switchPaneByIndex(index);
     }
 

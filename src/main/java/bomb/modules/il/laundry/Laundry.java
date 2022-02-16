@@ -28,6 +28,7 @@ import static bomb.modules.il.laundry.Clothing.Material.POLYESTER;
 import static bomb.modules.il.laundry.Clothing.Material.WOOL;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.number.MathUtils.negativeSafeModulo;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
@@ -39,6 +40,8 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
  */
 public class Laundry extends Widget {
     public static final String THANKS_BOB = "Thanks, Bob! :)";
+
+    private static final int NUMBER_OF_OPTIONS = 6;
 
     private static int needy;
 
@@ -95,7 +98,9 @@ public class Laundry extends Widget {
      * @param solved The number of solved modules
      */
     private static void setMaterial(int solved) {
-        Clothing.Material foundMaterial = switch (balance(solved + calculateTotalPorts() - numHolders)) {
+        int number = solved + calculateTotalPorts() - numHolders;
+        int selector = negativeSafeModulo(number, NUMBER_OF_OPTIONS);
+        Clothing.Material foundMaterial = switch (selector) {
             case 0 -> POLYESTER;
             case 1 -> COTTON;
             case 2 -> WOOL;
@@ -112,7 +117,8 @@ public class Laundry extends Widget {
      * Last Digit of the Serial Code + the No. of All Batteries
      */
     private static void setColor() {
-        Clothing.Color foundColor = switch (balance(getSerialCodeLastDigit() + getAllBatteries())) {
+        int selector = (getSerialCodeLastDigit() + getAllBatteries()) % NUMBER_OF_OPTIONS;
+        Clothing.Color foundColor = switch (selector) {
             case 0 -> RUBY;
             case 1 -> STAR;
             case 2 -> SAPPHIRE;
@@ -131,7 +137,8 @@ public class Laundry extends Widget {
      * @param unsolved The number of unsolved modules
      */
     private static void setItem(int unsolved) {
-        Clothing.Item foundItem = switch (balance(unsolved + countIndicators(IndicatorFilter.ALL_PRESENT))) {
+        int selector = (unsolved + countIndicators(IndicatorFilter.ALL_PRESENT)) % NUMBER_OF_OPTIONS;
+        Clothing.Item foundItem = switch (selector) {
             case 0 -> CORSET;
             case 1 -> SHIRT;
             case 2 -> SKIRT;
@@ -210,18 +217,6 @@ public class Laundry extends Widget {
             }
         }
         return att;
-    }
-
-    /**
-     * Keeps the balance factor between 0 and 6 for determining clothing properties
-     *
-     * @param in The number
-     * @return The balanced number
-     */
-    private static int balance(int in) {
-        if (in > 5) in %= 6;
-        else if (in < 0) in += 6;
-        return in;
     }
 
     /**
