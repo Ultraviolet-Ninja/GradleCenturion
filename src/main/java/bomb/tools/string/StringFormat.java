@@ -8,10 +8,14 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
 public class StringFormat {
-    public static final char INDEX_ZERO_LETTER_CONVERSION = 'A',
-            INDEX_ONE_LETTER_CONVERSION = '`';
+    public static final char INDEX_ZERO_UPPERCASE_LETTER = 'A',
+            INDEX_ZERO_LOWERCASE_LETTER = 'a',
+            INDEX_ONE_LOWERCASE_LETTER = '`',
+            CONVERT_CHAR_NUMBER_AT_ONE = '1';
+
     public static final String BULLET_POINT = "\\u2022 ", ARROW = " -> ",
             YES = "Yes", NO = "No";
+
     public static final UnaryOperator<String> FIRST_LETTER_CAPITAL = sample -> sample.length() > 1 ?
             sample.substring(0, 1).toUpperCase() + sample.substring(1).toLowerCase() :
             sample.toUpperCase();

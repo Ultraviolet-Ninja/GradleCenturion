@@ -1,12 +1,14 @@
 package bomb.modules.ab.battleship;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static bomb.Widget.IndicatorFilter.ALL_PRESENT;
 import static bomb.modules.ab.battleship.Tile.RADAR;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 
@@ -14,11 +16,12 @@ import static bomb.modules.ab.battleship.solve.BoardSolver.solve;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.number.MathUtils.negativeSafeModulo;
+import static bomb.tools.string.StringFormat.CONVERT_CHAR_NUMBER_AT_ONE;
+import static bomb.tools.string.StringFormat.INDEX_ZERO_LOWERCASE_LETTER;
 import static java.util.Arrays.stream;
 
 public class Battleship extends Widget {
-    private static final char CHAR_LETTER_TO_INT = 'a', CHAR_NUMBER_TO_INT = '1';
-
     private static Ocean ocean;
     private static int[] rowCounters, columnCounters;
     private static int numberOfRadarSpots;
@@ -27,7 +30,7 @@ public class Battleship extends Widget {
         reset();
     }
 
-    public static Set<String> calculateRadarPositions() throws IllegalArgumentException {
+    public static @NotNull Set<String> calculateRadarPositions() throws IllegalArgumentException {
         checkSerialCode();
         Set<String> output = new TreeSet<>(calculateSerialCodeCoordinates());
         output.add(calculateEdgeworkCoordinates());
@@ -53,25 +56,22 @@ public class Battleship extends Widget {
     }
 
     private static String calculateSingleSerialCodeCoordinates(char letter, char number) {
-        int startingRow = (letter - CHAR_LETTER_TO_INT) % Ocean.BOARD_LENGTH;
-        int startingColumn = (number - CHAR_NUMBER_TO_INT) % Ocean.BOARD_LENGTH;
-
-        if (startingColumn < 0)
-            startingColumn += Ocean.BOARD_LENGTH;
+        int startingRow = (letter - INDEX_ZERO_LOWERCASE_LETTER) % Ocean.BOARD_LENGTH;
+        int startingColumn = negativeSafeModulo((number - CONVERT_CHAR_NUMBER_AT_ONE), Ocean.BOARD_LENGTH);
 
         setTileAsRadar(startingColumn, startingRow);
-        return offsetChar(CHAR_LETTER_TO_INT, startingRow) +
-                offsetChar(CHAR_NUMBER_TO_INT, startingColumn);
+        return offsetChar(INDEX_ZERO_LOWERCASE_LETTER, startingRow) +
+                offsetChar(CONVERT_CHAR_NUMBER_AT_ONE, startingColumn);
     }
 
     private static String calculateEdgeworkCoordinates() {
         int startingRow = calculateTotalPorts() % Ocean.BOARD_LENGTH - 1;
         int startingColumn =
-                (countIndicators(IndicatorFilter.ALL_PRESENT) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
+                (countIndicators(ALL_PRESENT) + getAllBatteries() - 1) % Ocean.BOARD_LENGTH;
 
         setTileAsRadar(startingColumn, startingRow);
-        return offsetChar(CHAR_LETTER_TO_INT, startingRow) +
-                offsetChar(CHAR_NUMBER_TO_INT, startingColumn);
+        return offsetChar(INDEX_ZERO_LOWERCASE_LETTER, startingRow) +
+                offsetChar(CONVERT_CHAR_NUMBER_AT_ONE, startingColumn);
     }
 
     private static void setTileAsRadar(int x, int y) {

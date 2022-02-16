@@ -48,7 +48,7 @@ public class SquareButton extends Widget {
         if ((buttonColor == BLUE || buttonColor == YELLOW) && matchesGreatestSerialCodeNumber(buttonText))
             return TAP.toString();
         if ((buttonColor == BLUE || buttonColor == YELLOW) && COLOR_WORDS.contains(buttonText)) return HOLD.toString();
-        if (buttonText.isEmpty()) return TAP + " when the the two seconds digits on the timer match";
+        if (buttonText.isEmpty()) return TAP + " when the two seconds digits on the timer match";
         if (
                 (buttonColor != DARK_GRAY && buttonText.length() > countIndicators(LIT)) ||
                         (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode())

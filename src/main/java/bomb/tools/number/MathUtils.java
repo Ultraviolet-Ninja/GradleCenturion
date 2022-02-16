@@ -50,4 +50,9 @@ public class MathUtils {
         double factor = pow(10.0, places);
         return round(number * factor) / factor;
     }
+
+    public static int negativeSafeModulo(int number, final int modulus) {
+        while(number < 0) number += modulus;
+        return number % modulus;
+    }
 }

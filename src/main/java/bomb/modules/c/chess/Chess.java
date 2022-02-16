@@ -17,7 +17,7 @@ import static bomb.modules.c.chess.ChessPiece.KNIGHT;
 import static bomb.modules.c.chess.ChessPiece.QUEEN;
 import static bomb.modules.c.chess.ChessPiece.ROOK;
 import static bomb.modules.c.chess.Tile.TileColor.WHITE;
-import static bomb.tools.string.StringFormat.INDEX_ZERO_LETTER_CONVERSION;
+import static bomb.tools.string.StringFormat.INDEX_ZERO_UPPERCASE_LETTER;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
@@ -50,7 +50,7 @@ public class Chess extends Widget {
             char xCoordinate = chessCoordinate.toUpperCase().charAt(0);
             char yCoordinate = chessCoordinate.charAt(chessCoordinate.length() - 1);
 
-            int x = xCoordinate - INDEX_ZERO_LETTER_CONVERSION;
+            int x = xCoordinate - INDEX_ZERO_UPPERCASE_LETTER;
             int y = BOARD_LENGTH - Character.getNumericValue(yCoordinate);
             output.add(new Coordinates(x, y));
         }
@@ -146,7 +146,7 @@ public class Chess extends Widget {
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
-        char horizontal = (char) (INDEX_ZERO_LETTER_CONVERSION + uncoveredLocation.x());
+        char horizontal = (char) (INDEX_ZERO_UPPERCASE_LETTER + uncoveredLocation.x());
         String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.y());
         return horizontal + "-" + vertical;
     }

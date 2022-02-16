@@ -88,7 +88,7 @@ public class SquareButtonTest {
         Widget.setSerialCode(VALID_SERIAL_CODE);
 
         assertEquals(SquareButton.solve(DARK_GRAY, ""),
-                TAP + " when the the two seconds digits on the timer match");
+                TAP + " when the two seconds digits on the timer match");
     }
 
     @Test
