@@ -4,11 +4,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class Trie {
     private final TrieNode root;
@@ -17,7 +18,7 @@ public class Trie {
         root = new TrieNode();
     }
 
-    public Trie(Collection<String> startWords) {
+    public Trie(@NotNull Collection<String> startWords) {
         this();
         addWords(startWords);
     }
@@ -67,11 +68,10 @@ public class Trie {
     }
 
     private static List<String> getWordsStartingWith(TrieNode currentNode, StringBuilder builder) {
-        List<String> words = new ArrayList<>();
-
         if (currentNode.hasNoChild())
-            return words;
+            return Collections.emptyList();
 
+        List<String> words = new ArrayList<>();
         if (currentNode.getChildCount() == 1) {
             Character nextChar = currentNode.firstChild();
             currentNode = currentNode.getNextNode(nextChar);
@@ -122,7 +122,7 @@ public class Trie {
         private boolean isEndOfWord;
 
         public TrieNode() {
-            children = new HashMap<>(5);
+            children = new TreeMap<>();
             isEndOfWord = false;
         }
 
