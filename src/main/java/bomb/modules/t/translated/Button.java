@@ -6,13 +6,15 @@
 
 package bomb.modules.t.translated;
 
-import bomb.abstractions.ButtonType;
 import bomb.enumerations.Indicator;
+
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
 
 /**
  * Button class deals with a button module
  */
-public class Button extends TranslationCenter implements ButtonType {
+public class Button extends TranslationCenter {
     private static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
 
     /**
@@ -37,6 +39,6 @@ public class Button extends TranslationCenter implements ButtonType {
         else
             which = properties[COLOR_INDEX] == ButtonProperties.RED && properties[LABEL_INDEX] == ButtonProperties.HOLD;
 
-        return which ? TAP : HOLD;
+        return "" + (which ? TAP : HOLD);
     }
 }

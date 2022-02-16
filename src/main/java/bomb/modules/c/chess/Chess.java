@@ -3,6 +3,7 @@ package bomb.modules.c.chess;
 import bomb.Widget;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
+import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -16,13 +17,13 @@ import static bomb.modules.c.chess.ChessPiece.KNIGHT;
 import static bomb.modules.c.chess.ChessPiece.QUEEN;
 import static bomb.modules.c.chess.ChessPiece.ROOK;
 import static bomb.modules.c.chess.Tile.TileColor.WHITE;
+import static bomb.tools.string.StringFormat.INDEX_ZERO_LETTER_CONVERSION;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
 public class Chess extends Widget {
+    @Language("regexp")
     public static final String VALIDITY_PATTERN;
-
-    private static final char INT_CONVERSION_LETTER = 'A';
 
     static {
         VALIDITY_PATTERN = "[A-Fa-f]-?[1-6]";
@@ -49,7 +50,7 @@ public class Chess extends Widget {
             char xCoordinate = chessCoordinate.toUpperCase().charAt(0);
             char yCoordinate = chessCoordinate.charAt(chessCoordinate.length() - 1);
 
-            int x = xCoordinate - INT_CONVERSION_LETTER;
+            int x = xCoordinate - INDEX_ZERO_LETTER_CONVERSION;
             int y = BOARD_LENGTH - Character.getNumericValue(yCoordinate);
             output.add(new Coordinates(x, y));
         }
@@ -145,7 +146,7 @@ public class Chess extends Widget {
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
-        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.x());
+        char horizontal = (char) (INDEX_ZERO_LETTER_CONVERSION + uncoveredLocation.x());
         String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.y());
         return horizontal + "-" + vertical;
     }

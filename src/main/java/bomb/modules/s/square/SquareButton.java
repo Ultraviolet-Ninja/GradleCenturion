@@ -1,7 +1,6 @@
 package bomb.modules.s.square;
 
 import bomb.Widget;
-import bomb.abstractions.ButtonType;
 import bomb.tools.number.MathUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -15,13 +14,15 @@ import java.util.stream.IntStream;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
-public class SquareButton extends Widget implements ButtonType {
+public class SquareButton extends Widget {
     //Button colors
     public static final int BLUE, YELLOW, DARK_GRAY, WHITE;
     //Held button light colors
@@ -43,17 +44,17 @@ public class SquareButton extends Widget implements ButtonType {
         validateButtonColor(buttonColor);
         buttonText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
-        if (buttonColor == BLUE && numDoubleAs > numDBatteries) return HOLD;
+        if (buttonColor == BLUE && numDoubleAs > numDBatteries) return HOLD.toString();
         if ((buttonColor == BLUE || buttonColor == YELLOW) && matchesGreatestSerialCodeNumber(buttonText))
-            return TAP;
-        if ((buttonColor == BLUE || buttonColor == YELLOW) && COLOR_WORDS.contains(buttonText)) return HOLD;
+            return TAP.toString();
+        if ((buttonColor == BLUE || buttonColor == YELLOW) && COLOR_WORDS.contains(buttonText)) return HOLD.toString();
         if (buttonText.isEmpty()) return TAP + " when the the two seconds digits on the timer match";
         if (
                 (buttonColor != DARK_GRAY && buttonText.length() > countIndicators(LIT)) ||
                         (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode())
-        ) return TAP;
+        ) return TAP.toString();
 
-        return HOLD;
+        return HOLD.toString();
     }
 
     private static void validateButtonColor(int buttonColor) throws IllegalArgumentException {
@@ -68,7 +69,8 @@ public class SquareButton extends Widget implements ButtonType {
                 .orElse(0) == buttonText.length();
     }
 
-    public static String solveForHeldButton(boolean isFlashing, int lightColor) throws IllegalArgumentException {
+    public static @NotNull String solveForHeldButton(boolean isFlashing, int lightColor)
+            throws IllegalArgumentException {
         if (lightColor < ORANGE || lightColor > CYAN)
             throw new IllegalArgumentException("Invalid light color");
 

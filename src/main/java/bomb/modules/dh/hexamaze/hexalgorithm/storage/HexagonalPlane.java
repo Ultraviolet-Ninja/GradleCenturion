@@ -13,11 +13,7 @@ import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
 
 public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatable {
-    public static final IntUnaryOperator CALCULATE_SPAN = length -> 2 * length - 1,
-            NODAL_SIDE_LENGTH = area -> {
-                double result = (3 + Math.sqrt(12 * area - 3)) / 6;
-                return isAnInteger(result) ? (int) result : -1;
-            };
+    public static final IntUnaryOperator CALCULATE_SPAN, NODAL_SIDE_LENGTH;
 
     private final int sideLength;
 
@@ -131,7 +127,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatab
         return hexagon.hashCode();
     }
 
-    public static <T> BufferedQueue<BufferedQueue<T>> convertFromList(@NotNull List<T> list) {
+    public static <T> @NotNull BufferedQueue<BufferedQueue<T>> convertFromList(@NotNull List<T> list) {
         int sideLength = NODAL_SIDE_LENGTH.applyAsInt(list.size());
         BufferedQueue<BufferedQueue<T>> output = createHexagon(sideLength);
 
@@ -165,5 +161,13 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatab
                 .forEach(output::add);
 
         return output;
+    }
+
+    static {
+        CALCULATE_SPAN = length -> 2 * length - 1;
+        NODAL_SIDE_LENGTH = area -> {
+            double result = (3 + Math.sqrt(12 * area - 3)) / 6;
+            return isAnInteger(result) ? (int) result : -1;
+        };
     }
 }

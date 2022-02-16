@@ -1,11 +1,15 @@
 package bomb.tools.string;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.function.UnaryOperator;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
 public class StringFormat {
+    public static final char INDEX_ZERO_LETTER_CONVERSION = 'A',
+            INDEX_ONE_LETTER_CONVERSION = '`';
     public static final String BULLET_POINT = "\\u2022 ", ARROW = " -> ",
             YES = "Yes", NO = "No";
     public static final UnaryOperator<String> FIRST_LETTER_CAPITAL = sample -> sample.length() > 1 ?
@@ -22,7 +26,9 @@ public class StringFormat {
                     .map(String::toUpperCase)
                     .collect(joining("_"));
 
-    public static String createOrdinalNumber(int number) {
+    public static @NotNull String createOrdinalNumber(int number) {
+        if (number < 0)
+            throw new IllegalArgumentException("Number cannot be negative");
         int mod = number % 100;
 
         if (mod == 1) return number + "st";

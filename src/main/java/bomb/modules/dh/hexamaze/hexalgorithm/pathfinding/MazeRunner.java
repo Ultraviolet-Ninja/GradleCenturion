@@ -23,11 +23,8 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_
 
 public class MazeRunner {
     //Movement Vectors
-    private static final Coordinates
-            MOVE_DOWN = new Coordinates(0, 1),
-            MOVE_RIGHT = new Coordinates(1, 0),
-            LEFT_SIDE_MOVE_DOWN_RIGHT = new Coordinates(1, 1),
-            RIGHT_SIDE_MOVE_TOP_RIGHT = new Coordinates(1, -1);
+    private static final Coordinates MOVE_DOWN, MOVE_RIGHT,
+            LEFT_SIDE_MOVE_DOWN_RIGHT, RIGHT_SIDE_MOVE_TOP_RIGHT;
 
     public static @NotNull List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
             throws IllegalArgumentException {
@@ -90,5 +87,12 @@ public class MazeRunner {
             }
         }
         throw new RuntimeException("Failed to find start position");
+    }
+
+    static {
+        MOVE_DOWN = new Coordinates(0, 1);
+        MOVE_RIGHT = new Coordinates(1, 0);
+        LEFT_SIDE_MOVE_DOWN_RIGHT = new Coordinates(1, 1);
+        RIGHT_SIDE_MOVE_TOP_RIGHT = new Coordinates(1, -1);
     }
 }

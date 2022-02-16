@@ -1,8 +1,9 @@
 package bomb.modules.t.translated.solutions.button;
 
 import bomb.Widget;
-import bomb.abstractions.ButtonType;
 
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.modules.t.translated.solutions.button.ButtonProperty.ABORT;
@@ -14,7 +15,7 @@ import static bomb.modules.t.translated.solutions.button.ButtonProperty.WHITE;
 /**
  * Button class deals with a button module
  */
-public class Button extends Widget implements ButtonType {
+public class Button extends Widget {
     public static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
 
     /**
@@ -37,7 +38,7 @@ public class Button extends Widget implements ButtonType {
         else
             shouldTapButton = getAllBatteries() > 2 && hasLitIndicator(FRK);
 
-        return shouldTapButton ? TAP : HOLD;
+        return "" + (shouldTapButton ? TAP : HOLD);
     }
 
     private static void validateAllInput(ButtonProperty[] properties) throws IllegalArgumentException {

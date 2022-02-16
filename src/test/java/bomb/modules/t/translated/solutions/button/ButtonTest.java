@@ -2,17 +2,18 @@ package bomb.modules.t.translated.solutions.button;
 
 import bomb.ConditionSetter;
 import bomb.Widget;
+import bomb.enumerations.ButtonResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.enumerations.TrinarySwitch.ON;
-import static bomb.modules.t.translated.solutions.button.Button.HOLD;
-import static bomb.modules.t.translated.solutions.button.Button.TAP;
 import static org.testng.Assert.assertEquals;
 
 public class ButtonTest {
@@ -57,10 +58,10 @@ public class ButtonTest {
     }
 
     @Test(dataProvider = "validInputTestProvider")
-    public void validInputTest(ConditionSetter setter, ButtonProperty[] properties, String expected) {
+    public void validInputTest(ConditionSetter setter, ButtonProperty[] properties, ButtonResult expected) {
         setter.setCondition();
 
-        assertEquals(Button.evaluate(properties), expected);
+        assertEquals(Button.evaluate(properties), expected.toString());
     }
 
     @AfterClass

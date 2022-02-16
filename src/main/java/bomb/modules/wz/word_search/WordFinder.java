@@ -10,16 +10,17 @@ import java.util.Set;
 
 @SuppressWarnings("SuspiciousNameCombination")
 public class WordFinder {
-    private static int currentGridLength, longestWordLength;
+    private static int currentGridLength;
 
-    public static Optional<Pair<Coordinates, Coordinates>> findWordCoordinates(char[][] grid,
-                                                                               @NotNull Set<String> possibleWords) {
+    public static Optional<Pair<@NotNull Coordinates, @NotNull Coordinates>> findWordCoordinates(
+            char[] @NotNull [] grid, @NotNull Set<String> possibleWords) {
         validate(grid);
 
         Coordinates startPosition, endPosition;
         Trie trie = new Trie(possibleWords);
         currentGridLength = grid.length;
-        longestWordLength = possibleWords.stream()
+
+        int longestWordLength = possibleWords.stream()
                 .mapToInt(String::length)
                 .max()
                 .orElse(currentGridLength);
@@ -28,7 +29,7 @@ public class WordFinder {
         for (int i = 0; i < currentGridLength; i++) {
             for (int j = 0; j < currentGridLength; j++) {
                 startPosition = new Coordinates(j, i);
-                endPosition = searchLocation(grid, i, j, trie);
+                endPosition = searchLocation(grid, i, j, trie, longestWordLength);
 
                 if (endPosition != null)
                     return Optional.of(new Pair<>(startPosition, endPosition));
@@ -47,7 +48,7 @@ public class WordFinder {
         }
     }
 
-    private static Coordinates searchLocation(char[][] grid, int x, int y, Trie trie) {
+    private static Coordinates searchLocation(char[][] grid, int x, int y, Trie trie, int longestWordLength) {
         StringBuilder constructedWord = new StringBuilder().append(grid[x][y]);
 
         if (trie.containsWord(constructedWord.toString()))
@@ -58,7 +59,7 @@ public class WordFinder {
             for (int dY = -1; dY <= 1; dY++) {
                 if (dX == 0 && dY == 0) continue;
 
-                result = searchWithVector(grid, x, y, dX, dY, constructedWord, trie);
+                result = searchWithVector(grid, x, y, dX, dY, constructedWord, trie, longestWordLength);
                 if (result != null) return result;
                 else constructedWord.setLength(1);
             }
@@ -68,7 +69,7 @@ public class WordFinder {
     }
 
     private static Coordinates searchWithVector(char[][] grid, int x, int y,  int dX, int dY,
-                                                StringBuilder constructedWord, Trie trie) {
+                                                StringBuilder constructedWord, Trie trie, int longestWordLength) {
         x += dX;
         y += dY;
 
@@ -80,7 +81,7 @@ public class WordFinder {
         if (trie.containsWord(constructedWord.toString()))
             return new Coordinates(y, x);
 
-        return searchWithVector(grid, x, y, dX, dY, constructedWord, trie);
+        return searchWithVector(grid, x, y, dX, dY, constructedWord, trie, longestWordLength);
     }
 
     private static boolean isOutOfRange(int x, int y) {

@@ -11,6 +11,7 @@ import static bomb.modules.t.two_bit.TwoBitState.SUBMIT;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.string.StringFormat.INDEX_ONE_LETTER_CONVERSION;
 import static bomb.tools.string.StringFormat.createOrdinalNumber;
 
 /**
@@ -19,7 +20,6 @@ import static bomb.tools.string.StringFormat.createOrdinalNumber;
 public class TwoBit extends Widget {
     public static final String QUERY_TEXT, SUBMIT_TEXT;
 
-    private static final char LETTER_TO_NUMBER_CONVERTER = '`';
     private static final String[][] CODE_GRID;
 
     private static TwoBitState currentState = SECOND_QUERY;
@@ -35,7 +35,7 @@ public class TwoBit extends Widget {
         String numbersInSerialCode = filter(serialCode, NUMBER_PATTERN);
         String first = filter(serialCode, CHAR_FILTER).toLowerCase();
         int alphabetBaseValue = !first.isEmpty() ?
-                first.charAt(0) - LETTER_TO_NUMBER_CONVERTER :
+                first.charAt(0) - INDEX_ONE_LETTER_CONVERSION :
                 0;
 
         alphabetBaseValue += getAllBatteries() * Integer.parseInt(

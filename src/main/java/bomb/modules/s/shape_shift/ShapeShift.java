@@ -85,7 +85,7 @@ public class ShapeShift extends Widget {
     }
     //</editor-fold>
 
-    public static ShapeEnd[] solve(@NotNull ShapeEnd left, @NotNull ShapeEnd right) {
+    public static ShapeEnd @NotNull [] solve(@NotNull ShapeEnd left, @NotNull ShapeEnd right) {
         checkSerialCode();
         increment(left, right);
         if (checkIfVisitedTwice(left, right)) {

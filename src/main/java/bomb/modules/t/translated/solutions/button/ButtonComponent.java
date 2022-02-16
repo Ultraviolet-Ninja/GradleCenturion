@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.BUTTON_LABEL_ROW;
+import static bomb.modules.t.translated.solutions.button.Button.COLOR_INDEX;
+import static bomb.modules.t.translated.solutions.button.Button.LABEL_INDEX;
 
 public class ButtonComponent extends Pane implements Resettable, TranslationComponent {
     private final ButtonProperty[] properties;
@@ -44,14 +46,14 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
     }
 
     public void initialize() {
-        redButton.setOnAction(createButtonAction(ButtonProperty.RED, Button.COLOR_INDEX));
-        yellowButton.setOnAction(createButtonAction(ButtonProperty.YELLOW, Button.COLOR_INDEX));
-        blueButton.setOnAction(createButtonAction(ButtonProperty.BLUE, Button.COLOR_INDEX));
-        whiteButton.setOnAction(createButtonAction(ButtonProperty.WHITE, Button.COLOR_INDEX));
-        detonateButton.setOnAction(createButtonAction(ButtonProperty.DETONATE, Button.LABEL_INDEX));
-        abortButton.setOnAction(createButtonAction(ButtonProperty.ABORT, Button.LABEL_INDEX));
-        pressButton.setOnAction(createButtonAction(ButtonProperty.PRESS, Button.LABEL_INDEX));
-        holdButton.setOnAction(createButtonAction(ButtonProperty.HOLD, Button.LABEL_INDEX));
+        redButton.setOnAction(createButtonAction(ButtonProperty.RED, COLOR_INDEX));
+        yellowButton.setOnAction(createButtonAction(ButtonProperty.YELLOW, COLOR_INDEX));
+        blueButton.setOnAction(createButtonAction(ButtonProperty.BLUE, COLOR_INDEX));
+        whiteButton.setOnAction(createButtonAction(ButtonProperty.WHITE, COLOR_INDEX));
+        detonateButton.setOnAction(createButtonAction(ButtonProperty.DETONATE, LABEL_INDEX));
+        abortButton.setOnAction(createButtonAction(ButtonProperty.ABORT, LABEL_INDEX));
+        pressButton.setOnAction(createButtonAction(ButtonProperty.PRESS, LABEL_INDEX));
+        holdButton.setOnAction(createButtonAction(ButtonProperty.HOLD, LABEL_INDEX));
     }
 
     private EventHandler<ActionEvent> createButtonAction(ButtonProperty property, int index) {

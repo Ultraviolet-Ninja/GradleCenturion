@@ -1,8 +1,6 @@
 package bomb.modules.m.microcontroller;
 
 import bomb.Widget;
-import bomb.enumerations.Indicator;
-import bomb.enumerations.Port;
 import bomb.modules.m.microcontroller.chip.AbstractController;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
@@ -10,6 +8,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static bomb.enumerations.Indicator.SIG;
+import static bomb.enumerations.Port.RJ45;
 import static bomb.tools.filter.RegexFilter.filter;
 
 public class MicroController extends Widget {
@@ -19,7 +19,7 @@ public class MicroController extends Widget {
         validateInput(moduleSerialNumbers, controller);
         if (containsRequiredNumbers(moduleSerialNumbers))
             return controller.traversePins(0);
-        else if (hasLitIndicator(Indicator.SIG) || doesPortExists(Port.RJ45))
+        else if (hasLitIndicator(SIG) || doesPortExists(RJ45))
             return controller.traversePins(1);
         else if (filter(serialCode, new Regex("[clrx18]")).length() > 0)
             return controller.traversePins(2);

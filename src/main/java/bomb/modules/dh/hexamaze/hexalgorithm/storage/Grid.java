@@ -2,6 +2,7 @@ package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
 import bomb.tools.data.structures.ring.ArrayRing;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.CYAN;
@@ -20,7 +21,7 @@ public class Grid extends AbstractHexagon implements Rotatable {
         colorRing = new ArrayRing<>(RED, YELLOW, GREEN, CYAN, BLUE, PINK);
     }
 
-    public Grid(HexagonalPlane internalGrid, int neededRotations) {
+    public Grid(@NotNull HexagonalPlane internalGrid, int neededRotations) {
         if (internalGrid.getSideLength() != GRID_SIDE_LENGTH)
             throw new IllegalArgumentException("Grid doesn't have required side length");
 
