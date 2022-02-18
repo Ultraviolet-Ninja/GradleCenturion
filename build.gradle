@@ -59,7 +59,7 @@ dependencies {
 
     testImplementation 'org.testng:testng:7.5'
     testImplementation 'org.slf4j:slf4j-api:1.7.35'
-    testImplementation 'org.slf4j:slf4j-simple:1.7.35'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.9'
 }
 
