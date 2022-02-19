@@ -15,7 +15,7 @@ import java.util.Optional;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 
 public class MazeSearch {
-    public static final int ROTATION_COUNT = 6;
+    private static final int ROTATION_COUNT = 6;
 
     public static Optional<Grid> search(@NotNull Maze maze, @NotNull Grid grid) {
         int gridSpan = grid.getHexagon().getSpan();
@@ -139,8 +139,7 @@ public class MazeSearch {
                 .toList();
     }
 
-    private static void moveToNextSegment(BufferedQueue<BufferedQueue<HexNode>> pillar,
-                                          HexagonalPlane copy) {
+    private static void moveToNextSegment(BufferedQueue<BufferedQueue<HexNode>> pillar, HexagonalPlane copy) {
         BufferedQueue<BufferedQueue<HexNode>> copiedQueues = copy.getBufferedQueues();
         for (BufferedQueue<HexNode> column : copiedQueues)
             column.removeFirst();

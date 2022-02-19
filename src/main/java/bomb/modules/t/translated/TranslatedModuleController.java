@@ -60,7 +60,7 @@ public class TranslatedModuleController implements Resettable {
                 passwordUI.setContent(languageContent);
                 ventGasUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
-            } catch (IOException | CsvException e) {
+            } catch (IllegalArgumentException | IllegalStateException e) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
             }
         };

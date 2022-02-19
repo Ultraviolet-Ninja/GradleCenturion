@@ -8,7 +8,6 @@ import org.jgrapht.alg.interfaces.AStarAdmissibleHeuristic;
 import org.jgrapht.alg.shortestpath.AStarShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -24,11 +23,7 @@ public class ColoredSwitches extends Switches {
 
     static {
         WRONG_PATH_VALUE = Double.MAX_VALUE;
-        try {
-            INTERNAL_GRAPH = ColoredSwitchGraphFactory.makeGraph();
-        } catch (IOException e) {
-            throw new IllegalStateException(e.getMessage());
-        }
+        INTERNAL_GRAPH = ColoredSwitchGraphFactory.makeGraph();
     }
 
     public static @NotNull List<String> producePreemptiveMoveList(byte startingState) throws IllegalArgumentException {

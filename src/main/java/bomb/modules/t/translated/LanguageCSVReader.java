@@ -2,29 +2,32 @@ package bomb.modules.t.translated;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 @SuppressWarnings("ConstantConditions")
 public class LanguageCSVReader {
-    public static List<String> getLanguageContent(LanguageColumn languageColumn)
-            throws CsvException, IOException, IllegalArgumentException {
-        if (languageColumn == null) throw new IllegalArgumentException("Language is null");
+    public static List<String> getLanguageContent(@NotNull LanguageColumn languageColumn)
+            throws IllegalArgumentException, IllegalStateException {
+        if (languageColumn == null) throw new IllegalArgumentException("Language cannot be empty");
 
         int columnIndex = languageColumn.getColumnIndex();
         InputStream in = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-        List<String> dictionaryContent = csvReader.readAll()
-                .stream()
-                .map(array -> array[columnIndex])
-                .toList();
 
-        csvReader.close();
-        return dictionaryContent;
+        try (CSVReader csvReader = new CSVReader(new InputStreamReader(in, UTF_8))) {
+            return csvReader.readAll()
+                    .stream()
+                    .map(array -> array[columnIndex])
+                    .toList();
+        } catch (IOException | CsvException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     public enum LanguageRow {

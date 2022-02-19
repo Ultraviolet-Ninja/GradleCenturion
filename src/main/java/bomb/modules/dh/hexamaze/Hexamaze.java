@@ -48,7 +48,8 @@ public class Hexamaze extends Widget {
             @NotNull Grid,
             @Nullable String,
             @Nullable Integer,
-            @Nullable List<Coordinates>>solve(@NotNull List<HexNode> nodeList) throws IllegalArgumentException {
+            @Nullable List<Coordinates>> solve(@NotNull List<HexNode> nodeList)
+            throws IllegalArgumentException, IllegalStateException {
         Maze maze = new Maze();
         Grid original = new Grid(new HexagonalPlane(nodeList));
 

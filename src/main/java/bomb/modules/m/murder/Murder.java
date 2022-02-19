@@ -1,12 +1,10 @@
 package bomb.modules.m.murder;
 
 import bomb.Widget;
-import com.opencsv.exceptions.CsvException;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.List;
@@ -30,16 +28,11 @@ import static java.util.stream.Collectors.toMap;
 
 public class Murder extends Widget {
     public static @NotNull String solve(@NotNull Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
-                                        @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalArgumentException {
+                                        @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalStateException {
         validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);
 
-        Pair<EnumMap<Suspect, List<Location>>, EnumMap<Weapon, List<Location>>> mapPair;
-
-        try {
-            mapPair = LocationMapFactory.createMaps();
-        } catch (IOException | CsvException e) {
-            throw new IllegalArgumentException(e);
-        }
+        Pair<EnumMap<Suspect, List<Location>>, EnumMap<Weapon, List<Location>>> mapPair =
+                LocationMapFactory.createMaps();
 
         EnumMap<Location, Suspect> locationsToSuspect = getLocationsToType(mapPair.getValue0(),
                 possibleSuspects, getSuspectRow(bodyFoundRoom) - 1);

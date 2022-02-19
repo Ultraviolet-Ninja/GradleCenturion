@@ -6,6 +6,7 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,22 +21,27 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.HEX
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.toCollection;
 
 @SuppressWarnings("ConstantConditions")
 public class MazeFactory {
-    public static @NotNull List<HexNode> createMaze() throws IOException, CsvException {
+    public static @NotNull List<HexNode> createMaze() throws IllegalStateException {
         InputStream in = MazeFactory.class.getResourceAsStream("maze.csv");
-        CSVReader csvReader = new CSVReader(new InputStreamReader(in));
-        return csvReader.readAll().stream()
-                .flatMap(Arrays::stream)
-                .map(line -> line.split(" "))
-                .map(data -> new HexNode(decodeShape(data[1]), decodeWalls(data[0])))
-                .toList();
+
+        try (CSVReader csvReader = new CSVReader(new InputStreamReader(in, UTF_8))) {
+            return csvReader.readAll().stream()
+                    .flatMap(Arrays::stream)
+                    .map(line -> line.split(" "))
+                    .map(data -> new HexNode(decodeShape(data[1]), decodeWalls(data[0])))
+                    .toList();
+        } catch (CsvException | IOException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
-    public static HexShape decodeShape(String code) {
+    public static @Nullable HexShape decodeShape(@NotNull String code) {
         return switch(code) {
             case "c" -> CIRCLE;
             case "h" -> HEXAGON;
@@ -47,7 +53,7 @@ public class MazeFactory {
         };
     }
 
-    public static EnumSet<HexWall> decodeWalls(String code) {
+    public static @NotNull EnumSet<HexWall> decodeWalls(@NotNull String code) {
         HexWall[] allWalls = HexWall.values();
 
         return stream(code.split(""))
