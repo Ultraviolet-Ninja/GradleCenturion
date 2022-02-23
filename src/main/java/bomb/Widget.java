@@ -112,6 +112,10 @@ public class Widget {
         return portArray[which.ordinal()];
     }
 
+    public static String getSerialCode() {
+        return serialCode;
+    }
+
     public static int countPortTypes() {
         return (int) stream(portArray)
                 .filter(port -> port > 0)
@@ -138,7 +142,7 @@ public class Widget {
         return twoFactor;
     }
 
-    public static void checkSerialCode() throws IllegalArgumentException {
+    protected static void checkSerialCode() throws IllegalArgumentException {
         SERIAL_CODE_PATTERN.loadText(serialCode);
         if (!SERIAL_CODE_PATTERN.matchesRegex())
             throw new IllegalArgumentException("""
@@ -161,7 +165,7 @@ public class Widget {
      *
      * @return An int of the last digit from a String
      */
-    protected static int getSerialCodeLastDigit() {
+    public static int getSerialCodeLastDigit() {
         return Character.getNumericValue(serialCode.charAt(serialCode.length() - 1));
     }
 
@@ -184,7 +188,7 @@ public class Widget {
      * @param ind The Indicator to check
      * @return True if the Indicator is found
      */
-    protected static boolean hasIndicator(@NotNull Indicator ind) {
+    public static boolean hasIndicator(@NotNull Indicator ind) {
         return hasLitIndicator(ind) || hasUnlitIndicator(ind);
     }
 
@@ -208,7 +212,7 @@ public class Widget {
         return INDICATOR_ARRAY[ind.ordinal()].getState() == OFF;
     }
 
-    protected static boolean hasVowelInSerialCode() {
+    public static boolean hasVowelInSerialCode() {
         return !EMPTY_FILTER_RESULTS.test(serialCode, VOWEL_FILTER);
     }
 
@@ -217,7 +221,7 @@ public class Widget {
      *
      * @return The number of letters
      */
-    protected static int countLettersInSerialCode() {
+    public static int countLettersInSerialCode() {
         return filter(serialCode, CHAR_FILTER).length();
     }
 
@@ -226,7 +230,7 @@ public class Widget {
      *
      * @return The number of numbers
      */
-    protected static int countNumbersInSerialCode() {
+    public static int countNumbersInSerialCode() {
         return filter(serialCode, NUMBER_PATTERN).length();
     }
 
@@ -241,7 +245,7 @@ public class Widget {
         return portArray[port.ordinal()] > howMany;
     }
 
-    protected static int calculateTotalPorts() {
+    public static int calculateTotalPorts() {
         return stream(portArray).sum();
     }
 
@@ -257,7 +261,7 @@ public class Widget {
                 EnumSet.copyOf(tempList);
     }
 
-    protected static boolean doesPortExists(@NotNull Port port) {
+    public static boolean doesPortExists(@NotNull Port port) {
         return portArray[port.ordinal()] > 0;
     }
 
@@ -267,7 +271,7 @@ public class Widget {
      * @param filter Indicates what indicators should be counted, whether ON, OFF or both
      * @return The number of indicators
      */
-    protected static int countIndicators(IndicatorFilter filter) {
+    public static int countIndicators(IndicatorFilter filter) {
         return getFilteredSetOfIndicators(filter).size();
     }
 
