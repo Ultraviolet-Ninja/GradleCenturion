@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
+import static bomb.tools.logic.LogicOperator.IMPLIES;
 import static java.util.Arrays.asList;
 
 public class Logic extends Widget {
@@ -19,10 +21,19 @@ public class Logic extends Widget {
         List<LogicOperator> operators = new ArrayList<>(asList(intermediateOperators));
 
         validateInput(letterList, operators);
+
         if (!isPriorityOnFirstTwo) {
-            Collections.reverse(operators);
             LetterRecord lastRecord = letterList.remove(0);
             letterList.add(lastRecord);
+
+            Collections.reverse(operators);
+            LogicOperator reversedOperator = operators.get(1);
+
+            if (reversedOperator == IMPLIES) {
+                operators.set(1, IMPLIED_BY);
+            } else if (reversedOperator == IMPLIED_BY) {
+                operators.set(1, IMPLIES);
+            }
         }
 
         boolean firstHalf = operators.get(0).test(

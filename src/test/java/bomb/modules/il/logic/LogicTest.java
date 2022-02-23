@@ -20,18 +20,29 @@ import static bomb.modules.il.logic.LogicLetter.B;
 import static bomb.modules.il.logic.LogicLetter.C;
 import static bomb.modules.il.logic.LogicLetter.D;
 import static bomb.modules.il.logic.LogicLetter.E;
+import static bomb.modules.il.logic.LogicLetter.F;
 import static bomb.modules.il.logic.LogicLetter.G;
-import static bomb.modules.il.logic.LogicLetter.H;
 import static bomb.modules.il.logic.LogicLetter.I;
+import static bomb.modules.il.logic.LogicLetter.J;
+import static bomb.modules.il.logic.LogicLetter.K;
 import static bomb.modules.il.logic.LogicLetter.L;
 import static bomb.modules.il.logic.LogicLetter.N;
 import static bomb.modules.il.logic.LogicLetter.O;
 import static bomb.modules.il.logic.LogicLetter.P;
+import static bomb.modules.il.logic.LogicLetter.Q;
+import static bomb.modules.il.logic.LogicLetter.R;
+import static bomb.modules.il.logic.LogicLetter.S;
 import static bomb.modules.il.logic.LogicLetter.T;
 import static bomb.modules.il.logic.LogicLetter.U;
+import static bomb.modules.il.logic.LogicLetter.V;
+import static bomb.modules.il.logic.LogicLetter.W;
+import static bomb.modules.il.logic.LogicLetter.X;
+import static bomb.modules.il.logic.LogicLetter.Y;
 import static bomb.tools.logic.LogicOperator.AND;
 import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
 import static bomb.tools.logic.LogicOperator.IMPLIES;
+import static bomb.tools.logic.LogicOperator.NAND;
+import static bomb.tools.logic.LogicOperator.NOR;
 import static bomb.tools.logic.LogicOperator.OR;
 import static bomb.tools.logic.LogicOperator.XNOR;
 import static bomb.tools.logic.LogicOperator.XOR;
@@ -117,23 +128,42 @@ public class LogicTest {
 
                 {new LetterRecord[]{recordOf(true, N), recordOf(false, B), recordOf(true, D)},
                         new LogicOperator[]{IMPLIED_BY, IMPLIED_BY}, false, false},
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , },
-//                {new LetterRecord[]{}, new LogicOperator[]{}, , }
+
+                {new LetterRecord[]{recordOf(true, N), recordOf(false, Q), recordOf(false, C)},
+                        new LogicOperator[]{XOR, NOR}, true, true},
+
+                {new LetterRecord[]{recordOf(false, J), recordOf(false, F), recordOf(true, G)},
+                        new LogicOperator[]{IMPLIED_BY, XOR}, true, true},
+
+                {new LetterRecord[]{recordOf(true, E), recordOf(true, W), recordOf(false, X)},
+                        new LogicOperator[]{IMPLIES, AND}, true, false},
+
+                {new LetterRecord[]{recordOf(false, C), recordOf(true, S), recordOf(true, L)},
+                        new LogicOperator[]{IMPLIED_BY, NAND}, true, true},
+
+                {new LetterRecord[]{recordOf(false, W), recordOf(false, X), recordOf(false, R)},
+                        new LogicOperator[]{NOR, NAND}, false, false},
+
+                {new LetterRecord[]{recordOf(true, B), recordOf(false, C), recordOf(true, I)},
+                        new LogicOperator[]{IMPLIED_BY, NAND}, true, true},
+
+//                {new LetterRecord[]{recordOf(true, Y), recordOf(true, E), recordOf(false, B)},
+//                        new LogicOperator[]{IMPLIED_BY, XOR}, true, false}, //TODO
+
+                {new LetterRecord[]{recordOf(true, W), recordOf(true, W), recordOf(true, X)},
+                        new LogicOperator[]{OR, OR}, false, true},
+
+                {new LetterRecord[]{recordOf(true, E), recordOf(true, V), recordOf(false, K)},
+                        new LogicOperator[]{NOR, NAND}, false, false},
+
+                {new LetterRecord[]{recordOf(true, R), recordOf(true, J), recordOf(true, E)},
+                        new LogicOperator[]{NAND, AND}, false, true}
         };
     }
 
-    @Test(enabled = false, dataProvider = "videoSecondTestProvider")
+    @Test(dataProvider = "videoSecondTestProvider")
     public void videoSecondTest(LetterRecord[] letters, LogicOperator[] operators,
-                          boolean priorityToggle, boolean expected) {
+                                boolean priorityToggle, boolean expected) {
         secondEdgeWorkSetup();
 
         boolean actual = Logic.solve(letters, operators, priorityToggle);
