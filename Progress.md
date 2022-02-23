@@ -30,6 +30,7 @@
 - Cheap Checkout
 - Color Flash
 - Ice Cream
+- Logic
 - Morsematics
 - Murder
 - Translated Vanilla Modules (9/15 Supported languages)
@@ -38,7 +39,7 @@
 - Square Button
 - Word Search
 
-12/100
+13/100
 
 ### Untouched Modules
 - 3D Maze
@@ -70,7 +71,6 @@
 - Letter Keys
 - Light Cycle
 - Listening
-- Logic Gates
 - Math is Hard
 - MineSweeper
 - Modules Against Humanity
@@ -109,4 +109,4 @@
 - Yahtzee
 - Zoo
 
-67/100
+66/100
