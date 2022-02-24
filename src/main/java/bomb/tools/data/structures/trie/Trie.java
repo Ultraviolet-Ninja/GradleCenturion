@@ -25,7 +25,7 @@ public class Trie {
 
     public void addWords(@NotNull Collection<String> words) {
         for (String word : words)
-            addWord(word);
+            addWord(word.toLowerCase(), 0, root);
     }
 
     public void addWord(final @NotNull String word) {
