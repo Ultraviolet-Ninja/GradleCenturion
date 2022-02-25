@@ -22,6 +22,7 @@ import static bomb.modules.il.logic.LogicLetter.D;
 import static bomb.modules.il.logic.LogicLetter.E;
 import static bomb.modules.il.logic.LogicLetter.F;
 import static bomb.modules.il.logic.LogicLetter.G;
+import static bomb.modules.il.logic.LogicLetter.H;
 import static bomb.modules.il.logic.LogicLetter.I;
 import static bomb.modules.il.logic.LogicLetter.J;
 import static bomb.modules.il.logic.LogicLetter.K;
@@ -38,6 +39,7 @@ import static bomb.modules.il.logic.LogicLetter.V;
 import static bomb.modules.il.logic.LogicLetter.W;
 import static bomb.modules.il.logic.LogicLetter.X;
 import static bomb.modules.il.logic.LogicLetter.Y;
+import static bomb.modules.il.logic.LogicLetter.Z;
 import static bomb.tools.logic.LogicOperator.AND;
 import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
 import static bomb.tools.logic.LogicOperator.IMPLIES;
@@ -47,6 +49,7 @@ import static bomb.tools.logic.LogicOperator.OR;
 import static bomb.tools.logic.LogicOperator.XNOR;
 import static bomb.tools.logic.LogicOperator.XOR;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 
 public class LogicTest {
     @BeforeMethod
@@ -179,6 +182,17 @@ public class LogicTest {
         Widget.setIndicator(ON, FRK);
         Widget.setIndicator(OFF, CAR);
         Widget.setIndicator(OFF, NSA);
+    }
+
+    @Test
+    public void extraHZTest() {
+        Widget.setSerialCode("AD4MB7");
+        LetterRecord[] letters = {recordOf(false, H), recordOf(true, Z), recordOf(false, K)};
+        LogicOperator[] operators = {NAND, IMPLIES};
+
+        boolean actual = Logic.solve(letters, operators, true);
+
+        assertFalse(actual);
     }
 
     private static LetterRecord recordOf(boolean isNegated, LogicLetter letter) {
