@@ -147,8 +147,8 @@ public class LogicTest {
                 {new LetterRecord[]{recordOf(true, B), recordOf(false, C), recordOf(true, I)},
                         new LogicOperator[]{IMPLIED_BY, NAND}, true, true},
 
-//                {new LetterRecord[]{recordOf(true, Y), recordOf(true, E), recordOf(false, B)},
-//                        new LogicOperator[]{IMPLIED_BY, XOR}, true, false}, //TODO
+                {new LetterRecord[]{recordOf(true, Y), recordOf(true, E), recordOf(false, B)},
+                        new LogicOperator[]{IMPLIED_BY, XOR}, true, false},
 
                 {new LetterRecord[]{recordOf(true, W), recordOf(true, W), recordOf(true, X)},
                         new LogicOperator[]{OR, OR}, false, true},

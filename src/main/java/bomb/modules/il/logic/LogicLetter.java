@@ -26,7 +26,7 @@ public enum LogicLetter implements BooleanSupplier {
     B {
         @Override
         public boolean getAsBoolean() {
-            return Widget.countLettersInSerialCode() > Widget.countLettersInSerialCode();
+            return Widget.countLettersInSerialCode() > Widget.countNumbersInSerialCode();
         }
     },
     C {
