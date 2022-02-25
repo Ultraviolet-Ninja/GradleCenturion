@@ -12,33 +12,42 @@ import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 public class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID;
 
+    /**
+     * Turns the 2 letter combination of input turns it to a 2 number combination based on certain edgework
+     * and what letters are set as input
+     *
+     * @param letters The 2 letters that must be input (Case insensitive)
+     * @return The combination of numbers that the expert gives back to the defuser
+     * @throws IllegalArgumentException If the input doesn't match specifications OR the serial code isn't given
+     */
     public static @NotNull String solve(@NotNull String letters) throws IllegalArgumentException {
         checkSerialCode();
         letters = letters.toUpperCase();
         if (!letters.matches("[ABCDEGKNPSTXZ]{2}"))
             throw new IllegalArgumentException("Input 2 of the following letters: [A B C D E G K N P S T X Z]");
+
         int preconditions = evaluateEdgework();
-        int leftNum = translateLetter(letters.substring(0, 1));
-        int rightNum = translateLetter(letters.substring(1));
+        int leftNum = translateLetter(letters.charAt(0));
+        int rightNum = translateLetter(letters.charAt(1));
 
         String outputValue = String.valueOf(postConditions(INTERNAL_GRID[leftNum][rightNum] + preconditions));
         return (outputValue.length() == 1 ? "0" : "") + outputValue;
     }
 
-    private static int translateLetter(String letter) throws IllegalArgumentException {
+    private static int translateLetter(char letter) {
         return switch (letter) {
-            case "A" -> 0;
-            case "B" -> 1;
-            case "C" -> 2;
-            case "D" -> 3;
-            case "E" -> 4;
-            case "G" -> 5;
-            case "K" -> 6;
-            case "N" -> 7;
-            case "P" -> 8;
-            case "S" -> 9;
-            case "T" -> 10;
-            case "X" -> 11;
+            case 'A' -> 0;
+            case 'B' -> 1;
+            case 'C' -> 2;
+            case 'D' -> 3;
+            case 'E' -> 4;
+            case 'G' -> 5;
+            case 'K' -> 6;
+            case 'N' -> 7;
+            case 'P' -> 8;
+            case 'S' -> 9;
+            case 'T' -> 10;
+            case 'X' -> 11;
             default -> 12;
         };
     }
