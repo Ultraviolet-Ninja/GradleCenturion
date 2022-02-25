@@ -1,7 +1,6 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
-import bomb.tools.filter.Regex;
 import bomb.tools.logic.LogicOperator;
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
@@ -9,14 +8,8 @@ import org.jetbrains.annotations.NotNull;
 import static bomb.tools.filter.RegexFilter.LOGIC_REGEX;
 import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
-import static bomb.tools.logic.LogicOperator.AND;
-import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
-import static bomb.tools.logic.LogicOperator.IMPLIES;
-import static bomb.tools.logic.LogicOperator.NAND;
-import static bomb.tools.logic.LogicOperator.NOR;
-import static bomb.tools.logic.LogicOperator.OR;
+import static bomb.tools.logic.LogicOperator.LOGIC_SYMBOL_TO_ENUM_MAP;
 import static bomb.tools.logic.LogicOperator.XNOR;
-import static bomb.tools.logic.LogicOperator.XOR;
 
 /**
  * This class deals with the Boolean Venn Diagram module.
@@ -42,7 +35,8 @@ public class BooleanVenn extends Widget {
                 {false, true, true},
                 {true, false, true},
                 {true, true, false},
-                {true, true, true}};
+                {true, true, true}
+        };
     }
 
     /**
@@ -71,12 +65,11 @@ public class BooleanVenn extends Widget {
      * @throws IllegalArgumentException Format mismatch for the input equation
      */
     private static boolean checkFormat(String equation) throws IllegalArgumentException {
-        String abPriority = filter(equation, new Regex(AB_PRIORITY_PATTERN));
-        String bcPriority = filter(equation, new Regex(BC_PRIORITY_PATTERN));
+        boolean doesMatchABPriority = equation.matches(AB_PRIORITY_PATTERN);
 
-        if (XNOR.test(abPriority.isEmpty(), bcPriority.isEmpty()))
-            throw new IllegalArgumentException("Format mismatch!!");
-        return !abPriority.isEmpty();
+        if (XNOR.test(doesMatchABPriority, equation.matches(BC_PRIORITY_PATTERN)))
+            throw new IllegalArgumentException("Format given does not match the format specified");
+        return doesMatchABPriority;
     }
 
     /**
@@ -89,7 +82,7 @@ public class BooleanVenn extends Widget {
     private static String interpretAB(String operation) {
         String logicSymbols = filter(operation, LOGIC_SYMBOL_FILTER);
         StringBuilder builder = new StringBuilder();
-        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0, 1), A + B);
+        boolean[] priorityCases = priorityOutputs(logicSymbols.substring(0, 1), B);
 
         for (int i = 0; i < TEST_CASES.length; i++)
             builder.append(outsideOutputs(logicSymbols.substring(1), priorityCases[i], TEST_CASES[i][C]));
@@ -123,13 +116,16 @@ public class BooleanVenn extends Widget {
      */
     private static boolean[] priorityOutputs(String func, int priorityNum) {
         boolean[] out = new boolean[TEST_CASES.length];
-        if (priorityNum == 1) {
-            for (int i = 0; i < TEST_CASES.length; i++)
-                out[i] = functionMap(func, TEST_CASES[i][A], TEST_CASES[i][B]);
-        } else {
-            for (int i = 0; i < TEST_CASES.length; i++)
-                out[i] = functionMap(func, TEST_CASES[i][B], TEST_CASES[i][C]);
+        LogicOperator operator = LOGIC_SYMBOL_TO_ENUM_MAP.get(func);
+
+        boolean isPriorityOnFirstTwo = priorityNum == B;
+        int firstIndex = isPriorityOnFirstTwo ? A : B;
+        int secondIndex = isPriorityOnFirstTwo ? B : C;
+
+        for (int i = 0; i < TEST_CASES.length; i++) {
+            out[i] = operator.test(TEST_CASES[i][firstIndex], TEST_CASES[i][secondIndex]);
         }
+
         return out;
     }
 
@@ -141,30 +137,7 @@ public class BooleanVenn extends Widget {
      * @param y    2nd bit
      * @return 1 or 0 based on their respective booleans
      */
-    private static String outsideOutputs(String func, boolean x, boolean y) {
-        return functionMap(func, x, y) ? "1" : "0";
-    }
-
-    /**
-     * Selects the bitwise operation to be executed
-     *
-     * @param func The number selector
-     * @param x    1st bit
-     * @param y    2nd bit
-     * @return The result of the operation
-     */
-    private static boolean functionMap(String func, boolean x, boolean y) {
-        LogicOperator operator = switch (func) {
-            case "∧" -> AND;
-            case "∨" -> OR;
-            case "↓" -> NOR;
-            case "⊻" -> XOR;
-            case "|" -> NAND;
-            case "↔" -> XNOR;
-            case "→" -> IMPLIES;
-            default -> IMPLIED_BY;
-        };
-
-        return operator.test(x, y);
+    private static char outsideOutputs(String func, boolean x, boolean y) {
+        return LOGIC_SYMBOL_TO_ENUM_MAP.get(func).test(x, y) ? '1' : '0';
     }
 }
