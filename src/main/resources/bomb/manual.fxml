@@ -344,7 +344,7 @@
                     </VBox.margin>
                 </JFXRadioButton>
                 <JFXRadioButton id="puzzle-radio-button" layoutX="10.0" layoutY="435.0" onAction="#switchPaneByButtonPress"
-                                prefHeight="25.0" prefWidth="280.0" text="Logic Gates" toggleGroup="$options">
+                                prefHeight="25.0" prefWidth="280.0" text="Logic" toggleGroup="$options">
                     <VBox.margin>
                         <Insets left="3.0" top="5.0"/>
                     </VBox.margin>

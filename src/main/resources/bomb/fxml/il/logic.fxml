@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
+<?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../css/il/logic.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bomb.modules.il.logic.LogicController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="336.0" minHeight="10.0" prefHeight="336.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="637.0" minHeight="10.0" prefHeight="326.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="138.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <children>
+                <MFXToggleButton fx:id="firstSetToggle" text="Priority Toggle" />
+                <MFXTextField id="priorityText" fx:id="firstSetOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+                <MFXLegacyComboBox fx:id="firstSetFirstComboBox" />
+                <MFXTextField id="priorityText" fx:id="firstSetTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+                <MFXLegacyComboBox fx:id="firstSetSecondComboBox" />
+                <MFXTextField id="outsideText" fx:id="firstSetThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <children>
+                <MFXToggleButton fx:id="secondSetToggle" text="Priority Toggle" />
+                <MFXTextField id="priorityText" fx:id="secondSetOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+                <MFXLegacyComboBox fx:id="secondSetFirstComboBox" />
+                <MFXTextField id="priorityText" fx:id="secondSetTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+                <MFXLegacyComboBox fx:id="secondSetSecondComboBox" />
+                <MFXTextField id="outsideText" fx:id="secondSetThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+            </children>
+        </HBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+         <children>
+            <MFXButton id="submit-button" fx:id="submitButton" disable="true" text="Submit" onAction="#submitInfo"/>
+         </children>
+      </VBox>
+    </children>
+</GridPane>

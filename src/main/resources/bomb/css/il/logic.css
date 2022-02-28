@@ -1,0 +1,50 @@
+.mfx-button {
+    -fx-font-size: 25;
+}
+
+.mfx-text-field {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-font-size: 25;
+    -fx-padding: 0 0 0 11;
+    -fx-prompt-text-fill: white;
+    -mfx-line-stroke-width: 0;
+}
+
+#priorityText {
+    -fx-text-fill: #32d500;
+}
+
+#outsideText {
+    -fx-text-fill: #e3e000;
+}
+
+.mfx-toggle-button {
+    -mfx-untoggle-color: #354558;
+    -mfx-untoggle-line-color: #172b58;
+    -mfx-toggle-color: #dedee0;
+    -mfx-toggle-line-color: #2b4cff;
+    -fx-font-size: 25;
+}
+
+.mfx-legacy-combo-box-cell {
+    -fx-font-size: 25;
+    -fx-text-fill: black;
+    -mfx-hover: rgb(0, 89, 255);
+    -mfx-selected: rgb(0, 89, 255);
+}
+
+.mfx-legacy-combo-box {
+    -mfx-gap: 0;
+    -fx-padding: 3 5 3 5;
+}
+
+.mfx-legacy-combo-box .combo-popup .virtual-flow {
+    -fx-background-radius: 5;
+    -fx-border-color: #aa1f1f;
+    -fx-border-radius: 5;
+    -fx-max-height: 200;
+}
