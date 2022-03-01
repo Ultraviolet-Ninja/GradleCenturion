@@ -19,8 +19,6 @@ import static bomb.tools.logic.LogicOperator.LOGIC_SYMBOL_TO_ENUM_MAP;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFormatter;
 
 public class LogicController implements Resettable {
-    private static final String PRIORITY_TEXT = "priority", OUTSIDE_TEXT = "outside";
-
     @FXML
     private MFXButton submitButton;
 
@@ -33,7 +31,11 @@ public class LogicController implements Resettable {
             secondSetOne, secondSetTwo, secondSetThree;
 
     @FXML
-    private MFXToggleButton firstSetToggle, secondSetToggle;
+    private MFXToggleButton firstSetPriorityToggle, secondSetPriorityToggle;
+
+    @FXML
+    private MFXToggleButton firstSetFirstNegation, firstSetSecondNegation, firstSetThirdNegation,
+            secondSetFirstNegation, secondSetSecondNegation, secondSetThirdNegation;
 
     public void initialize() {
         firstSetOne.setTextFormatter(createOneLetterFormatter());
@@ -43,8 +45,8 @@ public class LogicController implements Resettable {
         secondSetTwo.setTextFormatter(createOneLetterFormatter());
         secondSetThree.setTextFormatter(createOneLetterFormatter());
 
-        initializeToggleButton(firstSetToggle, firstSetOne, firstSetThree);
-        initializeToggleButton(secondSetToggle, secondSetOne, secondSetThree);
+        initializeToggleButton(firstSetPriorityToggle, firstSetOne, firstSetThree);
+        initializeToggleButton(secondSetPriorityToggle, secondSetOne, secondSetThree);
         injectLogicSymbols();
     }
 
@@ -54,8 +56,8 @@ public class LogicController implements Resettable {
                 event -> {
                     MFXToggleButton source = (MFXToggleButton) event.getSource();
                     boolean isSelected = source.isSelected();
-                    first.setId((isSelected ? OUTSIDE_TEXT : PRIORITY_TEXT) + "Text");
-                    third.setId((isSelected ? PRIORITY_TEXT : OUTSIDE_TEXT) + "Text");
+                    first.setId((isSelected ? "outside" : "priority") + "-text");
+                    third.setId((isSelected ? "priority" : "outside") + "-text");
                 }
         );
     }
@@ -78,10 +80,12 @@ public class LogicController implements Resettable {
 
     }
 
-    private static boolean getResults(MFXToggleButton toggleButton, MFXTextField first, MFXTextField second,
-                                      MFXTextField third, MFXLegacyComboBox<String> firstComboBox,
+    private static boolean getResults(MFXToggleButton toggleButton, MFXTextField firstTextField,
+                                      MFXToggleButton firstNegation, MFXTextField second,
+                                      MFXToggleButton secondNegation, MFXTextField third,
+                                      MFXToggleButton thirdNegation, MFXLegacyComboBox<String> firstComboBox,
                                       MFXLegacyComboBox<String> secondComboBox) {
-        LogicLetter[] logicLetters = Stream.of(first, second, third)
+        LogicLetter[] logicLetters = Stream.of(firstTextField, second, third)
                 .map(MFXTextField::getText)
                 .map(String::toUpperCase)
                 .map(LogicLetter::valueOf)
@@ -95,15 +99,22 @@ public class LogicController implements Resettable {
 
 
 
-        return false;
+        return Logic.solve(null, null, !toggleButton.isSelected());
     }
 
     @Override
     public void reset() {
-        firstSetToggle.setSelected(false);
-        firstSetToggle.fire();
-        secondSetToggle.setSelected(false);
-        secondSetToggle.fire();
+        firstSetPriorityToggle.setSelected(false);
+        firstSetPriorityToggle.fire();
+        secondSetPriorityToggle.setSelected(false);
+        secondSetPriorityToggle.fire();
+
+        firstSetFirstNegation.setSelected(false);
+        firstSetSecondNegation.setSelected(false);
+        firstSetThirdNegation.setSelected(false);
+        secondSetFirstNegation.setSelected(false);
+        secondSetSecondNegation.setSelected(false);
+        secondSetThirdNegation.setSelected(false);
 
         firstSetFirstComboBox.setValue("");
         firstSetSecondComboBox.setValue("");

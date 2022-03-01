@@ -14,6 +14,9 @@ import static bomb.modules.c.color_flash.ColorFlashColor.WHITE;
 import static bomb.tools.string.StringFormat.NO;
 import static bomb.tools.string.StringFormat.YES;
 
+/**
+ *
+ */
 public class ColorFlash extends Widget {
     private static final int COMBO_LIMIT;
 
@@ -24,7 +27,14 @@ public class ColorFlash extends Widget {
         RESULT_IS_COLOR_OR_WORD = "is either the word or color";
     }
 
-    public static String decipher(@NotNull ColorFlashColor[] words, @NotNull ColorFlashColor[] colors)
+    /**
+     *
+     * @param words
+     * @param colors
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public static @NotNull String decipher(@NotNull ColorFlashColor[] words, @NotNull ColorFlashColor[] colors)
             throws IllegalArgumentException {
         validateInput(words, colors);
         var comboList = forgeCombos(words, colors);

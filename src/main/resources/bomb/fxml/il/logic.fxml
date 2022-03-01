@@ -4,6 +4,7 @@
 <?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import io.github.palexdev.materialfx.controls.MFXToggleButton?>
 <?import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,35 +16,133 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="336.0" minHeight="10.0" prefHeight="336.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="637.0" minHeight="10.0" prefHeight="326.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="138.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="412.0" minHeight="10.0" prefHeight="272.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="489.0" minHeight="10.0" prefHeight="338.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
             <children>
-                <MFXToggleButton fx:id="firstSetToggle" text="Priority Toggle" />
-                <MFXTextField id="priorityText" fx:id="firstSetOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
-                <MFXLegacyComboBox fx:id="firstSetFirstComboBox" />
-                <MFXTextField id="priorityText" fx:id="firstSetTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
-                <MFXLegacyComboBox fx:id="firstSetSecondComboBox" />
-                <MFXTextField id="outsideText" fx:id="firstSetThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+                <MFXButton id="submit-button" fx:id="submitButton" disable="true" onAction="#submitInfo" text="Submit" />
             </children>
         </HBox>
-        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="205.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="203.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="140.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="201.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="115.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="193.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="143.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
             <children>
-                <MFXToggleButton fx:id="secondSetToggle" text="Priority Toggle" />
-                <MFXTextField id="priorityText" fx:id="secondSetOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
-                <MFXLegacyComboBox fx:id="secondSetFirstComboBox" />
-                <MFXTextField id="priorityText" fx:id="secondSetTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
-                <MFXLegacyComboBox fx:id="secondSetSecondComboBox" />
-                <MFXTextField id="outsideText" fx:id="secondSetThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="41.0" />
+                <VBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                    <children>
+                        <MFXToggleButton id="negation-toggle" fx:id="firstSetFirstNegation" text="Negate" />
+                        <MFXTextField id="priority-text" fx:id="firstSetOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="100.0">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin></MFXTextField>
+                    </children>
+                </VBox>
+                <VBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                    <children>
+                        <MFXLegacyComboBox fx:id="firstSetFirstComboBox">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin></MFXLegacyComboBox>
+                    </children>
+                </VBox>
+                <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="177.0" GridPane.columnIndex="3">
+                    <children>
+                        <MFXToggleButton id="negation-toggle" fx:id="firstSetSecondNegation" text="Negate" />
+                        <MFXTextField id="priority-text" fx:id="firstSetTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="100.0">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin></MFXTextField>
+                    </children>
+                </VBox>
+                <VBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
+                    <children>
+                        <MFXLegacyComboBox fx:id="firstSetSecondComboBox">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin></MFXLegacyComboBox>
+                    </children>
+                </VBox>
+                <VBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5">
+                    <children>
+                        <MFXToggleButton id="negation-toggle" fx:id="firstSetThirdNegation" text="Negate" />
+                        <MFXTextField id="outside-text" fx:id="firstSetThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="100.0">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin></MFXTextField>
+                    </children>
+                </VBox>
+                <VBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="6" />
+                <VBox alignment="BOTTOM_CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="223.0">
+                    <children>
+                        <MFXToggleButton id="priority-toggle" fx:id="firstSetPriorityToggle" text="Priority Toggle">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin></MFXToggleButton>
+                    </children>
+                </VBox>
             </children>
-        </HBox>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
-         <children>
-            <MFXButton id="submit-button" fx:id="submitButton" disable="true" text="Submit" onAction="#submitInfo"/>
-         </children>
-      </VBox>
+        </GridPane>
+        <GridPane layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="205.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="226.0" minWidth="10.0" prefWidth="203.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="140.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="201.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="162.0" minWidth="10.0" prefWidth="115.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="193.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="143.0" minWidth="10.0" prefWidth="143.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+                    <children>
+                        <MFXToggleButton id="negation-toggle" fx:id="secondSetFirstNegation" text="Negate" />
+                        <MFXTextField id="priority-text" fx:id="secondSetOne" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="100.0" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+                    <children>
+                        <MFXLegacyComboBox fx:id="secondSetFirstComboBox" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="177.0" GridPane.columnIndex="3">
+                    <children>
+                        <MFXToggleButton id="negation-toggle" fx:id="secondSetSecondNegation" text="Negate" />
+                        <MFXTextField id="priority-text" fx:id="secondSetTwo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="100.0" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="4">
+                    <children>
+                        <MFXLegacyComboBox fx:id="secondSetSecondComboBox" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5">
+                    <children>
+                        <MFXToggleButton id="negation-toggle" fx:id="secondSetThirdNegation" text="Negate" />
+                        <MFXTextField id="outside-text" fx:id="secondSetThree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" prefWidth="100.0" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="6" />
+                <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="223.0">
+                    <children>
+                        <MFXToggleButton id="priority-toggle" fx:id="secondSetPriorityToggle" text="Priority Toggle" />
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
     </children>
 </GridPane>
