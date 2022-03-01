@@ -13,6 +13,7 @@
 - Forget Me Not
 - Hexamaze
 - Laundry
+- Logic
 - MicroController
 - Neutralization
 - Round Keypads
@@ -22,7 +23,7 @@
 - The Bulb
 - TwoBit
 
-21/100
+22/100
 
 ### Incomplete Modules
 - Battleship 
@@ -30,7 +31,6 @@
 - Cheap Checkout
 - Color Flash
 - Ice Cream
-- Logic
 - Morsematics
 - Murder
 - Translated Vanilla Modules (9/15 Supported languages)
@@ -39,7 +39,7 @@
 - Square Button
 - Word Search
 
-13/100
+12/100
 
 ### Untouched Modules
 - 3D Maze
