@@ -3,23 +3,39 @@
 }
 
 .mfx-text-field {
-    -fx-background-color: #00407c;
-    -fx-background-radius: 15;
-    -fx-border-color: black;
-    -fx-border-radius: 15;
-    -fx-border-width: 2;
     -fx-font-size: 32;
-    -fx-padding: 0 0 0 41;
     -fx-prompt-text-fill: white;
     -mfx-line-stroke-width: 0;
 }
 
 #priority-text {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-padding: 0 0 0 41;
     -fx-text-fill: #32d500;
 }
 
 #outside-text {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-padding: 0 0 0 41;
     -fx-text-fill: #e3e000;
+}
+
+#true-label {
+    -fx-background-color: #32d500;
+    -fx-padding: 0 0 3 16;
+}
+
+#false-label {
+    -fx-background-color: #ad0000;
+    -fx-padding: 0 0 3 15;
 }
 
 .mfx-toggle-button {

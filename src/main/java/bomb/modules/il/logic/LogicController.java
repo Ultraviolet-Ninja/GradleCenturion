@@ -8,6 +8,8 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBoxBase;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -29,6 +31,9 @@ public class LogicController implements Resettable {
     @FXML
     private MFXTextField firstSetOne, firstSetTwo, firstSetThree,
             secondSetOne, secondSetTwo, secondSetThree;
+
+    @FXML
+    private MFXTextField firstSetResultField, secondSetResultField;
 
     @FXML
     private MFXToggleButton firstSetPriorityToggle, secondSetPriorityToggle;
@@ -76,20 +81,56 @@ public class LogicController implements Resettable {
     }
 
     @FXML
-    private void submitInfo() {
+    private void updateDisabledState() {
+        var textFieldsStrings = Stream
+                .of(firstSetOne, firstSetTwo, firstSetThree, secondSetOne, secondSetTwo, secondSetThree)
+                .map(MFXTextField::getText);
 
+        var comboBoxStrings = Stream
+                .of(firstSetFirstComboBox, firstSetSecondComboBox, secondSetFirstComboBox, secondSetSecondComboBox)
+                .map(ComboBoxBase::getValue)
+                .map(value -> value == null ? "" : value);
+
+        boolean areAllStringsFilled = Stream
+                .concat(textFieldsStrings, comboBoxStrings)
+                .map(text -> !text.isEmpty())
+                .reduce((b1, b2) -> b1 && b2)
+                .orElse(false);
+
+        submitButton.setDisable(!areAllStringsFilled);
+    }
+
+    @FXML
+    private void submitInfo() {
+        try {
+            boolean firstSetResult = getResults(firstSetPriorityToggle, firstSetOne, firstSetFirstNegation,
+                    firstSetTwo, firstSetSecondNegation, firstSetThree, firstSetThirdNegation,
+                    firstSetFirstComboBox, firstSetSecondComboBox);
+
+            boolean secondSetResult = getResults(secondSetPriorityToggle, secondSetOne, secondSetFirstNegation,
+                    secondSetTwo, secondSetSecondNegation, secondSetThree, secondSetThirdNegation,
+                    secondSetFirstComboBox, secondSetSecondComboBox);
+
+            firstSetResultField.setText(firstSetResult ? "T" : "F");
+            secondSetResultField.setText(secondSetResult ? "T" : "F");
+
+            firstSetResultField.setId(firstSetResult + "-label");
+            secondSetResultField.setId(secondSetResult + "-label");
+        } catch (IllegalArgumentException e) {
+            FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
+        }
     }
 
     private static boolean getResults(MFXToggleButton toggleButton, MFXTextField firstTextField,
-                                      MFXToggleButton firstNegation, MFXTextField second,
-                                      MFXToggleButton secondNegation, MFXTextField third,
+                                      MFXToggleButton firstNegation, MFXTextField secondTextField,
+                                      MFXToggleButton secondNegation, MFXTextField thirdTextField,
                                       MFXToggleButton thirdNegation, MFXLegacyComboBox<String> firstComboBox,
-                                      MFXLegacyComboBox<String> secondComboBox) {
-        LogicLetter[] logicLetters = Stream.of(firstTextField, second, third)
-                .map(MFXTextField::getText)
-                .map(String::toUpperCase)
-                .map(LogicLetter::valueOf)
-                .toArray(LogicLetter[]::new);
+                                      MFXLegacyComboBox<String> secondComboBox) throws IllegalArgumentException {
+        LetterRecord[] letterRecords = createLetterRecords(
+                firstTextField, firstNegation,
+                secondTextField, secondNegation,
+                thirdTextField, thirdNegation
+        );
 
         LogicOperator[] logicOperators = Stream.of(firstComboBox, secondComboBox)
                 .map(MFXLegacyComboBox::getValue)
@@ -97,9 +138,29 @@ public class LogicController implements Resettable {
                 .map(LOGIC_SYMBOL_TO_ENUM_MAP::get)
                 .toArray(LogicOperator[]::new);
 
+        return Logic.solve(letterRecords, logicOperators, !toggleButton.isSelected());
+    }
 
+    private static LetterRecord[] createLetterRecords(MFXTextField firstTextField, MFXToggleButton firstNegation,
+                                                      MFXTextField secondTextField, MFXToggleButton secondNegation,
+                                                      MFXTextField thirdTextField, MFXToggleButton thirdNegation) {
+        MFXToggleButton[] buttonArray = {firstNegation, secondNegation, thirdNegation};
+        LetterRecord[] letters = new LetterRecord[buttonArray.length];
 
-        return Logic.solve(null, null, !toggleButton.isSelected());
+        LogicLetter[] logicLetters = Stream.of(firstTextField, secondTextField, thirdTextField)
+                .map(MFXTextField::getText)
+                .map(String::toUpperCase)
+                .map(LogicLetter::valueOf)
+                .toArray(LogicLetter[]::new);
+
+        for (int i = 0; i < logicLetters.length; i++) {
+            letters[i] = new LetterRecord(
+                    buttonArray[i].isSelected(),
+                    logicLetters[i]
+            );
+        }
+
+        return letters;
     }
 
     @Override
@@ -120,6 +181,9 @@ public class LogicController implements Resettable {
         firstSetSecondComboBox.setValue("");
         secondSetFirstComboBox.setValue("");
         secondSetSecondComboBox.setValue("");
+
+        FacadeFX.clearMultipleTextFields(firstSetOne, firstSetTwo, firstSetThree,
+                secondSetOne, secondSetTwo, secondSetThree);
 
         FacadeFX.disable(submitButton);
     }
