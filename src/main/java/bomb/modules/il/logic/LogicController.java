@@ -3,10 +3,10 @@ package bomb.modules.il.logic;
 import bomb.abstractions.Resettable;
 import bomb.tools.logic.LogicOperator;
 import bomb.tools.pattern.facade.FacadeFX;
+import com.jfoenix.controls.JFXComboBox;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
-import io.github.palexdev.materialfx.controls.legacy.MFXLegacyComboBox;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBoxBase;
@@ -25,7 +25,7 @@ public class LogicController implements Resettable {
     private MFXButton submitButton;
 
     @FXML
-    private MFXLegacyComboBox<String> firstSetFirstComboBox, firstSetSecondComboBox,
+    private JFXComboBox<String> firstSetFirstComboBox, firstSetSecondComboBox,
             secondSetFirstComboBox, secondSetSecondComboBox;
 
     @FXML
@@ -124,8 +124,8 @@ public class LogicController implements Resettable {
     private static boolean getResults(MFXToggleButton toggleButton, MFXTextField firstTextField,
                                       MFXToggleButton firstNegation, MFXTextField secondTextField,
                                       MFXToggleButton secondNegation, MFXTextField thirdTextField,
-                                      MFXToggleButton thirdNegation, MFXLegacyComboBox<String> firstComboBox,
-                                      MFXLegacyComboBox<String> secondComboBox) throws IllegalArgumentException {
+                                      MFXToggleButton thirdNegation, JFXComboBox<String> firstComboBox,
+                                      JFXComboBox<String> secondComboBox) throws IllegalArgumentException {
         LetterRecord[] letterRecords = createLetterRecords(
                 firstTextField, firstNegation,
                 secondTextField, secondNegation,
@@ -133,7 +133,7 @@ public class LogicController implements Resettable {
         );
 
         LogicOperator[] logicOperators = Stream.of(firstComboBox, secondComboBox)
-                .map(MFXLegacyComboBox::getValue)
+                .map(JFXComboBox::getValue)
                 .map(selectedText -> selectedText.substring(0, 1))
                 .map(LOGIC_SYMBOL_TO_ENUM_MAP::get)
                 .toArray(LogicOperator[]::new);
@@ -165,9 +165,9 @@ public class LogicController implements Resettable {
 
     @Override
     public void reset() {
-        firstSetPriorityToggle.setSelected(false);
+        firstSetPriorityToggle.setSelected(true);
         firstSetPriorityToggle.fire();
-        secondSetPriorityToggle.setSelected(false);
+        secondSetPriorityToggle.setSelected(true);
         secondSetPriorityToggle.fire();
 
         firstSetFirstNegation.setSelected(false);
@@ -181,6 +181,12 @@ public class LogicController implements Resettable {
         firstSetSecondComboBox.setValue("");
         secondSetFirstComboBox.setValue("");
         secondSetSecondComboBox.setValue("");
+
+        firstSetResultField.setText("F");
+        secondSetResultField.setText("F");
+
+        firstSetResultField.setId(false + "-label");
+        secondSetResultField.setId(false + "-label");
 
         FacadeFX.clearMultipleTextFields(firstSetOne, firstSetTwo, firstSetThree,
                 secondSetOne, secondSetTwo, secondSetThree);

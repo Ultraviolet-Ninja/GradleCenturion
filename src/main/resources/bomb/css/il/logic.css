@@ -54,19 +54,8 @@
     -mfx-toggle-color: #f68484;
 }
 
-.mfx-legacy-combo-box-cell {
-    -fx-font-size: 25;
-    -fx-text-fill: black;
-    -mfx-hover: rgb(0, 89, 255);
-    -mfx-selected: rgb(0, 89, 255);
-}
-
-.mfx-legacy-combo-box {
-}
-
-.mfx-legacy-combo-box .combo-popup .virtual-flow {
-    -fx-background-radius: 5;
-    -fx-border-color: #aa1f1f;
-    -fx-border-radius: 5;
-    -fx-max-height: 200;
+.jfx-combo-box {
+    -jfx-focus-color: rgb(206, 206, 206);
+    -jfx-unfocus-color: black;
+    -jfx-label-float: true;
 }
