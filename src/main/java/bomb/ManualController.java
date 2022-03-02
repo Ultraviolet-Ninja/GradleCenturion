@@ -89,10 +89,10 @@ public class ManualController {
         );
         ObserverHub.addObserver(FORGET_ME_NOT_TOGGLE, new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
-//        long start = System.nanoTime();
+        long start = System.nanoTime();
         regionMap = setupRegionMap().get();
-//        long stop = System.nanoTime();
-//        System.out.printf("Timer: %,d%n", stop - start);
+        long stop = System.nanoTime();
+        System.out.printf("Timer: %,d%n", stop - start);
     }
 
     private CompletableFuture<Map<Toggle, Region>> setupRegionMap() throws ExecutionException, InterruptedException {
