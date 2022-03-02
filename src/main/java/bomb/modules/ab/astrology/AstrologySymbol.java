@@ -27,11 +27,6 @@ public enum AstrologySymbol {
         return index;
     }
 
-    /**
-     * AstroSymbols constructor
-     *
-     * @param index Its index number found in the bomb manual page for Astrology
-     */
     AstrologySymbol(int index) {
         this.index = (byte) index;
     }

@@ -6,24 +6,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.joining;
 
 public class SimonScreams extends Widget {
-    private static final int MAX_OUTPUT_RULES = 6;
+    private static final int MAX_OUTPUT_RULES;
     private static final List<Integer> CURRENT_OUTPUT_NUMBERS;
-    private static final String[][]
-            // The output colors that depend on the edgework conditions and enum Letter
-            RESULTING_COLORS = {{"Yellow", "Orange", "Green", "Red", "Blue", "Purple"},
-            {"Purple", "Yellow", "Red", "Blue", "Orange", "Green"},
-            {"Orange", "Green", "Blue", "Purple", "Red", "Yellow"},
-            {"Green", "Blue", "Orange", "Yellow", "Purple", "Red"},
-            {"Red", "Purple", "Yellow", "Orange", "Green", "Blue"},
-            {"Blue", "Red", "Purple", "Green", "Yellow", "Orange"}},
-
-    // The letter sets that determine the column of colors to use in resultingColors 2D array
-    CATEGORIES = {{"FFC", "CEH", "HAF", "ECD", "DDE", "AHA"}, {"AHF", "DFC", "ECH", "CDE", "FEA", "HAD"},
-            {"DED", "ECF", "FHE", "HAA", "AFH", "CDC"}, {"HCE", "ADA", "CFD", "DHH", "EAC", "FEF"},
-            {"CAH", "FHD", "DDA", "AEC", "HCF", "EFE"}, {"EDA", "HAE", "AEC", "FFF", "CHD", "DCH"}};
+    private static final String[][] RESULTING_COLORS, CATEGORIES;
 
     private static boolean initialized;
     private static int stage;
@@ -32,6 +21,7 @@ public class SimonScreams extends Widget {
     static {
         initialized = false;
         stage = 0;
+        MAX_OUTPUT_RULES = 6;
         CURRENT_OUTPUT_NUMBERS = new ArrayList<>(MAX_OUTPUT_RULES);
     }
 
@@ -56,7 +46,7 @@ public class SimonScreams extends Widget {
      * @return - The resulting colors to pressed
      * @throws IllegalArgumentException - The init() method wasn't called first
      */
-    public static String nextSolve(@NotNull ScreamColor[] flashingOrder) throws IllegalArgumentException {
+    public static String nextSolve(@NotNull ScreamColor @NotNull [] flashingOrder) throws IllegalArgumentException {
         if (flashingOrder.length == 0)
             throw new IllegalArgumentException("No colors were selected");
         if (!initialized) throw new IllegalArgumentException("Initialization wasn't started");
@@ -100,7 +90,7 @@ public class SimonScreams extends Widget {
     private static String findColors(Letters current) {
         return CURRENT_OUTPUT_NUMBERS.stream()
                 .map(index -> RESULTING_COLORS[index][current.ordinal()])
-                .collect(Collectors.joining(","));
+                .collect(joining(","));
     }
 
     /**
@@ -132,5 +122,21 @@ public class SimonScreams extends Widget {
 
     private enum Letters {
         A, C, D, E, F, H
+    }
+
+    static {
+        // The output colors that depend on the edgework conditions and enum Letter
+        RESULTING_COLORS = new String[][]{{"Yellow", "Orange", "Green", "Red", "Blue", "Purple"},
+                {"Purple", "Yellow", "Red", "Blue", "Orange", "Green"},
+                {"Orange", "Green", "Blue", "Purple", "Red", "Yellow"},
+                {"Green", "Blue", "Orange", "Yellow", "Purple", "Red"},
+                {"Red", "Purple", "Yellow", "Orange", "Green", "Blue"},
+                {"Blue", "Red", "Purple", "Green", "Yellow", "Orange"}};
+
+        // The letter sets that determine the column of colors to use in resultingColors 2D array
+        CATEGORIES = new String[][]{{"FFC", "CEH", "HAF", "ECD", "DDE", "AHA"},
+                {"AHF", "DFC", "ECH", "CDE", "FEA", "HAD"}, {"DED", "ECF", "FHE", "HAA", "AFH", "CDC"},
+                {"HCE", "ADA", "CFD", "DHH", "EAC", "FEF"}, {"CAH", "FHD", "DDA", "AEC", "HCF", "EFE"},
+                {"EDA", "HAE", "AEC", "FFF", "CHD", "DCH"}};
     }
 }

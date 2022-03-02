@@ -3,12 +3,12 @@ package bomb.modules.c.chess;
 import bomb.Widget;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
+import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static bomb.modules.c.chess.ChessBoard.BOARD_LENGTH;
 import static bomb.modules.c.chess.ChessPiece.BISHOP;
@@ -17,14 +17,19 @@ import static bomb.modules.c.chess.ChessPiece.KNIGHT;
 import static bomb.modules.c.chess.ChessPiece.QUEEN;
 import static bomb.modules.c.chess.ChessPiece.ROOK;
 import static bomb.modules.c.chess.Tile.TileColor.WHITE;
+import static bomb.tools.string.StringFormat.INDEX_ZERO_UPPERCASE_LETTER;
 import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 public class Chess extends Widget {
-    public static final String VALIDITY_REGEX = "[A-Fa-f]-?[1-6]";
+    @Language("regexp")
+    public static final String VALIDITY_PATTERN;
 
-    private static final char INT_CONVERSION_LETTER = 'A';
+    static {
+        VALIDITY_PATTERN = "[A-Fa-f]-?[1-6]";
+    }
 
-    public static String solve(@NotNull List<String> inputCoordinateList)
+    public static @NotNull String solve(@NotNull List<String> inputCoordinateList)
             throws IllegalArgumentException, IllegalStateException {
         checkSerialCode();
         validateList(inputCoordinateList);
@@ -45,7 +50,7 @@ public class Chess extends Widget {
             char xCoordinate = chessCoordinate.toUpperCase().charAt(0);
             char yCoordinate = chessCoordinate.charAt(chessCoordinate.length() - 1);
 
-            int x = xCoordinate - INT_CONVERSION_LETTER;
+            int x = xCoordinate - INDEX_ZERO_UPPERCASE_LETTER;
             int y = BOARD_LENGTH - Character.getNumericValue(yCoordinate);
             output.add(new Coordinates(x, y));
         }
@@ -127,7 +132,7 @@ public class Chess extends Widget {
             throw new IllegalArgumentException("Every space must be filled with a move");
 
         for (String chessCoordinate : inputCoordinateList) {
-            if (!chessCoordinate.matches(VALIDITY_REGEX))
+            if (!chessCoordinate.matches(VALIDITY_PATTERN))
                 throw new IllegalArgumentException("Coordinate doesn't match the specified format");
         }
     }
@@ -135,13 +140,13 @@ public class Chess extends Widget {
     private static void checkUniqueness(List<String> inputCoordinateList) {
         Set<String> uniqueCoordinateChecker = inputCoordinateList.stream()
                 .map(chessCoordinate -> chessCoordinate.toUpperCase().replace("-", ""))
-                .collect(Collectors.toSet());
+                .collect(toUnmodifiableSet());
         if (uniqueCoordinateChecker.size() != BOARD_LENGTH)
             throw new IllegalArgumentException("Not all positions were unique. Please remove duplicates");
     }
 
     private static String convertToChessNotation(Coordinates uncoveredLocation) {
-        char horizontal = (char) (INT_CONVERSION_LETTER + uncoveredLocation.x());
+        char horizontal = (char) (INDEX_ZERO_UPPERCASE_LETTER + uncoveredLocation.x());
         String vertical = String.valueOf(BOARD_LENGTH - uncoveredLocation.y());
         return horizontal + "-" + vertical;
     }

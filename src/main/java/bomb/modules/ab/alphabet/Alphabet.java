@@ -18,9 +18,12 @@ import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
  * But if no set matches the 4 tiles, the tiles are to be pressed in alphabetical order.
  */
 public class Alphabet extends Widget {
-    private static final String[] WORD_BANK = {"JQXZ", "QEW", "AC", "ZNY", "TJL",
-            "OKBV", "DFW", "YKQ", "LXE", "GS", "VSI", "PQJS", "VCN", "JR", "IRNM",
-            "OP", "QYDX", "HDU", "PKD", "ARGF"};
+    private static final String[] WORD_BANK;
+
+    static {
+        WORD_BANK = new String[]{"JQXZ", "QEW", "AC", "ZNY", "TJL", "OKBV", "DFW", "YKQ", "LXE", "GS",
+                "VSI", "PQJS", "VCN", "JR", "IRNM", "OP", "QYDX", "HDU", "PKD", "ARGF"};
+    }
 
     /**
      * Arranges the given letters into the order they need to be pressed
@@ -28,7 +31,7 @@ public class Alphabet extends Widget {
      * @param input The given letter order of tiles
      * @return The letters in the way they should be pressed
      */
-    public static String order(@NotNull String input) throws IllegalArgumentException {
+    public static @NotNull String order(@NotNull String input) throws IllegalArgumentException {
         validateInput(input);
         input = input.toUpperCase();
         StringBuilder output = new StringBuilder();

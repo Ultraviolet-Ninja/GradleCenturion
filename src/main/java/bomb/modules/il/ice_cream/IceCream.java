@@ -21,8 +21,8 @@ import static bomb.modules.il.ice_cream.Flavor.TUTTI_FRUTTI;
 import static bomb.modules.il.ice_cream.Flavor.VANILLA;
 
 public class IceCream extends Widget {
-    public static Flavor findFlavor(@NotNull Person person, @NotNull EnumSet<Flavor> possibleFlavors,
-                                    boolean hasEmptyPortPlate)
+    public static @NotNull Flavor findFlavor(@NotNull Person person, @NotNull EnumSet<Flavor> possibleFlavors,
+                                             boolean hasEmptyPortPlate)
             throws IllegalArgumentException, IllegalStateException {
         validateInput(possibleFlavors);
 

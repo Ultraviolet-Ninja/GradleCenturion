@@ -14,7 +14,6 @@ import java.util.stream.Stream;
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toList;
 
 @SuppressWarnings("MagicConstant")
 public class Regex implements Iterable<String> {
@@ -77,7 +76,7 @@ public class Regex implements Iterable<String> {
                 .map(textMatcher::reset)
                 .map(RESULT_STREAM)
                 .map(stream -> stream.collect(joining()))
-                .collect(toList());
+                .toList();
     }
 
     public boolean hasMatch() {
@@ -102,7 +101,7 @@ public class Regex implements Iterable<String> {
 
     public List<String> findAllMatches() {
         return RESULT_STREAM.apply(textMatcher)
-                .collect(toList());
+                .toList();
     }
 
     public String getOriginalPattern() {

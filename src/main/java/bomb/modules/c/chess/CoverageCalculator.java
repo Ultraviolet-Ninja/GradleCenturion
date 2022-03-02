@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.NavigableSet;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 import static bomb.modules.c.chess.ChessBoard.BOARD_LENGTH;
 import static bomb.modules.c.chess.ChessPiece.BISHOP;
@@ -165,7 +164,7 @@ public class CoverageCalculator {
         return moveList.stream()
                 .filter(coordinates -> coordinates.x() >= 0 && coordinates.x() < BOARD_LENGTH)
                 .filter(coordinates -> coordinates.y() >= 0 && coordinates.y() < BOARD_LENGTH)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private static Collection<Coordinates> removeBlockedMoves(ChessBoard board, Collection<Coordinates> coordinatesList, boolean isAscending) {

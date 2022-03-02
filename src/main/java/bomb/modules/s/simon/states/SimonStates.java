@@ -28,12 +28,7 @@ public class SimonStates extends Widget {
     private static final String ERROR_MESSAGE = "The element does not exist";
     private static final BiPredicate<EnumSet<StateColor>, StateColor> FLASHED, DID_NOT_FLASH;
 
-    private static final StateColor[][] PRIORITY_ORDERS = new StateColor[][]{
-            {RED, BLUE, GREEN, YELLOW}, //Highest to Lowest
-            {BLUE, YELLOW, RED, GREEN},
-            {GREEN, RED, YELLOW, BLUE},
-            {YELLOW, GREEN, BLUE, RED}
-    };
+    private static final StateColor[][] PRIORITY_ORDERS;
 
     private static int dominantColorIndex;
     private static StageState currentStage;
@@ -45,13 +40,21 @@ public class SimonStates extends Widget {
         PRESSED_COLOR_HISTORY = new ArrayList<>();
         FLASHED = AbstractCollection::contains;
         DID_NOT_FLASH = FLASHED.negate();
+
+        //The Highest to lowest priorities
+        PRIORITY_ORDERS = new StateColor[][]{
+                {RED, BLUE, GREEN, YELLOW},
+                {BLUE, YELLOW, RED, GREEN},
+                {GREEN, RED, YELLOW, BLUE},
+                {YELLOW, GREEN, BLUE, RED}
+        };
     }
 
     public static void setDominantColor(@NotNull StateColor dominantColor) {
         dominantColorIndex = dominantColor.ordinal();
     }
 
-    public static List<StateColor> calculateNextColorPress(@NotNull EnumSet<StateColor> colorsFlashed)
+    public static @NotNull List<StateColor> calculateNextColorPress(@NotNull EnumSet<StateColor> colorsFlashed)
             throws IllegalArgumentException {
         validate(colorsFlashed);
         if (isSouvenirActive)

@@ -5,6 +5,7 @@ import bomb.abstractions.Flaggable;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.function.UnaryOperator;
@@ -16,9 +17,13 @@ import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
 public class RoundKeypads extends Widget {
-    private static final byte IMAGES_PER_COLUMN = 7;
-    private static final UnaryOperator<Color> HIGHLIGHT_COMMAND = previousColor ->
-            new Color(0, previousColor.getGreen(), previousColor.getBlue(), 1);
+    private static final int IMAGES_PER_COLUMN = 7;
+    private static final UnaryOperator<Color> HIGHLIGHT_COMMAND;
+
+    static {
+        HIGHLIGHT_COMMAND = previousColor ->
+                new Color(0, previousColor.getGreen(), previousColor.getBlue(), 1);
+    }
 
     public static int determineBadColumn() {
         Map<Integer, Long> frequencyCounter = stream(KEYPAD_ARRAY)
@@ -38,7 +43,7 @@ public class RoundKeypads extends Widget {
                 .orElse(-1);
     }
 
-    public static Image toggleImageColor(Keypad toEdit, Image original) {
+    public static Image toggleImageColor(@NotNull Keypad toEdit, @NotNull Image original) {
         if (toEdit.getFlag()) {
             toEdit.setFlag(false);
             return toEdit.getMemory();

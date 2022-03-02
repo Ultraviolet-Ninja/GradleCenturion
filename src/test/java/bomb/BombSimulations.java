@@ -23,7 +23,7 @@ public class BombSimulations {
         Widget.setDoubleAs(4);
         Widget.setNumHolders(2);
         Widget.setIndicator(ON, BOB);
-        Widget.setSerialCode("ag42w5");
+        Widget.setSerialCode("AG4KW5");
         centurionDefaults();
     }
 

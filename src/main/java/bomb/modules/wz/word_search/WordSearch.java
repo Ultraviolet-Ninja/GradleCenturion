@@ -1,6 +1,7 @@
 package bomb.modules.wz.word_search;
 
 import bomb.Widget;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -10,14 +11,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static java.util.stream.Collectors.toMap;
+import static java.util.stream.Collectors.toUnmodifiableMap;
 
 @SuppressWarnings("ConstantConditions")
 public class WordSearch extends Widget {
-    private static final int ARRAY_SIZE = 4;
-    private static final String FILENAME = "words.txt";
+    private static final int ARRAY_SIZE;
+    private static final String FILENAME;
 
-    public static Set<String> findPossibleWords(char[] letters) throws IllegalArgumentException {
+    static {
+        ARRAY_SIZE = 4;
+        FILENAME = "words.txt";
+    }
+
+    public static @NotNull Set<String> findPossibleWords(char[] letters) throws IllegalArgumentException {
         checkSerialCode();
         validate(letters);
 
@@ -63,7 +69,7 @@ public class WordSearch extends Widget {
         InputStream in = WordSearch.class.getResourceAsStream(FILENAME);
         return new BufferedReader(new InputStreamReader(in))
                 .lines()
-                .collect(toMap(
+                .collect(toUnmodifiableMap(
                         line -> line.charAt(0),
                         line -> List.of(line.substring(2).split(" "))
                 ));

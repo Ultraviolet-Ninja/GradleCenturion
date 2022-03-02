@@ -28,8 +28,9 @@ import static bomb.modules.il.laundry.Clothing.Material.POLYESTER;
 import static bomb.modules.il.laundry.Clothing.Material.WOOL;
 import static bomb.tools.filter.RegexFilter.CHAR_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
+import static bomb.tools.number.MathUtils.negativeSafeModulo;
 import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.toSet;
+import static java.util.stream.Collectors.toUnmodifiableSet;
 
 /**
  * This class deals with the Laundry module. The module requires a plethora of conditions that involve the
@@ -39,6 +40,8 @@ import static java.util.stream.Collectors.toSet;
  */
 public class Laundry extends Widget {
     public static final String THANKS_BOB = "Thanks, Bob! :)";
+
+    private static final int NUMBER_OF_OPTIONS = 6;
 
     private static int needy;
 
@@ -50,7 +53,8 @@ public class Laundry extends Widget {
      * @return The array of Strings containing the solve conditions
      * @throws IllegalArgumentException Whether serial code, needy or solved fields are empty
      */
-    public static String[] clean(@NotNull String solved, @NotNull String needy) throws IllegalArgumentException {
+    public static @NotNull String[] clean(@NotNull String solved, @NotNull String needy)
+            throws IllegalArgumentException {
         validateInput(solved, needy);
         Laundry.needy = Integer.parseInt(needy);
         setClothing(Integer.parseInt(solved));
@@ -94,14 +98,18 @@ public class Laundry extends Widget {
      * @param solved The number of solved modules
      */
     private static void setMaterial(int solved) {
-        switch (balance(solved + calculateTotalPorts() - numHolders)) {
-            case 0 -> ARTICLE.setMaterial(POLYESTER);
-            case 1 -> ARTICLE.setMaterial(COTTON);
-            case 2 -> ARTICLE.setMaterial(WOOL);
-            case 3 -> ARTICLE.setMaterial(NYLON);
-            case 4 -> ARTICLE.setMaterial(CORDUROY);
-            default -> ARTICLE.setMaterial(LEATHER);
-        }
+        int number = solved + calculateTotalPorts() - numHolders;
+        int selector = negativeSafeModulo(number, NUMBER_OF_OPTIONS);
+        Clothing.Material foundMaterial = switch (selector) {
+            case 0 -> POLYESTER;
+            case 1 -> COTTON;
+            case 2 -> WOOL;
+            case 3 -> NYLON;
+            case 4 -> CORDUROY;
+            default -> LEATHER;
+        };
+
+        ARTICLE.setMaterial(foundMaterial);
     }
 
     /**
@@ -109,14 +117,17 @@ public class Laundry extends Widget {
      * Last Digit of the Serial Code + the No. of All Batteries
      */
     private static void setColor() {
-        switch (balance(getSerialCodeLastDigit() + getAllBatteries())) {
-            case 0 -> ARTICLE.setColor(RUBY);
-            case 1 -> ARTICLE.setColor(STAR);
-            case 2 -> ARTICLE.setColor(SAPPHIRE);
-            case 3 -> ARTICLE.setColor(JADE);
-            case 4 -> ARTICLE.setColor(PEARL);
-            default -> ARTICLE.setColor(MALINITE);
-        }
+        int selector = (getSerialCodeLastDigit() + getAllBatteries()) % NUMBER_OF_OPTIONS;
+        Clothing.Color foundColor = switch (selector) {
+            case 0 -> RUBY;
+            case 1 -> STAR;
+            case 2 -> SAPPHIRE;
+            case 3 -> JADE;
+            case 4 -> PEARL;
+            default -> MALINITE;
+        };
+
+        ARTICLE.setColor(foundColor);
     }
 
     /**
@@ -126,14 +137,17 @@ public class Laundry extends Widget {
      * @param unsolved The number of unsolved modules
      */
     private static void setItem(int unsolved) {
-        switch (balance(unsolved + countIndicators(IndicatorFilter.ALL_PRESENT))) {
-            case 0 -> ARTICLE.setItem(CORSET);
-            case 1 -> ARTICLE.setItem(SHIRT);
-            case 2 -> ARTICLE.setItem(SKIRT);
-            case 3 -> ARTICLE.setItem(SKORT);
-            case 4 -> ARTICLE.setItem(SHORTS);
-            default -> ARTICLE.setItem(SCARF);
-        }
+        int selector = (unsolved + countIndicators(IndicatorFilter.ALL_PRESENT)) % NUMBER_OF_OPTIONS;
+        Clothing.Item foundItem = switch (selector) {
+            case 0 -> CORSET;
+            case 1 -> SHIRT;
+            case 2 -> SKIRT;
+            case 3 -> SKORT;
+            case 4 -> SHORTS;
+            default -> SCARF;
+        };
+
+        ARTICLE.setItem(foundItem);
     }
 
     /**
@@ -142,7 +156,7 @@ public class Laundry extends Widget {
      * @return The array of Strings for the solve conditions
      */
     private static String[] conditions() {
-        if (thanksBob()) return returnBob();
+        if (checkBobConditions()) return returnBob();
 
         String[] attributes = new String[5];
         fillThird(attributes);
@@ -206,23 +220,11 @@ public class Laundry extends Widget {
     }
 
     /**
-     * Keeps the balance factor between 0 and 6 for determining clothing properties
-     *
-     * @param in The number
-     * @return The balanced number
-     */
-    private static int balance(int in) {
-        if (in > 5) in %= 6;
-        else if (in < 0) in += 6;
-        return in;
-    }
-
-    /**
      * Determines if Bob did all the work for us
      *
      * @return True if the edgework matches the BOB conditions
      */
-    private static boolean thanksBob() {
+    private static boolean checkBobConditions() {
         return getAllBatteries() == 4 && numHolders == 2 && hasLitIndicator(BOB);
     }
 
@@ -235,7 +237,7 @@ public class Laundry extends Widget {
     private static boolean letterMatch() {
         Set<String> clothingArticleLetters = stream(ARTICLE.getMaterial().name().split(""))
                 .map(String::toLowerCase)
-                .collect(toSet());
+                .collect(toUnmodifiableSet());
 
         return Stream.of(filter(serialCode, CHAR_FILTER).split(""))
                 .anyMatch(clothingArticleLetters::contains);

@@ -74,7 +74,7 @@ public class BufferedQueue<E> implements List<E>, Iterable<E>, RandomAccess {
     public List<E> removeCount(int count) throws IllegalArgumentException {
         if (count >= dataDeque.size() || count <= 0)
             throw new IllegalArgumentException("Invalid count");
-        List<E> removalList = new ArrayList<>();
+        List<E> removalList = new ArrayList<>(count);
 
         for (int i = 0; i < count; i++)
             removalList.add(dataDeque.pollFirst());

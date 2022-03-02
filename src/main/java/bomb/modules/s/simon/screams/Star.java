@@ -26,7 +26,7 @@ public class Star {
         if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }
 
-    public boolean threeAdjacencyRule(ScreamColor[] flashOrder) {
+    public boolean threeAdjacencyRule(ScreamColor @NotNull [] flashOrder) {
         for (int i = 0; i < flashOrder.length - 2; i++)
             if (threeAdjacencyRule(flashOrder[i], flashOrder[i + 1], flashOrder[i + 2]))
                 return true;
@@ -83,7 +83,7 @@ public class Star {
         return counter == 0;
     }
 
-    public boolean twoAdjacencyRule(ScreamColor[] flashOrder) {
+    public boolean twoAdjacencyRule(ScreamColor @NotNull [] flashOrder) {
         for (int i = 0; i < flashOrder.length - 1; i++) {
             if (twoAdjacencyRule(flashOrder[i], flashOrder[i + 1])) return true;
         }

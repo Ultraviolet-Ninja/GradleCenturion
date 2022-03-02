@@ -5,9 +5,11 @@ import static java.util.Arrays.stream;
 public enum Ship {
     BATTLESHIP(4), CRUISER(3), DESTROYER(2), SUBMARINE(1);
 
+    static final Ship[] SHIPS = values();
+
     /** Minimum number of ships on a given board */
     private static final int MINIMUM_NUMBER_OF_SHIPS = 4;
-    private static final Ship[] SHIPS = values();
+
 
     private final byte shipSize;
 

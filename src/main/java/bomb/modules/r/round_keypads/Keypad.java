@@ -32,7 +32,11 @@ public enum Keypad implements Flaggable {
     PUZZLE, AE, PSI2,
     RUSSIAN_NH, OMEGA;
 
-    static final Keypad[] KEYPAD_ARRAY = values();
+    static final Keypad[] KEYPAD_ARRAY;
+
+    static {
+        KEYPAD_ARRAY = values();
+    }
 
     private boolean flag;
     private Image memory = null;

@@ -2,6 +2,7 @@
 
 <?import bomb.components.hex.HexTile?>
 <?import javafx.scene.layout.Pane?>
+
 <fx:root type="javafx.scene.layout.Pane" prefHeight="200.0" prefWidth="200.0"
          stylesheets="@../../css/dh/hexamaze.css" xmlns="http://javafx.com/javafx/15.0.1"
          xmlns:fx="http://javafx.com/fxml/1">

@@ -1,9 +1,11 @@
 package bomb.tools;
 
+import org.jetbrains.annotations.NotNull;
+
 import static bomb.tools.number.MathUtils.HASHING_NUMBER;
 
 public record Coordinates(int x, int y) implements Comparable<Coordinates> {
-    public Coordinates add(Coordinates vector) {
+    public Coordinates add(@NotNull Coordinates vector) {
         return new Coordinates(this.x + vector.x, this.y + vector.y);
     }
 

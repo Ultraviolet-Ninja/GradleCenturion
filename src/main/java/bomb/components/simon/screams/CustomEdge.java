@@ -21,7 +21,7 @@ public class CustomEdge extends Polygon implements Resettable {
 
     private final ArrayRing<ScreamColor> colors;
 
-    public CustomEdge(){
+    public CustomEdge() {
         super();
         selectorMode = false;
         colors = new ArrayRing<>(6);
@@ -32,18 +32,18 @@ public class CustomEdge extends Polygon implements Resettable {
         FacadeFX.loadComponent(loader);
     }
 
-    private void fill(){
+    private void fill() {
         for (ScreamColor scream : ScreamColor.values())
             colors.add(scream);
         colors.rotateCounterClockwise();
     }
 
-    public void setSelectorMode(boolean nextBool){
+    public void setSelectorMode(boolean nextBool) {
         selectorMode = nextBool;
     }
 
-    public void clickAction(){
-        if (selectorMode){
+    public void clickAction() {
+        if (selectorMode) {
             colors.rotateClockwise();
             setFill(Color.web(colors.getHeadData().getLabel(), 1.0));
         } else {
@@ -53,7 +53,7 @@ public class CustomEdge extends Polygon implements Resettable {
         }
     }
 
-    private void indicateButtonPress(){
+    private void indicateButtonPress() {
         FacadeFX.parallelTransition(
                 this,
                 setupFade(),
@@ -61,24 +61,24 @@ public class CustomEdge extends Polygon implements Resettable {
         );
     }
 
-    public ScreamColor exportColor(){
+    public ScreamColor exportColor() {
         if (getFill() == WHITE)
             return null;
         return colors.getHeadData();
     }
 
-    public void getListReference(List<CustomEdge> list){
+    public void getListReference(List<CustomEdge> list) {
         internalReference = list;
     }
 
     @Override
-    public void reset(){
+    public void reset() {
         setFill(WHITE);
         while (colors.getHeadData() != ScreamColor.PURPLE) colors.rotateClockwise();
         selectorMode = false;
     }
 
-    private static FadeTransition setupFade(){
+    private static FadeTransition setupFade() {
         FadeTransition fade = new FadeTransition(Duration.millis(200));
         fade.setFromValue(0.5);
         fade.setToValue(1);
@@ -87,7 +87,7 @@ public class CustomEdge extends Polygon implements Resettable {
         return fade;
     }
 
-    private static ScaleTransition setupPressAnimation(){
+    private static ScaleTransition setupPressAnimation() {
         ScaleTransition scale = new ScaleTransition(Duration.millis(50));
         scale.setFromX(1.0);
         scale.setFromY(1.0);

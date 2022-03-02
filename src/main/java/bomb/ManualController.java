@@ -13,9 +13,11 @@ import bomb.tools.pattern.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
+
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -30,13 +32,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.IntStream;
 
+import static bomb.tools.number.MathUtils.negativeSafeModulo;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createSearchBarFormatter;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
@@ -47,7 +50,6 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOG
 import static java.util.Arrays.asList;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.function.UnaryOperator.identity;
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
@@ -55,6 +57,7 @@ public class ManualController {
     private static final String FXML_DIRECTORY = "fxml";
 
     private Map<Toggle, Region> regionMap;
+    private List<Node> observableRadioList;
     private final List<RadioButton> allRadioButtons;
 
     @FXML
@@ -78,8 +81,9 @@ public class ManualController {
 
     public void initialize() throws ExecutionException, InterruptedException {
         searchBar.setTextFormatter(createSearchBarFormatter());
+        observableRadioList = radioButtonHouse.getChildren();
         allRadioButtons.addAll(
-                radioButtonHouse.getChildren().stream()
+                observableRadioList.stream()
                         .map(node -> (RadioButton) node)
                         .toList()
         );
@@ -114,9 +118,8 @@ public class ManualController {
 
     private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
         URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
-        File file = new File(uri);
 
-        return supplyAsync(() -> getFilesFromDirectory(file))
+        return supplyAsync(() -> getFilesFromDirectory(new File(uri)))
                 .thenApply(ManualController::convertFilesToRegions);
     }
 
@@ -129,7 +132,7 @@ public class ManualController {
                 .thenApply(stream -> stream.map(Paths::get)
                         .map(Path::toUri)
                         .map(uri -> createSingleRegion(uri, resetObserver))
-                        .collect(toList())
+                        .toList()
                 );
 
         CompletableFuture<Map<String, Region>> fileToRegionMapFuture =
@@ -186,7 +189,7 @@ public class ManualController {
 
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                        Map<String, Region> filePathMap) {
-        Map<Toggle, Region> regionMap = new IdentityHashMap<>();
+        Map<Toggle, Region> regionMap = new LinkedHashMap<>();
         for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
             regionMap.put(
                     entry.getValue(),
@@ -204,7 +207,7 @@ public class ManualController {
     }
 
     @FXML
-    public void buttonPress() {
+    public void switchPaneByButtonPress() {
         Toggle selected = options.getSelectedToggle();
         String selectedName = GET_TOGGLE_NAME.apply(selected);
         if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
@@ -226,7 +229,7 @@ public class ManualController {
             return;
         }
 
-        String pattern = "[\\w ]*" + searchTerm + "[\\w ]*";
+        String pattern = "[a-z3 ]*" + searchTerm + "[a-z3 ]*";
         radioButtonHouse.getChildren().addAll(
                 allRadioButtons.stream()
                         .filter(radioButton -> GET_TOGGLE_NAME.apply(radioButton)
@@ -234,5 +237,32 @@ public class ManualController {
                                 .matches(pattern)
                         ).toList()
         );
+    }
+
+    void switchPaneByIndex(final int index) {
+        ((RadioButton)observableRadioList.get(index)).fire();
+    }
+
+    void switchPaneByUpArrow() {
+        int size = allRadioButtons.size();
+        if (size != observableRadioList.size()) return;
+
+        RadioButton selected = (RadioButton) options.getSelectedToggle();
+        if (selected == null) return;
+
+        int index = negativeSafeModulo(allRadioButtons.indexOf(selected) - 1, size);
+        switchPaneByIndex(index);
+    }
+
+    void switchPaneByDownArrow() {
+        int size = allRadioButtons.size();
+        if (size != observableRadioList.size()) return;
+
+        RadioButton selected = (RadioButton) options.getSelectedToggle();
+        if (selected == null) return;
+
+        int index = allRadioButtons.indexOf(selected) + 1;
+        index %= size;
+        switchPaneByIndex(index);
     }
 }

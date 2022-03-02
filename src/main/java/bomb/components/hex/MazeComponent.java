@@ -1,7 +1,7 @@
 package bomb.components.hex;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape;
+import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape;
 import bomb.tools.event.HoverHandler;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
@@ -13,13 +13,13 @@ import javafx.scene.paint.Color;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static bomb.modules.dh.hexamaze_redesign.Hexamaze.PEG_COLOR;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
-import static bomb.modules.dh.hexamaze_redesign.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
+import static bomb.modules.dh.hexamaze.Hexamaze.PEG_COLOR;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
 import static javafx.scene.paint.Color.BLUE;
 import static javafx.scene.paint.Color.CYAN;
 import static javafx.scene.paint.Color.GREEN;

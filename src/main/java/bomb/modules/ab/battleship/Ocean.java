@@ -1,9 +1,10 @@
 package bomb.modules.ab.battleship;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 import static java.util.Arrays.stream;
@@ -19,7 +20,7 @@ public class Ocean {
         initializeBoard();
     }
 
-    public Ocean(Tile[][] board) {
+    public Ocean(@NotNull Tile[][] board) {
         gameBoard = board;
     }
 
@@ -83,7 +84,7 @@ public class Ocean {
     }
 
     public int[] countByTile() {
-        int[] counters = new int[Tile.values().length];
+        int[] counters = new int[UNKNOWN.ordinal() + 1];
         for (Tile[] column : gameBoard) {
             for (Tile tile : column) {
                 counters[tile.ordinal()]++;
@@ -108,7 +109,7 @@ public class Ocean {
     private List<Tile> createBoardList(Tile[][] board) {
         return stream(board)
                 .flatMap(Arrays::stream)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override

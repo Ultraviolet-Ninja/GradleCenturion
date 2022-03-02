@@ -6,16 +6,5 @@ package bomb.enumerations;
  * that are lit and unlit.
  */
 public enum TrinarySwitch {
-    /**
-     * The off state
-     */
-    OFF,
-    /**
-     * The on state
-     */
-    ON,
-    /**
-     * The unknown state
-     */
-    UNKNOWN
+    OFF, ON, UNKNOWN
 }

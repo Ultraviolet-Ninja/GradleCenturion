@@ -5,7 +5,7 @@ import bomb.tools.filter.Regex;
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
-import static bomb.modules.dh.emoji.Emoji.EMOJI_ARRAY;
+import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
 
 /**
  * This class deals with the Emoji Math module.
@@ -13,11 +13,11 @@ import static bomb.modules.dh.emoji.Emoji.EMOJI_ARRAY;
  */
 public class EmojiMath extends Widget {
     @Language("regexp")
-    private static final String EMOJI_PATTERN = "(?:[=:][|()]|[|()][=:]){1,2}";
-    private static final Regex VALIDATION;
+    private static final String EMOJI_PATTERN, VALIDATION_PATTERN;
 
     static {
-        VALIDATION = new Regex("^" + EMOJI_PATTERN + "([+\\-])" + EMOJI_PATTERN + "$");
+        EMOJI_PATTERN = "(?:[=:][|()]|[|()][=:]){1,2}";
+        VALIDATION_PATTERN = "^" + EMOJI_PATTERN + "([+\\-])" + EMOJI_PATTERN + "$";
     }
 
     /**
@@ -26,51 +26,32 @@ public class EmojiMath extends Widget {
      * @param input The equation from the TextField
      * @return The values gathered from the emoji equation
      */
-    public static int calculate(@NotNull String input) {
-        VALIDATION.loadText(input);
-        if (!VALIDATION.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
+    public static int calculate(@NotNull String input) throws IllegalArgumentException {
+        Regex validationRegex = new Regex(VALIDATION_PATTERN, input);
+        if (!validationRegex.matchesRegex()) throw new IllegalArgumentException(input + " does not match pattern");
 
-        boolean toAdd = VALIDATION.captureGroup(1).equals("+");
-        String translatedEq = toAdd ?
-                translateEmojis(input.split("\\+"), true) :
-                translateEmojis(input.split("-"), false);
+        boolean toAdd = validationRegex.captureGroup(1).equals("+");
+        int[] results = convertEmojis(input.split(toAdd ? "\\+" : "-"));
 
-        return calculateRealNumbers(translatedEq, toAdd);
+        return toAdd ?
+                results[0] + results[1] :
+                results[0] - results[1];
     }
 
-    private static String translateEmojis(String[] samples, boolean add) {
-        StringBuilder result = new StringBuilder();
-        boolean flag = true;
-        for (String half : samples) {
-            if (half.length() == 4) {
-                result.append(findEmoji(half.substring(0, half.length() / 2)));
-                result.append(findEmoji(half.substring(half.length() / 2)));
-            } else result.append(findEmoji(half));
+    private static int[] convertEmojis(String[] operands) {
+        final int[] output = new int[operands.length];
+        final StringBuilder tempResult = new StringBuilder();
+        int counter = 0;
 
-            if (flag) {
-                flag = false;
-                result.append(add ? "+" : "-");
-            }
+        for (String operand : operands) {
+            if (operand.length() == 4) {
+                tempResult.append(EMOJI_MAP.get(operand.substring(0, 2)).ordinal());
+                tempResult.append(EMOJI_MAP.get(operand.substring(2)).ordinal());
+            } else tempResult.append(EMOJI_MAP.get(operand).ordinal());
+            output[counter++] = Integer.parseInt(tempResult.toString());
+            tempResult.setLength(0);
         }
-        return result.toString();
-    }
 
-    private static String findEmoji(String emoji) {
-        for (Emoji emo : EMOJI_ARRAY) {
-            if (emo.getLabel().equals(emoji)) {
-                return String.valueOf(emo.ordinal());
-            }
-        }
-        return null;
-    }
-
-    private static int calculateRealNumbers(String equation, boolean add) throws NumberFormatException {
-        String[] toNum = equation.split(add ? "\\+" : "-");
-        int[] nums = new int[toNum.length];
-        nums[0] = Integer.parseInt(toNum[0]);
-        nums[1] = Integer.parseInt(toNum[1]);
-        return add ?
-                nums[0] + nums[1] :
-                nums[0] - nums[1];
+        return output;
     }
 }

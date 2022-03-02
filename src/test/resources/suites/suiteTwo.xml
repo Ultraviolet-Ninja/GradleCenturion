@@ -2,33 +2,31 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite Two">
+    <test name="D-H Module Tests">
+        <classes>
+            <class name="bomb.modules.dh.emoji.EmojiMathTest"/>
+            <class name="bomb.modules.dh.fast_math.FastMathTest"/>
+            <class name="bomb.modules.dh.forget_me.ForgetMeNotTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitCheckerTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeRunnerTest"/>
+            <class name="bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNodeEqTest"/>
+        </classes>
+    </test>
+
+    <test name="I-L Module Tests">
+        <classes>
+            <class name="bomb.modules.il.ice_cream.IceCreamTest"/>
+            <class name="bomb.modules.il.laundry.LaundryTest"/>
+            <class name="bomb.modules.il.logic.LogicTest"/>
+        </classes>
+    </test>
+
     <test name="M Module Tests">
         <classes>
             <class name="bomb.modules.m.microcontroller.MicroControllerTest"/>
             <class name="bomb.modules.m.morsematics.MorsematicsTest"/>
             <class name="bomb.modules.m.murder.MurderTest"/>
-        </classes>
-    </test>
-
-    <test name="N-P Module Tests">
-        <classes>
-            <class name="bomb.modules.np.neutralization.NeutralizationTest"/>
-        </classes>
-    </test>
-
-    <test name="R Module Tests">
-        <classes>
-            <class name="bomb.modules.r.round_keypads.RoundKeypadTest"/>
-        </classes>
-    </test>
-
-    <test name="S Module Tests">
-        <classes>
-            <class name="bomb.modules.s.shape_shift.ShapeShiftTest"/>
-            <class name="bomb.modules.s.simon.screams.SimonScreamsTest"/>
-            <class name="bomb.modules.s.simon.states.SimonStatesTest"/>
-            <class name="bomb.modules.s.square.SquareButtonTest"/>
-            <class name="bomb.modules.s.switches.SwitchesTest"/>
         </classes>
     </test>
 </suite>

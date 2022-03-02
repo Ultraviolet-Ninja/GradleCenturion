@@ -3,6 +3,7 @@ package bomb.modules.dh.forget_me;
 import bomb.Widget;
 import bomb.tools.filter.Regex;
 import bomb.tools.filter.RegexFilter;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,18 @@ import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Port.SERIAL;
 
 public class ForgetMeNot extends Widget {
-    private static final IntUnaryOperator LEAST_SIG_DIGIT = num -> num % 10;
-    private static final IntUnaryOperator MOST_SIG_DIGIT =
-            num -> (int) (num / Math.pow(10, Math.floor(Math.log10(num))));
-    private static final List<Byte> FINAL_CODE = new ArrayList<>(100);
+    private static final IntUnaryOperator LEAST_SIG_DIGIT, MOST_SIG_DIGIT;
+    private static final List<Byte> FINAL_CODE;
 
-    private static byte largestSerialCodeNumber = -1;
+    private static byte largestSerialCodeNumber;
+
+    static {
+        LEAST_SIG_DIGIT = num -> num % 10;
+        MOST_SIG_DIGIT = num -> (int) (num / Math.pow(10, Math.floor(Math.log10(num))));
+        FINAL_CODE = new ArrayList<>(100);
+
+        largestSerialCodeNumber = -1;
+    }
 
     public static void add(int stageNumber) throws IllegalStateException {
         if (!isForgetMeNotActive)
@@ -120,7 +127,7 @@ public class ForgetMeNot extends Widget {
             FINAL_CODE.remove(size - 1);
     }
 
-    public static String stringifyFinalCode() {
+    public static @NotNull String stringifyFinalCode() {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < FINAL_CODE.size(); i++) {

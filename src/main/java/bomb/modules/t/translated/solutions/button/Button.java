@@ -2,6 +2,8 @@ package bomb.modules.t.translated.solutions.button;
 
 import bomb.Widget;
 
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.FRK;
 import static bomb.modules.t.translated.solutions.button.ButtonProperty.ABORT;
@@ -15,7 +17,6 @@ import static bomb.modules.t.translated.solutions.button.ButtonProperty.WHITE;
  */
 public class Button extends Widget {
     public static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
-    public static final String HOLD = "Hold", TAP = "Tap";
 
     /**
      * Sorts through the conditions of the current bomb and tells either to hold or tap the button
@@ -37,7 +38,7 @@ public class Button extends Widget {
         else
             shouldTapButton = getAllBatteries() > 2 && hasLitIndicator(FRK);
 
-        return shouldTapButton ? TAP : HOLD;
+        return "" + (shouldTapButton ? TAP : HOLD);
     }
 
     private static void validateAllInput(ButtonProperty[] properties) throws IllegalArgumentException {

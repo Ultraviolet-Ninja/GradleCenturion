@@ -9,6 +9,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
 import static bomb.enumerations.Indicator.MSA;
 import static bomb.enumerations.Indicator.NSA;
 import static bomb.enumerations.TrinarySwitch.OFF;
@@ -19,8 +21,6 @@ import static bomb.modules.s.square.SquareButton.GREEN;
 import static bomb.modules.s.square.SquareButton.ORANGE;
 import static bomb.modules.s.square.SquareButton.WHITE;
 import static bomb.modules.s.square.SquareButton.YELLOW;
-import static bomb.modules.t.translated.solutions.button.Button.HOLD;
-import static bomb.modules.t.translated.solutions.button.Button.TAP;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -64,23 +64,23 @@ public class SquareButtonTest {
         Widget.setSerialCode(VALID_SERIAL_CODE);
         Widget.setDoubleAs(2);
 
-        assertEquals(SquareButton.solve(BLUE, ""), HOLD);
+        assertEquals(SquareButton.solve(BLUE, ""), HOLD.toString());
     }
 
     @Test
     public void secondBranchSolveTest() {
         Widget.setSerialCode(VALID_SERIAL_CODE);
 
-        assertEquals(SquareButton.solve(BLUE, "Elevate"), TAP);
-        assertEquals(SquareButton.solve(YELLOW, "Elevate"), TAP);
+        assertEquals(SquareButton.solve(BLUE, "Elevate"), TAP.toString());
+        assertEquals(SquareButton.solve(YELLOW, "Elevate"), TAP.toString());
     }
 
     @Test
     public void thirdBranchSolveTest() {
         Widget.setSerialCode(VALID_SERIAL_CODE);
 
-        assertEquals(SquareButton.solve(BLUE, "jade"), HOLD);
-        assertEquals(SquareButton.solve(YELLOW, "JADE"), HOLD);
+        assertEquals(SquareButton.solve(BLUE, "jade"), HOLD.toString());
+        assertEquals(SquareButton.solve(YELLOW, "JADE"), HOLD.toString());
     }
 
     @Test
@@ -88,14 +88,14 @@ public class SquareButtonTest {
         Widget.setSerialCode(VALID_SERIAL_CODE);
 
         assertEquals(SquareButton.solve(DARK_GRAY, ""),
-                TAP + " when the the two seconds digits on the timer match");
+                TAP + " when the two seconds digits on the timer match");
     }
 
     @Test
     public void fifthBranchSolveTest() {
         Widget.setSerialCode(VALID_SERIAL_CODE);
 
-        assertEquals(SquareButton.solve(WHITE, "Maroon"), TAP);
+        assertEquals(SquareButton.solve(WHITE, "Maroon"), TAP.toString());
     }
 
     @Test
@@ -104,15 +104,15 @@ public class SquareButtonTest {
         Widget.setIndicator(OFF, NSA);
         Widget.setIndicator(OFF, MSA);
 
-        assertEquals(SquareButton.solve(DARK_GRAY, "Maroon"), TAP);
-        assertEquals(SquareButton.solve(WHITE, "Maroon"), TAP);
+        assertEquals(SquareButton.solve(DARK_GRAY, "Maroon"), TAP.toString());
+        assertEquals(SquareButton.solve(WHITE, "Maroon"), TAP.toString());
     }
 
     @Test
     public void seventhBranchSolveTest() {
         Widget.setSerialCode(VALID_SERIAL_CODE);
 
-        assertEquals(SquareButton.solve(DARK_GRAY, "Maroon"), HOLD);
+        assertEquals(SquareButton.solve(DARK_GRAY, "Maroon"), HOLD.toString());
     }
 
     @DataProvider

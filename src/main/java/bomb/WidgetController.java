@@ -21,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 
 import java.util.function.Consumer;
 
+import static bomb.Widget.INDICATOR_ARRAY;
 import static bomb.enumerations.Port.DVI;
 import static bomb.enumerations.Port.PARALLEL;
 import static bomb.enumerations.Port.PS2;
@@ -107,11 +108,10 @@ public class WidgetController {
     }
 
     private void createIndicatorToggleButtonEvent() {
-        Indicator[] indicatorArray = Indicator.values();
         ToggleGroup[] groupArray = {bobGroup, carGroup, clrGroup, frkGroup, frqGroup, indGroup, msaGroup, nsaGroup,
                 sigGroup, sndGroup, trnGroup};
-        for (int i = 0; i < indicatorArray.length; i++) {
-            Indicator currentIndicator = indicatorArray[i];
+        for (int i = 0; i < INDICATOR_ARRAY.length; i++) {
+            Indicator currentIndicator = INDICATOR_ARRAY[i];
             ToggleGroup currentGroup = groupArray[i];
             groupArray[i].getToggles()
                     .forEach(toggle -> ((ToggleButton) toggle).setOnAction(
@@ -133,8 +133,7 @@ public class WidgetController {
     @FXML
     private void detectSerialCodeAreaChange() {
         String serialCode = serialCodeField.getText();
-        SERIAL_CODE_PATTERN.loadText(serialCode);
-        if (SERIAL_CODE_PATTERN.matchesRegex()) {
+        if (serialCode.matches(SERIAL_CODE_PATTERN.getOriginalPattern())) {
             Widget.setSerialCode(serialCode);
         } else if (serialCode.length() == 6) {
             FacadeFX.setAlert(Alert.AlertType.INFORMATION, """
@@ -158,7 +157,6 @@ public class WidgetController {
     @FXML
     private void fullBombReset() {
         widgetPageReset();
-        FacadeFX.enable(serialCodeField);
         forgetMeNot.setSelected(false);
         souvenir.setSelected(false);
         forgetMeToggle();

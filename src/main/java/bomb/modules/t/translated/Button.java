@@ -8,12 +8,14 @@ package bomb.modules.t.translated;
 
 import bomb.enumerations.Indicator;
 
+import static bomb.enumerations.ButtonResult.HOLD;
+import static bomb.enumerations.ButtonResult.TAP;
+
 /**
  * Button class deals with a button module
  */
 public class Button extends TranslationCenter {
     private static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
-    private static final String HOLD = "Hold", TAP = "Tap";
 
     /**
      * Sorts through the conditions of the current bomb and tells either to hold or tap the button
@@ -37,6 +39,6 @@ public class Button extends TranslationCenter {
         else
             which = properties[COLOR_INDEX] == ButtonProperties.RED && properties[LABEL_INDEX] == ButtonProperties.HOLD;
 
-        return which ? TAP : HOLD;
+        return "" + (which ? TAP : HOLD);
     }
 }

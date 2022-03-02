@@ -5,10 +5,11 @@ import org.javatuples.Pair;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Optional;
 import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertTrue;
 
 public class WordFinderTest {
     @Test(expectedExceptions = IllegalArgumentException.class,
@@ -49,9 +50,13 @@ public class WordFinderTest {
 
     @Test(dataProvider = "nonNullTestProvider")
     public void nonNullTest(Set<String> possibleWords, Coordinates start, Coordinates end, char[][] grid) {
-        Pair<Coordinates, Coordinates> resultPair = WordFinder.findWordCoordinates(grid, possibleWords);
+        Optional<Pair<Coordinates, Coordinates>> resultingOptional =
+                WordFinder.findWordCoordinates(grid, possibleWords);
 
-        assertNotNull(resultPair);
+        assertTrue(resultingOptional.isPresent());
+
+        Pair<Coordinates, Coordinates> resultPair = resultingOptional.get();
+
         assertEquals(resultPair.getValue0(), start);
         assertEquals(resultPair.getValue1(), end);
     }

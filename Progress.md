@@ -13,6 +13,7 @@
 - Forget Me Not
 - Hexamaze
 - Laundry
+- Logic
 - MicroController
 - Neutralization
 - Round Keypads
@@ -22,12 +23,13 @@
 - The Bulb
 - TwoBit
 
-21/100
+22/100
 
 ### Incomplete Modules
 - Battleship 
 - Caesar Cipher
 - Cheap Checkout
+- Color Flash
 - Ice Cream
 - Morsematics
 - Murder
@@ -37,7 +39,7 @@
 - Square Button
 - Word Search
 
-11/100
+12/100
 
 ### Untouched Modules
 - 3D Maze
@@ -47,7 +49,6 @@
 - Binary LEDs
 - BitMaps
 - Broken Button
-- Color Flash
 - Color Math
 - Color Squares
 - Combination Lock
@@ -70,7 +71,6 @@
 - Letter Keys
 - Light Cycle
 - Listening
-- Logic Gates
 - Math is Hard
 - MineSweeper
 - Modules Against Humanity
@@ -109,4 +109,4 @@
 - Yahtzee
 - Zoo
 
-68/100
+66/100
