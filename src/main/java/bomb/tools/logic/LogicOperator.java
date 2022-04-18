@@ -73,6 +73,10 @@ public enum LogicOperator implements BooleanOperation {
         this.symbol = symbol;
     }
 
+    public String getSymbol() {
+        return symbol;
+    }
+
     public static final Map<String, LogicOperator> LOGIC_SYMBOL_TO_ENUM_MAP;
 
     static {
