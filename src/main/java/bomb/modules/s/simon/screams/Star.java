@@ -15,13 +15,13 @@ public class Star {
 
     private final ArrayRing<ScreamColor> colorOrder;
 
-    public Star(@NotNull ScreamColor[] order) {
+    public Star(@NotNull ScreamColor[] order) throws IllegalArgumentException {
         checkUniqueColors(order);
         colorOrder = new ArrayRing<>(LIMIT);
         for (ScreamColor instance : order) colorOrder.add(instance);
     }
 
-    private static void checkUniqueColors(ScreamColor[] order) {
+    private static void checkUniqueColors(ScreamColor[] order) throws IllegalArgumentException {
         Set<ScreamColor> set = EnumSet.copyOf(asList(order));
         if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }
