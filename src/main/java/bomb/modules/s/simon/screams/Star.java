@@ -66,8 +66,10 @@ public class Star {
                 default -> {
                 }
             }
+            if (counter == 2)
+                return false;
         }
-        return counter < 2;
+        return true;
     }
 
     //Complementary Color Not Flashed Rule
