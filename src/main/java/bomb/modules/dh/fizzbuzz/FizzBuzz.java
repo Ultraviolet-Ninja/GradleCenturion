@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FizzBuzz extends Widget {
-    public static String solve(@NotNull String numberText, @NotNull FizzBuzzColor color,
-                               @Range(from=0, to=2) int strikeCount) throws IllegalArgumentException {
+    public static @NotNull String solve(@NotNull String numberText, @NotNull FizzBuzzColor color,
+                                        @Range(from=0, to=2) int strikeCount) throws IllegalArgumentException {
         validateInput(numberText, color, strikeCount);
         List<Integer> numberList = new ArrayList<>(7);
 
@@ -122,14 +122,19 @@ public class FizzBuzz extends Widget {
     }
 
     private static String calculateResults(String text, int offset) {
-        StringBuilder newNumberString = new StringBuilder(),
-                output = new StringBuilder();
-        for (char c : text.toCharArray()) {
-            int numberValue = (Character.getNumericValue(c) + offset) % 10;
-            newNumberString.append(numberValue);
+        int newValue;
+        offset %= 10;
+        StringBuilder output = new StringBuilder();
+        if (offset != 0) {
+            StringBuilder newNumberString = new StringBuilder();
+            for (char c : text.toCharArray()) {
+                int numberValue = (Character.getNumericValue(c) + offset) % 10;
+                newNumberString.append(numberValue);
+            }
+            newValue = Integer.parseInt(newNumberString.toString());
+        } else {
+            newValue = Integer.parseInt(text);
         }
-
-        int newValue = Integer.parseInt(newNumberString.toString());
 
         if (newValue % 3 == 0)
             output.append("FIZZ");
@@ -137,7 +142,7 @@ public class FizzBuzz extends Widget {
             output.append("BUZZ");
 
         return output.isEmpty() ?
-                text :
+                "NUMBER" :
                 output.toString();
     }
 

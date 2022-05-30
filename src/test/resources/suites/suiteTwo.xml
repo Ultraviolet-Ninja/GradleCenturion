@@ -6,6 +6,7 @@
         <classes>
             <class name="bomb.modules.dh.emoji.EmojiMathTest"/>
             <class name="bomb.modules.dh.fast_math.FastMathTest"/>
+            <class name="bomb.modules.dh.fizzbuzz.FizzBuzzTest"/>
             <class name="bomb.modules.dh.forget_me.ForgetMeNotTest"/>
             <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest"/>
             <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitCheckerTest"/>
