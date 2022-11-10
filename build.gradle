@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.opencsv:opencsv:5.7.0'
+    implementation 'com.opencsv:opencsv:5.7.1'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
     implementation 'org.jetbrains:annotations:23.0.0'
@@ -60,7 +60,7 @@ dependencies {
     testImplementation 'org.testng:testng:7.6.1'
     testImplementation 'org.slf4j:slf4j-api:2.0.3'
     testImplementation 'org.slf4j:slf4j-simple:2.0.3'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.10.1'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.11'
 }
 
 def firstInstance = project.hasProperty('thread0')
