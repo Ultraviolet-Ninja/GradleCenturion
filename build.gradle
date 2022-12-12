@@ -3,11 +3,11 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'org.beryx.jlink' version '2.24.4'
-    id 'com.palantir.docker' version '0.28.0'
+    id 'com.palantir.docker' version '0.34.0'
     id 'info.solidsoft.pitest' version '1.7.0'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.javamodularity.moduleplugin' version '1.8.10'
-    id 'com.github.breadmoirai.github-release' version '2.2.12'
+    id 'com.github.breadmoirai.github-release' version '2.4.1'
 }
 
 group 'jasmine.jragon'
