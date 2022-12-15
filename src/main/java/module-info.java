@@ -1,4 +1,4 @@
-open module bomb {
+open module centurion {
     requires javafx.controls;
     requires javafx.fxml;
 

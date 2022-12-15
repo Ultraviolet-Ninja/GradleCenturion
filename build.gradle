@@ -11,7 +11,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.22.0'
+version '0.22.1'
 
 java {
     toolchain {
@@ -24,7 +24,7 @@ application {
             'bomb.TestingArea' :
             'bomb.Main'
 
-    mainModule.set('bomb')
+    mainModule.set('centurion')
 }
 
 compileJava {
@@ -44,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.opencsv:opencsv:5.7.0'
+    implementation 'com.opencsv:opencsv:5.7.1'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
     implementation 'org.jetbrains:annotations:23.0.0'
@@ -57,10 +57,10 @@ dependencies {
         exclude group: "org.javafx"
     }
 
-    testImplementation 'org.testng:testng:7.6.1'
-    testImplementation 'org.slf4j:slf4j-api:2.0.3'
-    testImplementation 'org.slf4j:slf4j-simple:2.0.3'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.10.1'
+    testImplementation 'org.testng:testng:7.7.0'
+    testImplementation 'org.slf4j:slf4j-api:2.0.5'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.5'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.11.1'
 }
 
 def firstInstance = project.hasProperty('thread0')
@@ -148,9 +148,17 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
-jar.manifest.attributes(['Main-Class': "${mainClassName}"])
+jar {
+    manifest.attributes(['Main-Class': "${mainClassName}"])
+
+//    from {
+//        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
+}
 
 jlink {
+    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = "${project.name}"
@@ -184,21 +192,21 @@ dockerfileZip {
     destinationDirectory = file("${buildDir}/zip/docker")
 }
 
-distZip {
-    from projectDir
-    include 'src/main/**/*'
-    include 'gradle/wrapper/*'
-    include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
-}
-
-distTar {
-    from projectDir
-    include 'src/main/**/*'
-    include 'gradle/wrapper/*'
-    include 'markdown/*'
-    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
-}
+//distZip {
+//    from projectDir
+//    include 'src/main/**/*'
+//    include 'gradle/wrapper/*'
+//    include 'markdown/*'
+//    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
+//}
+//
+//distTar {
+//    from projectDir
+//    include 'src/main/**/*'
+//    include 'gradle/wrapper/*'
+//    include 'markdown/*'
+//    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
+//}
 
 githubRelease {
     String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
