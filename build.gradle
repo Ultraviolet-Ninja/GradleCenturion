@@ -16,9 +16,8 @@ group 'jasmine.jragon'
 version '0.22.1'
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(16)
-    }
+    sourceCompatibility(16)
+    targetCompatibility(16)
 }
 
 application {
@@ -49,7 +48,7 @@ dependencies {
     implementation 'com.opencsv:opencsv:5.7.1'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.jgrapht:jgrapht-ext:1.5.1'
-    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation 'org.jetbrains:annotations:23.1.0'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
 
     implementation('com.jfoenix:jfoenix:9.0.4')
@@ -64,7 +63,7 @@ dependencies {
     testImplementation 'org.testng:testng:7.7.0'
     testImplementation 'org.slf4j:slf4j-api:2.0.5'
     testImplementation 'org.slf4j:slf4j-simple:2.0.5'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.11.1'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.12.2'
 }
 
 def firstInstance = project.hasProperty('thread0')
@@ -163,12 +162,19 @@ jlink {
     }
 }
 
+//docker {
+//    dependsOn(jar)
+//    name "${project.name.toLowerCase()}:${project.version}"
+//    files "${buildDir}/libs/${project.name}-${project.version}.jar"
+//    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar"])
+//    tag('DockerHub', "jasminejragon/${project.name.replace("C", "-c").toLowerCase()}:${project.version}")
+//}
+
 docker {
     dependsOn(jar)
-    name "${project.name.toLowerCase()}:${project.version}"
-    files "${buildDir}/libs/${project.name}-${project.version}.jar"
-    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar"])
-    tag('DockerHub', "jasminejragon/${project.name.replace("C", "-c").toLowerCase()}:${project.version}")
+    name "${project.name.replace("C", "-c").toLowerCase()}:${project.version}"
+    copySpec.from("src/main").from("gradle").into("necessaryFiles")
+    files 'build.gradle', 'settings.gradle'
 }
 
 dockerfileZip {
