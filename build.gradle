@@ -23,7 +23,7 @@ java {
 application {
     mainClassName = project.hasProperty('testingArea') ?
             'bomb.TestingArea' :
-            'bomb.Main'
+            'bomb.TestingArea'
 
     mainModule.set('centurion')
 }

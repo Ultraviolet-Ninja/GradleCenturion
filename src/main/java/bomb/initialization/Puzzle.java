@@ -1,4 +1,4 @@
-package bomb.annotations;
+package bomb.initialization;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

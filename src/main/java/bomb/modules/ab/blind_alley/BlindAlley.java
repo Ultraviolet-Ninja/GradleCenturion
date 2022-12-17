@@ -1,7 +1,7 @@
 package bomb.modules.ab.blind_alley;
 
 import bomb.Widget;
-import bomb.annotations.Puzzle;
+import bomb.initialization.Puzzle;
 
 import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.CAR;

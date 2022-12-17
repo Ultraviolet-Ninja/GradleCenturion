@@ -1,6 +1,5 @@
 package bomb;
 
-import bomb.annotations.Puzzle;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
 import bomb.tools.pattern.observer.SouvenirToggleObserver;

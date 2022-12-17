@@ -1,7 +1,7 @@
 package bomb.modules.ab.alphabet;
 
 import bomb.Widget;
-import bomb.annotations.Puzzle;
+import bomb.initialization.Puzzle;
 import bomb.tools.filter.Regex;
 import org.jetbrains.annotations.NotNull;
 
