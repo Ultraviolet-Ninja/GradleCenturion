@@ -2,8 +2,7 @@
 *101 modules, 100 minutes, exponentially more problems.*
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
-[![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/Ultraviolet-Ninja/GradleCenturion.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Ultraviolet-Ninja/GradleCenturion/context:java)
-![Project Version](https://img.shields.io/badge/version-0.22.0-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.22.2-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
@@ -11,7 +10,7 @@ This project is designed to solve all puzzles found on the Centurion Bomb from K
 This is a huge project for one man to tackle, but I've [learned a lot](Learned.md) from the challenges I've faced.
 
 ## Technologies
-- Java 16
+- Java 17
 - Gradle 7.4
 ### Plugins
 - JavaFX
@@ -32,7 +31,7 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 See the running list of modules [here](Progress.md)
 
 ## How to run the program
-*Disclaimer:* Make sure you have Java [16](https://www.oracle.com/java/technologies/javase/jdk16-archive-downloads.html) or [17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+*Disclaimer:* Make sure you have Java [17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 and the JAVA_HOME is set.
 1. Grab the latest .zip/tar of the GradleCenturion-X.X.X and unzip it
 2. Using the command line, navigate to the unzipped directory
