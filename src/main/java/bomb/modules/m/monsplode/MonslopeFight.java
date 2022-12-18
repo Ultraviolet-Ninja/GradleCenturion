@@ -1,8 +1,8 @@
 package bomb.modules.m.monsplode;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 
-@Puzzle(resource = "monsplode_fight.fxml", buttonLinkerName = "Monslope Fight")
+@DisplayComponent(resource = "monsplode_fight.fxml", buttonLinkerName = "Monslope Fight")
 public final class MonslopeFight extends Widget {
 }

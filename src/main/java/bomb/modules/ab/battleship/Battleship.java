@@ -1,7 +1,7 @@
 package bomb.modules.ab.battleship;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static bomb.tools.string.StringFormat.CONVERT_CHAR_NUMBER_AT_ONE;
 import static bomb.tools.string.StringFormat.INDEX_ZERO_LOWERCASE_LETTER;
 import static java.util.Arrays.stream;
 
-@Puzzle(resource = "battleship.fxml", buttonLinkerName = "Battleship")
+@DisplayComponent(resource = "battleship.fxml", buttonLinkerName = "Battleship")
 public final class Battleship extends Widget {
     private static Ocean ocean;
     private static int[] rowCounters, columnCounters;

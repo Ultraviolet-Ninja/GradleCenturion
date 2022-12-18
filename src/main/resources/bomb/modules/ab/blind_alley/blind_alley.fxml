@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/ab/blind_alley.css"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.ab.blind_alley.BlindAlleyController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+   </rowConstraints>
+   <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0">
+      <JFXTextField fx:id="topLeft" editable="false">
+         <VBox.margin>
+            <Insets left="200.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1">
+      <JFXTextField fx:id="topMid" editable="false">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+      <JFXTextField fx:id="midLeft" editable="false">
+         <VBox.margin>
+            <Insets left="200.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <JFXTextField fx:id="trueMid" editable="false">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2"
+         GridPane.rowIndex="1">
+      <JFXTextField fx:id="midRight" editable="false">
+         <VBox.margin>
+            <Insets right="200.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+      <JFXTextField fx:id="bottomLeft" editable="false" prefHeight="153.0" prefWidth="151.0">
+         <VBox.margin>
+            <Insets left="200.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
+         GridPane.rowIndex="2">
+      <JFXTextField fx:id="bottomMid" editable="false">
+         <VBox.margin>
+            <Insets left="100.0" right="100.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <JFXTextField fx:id="bottomRight" editable="false">
+         <VBox.margin>
+            <Insets right="200.0"/>
+         </VBox.margin>
+      </JFXTextField>
+   </VBox>
+   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="2">
+      <Label fx:id="maxAlley"/>
+   </VBox>
+</GridPane>

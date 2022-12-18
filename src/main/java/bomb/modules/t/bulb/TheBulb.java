@@ -1,7 +1,7 @@
 package bomb.modules.t.bulb;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.enumerations.Indicator;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
@@ -34,7 +34,7 @@ import static bomb.modules.t.bulb.Bulb.Opacity.TRANSLUCENT;
 import static bomb.modules.t.bulb.Bulb.Position.SCREWED;
 import static bomb.modules.t.bulb.Bulb.Position.UNSCREWED;
 
-@Puzzle(resource = "the_bulb.fxml", buttonLinkerName = "The Bulb")
+@DisplayComponent(resource = "the_bulb.fxml", buttonLinkerName = "The Bulb")
 public final class TheBulb extends Widget {
     public static final String PRESS_I, PRESS_O, SCREW, UNSCREW;
 

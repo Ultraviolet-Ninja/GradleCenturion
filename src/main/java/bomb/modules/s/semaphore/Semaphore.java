@@ -1,8 +1,8 @@
 package bomb.modules.s.semaphore;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 
-@Puzzle(resource = "semaphore.fxml", buttonLinkerName = "Semaphore")
+@DisplayComponent(resource = "semaphore.fxml", buttonLinkerName = "Semaphore")
 public final class Semaphore extends Widget {
 }

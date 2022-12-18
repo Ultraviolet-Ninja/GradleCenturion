@@ -1,7 +1,7 @@
 package bomb.modules.s.shape_shift;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.tools.data.structures.graph.list.ListGraph;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -24,7 +24,7 @@ import static bomb.enumerations.Port.RJ45;
 import static bomb.modules.s.shape_shift.ShapeEnd.SHAPE_END_ARRAY;
 import static bomb.tools.logic.BitConverter.TO_INT;
 
-@Puzzle(resource = "shape_shift.fxml", buttonLinkerName = "Shape Shift")
+@DisplayComponent(resource = "shape_shift.fxml", buttonLinkerName = "Shape Shift")
 public final class ShapeShift extends Widget {
     private static final int[][] COUNT_TRACKER;
 

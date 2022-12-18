@@ -1,7 +1,7 @@
 package bomb.modules.m.morsematics;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.enumerations.Indicator;
 import bomb.tools.data.structures.graph.list.ListGraph;
 import bomb.tools.data.structures.ring.ArrayRing;
@@ -21,7 +21,7 @@ import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.tools.number.MathUtils.isPerfectSquare;
 
-@Puzzle(resource = "morsematics.fxml", buttonLinkerName = "Morsematics")
+@DisplayComponent(resource = "morsematics.fxml", buttonLinkerName = "Morsematics")
 public final class Morsematics extends Widget {
     public static @NotNull String solve(@NotNull LinkedHashSet<String> inputSet) throws IllegalArgumentException {
         checkSerialCode();

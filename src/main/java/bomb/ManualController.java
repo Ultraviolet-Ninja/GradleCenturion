@@ -1,10 +1,10 @@
 package bomb;
 
-import bomb.annotation.Puzzle;
-import bomb.modules.ab.battleship.Battleship;
+import bomb.annotation.DisplayComponent;
 import bomb.modules.ab.blind_alley.BlindAlleyController;
 import bomb.modules.s.souvenir.SouvenirController;
 import bomb.tools.filter.Regex;
+import bomb.tools.note.NoteController;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
@@ -103,6 +103,7 @@ public class ManualController {
                 createRadioButtonNameFuture(options.getToggles());
 
         createFXMLMap();
+//        var fxmlMapFuture = supplyAsync(ManualController::createFXMLMap);
 
         //TODO - This is what we're looking to replace
         return createFilePathFuture().thenApply(filePathFuture ->
@@ -217,10 +218,9 @@ public class ManualController {
     }
 
     private static LinkedHashMap<String, FXMLLoader> createFXMLMap() {
-        var e = Battleship.class.getResource("battleship.fxml");
         return getWidgetSubClasses()
                 .stream()
-                .map(cls -> new Pair<>(cls.getAnnotation(Puzzle.class), cls))
+                .map(cls -> new Pair<>(cls.getAnnotation(DisplayComponent.class), cls))
                 .map(pair -> pair.setAt1(pair.getValue1().getResource(pair.getValue0().resource())))
                 .map(pair -> pair.setAt0(pair.getValue0().buttonLinkerName()))
                 .sorted()
@@ -233,17 +233,17 @@ public class ManualController {
     }
 
     private static List<Class<?>> getWidgetSubClasses() {
-        List<Class<?>> list = new ArrayList<>();
+        List<Class<?>> list = new ArrayList<>(List.of(NoteController.class));
         ArrayDeque<Class<?>> files = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
-        Class<?> temp;
 
+        Class<?> temp;
         while ((temp = files.poll()) != null) {
             Class<?>[] nextSubLevel = temp.getPermittedSubclasses();
             if (nextSubLevel != null) {
                 files.addAll(asList(nextSubLevel));
             }
 
-            if (temp.isAnnotationPresent(Puzzle.class)) {
+            if (temp.isAnnotationPresent(DisplayComponent.class)) {
                 list.add(temp);
             }
         }

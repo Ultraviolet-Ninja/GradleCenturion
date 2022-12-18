@@ -1,7 +1,7 @@
 package bomb.modules.c.caesar;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.IntStream;
@@ -10,7 +10,7 @@ import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.NSA;
 import static bomb.enumerations.Port.PARALLEL;
 
-@Puzzle(resource = "caesar.fxml", buttonLinkerName = "Caesar Cipher")
+@DisplayComponent(resource = "caesar.fxml", buttonLinkerName = "Caesar Cipher")
 public final class Caesar extends Widget {
     private static final int MAX_LETTER_COUNT = 26;
 

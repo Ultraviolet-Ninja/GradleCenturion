@@ -1,8 +1,8 @@
 package bomb.modules.wz.zoo;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 
-@Puzzle(resource = "zoo.fxml", buttonLinkerName = "Zoo")
+@DisplayComponent(resource = "zoo.fxml", buttonLinkerName = "Zoo")
 public final class Zoo extends Widget {
 }

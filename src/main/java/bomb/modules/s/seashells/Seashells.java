@@ -1,8 +1,8 @@
 package bomb.modules.s.seashells;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 
-@Puzzle(resource = "seashells.fxml", buttonLinkerName = "Seashells")
+@DisplayComponent(resource = "seashells.fxml", buttonLinkerName = "Seashells")
 public final class Seashells extends Widget {
 }

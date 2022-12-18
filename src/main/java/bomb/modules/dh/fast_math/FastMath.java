@@ -1,7 +1,7 @@
 package bomb.modules.dh.fast_math;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.tools.filter.Regex;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +10,7 @@ import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
 import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 
-@Puzzle(resource = "fast_math.fxml", buttonLinkerName = "Fast Math")
+@DisplayComponent(resource = "fast_math.fxml", buttonLinkerName = "Fast Math")
 public final class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID;
 

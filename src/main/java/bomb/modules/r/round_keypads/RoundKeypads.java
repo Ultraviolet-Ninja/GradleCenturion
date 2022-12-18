@@ -2,7 +2,7 @@ package bomb.modules.r.round_keypads;
 
 import bomb.Widget;
 import bomb.abstractions.Flaggable;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
@@ -17,7 +17,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-@Puzzle(resource = "round_keypads.fxml", buttonLinkerName = "Round Keypads")
+@DisplayComponent(resource = "round_keypads.fxml", buttonLinkerName = "Round Keypads")
 public final class RoundKeypads extends Widget {
     private static final int IMAGES_PER_COLUMN = 7;
     private static final UnaryOperator<Color> HIGHLIGHT_COMMAND;

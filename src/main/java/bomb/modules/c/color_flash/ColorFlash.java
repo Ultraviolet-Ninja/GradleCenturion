@@ -1,7 +1,7 @@
 package bomb.modules.c.color_flash;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +18,7 @@ import static bomb.tools.string.StringFormat.YES;
 /**
  *
  */
-@Puzzle(resource = "color_flash.fxml", buttonLinkerName = "Color Flash")
+@DisplayComponent(resource = "color_flash.fxml", buttonLinkerName = "Color Flash")
 public final class ColorFlash extends Widget {
     private static final int COMBO_LIMIT;
 

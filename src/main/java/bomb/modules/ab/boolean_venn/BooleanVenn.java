@@ -1,7 +1,7 @@
 package bomb.modules.ab.boolean_venn;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.tools.logic.LogicOperator;
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +17,7 @@ import static bomb.tools.logic.LogicOperator.XNOR;
  * The concept is based on the basics of Discrete Mathematics and uses basic boolean operators
  * to determine the state of each section of the triple venn diagram, green being true and red for false.
  */
-@Puzzle(resource = "boolean_venn_diagram.fxml", buttonLinkerName = "Boolean Venn Diagram")
+@DisplayComponent(resource = "boolean_venn_diagram.fxml", buttonLinkerName = "Boolean Venn Diagram")
 public final class BooleanVenn extends Widget {
     private static final boolean[][] TEST_CASES;
     private static final byte A = 0, B = 1, C = 2;

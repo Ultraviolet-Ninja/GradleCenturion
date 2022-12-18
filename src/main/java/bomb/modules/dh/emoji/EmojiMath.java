@@ -1,7 +1,7 @@
 package bomb.modules.dh.emoji;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.tools.filter.Regex;
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,7 @@ import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
  * This class deals with the Emoji Math module.
  * It's simple math, but replacing numbers with text emojis.
  */
-@Puzzle(resource = "emoji_math.fxml", buttonLinkerName = "Emoji Math")
+@DisplayComponent(resource = "emoji_math.fxml", buttonLinkerName = "Emoji Math")
 public final class EmojiMath extends Widget {
     @Language("regexp")
     private static final String EMOJI_PATTERN, VALIDATION_PATTERN;

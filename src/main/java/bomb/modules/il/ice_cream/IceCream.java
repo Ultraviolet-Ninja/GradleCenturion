@@ -1,7 +1,7 @@
 package bomb.modules.il.ice_cream;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -21,7 +21,7 @@ import static bomb.modules.il.ice_cream.Flavor.THE_CLASSIC;
 import static bomb.modules.il.ice_cream.Flavor.TUTTI_FRUTTI;
 import static bomb.modules.il.ice_cream.Flavor.VANILLA;
 
-@Puzzle(resource = "ice_cream.fxml", buttonLinkerName = "Ice Cream")
+@DisplayComponent(resource = "ice_cream.fxml", buttonLinkerName = "Ice Cream")
 public final class IceCream extends Widget {
     public static @NotNull Flavor findFlavor(@NotNull Person person, @NotNull EnumSet<Flavor> possibleFlavors,
                                              boolean hasEmptyPortPlate)

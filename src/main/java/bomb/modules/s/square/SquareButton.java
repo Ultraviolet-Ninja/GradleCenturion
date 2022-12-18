@@ -1,7 +1,7 @@
 package bomb.modules.s.square;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.tools.number.MathUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,7 +23,7 @@ import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
-@Puzzle(resource = "square_button.fxml", buttonLinkerName = "Square Button")
+@DisplayComponent(resource = "square_button.fxml", buttonLinkerName = "Square Button")
 public final class SquareButton extends Widget {
     //Button colors
     public static final int BLUE, YELLOW, DARK_GRAY, WHITE;

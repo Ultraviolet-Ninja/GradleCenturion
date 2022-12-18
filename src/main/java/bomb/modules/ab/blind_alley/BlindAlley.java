@@ -1,7 +1,7 @@
 package bomb.modules.ab.blind_alley;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 
 import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.CAR;
@@ -28,7 +28,7 @@ import static bomb.tools.logic.BitConverter.TO_INT;
  * the 'Blind Alley' tab pane. Blind Alley in a widget-dependant module that require you to press
  * specific sections of the module based on the indicators, LED's, ports and batteries are on the bomb.
  */
-@Puzzle(resource = "blind_alley.fxml", buttonLinkerName = "Blind Alley")
+@DisplayComponent(resource = "blind_alley.fxml", buttonLinkerName = "Blind Alley")
 public final class BlindAlley extends Widget {
     private static int[][] alleyCat = new int[3][3];
 

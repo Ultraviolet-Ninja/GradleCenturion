@@ -1,7 +1,7 @@
 package bomb.modules.t.two_bit;
 
 import bomb.Widget;
-import bomb.annotation.Puzzle;
+import bomb.annotation.DisplayComponent;
 import bomb.modules.s.souvenir.Souvenir;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,7 +18,7 @@ import static bomb.tools.string.StringFormat.createOrdinalNumber;
 /**
  *
  */
-@Puzzle(resource = "two_bit.fxml", buttonLinkerName = "Two Bit")
+@DisplayComponent(resource = "two_bit.fxml", buttonLinkerName = "Two Bit")
 public final class TwoBit extends Widget {
     public static final String QUERY_TEXT, SUBMIT_TEXT;
 
