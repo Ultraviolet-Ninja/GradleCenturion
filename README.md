@@ -24,7 +24,6 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - OpenCSV ver. 5.5.2
 ### Other Technologies
 - Circle CI
-- LGTM Code Quality
 - CodeMR Free Trial
 
 ## Status - In progress
@@ -40,7 +39,7 @@ and the JAVA_HOME is set.
    - Linux: `./gradlew run`
 
 ## Inspiration
-After my first manual turning out to be successful in solving the main-game bombs, I thought "Why stop there?".
+After my first manual turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*".
 I started creating this project working on the auto-solver for the vanilla game, which was, by comparison, much easier. 
 
 ### Example Bomb
