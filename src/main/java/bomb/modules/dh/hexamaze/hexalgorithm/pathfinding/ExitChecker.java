@@ -28,6 +28,15 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
 
 public class ExitChecker {
+    /**
+     * Determines the possible exits and the exit description from the grid that was found in the
+     * MazeSearch search function
+     *
+     * @param grid The grid with all shape, peg color and wall information
+     * @return An empty Optional if there is no player peg on the board or
+     * all possible exits based on the peg color and the direction the player must exit from
+     * @throws IllegalArgumentException If there's more than one peg on the board
+     */
     public static Optional<Pair<String, List<Coordinates>>> findPossibleExits(@NotNull Grid grid)
             throws IllegalArgumentException {
         int pegCount = countPegsOnGrid(grid.getHexagon().getBufferedQueues());

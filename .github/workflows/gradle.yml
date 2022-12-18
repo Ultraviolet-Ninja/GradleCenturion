@@ -44,5 +44,5 @@ jobs:
         id: docker_build
         run: ./gradlew dockerPushDockerHub
 
-      - name: Auto-Upload Relseases
+      - name: Auto-Upload Releases
         run: ./gradlew releaseToGitHub -PauthToken=${{ secrets.GITHUB_TOKEN }}

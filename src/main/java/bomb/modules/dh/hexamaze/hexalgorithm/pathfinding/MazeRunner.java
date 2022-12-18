@@ -26,6 +26,14 @@ public class MazeRunner {
     private static final Coordinates MOVE_DOWN, MOVE_RIGHT,
             LEFT_SIDE_MOVE_DOWN_RIGHT, RIGHT_SIDE_MOVE_TOP_RIGHT;
 
+    /**
+     * Runs the maze through Dijkstra's algorithm for every exit that's possible
+     *
+     * @param grid The grid with all shape and wall information
+     * @param possibleExits The list of coordinates for all possible exits
+     * @return The coordinate list of the shortest path from the player location to the best possible exit
+     * @throws IllegalArgumentException If there is no possible exit, which ideally shouldn't happen
+     */
     public static @NotNull List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
             throws IllegalArgumentException {
         Coordinates startingLocation = findStartingLocation(grid);
