@@ -16,7 +16,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-public class RoundKeypads extends Widget {
+public final class RoundKeypads extends Widget {
     private static final int IMAGES_PER_COLUMN = 7;
     private static final UnaryOperator<Color> HIGHLIGHT_COMMAND;
 

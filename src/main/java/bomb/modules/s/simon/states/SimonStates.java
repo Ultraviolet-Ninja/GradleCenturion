@@ -22,7 +22,7 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
 import static java.util.stream.Collectors.joining;
 
-public class SimonStates extends Widget {
+public final class SimonStates extends Widget {
     private static final int HIGH = 1, LOW = 2, LOWEST = 3;
     private static final List<StateColor> PRESSED_COLOR_HISTORY;
     private static final String ERROR_MESSAGE = "The element does not exist";

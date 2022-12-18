@@ -11,7 +11,7 @@ import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
  * This class deals with the Emoji Math module.
  * It's simple math, but replacing numbers with text emojis.
  */
-public class EmojiMath extends Widget {
+public final class EmojiMath extends Widget {
     @Language("regexp")
     private static final String EMOJI_PATTERN, VALIDATION_PATTERN;
 

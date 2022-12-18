@@ -26,7 +26,7 @@ import static bomb.tools.string.StringFormat.TO_TITLE_CASE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
-public class Murder extends Widget {
+public final class Murder extends Widget {
     public static @NotNull String solve(@NotNull Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
                                         @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalStateException {
         validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);

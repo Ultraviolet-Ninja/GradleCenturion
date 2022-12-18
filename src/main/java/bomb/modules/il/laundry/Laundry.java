@@ -38,7 +38,7 @@ import static java.util.stream.Collectors.toUnmodifiableSet;
  * item, material, and color. These will lead to the instructions for washing, drying, ironing,
  * and dry cleaning your clothing.
  */
-public class Laundry extends Widget {
+public final class Laundry extends Widget {
     public static final String THANKS_BOB = "Thanks, Bob! :)";
 
     private static final int NUMBER_OF_OPTIONS = 6;

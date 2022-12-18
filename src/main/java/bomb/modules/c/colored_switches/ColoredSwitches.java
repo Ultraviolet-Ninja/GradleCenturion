@@ -14,7 +14,7 @@ import java.util.function.BiFunction;
 
 import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 
-public class ColoredSwitches extends Switches {
+public final class ColoredSwitches extends Switches {
     private static final double WRONG_PATH_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;
     private static final BiFunction<SwitchColor[], Byte, AStarAdmissibleHeuristic<ColoredSwitchNode>> HEURISTIC_FUNCTION;

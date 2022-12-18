@@ -17,7 +17,7 @@ import static bomb.tools.string.StringFormat.YES;
 /**
  *
  */
-public class ColorFlash extends Widget {
+public final class ColorFlash extends Widget {
     private static final int COMBO_LIMIT;
 
     private static final String RESULT_IS_COLOR_OR_WORD;

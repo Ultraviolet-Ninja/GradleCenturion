@@ -27,7 +27,7 @@ import static javafx.scene.paint.Color.PINK;
 import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
-public class Hexamaze extends Widget {
+public final class Hexamaze extends Widget {
     public static final Map<Color, Integer> COLOR_MAP;
     public static final Color PEG_COLOR;
 

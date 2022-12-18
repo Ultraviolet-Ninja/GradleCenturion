@@ -2,5 +2,5 @@ package bomb.modules.s.seashells;
 
 import bomb.Widget;
 
-public class Seashells extends Widget {
+public final class Seashells extends Widget {
 }

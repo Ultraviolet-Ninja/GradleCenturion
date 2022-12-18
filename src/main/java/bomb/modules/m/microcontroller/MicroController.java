@@ -12,7 +12,7 @@ import static bomb.enumerations.Indicator.SIG;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.tools.filter.RegexFilter.filter;
 
-public class MicroController extends Widget {
+public final class MicroController extends Widget {
     public static @NotNull List<Color> getPinColors(@NotNull String moduleSerialNumbers,
                                                     @NotNull AbstractController controller)
             throws IllegalArgumentException {

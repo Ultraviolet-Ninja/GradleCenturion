@@ -9,7 +9,7 @@ import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.NSA;
 import static bomb.enumerations.Port.PARALLEL;
 
-public class Caesar extends Widget {
+public final class Caesar extends Widget {
     private static final int MAX_LETTER_COUNT = 26;
 
     public static @NotNull String reshuffle(@NotNull String input) throws IllegalArgumentException {

@@ -14,7 +14,7 @@ import bomb.tools.data.structures.dictionary.GermanDict;
 
 import java.util.HashMap;
 
-public class TranslationCenter extends Widget {
+public sealed class TranslationCenter extends Widget permits Button, Morse, OnFirst, Passwords, VentGas {
     public static String[] moduleNames, buttonNames;
 
     protected static String[] passwords;

@@ -23,7 +23,7 @@ import static bomb.enumerations.Port.RJ45;
 import static bomb.modules.s.shape_shift.ShapeEnd.SHAPE_END_ARRAY;
 import static bomb.tools.logic.BitConverter.TO_INT;
 
-public class ShapeShift extends Widget {
+public final class ShapeShift extends Widget {
     private static final int[][] COUNT_TRACKER;
 
     private static ListGraph<Pair<ShapeEnd, ShapeEnd>> graph;

@@ -1,6 +1,7 @@
 package bomb.modules.s.switches;
 
 import bomb.Widget;
+import bomb.modules.c.colored_switches.ColoredSwitches;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 
-public class Switches extends Widget {
+public sealed class Switches extends Widget permits ColoredSwitches {
     protected static final byte BIT_LENGTH = 5;
     private static final Set<Byte> FORBIDDEN_MOVES;
     private static final Map<Byte, String[]> SPECIAL_CONDITIONS;

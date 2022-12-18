@@ -13,7 +13,7 @@ import javafx.scene.image.Image;
 /**
  * OnFirst class refers to the Who's on First module.
  */
-public class OnFirst extends TranslationCenter {
+public final class OnFirst extends TranslationCenter {
 
     /**
      * findPanel() finds the correct panel for Step 1 of the module

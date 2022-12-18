@@ -9,7 +9,7 @@ import static bomb.enumerations.Port.RJ45;
 import static bomb.enumerations.Port.SERIAL;
 import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
 
-public class FastMath extends Widget {
+public final class FastMath extends Widget {
     private static final int[][] INTERNAL_GRID;
 
     /**

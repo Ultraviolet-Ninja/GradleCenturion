@@ -1,7 +1,7 @@
 package bomb.modules.ab.astrology;
 
 import bomb.Widget;
-import bomb.initialization.Puzzle;
+import bomb.annotation.Puzzle;
 import bomb.tools.filter.Regex;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,7 +25,7 @@ import static bomb.tools.filter.RegexFilter.filter;
  * (i.e. Bad Omen at 5 means that you need to press "Bad Omen" when the bomb timer has a 5 in it)
  */
 @Puzzle(resource = "alphabet.fxml")
-public class Astrology extends Widget {
+public final class Astrology extends Widget {
     public static final byte ELEMENT_INDEX = 0, CELESTIAL_INDEX = 1, ZODIAC_INDEX = 2, EXPECTED_SIZE = 3;
     public static final String GOOD_OMEN = "Good Omen at ", POOR_OMEN = "Poor Omen at ", NO_OMEN = "No Omen";
 

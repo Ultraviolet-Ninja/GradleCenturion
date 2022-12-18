@@ -21,7 +21,7 @@ import static bomb.tools.string.StringFormat.INDEX_ZERO_UPPERCASE_LETTER;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
-public class Chess extends Widget {
+public final class Chess extends Widget {
     @Language("regexp")
     public static final String VALIDITY_PATTERN;
 

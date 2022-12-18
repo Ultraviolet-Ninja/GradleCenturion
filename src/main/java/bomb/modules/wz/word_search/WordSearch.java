@@ -14,7 +14,7 @@ import java.util.TreeSet;
 import static java.util.stream.Collectors.toUnmodifiableMap;
 
 @SuppressWarnings("ConstantConditions")
-public class WordSearch extends Widget {
+public final class WordSearch extends Widget {
     private static final int ARRAY_SIZE;
     private static final String FILENAME;
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
-public class SimonScreams extends Widget {
+public final class SimonScreams extends Widget {
     private static final int MAX_OUTPUT_RULES;
     private static final List<Integer> CURRENT_OUTPUT_NUMBERS;
     private static final String[][] RESULTING_COLORS, CATEGORIES;

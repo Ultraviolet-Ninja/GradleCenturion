@@ -21,7 +21,7 @@ import static bomb.tools.string.StringFormat.CONVERT_CHAR_NUMBER_AT_ONE;
 import static bomb.tools.string.StringFormat.INDEX_ZERO_LOWERCASE_LETTER;
 import static java.util.Arrays.stream;
 
-public class Battleship extends Widget {
+public final class Battleship extends Widget {
     private static Ocean ocean;
     private static int[] rowCounters, columnCounters;
     private static int numberOfRadarSpots;

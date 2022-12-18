@@ -22,7 +22,7 @@ import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
-public class SquareButton extends Widget {
+public final class SquareButton extends Widget {
     //Button colors
     public static final int BLUE, YELLOW, DARK_GRAY, WHITE;
     //Held button light colors

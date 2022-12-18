@@ -20,7 +20,7 @@ import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.tools.number.MathUtils.isPerfectSquare;
 
-public class Morsematics extends Widget {
+public final class Morsematics extends Widget {
     public static @NotNull String solve(@NotNull LinkedHashSet<String> inputSet) throws IllegalArgumentException {
         checkSerialCode();
         ListGraph<String> morseGraph = MorseCodeGraphFactory.createGraph();

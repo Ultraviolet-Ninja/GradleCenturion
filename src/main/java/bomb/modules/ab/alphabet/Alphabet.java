@@ -1,7 +1,7 @@
 package bomb.modules.ab.alphabet;
 
 import bomb.Widget;
-import bomb.initialization.Puzzle;
+import bomb.annotation.Puzzle;
 import bomb.tools.filter.Regex;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +19,7 @@ import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
  * But if no set matches the 4 tiles, the tiles are to be pressed in alphabetical order.
  */
 @Puzzle(resource = "alphabet.fxml")
-public class Alphabet extends Widget {
+public final class Alphabet extends Widget {
     private static final String[] WORD_BANK;
 
     static {

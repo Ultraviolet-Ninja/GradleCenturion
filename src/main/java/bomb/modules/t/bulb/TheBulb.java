@@ -33,7 +33,7 @@ import static bomb.modules.t.bulb.Bulb.Opacity.TRANSLUCENT;
 import static bomb.modules.t.bulb.Bulb.Position.SCREWED;
 import static bomb.modules.t.bulb.Bulb.Position.UNSCREWED;
 
-public class TheBulb extends Widget {
+public final class TheBulb extends Widget {
     public static final String PRESS_I, PRESS_O, SCREW, UNSCREW;
 
     static {

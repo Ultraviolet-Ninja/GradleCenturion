@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * Morse class deals with the Morse Code module.
  */
-public class Morse extends TranslationCenter {
+public final class Morse extends TranslationCenter {
     private static final AVLTree<String> CODE_TREE = new AVLTree<>();
     private static final String ABSOLUTE_PATH = System.getProperty("user.dir") +
             "\\src\\main\\resources\\bomb\\modules\\t\\translated\\morsecode.txt";

@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Souvenir extends Widget {
+public final class Souvenir extends Widget {
     private static final Map<String, String> MODULE_ARTIFACTS;
 
     static {

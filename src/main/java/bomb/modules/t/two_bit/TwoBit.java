@@ -17,7 +17,7 @@ import static bomb.tools.string.StringFormat.createOrdinalNumber;
 /**
  *
  */
-public class TwoBit extends Widget {
+public final class TwoBit extends Widget {
     public static final String QUERY_TEXT, SUBMIT_TEXT;
 
     private static final String[][] CODE_GRID;

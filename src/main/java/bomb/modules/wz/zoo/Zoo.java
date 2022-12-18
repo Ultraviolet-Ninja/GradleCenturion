@@ -2,5 +2,5 @@ package bomb.modules.wz.zoo;
 
 import bomb.Widget;
 
-public class Zoo extends Widget {
+public final class Zoo extends Widget {
 }

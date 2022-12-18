@@ -16,7 +16,7 @@ import static bomb.tools.logic.LogicOperator.XNOR;
  * The concept is based on the basics of Discrete Mathematics and uses basic boolean operators
  * to determine the state of each section of the triple venn diagram, green being true and red for false.
  */
-public class BooleanVenn extends Widget {
+public final class BooleanVenn extends Widget {
     private static final boolean[][] TEST_CASES;
     private static final byte A = 0, B = 1, C = 2;
 

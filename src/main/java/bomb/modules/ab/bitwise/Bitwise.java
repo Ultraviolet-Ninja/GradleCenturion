@@ -1,7 +1,7 @@
 package bomb.modules.ab.bitwise;
 
 import bomb.Widget;
-import bomb.initialization.Puzzle;
+import bomb.annotation.Puzzle;
 import bomb.tools.logic.LogicOperator;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +19,7 @@ import static bomb.tools.filter.RegexFilter.filter;
  * which bits will be 1 or 0 in the byte line.
  */
 @Puzzle(resource = "bitwise.fxml")
-public class Bitwise extends Widget {
+public final class Bitwise extends Widget {
     /**
      * Turns the edgework conditions into a byte that the Defuser will input into the bomb module
      *

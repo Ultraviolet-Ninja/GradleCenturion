@@ -12,7 +12,7 @@ import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.SWEET;
 import static bomb.tools.number.MathUtils.digitalRoot;
 import static bomb.tools.number.MathUtils.roundToNPlaces;
 
-public class CheapCheckout extends Widget {
+public final class CheapCheckout extends Widget {
     private static final double SUNDAY_ADDITION, THURSDAY_SALE, FRIDAY_MARK_UP, SATURDAY_SALE;
     private static final int REQUIRED_ITEM_COUNT, REQUIRED_WEIGHT_COUNT;
     private static final ToDoubleFunction<List<CheckoutItem>> TO_SUM;

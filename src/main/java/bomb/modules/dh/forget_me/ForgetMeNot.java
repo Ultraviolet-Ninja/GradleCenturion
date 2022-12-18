@@ -14,7 +14,7 @@ import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Port.SERIAL;
 
-public class ForgetMeNot extends Widget {
+public final class ForgetMeNot extends Widget {
     private static final IntUnaryOperator LEAST_SIG_DIGIT, MOST_SIG_DIGIT;
     private static final List<Byte> FINAL_CODE;
 

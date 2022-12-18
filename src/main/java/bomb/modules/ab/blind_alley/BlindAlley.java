@@ -1,7 +1,7 @@
 package bomb.modules.ab.blind_alley;
 
 import bomb.Widget;
-import bomb.initialization.Puzzle;
+import bomb.annotation.Puzzle;
 
 import static bomb.enumerations.Indicator.BOB;
 import static bomb.enumerations.Indicator.CAR;
@@ -29,7 +29,7 @@ import static bomb.tools.logic.BitConverter.TO_INT;
  * specific sections of the module based on the indicators, LED's, ports and batteries are on the bomb.
  */
 @Puzzle(resource = "blind_alley.fxml")
-public class BlindAlley extends Widget {
+public final class BlindAlley extends Widget {
     private static int[][] alleyCat = new int[3][3];
 
     private static void alleyUpdate() {

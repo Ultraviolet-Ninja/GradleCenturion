@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ChordQualities extends Widget {
+public final class ChordQualities extends Widget {
     public static final String NEW_CHORD;
 
     private static final ArrayRing<String> ALL_NOTES;
