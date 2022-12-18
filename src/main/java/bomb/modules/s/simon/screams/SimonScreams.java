@@ -1,6 +1,7 @@
 package bomb.modules.s.simon.screams;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import bomb.modules.s.simon.SimonColors.ScreamColor;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.joining;
 
+@Puzzle(resource = "simon_screams.fxml", buttonLinkerName = "Simon Screams")
 public final class SimonScreams extends Widget {
     private static final int MAX_OUTPUT_RULES;
     private static final List<Integer> CURRENT_OUTPUT_NUMBERS;

@@ -1,6 +1,7 @@
 package bomb.modules.m.microcontroller;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import bomb.modules.m.microcontroller.chip.AbstractController;
 import bomb.tools.filter.Regex;
 import javafx.scene.paint.Color;
@@ -12,6 +13,7 @@ import static bomb.enumerations.Indicator.SIG;
 import static bomb.enumerations.Port.RJ45;
 import static bomb.tools.filter.RegexFilter.filter;
 
+@Puzzle(resource = "microcontroller.fxml", buttonLinkerName = "MicroController")
 public final class MicroController extends Widget {
     public static @NotNull List<Color> getPinColors(@NotNull String moduleSerialNumbers,
                                                     @NotNull AbstractController controller)

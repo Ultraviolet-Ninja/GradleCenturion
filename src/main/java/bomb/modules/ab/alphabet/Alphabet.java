@@ -18,7 +18,7 @@ import static bomb.tools.filter.RegexFilter.EMPTY_FILTER_RESULTS;
  * if the letters appear in those 4 tiles.
  * But if no set matches the 4 tiles, the tiles are to be pressed in alphabetical order.
  */
-@Puzzle(resource = "alphabet.fxml")
+@Puzzle(resource = "alphabet.fxml", buttonLinkerName = "Alphabet")
 public final class Alphabet extends Widget {
     private static final String[] WORD_BANK;
 

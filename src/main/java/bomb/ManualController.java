@@ -1,5 +1,7 @@
 package bomb;
 
+import bomb.annotation.Puzzle;
+import bomb.modules.ab.battleship.Battleship;
 import bomb.modules.ab.blind_alley.BlindAlleyController;
 import bomb.modules.s.souvenir.SouvenirController;
 import bomb.tools.filter.Regex;
@@ -22,6 +24,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.javatuples.Pair;
 
 import java.io.File;
 import java.net.MalformedURLException;
@@ -99,6 +102,9 @@ public class ManualController {
         CompletableFuture<Map<String, Toggle>> radioButtonNameFuture =
                 createRadioButtonNameFuture(options.getToggles());
 
+        createFXMLMap();
+
+        //TODO - This is what we're looking to replace
         return createFilePathFuture().thenApply(filePathFuture ->
                         filePathFuture.thenCombine(radioButtonNameFuture, (filePathMap, radioButtonMap) ->
                                 createRegionMap(radioButtonMap, filePathMap)))
@@ -116,6 +122,7 @@ public class ManualController {
                 )));
     }
 
+    //TODO - Method to replace
     private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
         URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
 
@@ -123,6 +130,7 @@ public class ManualController {
                 .thenApply(ManualController::convertFilesToRegions);
     }
 
+    //TODO - Method to replace
     private static CompletableFuture<Map<String, Region>> convertFilesToRegions(List<String> fileList) {
         ResetObserver resetObserver = new ResetObserver();
         Regex filenamePattern = new Regex("\\w+(?=\\.fxml)");
@@ -147,6 +155,7 @@ public class ManualController {
         return fileToRegionMapFuture;
     }
 
+    //TODO - Method to replace
     private static Region createSingleRegion(URI uri, ResetObserver resetObserver)
             throws IllegalArgumentException {
         FXMLLoader loader;
@@ -173,6 +182,7 @@ public class ManualController {
         ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
     }
 
+    //TODO - Method to replace
     private static List<String> getFilesFromDirectory(final File topLevelDirectory) {
         List<String> list = new ArrayList<>();
         ArrayDeque<File> files = new ArrayDeque<>(asList(topLevelDirectory.listFiles()));
@@ -204,6 +214,40 @@ public class ManualController {
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    private static LinkedHashMap<String, FXMLLoader> createFXMLMap() {
+        var e = Battleship.class.getResource("battleship.fxml");
+        return getWidgetSubClasses()
+                .stream()
+                .map(cls -> new Pair<>(cls.getAnnotation(Puzzle.class), cls))
+                .map(pair -> pair.setAt1(pair.getValue1().getResource(pair.getValue0().resource())))
+                .map(pair -> pair.setAt0(pair.getValue0().buttonLinkerName()))
+                .sorted()
+                .collect(toMap(
+                        Pair::getValue0,
+                        pair -> new FXMLLoader(pair.getValue1()),
+                        (x, y) -> y,
+                        LinkedHashMap::new
+                ));
+    }
+
+    private static List<Class<?>> getWidgetSubClasses() {
+        List<Class<?>> list = new ArrayList<>();
+        ArrayDeque<Class<?>> files = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
+        Class<?> temp;
+
+        while ((temp = files.poll()) != null) {
+            Class<?>[] nextSubLevel = temp.getPermittedSubclasses();
+            if (nextSubLevel != null) {
+                files.addAll(asList(nextSubLevel));
+            }
+
+            if (temp.isAnnotationPresent(Puzzle.class)) {
+                list.add(temp);
+            }
+        }
+        return list;
     }
 
     @FXML

@@ -1,6 +1,7 @@
 package bomb.modules.dh.forget_me;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import bomb.tools.filter.Regex;
 import bomb.tools.filter.RegexFilter;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,7 @@ import static bomb.Widget.IndicatorFilter.UNLIT;
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Port.SERIAL;
 
+@Puzzle(resource = "forget_me_not.fxml", buttonLinkerName = "Forget Me Not")
 public final class ForgetMeNot extends Widget {
     private static final IntUnaryOperator LEAST_SIG_DIGIT, MOST_SIG_DIGIT;
     private static final List<Byte> FINAL_CODE;

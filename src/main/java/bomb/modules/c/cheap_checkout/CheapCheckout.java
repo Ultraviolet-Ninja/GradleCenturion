@@ -1,6 +1,7 @@
 package bomb.modules.c.cheap_checkout;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import org.jetbrains.annotations.NotNull;
 
 import java.time.DayOfWeek;
@@ -12,6 +13,7 @@ import static bomb.modules.c.cheap_checkout.CheckoutItem.Category.SWEET;
 import static bomb.tools.number.MathUtils.digitalRoot;
 import static bomb.tools.number.MathUtils.roundToNPlaces;
 
+@Puzzle(resource = "cheap_checkout.fxml", buttonLinkerName = "Cheap Checkout")
 public final class CheapCheckout extends Widget {
     private static final double SUNDAY_ADDITION, THURSDAY_SALE, FRIDAY_MARK_UP, SATURDAY_SALE;
     private static final int REQUIRED_ITEM_COUNT, REQUIRED_WEIGHT_COUNT;

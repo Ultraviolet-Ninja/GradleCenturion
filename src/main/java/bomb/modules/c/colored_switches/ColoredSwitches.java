@@ -1,5 +1,6 @@
 package bomb.modules.c.colored_switches;
 
+import bomb.annotation.Puzzle;
 import bomb.modules.s.switches.Switches;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,7 @@ import java.util.function.BiFunction;
 
 import static bomb.modules.c.colored_switches.SwitchColor.NEUTRAL;
 
+@Puzzle(resource = "colored_switches.fxml", buttonLinkerName = "Colored Switches")
 public final class ColoredSwitches extends Switches {
     private static final double WRONG_PATH_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;

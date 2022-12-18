@@ -1,6 +1,7 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeSearch;
 import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitChecker;
 import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeRunner;
@@ -27,6 +28,7 @@ import static javafx.scene.paint.Color.PINK;
 import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
+@Puzzle(resource = "hexamaze.fxml", buttonLinkerName = "Hexamaze")
 public final class Hexamaze extends Widget {
     public static final Map<Color, Integer> COLOR_MAP;
     public static final Color PEG_COLOR;

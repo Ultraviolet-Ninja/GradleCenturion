@@ -1,6 +1,7 @@
 package bomb.modules.wz.word_search;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
@@ -14,6 +15,7 @@ import java.util.TreeSet;
 import static java.util.stream.Collectors.toUnmodifiableMap;
 
 @SuppressWarnings("ConstantConditions")
+@Puzzle(resource = "word_search.fxml", buttonLinkerName = "Word Search")
 public final class WordSearch extends Widget {
     private static final int ARRAY_SIZE;
     private static final String FILENAME;

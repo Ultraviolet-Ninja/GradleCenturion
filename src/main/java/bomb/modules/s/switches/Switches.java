@@ -1,6 +1,7 @@
 package bomb.modules.s.switches;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import bomb.modules.c.colored_switches.ColoredSwitches;
 import org.jetbrains.annotations.NotNull;
 
@@ -14,6 +15,7 @@ import java.util.Set;
 
 import static java.util.Arrays.asList;
 
+@Puzzle(resource = "switches.fxml", buttonLinkerName = "Switches")
 public sealed class Switches extends Widget permits ColoredSwitches {
     protected static final byte BIT_LENGTH = 5;
     private static final Set<Byte> FORBIDDEN_MOVES;

@@ -1,6 +1,7 @@
 package bomb.modules.dh.fizzbuzz;
 
 import bomb.Widget;
+import bomb.annotation.Puzzle;
 import bomb.enumerations.Port;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
@@ -8,6 +9,7 @@ import org.jetbrains.annotations.Range;
 import java.util.ArrayList;
 import java.util.List;
 
+@Puzzle(resource = "fizzbuzz.fxml", buttonLinkerName = "FizzBuzz")
 public final class FizzBuzz extends Widget {
     public static @NotNull String solve(@NotNull String numberText, @NotNull FizzBuzzColor color,
                                         @Range(from=0, to=2) int strikeCount) throws IllegalArgumentException {
