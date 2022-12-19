@@ -41,13 +41,13 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Assemble with Gradle
-        run: gradle assemble
+        run: ./gradlew assemble --stacktrace
 
       - name: Build with Gradle
-        run: gradle build
+        run: ./gradlew build
 
       - name: Linking Dependencies with Gradle
-        run: gradle jlink
+        run: ./gradlew jlink
 
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v1
