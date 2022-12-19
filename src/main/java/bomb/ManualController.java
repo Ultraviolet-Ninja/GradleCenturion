@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import org.javatuples.Pair;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -119,14 +120,6 @@ public class ManualController {
                 )));
     }
 
-    private static void loadBlindAlleyController(BlindAlleyController controller) {
-        ObserverHub.addObserver(BLIND_ALLEY_PANE, new BlindAlleyPaneObserver(controller));
-    }
-
-    private static void loadSouvenirController(SouvenirController controller) {
-        ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
-    }
-
     private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
                                                        Map<String, Region> filePathMap) {
         Map<Toggle, Region> regionMap = new LinkedHashMap<>();
@@ -140,19 +133,10 @@ public class ManualController {
 
     private static Map<String, Region> createFXMLMap(ResetObserver resetObserver) {
         return getDisplayedClasses()
-                .stream()
-                .map(cls -> new Pair<>(cls.getAnnotation(DisplayComponent.class), cls))
-                .map(pair -> pair.setAt1(pair.getValue1().getResource(pair.getValue0().resource())))
-                .map(pair -> pair.setAt0(pair.getValue0().buttonLinkerName()))
-                .map(pair -> pair.setAt1(new FXMLLoader(pair.getValue1())))
-                .map(pair -> pair.setAt1(createSingleRegion2(pair.getValue1(), resetObserver)))
-                .sorted()
-                .collect(toMap(
-                        Pair::getValue0,
-                        Pair::getValue1,
-                        (x, y) -> y,
-                        LinkedHashMap::new
-                ));
+//                .stream()
+                .parallelStream()
+                .map(cls -> mapClassToRegion(cls, resetObserver))
+                .collect(toMap(Pair::getValue0, Pair::getValue1));
     }
 
     private static List<Class<?>> getDisplayedClasses() {
@@ -173,16 +157,35 @@ public class ManualController {
         return list;
     }
 
-    private static Region createSingleRegion2(FXMLLoader loader, ResetObserver resetObserver)
+    private static Pair<String, Region> mapClassToRegion(Class<?> clazz, ResetObserver resetObserver) {
+        DisplayComponent annotation = clazz.getAnnotation(DisplayComponent.class);
+        URL resource = clazz.getResource(annotation.resource());
+        String buttonLinkerName = annotation.buttonLinkerName();
+
+        return new Pair<>(
+                buttonLinkerName,
+                createSingleRegion(new FXMLLoader(resource), resetObserver)
+        );
+    }
+
+    private static Region createSingleRegion(FXMLLoader loader, ResetObserver resetObserver)
             throws IllegalArgumentException {
         Region output = FacadeFX.load(loader);
         String location = loader.getLocation().toString();
 
-        if (!location.contains("widget")) resetObserver.addController(loader);
+        if (!location.endsWith("widget.fxml")) resetObserver.addController(loader);
 
-        if (location.contains("souvenir")) loadSouvenirController(loader.getController());
-        else if (location.contains("blind_alley")) loadBlindAlleyController(loader.getController());
+        if (location.endsWith("souvenir.fxml")) loadSouvenirController(loader.getController());
+        else if (location.endsWith("blind_alley.fxml")) loadBlindAlleyController(loader.getController());
         return output;
+    }
+
+    private static void loadBlindAlleyController(BlindAlleyController controller) {
+        ObserverHub.addObserver(BLIND_ALLEY_PANE, new BlindAlleyPaneObserver(controller));
+    }
+
+    private static void loadSouvenirController(SouvenirController controller) {
+        ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
     }
 
     @FXML
