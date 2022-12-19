@@ -155,8 +155,17 @@ jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     addExtraDependencies("javafx")
+
     launcher {
-        name = "${project.name}"
+        name = 'Gradle Centurion'
+    }
+
+    jpackage {
+        def opSys = org.gradle.internal.os.OperatingSystem.current()
+        if (opSys.windows) {
+            installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu']
+            imageOptions += ['--icon', "${buildDir}/resources/main/bomb/KTANE logo.ico"]
+        }
     }
 }
 
