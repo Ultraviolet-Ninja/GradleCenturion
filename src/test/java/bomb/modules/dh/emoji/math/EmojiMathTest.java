@@ -1,4 +1,4 @@
-package bomb.modules.dh.emoji;
+package bomb.modules.dh.emoji.math;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

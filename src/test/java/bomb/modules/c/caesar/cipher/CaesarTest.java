@@ -1,4 +1,4 @@
-package bomb.modules.c.caesar;
+package bomb.modules.c.caesar.cipher;
 
 import bomb.ConditionSetter;
 import bomb.Widget;

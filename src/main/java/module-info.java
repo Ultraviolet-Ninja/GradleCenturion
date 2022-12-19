@@ -24,13 +24,13 @@ open module centurion {
     exports bomb.modules.ab.bitwise to javafx.fxml;
     exports bomb.modules.ab.blind.alley to javafx.fxml;
     exports bomb.modules.ab.bool.venn.diagram to javafx.fxml;
-    exports bomb.modules.c.caesar to javafx.fxml;
+    exports bomb.modules.c.caesar.cipher to javafx.fxml;
     exports bomb.modules.c.cheap.checkout to javafx.fxml;
     exports bomb.modules.c.chess to javafx.fxml;
     exports bomb.modules.c.chords to javafx.fxml;
     exports bomb.modules.c.color.flash to javafx.fxml;
     exports bomb.modules.c.colored.switches to javafx.fxml;
-    exports bomb.modules.dh.emoji to javafx.fxml;
+    exports bomb.modules.dh.emoji.math to javafx.fxml;
     exports bomb.modules.dh.fast.math to javafx.fxml;
     exports bomb.modules.dh.forget.me.not to javafx.fxml;
     exports bomb.modules.dh.hexamaze to javafx.fxml;

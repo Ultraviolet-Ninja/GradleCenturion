@@ -1,4 +1,4 @@
-package bomb.modules.dh.emoji;
+package bomb.modules.dh.emoji.math;
 
 import bomb.abstractions.State;
 

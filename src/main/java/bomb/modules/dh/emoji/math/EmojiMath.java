@@ -1,4 +1,4 @@
-package bomb.modules.dh.emoji;
+package bomb.modules.dh.emoji.math;
 
 import bomb.Widget;
 import bomb.annotation.DisplayComponent;
@@ -6,7 +6,7 @@ import bomb.tools.filter.Regex;
 import org.intellij.lang.annotations.Language;
 import org.jetbrains.annotations.NotNull;
 
-import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
+import static bomb.modules.dh.emoji.math.Emoji.EMOJI_MAP;
 
 /**
  * This class deals with the Emoji Math module.

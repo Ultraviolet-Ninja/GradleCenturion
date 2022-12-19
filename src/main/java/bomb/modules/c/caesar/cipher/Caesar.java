@@ -1,4 +1,4 @@
-package bomb.modules.c.caesar;
+package bomb.modules.c.caesar.cipher;
 
 import bomb.Widget;
 import bomb.annotation.DisplayComponent;
@@ -10,7 +10,7 @@ import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.NSA;
 import static bomb.enumerations.Port.PARALLEL;
 
-@DisplayComponent(resource = "caesar.fxml", buttonLinkerName = "Caesar Cipher")
+@DisplayComponent(resource = "caesar_cipher.fxml", buttonLinkerName = "Caesar Cipher")
 public final class Caesar extends Widget {
     private static final int MAX_LETTER_COUNT = 26;
 

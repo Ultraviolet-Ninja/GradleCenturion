@@ -16,7 +16,7 @@
 
     <test name="C Module Tests">
         <classes>
-            <class name="bomb.modules.c.caesar.CaesarTest"/>
+            <class name="bomb.modules.c.caesar.cipher.CaesarTest"/>
             <class name="bomb.modules.c.cheap.checkout.CheapCheckoutTest"/>
             <class name="bomb.modules.c.cheap.checkout.CheckoutItemTest"/>
             <class name="bomb.modules.c.chess.ChessTest"/>

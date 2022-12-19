@@ -1,4 +1,4 @@
-package bomb.modules.dh.emoji;
+package bomb.modules.dh.emoji.math;
 
 import bomb.abstractions.Resettable;
 import bomb.tools.event.HoverHandler;
@@ -11,11 +11,11 @@ import javafx.fxml.FXML;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static bomb.modules.dh.emoji.Emoji.EMOJI_MAP;
-import static bomb.modules.dh.emoji.EmojiControllerState.END;
-import static bomb.modules.dh.emoji.EmojiControllerState.FIRST_EMOJI_PRESS;
-import static bomb.modules.dh.emoji.EmojiControllerState.MATH_SYMBOL_PRESS;
-import static bomb.modules.dh.emoji.EmojiControllerState.RESET;
+import static bomb.modules.dh.emoji.math.Emoji.EMOJI_MAP;
+import static bomb.modules.dh.emoji.math.EmojiControllerState.END;
+import static bomb.modules.dh.emoji.math.EmojiControllerState.FIRST_EMOJI_PRESS;
+import static bomb.modules.dh.emoji.math.EmojiControllerState.MATH_SYMBOL_PRESS;
+import static bomb.modules.dh.emoji.math.EmojiControllerState.RESET;
 import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
 public class EmojiController implements Resettable {
