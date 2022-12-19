@@ -51,14 +51,12 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.1.0'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
 
-    implementation('com.jfoenix:jfoenix:9.0.4')
-//            {
-//        exclude group: "org.javafx"
-//            }
-    implementation('io.github.palexdev:materialfx:11.12.0')
-//            {
-//        exclude group: "org.javafx"
-//    }
+    implementation('com.jfoenix:jfoenix:9.0.4') {
+        exclude group: "org.javafx"
+    }
+    implementation('io.github.palexdev:materialfx:11.12.0') {
+        exclude group: "org.javafx"
+    }
 
     testImplementation 'org.testng:testng:7.7.0'
     testImplementation 'org.slf4j:slf4j-api:2.0.5'
@@ -156,7 +154,7 @@ jar.manifest.attributes(['Main-Class': "${mainClassName}"])
 jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-//    addExtraDependencies("javafx")
+    addExtraDependencies("javafx")
     launcher {
         name = "${project.name}"
     }
