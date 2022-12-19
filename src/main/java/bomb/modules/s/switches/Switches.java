@@ -2,7 +2,7 @@ package bomb.modules.s.switches;
 
 import bomb.Widget;
 import bomb.annotation.DisplayComponent;
-import bomb.modules.c.colored_switches.ColoredSwitches;
+import bomb.modules.c.colored.switches.ColoredSwitches;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

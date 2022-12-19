@@ -1,7 +1,7 @@
 package bomb;
 
 import bomb.annotation.DisplayComponent;
-import bomb.modules.ab.blind_alley.BlindAlleyController;
+import bomb.modules.ab.blind.alley.BlindAlleyController;
 import bomb.modules.s.souvenir.SouvenirController;
 import bomb.tools.filter.Regex;
 import bomb.tools.note.NoteController;
@@ -92,6 +92,7 @@ public class ManualController {
         );
         ObserverHub.addObserver(FORGET_ME_NOT_TOGGLE, new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
+
         long start = System.nanoTime();
         regionMap = setupRegionMap().get();
         long stop = System.nanoTime();
@@ -99,8 +100,7 @@ public class ManualController {
     }
 
     private CompletableFuture<Map<Toggle, Region>> setupRegionMap() throws ExecutionException, InterruptedException {
-        CompletableFuture<Map<String, Toggle>> radioButtonNameFuture =
-                createRadioButtonNameFuture(options.getToggles());
+        var radioButtonNameFuture = createRadioButtonNameFuture(options.getToggles());
 
         createFXMLMap();
 //        var fxmlMapFuture = supplyAsync(ManualController::createFXMLMap);
@@ -119,7 +119,9 @@ public class ManualController {
                                 .replaceAll("[ -]", "_")
                                 .replaceAll("[()']", "")
                                 .toLowerCase(),
-                        identity()
+                        identity(),
+                        (x, y) -> y,
+                        LinkedHashMap::new
                 )));
     }
 

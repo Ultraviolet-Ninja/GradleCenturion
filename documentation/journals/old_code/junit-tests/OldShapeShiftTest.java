@@ -1,4 +1,4 @@
-package bomb.modules.s.shape_shift;
+package bomb.modules.s.shape;
 
 import bomb.Widget;
 import bomb.WidgetSimulations;
@@ -8,10 +8,10 @@ import bomb.enumerations.TriState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static bomb.modules.s.shape_shift.ShapeEnd.FLAT;
-import static bomb.modules.s.shape_shift.ShapeEnd.POINT;
-import static bomb.modules.s.shape_shift.ShapeEnd.ROUND;
-import static bomb.modules.s.shape_shift.ShapeEnd.TICKET;
+import static bomb.modules.s.shape.ShapeEnd.FLAT;
+import static bomb.modules.s.shape.ShapeEnd.POINT;
+import static bomb.modules.s.shape.ShapeEnd.ROUND;
+import static bomb.modules.s.shape.ShapeEnd.TICKET;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

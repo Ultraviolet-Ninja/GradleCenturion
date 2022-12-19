@@ -1,4 +1,4 @@
-package bomb.modules.t.two_bit;
+package bomb.modules.t.two;
 
 import bomb.Widget;
 import bomb.WidgetSimulations;
@@ -6,8 +6,8 @@ import bomb.enumerations.Ports;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static bomb.modules.t.two_bit.TwoBit.QUERY;
-import static bomb.modules.t.two_bit.TwoBit.SUBMIT;
+import static bomb.modules.t.two.TwoBit.QUERY;
+import static bomb.modules.t.two.TwoBit.SUBMIT;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

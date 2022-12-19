@@ -5,9 +5,9 @@
     <test name="D-H Module Tests">
         <classes>
             <class name="bomb.modules.dh.emoji.EmojiMathTest"/>
-            <class name="bomb.modules.dh.fast_math.FastMathTest"/>
+            <class name="bomb.modules.dh.fast.math.FastMathTest"/>
             <class name="bomb.modules.dh.fizzbuzz.FizzBuzzTest"/>
-            <class name="bomb.modules.dh.forget_me.ForgetMeNotTest"/>
+            <class name="bomb.modules.dh.forget.me.not.ForgetMeNotTest"/>
             <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.MazeSearchTest"/>
             <class name="bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitCheckerTest"/>
             <class name="bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeRunnerTest"/>
@@ -17,7 +17,7 @@
 
     <test name="I-L Module Tests">
         <classes>
-            <class name="bomb.modules.il.ice_cream.IceCreamTest"/>
+            <class name="bomb.modules.il.ice.cream.IceCreamTest"/>
             <class name="bomb.modules.il.laundry.LaundryTest"/>
             <class name="bomb.modules.il.logic.LogicTest"/>
         </classes>

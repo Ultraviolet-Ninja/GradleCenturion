@@ -4,8 +4,8 @@
 <suite name="Suite Five">
     <test name="W-Z Module Tests">
         <classes>
-            <class name="bomb.modules.wz.word_search.WordSearchTest"/>
-            <class name="bomb.modules.wz.word_search.WordFinderTest"/>
+            <class name="bomb.modules.wz.word.search.WordSearchTest"/>
+            <class name="bomb.modules.wz.word.search.WordFinderTest"/>
         </classes>
     </test>
 
