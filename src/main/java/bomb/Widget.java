@@ -1,5 +1,6 @@
 package bomb;
 
+import bomb.annotation.DisplayComponent;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
@@ -67,6 +68,7 @@ import static java.util.Arrays.stream;
  * This class is extended by the Module classes, and all bomb widgets are accessible by those classes,
  * as well as the MainController to add/subtract to the widgets.
  */
+@DisplayComponent(resource = "widget.fxml", buttonLinkerName = "Widget")
 public sealed class Widget permits Alphabet, Astrology, Battleship, Bitwise, BlindAlley, BooleanVenn, Caesar,
         CheapCheckout, Chess, ChordQualities, ColorFlash, EmojiMath, FastMath, FizzBuzz, ForgetMeNot, Hexamaze,
         IceCream, Laundry, LEDEncryption, Logic, MicroController, MonslopeFight, Morsematics, Murder,
