@@ -1,8 +1,9 @@
 package bomb;
 
-import bomb.modules.ab.blind_alley.BlindAlleyController;
+import bomb.annotation.DisplayComponent;
+import bomb.modules.ab.blind.alley.BlindAlleyController;
 import bomb.modules.s.souvenir.SouvenirController;
-import bomb.tools.filter.Regex;
+import bomb.tools.note.NoteController;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
@@ -22,14 +23,10 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.javatuples.Pair;
 
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -37,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.IntStream;
 
 import static bomb.tools.number.MathUtils.negativeSafeModulo;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
@@ -54,7 +50,8 @@ import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
 public class ManualController {
-    private static final String FXML_DIRECTORY = "fxml";
+    //TODO - Remove when every FXML file is being used
+    private static final Region EMPTY_VIEW;
 
     private Map<Toggle, Region> regionMap;
     private List<Node> observableRadioList;
@@ -75,6 +72,15 @@ public class ManualController {
     @FXML
     private VBox menuVBox, radioButtonHouse;
 
+    static {
+        var emptyViewLocation = ManualController.class.getResource("empty_view.fxml");
+        try {
+            EMPTY_VIEW = FXMLLoader.load(emptyViewLocation);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public ManualController() {
         allRadioButtons = new ArrayList<>();
     }
@@ -89,79 +95,89 @@ public class ManualController {
         );
         ObserverHub.addObserver(FORGET_ME_NOT_TOGGLE, new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
+
         long start = System.nanoTime();
         regionMap = setupRegionMap().get();
         long stop = System.nanoTime();
         System.out.printf("Timer: %,d%n", stop - start);
     }
 
-    private CompletableFuture<Map<Toggle, Region>> setupRegionMap() throws ExecutionException, InterruptedException {
-        CompletableFuture<Map<String, Toggle>> radioButtonNameFuture =
-                createRadioButtonNameFuture(options.getToggles());
+    private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
+        ResetObserver resetObserver = new ResetObserver();
+        ObserverHub.addObserver(RESET, resetObserver);
+        var fxmlMapFuture = supplyAsync(() -> createFXMLMap(resetObserver));
+        var radioButtonNameFuture = createRadioButtonNameFuture(options.getToggles());
 
-        return createFilePathFuture().thenApply(filePathFuture ->
-                        filePathFuture.thenCombine(radioButtonNameFuture, (filePathMap, radioButtonMap) ->
-                                createRegionMap(radioButtonMap, filePathMap)))
-                .get();
+        return radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::createRegionMap);
     }
 
     private static CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
         return supplyAsync(radioButtonList::stream)
                 .thenApply(stream -> stream.collect(toMap(
-                        toggle -> GET_TOGGLE_NAME.apply(toggle)
-                                .replaceAll("[ -]", "_")
-                                .replaceAll("[()']", "")
-                                .toLowerCase(),
-                        identity()
+                        GET_TOGGLE_NAME,
+                        identity(),
+                        (x, y) -> y,
+                        LinkedHashMap::new
                 )));
     }
 
-    private static CompletableFuture<CompletableFuture<Map<String, Region>>> createFilePathFuture() {
-        URI uri = toURI(ManualController.class.getResource(FXML_DIRECTORY));
-
-        return supplyAsync(() -> getFilesFromDirectory(new File(uri)))
-                .thenApply(ManualController::convertFilesToRegions);
+    private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
+                                                       Map<String, Region> filePathMap) {
+        Map<Toggle, Region> regionMap = new LinkedHashMap<>();
+        for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
+            regionMap.put(
+                    entry.getValue(),
+                    filePathMap.getOrDefault(entry.getKey(), EMPTY_VIEW)
+            );
+        return regionMap;
     }
 
-    private static CompletableFuture<Map<String, Region>> convertFilesToRegions(List<String> fileList) {
-        ResetObserver resetObserver = new ResetObserver();
-        Regex filenamePattern = new Regex("\\w+(?=\\.fxml)");
-        fileList.removeIf(location -> location.contains("old") || location.contains("new"));
-
-        CompletableFuture<List<Region>> regionListFuture = supplyAsync(fileList::parallelStream)
-                .thenApply(stream -> stream.map(Paths::get)
-                        .map(Path::toUri)
-                        .map(uri -> createSingleRegion(uri, resetObserver))
-                        .toList()
-                );
-
-        CompletableFuture<Map<String, Region>> fileToRegionMapFuture =
-                supplyAsync(() -> filenamePattern.filterCollection(fileList))
-                        .thenCombine(regionListFuture,
-                                (fileNameList, regionList) -> IntStream.range(0, fileNameList.size())
-                                        .boxed()
-                                        .collect(toMap(fileNameList::get, regionList::get))
-                        );
-
-        ObserverHub.addObserver(RESET, resetObserver);
-        return fileToRegionMapFuture;
+    private static Map<String, Region> createFXMLMap(ResetObserver resetObserver) {
+        return getDisplayedClasses()
+//                .stream()
+                .parallelStream()
+                .map(cls -> mapClassToRegion(cls, resetObserver))
+                .collect(toMap(Pair::getValue0, Pair::getValue1));
     }
 
-    private static Region createSingleRegion(URI uri, ResetObserver resetObserver)
-            throws IllegalArgumentException {
-        FXMLLoader loader;
-        try {
-            loader = new FXMLLoader(uri.toURL());
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(e);
+    private static List<Class<?>> getDisplayedClasses() {
+        List<Class<?>> list = new ArrayList<>(List.of(Widget.class, NoteController.class));
+        ArrayDeque<Class<?>> files = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
+
+        Class<?> temp;
+        while ((temp = files.poll()) != null) {
+            Class<?>[] nextSubLevel = temp.getPermittedSubclasses();
+            if (nextSubLevel != null) {
+                files.addAll(asList(nextSubLevel));
+            }
+
+            if (temp.isAnnotationPresent(DisplayComponent.class)) {
+                list.add(temp);
+            }
         }
+        return list;
+    }
+
+    private static Pair<String, Region> mapClassToRegion(Class<?> clazz, ResetObserver resetObserver) {
+        DisplayComponent annotation = clazz.getAnnotation(DisplayComponent.class);
+        URL resource = clazz.getResource(annotation.resource());
+        String buttonLinkerName = annotation.buttonLinkerName();
+
+        return new Pair<>(
+                buttonLinkerName,
+                createSingleRegion(new FXMLLoader(resource), resetObserver)
+        );
+    }
+
+    private static Region createSingleRegion(FXMLLoader loader, ResetObserver resetObserver)
+            throws IllegalArgumentException {
         Region output = FacadeFX.load(loader);
         String location = loader.getLocation().toString();
 
-        if (!location.contains("widget")) resetObserver.addController(loader);
+        if (!location.endsWith("widget.fxml")) resetObserver.addController(loader);
 
-        if (location.contains("souvenir")) loadSouvenirController(loader.getController());
-        else if (location.contains("blind_alley")) loadBlindAlleyController(loader.getController());
+        if (location.endsWith("souvenir.fxml")) loadSouvenirController(loader.getController());
+        else if (location.endsWith("blind_alley.fxml")) loadBlindAlleyController(loader.getController());
         return output;
     }
 
@@ -171,39 +187,6 @@ public class ManualController {
 
     private static void loadSouvenirController(SouvenirController controller) {
         ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
-    }
-
-    private static List<String> getFilesFromDirectory(final File topLevelDirectory) {
-        List<String> list = new ArrayList<>();
-        ArrayDeque<File> files = new ArrayDeque<>(asList(topLevelDirectory.listFiles()));
-        File temp;
-
-        while ((temp = files.poll()) != null) {
-            if (!temp.isDirectory())
-                list.add(temp.getPath());
-            else
-                files.addAll(asList(temp.listFiles()));
-        }
-        return list;
-    }
-
-    private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
-                                                       Map<String, Region> filePathMap) {
-        Map<Toggle, Region> regionMap = new LinkedHashMap<>();
-        for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
-            regionMap.put(
-                    entry.getValue(),
-                    filePathMap.get(entry.getKey())
-            );
-        return regionMap;
-    }
-
-    private static URI toURI(URL url) throws IllegalArgumentException {
-        try {
-            return url.toURI();
-        } catch (URISyntaxException e) {
-            throw new IllegalArgumentException(e);
-        }
     }
 
     @FXML

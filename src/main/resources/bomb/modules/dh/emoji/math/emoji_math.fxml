@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../../css/dh/emoji_math.css"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.dh.emoji.math.EmojiController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="350.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="150.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+        <MFXTextField fx:id="equationBar" editable="false" promptText="Equation">
+            <VBox.margin>
+                <Insets left="150.0" right="150.0"/>
+            </VBox.margin>
+        </MFXTextField>
+    </VBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <MFXButton id="submit-button" fx:id="first" text=":)"/>
+        <MFXButton id="submit-button" fx:id="second" text="=(">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="third" text="(:">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="forth" text=")=">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="fifth" text=":(">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+        <MFXButton id="submit-button" fx:id="sixth" text="):"/>
+        <MFXButton id="submit-button" fx:id="seventh" text="=)">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="eighth" text="(=">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="ninth" text=":|">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="tenth" text="|:">
+            <HBox.margin>
+                <Insets left="23.0"/>
+            </HBox.margin>
+        </MFXButton>
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+        <MFXButton id="submit-button" fx:id="add" disable="true" text="+">
+            <HBox.margin>
+                <Insets left="403.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="minus" disable="true" text="-">
+            <HBox.margin>
+                <Insets left="84.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="equal" disable="true" onAction="#submitEquation" text="=">
+            <HBox.margin>
+                <Insets left="84.0"/>
+            </HBox.margin>
+        </MFXButton>
+        <MFXButton id="submit-button" fx:id="clear" disable="true" onAction="#resetModule" text="Clear">
+            <HBox.margin>
+                <Insets left="280.0" top="60.0"/>
+            </HBox.margin>
+        </MFXButton>
+    </HBox>
+</GridPane>

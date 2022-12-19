@@ -1,6 +1,7 @@
 package bomb.modules.il.logic;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 import bomb.tools.logic.LogicOperator;
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +13,8 @@ import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
 import static bomb.tools.logic.LogicOperator.IMPLIES;
 import static java.util.Arrays.asList;
 
-public class Logic extends Widget {
+@DisplayComponent(resource = "logic.fxml", buttonLinkerName = "Logic")
+public final class Logic extends Widget {
     public static boolean solve(@NotNull LetterRecord @NotNull[] letters,
                                 @NotNull LogicOperator @NotNull[] intermediateOperators,
                                 boolean isPriorityOnFirstTwo) throws IllegalArgumentException {

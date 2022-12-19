@@ -13,7 +13,7 @@ import java.util.Collections;
 /**
  * Password class refers to the Password module
  */
-public class Passwords extends TranslationCenter {
+public final class Passwords extends TranslationCenter {
 
     /**
      * solve() solves the password module from gathering the letters of any column and

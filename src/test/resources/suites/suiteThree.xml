@@ -10,7 +10,7 @@
 
     <test name="R Module Tests">
         <classes>
-            <class name="bomb.modules.r.round_keypads.RoundKeypadTest"/>
+            <class name="bomb.modules.r.round.keypads.RoundKeypadTest"/>
         </classes>
     </test>
 </suite>

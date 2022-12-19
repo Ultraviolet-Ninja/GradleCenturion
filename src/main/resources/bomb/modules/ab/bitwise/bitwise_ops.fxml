@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/ab/bitwise_ops.css"
+            xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="bomb.modules.ab.bitwise.BitwiseController">
+    <center>
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <MFXTextField fx:id="byteTextField" alignment="CENTER" editable="false" prefHeight="94.0" prefWidth="705.0"
+                          promptText="Output Binary">
+                <VBox.margin>
+                    <Insets left="100.0" right="100.0"/>
+                </VBox.margin>
+            </MFXTextField>
+        </VBox>
+    </center>
+    <top>
+        <HBox alignment="CENTER" prefHeight="315.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+            <MFXButton id="submit-button" fx:id="andButton" text="And"/>
+            <MFXButton id="submit-button" fx:id="orButton" text="Or">
+                <HBox.margin>
+                    <Insets left="35.0"/>
+                </HBox.margin>
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="xorButton" text="Xor">
+                <HBox.margin>
+                    <Insets left="35.0"/>
+                </HBox.margin>
+            </MFXButton>
+            <MFXButton id="submit-button" fx:id="notButton" text="Not">
+                <HBox.margin>
+                    <Insets left="35.0"/>
+                </HBox.margin>
+            </MFXButton>
+        </HBox>
+    </top>
+</BorderPane>

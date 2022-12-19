@@ -3,7 +3,6 @@ package bomb.tools.pattern.observer;
 import bomb.Widget;
 import javafx.scene.control.RadioButton;
 
-@SuppressWarnings("ClassCanBeRecord")
 public class SouvenirToggleObserver implements Observer {
     private final RadioButton souvenir;
 

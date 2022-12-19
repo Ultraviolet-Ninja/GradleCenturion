@@ -4,20 +4,20 @@
 <suite name="Suite Four">
     <test name="S Module Tests">
         <classes>
-            <class name="bomb.modules.s.shape_shift.ShapeShiftTest"/>
+            <class name="bomb.modules.s.shape.shift.ShapeShiftTest"/>
             <class name="bomb.modules.s.simon.screams.SimonScreamsTest"/>
             <class name="bomb.modules.s.simon.states.SimonStatesTest"/>
-            <class name="bomb.modules.s.square.SquareButtonTest"/>
+            <class name="bomb.modules.s.square.button.SquareButtonTest"/>
             <class name="bomb.modules.s.switches.SwitchesTest"/>
         </classes>
     </test>
 
     <test name="T Module Tests">
         <classes>
-            <class name="bomb.modules.t.bulb.TheBulbTest"/>
+            <class name="bomb.modules.t.the.bulb.TheBulbTest"/>
             <class name="bomb.modules.t.translated.solutions.button.ButtonTest"/>
             <class name="bomb.modules.t.translated.solutions.password.PasswordTest"/>
-            <class name="bomb.modules.t.two_bit.TwoBitTest"/>
+            <class name="bomb.modules.t.two.bit.TwoBitTest"/>
         </classes>
     </test>
 </suite>

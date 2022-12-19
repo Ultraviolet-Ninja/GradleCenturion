@@ -11,7 +11,7 @@ Another thing we talked about while he was on the project was moving back to Jav
 - Using the build.gradle file to organize dependencies and plugins, facilitate testing, set up distributions in zip and tar files, and releases for GitHub.
 - Making custom tasks and using parameters for CI pipelines to test certain parts of the code.
 - Automating tests with CircleCI using this [video](https://www.youtube.com/watch?v=9PgZCJNzY9M) as a guide.
-- Coming across [LGTM](https://lgtm.com/) and taking advantage of its code quality checking for flaws in my Java code.
+- Coming across ~~LGTM~~ (when it was still around) and taking advantage of its code quality checking for flaws in my Java code.
 ## Graphs and their Algorithms
 - Creating graphs by looking up the concept or using the JGraphT library.
 - Making use of Dijkstra's Shortest Path and A* to solve different problems.

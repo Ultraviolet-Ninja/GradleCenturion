@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 
 import java.util.function.Consumer;
 
-@SuppressWarnings("ClassCanBeRecord")
 public class HoverHandler<T extends Event> implements EventHandler<T> {
     private final Consumer<T> action;
 

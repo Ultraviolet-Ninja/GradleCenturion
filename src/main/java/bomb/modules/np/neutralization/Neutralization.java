@@ -1,6 +1,7 @@
 package bomb.modules.np.neutralization;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 import bomb.modules.np.neutralization.Chemical.Acid;
 import bomb.modules.np.neutralization.Chemical.Base;
 import bomb.modules.s.souvenir.Souvenir;
@@ -38,7 +39,8 @@ import static javafx.scene.paint.Color.YELLOW;
  * acid there is in the test tube. The Expert must then find the base that will titrate the acid with a specific
  * drop count and determine if the titration needs a filter or not.
  */
-public class Neutralization extends Widget {
+@DisplayComponent(resource = "neutralization.fxml", buttonLinkerName = "Neutralization")
+public final class Neutralization extends Widget {
     public static final String NO_FILTER_TEXT, FILTER_TEXT;
 
     static final String OUTPUT_SEPARATOR;
