@@ -15,7 +15,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ macos-latest ] #, ubuntu-latest,  macos-latest ]
+        os: [ windows-latest ] #, ubuntu-latest,  macos-latest ]
 
     steps:
       - uses: actions/checkout@v2
@@ -30,17 +30,20 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Set up dependencies
-        run: ./gradlew dependencies
-
-      - name: Assemble with Gradle
-        run: ./gradlew assemble --stacktrace
+#      - name: Set up dependencies
+#        run: ./gradlew dependencies
+#
+#      - name: Assemble with Gradle
+#        run: ./gradlew assemble --stacktrace
 
       - name: Build with Gradle
         run: ./gradlew build
 
       - name: Linking Dependencies with Gradle
         run: ./gradlew jlink
+
+      - name: Packaging with Gradle
+        run: ./gradlew jpackage
 
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v1
