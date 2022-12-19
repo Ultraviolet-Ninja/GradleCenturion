@@ -33,16 +33,21 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+
+      - name: Assemble with Gradle
+        run: gradle assemble
 
       - name: Build with Gradle
         run: gradle build
 
       - name: Linking Dependencies with Gradle
-        run: ./gradlew jlink
+        run: gradle jlink
 
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v1
