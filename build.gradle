@@ -206,9 +206,9 @@ githubRelease {
     overwrite = true
 }
 
-task releaseToGitHub() {
+tasks.register('releaseToGitHub') {
     doFirst {
         githubRelease.token = "${authToken}"
     }
-    finalizedBy(tasks.getByName('githubRelease'))
+    finalizedBy(tasks.named('githubRelease'))
 }
