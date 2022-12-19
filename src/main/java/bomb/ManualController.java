@@ -50,6 +50,7 @@ import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
 public class ManualController {
+    //TODO - Remove when every FXML file is being used
     private static final Region EMPTY_VIEW;
 
     private Map<Toggle, Region> regionMap;
