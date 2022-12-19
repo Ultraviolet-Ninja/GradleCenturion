@@ -8,7 +8,6 @@ import bomb.modules.t.translated.solutions.morse.MorseCodeComponent;
 import bomb.modules.t.translated.solutions.password.PasswordComponent;
 import bomb.modules.t.translated.solutions.wof.WOFComponent;
 import bomb.tools.pattern.facade.FacadeFX;
-import com.opencsv.exceptions.CsvException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
-import java.io.IOException;
 import java.util.List;
 
 public class TranslatedModuleController implements Resettable {
