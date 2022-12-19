@@ -29,7 +29,6 @@ import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Widget.class.getPermittedSubclasses();
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("manual.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
