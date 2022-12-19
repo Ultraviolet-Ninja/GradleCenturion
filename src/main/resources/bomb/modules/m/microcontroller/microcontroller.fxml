@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/m/microcontroller.css"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.m.microcontroller.MicroControllerController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="585.0" minWidth="10.0" prefWidth="388.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="842.0" minWidth="10.0" prefWidth="812.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <GridPane>
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+            <JFXRadioButton onAction="#toggleSubmitButton" text="STRK">
+                <toggleGroup>
+                    <ToggleGroup fx:id="controllerGroup"/>
+                </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton onAction="#toggleSubmitButton" text="LEDS" toggleGroup="$controllerGroup">
+                <VBox.margin>
+                    <Insets top="15.0"/>
+                </VBox.margin>
+            </JFXRadioButton>
+            <JFXRadioButton onAction="#toggleSubmitButton" text="EXPL" toggleGroup="$controllerGroup">
+                <VBox.margin>
+                    <Insets top="15.0"/>
+                </VBox.margin>
+            </JFXRadioButton>
+            <JFXRadioButton onAction="#toggleSubmitButton" text="CNTD" toggleGroup="$controllerGroup">
+                <VBox.margin>
+                    <Insets top="15.0"/>
+                </VBox.margin>
+            </JFXRadioButton>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+            <JFXRadioButton onAction="#toggleSubmitButton" text="6-Pin">
+                <toggleGroup>
+                    <ToggleGroup fx:id="pinCountGroup"/>
+                </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton onAction="#toggleSubmitButton" text="8-Pin" toggleGroup="$pinCountGroup">
+                <VBox.margin>
+                    <Insets top="15.0"/>
+                </VBox.margin>
+            </JFXRadioButton>
+            <JFXRadioButton onAction="#toggleSubmitButton" text="10-Pin" toggleGroup="$pinCountGroup">
+                <VBox.margin>
+                    <Insets top="15.0"/>
+                </VBox.margin>
+            </JFXRadioButton>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+            <MFXTextField fx:id="moduleSerialCodeInput" onKeyTyped="#toggleSubmitButton" prefHeight="60.0"
+                          prefWidth="364.0" promptText="2 Numbers on MicroController"/>
+            <MFXButton id="submit-button" fx:id="submitButton" disable="true" onAction="#submitInfo" text="Submit">
+                <VBox.margin>
+                    <Insets top="20.0"/>
+                </VBox.margin>
+            </MFXButton>
+        </VBox>
+    </GridPane>
+    <HBox id="chip-background" fx:id="chipBackground" alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
+          GridPane.columnIndex="1">
+        <GridPane.margin>
+            <Insets/>
+        </GridPane.margin>
+        <padding>
+            <Insets top="165.0"/>
+        </padding>
+    </HBox>
+</GridPane>

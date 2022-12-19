@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
+          minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../../css/dh/fast_math.css"
+          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.dh.fast.math.FastController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="478.0" minHeight="10.0" prefHeight="252.0" vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="590.0" minHeight="0.0" prefHeight="511.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <VBox alignment="CENTER" prefHeight="242.0" prefWidth="1171.0">
+        <MFXTextField fx:id="outputMath" editable="false" promptText="Output Math">
+            <VBox.margin>
+                <Insets left="250.0" right="250.0"/>
+            </VBox.margin>
+        </MFXTextField>
+    </VBox>
+    <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+        <center>
+            <GridPane BorderPane.alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                    <MFXButton id="submit-button" fx:id="alfa" text="A"/>
+                    <MFXButton id="submit-button" fx:id="bravo" text="B">
+                        <HBox.margin>
+                            <Insets left="15.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="charlie" layoutX="10.0" layoutY="10.0" text="C">
+                        <HBox.margin>
+                            <Insets left="15.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="delta" layoutX="62.0" layoutY="10.0" text="D">
+                        <HBox.margin>
+                            <Insets left="15.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <MFXButton id="submit-button" fx:id="echo" text="E"/>
+                    <MFXButton id="submit-button" fx:id="golf" layoutX="10.0" layoutY="10.0" text="G">
+                        <HBox.margin>
+                            <Insets left="15.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="kilo" layoutX="62.0" layoutY="10.0" text="K">
+                        <HBox.margin>
+                            <Insets left="15.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="november" layoutX="114.0" layoutY="10.0" text="N">
+                        <HBox.margin>
+                            <Insets left="15.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                </HBox>
+                <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                    <MFXButton id="submit-button" fx:id="papa" text="P"/>
+                    <MFXButton id="submit-button" fx:id="sierra" layoutX="10.0" layoutY="10.0" text="S">
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="tango" layoutX="10.0" layoutY="10.0" text="T">
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" layoutX="62.0" layoutY="10.0" text="X" fx:id="xRay">
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                    <MFXButton id="submit-button" fx:id="zulu" layoutX="166.0" layoutY="10.0" text="Z">
+                        <HBox.margin>
+                            <Insets left="10.0"/>
+                        </HBox.margin>
+                    </MFXButton>
+                </HBox>
+            </GridPane>
+        </center>
+        <right>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+        </right>
+        <left>
+            <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+        </left>
+    </BorderPane>
+</GridPane>
