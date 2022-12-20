@@ -64,9 +64,7 @@ jobs:
   linux-pipeline:
 
     runs-on: ubuntu-latest
-
     needs: windows-pipeline
-    if: success
 
     steps:
       - uses: actions/checkout@v2
@@ -95,9 +93,7 @@ jobs:
   mac-pipeline:
 
     runs-on: macos-latest
-
     needs: linux-pipeline
-    if: success
 
     steps:
       - uses: actions/checkout@v2
