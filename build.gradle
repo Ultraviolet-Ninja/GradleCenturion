@@ -12,7 +12,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.22.3'
+version '0.22.3.1'
 
 java {
     sourceCompatibility(17)
