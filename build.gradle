@@ -236,6 +236,7 @@ githubRelease {
 
     def opSys = org.gradle.internal.os.OperatingSystem.current()
     String baseFilename = "${buildDir}/distributions/Gradle-Centurion-${project.version}-"
+    allowUploadToExisting = !opSys.windows
 
     if (opSys.windows) {
         releaseAssets = files("${baseFilename}win.zip", "${baseFilename}win.tar")
