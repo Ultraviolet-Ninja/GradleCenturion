@@ -61,6 +61,13 @@ jobs:
       # - run: |
       #   echo "Run, Build Application using script"
       #   ./location_of_script_within_repo/buildscript.sh
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: 'adopt'
+          check-latest: true
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
