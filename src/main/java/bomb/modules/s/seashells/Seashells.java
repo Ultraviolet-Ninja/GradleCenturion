@@ -1,6 +1,8 @@
 package bomb.modules.s.seashells;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 
-public class Seashells extends Widget {
+@DisplayComponent(resource = "seashells.fxml", buttonLinkerName = "Seashells")
+public final class Seashells extends Widget {
 }

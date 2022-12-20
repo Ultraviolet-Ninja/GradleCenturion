@@ -1,6 +1,8 @@
 package bomb.modules.wz.zoo;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 
-public class Zoo extends Widget {
+@DisplayComponent(resource = "zoo.fxml", buttonLinkerName = "Zoo")
+public final class Zoo extends Widget {
 }

@@ -8,6 +8,9 @@ import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
+import static bomb.modules.s.simon.SimonColors.ScreamColor.BLUE;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.RED;
+import static bomb.modules.s.simon.SimonColors.ScreamColor.YELLOW;
 import static java.util.Arrays.asList;
 
 public class Star {
@@ -15,13 +18,13 @@ public class Star {
 
     private final ArrayRing<ScreamColor> colorOrder;
 
-    public Star(@NotNull ScreamColor[] order) {
+    public Star(@NotNull ScreamColor[] order) throws IllegalArgumentException {
         checkUniqueColors(order);
         colorOrder = new ArrayRing<>(LIMIT);
         for (ScreamColor instance : order) colorOrder.add(instance);
     }
 
-    private static void checkUniqueColors(ScreamColor[] order) {
+    private static void checkUniqueColors(ScreamColor[] order) throws IllegalArgumentException {
         Set<ScreamColor> set = EnumSet.copyOf(asList(order));
         if (set.size() != LIMIT) throw new IllegalArgumentException("Size doesn't equal 6");
     }
@@ -56,18 +59,12 @@ public class Star {
 
     //If there are one or less primary colors are flashing
     public boolean primaryRule(ScreamColor[] flashOrder) {
-        Set<ScreamColor> unique = EnumSet.noneOf(ScreamColor.class);
-        Collections.addAll(unique, flashOrder);
+        Set<ScreamColor> uniqueFlashes = EnumSet.noneOf(ScreamColor.class);
+        Collections.addAll(uniqueFlashes, flashOrder);
 
-        int counter = 0;
-        for (ScreamColor instance : unique) {
-            switch (instance) {
-                case RED, BLUE, YELLOW -> counter++;
-                default -> {
-                }
-            }
-        }
-        return counter < 2;
+        return uniqueFlashes.stream()
+                .filter(color -> color == RED || color == BLUE || color == YELLOW)
+                .count() < 2;
     }
 
     //Complementary Color Not Flashed Rule

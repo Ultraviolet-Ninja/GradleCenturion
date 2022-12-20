@@ -1,6 +1,7 @@
 package bomb.modules.m.murder;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 import org.javatuples.Pair;
 import org.javatuples.Triplet;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +27,8 @@ import static bomb.tools.string.StringFormat.TO_TITLE_CASE;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toMap;
 
-public class Murder extends Widget {
+@DisplayComponent(resource = "murder.fxml", buttonLinkerName = "Murder")
+public final class Murder extends Widget {
     public static @NotNull String solve(@NotNull Location bodyFoundRoom, @NotNull EnumSet<Weapon> possibleWeapons,
                                         @NotNull EnumSet<Suspect> possibleSuspects) throws IllegalStateException {
         validateInput(possibleWeapons, possibleSuspects, bodyFoundRoom);

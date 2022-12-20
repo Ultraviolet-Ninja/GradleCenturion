@@ -1,9 +1,51 @@
 package bomb;
 
+import bomb.annotation.DisplayComponent;
 import bomb.enumerations.Indicator;
 import bomb.enumerations.Port;
 import bomb.enumerations.TrinarySwitch;
-import bomb.modules.dh.forget_me.ForgetMeNot;
+import bomb.modules.ab.alphabet.Alphabet;
+import bomb.modules.ab.astrology.Astrology;
+import bomb.modules.ab.battleship.Battleship;
+import bomb.modules.ab.blind.alley.BlindAlley;
+import bomb.modules.ab.bitwise.Bitwise;
+import bomb.modules.ab.bool.venn.diagram.BooleanVenn;
+import bomb.modules.c.caesar.cipher.Caesar;
+import bomb.modules.c.cheap.checkout.CheapCheckout;
+import bomb.modules.c.chess.Chess;
+import bomb.modules.c.chords.ChordQualities;
+import bomb.modules.c.color.flash.ColorFlash;
+import bomb.modules.dh.emoji.math.EmojiMath;
+import bomb.modules.dh.fast.math.FastMath;
+import bomb.modules.dh.fizzbuzz.FizzBuzz;
+import bomb.modules.dh.forget.me.not.ForgetMeNot;
+import bomb.modules.dh.hexamaze.Hexamaze;
+import bomb.modules.il.ice.cream.IceCream;
+import bomb.modules.il.laundry.Laundry;
+import bomb.modules.il.led.encryption.LEDEncryption;
+import bomb.modules.il.logic.Logic;
+import bomb.modules.m.microcontroller.MicroController;
+import bomb.modules.m.monsplode.MonslopeFight;
+import bomb.modules.m.morsematics.Morsematics;
+import bomb.modules.m.murder.Murder;
+import bomb.modules.np.neutralization.Neutralization;
+import bomb.modules.np.number.pad.NumberPad;
+import bomb.modules.r.round.keypads.RoundKeypads;
+import bomb.modules.s.seashells.Seashells;
+import bomb.modules.s.semaphore.Semaphore;
+import bomb.modules.s.shape.shift.ShapeShift;
+import bomb.modules.s.simon.screams.SimonScreams;
+import bomb.modules.s.simon.states.SimonStates;
+import bomb.modules.s.souvenir.Souvenir;
+import bomb.modules.s.square.button.SquareButton;
+import bomb.modules.s.switches.Switches;
+import bomb.modules.t.the.bulb.TheBulb;
+
+import bomb.modules.t.translated.TranslationCenter;
+import bomb.modules.t.translated.solutions.button.Button;
+import bomb.modules.t.two.bit.TwoBit;
+import bomb.modules.wz.word.search.WordSearch;
+import bomb.modules.wz.zoo.Zoo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
@@ -26,7 +68,12 @@ import static java.util.Arrays.stream;
  * This class is extended by the Module classes, and all bomb widgets are accessible by those classes,
  * as well as the MainController to add/subtract to the widgets.
  */
-public class Widget {
+@DisplayComponent(resource = "widget.fxml", buttonLinkerName = "Widget")
+public sealed class Widget permits Alphabet, Astrology, Battleship, Bitwise, BlindAlley, BooleanVenn, Caesar,
+        CheapCheckout, Chess, ChordQualities, ColorFlash, EmojiMath, FastMath, FizzBuzz, ForgetMeNot, Hexamaze,
+        IceCream, Laundry, LEDEncryption, Logic, MicroController, MonslopeFight, Morsematics, Murder,
+        Neutralization, NumberPad, RoundKeypads, Seashells, Semaphore, ShapeShift, SimonScreams, SimonStates, Souvenir,
+        SquareButton, Switches, TheBulb, Button, TranslationCenter, TwoBit, WordSearch, Zoo {
     protected static boolean isSouvenirActive, isForgetMeNotActive;
     protected static int numDoubleAs, numDBatteries, numHolders, numModules, numPortPlates, numStartingMinutes;
     protected static String serialCode = "", twoFactor = "";

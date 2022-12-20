@@ -1,6 +1,7 @@
 package bomb.modules.c.chess;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.Coordinates;
 import org.intellij.lang.annotations.Language;
@@ -21,7 +22,8 @@ import static bomb.tools.string.StringFormat.INDEX_ZERO_UPPERCASE_LETTER;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toUnmodifiableSet;
 
-public class Chess extends Widget {
+@DisplayComponent(resource = "chess.fxml", buttonLinkerName = "Chess")
+public final class Chess extends Widget {
     @Language("regexp")
     public static final String VALIDITY_PATTERN;
 

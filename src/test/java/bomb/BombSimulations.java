@@ -29,7 +29,7 @@ public class BombSimulations {
 
     /**
      * The Great Berate's first Centurion widget details
-     * https://www.youtube.com/watch?v=ixlWDV0CVmM&t=4537s
+     * <a href="https://www.youtube.com/watch?v=ixlWDV0CVmM&t=4537s">...</a>
      */
     public static void theGreatBerateVideoOne() {
         Widget.resetProperties();
@@ -45,7 +45,7 @@ public class BombSimulations {
 
     /**
      * The Great Berate's second Centurion widget details
-     * https://www.youtube.com/watch?v=dAJp9nRgIbM
+     * <a href="https://www.youtube.com/watch?v=dAJp9nRgIbM">...</a>
      */
     public static void theGreatBerateVideoTwo() {
         Widget.resetProperties();

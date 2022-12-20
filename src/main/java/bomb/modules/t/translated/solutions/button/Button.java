@@ -15,7 +15,7 @@ import static bomb.modules.t.translated.solutions.button.ButtonProperty.WHITE;
 /**
  * Button class deals with a button module
  */
-public class Button extends Widget {
+public final class Button extends Widget {
     public static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
 
     /**

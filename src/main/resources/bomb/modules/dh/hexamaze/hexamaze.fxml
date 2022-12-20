@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import bomb.components.hex.MazeComponent?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Pane?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0"
+          prefWidth="1160.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="bomb.modules.dh.hexamaze.HexamazeController">
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+    <GridPane prefHeight="791.0" prefWidth="1266.0" stylesheets="@../../../css/dh/hexamaze.css">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <Pane>
+            <MazeComponent fx:id="mazeComponent"/>
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="127.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Circle">
+                <toggleGroup>
+                    <ToggleGroup fx:id="hexGroup"/>
+                </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="170.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Hexagon" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="920.0" layoutY="127.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Left Triangle" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="921.0" layoutY="170.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Right Triangle" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="920.0" layoutY="212.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Up Triangle" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="921.0" layoutY="254.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Down Triangle" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="254.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Erase" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="shape-selector" layoutX="778.0" layoutY="212.0" mnemonicParsing="false"
+                            onAction="#setShape" text="Peg" toggleGroup="$hexGroup">
+            </JFXRadioButton>
+            <JFXButton id="submit-button" buttonType="RAISED" layoutX="850.0" layoutY="554.0" mnemonicParsing="false"
+                       onAction="#solveMaze" text="Submit">
+            </JFXButton>
+            <JFXRadioButton id="red-button-selector" fx:id="redButton" disable="true" layoutX="785.0" layoutY="358.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Red">
+                <toggleGroup>
+                    <ToggleGroup fx:id="hexColorGroup"/>
+                </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton id="yellow-button-selector" fx:id="yellowButton" disable="true" layoutX="786.0"
+                            layoutY="413.0" mnemonicParsing="false" onAction="#setPegFill" text="Yellow"
+                            toggleGroup="$hexColorGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="green-button-selector" fx:id="greenButton" disable="true" layoutX="787.0"
+                            layoutY="466.0" mnemonicParsing="false" onAction="#setPegFill" text="Green"
+                            toggleGroup="$hexColorGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="cyan-button-selector" fx:id="cyanButton" disable="true" layoutX="918.0" layoutY="358.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Cyan" toggleGroup="$hexColorGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="blue-button-selector" fx:id="blueButton" disable="true" layoutX="917.0" layoutY="413.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Blue" toggleGroup="$hexColorGroup">
+            </JFXRadioButton>
+            <JFXRadioButton id="pink-button-selector" fx:id="pinkButton" disable="true" layoutX="918.0" layoutY="466.0"
+                            mnemonicParsing="false" onAction="#setPegFill" text="Pink" toggleGroup="$hexColorGroup">
+            </JFXRadioButton>
+            <Label fx:id="exitDirectionLabel" layoutX="684.0" layoutY="641.0" prefHeight="38.0" prefWidth="445.0"/>
+        </Pane>
+    </GridPane>
+</GridPane>

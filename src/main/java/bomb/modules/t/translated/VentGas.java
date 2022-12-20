@@ -1,6 +1,6 @@
 package bomb.modules.t.translated;
 
-public class VentGas extends TranslationCenter {
+public final class VentGas extends TranslationCenter {
     public static String writeYes() {
         return yes;
     }

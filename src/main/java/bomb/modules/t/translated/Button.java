@@ -14,7 +14,7 @@ import static bomb.enumerations.ButtonResult.TAP;
 /**
  * Button class deals with a button module
  */
-public class Button extends TranslationCenter {
+public final class Button extends TranslationCenter {
     private static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
 
     /**

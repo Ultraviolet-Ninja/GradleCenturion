@@ -1,6 +1,7 @@
 package bomb.modules.c.chords;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.data.structures.ring.ArrayRing;
 import org.jetbrains.annotations.NotNull;
@@ -8,7 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ChordQualities extends Widget {
+@DisplayComponent(resource = "chord_qualities.fxml", buttonLinkerName = "Chord Qualities")
+public final class ChordQualities extends Widget {
     public static final String NEW_CHORD;
 
     private static final ArrayRing<String> ALL_NOTES;

@@ -1,6 +1,7 @@
 package bomb.modules.s.souvenir;
 
 import bomb.Widget;
+import bomb.annotation.DisplayComponent;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,7 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Souvenir extends Widget {
+@DisplayComponent(resource = "souvenir.fxml", buttonLinkerName = "Souvenir")
+public final class Souvenir extends Widget {
     private static final Map<String, String> MODULE_ARTIFACTS;
 
     static {
