@@ -2,7 +2,7 @@
 *101 modules, 100 minutes, exponentially more problems.*
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
-![Project Version](https://img.shields.io/badge/version-0.22.2-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.22.3-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
@@ -21,7 +21,7 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - JFoenix ver. 9.0.4
 - JavaTuple ver. 1.2
 - JGraphT ver. 1.5.1
-- OpenCSV ver. 5.5.2
+- OpenCSV ver. 5.7.1
 ### Other Technologies
 - Circle CI
 - CodeMR Free Trial
