@@ -247,10 +247,9 @@ githubRelease {
 }
 
 tasks.register('releaseToGitHub') {
+    dependsOn(tasks.named('zipExecutableFiles'), tasks.named('tarExecutableFiles'))
     doFirst {
         githubRelease.token = "${authToken}"
-        tasks.named('zipExecutableFiles')
-        tasks.named('tarExecutableFiles')
     }
     finalizedBy(tasks.named('githubRelease'))
 }
