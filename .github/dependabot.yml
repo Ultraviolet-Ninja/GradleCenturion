@@ -9,6 +9,7 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    target-branch: "dev"
     allow:
       - dependency-name: "com.opencsv:opencsv"
       - dependency-name: "org.javatuples:javatuples"
@@ -18,12 +19,15 @@ updates:
       - dependency-name: "org.slf4j:slf4j-api"
       - dependency-name: "org.slf4j:slf4j-simple"
       - dependency-name: "nl.jqno.equalsverifier:equalsverifier"
+      - dependency-name: "org.openjfx.javafxplugin"
+      - dependency-name: "org.beryx.jlink"
+      - dependency-name: "org.javamodularity.moduleplugin"
+      - dependency-name: "com.github.breadmoirai.github-release"
     ignore:
-      - dependency-name: "com.jfoenix:jfoenix"
-      - dependency-name: "io.github.palexdev:materialfx"
-    branches:
-      only:
-        - dev
+      - dependency-name: "com.jfoenix:jfoenix"            # Must stay at 9.0.4
+      - dependency-name: "io.github.palexdev:materialfx"  # Must stay at 11.12.0
+      - dependency-name: "info.solidsoft.pitest"          # Must stay at 1.7.4
+
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -31,6 +35,4 @@ updates:
       interval: "monthly"
     allow:
       - dependency-type: "all"
-    branches:
-      only:
-        - dev
+    target-branch: "dev"

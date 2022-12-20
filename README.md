@@ -2,7 +2,7 @@
 *101 modules, 100 minutes, exponentially more problems.*
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
-![Project Version](https://img.shields.io/badge/version-0.22.3-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.22.3.1-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>

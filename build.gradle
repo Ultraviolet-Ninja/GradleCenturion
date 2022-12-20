@@ -12,7 +12,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.22.3'
+version '0.22.3.1'
 
 java {
     sourceCompatibility(17)
@@ -60,7 +60,7 @@ dependencies {
     testImplementation 'org.testng:testng:7.7.0'
     testImplementation 'org.slf4j:slf4j-api:2.0.6'
     testImplementation 'org.slf4j:slf4j-simple:2.0.6'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.12.2'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.12.3'
 }
 
 def firstInstance = project.hasProperty('thread0')
