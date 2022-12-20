@@ -3,7 +3,6 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'org.beryx.jlink' version '2.25.0'
-    id 'com.palantir.docker' version '0.34.0'
     id 'info.solidsoft.pitest' version '1.7.4'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
@@ -51,14 +50,12 @@ dependencies {
     implementation 'org.jetbrains:annotations:23.1.0'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
 
-    implementation('com.jfoenix:jfoenix:9.0.4')
-//            {
-//        exclude group: "org.javafx"
-//            }
-    implementation('io.github.palexdev:materialfx:11.12.0')
-//            {
-//        exclude group: "org.javafx"
-//    }
+    implementation('com.jfoenix:jfoenix:9.0.4') {
+        exclude group: "org.javafx"
+    }
+    implementation('io.github.palexdev:materialfx:11.12.0') {
+        exclude group: "org.javafx"
+    }
 
     testImplementation 'org.testng:testng:7.7.0'
     testImplementation 'org.slf4j:slf4j-api:2.0.5'
@@ -79,28 +76,30 @@ def includedTestDirectories = [
 
 test {
     useTestNG() {
+        String baseDirectory = 'src/test/resources/suites/suite'
+
         if(firstInstance) {
-            suites "src/test/resources/suites/suiteOne.xml"
+            suites "${baseDirectory}One.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/ab/**', 'bomb/modules/c/**'
             ])
         } else if (secondInstance) {
-            suites "src/test/resources/suites/suiteTwo.xml"
+            suites "${baseDirectory}Two.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/dh/**', 'bomb/modules/il/**', 'bomb/modules/m/**'
             ])
         } else if (thirdInstance) {
-            suites "src/test/resources/suites/suiteThree.xml"
+            suites "${baseDirectory}Three.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/np/**', 'bomb/modules/r/**'
             ])
         } else if (fourthInstance) {
-            suites "src/test/resources/suites/suiteFour.xml"
+            suites "${baseDirectory}Four.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/s/**', 'bomb/modules/t/**'
             ])
         } else if (fifthInstance) {
-            suites "src/test/resources/suites/suiteFive.xml"
+            suites "${baseDirectory}Five.xml"
             includedTestDirectories.addAll([
                     'bomb', 'bomb/tools/filter/*', 'bomb/modules/wz/**'
             ])
@@ -124,18 +123,20 @@ jacocoTestReport {
 static List<String> getTargetClasses(boolean firstInstance, boolean secondInstance,
                                      boolean thirdInstance, boolean fourthInstance,
                                      boolean fifthInstance, boolean sixthInstance) {
+    String baseModuleDirectory = 'bomb.modules.'
+
     if (firstInstance)
-        return ['bomb.modules.ab.**']
+        return ["${baseModuleDirectory}ab.**"]
     else if (secondInstance)
-        return ['bomb.modules.c.**']
+        return ["${baseModuleDirectory}c.**"]
     else if (thirdInstance)
-        return ['bomb.modules.dh.**', 'bomb.modules.il.**']
+        return ["${baseModuleDirectory}dh.**", "${baseModuleDirectory}il.**"]
     else if (fourthInstance)
-        return ['bomb.modules.m.**', 'bomb.modules.np.**']
+        return ["${baseModuleDirectory}m.**", "${baseModuleDirectory}np.**"]
     else if (fifthInstance)
-        return ['bomb.modules.r.**', 'bomb.modules.s.**']
+        return ["${baseModuleDirectory}r.**", "${baseModuleDirectory}s.**"]
     else if (sixthInstance)
-        return ['bomb.modules.t.**', 'bomb.modules.wz.**', 'bomb.tools.filter.*']
+        return ["${baseModuleDirectory}t.**", "${baseModuleDirectory}wz.**", 'bomb.tools.filter.*']
     return ['bomb.*']
 }
 
@@ -157,56 +158,97 @@ jlink {
     imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     addExtraDependencies("javafx")
-    launcher {
-        name = "${project.name}"
+
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String iconBaseFilename = "${buildDir}/resources/main/bomb/KTANE logo"
+
+    if (opSys.windows) {
+        launcher {
+            name = 'Gradle Centurion Win'
+        }
+
+        jpackage {
+            installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu']
+            imageOptions += ['--icon', "${iconBaseFilename}.ico"]
+        }
+    } else if (opSys.linux) {
+        launcher {
+            name = 'Gradle Centurion Linux'
+        }
+
+        jpackage {
+            imageOptions += ['--icon', "${iconBaseFilename}.png"]
+            installerOptions += [
+                    '--linux-menu-group', 'Office',
+                    '--linux-shortcut'
+            ]
+        }
+    } else {
+        launcher {
+            name = 'Gradle Centurion Mac'
+        }
+
+        jpackage {
+            imageOptions += ['--icon', "${iconBaseFilename}.icns"]
+        }
     }
 }
 
-//docker {
-//    dependsOn(jar)
-//    name "${project.name.toLowerCase()}:${project.version}"
-//    files "${buildDir}/libs/${project.name}-${project.version}.jar"
-//    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar"])
-//    tag('DockerHub', "jasminejragon/${project.name.replace("C", "-c").toLowerCase()}:${project.version}")
-//}
+tasks.register('zipExecutableFiles', Zip) {
+    dependsOn(jpackageImage)
+    from buildDir
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String baseFilename = "Gradle-Centurion-${project.version}-"
 
-docker {
-    dependsOn(jar)
-    name "${project.name.replace("C", "-c").toLowerCase()}:${project.version}"
-    copySpec.from("src/main").from("gradle").into("necessaryFiles")
-    files 'build.gradle', 'settings.gradle'
+    if (opSys.windows) {
+        include 'jpackage/Gradle Centurion Win/**'
+        archiveName "${baseFilename}win.zip"
+    } else if (opSys.linux) {
+        include 'jpackage/Gradle Centurion Linux/**'
+        archiveName "${baseFilename}linux.zip"
+    } else {
+        include 'jpackage/Gradle Centurion Mac/**'
+        archiveName "${baseFilename}mac.zip"
+    }
 }
 
-dockerfileZip {
-    destinationDirectory = file("${buildDir}/zip/docker")
-}
+tasks.register('tarExecutableFiles', Tar) {
+    dependsOn(jpackageImage)
+    from buildDir
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String baseFilename = "Gradle-Centurion-${project.version}-"
 
-//distZip {
-//    from projectDir
-//    include 'src/main/**/*'
-//    include 'gradle/wrapper/*'
-//    include 'markdown/*'
-//    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
-//}
-//
-//distTar {
-//    from projectDir
-//    include 'src/main/**/*'
-//    include 'gradle/wrapper/*'
-//    include 'markdown/*'
-//    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
-//}
+    if (opSys.windows) {
+        include 'jpackage/Gradle Centurion Win/**'
+        archiveName "${baseFilename}win.tar"
+    } else if (opSys.linux) {
+        include 'jpackage/Gradle Centurion Linux/**'
+        archiveName "${baseFilename}linux.tar"
+    } else {
+        include 'jpackage/Gradle Centurion Mac/**'
+        archiveName "${baseFilename}mac.tar"
+    }
+}
 
 githubRelease {
-    String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
-    releaseAssets = files("${baseFileName}.zip", "${baseFileName}.tar")
     tagName = "${project.version}"
-    targetCommitish = 'main'
     owner = 'Ultraviolet-Ninja'
-    overwrite = true
+
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String baseFilename = "${buildDir}/distributions/Gradle-Centurion-${project.version}-"
+    allowUploadToExisting = !opSys.windows
+
+    if (opSys.windows) {
+        releaseAssets = files("${baseFilename}win.zip", "${baseFilename}win.tar")
+    } else if (opSys.linux) {
+        releaseAssets = files("${baseFilename}linux.zip", "${baseFilename}linux.tar")
+    } else {
+        releaseAssets = files("${baseFilename}mac.zip", "${baseFilename}mac.tar")
+    }
 }
 
 tasks.register('releaseToGitHub') {
+    dependsOn(tasks.named('zipExecutableFiles'), tasks.named('tarExecutableFiles'))
     doFirst {
         githubRelease.token = "${authToken}"
     }
