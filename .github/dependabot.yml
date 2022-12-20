@@ -1,0 +1,30 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "gradle" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-name: "com.opencsv:opencsv"
+      - dependency-name: "org.javatuples:javatuples"
+      - dependency-name: "org.jgrapht:jgrapht-ext"
+      - dependency-name: "org.jetbrains:annotations"
+      - dependency-name: "org.testng:testng"
+      - dependency-name: "org.slf4j:slf4j-api"
+      - dependency-name: "org.slf4j:slf4j-simple"
+      - dependency-name: "nl.jqno.equalsverifier:equalsverifier"
+    ignore:
+      - dependency-name: "com.jfoenix:jfoenix"
+      - dependency-name: "io.github.palexdev:materialfx"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    allow:
+      - dependency-type: "all"
