@@ -21,6 +21,9 @@ updates:
     ignore:
       - dependency-name: "com.jfoenix:jfoenix"
       - dependency-name: "io.github.palexdev:materialfx"
+    branches:
+      only:
+        - dev
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -28,3 +31,6 @@ updates:
       interval: "monthly"
     allow:
       - dependency-type: "all"
+    branches:
+      only:
+        - dev
