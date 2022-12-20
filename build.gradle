@@ -3,7 +3,6 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'org.beryx.jlink' version '2.25.0'
-    id 'com.palantir.docker' version '0.34.0'
     id 'info.solidsoft.pitest' version '1.7.4'
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
@@ -195,61 +194,63 @@ jlink {
     }
 }
 
-//docker {
-//    dependsOn(jar)
-//    name "${project.name.toLowerCase()}:${project.version}"
-//    files "${buildDir}/libs/${project.name}-${project.version}.jar"
-//    buildArgs([JAR_FILE: "${project.name}-${project.version}.jar"])
-//    tag('DockerHub', "jasminejragon/${project.name.replace("C", "-c").toLowerCase()}:${project.version}")
-//}
+tasks.register('zipExecutableFiles', Zip) {
+    dependsOn(jpackageImage)
+    from buildDir
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String baseFilename = "Gradle-Centurion-${project.version}-"
 
-docker {
-    dependsOn(jar)
-    name "${project.name.replace("C", "-c").toLowerCase()}:${project.version}"
-    copySpec.from("src/main").from("gradle").into("necessaryFiles")
-    files 'build.gradle', 'settings.gradle'
+    if (opSys.windows) {
+        include 'jpackage/Gradle Centurion Win/**'
+        archiveName "${baseFilename}win.zip"
+    } else if (opSys.linux) {
+        include 'jpackage/Gradle Centurion Linux/**'
+        archiveName "${baseFilename}linux.zip"
+    } else {
+        include 'jpackage/Gradle Centurion Mac/**'
+        archiveName "${baseFilename}mac.zip"
+    }
 }
 
-dockerfileZip {
-    destinationDirectory = file("${buildDir}/zip/docker")
-}
+tasks.register('tarExecutableFiles', Tar) {
+    dependsOn(jpackageImage)
+    from buildDir
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String baseFilename = "Gradle-Centurion-${project.version}-"
 
-//distZip {
-//    from projectDir
-//    include 'src/main/**/*'
-//    include 'gradle/wrapper/*'
-//    include 'markdown/*'
-//    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
-//}
-//
-//distTar {
-//    from projectDir
-//    include 'src/main/**/*'
-//    include 'gradle/wrapper/*'
-//    include 'markdown/*'
-//    include 'build.gradle', 'gradlew', 'gradlew.bat', 'README.md', 'Progress.md', 'Learned.md'
-//}
+    if (opSys.windows) {
+        include 'jpackage/Gradle Centurion Win/**'
+        archiveName "${baseFilename}win.tar"
+    } else if (opSys.linux) {
+        include 'jpackage/Gradle Centurion Linux/**'
+        archiveName "${baseFilename}linux.tar"
+    } else {
+        include 'jpackage/Gradle Centurion Mac/**'
+        archiveName "${baseFilename}mac.tar"
+    }
+}
 
 githubRelease {
     tagName = "${project.version}"
     owner = 'Ultraviolet-Ninja'
-//    overwrite = true
 
     def opSys = org.gradle.internal.os.OperatingSystem.current()
-    String baseDirectory = "${buildDir}/jpackage/Gradle Centurion "
+    String baseFilename = "${buildDir}/distributions/Gradle-Centurion-${project.version}-"
 
     if (opSys.windows) {
-        releaseAssets.from("${baseDirectory}Win")
+        releaseAssets = files("${baseFilename}-win.zip", "${baseFilename}-win.tar")
     } else if (opSys.linux) {
-        releaseAssets.from("${baseDirectory}Linux")
+        releaseAssets = files("${baseFilename}-linux.zip", "${baseFilename}-linux.tar")
     } else {
-        releaseAssets.from("${baseDirectory}Mac")
+        releaseAssets = files("${baseFilename}-mac.zip", "${baseFilename}-mac.tar")
     }
 }
 
 tasks.register('releaseToGitHub') {
     doFirst {
         githubRelease.token = "${authToken}"
+        tasks.named('zipExecutableFiles')
+        tasks.named('tarExecutableFiles')
     }
     finalizedBy(tasks.named('githubRelease'))
 }

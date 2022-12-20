@@ -29,9 +29,6 @@ jobs:
 
 #      - name: Build with Gradle
 #        run: ./gradlew build
-#
-#      - name: Linking Dependencies with Gradle
-#        run: ./gradlew jlink
 
       - name: Creating the Executable
         run: ./gradlew jpackageImage
@@ -51,8 +48,8 @@ jobs:
 #      - name: Docker Build and Push
 #        id: docker_build
 #        run: ./gradlew dockerPushDockerHub
-#
-      - name: Auto-Upload Releases
+
+      - name: Upload Releases
         run: ./gradlew releaseToGitHub -PauthToken=${{ secrets.GITHUB_TOKEN }}
 
   linux-pipeline:
