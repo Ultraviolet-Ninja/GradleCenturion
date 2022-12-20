@@ -30,13 +30,10 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 See the running list of modules [here](Progress.md)
 
 ## How to run the program
-*Disclaimer:* Make sure you have Java [17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
-and the JAVA_HOME is set.
-1. Grab the latest .zip/tar of the GradleCenturion-X.X.X and unzip it
-2. Using the command line, navigate to the unzipped directory
-3. Run the command
-   - Windows: `gradlew run`
-   - Linux: `./gradlew run`
+*Disclaimer*: This is referring to program versions `0.22.2` onward
+- The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable, a Windows batch file and all the necessary jar files to run the program
+- The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains a OS-specific executable file with a runtime environment for the program to run in
+  - *Only supports Windows currently*
 
 ## Inspiration
 After my first manual turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*".
