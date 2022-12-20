@@ -238,11 +238,11 @@ githubRelease {
     String baseFilename = "${buildDir}/distributions/Gradle-Centurion-${project.version}-"
 
     if (opSys.windows) {
-        releaseAssets = files("${baseFilename}-win.zip", "${baseFilename}-win.tar")
+        releaseAssets = files("${baseFilename}win.zip", "${baseFilename}win.tar")
     } else if (opSys.linux) {
-        releaseAssets = files("${baseFilename}-linux.zip", "${baseFilename}-linux.tar")
+        releaseAssets = files("${baseFilename}linux.zip", "${baseFilename}linux.tar")
     } else {
-        releaseAssets = files("${baseFilename}-mac.zip", "${baseFilename}-mac.tar")
+        releaseAssets = files("${baseFilename}mac.zip", "${baseFilename}mac.tar")
     }
 }
 
