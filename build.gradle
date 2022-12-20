@@ -76,30 +76,28 @@ def includedTestDirectories = [
 
 test {
     useTestNG() {
-        String baseDirectory = 'src/test/resources/suites/suite'
-
         if(firstInstance) {
-            suites "${baseDirectory}One.xml"
+            suites 'src/test/resources/suites/suiteOne.xml'
             includedTestDirectories.addAll([
                     'bomb/modules/ab/**', 'bomb/modules/c/**'
             ])
         } else if (secondInstance) {
-            suites "${baseDirectory}Two.xml"
+            suites 'src/test/resources/suites/suiteTwo.xml'
             includedTestDirectories.addAll([
                     'bomb/modules/dh/**', 'bomb/modules/il/**', 'bomb/modules/m/**'
             ])
         } else if (thirdInstance) {
-            suites "${baseDirectory}Three.xml"
+            suites 'src/test/resources/suites/suiteThree.xml'
             includedTestDirectories.addAll([
                     'bomb/modules/np/**', 'bomb/modules/r/**'
             ])
         } else if (fourthInstance) {
-            suites "${baseDirectory}Four.xml"
+            suites 'src/test/resources/suites/suiteFour.xml'
             includedTestDirectories.addAll([
                     'bomb/modules/s/**', 'bomb/modules/t/**'
             ])
         } else if (fifthInstance) {
-            suites "${baseDirectory}Five.xml"
+            suites 'src/test/resources/suites/suiteFive.xml'
             includedTestDirectories.addAll([
                     'bomb', 'bomb/tools/filter/*', 'bomb/modules/wz/**'
             ])
@@ -123,20 +121,18 @@ jacocoTestReport {
 static List<String> getTargetClasses(boolean firstInstance, boolean secondInstance,
                                      boolean thirdInstance, boolean fourthInstance,
                                      boolean fifthInstance, boolean sixthInstance) {
-    String baseModuleDirectory = 'bomb.modules.'
-
     if (firstInstance)
-        return ["${baseModuleDirectory}ab.**"]
+        return ['bomb.modules.ab.**']
     else if (secondInstance)
-        return ["${baseModuleDirectory}c.**"]
+        return ['bomb.modules.c.**']
     else if (thirdInstance)
-        return ["${baseModuleDirectory}dh.**", "${baseModuleDirectory}il.**"]
+        return ['bomb.modules.dh.**', 'bomb.modules.il.**']
     else if (fourthInstance)
-        return ["${baseModuleDirectory}m.**", "${baseModuleDirectory}np.**"]
+        return ['bomb.modules.m.**', 'bomb.modules.np.**']
     else if (fifthInstance)
-        return ["${baseModuleDirectory}r.**", "${baseModuleDirectory}s.**"]
+        return ['bomb.modules.r.**', 'bomb.modules.s.**']
     else if (sixthInstance)
-        return ["${baseModuleDirectory}t.**", "${baseModuleDirectory}wz.**", 'bomb.tools.filter.*']
+        return ['bomb.modules.t.**', 'bomb.modules.wz.**', 'bomb.tools.filter.*']
     return ['bomb.*']
 }
 
