@@ -77,28 +77,30 @@ def includedTestDirectories = [
 
 test {
     useTestNG() {
+        String baseDirectory = 'src/test/resources/suites/suite'
+
         if(firstInstance) {
-            suites "src/test/resources/suites/suiteOne.xml"
+            suites "${baseDirectory}One.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/ab/**', 'bomb/modules/c/**'
             ])
         } else if (secondInstance) {
-            suites "src/test/resources/suites/suiteTwo.xml"
+            suites "${baseDirectory}Two.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/dh/**', 'bomb/modules/il/**', 'bomb/modules/m/**'
             ])
         } else if (thirdInstance) {
-            suites "src/test/resources/suites/suiteThree.xml"
+            suites "${baseDirectory}Three.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/np/**', 'bomb/modules/r/**'
             ])
         } else if (fourthInstance) {
-            suites "src/test/resources/suites/suiteFour.xml"
+            suites "${baseDirectory}Four.xml"
             includedTestDirectories.addAll([
                     'bomb/modules/s/**', 'bomb/modules/t/**'
             ])
         } else if (fifthInstance) {
-            suites "src/test/resources/suites/suiteFive.xml"
+            suites "${baseDirectory}Five.xml"
             includedTestDirectories.addAll([
                     'bomb', 'bomb/tools/filter/*', 'bomb/modules/wz/**'
             ])
@@ -122,18 +124,20 @@ jacocoTestReport {
 static List<String> getTargetClasses(boolean firstInstance, boolean secondInstance,
                                      boolean thirdInstance, boolean fourthInstance,
                                      boolean fifthInstance, boolean sixthInstance) {
+    String baseModuleDirectory = 'bomb.modules.'
+
     if (firstInstance)
-        return ['bomb.modules.ab.**']
+        return ["${baseModuleDirectory}ab.**"]
     else if (secondInstance)
-        return ['bomb.modules.c.**']
+        return ["${baseModuleDirectory}c.**"]
     else if (thirdInstance)
-        return ['bomb.modules.dh.**', 'bomb.modules.il.**']
+        return ["${baseModuleDirectory}dh.**", "${baseModuleDirectory}il.**"]
     else if (fourthInstance)
-        return ['bomb.modules.m.**', 'bomb.modules.np.**']
+        return ["${baseModuleDirectory}m.**", "${baseModuleDirectory}np.**"]
     else if (fifthInstance)
-        return ['bomb.modules.r.**', 'bomb.modules.s.**']
+        return ["${baseModuleDirectory}r.**", "${baseModuleDirectory}s.**"]
     else if (sixthInstance)
-        return ['bomb.modules.t.**', 'bomb.modules.wz.**', 'bomb.tools.filter.*']
+        return ["${baseModuleDirectory}t.**", "${baseModuleDirectory}wz.**", 'bomb.tools.filter.*']
     return ['bomb.*']
 }
 
@@ -156,23 +160,37 @@ jlink {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     addExtraDependencies("javafx")
 
-    launcher {
-        name = 'Gradle Centurion'
-    }
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String iconBaseFilename = "${buildDir}/resources/main/bomb/KTANE logo"
 
-    jpackage {
-        def opSys = org.gradle.internal.os.OperatingSystem.current()
-        if (opSys.windows) {
+    if (opSys.windows) {
+        launcher {
+            name = 'Gradle Centurion Win'
+        }
+
+        jpackage {
             installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu']
-            imageOptions += ['--icon', "${buildDir}/resources/main/bomb/KTANE logo.ico"]
-        } else if (opSys.linux) {
-            imageOptions += ['--icon', 'src/main/resources/main/bomb/KTANE logo.png']
+            imageOptions += ['--icon', "${iconBaseFilename}.ico"]
+        }
+    } else if (opSys.linux) {
+        launcher {
+            name = 'Gradle Centurion Linux'
+        }
+
+        jpackage {
+            imageOptions += ['--icon', "${iconBaseFilename}.png"]
             installerOptions += [
                     '--linux-menu-group', 'Office',
                     '--linux-shortcut'
             ]
-        } else {
-            imageOptions += ['--icon', 'src/main/resources/main/bomb/KTANE logo.icns']
+        }
+    } else {
+        launcher {
+            name = 'Gradle Centurion Mac'
+        }
+
+        jpackage {
+            imageOptions += ['--icon', "${iconBaseFilename}.icns"]
         }
     }
 }
@@ -213,22 +231,20 @@ dockerfileZip {
 //}
 
 githubRelease {
-//    String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
+    tagName = "${project.version}"
+    owner = 'Ultraviolet-Ninja'
+//    overwrite = true
+
     def opSys = org.gradle.internal.os.OperatingSystem.current()
-    String baseFileName = "${buildDir}/jpackage/${project.name}-${project.version}"
+    String baseDirectory = "${buildDir}/jpackage/Gradle Centurion "
 
     if (opSys.windows) {
-        releaseAssets = files("${baseFileName}.exe", "${baseFileName}.msi")
+        releaseAssets.from("${baseDirectory}Win")
     } else if (opSys.linux) {
-        releaseAssets = files("${baseFileName}.deb", "${baseFileName}.rpm")
+        releaseAssets.from("${baseDirectory}Linux")
     } else {
-        releaseAssets = files("${baseFileName}.pkg")
+        releaseAssets.from("${baseDirectory}Mac")
     }
-
-    tagName = "${project.version}"
-    targetCommitish = 'main'
-    owner = 'Ultraviolet-Ninja'
-    overwrite = true
 }
 
 tasks.register('releaseToGitHub') {

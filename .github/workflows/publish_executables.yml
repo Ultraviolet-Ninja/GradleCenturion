@@ -27,20 +27,14 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-#      - name: Set up dependencies
-#        run: ./gradlew dependencies
+#      - name: Build with Gradle
+#        run: ./gradlew build
 #
-#      - name: Assemble with Gradle
-#        run: ./gradlew assemble --stacktrace
+#      - name: Linking Dependencies with Gradle
+#        run: ./gradlew jlink
 
-      - name: Build with Gradle
-        run: ./gradlew build
-
-      - name: Linking Dependencies with Gradle
-        run: ./gradlew jlink
-
-      - name: Packaging with Gradle
-        run: ./gradlew jpackage
+      - name: Creating the Executable
+        run: ./gradlew jpackageImage
 
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v1
@@ -58,8 +52,8 @@ jobs:
 #        id: docker_build
 #        run: ./gradlew dockerPushDockerHub
 #
-#      - name: Auto-Upload Releases
-#        run: ./gradlew releaseToGitHub -PauthToken=${{ secrets.GITHUB_TOKEN }}
+      - name: Auto-Upload Releases
+        run: ./gradlew releaseToGitHub -PauthToken=${{ secrets.GITHUB_TOKEN }}
 
   linux-pipeline:
 
@@ -90,6 +84,7 @@ jobs:
 
 #      - name: Auto-Upload Releases
 #        run: ./gradlew releaseToGitHub -PauthToken=${{ secrets.GITHUB_TOKEN }}
+
   mac-pipeline:
 
     runs-on: macos-latest
