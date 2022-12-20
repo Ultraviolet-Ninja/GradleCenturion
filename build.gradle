@@ -165,6 +165,14 @@ jlink {
         if (opSys.windows) {
             installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu']
             imageOptions += ['--icon', "${buildDir}/resources/main/bomb/KTANE logo.ico"]
+        } else if (opSys.linux) {
+            imageOptions += ['--icon', 'src/main/resources/main/bomb/KTANE logo.png']
+            installerOptions += [
+                    '--linux-menu-group', 'Office',
+                    '--linux-shortcut'
+            ]
+        } else {
+            imageOptions += ['--icon', 'src/main/resources/main/bomb/KTANE logo.icns']
         }
     }
 }
@@ -205,8 +213,18 @@ dockerfileZip {
 //}
 
 githubRelease {
-    String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
-    releaseAssets = files("${baseFileName}.zip", "${baseFileName}.tar")
+//    String baseFileName = "${buildDir}/distributions/${project.name}-${project.version}"
+    def opSys = org.gradle.internal.os.OperatingSystem.current()
+    String baseFileName = "${buildDir}/jpackage/${project.name}-${project.version}"
+
+    if (opSys.windows) {
+        releaseAssets = files("${baseFileName}.exe", "${baseFileName}.msi")
+    } else if (opSys.linux) {
+        releaseAssets = files("${baseFileName}.deb", "${baseFileName}.rpm")
+    } else {
+        releaseAssets = files("${baseFileName}.pkg")
+    }
+
     tagName = "${project.version}"
     targetCommitish = 'main'
     owner = 'Ultraviolet-Ninja'
