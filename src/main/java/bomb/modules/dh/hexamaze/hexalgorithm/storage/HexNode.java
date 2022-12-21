@@ -75,7 +75,7 @@ public class HexNode implements Rotatable {
         StringBuilder sb = new StringBuilder(
                 hexShape != null ? hexShape.toString() : "No Shape"
         );
-        sb.append("-");
+        sb.append('-');
         if (walls == null) return sb.append("No walls").toString();
         sb.append(
                 walls.stream()

@@ -72,7 +72,7 @@ public class BooleanController implements Resettable {
     private void switchEquationPriority() {
         priorityToggle.setText((!priorityToggle.isSelected() ? "AB" : "BC") + " Priority");
 
-        if (currentOperation.toString().length() != DEFAULT_TEXT.length()) {
+        if (currentOperation.length() != DEFAULT_TEXT.length()) {
             currentOperation = shiftPriority(currentOperation.toString());
             solveEquation();
         } else {

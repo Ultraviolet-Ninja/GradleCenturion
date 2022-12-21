@@ -31,7 +31,7 @@ public sealed class Switches extends Widget permits ColoredSwitches {
     private static void setUpSpecialConditions() {
         Byte[] specialConditionsSource = {12, 20, 27, 31};
         String[][] specialConditionsOutputs = {{"3", "2"}, {"3", "1"}, {"4", "1", "2", "5"}, {"3", "4", "1", "2", "5"}};
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < specialConditionsSource.length; i++)
             SPECIAL_CONDITIONS.put(specialConditionsSource[i], specialConditionsOutputs[i]);
     }
 
