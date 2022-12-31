@@ -133,9 +133,13 @@ public class ManualController {
     }
 
     private static Map<String, Region> createFXMLMap(ResetObserver resetObserver) {
-        return getDisplayedClasses()
-//                .stream()
-                .parallelStream()
+        var displayClassStream = getDisplayedClasses().parallelStream();
+
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            displayClassStream = displayClassStream.sequential();
+        }
+
+        return displayClassStream
                 .map(cls -> mapClassToRegion(cls, resetObserver))
                 .collect(toMap(Pair::getValue0, Pair::getValue1));
     }
