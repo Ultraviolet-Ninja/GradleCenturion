@@ -89,38 +89,38 @@ public class HexNode implements Rotatable {
     public void rotate() {
         if (!walls.isEmpty()) {
             walls = walls.stream()
-                    .map(State::nextState)
+                    .map(State::toNextState)
                     .collect(toCollection(() -> EnumSet.noneOf(HexWall.class)));
         }
 
-        if (hexShape != null) hexShape = hexShape.nextState();
+        if (hexShape != null) hexShape = hexShape.toNextState();
     }
 
     public enum HexShape implements State<HexShape> {
         CIRCLE, HEXAGON, LEFT_TRIANGLE {
             @Override
-            public HexShape nextState() {
+            public HexShape toNextState() {
                 return RIGHT_TRIANGLE;
             }
         }, RIGHT_TRIANGLE {
             @Override
-            public HexShape nextState() {
+            public HexShape toNextState() {
                 return LEFT_TRIANGLE;
             }
         }, UP_TRIANGLE {
             @Override
-            public HexShape nextState() {
+            public HexShape toNextState() {
                 return DOWN_TRIANGLE;
             }
         }, DOWN_TRIANGLE {
             @Override
-            public HexShape nextState() {
+            public HexShape toNextState() {
                 return UP_TRIANGLE;
             }
         };
 
         @Override
-        public HexShape nextState() {
+        public HexShape toNextState() {
             return this;
         }
     }
@@ -128,32 +128,32 @@ public class HexNode implements Rotatable {
     public enum HexWall implements State<HexWall> {
         TOP_LEFT {
             @Override
-            public HexWall nextState() {
+            public HexWall toNextState() {
                 return TOP;
             }
         }, TOP {
             @Override
-            public HexWall nextState() {
+            public HexWall toNextState() {
                 return TOP_RIGHT;
             }
         }, TOP_RIGHT {
             @Override
-            public HexWall nextState() {
+            public HexWall toNextState() {
                 return BOTTOM_RIGHT;
             }
         }, BOTTOM_LEFT {
             @Override
-            public HexWall nextState() {
+            public HexWall toNextState() {
                 return TOP_LEFT;
             }
         }, BOTTOM {
             @Override
-            public HexWall nextState() {
+            public HexWall toNextState() {
                 return BOTTOM_LEFT;
             }
         }, BOTTOM_RIGHT {
             @Override
-            public HexWall nextState() {
+            public HexWall toNextState() {
                 return BOTTOM;
             }
         }

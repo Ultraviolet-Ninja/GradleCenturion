@@ -72,7 +72,7 @@ public final class SimonStates extends Widget {
             case THIRD -> getStageThree(colorsFlashed);
             default -> getStageFour(colorsFlashed);
         };
-        currentStage = currentStage.nextState();
+        currentStage = currentStage.toNextState();
 
         PRESSED_COLOR_HISTORY.add(colorToPress);
         return PRESSED_COLOR_HISTORY;

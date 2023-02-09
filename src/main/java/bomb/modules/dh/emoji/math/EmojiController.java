@@ -85,7 +85,7 @@ public class EmojiController implements Resettable {
                 FacadeFX.enable(equal);
                 break;
         }
-        currentState = currentState.nextState();
+        currentState = currentState.toNextState();
     }
 
     @FXML
