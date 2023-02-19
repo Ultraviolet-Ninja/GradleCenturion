@@ -7,21 +7,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.TreeSet;
-
 import static bomb.enumerations.Indicator.FRQ;
 import static bomb.enumerations.Port.PARALLEL;
 import static bomb.enumerations.Port.SERIAL;
 import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.modules.ab.battleship.Tile.CLEAR;
-import static bomb.modules.ab.battleship.Tile.RADAR;
 import static bomb.modules.ab.battleship.Tile.SHIP;
-import static bomb.modules.ab.battleship.Tile.UNKNOWN;
-import static org.testng.Assert.assertEquals;
 
-public class BattleshipTest {
+public class BattleshipExceptionTest {
     @BeforeMethod
     public void setUp() {
         Widget.resetProperties();
@@ -136,56 +129,6 @@ public class BattleshipTest {
         Battleship.confirmRadarSpots(confirmedRadarSpots);
 
         Battleship.solveOcean();
-    }
-
-    @Test
-    public void videoTestCalculateValidRadarPositionsTest() {
-        setVideoEdgework();
-        Tile[][] expectedOcean = new Tile[][]{
-                {RADAR, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
-                {UNKNOWN, RADAR, UNKNOWN, UNKNOWN, UNKNOWN},
-                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
-                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
-                {UNKNOWN, RADAR, UNKNOWN, UNKNOWN, UNKNOWN}
-        };
-
-        Set<String> radarPositions = Battleship.calculateRadarPositions();
-
-        assertEquals(Battleship.getOcean(), new Ocean(expectedOcean));
-        assertEquals(radarPositions, new TreeSet<>(Arrays.asList("a1", "b2", "b5")));
-    }
-
-    @DataProvider
-    public Object[][] videoOceanSolverTestProvider() {
-        return new Object[][]{
-                {
-                        new Tile[]{CLEAR, CLEAR, SHIP}, new int[]{1, 2, 3, 0, 4},
-                        new int[]{3, 1, 2, 1, 3}, new int[]{1, 1, 1, 1},
-                        new Tile[][]{
-                                {CLEAR, CLEAR,  CLEAR,  CLEAR,  SHIP},
-                                {SHIP,  CLEAR,  CLEAR,  CLEAR,  SHIP},
-                                {SHIP,  CLEAR,  SHIP,   CLEAR,  SHIP},
-                                {CLEAR, CLEAR,  CLEAR,  CLEAR,  CLEAR},
-                                {SHIP,  SHIP,   SHIP,   SHIP,   CLEAR}
-                        }
-                }
-        };
-    }
-
-    @Test(enabled = false, dataProvider = "videoOceanSolverTestProvider")
-    public void videoOceanSolverTest(Tile[] confirmedRadarSpots, int[] rowCounters,
-                                     int[] columnCounters, int[] shipQuantities, Tile[][] expected) {
-        setVideoEdgework();
-        setShipQuantities(shipQuantities);
-        Battleship.setRowCounters(rowCounters);
-        Battleship.setColumnCounters(columnCounters);
-
-        Battleship.calculateRadarPositions();
-        Battleship.confirmRadarSpots(confirmedRadarSpots);
-
-        Ocean ocean = Battleship.solveOcean();
-
-        assertEquals(ocean, new Ocean(expected));
     }
 
     @AfterClass

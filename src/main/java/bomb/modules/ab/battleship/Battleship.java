@@ -85,16 +85,16 @@ public final class Battleship extends Widget {
     }
 
     public static void setRowCounters(int[] rowCounters) {
-        if (validateArray(rowCounters))
+        if (validateDimensionArray(rowCounters))
             Battleship.rowCounters = rowCounters;
     }
 
     public static void setColumnCounters(int[] columnCounters) {
-        if (validateArray(columnCounters))
+        if (validateDimensionArray(columnCounters))
             Battleship.columnCounters = columnCounters;
     }
 
-    private static boolean validateArray(int[] array) {
+    private static boolean validateDimensionArray(int[] array) {
         if (array.length != Ocean.BOARD_LENGTH)
             return false;
 
@@ -114,14 +114,16 @@ public final class Battleship extends Widget {
     private static void validateConfirmedTiles(Tile[] tiles) throws IllegalArgumentException {
         if (numberOfRadarSpots == -1)
             throw new IllegalArgumentException("Radar spots were not identified");
-        if (tiles.length != numberOfRadarSpots)
-            throw new IllegalArgumentException("Size mismatch");
+        if (tiles.length != numberOfRadarSpots) {
+            throw new IllegalArgumentException(
+                    "There's a discrepancy between the number of radar spots and the number of given tiles"
+            );
+        }
     }
 
-    public static Ocean solveOcean() {
+    public static Set<Ocean> solveOcean() {
         validateEssentialData();
-        solve(ocean, rowCounters, columnCounters);
-        return ocean;
+        return solve(ocean, rowCounters, columnCounters);
     }
 
     private static void validateEssentialData() throws IllegalArgumentException {
