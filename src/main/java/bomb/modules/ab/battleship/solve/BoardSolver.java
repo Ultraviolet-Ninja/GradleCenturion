@@ -19,7 +19,7 @@ import static bomb.modules.ab.battleship.Tile.CLEAR;
 import static bomb.modules.ab.battleship.Tile.SHIP;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 
-public class BoardSolver {
+public final class BoardSolver {
     @SuppressWarnings("DataFlowIssue")
     public static Set<Ocean> solve(Ocean ocean, int[] rowCounters, int[] columnCounters) {
         refineSearchSpace(ocean, rowCounters, columnCounters);
@@ -79,7 +79,7 @@ public class BoardSolver {
 
     private static boolean containsTooManyWaterSpaces(int[] currentValues, int[] actualValues) {
         return IntStream.range(0, currentValues.length)
-                .anyMatch(i -> currentValues[i] > 5 - actualValues[i]);
+                .anyMatch(i -> currentValues[i] > BOARD_LENGTH - actualValues[i]);
     }
 
     private static boolean isCompleteBoard(Ocean ocean, int[] rowCounters, int[] columnCounters) {
@@ -97,7 +97,7 @@ public class BoardSolver {
 
     private static boolean areWaterSpacesMatching(int[] waterSpaces, int[] shipCounters) {
         return IntStream.range(0, waterSpaces.length)
-                .allMatch(i -> waterSpaces[i] == 5 - shipCounters[i]);
+                .allMatch(i -> waterSpaces[i] == BOARD_LENGTH - shipCounters[i]);
     }
 
     private static void refineSearchSpace(Ocean ocean, int[] rowCounters, int[] columnCounters) {

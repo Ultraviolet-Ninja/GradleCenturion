@@ -17,7 +17,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 
-public class ShipFinder {
+public final class ShipFinder {
     private ShipFinder(){}
 
     public static boolean inspectCompletedBoard(Ocean ocean) {
