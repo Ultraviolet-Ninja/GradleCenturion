@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.groupingBy;
 public final class ShipFinder {
     private ShipFinder(){}
 
-    public static boolean inspectCompletedBoard(Ocean ocean) {
+    public static boolean inspectShipsOnBoard(Ocean ocean) {
         EnumMap<Ship, Long> countMap = new EnumMap<>(Ship.class);
         countMap.putAll(findShips(ocean)
                 .stream()

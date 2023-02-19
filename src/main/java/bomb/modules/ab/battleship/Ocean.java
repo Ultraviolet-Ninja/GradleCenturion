@@ -49,6 +49,14 @@ public final class Ocean {
         return gameBoard[x][y];
     }
 
+    public boolean isTileClearState(int x, int y) {
+        return WATER_FILTER.test(gameBoard[x][y]);
+    }
+
+    public boolean isTileShipState(int x, int y) {
+        return SHIP_FILTER.test(gameBoard[x][y]);
+    }
+
     public List<Tile> getRow(int column) {
         return Arrays.asList(gameBoard[column]);
     }

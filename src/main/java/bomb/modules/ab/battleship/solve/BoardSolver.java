@@ -92,7 +92,29 @@ public final class BoardSolver {
                 Arrays.equals(currentColumnShipCounts, columnCounters) &&
                 areWaterSpacesMatching(currentRowWaterCounts, rowCounters) &&
                 areWaterSpacesMatching(currentColumnWaterCounts, columnCounters) &&
-                ShipFinder.inspectCompletedBoard(ocean);
+                ShipFinder.inspectShipsOnBoard(ocean) &&
+                doShipDiagonalsComply(ocean);
+    }
+
+    private static boolean doShipDiagonalsComply(Ocean ocean) {
+        for (int i = 0; i < BOARD_LENGTH; i++) {
+            for (int j = 0; j < BOARD_LENGTH; j++) {
+                if (ocean.isTileShipState(i, j) && areShipsDiagonallyTouching(ocean, i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean areShipsDiagonallyTouching(Ocean ocean, int x, int y) {
+        return Arrays.stream(new int[][]{{-1,-1}, {-1,1}, {1,-1}, {1,1}})
+                .peek(pair -> {
+                    pair[0] += x;
+                    pair[1] += y;
+                })
+                .filter(pair -> Ocean.isInBoardRange(pair[0], pair[1]))
+                .anyMatch(pair -> !ocean.isTileClearState(pair[0], pair[1]));
     }
 
     private static boolean areWaterSpacesMatching(int[] waterSpaces, int[] shipCounters) {
