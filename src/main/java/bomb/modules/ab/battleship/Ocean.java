@@ -182,9 +182,9 @@ public final class Ocean {
     public Ocean copy() {
         Tile[][] clonedBoard = new Tile[BOARD_LENGTH][BOARD_LENGTH];
 
-        int i = 0;
+        int rowCounter = 0;
         for (Tile[] row : gameBoard) {
-            System.arraycopy(row, 0, clonedBoard[i++], 0, BOARD_LENGTH);
+            System.arraycopy(row, 0, clonedBoard[rowCounter++], 0, BOARD_LENGTH);
         }
 
         return new Ocean(clonedBoard);

@@ -1,7 +1,5 @@
 package bomb.modules.ab.battleship;
 
-import java.util.Arrays;
-
 import static java.util.Arrays.stream;
 
 public enum Ship {
@@ -62,7 +60,7 @@ public enum Ship {
     }
 
     public static int[] getAllShipCounts() {
-        return Arrays.stream(values())
+        return stream(values())
                 .mapToInt(ship -> ship.currentQuantity)
                 .toArray();
     }
