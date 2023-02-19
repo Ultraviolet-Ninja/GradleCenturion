@@ -28,9 +28,9 @@ import static org.testng.Assert.assertTrue;
 
 public class BattleshipValidationTest {
     private static final ConditionSetter FIRST_BOMB_CONDITIONS =
-            BattleshipValidationTest::setVideoEdgeworkVersionOne;
+            BattleshipConditionSetter::setVideoEdgeworkVersionOne;
     private static final ConditionSetter SECOND_BOMB_CONDITIONS =
-            BattleshipValidationTest::setVideoEdgeworkVersionTwo;
+            BattleshipConditionSetter::setVideoEdgeworkVersionTwo;
     @BeforeMethod
     public void setUp() {
         Widget.resetProperties();
@@ -147,27 +147,6 @@ public class BattleshipValidationTest {
     public void tearDown() {
         Widget.resetProperties();
         Battleship.reset();
-    }
-
-    private static void setVideoEdgeworkVersionOne() {
-        Widget.setSerialCode("ZB6HA2");
-        Widget.setDBatteries(2);
-        Widget.setDoubleAs(2);
-        Widget.setNumHolders(3);
-        Widget.setIndicator(ON, FRQ);
-        Widget.setNumberOfPlates(1);
-        Widget.setPortValue(PARALLEL, 1);
-        Widget.setPortValue(SERIAL, 1);
-    }
-
-    private static void setVideoEdgeworkVersionTwo() {
-        Widget.setSerialCode("9X3VS6");
-        Widget.setIndicator(OFF, BOB);
-        Widget.setIndicator(OFF, FRQ);
-        Widget.setIndicator(OFF, CAR);
-        Widget.setIndicator(ON, SIG);
-        Widget.setDoubleAs(2);
-        Widget.setNumHolders(1);
     }
 
     private static void setShipQuantities(int[] shipQuantities) {

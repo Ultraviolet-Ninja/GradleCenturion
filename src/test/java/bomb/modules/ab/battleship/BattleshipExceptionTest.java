@@ -7,10 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static bomb.enumerations.Indicator.FRQ;
-import static bomb.enumerations.Port.PARALLEL;
-import static bomb.enumerations.Port.SERIAL;
-import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.modules.ab.battleship.Tile.CLEAR;
 import static bomb.modules.ab.battleship.Tile.SHIP;
 
@@ -61,7 +57,7 @@ public class BattleshipExceptionTest {
     @Test(expectedExceptions = IllegalArgumentException.class,
             expectedExceptionsMessageRegExp = "Board still contains Radar spots")
     public void solveOceanSecondBranchExceptionTest() {
-        setVideoEdgework();
+        BattleshipConditionSetter.setVideoEdgeworkVersionOne();
         Battleship.calculateRadarPositions();
 
         Battleship.solveOcean();
@@ -78,7 +74,7 @@ public class BattleshipExceptionTest {
             expectedExceptions = IllegalArgumentException.class,
             expectedExceptionsMessageRegExp = "Initial rows and columns need to be set")
     public void solveOceanThirdBranchExceptionTest(Tile[] confirmedRadarSpots) {
-        setVideoEdgework();
+        BattleshipConditionSetter.setVideoEdgeworkVersionOne();
         Battleship.calculateRadarPositions();
         Battleship.confirmRadarSpots(confirmedRadarSpots);
 
@@ -97,7 +93,7 @@ public class BattleshipExceptionTest {
             expectedExceptionsMessageRegExp = "The number of Ships has not been set")
     public void solveOceanFourthBranchExceptionTest(int[] validDummyCounter,
                                                     Tile[] confirmedRadarSpots) {
-        setVideoEdgework();
+        BattleshipConditionSetter.setVideoEdgeworkVersionOne();
         Battleship.calculateRadarPositions();
         Battleship.setColumnCounters(validDummyCounter);
         Battleship.setRowCounters(validDummyCounter);
@@ -121,8 +117,8 @@ public class BattleshipExceptionTest {
             expectedExceptionsMessageRegExp = "Values don't match\\..*")
     public void solveOceanFifthBranchExceptionTest(int[] rowCounters, int[] columnCounters,
                                                    int[] shipQuantities, Tile[] confirmedRadarSpots) {
+        BattleshipConditionSetter.setVideoEdgeworkVersionOne();
         setShipQuantities(shipQuantities);
-        setVideoEdgework();
         Battleship.calculateRadarPositions();
         Battleship.setColumnCounters(rowCounters);
         Battleship.setRowCounters(columnCounters);
@@ -135,17 +131,6 @@ public class BattleshipExceptionTest {
     public void tearDown() {
         Widget.resetProperties();
         Battleship.reset();
-    }
-
-    private static void setVideoEdgework() {
-        Widget.setSerialCode("ZB6HA2");
-        Widget.setDBatteries(2);
-        Widget.setDoubleAs(2);
-        Widget.setNumHolders(3);
-        Widget.setIndicator(ON, FRQ);
-        Widget.setNumberOfPlates(1);
-        Widget.setPortValue(PARALLEL, 1);
-        Widget.setPortValue(SERIAL, 1);
     }
 
     private static void setShipQuantities(int[] shipQuantities) {
