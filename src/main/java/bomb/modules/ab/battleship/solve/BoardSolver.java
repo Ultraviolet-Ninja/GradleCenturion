@@ -30,7 +30,7 @@ public class BoardSolver {
         }
 
         Deque<Ocean> oceanGuesses = new ArrayDeque<>(generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters));
-        List<Ocean> permutationList = new ArrayList<>(1 << 10);
+        List<Ocean> permutationList = new ArrayList<>();
 
         while (!oceanGuesses.isEmpty()) {
             Ocean guess = oceanGuesses.poll();
