@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
@@ -16,7 +17,7 @@ import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
-public final class Ocean {
+public final class Ocean implements Iterable<Tile[]> {
     public static final int BOARD_LENGTH = 5;
 
     private static final Predicate<Tile> SHIP_FILTER = tile -> tile == SHIP,
@@ -196,5 +197,12 @@ public final class Ocean {
         }
 
         return new Ocean(clonedBoard);
+    }
+
+    @NotNull
+    @Override
+    public Iterator<Tile[]> iterator() {
+        return Arrays.asList(gameBoard)
+                .iterator();
     }
 }

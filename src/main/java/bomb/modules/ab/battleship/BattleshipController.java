@@ -18,6 +18,8 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import static bomb.modules.ab.battleship.BattleshipUITranslator.translateToFrontendGrid;
+import static bomb.tools.pattern.facade.FacadeFX.disable;
+import static bomb.tools.pattern.facade.FacadeFX.enable;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createBattleshipCounterTextFormatter;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
@@ -85,15 +87,14 @@ public final class BattleshipController implements Resettable {
 
     @FXML
     private void enableSolveButton() {
-        boolean anyEmptyFields = Stream.concat(Stream.concat(
-                        Arrays.stream(rowGroup),
-                        Arrays.stream(columnGroup)),
-                        Arrays.stream(shipCountFields))
-                .map(TextField::getText)
+        Stream<MFXTextField> stream = Stream.concat(Arrays.stream(rowGroup), Arrays.stream(columnGroup));
+        stream = Stream.concat(stream, Arrays.stream(shipCountFields));
+
+        boolean anyEmptyFields = stream.map(TextField::getText)
                 .anyMatch(String::isEmpty);
 
         if (anyEmptyFields || radarRectangles == null) {
-            solveButton.setDisable(true);
+            disable(solveButton);
             return;
         }
 
@@ -102,7 +103,7 @@ public final class BattleshipController implements Resettable {
                 .toList();
 
         if (rectangles.isEmpty()) {
-            solveButton.setDisable(true);
+            disable(solveButton);
             return;
         }
         solveButton.setDisable(rectangles.stream()
@@ -138,6 +139,9 @@ public final class BattleshipController implements Resettable {
 
     @FXML
     private void revealRadarSpots() {
+        Battleship.wipeRadarSpots();
+        setAllRectanglesUnknown(frontendGrid);
+
         Set<String> radarLocations;
         try {
             radarLocations = Battleship.calculateRadarPositions();
@@ -146,10 +150,12 @@ public final class BattleshipController implements Resettable {
                     "Serial Code error", "Incomplete Edgework");
             return;
         }
+
         radarRectangles = revealSpotsOnFrontend(radarLocations);
         String output = String.join(", ", radarLocations)
                 .toUpperCase();
 
+        disable(confirmationButton);
         FacadeFX.setAlert(INFORMATION, output,
                 "Current Radar Locations", "Bomb Info");
     }
@@ -167,7 +173,7 @@ public final class BattleshipController implements Resettable {
 
     private static void updateRadarSpot(Rectangle rectangle) {
         rectangle.setFill(Tile.RADAR.getTileColor());
-        rectangle.setDisable(false);
+        enable(rectangle);
     }
 
     @FXML
@@ -176,13 +182,13 @@ public final class BattleshipController implements Resettable {
                 .filter(rectangle -> !isRectangleUnknownOrRadar(rectangle))
                 .map(Rectangle::getFill)
                 .map(fill -> (Color) fill)
-                .map(BattleshipController::determineWaterOrShip)
+                .map(BattleshipController::determineWaterOrShipTile)
                 .toArray(Tile[]::new);
 
         try {
             Battleship.confirmRadarSpots(confirmedSpots);
             FacadeFX.setAlert(INFORMATION, "Radar Spots have been logged");
-            confirmationButton.setDisable(true);
+            disable(confirmationButton);
         } catch (IllegalArgumentException e) {
             FacadeFX.setAlert(ERROR, e.getMessage(),
                     "", "Battleship State Error");
@@ -202,7 +208,6 @@ public final class BattleshipController implements Resettable {
         for (int i = 0; i < shipCounts.length; i++) {
             ships[i].setCurrentQuantity(shipCounts[i]);
         }
-
 
         Set<Ocean> solve;
         try {
@@ -252,9 +257,7 @@ public final class BattleshipController implements Resettable {
         FacadeFX.clearMultipleTextFields(columnGroup);
         FacadeFX.clearMultipleTextFields(shipCountFields);
 
-        Arrays.stream(frontendGrid)
-                .flatMap(Arrays::stream)
-                .forEach(rectangle -> rectangle.setFill(Tile.UNKNOWN.getTileColor()));
+        setAllRectanglesUnknown(frontendGrid);
     }
 
     private static boolean isRectangleUnknownOrRadar(Rectangle rectangle) {
@@ -262,9 +265,15 @@ public final class BattleshipController implements Resettable {
                 rectangle.getFill().equals(Tile.RADAR.getTileColor());
     }
 
-    private static Tile determineWaterOrShip(Color color) {
+    private static Tile determineWaterOrShipTile(Color color) {
         return Tile.CLEAR.getTileColor().equals(color) ?
                 Tile.CLEAR :
                 Tile.SHIP;
+    }
+
+    private static void setAllRectanglesUnknown(Rectangle[][] frontendGrid) {
+        Arrays.stream(frontendGrid)
+                .flatMap(Arrays::stream)
+                .forEach(rectangle -> rectangle.setFill(Tile.UNKNOWN.getTileColor()));
     }
 }
