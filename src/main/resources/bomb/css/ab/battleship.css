@@ -1,0 +1,19 @@
+.label {
+    -fx-font-size: 18;
+}
+
+.mfx-button {
+    -fx-font-size: 24;
+}
+
+.mfx-text-field {
+    -fx-background-color: #00407c;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-font-size: 22;
+    -fx-padding: 0 0 0 10;
+    -fx-prompt-text-fill: white;
+    -mfx-line-stroke-width: 0;
+}
