@@ -9,29 +9,29 @@
          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Circle id="background-circle" fill="DODGERBLUE" layoutX="150.0" layoutY="150.0" radius="150.0" stroke="BLACK"
             strokeType="INSIDE"/>
-    <MFXButton id="note-button" fx:id="a" layoutX="131.0" layoutY="14.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteAButton" layoutX="131.0" layoutY="14.0" prefHeight="39.0" prefWidth="39.0"
                text="A"/>
-    <MFXButton id="note-button" fx:id="b" layoutX="234.0" layoutY="75.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteBButton" layoutX="234.0" layoutY="75.0" prefHeight="39.0" prefWidth="39.0"
                text="B"/>
-    <MFXButton id="note-button" fx:id="c" layoutX="247.0" layoutY="131.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteCButton" layoutX="247.0" layoutY="131.0" prefHeight="39.0" prefWidth="39.0"
                text="C"/>
-    <MFXButton id="note-button" fx:id="g" layoutX="31.0" layoutY="75.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteGButton" layoutX="31.0" layoutY="75.0" prefHeight="39.0" prefWidth="39.0"
                text="G"/>
-    <MFXButton id="note-button" fx:id="f" layoutX="31.0" layoutY="186.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteFButton" layoutX="31.0" layoutY="186.0" prefHeight="39.0" prefWidth="39.0"
                text="F"/>
-    <MFXButton id="note-button" fx:id="e" layoutX="75.0" layoutY="228.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteEButton" layoutX="75.0" layoutY="228.0" prefHeight="39.0" prefWidth="39.0"
                text="E"/>
-    <MFXButton id="note-button" fx:id="d" layoutX="189.0" layoutY="228.0" prefHeight="39.0" prefWidth="39.0"
+    <MFXButton id="note-button" fx:id="noteDButton" layoutX="189.0" layoutY="228.0" prefHeight="39.0" prefWidth="39.0"
                text="D"/>
-    <MFXButton id="half-step-button" fx:id="dSharp" layoutX="129.0" layoutY="242.0" prefHeight="43.0"
+    <MFXButton id="half-step-button" fx:id="noteDSharpButton" layoutX="129.0" layoutY="242.0" prefHeight="43.0"
                prefWidth="43.0" text="D#"/>
-    <MFXButton id="half-step-button" fx:id="gSharp" layoutX="73.0" layoutY="32.0" prefHeight="43.0" prefWidth="43.0"
+    <MFXButton id="half-step-button" fx:id="noteGSharpButton" layoutX="73.0" layoutY="32.0" prefHeight="43.0" prefWidth="43.0"
                text="G#"/>
-    <MFXButton id="half-step-button" fx:id="aSharp" layoutX="187.0" layoutY="32.0" prefHeight="43.0"
+    <MFXButton id="half-step-button" fx:id="noteASharpButton" layoutX="187.0" layoutY="32.0" prefHeight="43.0"
                prefWidth="43.0" text="A#"/>
-    <MFXButton id="half-step-button" fx:id="cSharp" layoutX="226.0" layoutY="184.0" prefHeight="43.0"
+    <MFXButton id="half-step-button" fx:id="noteCSharpButton" layoutX="226.0" layoutY="184.0" prefHeight="43.0"
                prefWidth="43.0" text="C#"/>
-    <MFXButton id="half-step-button" fx:id="fSharp" layoutX="13.0" layoutY="129.0" prefHeight="43.0"
+    <MFXButton id="half-step-button" fx:id="noteFSharpButton" layoutX="13.0" layoutY="129.0" prefHeight="43.0"
                prefWidth="43.0" text="F#"/>
     <Circle id="gray-circle" fill="DODGERBLUE" layoutX="150.0" layoutY="150.0" radius="84.0" stroke="BLACK"
             strokeType="INSIDE"/>

@@ -31,7 +31,9 @@ public final class NoteCircleComponent extends Pane implements Resettable {
             noteDSharpLight, noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight;
 
     @FXML
-    private MFXButton a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp;
+    private MFXButton noteAButton, noteASharpButton, noteBButton, noteCButton, noteCSharpButton,
+            noteDButton, noteDSharpButton, noteEButton, noteFButton, noteFSharpButton,
+            noteGButton, noteGSharpButton;
 
     public NoteCircleComponent() {
         super();
@@ -45,7 +47,10 @@ public final class NoteCircleComponent extends Pane implements Resettable {
     }
 
     public void initialize() {
-        MFXButton[] buttonArray = {a, aSharp, b, c, cSharp, d, dSharp, e, f, fSharp, g, gSharp};
+        MFXButton[] buttonArray = {noteAButton, noteASharpButton, noteBButton, noteCButton,
+                noteCSharpButton, noteDButton, noteDSharpButton, noteEButton, noteFButton,
+                noteFSharpButton, noteGButton, noteGSharpButton};
+
         Circle[] circleArray = {
                 noteALight, noteASharpLight, noteBLight, noteCLight, noteCSharpLight, noteDLight,
                 noteDSharpLight, noteELight, noteFLight, noteFSharpLight, noteGLight, noteGSharpLight
