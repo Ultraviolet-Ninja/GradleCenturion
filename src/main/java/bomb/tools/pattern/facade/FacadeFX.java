@@ -20,7 +20,7 @@ import javafx.scene.layout.Region;
 import java.io.IOException;
 import java.util.function.Function;
 
-public class FacadeFX {
+public final class FacadeFX {
     public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
             ((Button) actionEvent.getSource()).getText();
 
