@@ -72,17 +72,17 @@ public class HexNode implements Rotatable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder(
+        StringBuilder stringBuilder = new StringBuilder(
                 hexShape != null ? hexShape.toString() : "No Shape"
         );
-        sb.append('-');
-        if (walls == null) return sb.append("No walls").toString();
-        sb.append(
+        stringBuilder.append('-');
+        if (walls == null) return stringBuilder.append("No walls").toString();
+        stringBuilder.append(
                 walls.stream()
                 .map(Objects::toString)
                 .collect(joining(" "))
         );
-        return sb.toString();
+        return stringBuilder.toString();
     }
 
     @Override

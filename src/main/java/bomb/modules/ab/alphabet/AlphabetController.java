@@ -47,12 +47,13 @@ public final class AlphabetController implements Resettable {
     }
 
     private boolean moveToLastEmptyTextField(MFXTextField source) {
+        MFXTextField tempSource = source;
         do {
-            source = stateMap.get(source);
-        } while (source != null && !source.getText().isEmpty());
+            tempSource = stateMap.get(tempSource);
+        } while (tempSource != null && !tempSource.getText().isEmpty());
 
-        if (source != null) {
-            source.requestFocus();
+        if (tempSource != null) {
+            tempSource.requestFocus();
             return false;
         }
         return true;
