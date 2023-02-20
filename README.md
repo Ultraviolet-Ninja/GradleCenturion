@@ -33,7 +33,7 @@ See the running list of modules [here](Progress.md)
 ## How to run the program
 *Disclaimer*: This is referring to program versions `0.22.2` onward
 - The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable, a Windows batch file and all the necessary jar files to run the program
-- The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains a OS-specific executable file with a runtime environment for the program to run in
+- The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains an OS-specific executable file with a runtime environment for the program to run in
   - *Only supports Windows currently*
 
 ## Inspiration
