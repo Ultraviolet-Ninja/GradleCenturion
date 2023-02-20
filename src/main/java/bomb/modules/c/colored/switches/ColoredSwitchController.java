@@ -25,7 +25,7 @@ import static bomb.modules.c.colored.switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored.switches.SwitchColor.RED;
 import static bomb.tools.string.StringFormat.ARROW;
 
-public class ColoredSwitchController implements Resettable {
+public final class ColoredSwitchController implements Resettable {
     private final ArrayRing<SwitchColor> firstButtonRing, secondButtonRing, thirdButtonRing,
             fourthButtonRing, fifthButtonRing;
 

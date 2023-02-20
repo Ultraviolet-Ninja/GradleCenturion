@@ -2,7 +2,7 @@ package bomb.modules.m.microcontroller.chip;
 
 import bomb.modules.m.microcontroller.Pin;
 
-public class DiodeController extends AbstractController {
+public final class DiodeController extends AbstractController {
     public static final String ACRONYM = "LEDS";
 
     public DiodeController(int pinCount) {

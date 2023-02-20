@@ -22,7 +22,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public class MicroControllerController implements Resettable {
+public final class MicroControllerController implements Resettable {
     @FXML
     private MFXButton submitButton;
 

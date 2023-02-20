@@ -21,7 +21,7 @@ import static bomb.modules.t.the.bulb.Bulb.Opacity.OPAQUE;
 import static bomb.modules.t.the.bulb.Bulb.Opacity.TRANSLUCENT;
 import static bomb.modules.t.the.bulb.Bulb.Position.SCREWED;
 
-public class TheBulbController implements Resettable {
+public final class TheBulbController implements Resettable {
     @FXML
     private ToggleGroup colorGroup, opacityGroup, luminosityGroup;
 

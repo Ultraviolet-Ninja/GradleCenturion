@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class EightPinController extends AbstractChipComponent {
+public final class EightPinController extends AbstractChipComponent {
     public static final int PIN_COUNT = 8;
 
     @FXML

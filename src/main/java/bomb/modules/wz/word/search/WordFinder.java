@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @SuppressWarnings("SuspiciousNameCombination")
-public class WordFinder {
+public final class WordFinder {
     private static int currentGridLength;
 
     public static Optional<Pair<@NotNull Coordinates, @NotNull Coordinates>> findWordCoordinates(

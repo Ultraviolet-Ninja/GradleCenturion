@@ -74,15 +74,16 @@ public final class Morse extends TranslationCenter {
             for (Map.Entry<String, Double> tempEntry : TranslationCenter.frequencies.entrySet()) {
                 if (tempEntry.getKey().contains(sample.toLowerCase()))
                     finalWords.append(tempEntry.getKey()).append(" - ").append(tempEntry.getValue())
-                            .append("MHz").append("/");
+                            .append("MHz").append('/');
             }
         }
         return finalWords.toString();
     }
 
-    private static String[] splitter(String in) {
-        return in.replace("[", "")
-                .replace("]", "").split(",");
+    private static String[] splitter(String input) {
+        return input.replace("[", "")
+                .replace("]", "")
+                .split(",");
     }
 
     private static String[] wordMaker(String letters) {

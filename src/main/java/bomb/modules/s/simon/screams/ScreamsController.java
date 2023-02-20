@@ -14,7 +14,7 @@ import static bomb.tools.string.StringFormat.BULLET_POINT;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
-public class ScreamsController implements Resettable {
+public final class ScreamsController implements Resettable {
     @FXML
     private Button solve, resetLastStage;
 

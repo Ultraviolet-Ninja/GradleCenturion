@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 
 import static bomb.modules.s.shape.shift.ShapeEnd.SHAPE_END_ARRAY;
 
-public class ShapeShiftController implements Resettable {
+public final class ShapeShiftController implements Resettable {
     private final ArrayRing<ShapeEnd> leftSide, rightSide;
 
     public ShapeShiftController() {

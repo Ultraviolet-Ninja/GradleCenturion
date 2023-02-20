@@ -2,7 +2,7 @@ package bomb.modules.m.microcontroller.chip;
 
 import bomb.modules.m.microcontroller.Pin;
 
-public class ExplodeController extends AbstractController {
+public final class ExplodeController extends AbstractController {
     public static final String ACRONYM = "EXPL";
 
     public ExplodeController(int pinCount) {

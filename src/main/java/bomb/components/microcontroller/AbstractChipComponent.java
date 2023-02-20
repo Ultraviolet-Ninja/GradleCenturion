@@ -11,10 +11,6 @@ public abstract class AbstractChipComponent extends Pane {
     @FXML
     protected Label type, serialNumbers;
 
-    public AbstractChipComponent() {
-        super();
-    }
-
     public abstract void setColors(List<Color> results);
 
     public void setChipSerialNum(String numbers) {

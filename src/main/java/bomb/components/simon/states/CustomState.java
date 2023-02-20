@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
 import javafx.util.Duration;
 
-public class CustomState extends Pane implements Resettable {
+public final class CustomState extends Pane implements Resettable {
     @FXML private Arc button;
 
     public CustomState(){

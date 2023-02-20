@@ -52,7 +52,7 @@ import static bomb.modules.r.round.keypads.Keypad.TB_2;
 import static bomb.modules.r.round.keypads.Keypad.THE_SAC;
 import static java.util.Arrays.asList;
 
-public class RoundKeypadsController implements Resettable {
+public final class RoundKeypadsController implements Resettable {
     private static final String BAD_COLUMN_BACKGROUND = "-fx-background-color: crimson",
             NORMAL_BACKGROUND = "-fx-background-color: transparent";
 

@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 
 import java.util.function.Consumer;
 
-public class FastController implements Resettable {
+public final class FastController implements Resettable {
     private final StringBuilder buttonPressTracker, outputMathTextTracker;
 
     @FXML

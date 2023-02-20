@@ -10,7 +10,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.Arrays;
 
-public class AstrologyController implements Resettable {
+public final class AstrologyController implements Resettable {
     private final AstrologySymbol[] astrologySymbolBuffer;
 
     @FXML

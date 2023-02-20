@@ -5,25 +5,25 @@ import bomb.abstractions.State;
 public enum StageState implements State<StageState> {
     FIRST {
         @Override
-        public StageState nextState() {
+        public StageState toNextState() {
             return SECOND;
         }
     },
     SECOND {
         @Override
-        public StageState nextState() {
+        public StageState toNextState() {
             return THIRD;
         }
     },
     THIRD {
         @Override
-        public StageState nextState() {
+        public StageState toNextState() {
             return FOURTH;
         }
     },
     FOURTH {
         @Override
-        public StageState nextState() {
+        public StageState toNextState() {
             return FIRST;
         }
     };

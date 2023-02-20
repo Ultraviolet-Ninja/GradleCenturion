@@ -1,5 +1,6 @@
 package bomb.tools.pattern.facade;
 
+import bomb.Main;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
@@ -14,13 +15,15 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.function.Function;
 
-public class FacadeFX {
+public final class FacadeFX {
     public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
             ((Button) actionEvent.getSource()).getText();
 
@@ -128,6 +131,12 @@ public class FacadeFX {
         Alert alert = new Alert(type, context);
         alert.setHeaderText(header);
         alert.setTitle(title);
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+
+        Image icon = new Image(String.valueOf(Main.class.getResource("KTANE logo.png")));
+        stage.getIcons().add(icon);
+
         alert.showAndWait();
     }
 

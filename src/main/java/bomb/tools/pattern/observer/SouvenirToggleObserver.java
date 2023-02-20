@@ -3,7 +3,7 @@ package bomb.tools.pattern.observer;
 import bomb.Widget;
 import javafx.scene.control.RadioButton;
 
-public class SouvenirToggleObserver implements Observer {
+public final class SouvenirToggleObserver implements Observer {
     private final RadioButton souvenir;
 
     public SouvenirToggleObserver(RadioButton souvenir) {

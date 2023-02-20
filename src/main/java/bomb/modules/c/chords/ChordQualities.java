@@ -87,7 +87,7 @@ public final class ChordQualities extends Widget {
             attemptedDistances.append(noteDistanceRing.getHeadData());
             noteDistanceRing.rotateClockwise();
             if (distanceRingCount < ringSize - 1)
-                attemptedDistances.append(",");
+                attemptedDistances.append(',');
         }
 
         String resultingDistanceString = attemptedDistances.toString();

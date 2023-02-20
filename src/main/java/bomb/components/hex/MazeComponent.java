@@ -27,7 +27,7 @@ import static javafx.scene.paint.Color.PINK;
 import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
-public class MazeComponent extends Pane implements Resettable {
+public final class MazeComponent extends Pane implements Resettable {
     private String shapeSelection, colorSelection;
     private HexTile playerLocation;
 
