@@ -121,7 +121,7 @@ public final class Battleship extends Widget {
         }
     }
 
-    public static Set<Ocean> solveOcean() {
+    public static Set<Ocean> solveOcean() throws IllegalArgumentException {
         validateEssentialData();
         return solve(ocean, rowCounters, columnCounters);
     }
