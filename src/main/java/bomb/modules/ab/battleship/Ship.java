@@ -11,16 +11,16 @@ public enum Ship {
     private static final int MINIMUM_NUMBER_OF_SHIPS = 4;
 
 
-    private final byte shipSize;
+    private final int shipSize;
 
-    private byte currentQuantity;
+    private int currentQuantity;
 
     Ship(int shipSize) {
-        this.shipSize = (byte) shipSize;
+        this.shipSize = shipSize;
         this.currentQuantity = 0;
     }
 
-    public void setCurrentQuantity(byte currentQuantity) {
+    public void setCurrentQuantity(int currentQuantity) {
         this.currentQuantity = currentQuantity;
     }
 
