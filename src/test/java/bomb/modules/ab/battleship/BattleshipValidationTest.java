@@ -11,14 +11,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static bomb.enumerations.Indicator.BOB;
-import static bomb.enumerations.Indicator.CAR;
-import static bomb.enumerations.Indicator.FRQ;
-import static bomb.enumerations.Indicator.SIG;
-import static bomb.enumerations.Port.PARALLEL;
-import static bomb.enumerations.Port.SERIAL;
-import static bomb.enumerations.TrinarySwitch.OFF;
-import static bomb.enumerations.TrinarySwitch.ON;
 import static bomb.modules.ab.battleship.Tile.CLEAR;
 import static bomb.modules.ab.battleship.Tile.RADAR;
 import static bomb.modules.ab.battleship.Tile.SHIP;
@@ -47,20 +39,22 @@ public class BattleshipValidationTest {
                         {UNKNOWN, RADAR,   UNKNOWN, UNKNOWN, UNKNOWN},
                         {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
                         {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
-                        {UNKNOWN, RADAR,   UNKNOWN, UNKNOWN, UNKNOWN}}
+                        {UNKNOWN, RADAR,   UNKNOWN, UNKNOWN, UNKNOWN}},
+                        new TreeSet<>(Arrays.asList("a1", "b2", "b5"))
                 }
         };
     }
 
     @Test(dataProvider = "videoTestCalculateValidRadarPositionsTestProvider")
     public void videoTestCalculateValidRadarPositionsTest(ConditionSetter setter,
-                                                          Tile[][] expectedOcean) {
+                                                          Tile[][] expectedOcean,
+                                                          Set<String> expected) {
         setter.setCondition();
 
         Set<String> radarPositions = Battleship.calculateRadarPositions();
 
         assertEquals(Battleship.getOcean(), new Ocean(expectedOcean));
-        assertEquals(radarPositions, new TreeSet<>(Arrays.asList("a1", "b2", "b5")));
+        assertEquals(radarPositions, expected);
     }
 
     @DataProvider
