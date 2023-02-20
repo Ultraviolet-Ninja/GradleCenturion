@@ -20,6 +20,7 @@ import static bomb.modules.c.colored.switches.SwitchColor.NEUTRAL;
 public final class ColoredSwitches extends Switches {
     private static final double WRONG_PATH_VALUE;
     private static final Graph<ColoredSwitchNode, DefaultEdge> INTERNAL_GRAPH;
+    private static final Graph<ColoredSwitchNode, DefaultEdge> PREEMPTIVE_MOVE_GRAPH;
     private static final BiFunction<SwitchColor[], Byte, AStarAdmissibleHeuristic<ColoredSwitchNode>> HEURISTIC_FUNCTION;
 
     private static byte secondaryStartLocation = -1;
@@ -27,6 +28,8 @@ public final class ColoredSwitches extends Switches {
     static {
         WRONG_PATH_VALUE = Double.MAX_VALUE;
         INTERNAL_GRAPH = ColoredSwitchGraphFactory.makeGraph();
+        PREEMPTIVE_MOVE_GRAPH = ColoredSwitchGraphFactory
+                .makeGraphFromSwitchColors(new SwitchColor[]{NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL, NEUTRAL});
     }
 
     public static @NotNull List<String> producePreemptiveMoveList(byte startingState) throws IllegalArgumentException {
