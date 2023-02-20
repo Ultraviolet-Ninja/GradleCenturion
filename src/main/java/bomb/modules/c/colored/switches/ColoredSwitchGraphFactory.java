@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
+import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +39,27 @@ public class ColoredSwitchGraphFactory {
 
     private static Graph<ColoredSwitchNode, DefaultEdge> buildGraph(List<ColoredSwitchNode> nodeList) {
         Graph<ColoredSwitchNode, DefaultEdge> output = new SimpleDirectedGraph<>(DefaultEdge.class);
+
+        for (ColoredSwitchNode node : nodeList)
+            output.addVertex(node);
+
+        for (ColoredSwitchNode node : nodeList) {
+            for (byte connection : node.getOutgoingConnections()) {
+                output.addEdge(node, nodeList.get(connection));
+            }
+        }
+
+        return output;
+    }
+
+    public static @NotNull Graph<ColoredSwitchNode, DefaultEdge> makeGraph2(@NotNull SwitchColor[] startingColors)
+            throws IllegalStateException {
+        return buildGraph2(createFromFile(), startingColors);
+    }
+
+    private static Graph<ColoredSwitchNode, DefaultEdge> buildGraph2(List<ColoredSwitchNode> nodeList,
+                                                                     SwitchColor[] startingColors) {
+        Graph<ColoredSwitchNode, DefaultEdge> output = new SimpleDirectedWeightedGraph<>(DefaultEdge.class);
 
         for (ColoredSwitchNode node : nodeList)
             output.addVertex(node);
