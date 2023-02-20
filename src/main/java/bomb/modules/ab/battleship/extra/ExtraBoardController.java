@@ -38,9 +38,8 @@ public final class ExtraBoardController {
             return;
         }
         loader.setController(this);
-        Scene scene = new Scene(root, 600, 400);
 
-        stage.setScene(scene);
+        stage.setScene(new Scene(root, 600, 400));
     }
 
     public void initialize() {
