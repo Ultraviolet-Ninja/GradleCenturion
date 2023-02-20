@@ -10,6 +10,7 @@ import org.jgrapht.alg.shortestpath.AStarShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -44,7 +45,7 @@ public final class ColoredSwitches extends Switches {
         ColoredSwitchNode currentNode = getNodeByState(currentState);
 
         for (Byte connection : currentNode.getOutgoingConnections()) {
-            Pair<SwitchColor[], Byte> edgeData = currentNode.getEdgeData(connection);
+            Pair<EnumSet<SwitchColor>, Byte> edgeData = currentNode.getEdgeData(connection);
 
             if (isBlackPath(edgeData.getValue0())) {
                 outputList.add(String.valueOf(edgeData.getValue1()));
@@ -90,21 +91,22 @@ public final class ColoredSwitches extends Switches {
         List<String> output = new ArrayList<>();
 
         for (int i = 0; i < path.size() - 1; i++) {
-            Pair<SwitchColor[], Byte> edgeData = path.get(i).getEdgeData(path.get(i + 1).getState());
+            Pair<EnumSet<SwitchColor>, Byte> edgeData = path.get(i).getEdgeData(path.get(i + 1).getState());
             output.add(String.valueOf(edgeData.getValue1()));
         }
 
         return output;
     }
 
-    private static boolean canFollowPath(SwitchColor[] connectionConditions, SwitchColor switchColor) {
+    static boolean canFollowPath(EnumSet<SwitchColor> connectionConditions, SwitchColor switchColor) {
         if (isBlackPath(connectionConditions)) return true;
 
-        for (SwitchColor possibleConnection : connectionConditions) {
-            if (switchColor == possibleConnection)
-                return true;
-        }
-        return false;
+        return connectionConditions.contains(switchColor);
+//        for (SwitchColor possibleConnection : connectionConditions) {
+//            if (switchColor == possibleConnection)
+//                return true;
+//        }
+//        return false;
     }
 
     private static void validateSwitchColors(SwitchColor[] startingColors) {
@@ -114,8 +116,8 @@ public final class ColoredSwitches extends Switches {
         }
     }
 
-    private static boolean isBlackPath(SwitchColor[] connectionConditions) {
-        return connectionConditions.length == 1 && connectionConditions[0] == NEUTRAL;
+    private static boolean isBlackPath(EnumSet<SwitchColor> connectionConditions) {
+        return connectionConditions.size() == 1 && connectionConditions.contains(NEUTRAL);
     }
 
     private static void validateByte(byte state) throws IllegalArgumentException {
@@ -139,7 +141,7 @@ public final class ColoredSwitches extends Switches {
                     //Weight from target to desired state
                     double hX = Math.abs(desiredState - targetVertex.getState());
 
-                    Pair<SwitchColor[], Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
+                    Pair<EnumSet<SwitchColor>, Byte> edgeData = sourceVertex.getEdgeData(targetVertex.getState());
                     if (edgeData == null)
                         return WRONG_PATH_VALUE;
                     SwitchColor switchToFlip = startingColors[edgeData.getValue1()];

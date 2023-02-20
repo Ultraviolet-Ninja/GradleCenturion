@@ -6,14 +6,16 @@ import org.jetbrains.annotations.NotNull;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleDirectedGraph;
-import org.jgrapht.graph.SimpleDirectedWeightedGraph;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
+
+import static bomb.modules.c.colored.switches.ColoredSwitches.canFollowPath;
 
 @SuppressWarnings("ConstantConditions")
 public class ColoredSwitchGraphFactory {
@@ -52,25 +54,35 @@ public class ColoredSwitchGraphFactory {
         return output;
     }
 
-    public static @NotNull Graph<ColoredSwitchNode, DefaultEdge> makeGraph2(@NotNull SwitchColor[] startingColors)
+    public static @NotNull Graph<ColoredSwitchNode, DefaultEdge> makeGraphFromSwitchColors(@NotNull SwitchColor[] startingColors)
             throws IllegalStateException {
         return buildGraph2(createFromFile(), startingColors);
     }
 
     private static Graph<ColoredSwitchNode, DefaultEdge> buildGraph2(List<ColoredSwitchNode> nodeList,
                                                                      SwitchColor[] startingColors) {
-        Graph<ColoredSwitchNode, DefaultEdge> output = new SimpleDirectedWeightedGraph<>(DefaultEdge.class);
+        Graph<ColoredSwitchNode, DefaultEdge> createdGraph = new SimpleDirectedGraph<>(DefaultEdge.class);
 
-        for (ColoredSwitchNode node : nodeList)
-            output.addVertex(node);
+        nodeList.forEach(createdGraph::addVertex);
 
         for (ColoredSwitchNode node : nodeList) {
             for (byte connection : node.getOutgoingConnections()) {
-                output.addEdge(node, nodeList.get(connection));
+                if (isPlausibleEdge(startingColors, node, connection)) {
+                    createdGraph.addEdge(node, nodeList.get(connection));
+                }
             }
         }
 
-        return output;
+        return createdGraph;
+    }
+
+    private static boolean isPlausibleEdge(SwitchColor[] startingColors, ColoredSwitchNode node,
+                                           int connectionValue) {
+        SwitchColor switchColor = startingColors[connectionValue];
+        var edges = node.getEdgeData((byte) connectionValue)
+                .getValue0();
+
+        return canFollowPath(edges, switchColor);
     }
 
     private static ColoredSwitchNode buildNode(String[] record, Regex connectionFinder) {
@@ -82,7 +94,7 @@ public class ColoredSwitchGraphFactory {
             connectionFinder.hasMatch();
 
             byte outgoingConnection = Byte.parseByte(connectionFinder.captureGroup(OUTGOING_STATE));
-            SwitchColor[] colorConditions = createConditions(connectionFinder.captureGroup(COLOR_CONDITIONS));
+            EnumSet<SwitchColor> colorConditions = createConditions(connectionFinder.captureGroup(COLOR_CONDITIONS));
             byte switchToFlip = Byte.parseByte(connectionFinder.captureGroup(SWITCH_TO_FLIP));
 
             node.addConnection(outgoingConnection, colorConditions, switchToFlip);
@@ -91,10 +103,12 @@ public class ColoredSwitchGraphFactory {
         return node;
     }
 
-    private static SwitchColor[] createConditions(String ordinals) {
-        return Arrays.stream(ordinals.split(""))
+    private static EnumSet<SwitchColor> createConditions(String ordinals) {
+        return EnumSet.copyOf(
+                Arrays.stream(ordinals.split(""))
                 .mapToInt(Integer::parseInt)
                 .mapToObj(SwitchColor::getByIndex)
-                .toArray(SwitchColor[]::new);
+                .toList()
+        );
     }
 }
