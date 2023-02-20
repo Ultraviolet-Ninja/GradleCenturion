@@ -41,6 +41,16 @@ public class BattleshipValidationTest {
                         {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
                         {UNKNOWN, RADAR,   UNKNOWN, UNKNOWN, UNKNOWN}},
                         new TreeSet<>(Arrays.asList("a1", "b2", "b5"))
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[][]{
+                                {UNKNOWN, UNKNOWN, UNKNOWN, RADAR,   RADAR  },
+                                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
+                                {UNKNOWN, RADAR,   UNKNOWN, UNKNOWN, UNKNOWN},
+                                {UNKNOWN, UNKNOWN, UNKNOWN, RADAR,   UNKNOWN},
+                                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN}},
+                        new TreeSet<>(Arrays.asList("d1", "b3", "d4", "e1"))
                 }
         };
     }
@@ -114,6 +124,42 @@ public class BattleshipValidationTest {
                                 {SHIP,  CLEAR, CLEAR, CLEAR, CLEAR},
                                 {SHIP,  CLEAR, SHIP,  CLEAR, CLEAR},
                                 {SHIP,  CLEAR, CLEAR, CLEAR, CLEAR},
+                                {CLEAR, CLEAR, SHIP,  SHIP,  CLEAR}
+                        }
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[]{CLEAR, SHIP, CLEAR, CLEAR}, new int[]{2, 1, 2, 0, 3},
+                        new int[]{1, 1, 3, 0, 3}, new int[]{0, 2, 0, 2},
+                        new Tile[][]{
+                                {CLEAR, CLEAR, SHIP,  CLEAR, SHIP },
+                                {CLEAR, CLEAR, CLEAR, CLEAR, SHIP },
+                                {CLEAR, CLEAR, SHIP,  CLEAR, SHIP },
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {SHIP,  SHIP,  SHIP,  CLEAR, CLEAR}
+                        }
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[]{CLEAR, SHIP, CLEAR, CLEAR}, new int[]{2, 3, 2, 0, 3},
+                        new int[]{3, 1, 2, 1, 3}, new int[]{0, 3, 0, 1},
+                        new Tile[][]{
+                                {SHIP,  CLEAR, CLEAR, CLEAR, SHIP },
+                                {SHIP,  CLEAR, SHIP,  CLEAR, SHIP },
+                                {SHIP,  CLEAR, CLEAR, CLEAR, SHIP },
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {CLEAR, SHIP,  SHIP,  SHIP,  CLEAR}
+                        }
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[]{CLEAR, SHIP, CLEAR, CLEAR}, new int[]{2, 3, 2, 0, 2},
+                        new int[]{3, 0, 3, 1, 2}, new int[]{0, 1, 3, 0},
+                        new Tile[][]{
+                                {SHIP,  CLEAR, CLEAR, CLEAR, SHIP },
+                                {SHIP,  CLEAR, SHIP,  CLEAR, SHIP },
+                                {SHIP,  CLEAR, SHIP,  CLEAR, CLEAR},
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
                                 {CLEAR, CLEAR, SHIP,  SHIP,  CLEAR}
                         }
                 }
