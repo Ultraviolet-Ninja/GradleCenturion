@@ -162,6 +162,42 @@ public class BattleshipValidationTest {
                                 {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
                                 {CLEAR, CLEAR, SHIP,  SHIP,  CLEAR}
                         }
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[]{SHIP, CLEAR, SHIP, CLEAR}, new int[]{4, 0, 4, 0, 1},
+                        new int[]{2, 2, 2, 2, 1}, new int[]{1, 1, 0, 2},
+                        new Tile[][]{
+                                {SHIP,  SHIP,  SHIP,  SHIP,  CLEAR},
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {SHIP,  SHIP,  SHIP,  CLEAR, SHIP },
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {CLEAR, CLEAR, CLEAR, SHIP,  CLEAR}
+                        }
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[]{SHIP, CLEAR, SHIP, CLEAR}, new int[]{2, 1, 2, 0, 3},
+                        new int[]{1, 3, 1, 3, 0}, new int[]{0, 1, 1, 3},
+                        new Tile[][]{
+                                {CLEAR, SHIP,  CLEAR, SHIP,  CLEAR},
+                                {CLEAR, SHIP,  CLEAR, CLEAR, CLEAR},
+                                {CLEAR, SHIP,  CLEAR, SHIP,  CLEAR},
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {SHIP,  CLEAR, SHIP,  SHIP,  CLEAR}
+                        }
+                },
+                {
+                        SECOND_BOMB_CONDITIONS,
+                        new Tile[]{CLEAR, CLEAR, SHIP, CLEAR}, new int[]{3, 1, 2, 0, 3},
+                        new int[]{1, 3, 2, 1, 2}, new int[]{0, 2, 1, 1},
+                        new Tile[][]{
+                                {SHIP,  SHIP,  SHIP,  CLEAR, CLEAR},
+                                {CLEAR, CLEAR, CLEAR, CLEAR, SHIP },
+                                {CLEAR, SHIP,  CLEAR, CLEAR, SHIP },
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {CLEAR, SHIP,  SHIP,  SHIP,  CLEAR}
+                        }
                 }
         };
     }
