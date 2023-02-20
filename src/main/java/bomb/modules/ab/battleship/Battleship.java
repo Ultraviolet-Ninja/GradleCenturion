@@ -182,10 +182,10 @@ public final class Battleship extends Widget {
     }
 
     public static void wipeRadarSpots() {
-        for (Tile[] row : ocean) {
-            for (int i = 0; i < row.length; i++) {
-                if (row[i] == RADAR) {
-                    row[i] = UNKNOWN;
+        for (int i = 0; i < Ocean.BOARD_LENGTH; i++) {
+            for (int j = 0; j < Ocean.BOARD_LENGTH; j++) {
+                if (ocean.getTileState(i, j) == RADAR) {
+                    ocean.setTileState(i, j, UNKNOWN);
                 }
             }
         }
