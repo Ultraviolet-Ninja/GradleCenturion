@@ -158,8 +158,8 @@ public final class BattleshipController implements Resettable {
     private List<Rectangle> revealSpotsOnFrontend(Set<String> radarLocations) {
         return radarLocations.stream()
                 .map(location -> new int[]{
-                        'a' - location.charAt(0),
-                        '1' - location.charAt(1)
+                        location.charAt(1) - '1',
+                        location.charAt(0) - 'a'
                 })
                 .map(location -> frontendGrid[location[0]][location[1]])
                 .peek(BattleshipController::updateRadarSpot)
