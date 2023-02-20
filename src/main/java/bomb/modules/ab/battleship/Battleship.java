@@ -71,7 +71,7 @@ public final class Battleship extends Widget {
         startingRow = negativeSafeModulo(startingRow, Ocean.BOARD_LENGTH);
 
         int startingColumn = negativeSafeModulo(
-                (countIndicators(ALL_PRESENT) + getAllBatteries() - 1),
+                countIndicators(ALL_PRESENT) + getAllBatteries() - 1,
                 Ocean.BOARD_LENGTH
         );
 
