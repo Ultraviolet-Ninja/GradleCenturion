@@ -6,7 +6,6 @@ import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -25,7 +24,7 @@ import static javafx.scene.control.Alert.AlertType.INFORMATION;
 
 public final class BattleshipController implements Resettable {
     @FXML
-    private MFXButton radarButton, confirmationButton, solveButton;
+    private MFXButton confirmationButton, solveButton;
 
     @FXML
     private MFXTextField rowOne, rowTwo, rowThree, rowFour, rowFive,
@@ -182,7 +181,8 @@ public final class BattleshipController implements Resettable {
 
         try {
             Battleship.confirmRadarSpots(confirmedSpots);
-            FacadeFX.setAlert(Alert.AlertType.CONFIRMATION, "Radar Spots have been logged");
+            FacadeFX.setAlert(INFORMATION, "Radar Spots have been logged");
+            confirmationButton.setDisable(true);
         } catch (IllegalArgumentException e) {
             FacadeFX.setAlert(ERROR, e.getMessage(),
                     "", "Battleship State Error");
@@ -244,16 +244,17 @@ public final class BattleshipController implements Resettable {
     public void reset() {
         Battleship.reset();
         solveButton.setDisable(true);
-        radarButton.setDisable(true);
+        confirmationButton.setDisable(true);
 
-        for (MFXTextField field : rowGroup) {
-            FacadeFX.clearText(field);
-        }
+        radarRectangles = null;
 
-        for (MFXTextField field : columnGroup) {
-            FacadeFX.clearText(field);
-        }
+        FacadeFX.clearMultipleTextFields(rowGroup);
+        FacadeFX.clearMultipleTextFields(columnGroup);
+        FacadeFX.clearMultipleTextFields(shipCountFields);
 
+        Arrays.stream(frontendGrid)
+                .flatMap(Arrays::stream)
+                .forEach(rectangle -> rectangle.setFill(Tile.UNKNOWN.getTileColor()));
     }
 
     private static boolean isRectangleUnknownOrRadar(Rectangle rectangle) {
