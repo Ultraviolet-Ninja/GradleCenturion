@@ -16,7 +16,7 @@ import static java.util.regex.Pattern.CASE_INSENSITIVE;
 import static java.util.stream.Collectors.joining;
 
 @SuppressWarnings("MagicConstant")
-public class Regex implements Iterable<String> {
+public final class Regex implements Iterable<String> {
     public static final Function<String, Regex> CREATE_INSENSITIVE_SET =
             input -> new Regex("[" + input + "]", CASE_INSENSITIVE),
             CREATE_NEGATED_SET = input -> new Regex("[^" + input + "]");

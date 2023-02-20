@@ -13,7 +13,7 @@ import java.util.Map;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFormatter;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 
-public class AlphabetController implements Resettable {
+public final class AlphabetController implements Resettable {
     private final Map<MFXTextField, MFXTextField> stateMap;
 
     @FXML

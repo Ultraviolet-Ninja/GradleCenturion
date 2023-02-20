@@ -37,7 +37,7 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NO
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOGGLE;
 
-public class WidgetController {
+public final class WidgetController {
     @FXML
     private MFXSlider dviPortSlider, parallelPortSlider, psPortSlider, rjPortSlider,
             serialPortSlider, rcaPortSlider;

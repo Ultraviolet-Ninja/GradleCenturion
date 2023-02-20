@@ -10,7 +10,7 @@ import javafx.scene.control.Alert;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class ChordController implements Resettable {
+public final class ChordController implements Resettable {
     @FXML
     private MFXTextField outputField;
 

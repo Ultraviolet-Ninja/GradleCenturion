@@ -13,7 +13,7 @@ import static bomb.modules.s.simon.SimonColors.ScreamColor.RED;
 import static bomb.modules.s.simon.SimonColors.ScreamColor.YELLOW;
 import static java.util.Arrays.asList;
 
-public class Star {
+public final class Star {
     private static final byte LIMIT = 6;
 
     private final ArrayRing<ScreamColor> colorOrder;

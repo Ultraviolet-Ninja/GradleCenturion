@@ -14,7 +14,7 @@ import java.util.function.Consumer;
 
 import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
-public class BitwiseController implements Resettable {
+public final class BitwiseController implements Resettable {
     @FXML
     private MFXButton andButton, orButton, xorButton, notButton;
 

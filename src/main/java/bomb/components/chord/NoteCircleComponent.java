@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-public class NoteCircleComponent extends Pane implements Resettable {
+public final class NoteCircleComponent extends Pane implements Resettable {
     public static final byte SELECTED_NOTE_LIMIT = 4;
 
     private static final String ENABLED_ID = "enabled-light-circle", DISABLED_ID = "disabled-light-circle";

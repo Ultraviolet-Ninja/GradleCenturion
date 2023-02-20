@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class CustomStar extends Pane implements Resettable {
+public final class CustomStar extends Pane implements Resettable {
     private final List<CustomEdge> clicks = new ArrayList<>();
 
     @FXML private CustomEdge first, second, third, forth, fifth, sixth;

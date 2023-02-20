@@ -2,7 +2,7 @@ package bomb.modules.m.microcontroller.chip;
 
 import bomb.modules.m.microcontroller.Pin;
 
-public class CountdownController extends AbstractController {
+public final class CountdownController extends AbstractController {
     public static final String ACRONYM = "CNTD";
 
     public CountdownController(int pinCount) {

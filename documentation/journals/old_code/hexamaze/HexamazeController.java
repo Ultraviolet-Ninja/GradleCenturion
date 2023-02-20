@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HexamazeController implements Resettable {
+public final class HexamazeController implements Resettable {
     @FXML
     private ToggleGroup hexGroup, hexColorGroup;
 

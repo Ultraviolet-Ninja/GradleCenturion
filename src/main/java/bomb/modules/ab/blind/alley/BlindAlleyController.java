@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 
 import java.util.Arrays;
 
-public class BlindAlleyController implements Resettable {
+public final class BlindAlleyController implements Resettable {
     @FXML
     private Label maxAlley;
 

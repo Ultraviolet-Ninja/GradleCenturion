@@ -19,7 +19,7 @@ import java.util.EnumSet;
 import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
 import static bomb.modules.dh.hexamaze.Hexamaze.PEG_COLOR;
 
-public class HexTile extends Pane implements Resettable {
+public final class HexTile extends Pane implements Resettable {
     public static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
 
     private HexNode internalNode;

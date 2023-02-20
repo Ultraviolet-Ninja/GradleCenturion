@@ -16,7 +16,7 @@ import java.util.List;
 
 import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
-public class ChessController implements Resettable {
+public final class ChessController implements Resettable {
     private byte previousPosition = 0;
     private final List<String> positionList;
 

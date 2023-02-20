@@ -13,7 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.javatuples.Pair;
 
-public class SouvenirController implements Resettable {
+public final class SouvenirController implements Resettable {
     private final ObservableList<Pair<String, String>> souvenirData;
     private final FilteredList<Pair<String, String>> filteredData;
 
