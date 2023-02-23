@@ -14,6 +14,7 @@ import static bomb.modules.c.colored.switches.SwitchColor.NEUTRAL;
 import static bomb.modules.c.colored.switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored.switches.SwitchColor.RED;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ColoredSwitchesTest {
     @BeforeMethod
@@ -37,6 +38,7 @@ public class ColoredSwitchesTest {
     @DataProvider
     public Object[][] finalMoveListExceptionTestProvider() {
         return new Object[][]{
+                {new SwitchColor[]{RED, CYAN, GREEN, BLUE}, -1},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE}, 0},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE, RED}, 0},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE, NEUTRAL}, 0}
@@ -89,6 +91,8 @@ public class ColoredSwitchesTest {
                 ColoredSwitches.producePreemptiveMoveList((byte) startingState),
                 Arrays.asList(preemptiveMoveList)
         );
+
+        assertTrue(ColoredSwitches.isFirstStepDone());
 
         assertEquals(
                 ColoredSwitches.produceFinalMoveList(startingColors, (byte) desiredState),

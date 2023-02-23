@@ -8,6 +8,7 @@ import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -85,10 +86,10 @@ public final class ColoredSwitches extends Switches {
         ColoredSwitchNode startNode = NUMBER_TO_STATE_MAP.get(secondaryStartLocation);
         ColoredSwitchNode destination = NUMBER_TO_STATE_MAP.get(desiredState);
 
-        List<ColoredSwitchNode> nodeList2 = shortestPath.getPath(startNode, destination)
+        List<ColoredSwitchNode> nodeList = shortestPath.getPath(startNode, destination)
                 .getVertexList();
 
-        return createSwitchToFlipList(nodeList2);
+        return createSwitchToFlipList(nodeList);
     }
 
     private static List<String> createSwitchToFlipList(List<ColoredSwitchNode> path) {
@@ -106,9 +107,8 @@ public final class ColoredSwitches extends Switches {
     }
 
     private static void validateSwitchColors(SwitchColor[] startingColors) {
-        for (SwitchColor switchColor : startingColors) {
-            if (switchColor == NEUTRAL)
-                throw new IllegalArgumentException("All switches must have a color");
+        if (EnumSet.copyOf(Arrays.asList(startingColors)).contains(NEUTRAL)) {
+            throw new IllegalArgumentException("All switches must have a color. No neutral/black switches allowed");
         }
     }
 
