@@ -32,7 +32,7 @@ public final class IceCream extends Widget {
         EnumMap<Person, EnumSet<Allergen>> personMap = Person.getPersonAllergens(createIndexFromSerialCode());
         EnumSet<Allergen> personAllergens = personMap.get(person);
         possibleFlavors.removeIf(flavor ->
-                doesFlavorHaveAllergens(flavor.getAllergens(), personAllergens));
+                intersectionIsNotEmpty(flavor.getAllergens(), personAllergens));
 
         if (possibleFlavors.isEmpty()) return VANILLA;
         if (possibleFlavors.size() == 1) return possibleFlavors.iterator().next();
@@ -49,8 +49,8 @@ public final class IceCream extends Widget {
         return (serialCode.charAt(5) - '0') / 2;
     }
 
-    private static boolean doesFlavorHaveAllergens(EnumSet<Allergen> flavorAllergens,
-                                                   EnumSet<Allergen> personAllergens) {
+    private static boolean intersectionIsNotEmpty(EnumSet<Allergen> flavorAllergens,
+                                                  EnumSet<Allergen> personAllergens) {
         return personAllergens.stream()
                 .anyMatch(personAllergen -> personAllergen.test(flavorAllergens));
     }
