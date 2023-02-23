@@ -74,6 +74,10 @@ public class ColoredSwitchesTest {
                 {
                     21, new String[]{"5", "4", "5"}, new SwitchColor[]{GREEN, RED, GREEN, BLUE, BLUE},
                         1, new String[]{"4", "5", "4", "3", "5", "4", "2", "1", "2"}
+                },
+                {
+                        20, new String[]{"4", "5", "4"}, new SwitchColor[]{ORANGE, ORANGE, CYAN, ORANGE, CYAN},
+                        6, new String[]{"5", "3", "5", "2", "4", "5", "2", "1", "3"}
                 }
         };
     }
