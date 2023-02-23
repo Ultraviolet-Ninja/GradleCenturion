@@ -51,11 +51,8 @@ public final class IceCream extends Widget {
 
     private static boolean doesFlavorHaveAllergens(EnumSet<Allergen> flavorAllergens,
                                                    EnumSet<Allergen> personAllergens) {
-        for (Allergen personAllergen : personAllergens) {
-            if (personAllergen.test(flavorAllergens))
-                return true;
-        }
-        return false;
+        return personAllergens.stream()
+                .anyMatch(personAllergen -> personAllergen.test(flavorAllergens));
     }
 
     private static List<Flavor> createPopularFlavorList(boolean hasEmptyPortPlate) {
