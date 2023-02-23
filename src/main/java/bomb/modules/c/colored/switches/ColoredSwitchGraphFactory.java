@@ -22,52 +22,33 @@ public class ColoredSwitchGraphFactory {
     private static final byte OUTGOING_STATE = 1, COLOR_CONDITIONS = 2, SWITCH_TO_FLIP = 3;
     private static final String FILENAME = "graph.csv";
 
-    public static @NotNull Graph<ColoredSwitchNode, DefaultEdge> makeGraph() throws IllegalStateException {
-        return buildGraph(createFromFile());
-    }
-
-    private static List<ColoredSwitchNode> createFromFile() throws IllegalStateException {
+    static List<ColoredSwitchNode> createFromFile() throws IllegalStateException {
         List<ColoredSwitchNode> output = new ArrayList<>(32);
-        Regex connectionFinder = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])]");
+        Regex connectionRegex = new Regex("\\[(\\d{1,2})\\((\\d{1,3})\\)([1-5])]");
         InputStream in = ColoredSwitchGraphFactory.class.getResourceAsStream(FILENAME);
 
         try (CSVReader csvReader = new CSVReader(new InputStreamReader(in))) {
-            csvReader.forEach(record -> output.add(buildNode(record, connectionFinder)));
+            csvReader.forEach(record -> output.add(buildNode(record, connectionRegex)));
             return output;
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }
     }
 
-    private static Graph<ColoredSwitchNode, DefaultEdge> buildGraph(List<ColoredSwitchNode> nodeList) {
-        Graph<ColoredSwitchNode, DefaultEdge> output = new SimpleDirectedGraph<>(DefaultEdge.class);
-
-        for (ColoredSwitchNode node : nodeList)
-            output.addVertex(node);
-
-        for (ColoredSwitchNode node : nodeList) {
-            for (byte connection : node.getOutgoingConnections()) {
-                output.addEdge(node, nodeList.get(connection));
-            }
-        }
-
-        return output;
+    static @NotNull Graph<ColoredSwitchNode, DefaultEdge> makeGraphFromSwitchColors(
+            @NotNull SwitchColor[] startingColors) throws IllegalStateException {
+        return buildGraph(createFromFile(), startingColors);
     }
 
-    public static @NotNull Graph<ColoredSwitchNode, DefaultEdge> makeGraphFromSwitchColors(@NotNull SwitchColor[] startingColors)
-            throws IllegalStateException {
-        return buildGraph2(createFromFile(), startingColors);
-    }
-
-    private static Graph<ColoredSwitchNode, DefaultEdge> buildGraph2(List<ColoredSwitchNode> nodeList,
-                                                                     SwitchColor[] startingColors) {
+    private static Graph<ColoredSwitchNode, DefaultEdge> buildGraph(List<ColoredSwitchNode> nodeList,
+                                                                    SwitchColor[] startingSwitchColors) {
         Graph<ColoredSwitchNode, DefaultEdge> createdGraph = new SimpleDirectedGraph<>(DefaultEdge.class);
 
         nodeList.forEach(createdGraph::addVertex);
 
         for (ColoredSwitchNode node : nodeList) {
             for (byte connection : node.getOutgoingConnections()) {
-                if (isPlausibleEdge(startingColors, node, connection)) {
+                if (isTraversableEdge(startingSwitchColors, node, nodeList.get(connection))) {
                     createdGraph.addEdge(node, nodeList.get(connection));
                 }
             }
@@ -76,28 +57,27 @@ public class ColoredSwitchGraphFactory {
         return createdGraph;
     }
 
-    private static boolean isPlausibleEdge(SwitchColor[] startingColors, ColoredSwitchNode node,
-                                           int connectionValue) {
-        SwitchColor switchColor = startingColors[connectionValue];
-        var edges = node.getEdgeData((byte) connectionValue)
-                .getValue0();
+    private static boolean isTraversableEdge(SwitchColor[] startingColors, ColoredSwitchNode startNode,
+                                             ColoredSwitchNode outgoingNode) {
+        var edgeData = startNode.getEdgeData(outgoingNode.getState());
+        SwitchColor switchColor = startingColors[edgeData.getValue1() - 1];
 
-        return canFollowPath(edges, switchColor);
+        return canFollowPath(edgeData.getValue0(), switchColor);
     }
 
-    private static ColoredSwitchNode buildNode(String[] record, Regex connectionFinder) {
+    private static ColoredSwitchNode buildNode(String[] record, Regex connectionRegex) {
         ColoredSwitchNode node = new ColoredSwitchNode(Byte.parseByte(record[0]));
 
         for (int i = 1; i < record.length; i++) {
             if (record[i].isEmpty()) return node;
-            connectionFinder.loadText(record[i]);
-            connectionFinder.hasMatch();
+            connectionRegex.loadText(record[i]);
+            connectionRegex.hasMatch();
 
-            byte outgoingConnection = Byte.parseByte(connectionFinder.captureGroup(OUTGOING_STATE));
-            EnumSet<SwitchColor> colorConditions = createConditions(connectionFinder.captureGroup(COLOR_CONDITIONS));
-            byte switchToFlip = Byte.parseByte(connectionFinder.captureGroup(SWITCH_TO_FLIP));
+            byte outgoingConnection = Byte.parseByte(connectionRegex.captureGroup(OUTGOING_STATE));
+            EnumSet<SwitchColor> edgeColors = createConditions(connectionRegex.captureGroup(COLOR_CONDITIONS));
+            byte switchToFlip = Byte.parseByte(connectionRegex.captureGroup(SWITCH_TO_FLIP));
 
-            node.addConnection(outgoingConnection, colorConditions, switchToFlip);
+            node.addConnection(outgoingConnection, edgeColors, switchToFlip);
         }
 
         return node;

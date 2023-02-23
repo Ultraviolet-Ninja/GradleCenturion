@@ -8,7 +8,7 @@
 - Boolean Venn Diagram
 - Chess
 - Chord Qualities
-- Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using A*)
+- Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using ~~A*~~ Dijkstra's)
 - Emoji Math
 - Fast Math
 - Forget Me Not
