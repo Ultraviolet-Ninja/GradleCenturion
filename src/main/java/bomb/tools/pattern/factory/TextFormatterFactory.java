@@ -6,7 +6,7 @@ import java.util.function.Function;
 
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 
-public class TextFormatterFactory {
+public final class TextFormatterFactory {
     private static final Function<String, TextFormatter<String>> REGEX_MATCH_FORMATTER = regex ->
             new TextFormatter<>(change -> {
                 if (!change.isContentChange()) return change;

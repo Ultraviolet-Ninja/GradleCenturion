@@ -2,12 +2,13 @@
 ### Finished Modules
 - Alphabet
 - Astrology
+- Battleship
 - Bitwise Ops
 - Blind Alley
 - Boolean Venn Diagram
 - Chess
 - Chord Qualities
-- Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using A*)
+- Colored Switches (Not technically part of the bomb, but was a fun ~~recursion~~ graph problem using ~~A*~~ Dijkstra's)
 - Emoji Math
 - Fast Math
 - Forget Me Not
@@ -23,10 +24,9 @@
 - The Bulb
 - TwoBit
 
-22/100
+23/100
 
 ### Incomplete Modules
-- Battleship 
 - Caesar Cipher
 - Cheap Checkout
 - Color Flash
@@ -39,7 +39,7 @@
 - Square Button
 - Word Search
 
-12/100
+11/100
 
 ### Untouched Modules
 - 3D Maze

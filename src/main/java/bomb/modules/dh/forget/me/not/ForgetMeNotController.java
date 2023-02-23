@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 
 import java.util.function.Consumer;
 
-public class ForgetMeNotController implements Resettable {
+public final class ForgetMeNotController implements Resettable {
     @FXML
     private MFXButton outputButton, undoButton, resetButton,
             one, two, three, four, five, six, seven, eight, nine, zero;

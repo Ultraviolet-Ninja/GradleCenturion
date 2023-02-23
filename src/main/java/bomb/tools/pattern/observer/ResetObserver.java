@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResetObserver implements Observer {
+public final class ResetObserver implements Observer {
     private final List<Resettable> controllerList;
 
     public ResetObserver() {

@@ -17,7 +17,7 @@ import static bomb.tools.filter.RegexFilter.LOGIC_SYMBOL_FILTER;
 import static bomb.tools.filter.RegexFilter.filter;
 import static javafx.scene.paint.Paint.valueOf;
 
-public class BooleanController implements Resettable {
+public final class BooleanController implements Resettable {
     private static final String PRESS_COLOR, DO_NOT_PRESS_COLOR, DEFAULT_TEXT;
     private static final Regex FIRST_SYMBOL_CAPTURE, SECOND_SYMBOL_CAPTURE;
 
@@ -72,7 +72,7 @@ public class BooleanController implements Resettable {
     private void switchEquationPriority() {
         priorityToggle.setText((!priorityToggle.isSelected() ? "AB" : "BC") + " Priority");
 
-        if (currentOperation.toString().length() != DEFAULT_TEXT.length()) {
+        if (currentOperation.length() != DEFAULT_TEXT.length()) {
             currentOperation = shiftPriority(currentOperation.toString());
             solveEquation();
         } else {

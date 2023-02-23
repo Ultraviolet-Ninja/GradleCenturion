@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @SuppressWarnings("ConstantConditions")
-public class MorseCodeGraphFactory {
+public final class MorseCodeGraphFactory {
     private static final String FILENAME = "morseCode.csv";
 
     private MorseCodeGraphFactory() {}

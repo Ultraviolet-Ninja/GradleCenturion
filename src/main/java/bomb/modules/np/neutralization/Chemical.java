@@ -1,6 +1,6 @@
 package bomb.modules.np.neutralization;
 
-public class Chemical {
+public final class Chemical {
     public enum Acid {
         HYDROFLUORIC_ACID(9, "HF", "F"),
         HYDROCHORIC_ACID(17, "HCl", "Cl"),

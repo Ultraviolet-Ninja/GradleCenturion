@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @DisplayComponent(resource = "extra_notes.fxml", buttonLinkerName = "Extra Notes")
-public class NoteController implements Resettable {
+public final class NoteController implements Resettable {
     @FXML
     private JFXTextArea firstNote, secondNote, thirdNote, fourthNote, fifthNote;
 

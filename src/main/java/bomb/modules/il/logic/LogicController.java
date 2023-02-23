@@ -20,7 +20,7 @@ import static bomb.tools.logic.LogicOperator.IMPLIED_BY;
 import static bomb.tools.logic.LogicOperator.LOGIC_SYMBOL_TO_ENUM_MAP;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFormatter;
 
-public class LogicController implements Resettable {
+public final class LogicController implements Resettable {
     @FXML
     private MFXButton submitButton;
 

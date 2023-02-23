@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
-public class WidgetEventFactory {
+public final class WidgetEventFactory {
     public static Consumer<MFXTextField> createNumbersOnlyTextArea() {
         BiConsumer<MFXTextField, Integer> decideSetter = (mfxTextArea, number) -> {
             if (mfxTextArea.getPromptText().contains("Minutes")) Widget.setStartTime(number);

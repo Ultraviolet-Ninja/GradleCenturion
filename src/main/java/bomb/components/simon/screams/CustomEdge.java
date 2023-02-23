@@ -15,7 +15,7 @@ import java.util.List;
 
 import static javafx.scene.paint.Color.WHITE;
 
-public class CustomEdge extends Polygon implements Resettable {
+public final class CustomEdge extends Polygon implements Resettable {
     private boolean selectorMode;
     private List<CustomEdge> internalReference;
 

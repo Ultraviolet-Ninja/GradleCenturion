@@ -37,7 +37,7 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NO
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOGGLE;
 
-public class WidgetController {
+public final class WidgetController {
     @FXML
     private MFXSlider dviPortSlider, parallelPortSlider, psPortSlider, rjPortSlider,
             serialPortSlider, rcaPortSlider;
@@ -66,9 +66,9 @@ public class WidgetController {
 
     private void initializeOtherSliderEvent() {
         doubleABatteries.setOnMouseClicked(event -> Widget.setDoubleAs((int) doubleABatteries.getValue()));
-        dBatteries.setOnMouseClicked(event -> Widget.setDoubleAs((int) dBatteries.getValue()));
-        batteryHolders.setOnMouseClicked(event -> Widget.setDoubleAs((int) batteryHolders.getValue()));
-        portPlates.setOnMouseClicked(event -> Widget.setDoubleAs((int) portPlates.getValue()));
+        dBatteries.setOnMouseClicked(event -> Widget.setDBatteries((int) dBatteries.getValue()));
+        batteryHolders.setOnMouseClicked(event -> Widget.setNumHolders((int) batteryHolders.getValue()));
+        portPlates.setOnMouseClicked(event -> Widget.setNumberOfPlates((int) portPlates.getValue()));
     }
 
     private void initializePortSliderEvent() {

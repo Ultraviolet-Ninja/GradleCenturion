@@ -15,7 +15,7 @@ import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
-public class LaundryController implements Resettable {
+public final class LaundryController implements Resettable {
     private static final String WASH_INSTRUCTIONS = "Wash Instructions: ", DRY_INSTRUCTIONS = "Dry Instructions: ",
             IRONING_INSTRUCTIONS = "Iron Instructions: ", SPECIAL_INSTRUCTIONS = "Special Instructions: ";
     private static final String MATERIAL_RESET_TEXT = "Material - Color - Item";

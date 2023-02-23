@@ -3,7 +3,7 @@ package bomb.tools.number;
 import static java.lang.Math.pow;
 import static java.lang.Math.round;
 
-public class MathUtils {
+public final class MathUtils {
     public static final int HASHING_NUMBER = 5501;
 
     public static boolean isPerfectSquare(long num) {

@@ -6,7 +6,7 @@ import java.util.function.BiPredicate;
 
 import static java.util.regex.Pattern.CASE_INSENSITIVE;
 
-public class RegexFilter {
+public final class RegexFilter {
     public static final BiPredicate<String, Regex> EMPTY_FILTER_RESULTS = (text, regex) ->
             filter(text, regex).isEmpty();
 

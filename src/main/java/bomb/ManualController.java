@@ -49,7 +49,7 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
 
 @SuppressWarnings("ConstantConditions")
-public class ManualController {
+public final class ManualController {
     //TODO - Remove when every FXML file is being used
     private static final Region EMPTY_VIEW;
 
@@ -106,12 +106,12 @@ public class ManualController {
         ResetObserver resetObserver = new ResetObserver();
         ObserverHub.addObserver(RESET, resetObserver);
         var fxmlMapFuture = supplyAsync(() -> createFXMLMap(resetObserver));
-        var radioButtonNameFuture = createRadioButtonNameFuture(options.getToggles());
+        var radioButtonNameFuture = createButtonNameFuture(options.getToggles());
 
         return radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::createRegionMap);
     }
 
-    private static CompletableFuture<Map<String, Toggle>> createRadioButtonNameFuture(List<Toggle> radioButtonList) {
+    private static CompletableFuture<Map<String, Toggle>> createButtonNameFuture(List<Toggle> radioButtonList) {
         return supplyAsync(radioButtonList::stream)
                 .thenApply(stream -> stream.collect(toMap(
                         GET_TOGGLE_NAME,
@@ -133,9 +133,13 @@ public class ManualController {
     }
 
     private static Map<String, Region> createFXMLMap(ResetObserver resetObserver) {
-        return getDisplayedClasses()
-//                .stream()
-                .parallelStream()
+        var displayClassStream = getDisplayedClasses().parallelStream();
+
+        if (System.getProperty("os.name").toLowerCase().contains("linux")) {
+            displayClassStream = displayClassStream.sequential();
+        }
+
+        return displayClassStream
                 .map(cls -> mapClassToRegion(cls, resetObserver))
                 .collect(toMap(Pair::getValue0, Pair::getValue1));
     }

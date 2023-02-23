@@ -13,7 +13,7 @@ import java.util.Map;
 import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFormatter;
 import static javafx.scene.control.Alert.AlertType.ERROR;
 
-public class AlphabetController implements Resettable {
+public final class AlphabetController implements Resettable {
     private final Map<MFXTextField, MFXTextField> stateMap;
 
     @FXML
@@ -47,12 +47,13 @@ public class AlphabetController implements Resettable {
     }
 
     private boolean moveToLastEmptyTextField(MFXTextField source) {
+        MFXTextField tempSource = source;
         do {
-            source = stateMap.get(source);
-        } while (source != null && !source.getText().isEmpty());
+            tempSource = stateMap.get(tempSource);
+        } while (tempSource != null && !tempSource.getText().isEmpty());
 
-        if (source != null) {
-            source.requestFocus();
+        if (tempSource != null) {
+            tempSource.requestFocus();
             return false;
         }
         return true;

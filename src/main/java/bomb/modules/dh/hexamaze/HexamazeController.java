@@ -25,7 +25,7 @@ import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
 import static javafx.scene.paint.Color.RED;
 
-public class HexamazeController implements Resettable {
+public final class HexamazeController implements Resettable {
     @FXML
     private Label exitDirectionLabel;
 

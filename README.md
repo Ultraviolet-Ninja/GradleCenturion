@@ -2,7 +2,8 @@
 *101 modules, 100 minutes, exponentially more problems.*
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
-![Project Version](https://img.shields.io/badge/version-0.22.3.1-blueviolet)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b4b8571475d543a2afc720f5f96ae2cf)](https://www.codacy.com/gh/Ultraviolet-Ninja/GradleCenturion/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ultraviolet-Ninja/GradleCenturion&amp;utm_campaign=Badge_Grade)
+![Project Version](https://img.shields.io/badge/version-0.23.0-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
@@ -32,7 +33,7 @@ See the running list of modules [here](Progress.md)
 ## How to run the program
 *Disclaimer*: This is referring to program versions `0.22.2` onward
 - The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable, a Windows batch file and all the necessary jar files to run the program
-- The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains a OS-specific executable file with a runtime environment for the program to run in
+- The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains an OS-specific executable file with a runtime environment for the program to run in
   - *Only supports Windows currently*
 
 ## Inspiration

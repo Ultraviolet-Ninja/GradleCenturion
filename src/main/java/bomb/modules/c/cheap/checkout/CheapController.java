@@ -2,7 +2,7 @@ package bomb.modules.c.cheap.checkout;
 
 import bomb.abstractions.Resettable;
 
-public class CheapController implements Resettable {
+final class CheapController implements Resettable {
     @Override
     public void reset() {
 

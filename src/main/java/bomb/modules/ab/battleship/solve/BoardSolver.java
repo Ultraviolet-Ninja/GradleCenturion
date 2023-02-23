@@ -1,25 +1,131 @@
 package bomb.modules.ab.battleship.solve;
 
 import bomb.modules.ab.battleship.Ocean;
-import bomb.modules.ab.battleship.Ship;
 import bomb.modules.ab.battleship.Tile;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Deque;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static bomb.modules.ab.battleship.Ocean.BOARD_LENGTH;
 import static bomb.modules.ab.battleship.Tile.CLEAR;
 import static bomb.modules.ab.battleship.Tile.SHIP;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 
-public class BoardSolver {
-    public static void solve(Ocean ocean, int[] rowCounters, int[] columnCounters) {
-        do {
-            setClearTiles(ocean, rowCounters, columnCounters);
-            setDiagonalAdjacentShipTilesClear(ocean);
-            guaranteeShipTile(ocean, rowCounters, columnCounters);
-            ShipFinder.updateFoundShips(ocean);
-//            findLargestShip(ocean, rowCounters, columnCounters);
-        } while (ocean.hasUnknownTile());
+public final class BoardSolver {
+    @SuppressWarnings("DataFlowIssue")
+    public static Set<Ocean> solve(Ocean ocean, int[] rowCounters, int[] columnCounters) {
+        refineSearchSpace(ocean, rowCounters, columnCounters);
+
+        int[] nextSpot = ocean.findNextUnknownTile();
+        if (nextSpot == null) {
+            return Collections.singleton(ocean);
+        }
+
+        Deque<Ocean> oceanGuesses = new ArrayDeque<>(generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters));
+        List<Ocean> permutationList = new ArrayList<>();
+
+        while (!oceanGuesses.isEmpty()) {
+            Ocean guess = oceanGuesses.poll();
+            if (guess.hasUnknownTile()) {
+                nextSpot = guess.findNextUnknownTile();
+
+                oceanGuesses.addAll(generateNewGuesses(nextSpot, guess, rowCounters, columnCounters));
+            } else {
+                permutationList.add(guess);
+            }
+        }
+
+        return permutationList.stream()
+                .filter(permutation -> isCompleteBoard(permutation, rowCounters, columnCounters))
+                .collect(Collectors.toSet());
+    }
+
+    private static List<Ocean> generateNewGuesses(int[] coordinates, Ocean ocean, int[] rowCounters, int[] columnCounters) {
+        Ocean waterCopy = ocean.copy();
+        Ocean shipCopy = ocean.copy();
+
+        waterCopy.setTileState(coordinates[0], coordinates[1], CLEAR);
+        shipCopy.setTileState(coordinates[0], coordinates[1], SHIP);
+
+        return Stream.of(waterCopy, shipCopy)
+                .filter(permutation -> !isInvalidBoardConfig(permutation, rowCounters, columnCounters))
+                .toList();
+    }
+
+    private static boolean isInvalidBoardConfig(Ocean ocean, int[] rowCounters, int[] columnCounters) {
+        int[] currentRowShipCounts = ocean.countShipSpacesByRow();
+        int[] currentColumnShipCounts = ocean.countShipSpacesByColumn();
+        int[] currentRowWaterCounts = ocean.countClearSpacesByRow();
+        int[] currentColumnWaterCounts = ocean.countClearSpacesByColumn();
+
+        return containsTooManyShipSpaces(currentRowShipCounts, rowCounters) ||
+                containsTooManyShipSpaces(currentColumnShipCounts, columnCounters) ||
+                containsTooManyWaterSpaces(currentRowWaterCounts, rowCounters) ||
+                containsTooManyWaterSpaces(currentColumnWaterCounts, columnCounters);
+    }
+
+    private static boolean containsTooManyShipSpaces(int[] currentValues, int[] actualValues) {
+        return IntStream.range(0, currentValues.length)
+                .anyMatch(i -> currentValues[i] > actualValues[i]);
+    }
+
+    private static boolean containsTooManyWaterSpaces(int[] currentValues, int[] actualValues) {
+        return IntStream.range(0, currentValues.length)
+                .anyMatch(i -> currentValues[i] > BOARD_LENGTH - actualValues[i]);
+    }
+
+    private static boolean isCompleteBoard(Ocean ocean, int[] rowCounters, int[] columnCounters) {
+        int[] currentRowShipCounts = ocean.countShipSpacesByRow();
+        int[] currentColumnShipCounts = ocean.countShipSpacesByColumn();
+        int[] currentRowWaterCounts = ocean.countClearSpacesByRow();
+        int[] currentColumnWaterCounts = ocean.countClearSpacesByColumn();
+
+        return Arrays.equals(currentRowShipCounts, rowCounters) &&
+                Arrays.equals(currentColumnShipCounts, columnCounters) &&
+                areWaterSpacesMatching(currentRowWaterCounts, rowCounters) &&
+                areWaterSpacesMatching(currentColumnWaterCounts, columnCounters) &&
+                ShipFinder.inspectShipsOnBoard(ocean) &&
+                doShipDiagonalsComply(ocean);
+    }
+
+    private static boolean doShipDiagonalsComply(Ocean ocean) {
+        for (int i = 0; i < BOARD_LENGTH; i++) {
+            for (int j = 0; j < BOARD_LENGTH; j++) {
+                if (ocean.isTileShipState(i, j) && areShipsDiagonallyTouching(ocean, i, j)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean areShipsDiagonallyTouching(Ocean ocean, int x, int y) {
+        return Arrays.stream(new int[][]{{-1,-1}, {-1,1}, {1,-1}, {1,1}})
+                .peek(pair -> {
+                    pair[0] += x;
+                    pair[1] += y;
+                })
+                .filter(pair -> Ocean.isInBoardRange(pair[0], pair[1]))
+                .anyMatch(pair -> !ocean.isTileClearState(pair[0], pair[1]));
+    }
+
+    private static boolean areWaterSpacesMatching(int[] waterSpaces, int[] shipCounters) {
+        return IntStream.range(0, waterSpaces.length)
+                .allMatch(i -> waterSpaces[i] == BOARD_LENGTH - shipCounters[i]);
+    }
+
+    private static void refineSearchSpace(Ocean ocean, int[] rowCounters, int[] columnCounters) {
+        setClearTiles(ocean, rowCounters, columnCounters);
+        setDiagonalAdjacentShipTilesClear(ocean);
+        guaranteeShipTile(ocean, rowCounters, columnCounters);
     }
 
     private static void setClearTiles(Ocean ocean, int[] rowCounters, int[] columnCounters) {
@@ -93,14 +199,6 @@ public class BoardSolver {
                     ocean.setTileState(newColumn, newRow, CLEAR);
             }
         }
-    }
-
-    private static void findLargestShip(Ocean ocean, int[] rowCounters, int[] columnCounters) {
-        Ship ship = Ship.getCurrentLargestShip();
-        if (ship == null)
-            return;
-
-
     }
 
     private static int countSpecificTile(List<Tile> alley, Tile tileToFind) {

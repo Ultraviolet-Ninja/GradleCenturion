@@ -18,7 +18,7 @@ import static bomb.modules.dh.emoji.math.EmojiControllerState.MATH_SYMBOL_PRESS;
 import static bomb.modules.dh.emoji.math.EmojiControllerState.RESET;
 import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
-public class EmojiController implements Resettable {
+public final class EmojiController implements Resettable {
     private final StringBuilder internalEquation;
 
     private EmojiControllerState currentState;
@@ -85,7 +85,7 @@ public class EmojiController implements Resettable {
                 FacadeFX.enable(equal);
                 break;
         }
-        currentState = currentState.nextState();
+        currentState = currentState.toNextState();
     }
 
     @FXML

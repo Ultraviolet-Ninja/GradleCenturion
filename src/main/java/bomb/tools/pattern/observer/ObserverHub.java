@@ -4,7 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
 
-public class ObserverHub {
+public final class ObserverHub {
     public enum ObserverIndex {
         FORGET_ME_NOT_TOGGLE, SOUVENIR_TOGGLE, BLIND_ALLEY_PANE, SOUVENIR_PANE, RESET
     }

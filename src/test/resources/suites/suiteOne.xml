@@ -6,7 +6,8 @@
         <classes>
             <class name="bomb.modules.ab.alphabet.AlphabetTest"/>
             <class name="bomb.modules.ab.astrology.AstrologyTest"/>
-            <class name="bomb.modules.ab.battleship.BattleshipTest"/>
+            <class name="bomb.modules.ab.battleship.BattleshipExceptionTest"/>
+            <class name="bomb.modules.ab.battleship.BattleshipValidationTest"/>
             <class name="bomb.modules.ab.battleship.OceanEqTest"/>
             <class name="bomb.modules.ab.bitwise.BitwiseTest"/>
             <class name="bomb.modules.ab.blind.alley.BlindAlleyTest"/>

@@ -19,7 +19,7 @@ import static javafx.scene.paint.Color.GREEN;
 import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
-public class NeutralizationController implements Resettable {
+public final class NeutralizationController implements Resettable {
     private static final double MAX_VOLUME = 20;
     private static final String RED_STYLE = "-fx-accent: #ea0001", YELLOW_STYLE = "-fx-accent: #f8db03",
             GREEN_STYLE = "-fx-accent: #00fe01", BLUE_STYLE = "-fx-accent: #00007e",

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.util.List;
 
-public class NotePageController extends Stage {
+public final class NotePageController extends Stage {
     private static final short HEIGHT = 400, WIDTH = 600;
 
     private final List<NotePageController> internalReference;

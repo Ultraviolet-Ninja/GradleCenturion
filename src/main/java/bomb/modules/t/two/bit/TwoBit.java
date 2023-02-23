@@ -68,7 +68,7 @@ public final class TwoBit extends Widget {
         int[] coords = translateToBitCoordinates(newCode);
 
         if (currentState == SUBMIT) {
-            currentState = currentState.nextState();
+            currentState = currentState.toNextState();
             return SUBMIT_TEXT + CODE_GRID[coords[0]][coords[1]];
         }
 
@@ -78,7 +78,7 @@ public final class TwoBit extends Widget {
                     String.format("%s - %s", newCode, CODE_GRID[coords[0]][coords[1]])
             );
         }
-        currentState = currentState.nextState();
+        currentState = currentState.toNextState();
         return QUERY_TEXT + CODE_GRID[coords[0]][coords[1]];
     }
 

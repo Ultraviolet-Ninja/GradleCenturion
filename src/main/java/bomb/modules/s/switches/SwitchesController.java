@@ -14,7 +14,7 @@ import java.util.function.IntUnaryOperator;
 import static bomb.modules.s.switches.Switches.BIT_LENGTH;
 import static bomb.tools.string.StringFormat.ARROW;
 
-public class SwitchesController implements Resettable {
+public final class SwitchesController implements Resettable {
     private static final IntUnaryOperator SHIFT_BIT = index -> 1 << (BIT_LENGTH - index - 1);
 
     @FXML

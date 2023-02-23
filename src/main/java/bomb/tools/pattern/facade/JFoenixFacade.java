@@ -1,4 +1,4 @@
 package bomb.tools.pattern.facade;
 
-public class JFoenixFacade {
+public final class JFoenixFacade {
 }

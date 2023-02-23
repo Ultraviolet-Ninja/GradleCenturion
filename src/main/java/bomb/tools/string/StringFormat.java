@@ -7,7 +7,7 @@ import java.util.function.UnaryOperator;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 
-public class StringFormat {
+public final class StringFormat {
     public static final char INDEX_ZERO_UPPERCASE_LETTER = 'A',
             INDEX_ZERO_LOWERCASE_LETTER = 'a',
             INDEX_ONE_LOWERCASE_LETTER = '`',

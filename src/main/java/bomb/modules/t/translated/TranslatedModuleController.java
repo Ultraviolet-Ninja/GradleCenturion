@@ -19,7 +19,7 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
-public class TranslatedModuleController implements Resettable {
+public final class TranslatedModuleController implements Resettable {
     @FXML
     private ButtonComponent buttonUI;
 

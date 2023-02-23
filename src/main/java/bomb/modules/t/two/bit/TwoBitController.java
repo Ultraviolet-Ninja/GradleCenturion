@@ -9,7 +9,7 @@ import javafx.scene.control.Alert;
 
 import static bomb.tools.pattern.factory.TextFormatterFactory.createTwoDigitTextFormatter;
 
-public class TwoBitController implements Resettable {
+public final class TwoBitController implements Resettable {
     @FXML
     private MFXButton nextCodeButton;
 
