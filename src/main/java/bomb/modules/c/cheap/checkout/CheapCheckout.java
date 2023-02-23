@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.time.DayOfWeek;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.ToDoubleFunction;
 
 import static bomb.modules.c.cheap.checkout.CheckoutItem.Category.FRUIT;
@@ -17,7 +18,7 @@ import static bomb.tools.number.MathUtils.roundToNPlaces;
 public final class CheapCheckout extends Widget {
     private static final double SUNDAY_ADDITION, THURSDAY_SALE, FRIDAY_MARK_UP, SATURDAY_SALE;
     private static final int REQUIRED_ITEM_COUNT, REQUIRED_WEIGHT_COUNT;
-    private static final ToDoubleFunction<List<CheckoutItem>> TO_SUM;
+    private static final ToDoubleFunction<List<CheckoutItem>> ITEM_LIST_TO_SUM;
 
     static {
         SUNDAY_ADDITION = 2.15;
@@ -28,7 +29,7 @@ public final class CheapCheckout extends Widget {
         REQUIRED_ITEM_COUNT = 6;
         REQUIRED_WEIGHT_COUNT = 2;
 
-        TO_SUM = items -> items.stream()
+        ITEM_LIST_TO_SUM = items -> items.stream()
                 .mapToDouble(CheckoutItem::getCurrentPiece)
                 .sum();
     }
@@ -92,19 +93,20 @@ public final class CheapCheckout extends Widget {
         items.get(2).applyMultiplicand(sale);
         items.get(5).applyMultiplicand(sale);
 
-        return TO_SUM.applyAsDouble(items);
+        return ITEM_LIST_TO_SUM.applyAsDouble(items);
     }
 
     private static double calculateTroublesomeTuesday(List<CheckoutItem> items) {
-        int counter = 0;
-        for (CheckoutItem item : items) {
+        Consumer<CheckoutItem> applyTroublesomeTuesday = (item) -> {
             int digRoot = digitalRoot(item.getCurrentPiece());
             item.addToPrice(digRoot);
-            if (++counter == 4)
-                break;
-        }
+        };
 
-        return TO_SUM.applyAsDouble(items);
+        items.stream()
+                .limit(4)
+                .forEach(applyTroublesomeTuesday);
+
+        return ITEM_LIST_TO_SUM.applyAsDouble(items);
     }
 
     private static double calculateWackyWednesday(List<CheckoutItem> items) {
@@ -121,7 +123,7 @@ public final class CheapCheckout extends Widget {
         for (int i = 0; i < size; i += 2)
             items.get(i).applyMultiplicand(THURSDAY_SALE);
 
-        return TO_SUM.applyAsDouble(items);
+        return ITEM_LIST_TO_SUM.applyAsDouble(items);
     }
 
     private static double calculateFruityFriday(List<CheckoutItem> items) {
