@@ -11,8 +11,10 @@ import static bomb.modules.c.colored.switches.SwitchColor.BLUE;
 import static bomb.modules.c.colored.switches.SwitchColor.CYAN;
 import static bomb.modules.c.colored.switches.SwitchColor.GREEN;
 import static bomb.modules.c.colored.switches.SwitchColor.NEUTRAL;
+import static bomb.modules.c.colored.switches.SwitchColor.ORANGE;
 import static bomb.modules.c.colored.switches.SwitchColor.RED;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ColoredSwitchesTest {
     @BeforeMethod
@@ -36,6 +38,7 @@ public class ColoredSwitchesTest {
     @DataProvider
     public Object[][] finalMoveListExceptionTestProvider() {
         return new Object[][]{
+                {new SwitchColor[]{RED, CYAN, GREEN, BLUE}, -1},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE}, 0},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE, RED}, 0},
                 {new SwitchColor[]{RED, CYAN, GREEN, BLUE, NEUTRAL}, 0}
@@ -61,5 +64,39 @@ public class ColoredSwitchesTest {
         List<String> converted = Arrays.asList(expectedResults);
 
         assertEquals(converted, ColoredSwitches.producePreemptiveMoveList((byte) startingState));
+    }
+
+    @DataProvider
+    public Object[][] fullMoveListTestProvider() {
+        return new Object[][] {
+                {
+                    28, new String[]{"5", "5", "5"}, new SwitchColor[]{GREEN, BLUE, ORANGE, RED, RED},
+                        2, new String[]{"4", "3", "5", "1", "2"}
+                },
+                {
+                    21, new String[]{"5", "4", "5"}, new SwitchColor[]{GREEN, RED, GREEN, BLUE, BLUE},
+                        1, new String[]{"4", "5", "4", "3", "5", "4", "2", "1", "2"}
+                },
+                {
+                        20, new String[]{"4", "5", "4"}, new SwitchColor[]{ORANGE, ORANGE, CYAN, ORANGE, CYAN},
+                        6, new String[]{"5", "3", "5", "2", "4", "5", "2", "1", "3"}
+                }
+        };
+    }
+
+    @Test(dataProvider = "fullMoveListTestProvider")
+    public void fullMoveListTest(int startingState, String[] preemptiveMoveList, SwitchColor[] startingColors,
+                                 int desiredState, String[] expectedShortestPath) {
+        assertEquals(
+                ColoredSwitches.producePreemptiveMoveList((byte) startingState),
+                Arrays.asList(preemptiveMoveList)
+        );
+
+        assertTrue(ColoredSwitches.isFirstStepDone());
+
+        assertEquals(
+                ColoredSwitches.produceFinalMoveList(startingColors, (byte) desiredState),
+                Arrays.asList(expectedShortestPath)
+        );
     }
 }
