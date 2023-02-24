@@ -18,7 +18,7 @@ import java.util.List;
 import static bomb.modules.c.colored.switches.ColoredSwitches.canFollowPath;
 
 @SuppressWarnings("ConstantConditions")
-public class ColoredSwitchGraphFactory {
+public final class ColoredSwitchGraphFactory {
     private static final byte OUTGOING_STATE = 1, COLOR_CONDITIONS = 2, SWITCH_TO_FLIP = 3;
     private static final String FILENAME = "graph.csv";
 
