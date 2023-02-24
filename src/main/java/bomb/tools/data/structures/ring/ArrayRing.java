@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
 
-public class ArrayRing<E> implements Iterable<E> {
+public final class ArrayRing<E> implements Iterable<E> {
     private final List<E> internalStructure;
 
     private int headIndex;
@@ -87,7 +87,7 @@ public class ArrayRing<E> implements Iterable<E> {
     }
 
     @Override
-    public Iterator<E> iterator() {
+    public @NotNull Iterator<E> iterator() {
         return headIndex == 0 ?
                 internalStructure.iterator() :
                 reorderList().iterator();

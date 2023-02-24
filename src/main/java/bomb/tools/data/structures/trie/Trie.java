@@ -117,7 +117,7 @@ public class Trie {
         return getWordsStartingWith("").toString();
     }
 
-    private static class TrieNode {
+    private static final class TrieNode {
         private final Map<Character, TrieNode> children;
         private boolean isEndOfWord;
 
