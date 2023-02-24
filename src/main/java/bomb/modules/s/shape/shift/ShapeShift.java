@@ -57,6 +57,12 @@ public final class ShapeShift extends Widget {
                 list.add(new Pair<>(left, right));
         }
         return list;
+
+//        return Arrays.stream(SHAPE_END_ARRAY)
+//                .flatMap(leftEnd -> Arrays.stream(SHAPE_END_ARRAY)
+//                        .map(rightEnd -> new Pair<>(leftEnd, rightEnd))
+//                )
+//                .toList();
     }
 
     private static void initializeTriples() {
@@ -77,6 +83,26 @@ public final class ShapeShift extends Widget {
         initializePairs(list.get(13), list.get(4), list.get(7));
         initializePairs(list.get(14), list.get(5), list.get(8));
         initializePairs(list.get(15), list.get(11), list.get(14));
+
+
+        int[][] elementIndexTriples = {
+                {0, 8, 15},
+                {1, 10, 15},
+                {2, 3, 0},
+                {3, 11, 14},
+                {4, 2, 9},
+                {5, 10, 7},
+                {6, 3, 12},
+                {7, 0, 1},
+                {8, 13, 1},
+                {9, 6, 13},
+                {10, 4, 6},
+                {11, 5, 12},
+                {12, 2, 9},
+                {13, 4, 7},
+                {14, 5, 8},
+                {15, 11, 14}
+        };
     }
 
     private static void initializePairs(Pair<ShapeEnd, ShapeEnd> firstPair,
