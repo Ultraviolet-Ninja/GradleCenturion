@@ -42,7 +42,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.opencsv:opencsv:5.7.1'
+    implementation 'com.opencsv:opencsv:5.8'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.jgrapht:jgrapht-ext:1.5.2'
     implementation 'org.jetbrains:annotations:24.0.1'
