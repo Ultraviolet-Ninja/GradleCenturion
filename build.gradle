@@ -4,7 +4,7 @@ plugins {
     id 'application'
     id 'org.beryx.jlink' version '2.26.0'
     id 'info.solidsoft.pitest' version '1.7.4'
-    id 'org.openjfx.javafxplugin' version '0.0.14'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'com.github.breadmoirai.github-release' version '2.4.1'
 }
