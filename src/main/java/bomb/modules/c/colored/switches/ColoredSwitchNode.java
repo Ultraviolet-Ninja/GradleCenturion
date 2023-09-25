@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class ColoredSwitchNode {
+public final class ColoredSwitchNode {
     private static final int SIZE_LIMIT = 3;
 
     private final byte state;

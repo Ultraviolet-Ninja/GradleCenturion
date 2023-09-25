@@ -2,9 +2,9 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
-    id 'org.beryx.jlink' version '2.26.0'
+    id 'org.beryx.jlink' version '3.0.0'
     id 'info.solidsoft.pitest' version '1.7.4'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'com.github.breadmoirai.github-release' version '2.4.1'
 }
@@ -42,10 +42,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.opencsv:opencsv:5.7.1'
+    implementation 'com.opencsv:opencsv:5.8'
     implementation 'org.javatuples:javatuples:1.2'
-    implementation 'org.jgrapht:jgrapht-ext:1.5.1'
-    implementation 'org.jetbrains:annotations:24.0.0'
+    implementation 'org.jgrapht:jgrapht-ext:1.5.2'
+    implementation 'org.jetbrains:annotations:24.0.1'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
 
     implementation('com.jfoenix:jfoenix:9.0.4') {
@@ -55,10 +55,10 @@ dependencies {
         exclude group: "org.javafx"
     }
 
-    testImplementation 'org.testng:testng:7.7.1'
-    testImplementation 'org.slf4j:slf4j-api:2.0.6'
-    testImplementation 'org.slf4j:slf4j-simple:2.0.6'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.13.2'
+    testImplementation 'org.testng:testng:7.8.0'
+    testImplementation 'org.slf4j:slf4j-api:2.0.9'
+    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.15.2'
 }
 
 def firstInstance = project.hasProperty('thread0')

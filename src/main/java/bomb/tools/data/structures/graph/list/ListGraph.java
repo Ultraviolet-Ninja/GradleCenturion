@@ -6,10 +6,10 @@ import java.util.List;
 
 public class ListGraph<E> {
     private final LinkedHashMap<E, ArrayList<E>> list;
-    private final boolean biDirectional;
+    private final boolean isBidirectional;
 
-    public ListGraph(boolean biDirectional) {
-        this.biDirectional = biDirectional;
+    public ListGraph(boolean isBidirectional) {
+        this.isBidirectional = isBidirectional;
         list = new LinkedHashMap<>();
     }
 
@@ -21,11 +21,11 @@ public class ListGraph<E> {
     public void addEdge(E vertex, E edge) {
         if (!containsVertex(vertex))
             addVertex(vertex);
-        if (biDirectional && !containsVertex(edge))
+        if (isBidirectional && !containsVertex(edge))
             addVertex(edge);
         if (isNotDuplicate(vertex, edge))
             list.get(vertex).add(edge);
-        if (biDirectional && isNotDuplicate(edge, vertex))
+        if (isBidirectional && isNotDuplicate(edge, vertex))
             list.get(edge).add(vertex);
     }
 
@@ -43,7 +43,7 @@ public class ListGraph<E> {
 
     public List<E> removeVertex(E vertex) {
         if (!containsVertex(vertex)) return null;
-        if (biDirectional) removeReferences(vertex, list.get(vertex));
+        if (isBidirectional) removeReferences(vertex, list.get(vertex));
         return list.remove(vertex);
     }
 

@@ -15,7 +15,6 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - Gradle 7.4
 ### Plugins
 - JavaFX
-- Palantir Docker
 - Breadmoirai GitHub Release
 ### Dependencies
 - MaterialFX ver. 11.12.0

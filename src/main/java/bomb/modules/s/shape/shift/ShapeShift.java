@@ -6,7 +6,7 @@ import bomb.tools.data.structures.graph.list.ListGraph;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static bomb.enumerations.Indicator.BOB;
@@ -51,32 +51,27 @@ public final class ShapeShift extends Widget {
     }
 
     private static List<Pair<ShapeEnd, ShapeEnd>> createList() {
-        List<Pair<ShapeEnd, ShapeEnd>> list = new ArrayList<>();
-        for (ShapeEnd left : SHAPE_END_ARRAY) {
-            for (ShapeEnd right : SHAPE_END_ARRAY)
-                list.add(new Pair<>(left, right));
-        }
-        return list;
+        return Arrays.stream(SHAPE_END_ARRAY)
+                .flatMap(leftEnd -> Arrays.stream(SHAPE_END_ARRAY)
+                        .map(rightEnd -> new Pair<>(leftEnd, rightEnd))
+                )
+                .toList();
     }
 
     private static void initializeTriples() {
         List<Pair<ShapeEnd, ShapeEnd>> list = createList();
-        initializePairs(list.get(0), list.get(8), list.get(15));
-        initializePairs(list.get(1), list.get(10), list.get(15));
-        initializePairs(list.get(2), list.get(3), list.get(0));
-        initializePairs(list.get(3), list.get(11), list.get(14));
-        initializePairs(list.get(4), list.get(2), list.get(9));
-        initializePairs(list.get(5), list.get(10), list.get(7));
-        initializePairs(list.get(6), list.get(3), list.get(12));
-        initializePairs(list.get(7), list.get(0), list.get(1));
-        initializePairs(list.get(8), list.get(13), list.get(1));
-        initializePairs(list.get(9), list.get(6), list.get(13));
-        initializePairs(list.get(10), list.get(4), list.get(6));
-        initializePairs(list.get(11), list.get(5), list.get(12));
-        initializePairs(list.get(12), list.get(2), list.get(9));
-        initializePairs(list.get(13), list.get(4), list.get(7));
-        initializePairs(list.get(14), list.get(5), list.get(8));
-        initializePairs(list.get(15), list.get(11), list.get(14));
+
+        int[][] elementIndexTriples = {
+                {0, 8, 15}, {1, 10, 15}, {2, 3, 0},
+                {3, 11, 14}, {4, 2, 9}, {5, 10, 7},
+                {6, 3, 12}, {7, 0, 1}, {8, 13, 1},
+                {9, 6, 13}, {10, 4, 6}, {11, 5, 12},
+                {12, 2, 9}, {13, 4, 7}, {14, 5, 8},
+                {15, 11, 14}
+        };
+
+        Arrays.stream(elementIndexTriples)
+                .forEach(triple -> initializePairs(list.get(triple[0]), list.get(triple[1]), list.get(triple[2])));
     }
 
     private static void initializePairs(Pair<ShapeEnd, ShapeEnd> firstPair,
