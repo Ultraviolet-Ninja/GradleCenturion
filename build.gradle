@@ -103,7 +103,7 @@ test {
 }
 
 jacocoTestReport {
-    reports.xml.enabled(true)
+    reports.xml.required = true
 
     if (includedTestDirectories.size() != 3) {
         afterEvaluate {
