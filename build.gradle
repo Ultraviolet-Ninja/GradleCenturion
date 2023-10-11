@@ -12,10 +12,8 @@ plugins {
 group 'jasmine.jragon'
 version '0.23.0'
 
-java {
-    sourceCompatibility(17)
-    targetCompatibility(17)
-}
+sourceCompatibility = 17
+targetCompatibility = 17
 
 application {
     mainClassName = project.hasProperty('testingArea') ?
