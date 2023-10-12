@@ -9,8 +9,8 @@ on:
       - java-21
 
 jobs:
-  windows-pipeline:
-    runs-on: ubuntu-latest
+  macos-pipeline:
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
