@@ -9,8 +9,8 @@ on:
       - java-21
 
 jobs:
-  linux-pipeline:
-    runs-on: ubuntu-latest
+  windows-pipeline:
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -25,3 +25,12 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew build
+
+      - name: Creating the Executable
+        run: ./gradlew jpackageImage
+
+      - name: Creating the Tarball
+        run: ./gradlew tarExecutableFiles
+
+      - name: Creating the Zip File
+        run: ./gradlew zipExecutableFiles
