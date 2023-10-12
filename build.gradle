@@ -198,13 +198,13 @@ tasks.register('zipExecutableFiles', Zip) {
 
     if (opSys.windows) {
         include 'jpackage/Gradle Centurion Win/**'
-        archiveFileName "${baseFilename}win.zip"
+        archiveFileName.set("${baseFilename}win.zip")
     } else if (opSys.linux) {
         include 'jpackage/Gradle Centurion Linux/**'
-        archiveFileName "${baseFilename}linux.zip"
+        archiveFileName.set("${baseFilename}linux.zip")
     } else {
         include 'jpackage/Gradle Centurion Mac/**'
-        archiveFileName "${baseFilename}mac.zip"
+        archiveFileName.set("${baseFilename}mac.zip")
     }
 }
 
@@ -216,13 +216,13 @@ tasks.register('tarExecutableFiles', Tar) {
 
     if (opSys.windows) {
         include 'jpackage/Gradle Centurion Win/**'
-        archiveFileName "${baseFilename}win.tar"
+        archiveFileName.set("${baseFilename}win.tar")
     } else if (opSys.linux) {
         include 'jpackage/Gradle Centurion Linux/**'
-        archiveFileName "${baseFilename}linux.tar"
+        archiveFileName.set("${baseFilename}linux.tar")
     } else {
         include 'jpackage/Gradle Centurion Mac/**'
-        archiveFileName "${baseFilename}mac.tar"
+        archiveFileName.set("${baseFilename}mac.tar")
     }
 }
 
