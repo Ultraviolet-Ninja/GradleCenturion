@@ -12,8 +12,8 @@ plugins {
 group 'jasmine.jragon'
 version '0.23.0'
 
-sourceCompatibility = 17
-targetCompatibility = 17
+sourceCompatibility = 21
+targetCompatibility = 21
 
 application {
     mainClassName = project.hasProperty('testingArea') ?
@@ -135,7 +135,7 @@ static List<String> getTargetClasses(boolean firstInstance, boolean secondInstan
 pitest {
     targetClasses.set(
             getTargetClasses(firstInstance, secondInstance, thirdInstance, fourthInstance,
-            fifthInstance, sixthInstance)
+                    fifthInstance, sixthInstance)
     )
     outputFormats.add('HTML')
     testPlugin = 'testng'
