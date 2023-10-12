@@ -37,7 +37,7 @@ jobs:
           path: ./build/reports
   pitest:
     docker:
-     - image: cimg/openjdk:17.0.2
+     - image: openjdk:21
     parallelism: 6
     resource_class: large
 
