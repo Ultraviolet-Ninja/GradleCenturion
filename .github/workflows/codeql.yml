@@ -41,12 +41,10 @@ jobs:
           # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
           # queries: security-extended,security-and-quality
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: oracle-actions/setup-java@v1
         with:
-          java-version: 17
-          distribution: 'adopt'
-          check-latest: true
+          release: 21
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
