@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import static bomb.tools.number.MathUtils.negativeSafeModulo;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
@@ -108,7 +110,7 @@ public final class ManualController {
         var fxmlMapFuture = supplyAsync(() -> createFXMLMap(resetObserver));
         var radioButtonNameFuture = createButtonNameFuture(options.getToggles());
 
-        return radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::createRegionMap);
+        return radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::joinOnStringKeys);
     }
 
     private static CompletableFuture<Map<String, Toggle>> createButtonNameFuture(List<Toggle> radioButtonList) {
@@ -121,19 +123,20 @@ public final class ManualController {
                 )));
     }
 
-    private static Map<Toggle, Region> createRegionMap(Map<String, Toggle> radioButtonMap,
-                                                       Map<String, Region> filePathMap) {
+    private static Map<Toggle, Region> joinOnStringKeys(Map<String, Toggle> radioButtonMap,
+                                                        Map<String, Region> filePathMap) {
         Map<Toggle, Region> regionMap = new LinkedHashMap<>();
-        for (Map.Entry<String, Toggle> entry : radioButtonMap.entrySet())
+        for (var entry : radioButtonMap.entrySet()) {
             regionMap.put(
                     entry.getValue(),
                     filePathMap.getOrDefault(entry.getKey(), EMPTY_VIEW)
             );
+        }
         return regionMap;
     }
 
     private static Map<String, Region> createFXMLMap(ResetObserver resetObserver) {
-        var displayClassStream = getDisplayedClasses().parallelStream();
+        var displayClassStream = getAnnotatedClasses().parallelStream();
 
         if (System.getProperty("os.name").toLowerCase().contains("linux")) {
             displayClassStream = displayClassStream.sequential();
@@ -142,24 +145,45 @@ public final class ManualController {
         return displayClassStream
                 .map(cls -> mapClassToRegion(cls, resetObserver))
                 .collect(toMap(Pair::getValue0, Pair::getValue1));
+//        var annotatedClasses = getAnnotatedClasses();
+//        var virtualThreadList = new ArrayList<Future<Pair<String, Region>>>(annotatedClasses.size());
+//
+//        try (var executor = Executors.newVirtualThreadPerTaskExecutor()) {
+//            for (var annotatedClass : annotatedClasses) {
+//                var future = executor.submit(() -> mapClassToRegion(annotatedClass, resetObserver));
+//                virtualThreadList.add(future);
+//            }
+//        }
+//
+//        return virtualThreadList.stream()
+//                .map(ManualController::extractFromFuture)
+//                .collect(toMap(Pair::getValue0, Pair::getValue1));
     }
 
-    private static List<Class<?>> getDisplayedClasses() {
-        List<Class<?>> list = new ArrayList<>(List.of(Widget.class, NoteController.class));
-        ArrayDeque<Class<?>> files = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
+    private static Pair<String, Region> extractFromFuture(Future<Pair<String, Region>> future) {
+        try {
+            return future.get();
+        } catch (ExecutionException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static List<Class<?>> getAnnotatedClasses() {
+        var annotatedClasses = new ArrayList<>(List.of(Widget.class, NoteController.class));
+        var queue = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
 
         Class<?> temp;
-        while ((temp = files.poll()) != null) {
-            Class<?>[] nextSubLevel = temp.getPermittedSubclasses();
-            if (nextSubLevel != null) {
-                files.addAll(asList(nextSubLevel));
+        while ((temp = queue.poll()) != null) {
+            Class<?>[] subclasses = temp.getPermittedSubclasses();
+            if (subclasses != null) {
+                queue.addAll(asList(subclasses));
             }
 
             if (temp.isAnnotationPresent(DisplayComponent.class)) {
-                list.add(temp);
+                annotatedClasses.add(temp);
             }
         }
-        return list;
+        return annotatedClasses;
     }
 
     private static Pair<String, Region> mapClassToRegion(Class<?> clazz, ResetObserver resetObserver) {
@@ -169,11 +193,11 @@ public final class ManualController {
 
         return new Pair<>(
                 buttonLinkerName,
-                createSingleRegion(new FXMLLoader(resource), resetObserver)
+                loadSingleRegion(new FXMLLoader(resource), resetObserver)
         );
     }
 
-    private static Region createSingleRegion(FXMLLoader loader, ResetObserver resetObserver)
+    private static Region loadSingleRegion(FXMLLoader loader, ResetObserver resetObserver)
             throws IllegalArgumentException {
         Region output = FacadeFX.load(loader);
         String location = loader.getLocation().toString();
@@ -196,9 +220,7 @@ public final class ManualController {
     @FXML
     public void switchPaneByButtonPress() {
         Toggle selected = options.getSelectedToggle();
-        String selectedName = GET_TOGGLE_NAME.apply(selected);
-        if (selectedName.equals("Blind Alley")) ObserverHub.updateAtIndex(BLIND_ALLEY_PANE);
-        else if (selectedName.equals("Souvenir")) ObserverHub.updateAtIndex(SOUVENIR_PANE);
+        ObserverHub.scanButtonName(GET_TOGGLE_NAME.apply(selected));
         paneSwitch(regionMap.get(selected));
     }
 
