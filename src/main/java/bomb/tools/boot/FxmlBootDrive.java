@@ -15,6 +15,8 @@ import javafx.scene.layout.Region;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.ArrayDeque;
@@ -42,6 +44,7 @@ import static java.util.Arrays.asList;
  * Reason is unknown, but more testing is required on other machines.
  */
 public sealed interface FxmlBootDrive permits StandardFxmlBootDrive, VirtualThreadFxmlBootDrive {
+    Logger LOG = LoggerFactory.getLogger(FxmlBootDrive.class);
     SequencedMap<String, Region> createFXMLMap(ResetObserver resetObserver);
 
     @Contract(" -> new")

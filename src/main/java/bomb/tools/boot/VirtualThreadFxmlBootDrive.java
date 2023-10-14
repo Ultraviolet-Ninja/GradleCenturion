@@ -20,7 +20,8 @@ public final class VirtualThreadFxmlBootDrive implements FxmlBootDrive {
         try {
             return future.get();
         } catch (ExecutionException | InterruptedException e) {
-            throw new RuntimeException(e);
+            LOG.error("", e);
+            throw new IllegalStateException("Unexpected Boot Exception");
         }
     }
 
