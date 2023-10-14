@@ -11,7 +11,7 @@ import static javafx.scene.paint.Color.PINK;
 import static javafx.scene.paint.Color.RED;
 import static javafx.scene.paint.Color.YELLOW;
 
-public class Grid extends AbstractHexagon implements Rotatable {
+public final class Grid extends AbstractHexagon implements Rotatable {
     public static final int GRID_SIDE_LENGTH = 4;
 
     private final ArrayRing<Color> colorRing;

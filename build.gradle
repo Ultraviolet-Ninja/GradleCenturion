@@ -3,19 +3,17 @@ plugins {
     id 'jacoco'
     id 'application'
     id 'org.beryx.jlink' version '3.0.0'
-    id 'info.solidsoft.pitest' version '1.7.4'
+    id 'info.solidsoft.pitest' version '1.15.0'
     id 'org.openjfx.javafxplugin' version '0.1.0'
     id 'org.javamodularity.moduleplugin' version '1.8.12'
     id 'com.github.breadmoirai.github-release' version '2.4.1'
 }
 
 group 'jasmine.jragon'
-version '0.23.0'
+version '0.23.1'
 
-java {
-    sourceCompatibility(17)
-    targetCompatibility(17)
-}
+sourceCompatibility = 21
+targetCompatibility = 21
 
 application {
     mainClassName = project.hasProperty('testingArea') ?
@@ -47,6 +45,7 @@ dependencies {
     implementation 'org.jgrapht:jgrapht-ext:1.5.2'
     implementation 'org.jetbrains:annotations:24.0.1'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
+    implementation 'ch.qos.logback:logback-classic:1.4.8'
 
     implementation('com.jfoenix:jfoenix:9.0.4') {
         exclude group: "org.javafx"
@@ -56,8 +55,7 @@ dependencies {
     }
 
     testImplementation 'org.testng:testng:7.8.0'
-    testImplementation 'org.slf4j:slf4j-api:2.0.9'
-    testImplementation 'org.slf4j:slf4j-simple:2.0.9'
+    testImplementation 'org.pitest:pitest-testng-plugin:1.0.0'
     testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.15.2'
 }
 
@@ -105,7 +103,7 @@ test {
 }
 
 jacocoTestReport {
-    reports.xml.enabled(true)
+    reports.xml.required = true
 
     if (includedTestDirectories.size() != 3) {
         afterEvaluate {
@@ -135,10 +133,13 @@ static List<String> getTargetClasses(boolean firstInstance, boolean secondInstan
 }
 
 pitest {
-    targetClasses = getTargetClasses(firstInstance, secondInstance, thirdInstance, fourthInstance,
-            fifthInstance, sixthInstance)
-    outputFormats = ['HTML']
+    targetClasses.set(
+            getTargetClasses(firstInstance, secondInstance, thirdInstance, fourthInstance,
+                    fifthInstance, sixthInstance)
+    )
+    outputFormats.add('HTML')
     testPlugin = 'testng'
+    verbose = true
 }
 
 javafx {
@@ -148,13 +149,15 @@ javafx {
 
 jar.manifest.attributes(['Main-Class': "${mainClassName}"])
 
+def buildDirectory = buildDir
+
 jlink {
-    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    imageZip.set(project.file("${buildDirectory}/distributions/app-${javafx.platform.classifier}.zip"))
+    options.set(['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages'])
     addExtraDependencies("javafx")
 
     def opSys = org.gradle.internal.os.OperatingSystem.current()
-    String iconBaseFilename = "${buildDir}/resources/main/bomb/KTANE logo"
+    String iconBaseFilename = "${buildDirectory}/resources/main/bomb/KTANE logo"
 
     if (opSys.windows) {
         launcher {
@@ -190,37 +193,37 @@ jlink {
 
 tasks.register('zipExecutableFiles', Zip) {
     dependsOn(jpackageImage)
-    from buildDir
+    from buildDirectory
     def opSys = org.gradle.internal.os.OperatingSystem.current()
     String baseFilename = "Gradle-Centurion-${project.version}-"
 
     if (opSys.windows) {
         include 'jpackage/Gradle Centurion Win/**'
-        archiveName "${baseFilename}win.zip"
+        archiveFileName.set("${baseFilename}win.zip")
     } else if (opSys.linux) {
         include 'jpackage/Gradle Centurion Linux/**'
-        archiveName "${baseFilename}linux.zip"
+        archiveFileName.set("${baseFilename}linux.zip")
     } else {
         include 'jpackage/Gradle Centurion Mac/**'
-        archiveName "${baseFilename}mac.zip"
+        archiveFileName.set("${baseFilename}mac.zip")
     }
 }
 
 tasks.register('tarExecutableFiles', Tar) {
     dependsOn(jpackageImage)
-    from buildDir
+    from buildDirectory
     def opSys = org.gradle.internal.os.OperatingSystem.current()
     String baseFilename = "Gradle-Centurion-${project.version}-"
 
     if (opSys.windows) {
         include 'jpackage/Gradle Centurion Win/**'
-        archiveName "${baseFilename}win.tar"
+        archiveFileName.set("${baseFilename}win.tar")
     } else if (opSys.linux) {
         include 'jpackage/Gradle Centurion Linux/**'
-        archiveName "${baseFilename}linux.tar"
+        archiveFileName.set("${baseFilename}linux.tar")
     } else {
         include 'jpackage/Gradle Centurion Mac/**'
-        archiveName "${baseFilename}mac.tar"
+        archiveFileName.set("${baseFilename}mac.tar")
     }
 }
 
@@ -229,7 +232,7 @@ githubRelease {
     owner = 'Ultraviolet-Ninja'
 
     def opSys = org.gradle.internal.os.OperatingSystem.current()
-    String baseFilename = "${buildDir}/distributions/Gradle-Centurion-${project.version}-"
+    String baseFilename = "${buildDirectory}/distributions/Gradle-Centurion-${project.version}-"
     allowUploadToExisting = !opSys.windows
 
     if (opSys.windows) {

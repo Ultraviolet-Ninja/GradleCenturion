@@ -22,7 +22,7 @@ public class LaundryTest {
     }
 
     @DataProvider
-    public Object[][] exceptionProvider() {
+    public Object[][] illegalArgExceptionProvider() {
         ConditionSetter setSerial = () -> Widget.setSerialCode("ajwf45");
         return new Object[][]{
                 {EMPTY_SETTER, "1", "1"}, {setSerial, "", "1"}, {EMPTY_SETTER, "1", ""},
@@ -30,8 +30,23 @@ public class LaundryTest {
         };
     }
 
-    @Test(dataProvider = "exceptionProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(ConditionSetter setter, String solved, String needy) {
+    @Test(dataProvider = "illegalArgExceptionProvider", expectedExceptions = IllegalArgumentException.class)
+    public void illegalArgExceptionTest(ConditionSetter setter, String solved, String needy) {
+        setter.setCondition();
+        Laundry.clean(solved, needy);
+    }
+
+    @DataProvider
+    public Object[][] numberFormatExceptionProvider() {
+        ConditionSetter setSerial = () -> Widget.setSerialCode("ajwf45");
+        return new Object[][]{
+                {setSerial, "abc", "1"},
+                {setSerial, "1", "abc"}
+        };
+    }
+
+    @Test(dataProvider = "numberFormatExceptionProvider", expectedExceptions = NumberFormatException.class)
+    public void numberFormatExceptionTest(ConditionSetter setter, String solved, String needy) {
         setter.setCondition();
         Laundry.clean(solved, needy);
     }

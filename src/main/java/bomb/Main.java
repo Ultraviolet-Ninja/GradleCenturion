@@ -26,7 +26,7 @@ import static javafx.scene.input.KeyCode.DOWN;
 import static javafx.scene.input.KeyCode.UP;
 import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
-public class Main extends Application {
+public final class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("manual.fxml"));

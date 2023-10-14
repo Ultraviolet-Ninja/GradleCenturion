@@ -27,7 +27,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane.CALCULATE_SPAN;
 
-public class ExitChecker {
+public final class ExitChecker {
     /**
      * Determines the possible exits and the exit description from the grid that was found in the
      * MazeSearch search function

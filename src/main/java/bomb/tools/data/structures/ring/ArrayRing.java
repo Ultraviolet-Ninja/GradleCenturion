@@ -29,7 +29,7 @@ public final class ArrayRing<E> implements Iterable<E> {
     }
 
     public ArrayRing(@NotNull Collection<E> c) {
-        if (c.size() < 1)
+        if (c.isEmpty())
             throw new IllegalArgumentException();
         internalStructure = c instanceof ArrayList ?
                 (List<E>) c :

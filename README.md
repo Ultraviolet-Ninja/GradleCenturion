@@ -3,7 +3,7 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b4b8571475d543a2afc720f5f96ae2cf)](https://www.codacy.com/gh/Ultraviolet-Ninja/GradleCenturion/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ultraviolet-Ninja/GradleCenturion&amp;utm_campaign=Badge_Grade)
-![Project Version](https://img.shields.io/badge/version-0.23.0-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.23.1-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
@@ -11,19 +11,19 @@ This project is designed to solve all puzzles found on the Centurion Bomb from K
 This is a huge project for one man to tackle, but I've [learned a lot](Learned.md) from the challenges I've faced.
 
 ## Technologies
-- Java 17
-- Gradle 7.4
+- Java 21
+- Gradle 8.4
 ### Plugins
 - JavaFX
 - Breadmoirai GitHub Release
 ### Dependencies
-- MaterialFX ver. 11.12.0
-- JFoenix ver. 9.0.4
-- JavaTuple ver. 1.2
-- JGraphT ver. 1.5.1
-- OpenCSV ver. 5.7.1
+- MaterialFX ver. `11.12.0`
+- JFoenix ver. `9.0.4`
+- JavaTuple ver. `1.2`
+- JGraphT ver. `1.5.2`
+- OpenCSV ver. `5.8`
 ### Other Technologies
-- Circle CI
+- Circle CI with TestNG and Pitest
 - CodeMR Free Trial
 
 ## Status - In progress

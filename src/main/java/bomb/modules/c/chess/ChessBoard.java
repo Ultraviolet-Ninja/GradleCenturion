@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import static bomb.modules.c.chess.Tile.TileColor.BLACK;
 import static bomb.modules.c.chess.Tile.TileColor.WHITE;
 
-public class ChessBoard {
+public final class ChessBoard {
     public static final byte BOARD_LENGTH = 6;
 
     private final Tile[][] board;

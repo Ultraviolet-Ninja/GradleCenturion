@@ -13,7 +13,9 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -209,9 +211,9 @@ public final class BattleshipController implements Resettable {
             ships[i].setCurrentQuantity(shipCounts[i]);
         }
 
-        Set<Ocean> solve;
+        SequencedSet<Ocean> solve;
         try {
-            solve = Battleship.solveOcean();
+            solve = new LinkedHashSet<>(Battleship.solveOcean());
         } catch (IllegalArgumentException e) {
             FacadeFX.setAlert(ERROR, e.getMessage(),
                     "Incomplete Information Given", "Information Error");
@@ -219,7 +221,7 @@ public final class BattleshipController implements Resettable {
         }
 
         if (solve.size() == 1) {
-            translateToFrontendGrid(frontendGrid, solve.iterator().next());
+            translateToFrontendGrid(frontendGrid, solve.getFirst());
         } else {
             FacadeFX.setAlert(ERROR, "Displaying extra solutions in new window(s)",
                     "Multiple solutions detected", "Unexpected state");

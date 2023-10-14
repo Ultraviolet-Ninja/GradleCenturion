@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 import static java.util.Arrays.copyOf;
 
-public abstract class AbstractHexagon {
+public abstract sealed class AbstractHexagon permits Grid, Maze {
     protected HexagonalPlane hexagon;
 
     public AbstractHexagon() {

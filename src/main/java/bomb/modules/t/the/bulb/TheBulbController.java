@@ -9,17 +9,17 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
-import static bomb.modules.t.the.bulb.Bulb.Color.BLUE;
-import static bomb.modules.t.the.bulb.Bulb.Color.GREEN;
-import static bomb.modules.t.the.bulb.Bulb.Color.PURPLE;
-import static bomb.modules.t.the.bulb.Bulb.Color.RED;
-import static bomb.modules.t.the.bulb.Bulb.Color.WHITE;
-import static bomb.modules.t.the.bulb.Bulb.Color.YELLOW;
-import static bomb.modules.t.the.bulb.Bulb.Light.OFF;
-import static bomb.modules.t.the.bulb.Bulb.Light.ON;
-import static bomb.modules.t.the.bulb.Bulb.Opacity.OPAQUE;
-import static bomb.modules.t.the.bulb.Bulb.Opacity.TRANSLUCENT;
-import static bomb.modules.t.the.bulb.Bulb.Position.SCREWED;
+import static bomb.modules.t.the.bulb.BulbModel.Color.BLUE;
+import static bomb.modules.t.the.bulb.BulbModel.Color.GREEN;
+import static bomb.modules.t.the.bulb.BulbModel.Color.PURPLE;
+import static bomb.modules.t.the.bulb.BulbModel.Color.RED;
+import static bomb.modules.t.the.bulb.BulbModel.Color.WHITE;
+import static bomb.modules.t.the.bulb.BulbModel.Color.YELLOW;
+import static bomb.modules.t.the.bulb.BulbModel.Light.OFF;
+import static bomb.modules.t.the.bulb.BulbModel.Light.ON;
+import static bomb.modules.t.the.bulb.BulbModel.Opacity.OPAQUE;
+import static bomb.modules.t.the.bulb.BulbModel.Opacity.TRANSLUCENT;
+import static bomb.modules.t.the.bulb.BulbModel.Position.SCREWED;
 
 public final class TheBulbController implements Resettable {
     @FXML
@@ -46,7 +46,7 @@ public final class TheBulbController implements Resettable {
 
     @FXML
     private void submitBulbInfo() {
-        Bulb input = new Bulb();
+        BulbModel input = new BulbModel();
         input.setColor(retrieveColor());
         input.setLight(retrieveLuminosity());
         input.setOpacity(retrieveOpacity());
@@ -55,7 +55,7 @@ public final class TheBulbController implements Resettable {
         outputToTextArea(TheBulb.solve(input));
     }
 
-    private Bulb.Color retrieveColor() {
+    private BulbModel.Color retrieveColor() {
         String resultingColor = FacadeFX.getToggleName(colorGroup);
         return switch(resultingColor) {
             case "Red" -> RED;
@@ -67,12 +67,12 @@ public final class TheBulbController implements Resettable {
         };
     }
 
-    private Bulb.Light retrieveLuminosity() {
+    private BulbModel.Light retrieveLuminosity() {
         String resultingLight = FacadeFX.getToggleName(luminosityGroup);
         return resultingLight.equals("Lit") ? ON : OFF;
     }
 
-    private Bulb.Opacity retrieveOpacity() {
+    private BulbModel.Opacity retrieveOpacity() {
         String resultingOpacity = FacadeFX.getToggleName(opacityGroup);
         return resultingOpacity.equals("Opaque") ? OPAQUE : TRANSLUCENT;
     }

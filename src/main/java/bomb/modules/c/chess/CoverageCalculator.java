@@ -13,7 +13,7 @@ import java.util.TreeSet;
 import static bomb.modules.c.chess.ChessBoard.BOARD_LENGTH;
 import static bomb.modules.c.chess.ChessPiece.BISHOP;
 
-public class CoverageCalculator {
+public final class CoverageCalculator {
     public static Coordinates findNonCoveredTileLocation(ChessBoard board) {
         for (int x = 0; x < BOARD_LENGTH; x++) {
             for (int y = 0; y < BOARD_LENGTH; y++) {
