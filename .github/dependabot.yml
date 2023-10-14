@@ -22,10 +22,10 @@ updates:
       - dependency-name: "org.beryx.jlink"
       - dependency-name: "org.javamodularity.moduleplugin"
       - dependency-name: "com.github.breadmoirai.github-release"
+      - dependency-name: "info.solidsoft.pitest"
     ignore:
       - dependency-name: "com.jfoenix:jfoenix"            # Must stay at 9.0.4
       - dependency-name: "io.github.palexdev:materialfx"  # Must stay at 11.12.0
-      - dependency-name: "info.solidsoft.pitest"          # Must stay at 1.7.4
 
 
   - package-ecosystem: "github-actions"
