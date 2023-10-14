@@ -21,7 +21,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTT
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM_RIGHT;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.TOP_RIGHT;
 
-public class MazeRunner {
+public final class MazeRunner {
     //Movement Vectors
     private static final Coordinates MOVE_DOWN, MOVE_RIGHT,
             LEFT_SIDE_MOVE_DOWN_RIGHT, RIGHT_SIDE_MOVE_TOP_RIGHT;

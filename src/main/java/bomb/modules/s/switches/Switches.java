@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -23,7 +22,7 @@ public sealed class Switches extends Widget permits ColoredSwitches {
 
     static {
         Byte[] forbiddenMoveSource = {4, 11, 15, 18, 19, 23, 24, 26, 28, 30};
-        FORBIDDEN_MOVES = new HashSet<>(asList(forbiddenMoveSource));
+        FORBIDDEN_MOVES = Set.of(forbiddenMoveSource);
         SPECIAL_CONDITIONS = new HashMap<>();
         setUpSpecialConditions();
     }

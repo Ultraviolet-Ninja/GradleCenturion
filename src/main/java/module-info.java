@@ -5,6 +5,7 @@ open module centurion {
     requires com.opencsv;
     requires com.jfoenix;
     requires org.jgrapht.core;
+    requires org.slf4j;
     requires javatuples;
     requires MaterialFX;
     requires org.jetbrains.annotations;

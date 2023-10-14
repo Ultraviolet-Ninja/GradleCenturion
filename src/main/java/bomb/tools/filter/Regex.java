@@ -1,6 +1,7 @@
 package bomb.tools.filter;
 
 import org.intellij.lang.annotations.Language;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -126,8 +127,9 @@ public final class Regex implements Iterable<String> {
         textMatcher.reset();
     }
 
+    @Contract(pure = true)
     @Override
-    public String toString() {
+    public @NotNull String toString() {
         return "Regex: " + regPattern.pattern();
     }
 
@@ -136,11 +138,12 @@ public final class Regex implements Iterable<String> {
     }
 
     @Override
-    public Iterator<String> iterator() {
+    public @NotNull Iterator<String> iterator() {
         return RESULT_STREAM.apply(textMatcher).iterator();
     }
 
-    public Regex appendToPattern(@Language("regexp") @NotNull String pattern) {
+    @Contract("_ -> new")
+    public @NotNull Regex appendToPattern(@Language("regexp") @NotNull String pattern) {
         return new Regex(this.regPattern.pattern() + pattern, regPattern.flags());
     }
 

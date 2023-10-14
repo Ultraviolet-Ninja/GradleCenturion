@@ -27,3 +27,6 @@ hs_err_pid*
 Dockafile - Copy
 /.project
 /.settings/org.eclipse.buildship.core.prefs
+/index.html
+/script.js
+/styles.css

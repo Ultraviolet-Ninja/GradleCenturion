@@ -108,7 +108,7 @@ public final class Morsematics extends Widget {
 
     private static void rotateOnIndicatorMatch(EnumSet<Indicator> indicatorSet, ArrayRing<String> letterRing,
                                                List<String> inputLetters) {
-        if (indicatorSet.size() == 0) return;
+        if (indicatorSet.isEmpty()) return;
 
         indicatorSet.stream()
                 .map(Enum::name)

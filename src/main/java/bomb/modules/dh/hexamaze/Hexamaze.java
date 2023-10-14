@@ -56,9 +56,7 @@ public final class Hexamaze extends Widget {
         Grid original = new Grid(new HexagonalPlane(nodeList));
 
         Grid found = MazeSearch.search(maze, original)
-                .orElseThrow(() -> {
-                    throw new IllegalArgumentException("Could not find maze from given shapes");
-                });
+                .orElseThrow(() -> new IllegalArgumentException("Could not find maze from given shapes"));
 
         int colorValue = copyPegLocation(original, found);
         Optional<Pair<String, List<Coordinates>>> exitInfoOptional = ExitChecker.findPossibleExits(found);
