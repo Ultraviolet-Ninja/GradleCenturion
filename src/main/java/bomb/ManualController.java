@@ -136,7 +136,7 @@ public final class ManualController {
     }
 
     @FXML
-    public void switchPaneByButtonPress() {
+    private void switchPaneByButtonPress() {
         Toggle selected = options.getSelectedToggle();
         ObserverHub.scanButtonName(GET_TOGGLE_NAME.apply(selected));
         paneSwitch(regionMap.get(selected));
@@ -148,7 +148,7 @@ public final class ManualController {
     }
 
     @FXML
-    public void search() {
+    private void search() {
         String searchTerm = searchBar.getText().toLowerCase();
         radioButtonHouse.getChildren().clear();
         if (searchTerm.isEmpty()) {
@@ -191,5 +191,9 @@ public final class ManualController {
         int index = allRadioButtons.indexOf(selected) + 1;
         index %= size;
         switchPaneByIndex(index);
+    }
+
+    void focusOnSearchBar() {
+        searchBar.requestFocus();
     }
 }
