@@ -104,6 +104,8 @@ public final class ManualController {
     private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
         var resetObserver = new ResetObserver();
         ObserverHub.addObserver(RESET, resetObserver);
+
+        //Change the drive to test a new way to load the fxml files
         var drive = FxmlBootDrive.createStandardDrive();
         var fxmlMapFuture = supplyAsync(() -> drive.createFXMLMap(resetObserver));
         var radioButtonNameFuture = createButtonNameFuture(options.getToggles());
