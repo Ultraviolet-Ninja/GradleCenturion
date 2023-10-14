@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -90,7 +91,14 @@ public final class ManualController {
         long start = System.nanoTime();
         regionMap = setupRegionMap().get();
         long stop = System.nanoTime();
-        LOG.info(String.format("Timer: %,d%n", stop - start));
+        LOG.info("Boot Time: {}", convertTime(stop - start));
+    }
+
+    private static String convertTime(long nanos) {
+        var duration = Duration.ofNanos(nanos);
+        long seconds = duration.getSeconds() % 60;
+        long millis = duration.toMillis() % 1000;
+        return String.format("%01d.%03d sec", seconds, millis);
     }
 
     private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
