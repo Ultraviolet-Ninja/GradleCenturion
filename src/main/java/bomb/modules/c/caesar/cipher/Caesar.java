@@ -37,10 +37,9 @@ public final class Caesar extends Widget {
         if (hasLitIndicator(NSA) && doesPortExists(PARALLEL))
             return 0;
 
-        int out = 0;
-        out += getAllBatteries();
+        int out = getAllBatteries();
         if (hasVowelInSerialCode()) out--;
-        if (getSerialCodeLastDigit() % 2 == 0) out++;
+        if ((getSerialCodeLastDigit() & 1) == 0) out++;
         if (hasIndicator(CAR)) out++;
         return out;
     }

@@ -94,7 +94,7 @@ public final class LogicController implements Resettable {
         boolean areAllStringsFilled = Stream
                 .concat(textFieldsStrings, comboBoxStrings)
                 .map(text -> !text.isEmpty())
-                .reduce((b1, b2) -> b1 && b2)
+                .reduce(AND::test)
                 .orElse(false);
 
         submitButton.setDisable(!areAllStringsFilled);

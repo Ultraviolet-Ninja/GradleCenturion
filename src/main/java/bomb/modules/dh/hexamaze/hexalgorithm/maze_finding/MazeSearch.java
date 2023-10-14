@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 
-public class MazeSearch {
+public final class MazeSearch {
     private static final int ROTATION_COUNT = 6;
 
     /**

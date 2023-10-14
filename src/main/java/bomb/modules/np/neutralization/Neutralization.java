@@ -137,13 +137,13 @@ public final class Neutralization extends Widget {
             //Length of characters for the anion is equal to the cation symbol length
             concentrate *= 3;
         concentrate = Math.abs(concentrate) % 10;
-        if (concentrate == 0)
+        if (concentrate == 0.0)
             concentrate = acidVol * 2 / 5.0;
         return concentrate / 10.0;
     }
 
     private static int baseConcentration() {
-        if (overrule()) return 20;
+        if (isProcessOverruled()) return 20;
         int allIndicators = countIndicators(ALL_PRESENT);
         int portTypeCount = countPortTypes();
 
@@ -153,17 +153,15 @@ public final class Neutralization extends Widget {
             return 10;
         else if (allIndicators > numHolders && allIndicators > portTypeCount)
             return 20;
-        return closestNum();
+        return getClosestDistance();
     }
 
-    private static boolean overrule() {
-        return (currentAcid == HYDROIODIC_ACID &&
-                currentBase == POTASSIUM_HYDROXIDE) ||
-                (currentAcid == HYDROCHORIC_ACID &&
-                        currentBase == AMMONIA);
+    private static boolean isProcessOverruled() {
+        return (currentAcid == HYDROIODIC_ACID && currentBase == POTASSIUM_HYDROXIDE) ||
+                (currentAcid == HYDROCHORIC_ACID && currentBase == AMMONIA);
     }
 
-    private static int closestNum() {
+    private static int getClosestDistance() {
         int atomicNum = currentBase.getAtomicNum();
         int holderDistance = Math.abs(atomicNum - 5),
                 portDistance = Math.abs(atomicNum - 10),

@@ -88,19 +88,19 @@ public class BitwiseTest {
         assertEquals(Bitwise.getByte(operation), expected);
     }
 
-    private void setEssentialTrueConditions() {
+    private static void setEssentialTrueConditions() {
         Widget.setSerialCode(LAST_DIGIT_ODD);
         Widget.setStartTime(DEFAULT_START_TIME);
         Widget.setNumModules(6);
     }
 
-    private void setEssentialFalseConditions() {
+    private static void setEssentialFalseConditions() {
         Widget.setSerialCode(LAST_DIGIT_EVEN);
         Widget.setStartTime(DEFAULT_START_TIME);
         Widget.setNumModules(1);
     }
 
-    private void maximizeConditions() {
+    private static void maximizeConditions() {
         Widget.setPortValue(PARALLEL, 3);
         Widget.setIndicator(ON, BOB);
         Widget.setIndicator(ON, NSA);

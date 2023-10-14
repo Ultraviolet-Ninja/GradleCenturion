@@ -3,11 +3,14 @@ package bomb.tools.pattern.observer;
 import bomb.abstractions.Resettable;
 import javafx.fxml.FXMLLoader;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class ResetObserver implements Observer {
+    private static final Logger LOG = LoggerFactory.getLogger(ResetObserver.class);
     private final List<Resettable> controllerList;
 
     public ResetObserver() {
@@ -19,6 +22,7 @@ public final class ResetObserver implements Observer {
         Object controller = loader.getController();
         if (controller == null) return;
         controllerList.add((Resettable) controller);
+        LOG.debug("View of ResetObserver: {}", controllerList);
     }
 
     @Override

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.IntPredicate;
 import java.util.stream.IntStream;
 
@@ -20,7 +19,6 @@ import static bomb.enumerations.ButtonResult.TAP;
 import static bomb.tools.filter.RegexFilter.NUMBER_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
 import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
 @DisplayComponent(resource = "square_button.fxml", buttonLinkerName = "Square Button")
@@ -38,7 +36,7 @@ public final class SquareButton extends Widget {
         DARK_GRAY = CYAN = 2;
         WHITE = 3;
 
-        COLOR_WORDS = new TreeSet<>(asList("Purple", "Indigo", "Maroon", "Jade"));
+        COLOR_WORDS = Set.of("Purple", "Indigo", "Maroon", "Jade");
     }
 
     public static @NotNull String solve(int buttonColor, @NotNull String buttonText) throws IllegalArgumentException {

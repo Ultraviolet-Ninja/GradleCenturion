@@ -6,10 +6,10 @@
 ## Project Tech/Design Choices
 When my friend was working on the project, he helped me decide to move to a RadioButton design for switching between puzzles. This helped me get away from my previous design of nested TabPanes in a TabPane, which probably isn't the most visually appealing.
 
-Another thing we talked about while he was on the project was moving back to Java 8 since it was easier to work with JavaFX. This decision was later reversed after some time experimenting in Gradle. Since I have dependencies that needed to be taken into account, Java 15 was the one I landed on.
+Another thing we talked about while he was on the project was moving back to Java 8 since it was easier to work with JavaFX. This decision was later reversed after some time experimenting in Gradle.
 ## Gradle/Continuous Integration
 - Using the build.gradle file to organize dependencies and plugins, facilitate testing, set up distributions in zip and tar files, and releases for GitHub.
-- Making custom tasks and using parameters for CI pipelines to test certain parts of the code.
+- Making custom tasks and using parameters for CI pipelines to partition my test suite.
 - Automating tests with CircleCI using this [video](https://www.youtube.com/watch?v=9PgZCJNzY9M) as a guide.
 - Coming across ~~LGTM~~ (_when it was still around_) Codacy and taking advantage of its code quality checking for flaws in my Java code.
 ## Graphs and their Algorithms
@@ -23,12 +23,12 @@ Another thing we talked about while he was on the project was moving back to Jav
 ### School
 #### Tools & Practices
 - Understanding how to use Git and GitHub to host my project.
-- Having an introduction to Gradle from one of my teammates trying to bring it into the project. (Wasn't successful, but still)
+- Having an introduction to Gradle from one of my teammates trying to bring it into another project. (_Wasn't successful, but still_)
 #### Verification
 - Understanding the perks of TestNG vs. my previous experience with J-Unit.
 - Discovering Pitest, Exploratory Testing, Mockito, and Jacoco as different ways to test code and thinking about which concepts I should implement into the project.
 #### Design Patterns
-- Using Factories, Facade, and Observers to facilitate repeating code and updating related modules.
+- Using Adapters, Factories, Facades, and Observers to facilitate repeating code and updating related modules.
 - Being introduced to code coupling and cohesion, which was later applied when I had a CodeMR free trial.
 ### Udemy
 - Understanding how to write Groovy code. [Link](https://www.udemy.com/course/gradle-for-java-developers/)

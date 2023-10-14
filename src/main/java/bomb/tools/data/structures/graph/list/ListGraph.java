@@ -2,30 +2,33 @@ package bomb.tools.data.structures.graph.list;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.SequencedMap;
+import java.util.SequencedSet;
 
-public class ListGraph<E> {
-    private final LinkedHashMap<E, ArrayList<E>> list;
-    private final boolean biDirectional;
+public final class ListGraph<E> {
+    private final SequencedMap<E, SequencedSet<E>> list;
+    private final boolean isBidirectional;
 
-    public ListGraph(boolean biDirectional) {
-        this.biDirectional = biDirectional;
+    public ListGraph(boolean isBidirectional) {
+        this.isBidirectional = isBidirectional;
         list = new LinkedHashMap<>();
     }
 
     public void addVertex(E vertex) {
         if (containsVertex(vertex)) return;
-        list.put(vertex, new ArrayList<>());
+        list.put(vertex, new LinkedHashSet<>());
     }
 
     public void addEdge(E vertex, E edge) {
         if (!containsVertex(vertex))
             addVertex(vertex);
-        if (biDirectional && !containsVertex(edge))
+        if (isBidirectional && !containsVertex(edge))
             addVertex(edge);
         if (isNotDuplicate(vertex, edge))
             list.get(vertex).add(edge);
-        if (biDirectional && isNotDuplicate(edge, vertex))
+        if (isBidirectional && isNotDuplicate(edge, vertex))
             list.get(edge).add(vertex);
     }
 
@@ -34,20 +37,20 @@ public class ListGraph<E> {
     }
 
     public List<E> getTargetVertices(E vertex) {
-        return list.get(vertex);
+        return new ArrayList<>(list.get(vertex));
     }
 
     private boolean isNotDuplicate(E vertex, E edge) {
         return !list.get(vertex).contains(edge);
     }
 
-    public List<E> removeVertex(E vertex) {
+    public SequencedSet<E> removeVertex(E vertex) {
         if (!containsVertex(vertex)) return null;
-        if (biDirectional) removeReferences(vertex, list.get(vertex));
+        if (isBidirectional) removeReferences(vertex, list.get(vertex));
         return list.remove(vertex);
     }
 
-    private void removeReferences(E vertex, List<E> refList) {
+    private void removeReferences(E vertex, SequencedSet<E> refList) {
         for (E reference : refList)
             list.get(reference).remove(vertex);
     }

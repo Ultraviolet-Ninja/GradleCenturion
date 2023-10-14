@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.SequencedMap;
 import java.util.Set;
 import java.util.TreeMap;
 
-public class Trie {
+public final class Trie {
     private final TrieNode root;
 
     public Trie() {
@@ -117,8 +117,8 @@ public class Trie {
         return getWordsStartingWith("").toString();
     }
 
-    private static class TrieNode {
-        private final Map<Character, TrieNode> children;
+    private static final class TrieNode {
+        private final SequencedMap<Character, TrieNode> children;
         private boolean isEndOfWord;
 
         public TrieNode() {
@@ -151,7 +151,7 @@ public class Trie {
         }
 
         public Character firstChild() {
-            return children.keySet().iterator().next();
+            return children.sequencedKeySet().getFirst();
         }
 
         public void setEndOfWord(boolean isEndOfWord) {

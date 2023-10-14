@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.stream.Stream;
@@ -18,6 +19,7 @@ import static bomb.modules.s.simon.SimonColors.StateColor.GREEN;
 import static bomb.modules.s.simon.SimonColors.StateColor.RED;
 import static bomb.modules.s.simon.SimonColors.StateColor.YELLOW;
 import static bomb.modules.s.simon.states.StageState.FIRST;
+import static bomb.tools.logic.LogicOperator.OR;
 import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
@@ -103,7 +105,7 @@ public final class SimonStates extends Widget {
                     getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getLowestPriorityOrder());
 
             case 3 -> getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getHighestPriorityOrder());
-            default -> PRESSED_COLOR_HISTORY.get(0);
+            default -> PRESSED_COLOR_HISTORY.getFirst();
         };
     }
 
@@ -111,9 +113,9 @@ public final class SimonStates extends Widget {
         return switch (colorsFlashed.size()) {
             case 1 -> getColorFlashed(colorsFlashed);
 
-            case 2 -> PRESSED_COLOR_HISTORY.containsAll(colorsFlashed) ?
+            case 2 -> new HashSet<>(PRESSED_COLOR_HISTORY).containsAll(colorsFlashed) ?
                     getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getLowestPriorityOrder()) :
-                    PRESSED_COLOR_HISTORY.get(0);
+                    PRESSED_COLOR_HISTORY.getFirst();
 
             case 3 -> historyContainsAnyFlashed(colorsFlashed) ?
                     getFirstInOrder(//Get the highest priority that has flash and not been pressed
@@ -129,7 +131,7 @@ public final class SimonStates extends Widget {
     private static boolean historyContainsAnyFlashed(EnumSet<StateColor> colorsFlashed) {
         return PRESSED_COLOR_HISTORY.stream()
                 .map(colorsFlashed::contains)
-                .reduce((boolOne, boolTwo) -> boolOne || boolTwo)
+                .reduce(OR::test)
                 .orElse(false);
     }
 
@@ -141,10 +143,14 @@ public final class SimonStates extends Widget {
         int size = colorsFlashed.size();
 
         if (size == 3) {
-            Stream<StateColor> stream = colorsFlashed.stream()
-                    .filter(color -> !PRESSED_COLOR_HISTORY.contains(color));
-            if (stream.count() == 1)
-                return stream.findFirst().orElseThrow(IllegalStateException::new);
+            long colorsRemaining = colorsFlashed.stream()
+                    .filter(color -> !PRESSED_COLOR_HISTORY.contains(color))
+                    .count();
+            if (colorsRemaining == 1)
+                return colorsFlashed.stream()
+                        .filter(color -> !PRESSED_COLOR_HISTORY.contains(color))
+                        .findFirst()
+                        .orElseThrow(IllegalStateException::new);
         }
 
         if (size >= 3)

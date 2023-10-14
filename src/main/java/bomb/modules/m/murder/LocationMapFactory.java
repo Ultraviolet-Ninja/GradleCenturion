@@ -14,7 +14,7 @@ import java.util.List;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @SuppressWarnings("ConstantConditions")
-public class LocationMapFactory {
+public final class LocationMapFactory {
     private static final String FILENAME = "location_list.csv";
 
     static Pair<EnumMap<Suspect, List<Location>>, EnumMap<Weapon, List<Location>>> createMaps()

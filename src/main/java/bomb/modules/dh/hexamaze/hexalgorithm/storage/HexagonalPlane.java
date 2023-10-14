@@ -12,7 +12,7 @@ import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calc
 import static bomb.tools.number.MathUtils.isAnInteger;
 import static java.util.Arrays.stream;
 
-public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatable {
+public final class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatable {
     public static final IntUnaryOperator CALCULATE_SPAN, NODAL_SIDE_LENGTH;
 
     private final int sideLength;
@@ -111,7 +111,7 @@ public class HexagonalPlane implements Iterable<BufferedQueue<HexNode>>, Rotatab
     }
 
     @Override
-    public Iterator<BufferedQueue<HexNode>> iterator() {
+    public @NotNull Iterator<BufferedQueue<HexNode>> iterator() {
         return hexagon.iterator();
     }
 

@@ -1,6 +1,6 @@
 package bomb.modules.t.the.bulb;
 
-public class Bulb {
+public final class BulbModel {
     private Color color;
     private Light light;
     private Opacity opacity;
