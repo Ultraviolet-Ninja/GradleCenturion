@@ -143,7 +143,7 @@ pitest {
 }
 
 javafx {
-    version = '17.0.2'
+    version = '17.0.8'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
