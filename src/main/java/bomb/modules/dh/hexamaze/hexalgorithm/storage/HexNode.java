@@ -11,7 +11,7 @@ import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
 
-public class HexNode implements Rotatable {
+public final class HexNode implements Rotatable {
     private EnumSet<HexWall> walls;
     private HexShape hexShape;
     private int color;

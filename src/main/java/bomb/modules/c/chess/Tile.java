@@ -1,6 +1,6 @@
 package bomb.modules.c.chess;
 
-public class Tile {
+public final class Tile {
     public enum TileColor {
         BLACK, WHITE
     }
