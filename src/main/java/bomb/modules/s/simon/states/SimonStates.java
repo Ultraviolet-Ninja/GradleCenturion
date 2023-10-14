@@ -19,6 +19,7 @@ import static bomb.modules.s.simon.SimonColors.StateColor.GREEN;
 import static bomb.modules.s.simon.SimonColors.StateColor.RED;
 import static bomb.modules.s.simon.SimonColors.StateColor.YELLOW;
 import static bomb.modules.s.simon.states.StageState.FIRST;
+import static bomb.tools.logic.LogicOperator.OR;
 import static bomb.tools.string.StringFormat.FIRST_LETTER_CAPITAL;
 import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
@@ -104,7 +105,7 @@ public final class SimonStates extends Widget {
                     getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getLowestPriorityOrder());
 
             case 3 -> getFirstInOrder(DID_NOT_FLASH, colorsFlashed, getHighestPriorityOrder());
-            default -> PRESSED_COLOR_HISTORY.get(0);
+            default -> PRESSED_COLOR_HISTORY.getFirst();
         };
     }
 
@@ -130,7 +131,7 @@ public final class SimonStates extends Widget {
     private static boolean historyContainsAnyFlashed(EnumSet<StateColor> colorsFlashed) {
         return PRESSED_COLOR_HISTORY.stream()
                 .map(colorsFlashed::contains)
-                .reduce((boolOne, boolTwo) -> boolOne || boolTwo)
+                .reduce(OR::test)
                 .orElse(false);
     }
 

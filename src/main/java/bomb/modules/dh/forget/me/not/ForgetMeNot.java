@@ -73,28 +73,28 @@ public final class ForgetMeNot extends Widget {
         if (doesPortExists(SERIAL) && countNumbersInSerialCode() > 2)
             return stageNumber + largestSerialCodeNumber;
 
-        return stageNumber + FINAL_CODE.get(0) +
-                ((FINAL_CODE.get(0) % 2 == 0) ? 1 : -1);
+        return stageNumber + FINAL_CODE.getFirst() +
+                ((FINAL_CODE.getFirst() % 2 == 0) ? 1 : -1);
     }
 
     private static int createSucceedingNumber(int stageNumber) {
         int length = FINAL_CODE.size();
-        if (FINAL_CODE.get(length - 1) == 0 || FINAL_CODE.get(length - 2) == 0)
+        if (FINAL_CODE.getLast() == 0 || FINAL_CODE.get(length - 2) == 0)
             return stageNumber + largestSerialCodeNumber;
 
         if (bothPreviousNumbersAreEven())
             return stageNumber + smallestOddDigitInSerialCode();
 
         return stageNumber + MOST_SIG_DIGIT.applyAsInt(
-                FINAL_CODE.get(length - 1) + FINAL_CODE.get(length - 2)
+                FINAL_CODE.getLast() + FINAL_CODE.get(length - 2)
         );
     }
 
     private static boolean bothPreviousNumbersAreEven() {
         int length = FINAL_CODE.size();
-        int firstPrevious = FINAL_CODE.get(length - 1);
+        int firstPrevious = FINAL_CODE.getLast();
         int secondPrevious = FINAL_CODE.get(length - 2);
-        return  firstPrevious% 2 == 0 && secondPrevious % 2 == 0;
+        return firstPrevious% 2 == 0 && secondPrevious % 2 == 0;
     }
 
     private static int smallestOddDigitInSerialCode() {
@@ -124,9 +124,8 @@ public final class ForgetMeNot extends Widget {
     }
 
     public static void undoLastStage() {
-        int size = FINAL_CODE.size();
-        if (size != 0)
-            FINAL_CODE.remove(size - 1);
+        if (!FINAL_CODE.isEmpty())
+            FINAL_CODE.removeLast();
     }
 
     public static @NotNull String stringifyFinalCode() {

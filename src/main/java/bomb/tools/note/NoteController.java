@@ -33,8 +33,9 @@ public final class NoteController implements Resettable {
 
     @Override
     public void reset() {
-        for (int i = extraNotes.size() - 1; i >= 0; i--)
-            extraNotes.get(i).close();
+        for (var notePageController : extraNotes.reversed()) {
+            notePageController.close();
+        }
         extraNotes.clear();
         FacadeFX.clearMultipleTextFields(firstNote, secondNote, thirdNote, fourthNote, fifthNote);
     }

@@ -25,7 +25,7 @@ public final class Logic extends Widget {
         validateInput(letterList, operators);
 
         if (!isPriorityOnFirstTwo) {
-            LetterRecord lastRecord = letterList.remove(0);
+            LetterRecord lastRecord = letterList.removeFirst();
             letterList.add(lastRecord);
 
             Collections.reverse(operators);
@@ -38,8 +38,8 @@ public final class Logic extends Widget {
             }
         }
 
-        boolean firstHalf = operators.get(0).test(
-                letterList.get(0).getBooleanValue(),
+        boolean firstHalf = operators.getFirst().test(
+                letterList.getFirst().getBooleanValue(),
                 letterList.get(1).getBooleanValue()
         );
 

@@ -1,5 +1,6 @@
 package bomb.tools.data.structures.queue;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.ref.WeakReference;
@@ -14,7 +15,7 @@ import java.util.RandomAccess;
 import java.util.stream.Stream;
 
 @SuppressWarnings({"unchecked", "NullableProblems"})
-public class BufferedQueue<E> implements List<E>, Iterable<E>, RandomAccess {
+public final class BufferedQueue<E> implements List<E>, Iterable<E>, RandomAccess {
     private final int capacity;
     private final ArrayDeque<E> dataDeque;
 
@@ -37,6 +38,18 @@ public class BufferedQueue<E> implements List<E>, Iterable<E>, RandomAccess {
         if (index >= 0)
             return cachedGet()[index];
         throw new ArrayIndexOutOfBoundsException();
+    }
+
+    @Contract(pure = true)
+    @Override
+    public @NotNull E getFirst() {
+        return dataDeque.getFirst();
+    }
+
+    @Contract(pure = true)
+    @Override
+    public @NotNull E getLast() {
+        return dataDeque.getLast();
     }
 
     public int size() {
