@@ -26,6 +26,21 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
 import static java.util.Arrays.asList;
 
+/**
+ * FxmlBootDrive uses the Adapter Pattern to perform the part of the boot sequence with the highest bottleneck in performance.
+ * The purpose for this set of classes is to have a way to quickly switch between methodologies for booting the program
+ * under different operating systems scenarios. As the number of FXML files for the project increases,
+ * maintaining a short boot time for this program will more become critical.
+ * <p>
+ * The standard way uses a stream. This stream is sequential on Linux machines and parallel on Windows,
+ * thus using the thread pool initialized by Java. This means that performance is dependent on how many pooled threads
+ * can be created by the JVM.
+ * <p>
+ * The new way uses Java 21's virtual threads so that we can see if there are any promising results in boot time.
+ * As of Oct 13, 2023 on Windows, the performance is comparable to the standard drive, perhaps slightly faster; however,
+ * it's not reliable. I.e. some runs will boot with no problem, and other runs will abruptly pause while loading FXML files.
+ * Reason is unknown, but more testing is required on other machines.
+ */
 public sealed interface FxmlBootDrive permits StandardFxmlBootDrive, VirtualThreadFxmlBootDrive {
     SequencedMap<String, Region> createFXMLMap(ResetObserver resetObserver);
 
