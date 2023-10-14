@@ -36,10 +36,10 @@ public final class TheBulb extends Widget {
     private static boolean isLightOffAtStepOne;
     private static Indicator rememberedIndicator = null;
 
-    public static @NotNull List<String> solve(@NotNull Bulb bulb) {
-        validateBulb(bulb);
+    public static @NotNull List<String> solve(@NotNull BulbModel bulbModel) {
+        validateBulb(bulbModel);
         List<String> outputList = new ArrayList<>();
-        stepOne(bulb, outputList);
+        stepOne(bulbModel, outputList);
 
         if (isSouvenirActive)
             sendInfoToSouvenir(outputList);
@@ -48,80 +48,80 @@ public final class TheBulb extends Widget {
         return outputList;
     }
 
-    private static void stepOne(Bulb bulb, List<String> outputList) {
-        if (bulb.getLight() == Bulb.Light.OFF) {
-            unscrewBulb(bulb, outputList);
-            stepFour(bulb, outputList);
+    private static void stepOne(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getLight() == BulbModel.Light.OFF) {
+            unscrewBulb(bulbModel, outputList);
+            stepFour(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getOpacity() == Bulb.Opacity.TRANSLUCENT) {
+        if (bulbModel.getOpacity() == BulbModel.Opacity.TRANSLUCENT) {
             outputList.add(PRESS_I);
 
-            if (bulb.getColor() == Bulb.Color.WHITE)
-                checkIfLightTurnsOff(bulb, outputList);
+            if (bulbModel.getColor() == BulbModel.Color.WHITE)
+                checkIfLightTurnsOff(bulbModel, outputList);
 
-            stepTwo(bulb, outputList);
+            stepTwo(bulbModel, outputList);
             return;
         }
 
         outputList.add(PRESS_O);
-        stepThree(bulb, outputList);
+        stepThree(bulbModel, outputList);
     }
 
-    private static void stepTwo(Bulb bulb, List<String> outputList) {
-        if (bulb.getColor() == Bulb.Color.RED) {
-            checkIfLightTurnsOff(bulb, outputList);
+    private static void stepTwo(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getColor() == BulbModel.Color.RED) {
+            checkIfLightTurnsOff(bulbModel, outputList);
             outputList.add(PRESS_I);
-            unscrewBulb(bulb, outputList);
-            stepFive(bulb, outputList);
+            unscrewBulb(bulbModel, outputList);
+            stepFive(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.WHITE) {
+        if (bulbModel.getColor() == BulbModel.Color.WHITE) {
             outputList.add(PRESS_O);
-            unscrewBulb(bulb, outputList);
-            stepSix(bulb, outputList);
+            unscrewBulb(bulbModel, outputList);
+            stepSix(bulbModel, outputList);
             return;
         }
 
-        unscrewBulb(bulb, outputList);
-        stepSeven(bulb, outputList);
+        unscrewBulb(bulbModel, outputList);
+        stepSeven(bulbModel, outputList);
     }
 
-    private static void stepThree(Bulb bulb, List<String> outputList) {
-        if (bulb.getColor() == Bulb.Color.GREEN) {
+    private static void stepThree(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             outputList.add(PRESS_I);
-            checkIfLightTurnsOff(bulb, outputList);
-            unscrewBulb(bulb, outputList);
-            stepSix(bulb, outputList);
+            checkIfLightTurnsOff(bulbModel, outputList);
+            unscrewBulb(bulbModel, outputList);
+            stepSix(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.PURPLE) {
-            checkIfLightTurnsOff(bulb, outputList);
+        if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
+            checkIfLightTurnsOff(bulbModel, outputList);
             outputList.add(PRESS_O);
-            unscrewBulb(bulb, outputList);
-            stepFive(bulb, outputList);
+            unscrewBulb(bulbModel, outputList);
+            stepFive(bulbModel, outputList);
             return;
         }
 
-        unscrewBulb(bulb, outputList);
-        stepEight(bulb, outputList);
+        unscrewBulb(bulbModel, outputList);
+        stepEight(bulbModel, outputList);
     }
 
-    private static void stepFour(Bulb bulb, List<String> outputList) {
+    private static void stepFour(BulbModel bulbModel, List<String> outputList) {
         if (hasFollowingIndicators(CAR, IND, MSA, SND)) {
             outputList.add(PRESS_I);
-            stepNine(bulb, outputList);
+            stepNine(bulbModel, outputList);
             return;
         }
 
         outputList.add(PRESS_O);
-        stepTen(bulb, outputList);
+        stepTen(bulbModel, outputList);
     }
 
-    private static void stepFive(Bulb bulb, List<String> outputList) {
+    private static void stepFive(BulbModel bulbModel, List<String> outputList) {
         String previousPress = outputList.get(outputList.size() - 2);
 
         if (isLightOffAtStepOne) {
@@ -131,173 +131,173 @@ public final class TheBulb extends Widget {
             outputList.add(wasPreviousPressI ? PRESS_O : PRESS_I);
         }
 
-        screwBulb(bulb, outputList);
+        screwBulb(bulbModel, outputList);
     }
 
-    private static void stepSix(Bulb bulb, List<String> outputList) {
+    private static void stepSix(BulbModel bulbModel, List<String> outputList) {
         String firstButtonPress = outputList.get(0);
         String lastButtonPress = outputList.get(outputList.size() - 2);
 
         outputList.add(isLightOffAtStepOne ? firstButtonPress : lastButtonPress);
-        screwBulb(bulb, outputList);
+        screwBulb(bulbModel, outputList);
     }
 
-    private static void stepSeven(Bulb bulb, List<String> outputList) {
-        if (bulb.getColor() == Bulb.Color.GREEN) {
+    private static void stepSeven(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             rememberedIndicator = SIG;
             outputList.add(PRESS_I);
-            stepEleven(bulb, outputList);
+            stepEleven(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.PURPLE) {
+        if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
             outputList.add(PRESS_I);
-            screwBulb(bulb, outputList);
-            stepTwelve(bulb, outputList);
+            screwBulb(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.BLUE) {
+        if (bulbModel.getColor() == BulbModel.Color.BLUE) {
             rememberedIndicator = CLR;
             outputList.add(PRESS_O);
-            stepEleven(bulb, outputList);
+            stepEleven(bulbModel, outputList);
             return;
         }
 
         outputList.add(PRESS_O);
-        screwBulb(bulb, outputList);
-        stepThirteen(bulb, outputList);
+        screwBulb(bulbModel, outputList);
+        stepThirteen(bulbModel, outputList);
     }
 
-    private static void stepEight(Bulb bulb, List<String> outputList) {
-        if (bulb.getColor() == Bulb.Color.WHITE) {
+    private static void stepEight(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getColor() == BulbModel.Color.WHITE) {
             rememberedIndicator = FRQ;
             outputList.add(PRESS_I);
-            stepEleven(bulb, outputList);
+            stepEleven(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.RED) {
+        if (bulbModel.getColor() == BulbModel.Color.RED) {
             outputList.add(PRESS_I);
-            screwBulb(bulb, outputList);
-            stepThirteen(bulb, outputList);
+            screwBulb(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.YELLOW) {
+        if (bulbModel.getColor() == BulbModel.Color.YELLOW) {
             rememberedIndicator = FRK;
             outputList.add(PRESS_O);
-            stepEleven(bulb, outputList);
+            stepEleven(bulbModel, outputList);
             return;
         }
 
         outputList.add(PRESS_O);
-        screwBulb(bulb, outputList);
-        stepTwelve(bulb, outputList);
+        screwBulb(bulbModel, outputList);
+        stepTwelve(bulbModel, outputList);
     }
 
-    private static void stepNine(Bulb bulb, List<String> outputList) {
-        if (bulb.getColor() == Bulb.Color.BLUE) {
+    private static void stepNine(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getColor() == BulbModel.Color.BLUE) {
             outputList.add(PRESS_I);
-            stepFourteen(bulb, outputList);
+            stepFourteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.GREEN) {
+        if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             outputList.add(PRESS_I);
-            screwBulb(bulb, outputList);
-            stepTwelve(bulb, outputList);
+            screwBulb(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.YELLOW) {
+        if (bulbModel.getColor() == BulbModel.Color.YELLOW) {
             outputList.add(PRESS_O);
-            stepFifteen(bulb, outputList);
+            stepFifteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.WHITE) {
+        if (bulbModel.getColor() == BulbModel.Color.WHITE) {
             outputList.add(PRESS_O);
-            screwBulb(bulb, outputList);
-            stepThirteen(bulb, outputList);
+            screwBulb(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.PURPLE) {
-            screwBulb(bulb, outputList);
+        if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
+            screwBulb(bulbModel, outputList);
             outputList.add(PRESS_I);
-            stepTwelve(bulb, outputList);
+            stepTwelve(bulbModel, outputList);
             return;
         }
 
-        screwBulb(bulb, outputList);
+        screwBulb(bulbModel, outputList);
         outputList.add(PRESS_O);
-        stepThirteen(bulb, outputList);
+        stepThirteen(bulbModel, outputList);
     }
 
-    private static void stepTen(Bulb bulb, List<String> outputList) {
-        if (bulb.getColor() == Bulb.Color.PURPLE) {
+    private static void stepTen(BulbModel bulbModel, List<String> outputList) {
+        if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
             outputList.add(PRESS_I);
-            stepFourteen(bulb, outputList);
+            stepFourteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.RED) {
+        if (bulbModel.getColor() == BulbModel.Color.RED) {
             outputList.add(PRESS_I);
-            screwBulb(bulb, outputList);
-            stepThirteen(bulb, outputList);
+            screwBulb(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.BLUE) {
+        if (bulbModel.getColor() == BulbModel.Color.BLUE) {
             outputList.add(PRESS_O);
-            stepFifteen(bulb, outputList);
+            stepFifteen(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.YELLOW) {
+        if (bulbModel.getColor() == BulbModel.Color.YELLOW) {
             outputList.add(PRESS_O);
-            screwBulb(bulb, outputList);
-            stepTwelve(bulb, outputList);
+            screwBulb(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList);
             return;
         }
 
-        if (bulb.getColor() == Bulb.Color.GREEN) {
-            screwBulb(bulb, outputList);
+        if (bulbModel.getColor() == BulbModel.Color.GREEN) {
+            screwBulb(bulbModel, outputList);
             outputList.add(PRESS_I);
-            stepThirteen(bulb, outputList);
+            stepThirteen(bulbModel, outputList);
             return;
         }
 
-        screwBulb(bulb, outputList);
+        screwBulb(bulbModel, outputList);
         outputList.add(PRESS_O);
-        stepTwelve(bulb, outputList);
+        stepTwelve(bulbModel, outputList);
     }
 
-    private static void stepEleven(Bulb bulb, List<String> outputList) {
+    private static void stepEleven(BulbModel bulbModel, List<String> outputList) {
         boolean hasRememberedIndicator = rememberedIndicator != null && hasIndicator(rememberedIndicator);
         outputList.add(hasRememberedIndicator ? PRESS_I : PRESS_O);
-        screwBulb(bulb, outputList);
+        screwBulb(bulbModel, outputList);
     }
 
-    private static void stepTwelve(Bulb bulb, List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn(bulb, outputList);
+    private static void stepTwelve(BulbModel bulbModel, List<String> outputList) {
+        boolean isLightOn = confirmLightIsOn(bulbModel, outputList);
         outputList.add(isLightOn ? PRESS_I : PRESS_O);
     }
 
-    private static void stepThirteen(Bulb bulb, List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn(bulb, outputList);
+    private static void stepThirteen(BulbModel bulbModel, List<String> outputList) {
+        boolean isLightOn = confirmLightIsOn(bulbModel, outputList);
         outputList.add(isLightOn ? PRESS_O : PRESS_I);
     }
 
-    private static void stepFourteen(Bulb bulb, List<String> outputList) {
-        outputList.add(bulb.getOpacity() == Bulb.Opacity.OPAQUE ? PRESS_I : PRESS_O);
-        screwBulb(bulb, outputList);
+    private static void stepFourteen(BulbModel bulbModel, List<String> outputList) {
+        outputList.add(bulbModel.getOpacity() == BulbModel.Opacity.OPAQUE ? PRESS_I : PRESS_O);
+        screwBulb(bulbModel, outputList);
     }
 
-    private static void stepFifteen(Bulb bulb, List<String> outputList) {
-        outputList.add(bulb.getOpacity() == Bulb.Opacity.TRANSLUCENT ? PRESS_I : PRESS_O);
-        screwBulb(bulb, outputList);
+    private static void stepFifteen(BulbModel bulbModel, List<String> outputList) {
+        outputList.add(bulbModel.getOpacity() == BulbModel.Opacity.TRANSLUCENT ? PRESS_I : PRESS_O);
+        screwBulb(bulbModel, outputList);
     }
 
     private static void sendInfoToSouvenir(List<String> outputList) {
@@ -307,7 +307,7 @@ public final class TheBulb extends Widget {
         Souvenir.addRelic("The Bulb button presses", outputText);
     }
 
-    private static void checkIfLightTurnsOff(Bulb bulb, List<String> outputList) {
+    private static void checkIfLightTurnsOff(BulbModel bulbModel, List<String> outputList) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Light Confirmation");
         alert.setContentText("Did the Bulb turn off when you pressed I?");
@@ -325,10 +325,10 @@ public final class TheBulb extends Widget {
 
         options.ifPresent(buttonType -> isLightOffAtStepOne = buttonType == yes);
 
-        bulb.setLight(isLightOffAtStepOne ? Bulb.Light.OFF : Bulb.Light.ON);
+        bulbModel.setLight(isLightOffAtStepOne ? BulbModel.Light.OFF : BulbModel.Light.ON);
     }
 
-    private static boolean confirmLightIsOn(Bulb bulb, List<String> outputList) throws IllegalStateException {
+    private static boolean confirmLightIsOn(BulbModel bulbModel, List<String> outputList) throws IllegalStateException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Light Confirmation");
         alert.setContentText("Is the bulb now on or off?");
@@ -348,28 +348,28 @@ public final class TheBulb extends Widget {
             throw new IllegalStateException("Unexpected state");
 
         boolean isLightOn = options.get() == on;
-        bulb.setLight(isLightOn ? Bulb.Light.ON : Bulb.Light.OFF);
+        bulbModel.setLight(isLightOn ? BulbModel.Light.ON : BulbModel.Light.OFF);
         return isLightOn;
     }
 
-    private static void unscrewBulb(Bulb theBulb, List<String> list) throws IllegalStateException {
-        theBulb.setPosition(Bulb.Position.UNSCREWED);
+    private static void unscrewBulb(BulbModel theBulbModel, List<String> list) throws IllegalStateException {
+        theBulbModel.setPosition(BulbModel.Position.UNSCREWED);
         list.add(UNSCREW);
     }
 
-    private static void screwBulb(Bulb theBulb, List<String> list) throws IllegalStateException {
-        theBulb.setPosition(Bulb.Position.SCREWED);
+    private static void screwBulb(BulbModel theBulbModel, List<String> list) throws IllegalStateException {
+        theBulbModel.setPosition(BulbModel.Position.SCREWED);
         list.add(SCREW);
     }
 
-    private static void validateBulb(Bulb bulb) throws IllegalArgumentException {
-        if (bulb.getPosition() != Bulb.Position.SCREWED)
+    private static void validateBulb(BulbModel bulbModel) throws IllegalArgumentException {
+        if (bulbModel.getPosition() != BulbModel.Position.SCREWED)
             throw new IllegalArgumentException("Bulb must be screwed in at the start");
-        if (bulb.getLight() == null)
+        if (bulbModel.getLight() == null)
             throw new IllegalArgumentException("Bulb must be lit or unlit");
-        if (bulb.getColor() == null)
+        if (bulbModel.getColor() == null)
             throw new IllegalArgumentException("Bulb must have a color");
-        if (bulb.getOpacity() == null)
+        if (bulbModel.getOpacity() == null)
             throw new IllegalArgumentException("Bulb must be Opaque or Translucent");
     }
 }

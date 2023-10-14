@@ -19,17 +19,17 @@ import static bomb.enumerations.Indicator.FRQ;
 import static bomb.enumerations.Indicator.IND;
 import static bomb.enumerations.Indicator.NSA;
 import static bomb.enumerations.Indicator.SIG;
-import static bomb.modules.t.the.bulb.Bulb.Color.BLUE;
-import static bomb.modules.t.the.bulb.Bulb.Color.GREEN;
-import static bomb.modules.t.the.bulb.Bulb.Color.PURPLE;
-import static bomb.modules.t.the.bulb.Bulb.Color.WHITE;
-import static bomb.modules.t.the.bulb.Bulb.Color.YELLOW;
-import static bomb.modules.t.the.bulb.Bulb.Light.OFF;
-import static bomb.modules.t.the.bulb.Bulb.Light.ON;
-import static bomb.modules.t.the.bulb.Bulb.Opacity.OPAQUE;
-import static bomb.modules.t.the.bulb.Bulb.Opacity.TRANSLUCENT;
-import static bomb.modules.t.the.bulb.Bulb.Position.SCREWED;
-import static bomb.modules.t.the.bulb.Bulb.Position.UNSCREWED;
+import static bomb.modules.t.the.bulb.BulbModel.Color.BLUE;
+import static bomb.modules.t.the.bulb.BulbModel.Color.GREEN;
+import static bomb.modules.t.the.bulb.BulbModel.Color.PURPLE;
+import static bomb.modules.t.the.bulb.BulbModel.Color.WHITE;
+import static bomb.modules.t.the.bulb.BulbModel.Color.YELLOW;
+import static bomb.modules.t.the.bulb.BulbModel.Light.OFF;
+import static bomb.modules.t.the.bulb.BulbModel.Light.ON;
+import static bomb.modules.t.the.bulb.BulbModel.Opacity.OPAQUE;
+import static bomb.modules.t.the.bulb.BulbModel.Opacity.TRANSLUCENT;
+import static bomb.modules.t.the.bulb.BulbModel.Position.SCREWED;
+import static bomb.modules.t.the.bulb.BulbModel.Position.UNSCREWED;
 import static bomb.modules.t.the.bulb.TheBulb.PRESS_I;
 import static bomb.modules.t.the.bulb.TheBulb.PRESS_O;
 import static bomb.modules.t.the.bulb.TheBulb.SCREW;
@@ -51,15 +51,15 @@ public class TheBulbTest {
     }
 
     @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
-    public void exceptionTest(Bulb.Position position, Bulb.Light inputLight,
-                              Bulb.Color inputColor, Bulb.Opacity inputOpacity) {
-        Bulb testBulb = new Bulb();
-        testBulb.setPosition(position);
-        testBulb.setOpacity(inputOpacity);
-        testBulb.setLight(inputLight);
-        testBulb.setColor(inputColor);
+    public void exceptionTest(BulbModel.Position position, BulbModel.Light inputLight,
+                              BulbModel.Color inputColor, BulbModel.Opacity inputOpacity) {
+        BulbModel testBulbModel = new BulbModel();
+        testBulbModel.setPosition(position);
+        testBulbModel.setOpacity(inputOpacity);
+        testBulbModel.setLight(inputLight);
+        testBulbModel.setColor(inputColor);
 
-        TheBulb.solve(testBulb);
+        TheBulb.solve(testBulbModel);
     }
 
     @DataProvider
@@ -87,20 +87,20 @@ public class TheBulbTest {
     }
 
     @Test(dataProvider = "trainingVideoTestProvider")
-    public void trainingVideoTest(ConditionSetter bombConditions, Bulb.Light inputLight,
-                                  Bulb.Color inputColor, Bulb.Opacity inputOpacity,
+    public void trainingVideoTest(ConditionSetter bombConditions, BulbModel.Light inputLight,
+                                  BulbModel.Color inputColor, BulbModel.Opacity inputOpacity,
                                   String[] expectedResults) {
         bombConditions.setCondition();
 
-        Bulb testBulb = new Bulb();
-        testBulb.setPosition(SCREWED);
-        testBulb.setOpacity(inputOpacity);
-        testBulb.setLight(inputLight);
-        testBulb.setColor(inputColor);
+        BulbModel testBulbModel = new BulbModel();
+        testBulbModel.setPosition(SCREWED);
+        testBulbModel.setOpacity(inputOpacity);
+        testBulbModel.setLight(inputLight);
+        testBulbModel.setColor(inputColor);
 
         List<String> convertedResults = Arrays.asList(expectedResults);
 
-        assertEquals(TheBulb.solve(testBulb), convertedResults);
+        assertEquals(TheBulb.solve(testBulbModel), convertedResults);
     }
 
     @DataProvider
@@ -133,20 +133,20 @@ public class TheBulbTest {
     }
 
     @Test(dataProvider = "writtenTestProvider")
-    public void writtenTest(ConditionSetter bombConditions, Bulb.Light inputLight,
-                            Bulb.Color inputColor, Bulb.Opacity inputOpacity,
+    public void writtenTest(ConditionSetter bombConditions, BulbModel.Light inputLight,
+                            BulbModel.Color inputColor, BulbModel.Opacity inputOpacity,
                             String[] expectedResults) {
         bombConditions.setCondition();
 
-        Bulb testBulb = new Bulb();
-        testBulb.setPosition(SCREWED);
-        testBulb.setOpacity(inputOpacity);
-        testBulb.setLight(inputLight);
-        testBulb.setColor(inputColor);
+        BulbModel testBulbModel = new BulbModel();
+        testBulbModel.setPosition(SCREWED);
+        testBulbModel.setOpacity(inputOpacity);
+        testBulbModel.setLight(inputLight);
+        testBulbModel.setColor(inputColor);
 
         List<String> convertedResults = Arrays.asList(expectedResults);
 
-        assertEquals(TheBulb.solve(testBulb), convertedResults);
+        assertEquals(TheBulb.solve(testBulbModel), convertedResults);
     }
 
     @AfterClass
