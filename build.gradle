@@ -139,6 +139,7 @@ pitest {
     )
     outputFormats.add('HTML')
     testPlugin = 'testng'
+    verbose = true
 }
 
 javafx {
