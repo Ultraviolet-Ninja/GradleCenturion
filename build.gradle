@@ -45,7 +45,7 @@ dependencies {
     implementation 'org.jgrapht:jgrapht-ext:1.5.2'
     implementation 'org.jetbrains:annotations:24.0.1'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
-    implementation 'ch.qos.logback:logback-classic:1.4.8'
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
 
     implementation('com.jfoenix:jfoenix:9.0.4') {
         exclude group: "org.javafx"
