@@ -92,6 +92,7 @@ public final class ManualController {
         regionMap = setupRegionMap().get();
         long stop = System.nanoTime();
         LOG.info("Boot Time: {}", convertTime(stop - start));
+        ObserverHub.ensureMapIsPopulated();
     }
 
     private static String convertTime(long nanos) {

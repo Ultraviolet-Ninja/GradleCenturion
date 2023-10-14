@@ -2,7 +2,9 @@ package bomb.tools.boot;
 
 import bomb.Widget;
 import bomb.annotation.DisplayComponent;
+import bomb.modules.ab.blind.alley.BlindAlley;
 import bomb.modules.ab.blind.alley.BlindAlleyController;
+import bomb.modules.s.souvenir.Souvenir;
 import bomb.modules.s.souvenir.SouvenirController;
 import bomb.tools.note.NoteController;
 import bomb.tools.pattern.facade.FacadeFX;
@@ -44,6 +46,10 @@ import static java.util.Arrays.asList;
  * Reason is unknown, but more testing is required on other machines.
  */
 public sealed interface FxmlBootDrive permits StandardFxmlBootDrive, VirtualThreadFxmlBootDrive {
+    String WIDGET_FILE = extractAssociatedFile(Widget.class);
+    String SOUVENIR_FILE = extractAssociatedFile(Souvenir.class);
+    String BLIND_ALLEY_FILE = extractAssociatedFile(BlindAlley.class);
+
     Logger LOG = LoggerFactory.getLogger(FxmlBootDrive.class);
     SequencedMap<String, Region> createFXMLMap(ResetObserver resetObserver);
 
@@ -91,10 +97,10 @@ public sealed interface FxmlBootDrive permits StandardFxmlBootDrive, VirtualThre
         Region output = FacadeFX.load(loader);
         String location = loader.getLocation().toString();
 
-        if (!location.endsWith("widget.fxml")) resetObserver.addController(loader);
+        if (!location.endsWith(WIDGET_FILE)) resetObserver.addController(loader);
 
-        if (location.endsWith("souvenir.fxml")) loadSouvenirController(loader.getController());
-        else if (location.endsWith("blind_alley.fxml")) loadBlindAlleyController(loader.getController());
+        if (location.endsWith(SOUVENIR_FILE)) loadSouvenirController(loader.getController());
+        else if (location.endsWith(BLIND_ALLEY_FILE)) loadBlindAlleyController(loader.getController());
         return output;
     }
 
@@ -104,5 +110,10 @@ public sealed interface FxmlBootDrive permits StandardFxmlBootDrive, VirtualThre
 
     private static void loadSouvenirController(SouvenirController controller) {
         ObserverHub.addObserver(SOUVENIR_PANE, new SouvenirPaneObserver(controller));
+    }
+
+    private static String extractAssociatedFile(Class<?> clazz) {
+        return clazz.getAnnotation(DisplayComponent.class)
+                .resource();
     }
 }
