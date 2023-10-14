@@ -21,6 +21,7 @@ updates:
       - dependency-name: "org.jetbrains:annotations"
       - dependency-name: "ch.qos.logback:logback-classic"
       - dependency-name: "org.javamodularity.moduleplugin"
+      - dependency-name: "org.pitest:pitest-testng-plugin"
       - dependency-name: "com.github.breadmoirai.github-release"
       - dependency-name: "nl.jqno.equalsverifier:equalsverifier"
 
