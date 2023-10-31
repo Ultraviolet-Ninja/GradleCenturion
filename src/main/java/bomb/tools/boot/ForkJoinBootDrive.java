@@ -26,6 +26,8 @@ public final class ForkJoinBootDrive implements FxmlBootDrive {
     }
 
     private static class RegionGenerator extends RecursiveTask<SequencedMap<String, Region>> {
+        private static final int SIZE_LIMIT = 1;
+
         private final List<Class<?>> classList;
         private final ResetObserver observer;
 
@@ -36,7 +38,7 @@ public final class ForkJoinBootDrive implements FxmlBootDrive {
 
         @Override
         protected @NotNull SequencedMap<String, Region> compute() {
-            if (classList.size() != 1) {
+            if (classList.size() != SIZE_LIMIT) {
                 var splitList = splitList(classList);
                 var taskOne = new RegionGenerator(splitList.getFirst(), observer);
                 var taskTwo = new RegionGenerator(splitList.getLast(), observer);
