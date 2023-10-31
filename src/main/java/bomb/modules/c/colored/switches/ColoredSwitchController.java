@@ -136,7 +136,7 @@ public final class ColoredSwitchController implements Resettable {
             detectRadioButtonChanges();
             enableFinalMoveButton();
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 
@@ -163,7 +163,7 @@ public final class ColoredSwitchController implements Resettable {
             List<String> resultingSwitches = ColoredSwitches.produceFinalMoveList(switchColorArray, desiredState);
             sendToOutputField(finalMoveOutputField, resultingSwitches);
         } catch (IllegalArgumentException | IllegalStateException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

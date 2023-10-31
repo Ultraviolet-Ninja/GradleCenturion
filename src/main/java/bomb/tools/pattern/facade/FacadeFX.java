@@ -1,6 +1,5 @@
 package bomb.tools.pattern.facade;
 
-import bomb.Main;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
@@ -22,6 +21,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.function.Function;
+
+import static bomb.Main.IMAGE_ICON_RESOURCE;
 
 public final class FacadeFX {
     public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
@@ -123,6 +124,10 @@ public final class FacadeFX {
             slider.setValue(0.0);
     }
 
+    public static void setAlert(String context) {
+        setAlert(Alert.AlertType.ERROR, context, "", "");
+    }
+
     public static void setAlert(Alert.AlertType type, String context) {
         setAlert(type, context, "", "");
     }
@@ -134,7 +139,7 @@ public final class FacadeFX {
 
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 
-        Image icon = new Image(String.valueOf(Main.class.getResource("KTANE logo.png")));
+        Image icon = new Image(IMAGE_ICON_RESOURCE);
         stage.getIcons().add(icon);
 
         alert.showAndWait();

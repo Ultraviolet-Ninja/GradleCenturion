@@ -44,7 +44,7 @@ public final class SwitchesController implements Resettable {
             List<String> outputList = Switches.produceMoveList(startingState, desiredState);
             sendToOutputField(outputList);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
             reset();
         }
     }

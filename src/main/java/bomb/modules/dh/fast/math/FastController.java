@@ -44,7 +44,7 @@ public final class FastController implements Resettable {
                 outputMath.setText(outputMathTextTracker.toString());
                 if (outputMathTextTracker.length() > 2) outputMathTextTracker.setLength(0);
             } catch (IllegalArgumentException illegal) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getLocalizedMessage());
+                FacadeFX.setAlert(illegal.getLocalizedMessage());
                 clear();
             }
         };

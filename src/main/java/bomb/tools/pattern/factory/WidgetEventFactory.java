@@ -19,7 +19,7 @@ public final class WidgetEventFactory {
             String number = mfxTextField.getText();
             RegexFilter.NUMBER_PATTERN.loadText(number);
             if (!RegexFilter.NUMBER_PATTERN.matchesRegex()) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, "This is not a number");
+                FacadeFX.setAlert("This is not a number");
                 mfxTextField.setText("0");
                 decideSetter.accept(mfxTextField, 0);
             } else decideSetter.accept(mfxTextField, Integer.parseInt(number));

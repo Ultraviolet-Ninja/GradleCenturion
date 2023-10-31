@@ -59,7 +59,7 @@ public final class TranslatedModuleController implements Resettable {
                 ventGasUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
             } catch (IllegalArgumentException | IllegalStateException e) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
+                FacadeFX.setAlert(e.getMessage());
             }
         };
     }

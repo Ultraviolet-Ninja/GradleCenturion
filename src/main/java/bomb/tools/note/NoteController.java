@@ -28,7 +28,7 @@ public final class NoteController implements Resettable {
         if (extraNotes.size() != SIZE_LIMIT)
             extraNotes.add(new NotePageController(extraNotes));
         else
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "Max Capacity reached");
+            FacadeFX.setAlert("Max Capacity reached");
     }
 
     @Override

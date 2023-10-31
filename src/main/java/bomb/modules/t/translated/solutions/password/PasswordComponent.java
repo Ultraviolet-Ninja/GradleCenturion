@@ -53,7 +53,7 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
 
             outputArea.setText(finalOutput);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

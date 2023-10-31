@@ -70,7 +70,7 @@ public final class MicroControllerController implements Resettable {
             chipBackground.getChildren().clear();
             chipBackground.getChildren().add(currentChip);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 
