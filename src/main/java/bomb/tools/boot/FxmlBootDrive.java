@@ -31,7 +31,7 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PAN
 import static java.util.Arrays.asList;
 
 /**
- * FxmlBootDrive uses the Adapter Pattern to perform the part of the boot sequence with the highest bottleneck in performance.
+ * FxmlBootDrive uses the Strategy Pattern to perform the part of the boot sequence with the highest bottleneck in performance.
  * The purpose for this set of classes is to have a way to quickly switch between methodologies for booting the program
  * under different operating systems scenarios. As the number of FXML files for the project increases,
  * maintaining a short boot time for this program will more become critical.

@@ -28,7 +28,7 @@ Another thing we talked about while he was on the project was moving back to Jav
 - Understanding the perks of TestNG vs. my previous experience with J-Unit.
 - Discovering Pitest, Exploratory Testing, Mockito, and Jacoco as different ways to test code and thinking about which concepts I should implement into the project.
 #### Design Patterns
-- Using Adapters, Factories, Facades, and Observers to facilitate repeating code and updating related modules.
+- Using Strategies, Factories, Facades, and Observers to facilitate repeating code and updating related modules.
 - Being introduced to code coupling and cohesion, which was later applied when I had a CodeMR free trial.
 ### Udemy
 - Understanding how to write Groovy code. [Link](https://www.udemy.com/course/gradle-for-java-developers/)
