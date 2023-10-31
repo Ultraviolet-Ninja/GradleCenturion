@@ -125,11 +125,11 @@ public final class FacadeFX {
     }
 
     public static void setAlert(String context) {
-        setAlert(Alert.AlertType.ERROR, context, "", "");
+        setAlert(Alert.AlertType.ERROR, context, "", "Error occurred");
     }
 
     public static void setAlert(Alert.AlertType type, String context) {
-        setAlert(type, context, "", "");
+        setAlert(type, context, "", determineTitle(type));
     }
 
     public static void setAlert(Alert.AlertType type, String context, String header, String title) {
@@ -143,6 +143,16 @@ public final class FacadeFX {
         stage.getIcons().add(icon);
 
         alert.showAndWait();
+    }
+
+    private static String determineTitle(Alert.AlertType type) {
+        return switch (type) {
+            case ERROR -> "Error occurred";
+            case WARNING -> "Warning";
+            case INFORMATION -> "Info";
+            case CONFIRMATION -> "Confirmation";
+            default -> "";
+        };
     }
 
     public static void setToggleButtonsUnselected(ToggleButton... toggleButtons) {

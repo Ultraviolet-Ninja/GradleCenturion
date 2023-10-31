@@ -50,7 +50,7 @@ public final class MazeSearch {
      * @return The columns that represent a slice of the full maze that fits the grid
      */
     private static BufferedQueue<BufferedQueue<HexNode>> generatePillar(Maze maze, int gridSpan, int offset) {
-        BufferedQueue<BufferedQueue<HexNode>> queues = maze.getHexagon().getBufferedQueues();
+        var queues = maze.getHexagon().getBufferedQueues();
         BufferedQueue<BufferedQueue<HexNode>> output = new BufferedQueue<>(gridSpan);
         int stop = gridSpan + offset;
 
@@ -67,9 +67,9 @@ public final class MazeSearch {
      * @return A full copy of the queue information
      */
     private static BufferedQueue<HexNode> deepCopyQueue(BufferedQueue<HexNode> original) {
-        BufferedQueue<HexNode> output = new BufferedQueue<>(original.getCapacity());
+        var output = new BufferedQueue<HexNode>(original.getCapacity());
         for (HexNode node : original)
-            output.add(new HexNode(node));
+            output.add(node.copy());
         return output;
     }
 
@@ -83,15 +83,14 @@ public final class MazeSearch {
      * a valid grid containing shapes and wall information
      */
     private static Grid searchPillar(BufferedQueue<BufferedQueue<HexNode>> pillar, Grid grid) {
-        int gridSideLength = grid.getHexagon().getSideLength();
-        trimPillar(pillar);
-        HexagonalPlane copiedHexagon = new HexagonalPlane(
-                createInitialCopy(pillar, gridSideLength), gridSideLength);
         HexagonalPlane originalGrid = grid.getHexagon();
+        int gridSideLength = originalGrid.getSideLength();
+        trimPillar(pillar);
+        var copiedHexagon = createInitialCopy(pillar, gridSideLength);
 
         Grid output = compareFullRotation(originalGrid, copiedHexagon);
 
-        while(output == null && isNotColumnEmpty(pillar)) {
+        while(output == null && pillarNotEmpty(pillar)) {
             moveToNextSegment(pillar, copiedHexagon);
             output = compareFullRotation(originalGrid, copiedHexagon);
         }
@@ -105,14 +104,14 @@ public final class MazeSearch {
      * @param pillar The set columns to pull information from
      * @return Whether both ends of the pillar are not empty
      */
-    private static boolean isNotColumnEmpty(BufferedQueue<BufferedQueue<HexNode>> pillar) {
-        int firstSize = pillar.get(0).size();
-        int secondSize = pillar.get(pillar.getCapacity() - 1).size();
+    private static boolean pillarNotEmpty(BufferedQueue<BufferedQueue<HexNode>> pillar) {
+        int firstSize = pillar.getFirst().size();
+        int secondSize = pillar.getLast().size();
         return firstSize != 0 && secondSize != 0;
     }
 
     /**
-     * Trims the pillar based on its location in
+     * Trims the pillar based on its location in the larger maze
      *
      * @param pillar The set of columns
      */
@@ -130,7 +129,7 @@ public final class MazeSearch {
         int[] removalCounts = new int[length];
         while(start != end) {
             int change = capacityArray[start] - capacityArray[end];
-            change /= 2;
+            change >>= 1; //Divide by 2
             removalCounts[start++] = Math.max(change, 0);
             removalCounts[end--] = Math.max(-change, 0);
         }
@@ -139,7 +138,7 @@ public final class MazeSearch {
             int removalCount = removalCounts[i];
             if (removalCount == 0) continue;
 
-            BufferedQueue<HexNode> column = pillar.get(i);
+            var column = pillar.get(i);
             if (removalCount == 1) {
                 column.removeFirst();
             } else {
@@ -155,7 +154,7 @@ public final class MazeSearch {
      * @param gridSideLength The side length of a grid to calculate
      * @return The queues that make up the underlying start Grid
      */
-    private static BufferedQueue<BufferedQueue<HexNode>> createInitialCopy(
+    private static HexagonalPlane createInitialCopy(
             BufferedQueue<BufferedQueue<HexNode>> pillar, int gridSideLength) {
         int[] columnLengths = calculateColumnLengthArray(gridSideLength);
         BufferedQueue<BufferedQueue<HexNode>> copiedGrid = new BufferedQueue<>(columnLengths.length);
@@ -167,7 +166,7 @@ public final class MazeSearch {
             copiedGrid.add(partition);
         }
 
-        return copiedGrid;
+        return new HexagonalPlane(copiedGrid, gridSideLength);
     }
 
     /**
@@ -181,7 +180,7 @@ public final class MazeSearch {
      */
     private static Grid compareFullRotation(HexagonalPlane original, HexagonalPlane copy) {
         int rotation = 0;
-        final List<HexShape> originalShapes = convertToHexShapes(original);
+        final var originalShapes = convertToHexShapes(original);
         do {
             if (originalShapes.equals(convertToHexShapes(copy)))
                 return new Grid(copy, rotation);
@@ -213,11 +212,11 @@ public final class MazeSearch {
      */
     private static void moveToNextSegment(BufferedQueue<BufferedQueue<HexNode>> pillar, HexagonalPlane copy) {
         BufferedQueue<BufferedQueue<HexNode>> copiedQueues = copy.getBufferedQueues();
-        for (BufferedQueue<HexNode> column : copiedQueues)
+        for (var column : copiedQueues)
             column.removeFirst();
 
         int index = 0;
-        for (BufferedQueue<HexNode> column : pillar) {
+        for (var column : pillar) {
             HexNode nextNode = column.removeFirst();
             copiedQueues.get(index++).add(nextNode);
         }
