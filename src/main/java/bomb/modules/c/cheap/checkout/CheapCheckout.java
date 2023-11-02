@@ -16,12 +16,13 @@ import static bomb.tools.number.MathUtils.roundToNPlaces;
 
 @DisplayComponent(resource = "cheap_checkout.fxml", buttonLinkerName = "Cheap Checkout")
 public final class CheapCheckout extends Widget {
-    private static final double SUNDAY_ADDITION, THURSDAY_SALE, FRIDAY_MARK_UP, SATURDAY_SALE;
+    private static final double SUNDAY_ADDITION, MALLEABLE_MONDAY_SALE_PRICE, THURSDAY_SALE, FRIDAY_MARK_UP, SATURDAY_SALE;
     private static final int REQUIRED_ITEM_COUNT, REQUIRED_WEIGHT_COUNT;
     private static final ToDoubleFunction<List<CheckoutItem>> ITEM_LIST_TO_SUM;
 
     static {
         SUNDAY_ADDITION = 2.15;
+        MALLEABLE_MONDAY_SALE_PRICE = 0.85;
         THURSDAY_SALE = 0.5;
         FRIDAY_MARK_UP = 1.25;
         SATURDAY_SALE = 0.65;
@@ -88,10 +89,9 @@ public final class CheapCheckout extends Widget {
 
     private static double calculateMalleableMonday(List<CheckoutItem> items) {
         //15% off
-        double sale = 0.85;
-        items.get(0).applyMultiplicand(sale);
-        items.get(2).applyMultiplicand(sale);
-        items.get(5).applyMultiplicand(sale);
+        items.get(0).applyMultiplicand(MALLEABLE_MONDAY_SALE_PRICE);
+        items.get(2).applyMultiplicand(MALLEABLE_MONDAY_SALE_PRICE);
+        items.get(5).applyMultiplicand(MALLEABLE_MONDAY_SALE_PRICE);
 
         return ITEM_LIST_TO_SUM.applyAsDouble(items);
     }
