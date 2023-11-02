@@ -99,10 +99,10 @@ public final class SquareButton extends Widget {
             sb.append("3 or 13");
             numberToSum = sum -> sum == 3 || sum == 13;
         } else if (lightColor == GREEN) {
-            sb.append("5");
+            sb.append('5');
             numberToSum = sum -> sum == 5;
         } else {
-            sb.append("7");
+            sb.append('7');
             numberToSum = sum -> sum == 7;
         }
 
