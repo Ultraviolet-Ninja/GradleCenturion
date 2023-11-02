@@ -31,10 +31,10 @@ public final class MazeRunner {
      * @param grid The grid with all shape and wall information
      * @param possibleExits The list of coordinates for all possible exits
      * @return The coordinate list of the shortest path from the player location to the best possible exit
-     * @throws IllegalArgumentException If there is no possible exit, which ideally shouldn't happen
+     * @throws IllegalStateException If there is no possible exit, which theoretically shouldn't happen
      */
     public static @NotNull List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
-            throws IllegalArgumentException {
+            throws IllegalStateException {
         var startingLocation = grid.getStartingLocation()
                 .orElseThrow(() -> new IllegalArgumentException("Failed to find start position"));
 
@@ -46,7 +46,7 @@ public final class MazeRunner {
                 .map(exit -> dijkstraAlgorithm.getPath(startingLocation, exit))
                 .map(GraphPath::getVertexList)
                 .min(Comparator.comparingInt(List::size))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalStateException("No exits were found for the given configuration and possible exits."));
     }
 
     private static Graph<Coordinates, DefaultEdge> convertGridToGraph(Grid grid) {
