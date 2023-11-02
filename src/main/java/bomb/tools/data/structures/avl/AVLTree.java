@@ -194,7 +194,7 @@ public class AVLTree<E extends Comparable<E>> {
     private void traverseNodes(StringBuilder sb, String padding, String pointer, Node<E> node,
                                boolean hasRightSibling) {
         if (notNull(node)) {
-            sb.append("\n");
+            sb.append('\n');
             sb.append(padding);
             sb.append(pointer);
             sb.append(node.value);
