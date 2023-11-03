@@ -78,7 +78,7 @@ public final class ChessController implements Resettable {
             String result = Chess.solve(positionList);
             outputTextField.setText(result);
         } catch (IllegalArgumentException | IllegalStateException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

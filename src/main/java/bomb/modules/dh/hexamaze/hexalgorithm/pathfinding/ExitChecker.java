@@ -4,19 +4,15 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.queue.BufferedQueue;
-import javafx.scene.paint.Color;
 import org.javatuples.Pair;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.AbstractHexagon.calculateColumnLengthArray;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid.GRID_SIDE_LENGTH;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall.BOTTOM;
@@ -39,7 +35,7 @@ public final class ExitChecker {
      */
     public static Optional<Pair<String, List<Coordinates>>> findPossibleExits(@NotNull Grid grid)
             throws IllegalArgumentException {
-        int pegCount = countPegsOnGrid(grid.getHexagon().getBufferedQueues());
+        int pegCount = grid.countPlayerPegs();
         if (pegCount == 0)
             return Optional.empty();
         if (pegCount > 1)
@@ -100,7 +96,7 @@ public final class ExitChecker {
         int[] columnCapacities = calculateColumnLengthArray(GRID_SIDE_LENGTH);
 
         for (int i = GRID_SIDE_LENGTH - 1; i < gridSpan; i++) {
-            list.add( new Coordinates(i, columnCapacities[i] - 1));
+            list.add(new Coordinates(i, columnCapacities[i] - 1));
         }
         return list;
     }
@@ -149,42 +145,12 @@ public final class ExitChecker {
         return false;
     }
 
-    private static int countPegsOnGrid(BufferedQueue<BufferedQueue<HexNode>> gridQueues) {
-        int counter = 0;
-        for (BufferedQueue<HexNode> queue : gridQueues) {
-            for (HexNode node : queue) {
-                if (node.getColor() != -1) counter++;
-            }
-        }
-        return counter;
-    }
-
     private static int getSideToExit(Grid grid) throws IllegalArgumentException {
-        int pegValue = getPegValue(grid.getHexagon().getBufferedQueues());
-        Color pegColor = getPegColor(pegValue);
+        var startingCoordinates = grid.getStartingLocation()
+                .orElseThrow(() -> new IllegalArgumentException("Grid was not provided with starting location"));
+        var hexNode = grid.getAtCoordinates(startingCoordinates);
 
         return grid.getColorRing()
-                .findRelativeIndex(pegColor);
-    }
-
-    private static Color getPegColor(int pegValue) throws IllegalArgumentException {
-        for (Map.Entry<Color, Integer> entry : COLOR_MAP.entrySet()) {
-            if (entry.getValue() == pegValue)
-                return entry.getKey();
-        }
-        throw new IllegalArgumentException();
-    }
-
-    private static int getPegValue(BufferedQueue<BufferedQueue<HexNode>> gridQueues)
-            throws IllegalArgumentException {
-        int pegValue;
-        for (BufferedQueue<HexNode> queue : gridQueues) {
-            for (HexNode node : queue) {
-                pegValue = node.getColor();
-                if (pegValue != -1)
-                    return pegValue;
-            }
-        }
-        throw new IllegalArgumentException();
+                .findRelativeIndex(hexNode.getPlayerColor());
     }
 }

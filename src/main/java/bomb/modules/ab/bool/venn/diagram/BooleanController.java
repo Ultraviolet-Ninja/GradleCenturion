@@ -135,9 +135,10 @@ public final class BooleanController implements Resettable {
         if (priorityToggle.isSelected()) {
             temp.append(referenceSplit[0])
                     .append("(B")
-                    .append(referenceSplit[1]).append(")");
+                    .append(referenceSplit[1])
+                    .append(')');
         } else {
-            temp.append("(")
+            temp.append('(')
                     .append(referenceSplit[0])
                     .append("B)")
                     .append(referenceSplit[1]);

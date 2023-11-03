@@ -29,7 +29,7 @@ public final class ChordController implements Resettable {
                 try {
                     outputField.setText(ChordQualities.solve(output.trim()));
                 } catch (IllegalArgumentException illegal) {
-                    FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+                    FacadeFX.setAlert(illegal.getMessage());
                     FacadeFX.clearText(outputField);
                 }
             }

@@ -33,7 +33,7 @@ public final class ScreamsController implements Resettable {
     @FXML
     private void setSelector() {
         if (!colorSelectorToggle.isSelected() && !star.confirmDifferentColors()) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "2+ edges have the same color\n\t\tOR\nThere's a white edge");
+            FacadeFX.setAlert("2+ edges have the same color\n\t\tOR\nThere's a white edge");
             colorSelectorToggle.setSelected(true);
             return;
         }
@@ -44,7 +44,7 @@ public final class ScreamsController implements Resettable {
                 FacadeFX.disable(colorSelectorToggle);
                 FacadeFX.enable(solve);
             } catch (IllegalArgumentException ex) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
+                FacadeFX.setAlert(ex.getMessage());
                 colorSelectorToggle.setSelected(true);
             }
         }
@@ -64,7 +64,7 @@ public final class ScreamsController implements Resettable {
             updateStageNumber();
             resetLastStage.setDisable(false);
         } catch (IllegalArgumentException ex) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, ex.getMessage());
+            FacadeFX.setAlert(ex.getMessage());
         }
     }
 
