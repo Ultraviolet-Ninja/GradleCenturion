@@ -5,7 +5,6 @@ import bomb.annotation.DisplayComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -8,7 +8,6 @@ import com.jfoenix.controls.JFXTextArea;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;

@@ -4,7 +4,6 @@ import bomb.Widget;
 import bomb.tools.filter.RegexFilter;
 import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXTextField;
-import javafx.scene.control.Alert;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;

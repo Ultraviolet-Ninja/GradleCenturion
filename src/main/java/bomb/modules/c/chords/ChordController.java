@@ -5,7 +5,6 @@ import bomb.components.chord.NoteCircleComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
 import java.util.Set;
 import java.util.function.Consumer;
