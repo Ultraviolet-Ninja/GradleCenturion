@@ -45,16 +45,16 @@ public final class ButtonComponent extends Pane implements Resettable, Translati
         var colorButtons = new JFXRadioButton[]{redButton, yellowButton, blueButton, whiteButton};
         var labelButtons = new JFXRadioButton[]{detonateButton, abortButton, pressButton, holdButton};
 
-        int i = 0;
+        int counter = 0;
         var colors = ButtonProperty.getColors();
         for (var colorButton : colorButtons) {
-            colorButton.setOnAction(createButtonAction(colors[i++], COLOR_INDEX));
+            colorButton.setOnAction(createButtonAction(colors[counter++], COLOR_INDEX));
         }
 
-        i = 0;
+        counter = 0;
         var labels = ButtonProperty.getLabels();
         for (var labelButton : labelButtons) {
-            labelButton.setOnAction(createButtonAction(labels[i++], LABEL_INDEX));
+            labelButton.setOnAction(createButtonAction(labels[counter++], LABEL_INDEX));
         }
     }
 
