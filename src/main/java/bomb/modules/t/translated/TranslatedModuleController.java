@@ -69,5 +69,6 @@ public final class TranslatedModuleController implements Resettable {
         FacadeFX.resetToggleGroup(flagGroup);
         buttonUI.reset();
         passwordUI.reset();
+        ventGasUI.reset();
     }
 }
