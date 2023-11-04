@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.function.Function;
 
 import static bomb.Main.IMAGE_ICON_RESOURCE;
@@ -101,6 +102,10 @@ public final class FacadeFX {
 
     public static boolean hasSelectedToggle(ToggleGroup group) {
         return group.getSelectedToggle() != null;
+    }
+
+    public static Region load(URL url) throws IllegalArgumentException {
+        return load(new FXMLLoader(url));
     }
 
     public static Region load(FXMLLoader loader) throws IllegalArgumentException {

@@ -1,13 +1,13 @@
 package bomb;
 
 import bomb.tools.boot.FxmlBootDrive;
+import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
 import bomb.tools.pattern.observer.ResetObserver;
 import bomb.tools.pattern.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -19,7 +19,6 @@ import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -66,11 +65,7 @@ public final class ManualController {
 
     static {
         var emptyViewLocation = ManualController.class.getResource("empty_view.fxml");
-        try {
-            EMPTY_VIEW = FXMLLoader.load(emptyViewLocation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        EMPTY_VIEW = FacadeFX.load(emptyViewLocation);
     }
 
     public ManualController() {
