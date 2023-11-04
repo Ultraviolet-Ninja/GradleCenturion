@@ -5,7 +5,6 @@ import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
@@ -18,9 +17,9 @@ public class LanguageCSVReader {
         if (languageColumn == null) throw new IllegalArgumentException("Language cannot be empty");
 
         int columnIndex = languageColumn.getColumnIndex();
-        InputStream in = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
+        var inputStream = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
 
-        try (CSVReader csvReader = new CSVReader(new InputStreamReader(in, UTF_8))) {
+        try (var csvReader = new CSVReader(new InputStreamReader(inputStream, UTF_8))) {
             return csvReader.readAll()
                     .stream()
                     .map(array -> array[columnIndex])
