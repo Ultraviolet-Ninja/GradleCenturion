@@ -16,6 +16,7 @@ import java.io.IOException;
 import static bomb.tools.filter.RegexFilter.MORSE_CODE_PATTERN;
 import static bomb.tools.filter.RegexFilter.filter;
 
+@Deprecated
 public class OldTranslationController implements Resettable {
     private static final String RED_STYLE = "-fx-text-fill: #EB190E", YELLOW_STYLE = "-fx-text-fill: #FBE118",
             BLUE_STYLE = "-fx-text-fill: #3043AC",
