@@ -32,8 +32,8 @@ public final class Button extends Widget {
             shouldTapButton = getAllBatteries() > 1;
         else if (properties[COLOR_INDEX] == RED && properties[LABEL_INDEX] == ButtonProperty.HOLD)
             shouldTapButton = true;
-        else if ((properties[COLOR_INDEX] == BLUE && properties[LABEL_INDEX] == ABORT) ||
-                (properties[COLOR_INDEX] == WHITE && hasLitIndicator(CAR)))
+        else if (properties[COLOR_INDEX] == BLUE && properties[LABEL_INDEX] == ABORT ||
+                properties[COLOR_INDEX] == WHITE && hasLitIndicator(CAR))
             shouldTapButton = false;
         else
             shouldTapButton = getAllBatteries() > 2 && hasLitIndicator(FRK);
@@ -51,14 +51,14 @@ public final class Button extends Widget {
     }
 
     private static void validateColor(ButtonProperty colorInstance) throws IllegalArgumentException {
-        switch (colorInstance) {
-            case DETONATE, ABORT, HOLD, PRESS -> throw new IllegalArgumentException("Invalid color");
+        if (colorInstance.ordinal() > WHITE.ordinal()) {
+            throw new IllegalArgumentException("Cannot use a label as a color");
         }
     }
 
     private static void validateLabel(ButtonProperty labelInstance) throws IllegalArgumentException {
-        switch (labelInstance) {
-            case RED, YELLOW, BLUE, WHITE -> throw new IllegalArgumentException("Invalid Label");
+        if (labelInstance.ordinal() <= WHITE.ordinal()) {
+            throw new IllegalArgumentException("Cannot use a color as a label");
         }
     }
 }
