@@ -16,7 +16,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
-import java.util.List;
+import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
 public final class TranslatedModuleController implements Resettable {
     @FXML
@@ -49,10 +49,10 @@ public final class TranslatedModuleController implements Resettable {
 
     private EventHandler<ActionEvent> createButtonAction() {
         return event -> {
-            String buttonText = ((RadioButton)event.getSource()).getText();
+            var buttonText = BUTTON_NAME_FROM_EVENT.apply(event);
             try {
-                LanguageColumn currentLanguageColumn = LanguageColumn.valueOf(buttonText.toUpperCase());
-                List<String> languageContent = LanguageCSVReader.getLanguageContent(currentLanguageColumn);
+                var currentLanguageColumn = LanguageColumn.valueOf(buttonText.toUpperCase());
+                var languageContent = LanguageCSVReader.getLanguageContent(currentLanguageColumn);
                 buttonUI.setContent(languageContent);
                 passwordUI.setContent(languageContent);
                 ventGasUI.setContent(languageContent);
