@@ -8,26 +8,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.util.List;
 
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.NO_ROW;
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.YES_ROW;
+import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 
-public class VentGasComponent extends Pane implements Resettable, TranslationComponent {
+public final class VentGasComponent extends Pane implements Resettable, TranslationComponent {
     @FXML
     private MFXLabel yesLabel, noLabel;
 
     public VentGasComponent() {
         super();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("vent_gas.fxml"));
+        var loader = new FXMLLoader(getClass().getResource("vent_gas.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        loadComponent("Vent Gas", loader);
     }
 
     @Override

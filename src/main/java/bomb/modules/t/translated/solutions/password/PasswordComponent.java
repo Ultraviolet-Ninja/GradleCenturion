@@ -8,15 +8,17 @@ import com.jfoenix.controls.JFXTextArea;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.PASSWORD_ROW;
+import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 import static bomb.tools.string.StringFormat.BULLET_POINT;
 
-public class PasswordComponent extends Pane implements Resettable, TranslationComponent {
+public final class PasswordComponent extends Pane implements Resettable, TranslationComponent {
     @FXML
     private MFXTextField firstInputField, secondInputField, thirdInputField, fourthInputField, fifthInputField;
 
@@ -28,11 +30,7 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
         FXMLLoader loader = new FXMLLoader(getClass().getResource("password.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        loadComponent("Password", loader);
     }
 
     public void initialize() {
@@ -44,9 +42,11 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
     private void submitInfo() {
         String[] columnInfo = retrieveColumnLetters();
         try {
-            String results = Password.getPasswords(columnInfo).toString()
+            String commaReplacement = '\n' + BULLET_POINT;
+            String results = Password.getPasswords(columnInfo)
+                    .toString()
                     .replaceAll("[\\[\\]()]", "")
-                    .replaceAll(", ", "\n" + BULLET_POINT);
+                    .replaceAll(", ", commaReplacement);
 
             String finalOutput = (results.isEmpty() ? "" : BULLET_POINT) + results;
 
@@ -57,14 +57,9 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
     }
 
     private String[] retrieveColumnLetters() {
-        String[] columnInfo = new String[5];
-        MFXTextField[] textFields = getTextFields();
-
-        for (int i = 0; i < columnInfo.length; i++) {
-            columnInfo[i] = textFields[i].getText();
-        }
-
-        return columnInfo;
+        return Arrays.stream(getTextFields())
+                .map(TextField::getText)
+                .toArray(String[]::new);
     }
 
     @Override
@@ -81,6 +76,7 @@ public class PasswordComponent extends Pane implements Resettable, TranslationCo
     }
 
     private MFXTextField[] getTextFields() {
-        return new MFXTextField[]{firstInputField, secondInputField, thirdInputField, fourthInputField, fifthInputField};
+        return new MFXTextField[]{firstInputField, secondInputField, thirdInputField,
+                fourthInputField, fifthInputField};
     }
 }
