@@ -16,7 +16,7 @@ import static bomb.modules.t.translated.solutions.button.ButtonProperty.WHITE;
  * Button class deals with a button module
  */
 public final class Button extends Widget {
-    public static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
+    public static final int COLOR_INDEX = 0, LABEL_INDEX = 1;
 
     /**
      * Sorts through the conditions of the current bomb and tells either to hold or tap the button
@@ -38,7 +38,7 @@ public final class Button extends Widget {
         else
             shouldTapButton = getAllBatteries() > 2 && hasLitIndicator(FRK);
 
-        return "" + (shouldTapButton ? TAP : HOLD);
+        return String.valueOf(shouldTapButton ? TAP : HOLD);
     }
 
     private static void validateAllInput(ButtonProperty[] properties) throws IllegalArgumentException {
