@@ -102,7 +102,9 @@ public final class ManualController {
         ObserverHub.addObserver(RESET, resetObserver);
 
         //Change the drive to test a new way to load the fxml files
-        var drive = FxmlBootDrive.createParallelStreamDrive();
+        var drive = System.getProperty("os.name").toLowerCase().contains("linux") ?
+                FxmlBootDrive.createSequentialStreamDrive() : //Boot drive for Linux
+                FxmlBootDrive.createParallelStreamDrive();    //Boot drive for Windows and Mac
         var fxmlMapFuture = supplyAsync(() -> drive.createFXMLMap(resetObserver));
         var radioButtonNameFuture = createButtonNameFuture(options.getToggles());
 
