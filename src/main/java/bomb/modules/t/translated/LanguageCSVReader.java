@@ -7,23 +7,32 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @SuppressWarnings("ConstantConditions")
 public class LanguageCSVReader {
+    private static final Map<Integer, List<String>> INDEX_CACHE_MAP =
+            new WeakHashMap<>(LanguageColumn.values().length << 1);
     public static List<String> getLanguageContent(@NotNull LanguageColumn languageColumn)
             throws IllegalArgumentException, IllegalStateException {
         if (languageColumn == null) throw new IllegalArgumentException("Language cannot be empty");
 
         int columnIndex = languageColumn.getColumnIndex();
+        if (INDEX_CACHE_MAP.containsKey(columnIndex)) {
+            return INDEX_CACHE_MAP.get(columnIndex);
+        }
         var inputStream = LanguageCSVReader.class.getResourceAsStream("dictionary.csv");
 
         try (var csvReader = new CSVReader(new InputStreamReader(inputStream, UTF_8))) {
-            return csvReader.readAll()
+            var list = csvReader.readAll()
                     .stream()
                     .map(array -> array[columnIndex])
                     .toList();
+            INDEX_CACHE_MAP.put(columnIndex, list);
+            return list;
         } catch (IOException | CsvException e) {
             throw new IllegalStateException(e);
         }
