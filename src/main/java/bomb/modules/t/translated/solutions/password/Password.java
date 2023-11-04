@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Password {
+    static final String EMPTY_RESULTS = "No passwords found";
     private static String[] passwords;
 
     static {
@@ -27,7 +28,7 @@ public final class Password {
         }
 
         if (outputPasswords.isEmpty())
-            return Collections.singletonList("No passwords found");
+            return Collections.singletonList(EMPTY_RESULTS);
 
         return outputPasswords;
     }
