@@ -7,9 +7,10 @@ import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 import java.util.function.Consumer;
+
+import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
 public final class FastController implements Resettable {
     private final StringBuilder buttonPressTracker, outputMathTextTracker;
@@ -32,9 +33,9 @@ public final class FastController implements Resettable {
 
     private Consumer<ActionEvent> initializeAction() {
         return event -> {
-            String temp = ((Button) event.getSource()).getText();
-            buttonPressTracker.append(temp);
-            outputMathTextTracker.append(temp);
+            String buttonName = BUTTON_NAME_FROM_EVENT.apply(event);
+            buttonPressTracker.append(buttonName);
+            outputMathTextTracker.append(buttonName);
             try {
                 if (buttonPressTracker.length() == 2) {
                     outputMathTextTracker.append(" - ").append(FastMath.solve(buttonPressTracker.toString()));
