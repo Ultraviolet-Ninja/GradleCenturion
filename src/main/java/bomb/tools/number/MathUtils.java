@@ -8,38 +8,39 @@ public final class MathUtils {
 
     public static boolean isPerfectSquare(long num) {
         double root = Math.sqrt(num);
-        return (root - Math.floor(root)) == 0;
+        return root - Math.floor(root) == 0;
     }
 
-    public static boolean isPrime(long n) {
-        if(n % 2 == 0 || n % 3 == 0)
-            return n <= 3 && n > 1;
+    public static boolean isPrime(long num) {
+        if(num % 2 == 0 || num % 3 == 0)
+            return num <= 3 && num > 1;
 
-        for (long i = 5; i * i <= n; i += 6) {
-            if (n % i == 0 || n % (i + 2) == 0)
+        for (long i = 5; i * i <= num; i += 6) {
+            if (num % i == 0 || num % (i + 2) == 0)
                 return false;
         }
-        return n != 1;
+        return num != 1;
     }
 
     public static int digitalRoot(long number) {
         long root = 0;
+        long temp = number;
 
-        while (number > 0 || root > 9) {
-            if (number == 0) {
-                number = root;
+        while (temp > 0 || root > 9) {
+            if (temp == 0) {
+                temp = root;
                 root = 0;
             }
 
             root += number % 10;
-            number /= 10;
+            temp /= 10;
         }
         return (int) root;
     }
 
     public static int digitalRoot(double number) {
-        number = Double.parseDouble(String.valueOf(number).replace(".", ""));
-        return digitalRoot((long) number);
+        double parsedDouble = Double.parseDouble(String.valueOf(number).replace(".", ""));
+        return digitalRoot((long) parsedDouble);
     }
 
     public static boolean isAnInteger(double number) {
@@ -52,7 +53,8 @@ public final class MathUtils {
     }
 
     public static int negativeSafeModulo(int number, final int modulus) {
-        while(number < 0) number += modulus;
-        return number % modulus;
+        int temp = number;
+        while(temp < 0) temp += modulus;
+        return temp % modulus;
     }
 }
