@@ -6,6 +6,7 @@ import bomb.modules.ab.blind.alley.BlindAlley;
 import bomb.modules.ab.blind.alley.BlindAlleyController;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.modules.s.souvenir.SouvenirController;
+import bomb.modules.t.translated.TranslationComponent;
 import bomb.tools.note.NoteController;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
@@ -49,6 +50,9 @@ public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive
     String WIDGET_FILE = extractAssociatedFile(Widget.class);
     String SOUVENIR_FILE = extractAssociatedFile(Souvenir.class);
     String BLIND_ALLEY_FILE = extractAssociatedFile(BlindAlley.class);
+    List<Class<?>> INITIAL_BOOT_CLASSES = List.of(
+            Widget.class, NoteController.class, TranslationComponent.class
+    );
 
     Logger LOG = LoggerFactory.getLogger(FxmlBootDrive.class);
 
@@ -75,7 +79,7 @@ public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive
     }
 
     static @NotNull List<Class<?>> getAnnotatedClasses() {
-        var annotatedClasses = new ArrayList<>(List.of(Widget.class, NoteController.class));
+        var annotatedClasses = new ArrayList<>(INITIAL_BOOT_CLASSES);
         var queue = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
 
         Class<?> temp;

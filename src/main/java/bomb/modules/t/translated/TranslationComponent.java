@@ -1,4 +1,4 @@
-package bomb.modules.t.translated.solutions;
+package bomb.modules.t.translated;
 
 import bomb.annotation.DisplayComponent;
 import bomb.modules.t.translated.solutions.button.ButtonComponent;

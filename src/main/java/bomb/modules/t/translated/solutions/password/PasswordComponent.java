@@ -1,7 +1,7 @@
 package bomb.modules.t.translated.solutions.password;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.t.translated.solutions.TranslationComponent;
+import bomb.modules.t.translated.TranslationComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.factory.TextFormatterFactory;
 import com.jfoenix.controls.JFXTextArea;

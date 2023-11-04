@@ -1,7 +1,7 @@
 package bomb.modules.t.translated.solutions.button;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.t.translated.solutions.TranslationComponent;
+import bomb.modules.t.translated.TranslationComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;

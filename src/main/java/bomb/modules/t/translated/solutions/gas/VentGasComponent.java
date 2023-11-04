@@ -1,7 +1,7 @@
 package bomb.modules.t.translated.solutions.gas;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.t.translated.solutions.TranslationComponent;
+import bomb.modules.t.translated.TranslationComponent;
 import bomb.tools.pattern.facade.MaterialFacade;
 import io.github.palexdev.materialfx.controls.MFXLabel;
 import javafx.fxml.FXML;

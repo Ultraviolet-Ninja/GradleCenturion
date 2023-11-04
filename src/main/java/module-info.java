@@ -56,7 +56,6 @@ open module centurion {
     exports bomb.modules.t.the.bulb to javafx.fxml;
     exports bomb.modules.t.three.d.maze to javafx.fxml;
     exports bomb.modules.t.translated to javafx.fxml;
-    exports bomb.modules.t.translated.solutions to javafx.fxml;
     exports bomb.modules.t.translated.solutions.button to javafx.fxml;
     exports bomb.modules.t.translated.solutions.gas to javafx.fxml;
     exports bomb.modules.t.translated.solutions.morse to javafx.fxml;
