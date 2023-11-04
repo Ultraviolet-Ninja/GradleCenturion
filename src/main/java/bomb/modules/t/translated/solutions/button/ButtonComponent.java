@@ -80,9 +80,9 @@ public final class ButtonComponent extends Pane implements Resettable, Translati
                 .split("\\|");
         var buttons = new JFXRadioButton[]{redButton, blueButton, yellowButton, whiteButton,
                 holdButton, pressButton, detonateButton, abortButton};
-        int i = 0;
+        int counter = 0;
         for (var buttonLabel : buttonLabels) {
-            buttons[i++].setText(buttonLabel);
+            buttons[counter++].setText(buttonLabel);
         }
     }
 }
