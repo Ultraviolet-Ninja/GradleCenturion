@@ -32,7 +32,7 @@ public final class MathUtils {
                 root = 0;
             }
 
-            root += number % 10;
+            root += temp % 10;
             temp /= 10;
         }
         return (int) root;
