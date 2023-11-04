@@ -21,7 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,10 +95,16 @@ public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive
         return annotatedClasses;
     }
 
-    static @NotNull Pair<String, Region> mapClassToRegion(@NotNull Class<?> clazz, ResetObserver resetObserver) {
+    static @NotNull Pair<String, Region> mapClassToRegion(@NotNull Class<?> clazz, ResetObserver resetObserver)
+            throws IllegalArgumentException, IllegalStateException{
         DisplayComponent annotation = clazz.getAnnotation(DisplayComponent.class);
-        URL resource = clazz.getResource(annotation.resource());
-        String buttonLinkerName = annotation.buttonLinkerName();
+        var resource = clazz.getResource(annotation.resource());
+        var buttonLinkerName = annotation.buttonLinkerName();
+
+        if (resource == null) {
+            LOG.error("{} has a null resource. Make sure the FXML file is in the same package", buttonLinkerName);
+            throw new IllegalStateException();
+        }
 
         return new Pair<>(
                 buttonLinkerName,
