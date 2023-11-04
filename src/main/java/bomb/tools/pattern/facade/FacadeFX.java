@@ -18,6 +18,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.function.Function;
@@ -25,11 +27,18 @@ import java.util.function.Function;
 import static bomb.Main.IMAGE_ICON_RESOURCE;
 
 public final class FacadeFX {
-    public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent ->
-            ((Button) actionEvent.getSource()).getText();
-
+    private static final Logger LOG = LoggerFactory.getLogger(FacadeFX.class);
     public static final Function<Toggle, String> GET_TOGGLE_NAME = toggle ->
             ((ToggleButton)toggle).getText();
+
+    public static final Function<ActionEvent, String> BUTTON_NAME_FROM_EVENT = actionEvent -> {
+        var source = actionEvent.getSource();
+        return switch (source) {
+            case Button button -> button.getText();
+            case ToggleButton toggleButton -> GET_TOGGLE_NAME.apply(toggleButton);
+            default -> "";
+        };
+    };
 
     private FacadeFX() {
     }
@@ -98,6 +107,7 @@ public final class FacadeFX {
         try {
             return loader.load();
         } catch (IOException e) {
+            LOG.error("Loader Exception", e);
             throw new IllegalArgumentException(e);
         }
     }
@@ -106,6 +116,16 @@ public final class FacadeFX {
         try {
             loader.load();
         } catch (IOException e) {
+            LOG.error("Loader Exception", e);
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    public static void loadComponent(String componentName, FXMLLoader loader) throws IllegalArgumentException {
+        try {
+            loader.load();
+        } catch (IOException e) {
+            LOG.error(componentName + " Loader Exception", e);
             throw new IllegalArgumentException(e);
         }
     }
@@ -133,13 +153,16 @@ public final class FacadeFX {
     }
 
     public static void setAlert(Alert.AlertType type, String context, String header, String title) {
-        Alert alert = new Alert(type, context);
+        LOG.debug("Context: {}", context);
+        var alert = new Alert(type, context);
         alert.setHeaderText(header);
         alert.setTitle(title);
 
-        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        var stage = (Stage) alert.getDialogPane()
+                .getScene()
+                .getWindow();
 
-        Image icon = new Image(IMAGE_ICON_RESOURCE);
+        var icon = new Image(IMAGE_ICON_RESOURCE);
         stage.getIcons().add(icon);
 
         alert.showAndWait();
