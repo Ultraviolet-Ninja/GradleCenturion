@@ -92,21 +92,21 @@ public final class SquareButton extends Widget {
     }
 
     private static String handleSolidLight(int lightColor) {
-        StringBuilder sb = new StringBuilder("Release when the two seconds digits add up to ");
+        StringBuilder stringBuilder = new StringBuilder("Release when the two seconds digits add up to ");
         IntPredicate numberToSum;
 
         if (lightColor == ORANGE) {
-            sb.append("3 or 13");
+            stringBuilder.append("3 or 13");
             numberToSum = sum -> sum == 3 || sum == 13;
         } else if (lightColor == GREEN) {
-            sb.append('5');
+            stringBuilder.append('5');
             numberToSum = sum -> sum == 5;
         } else {
-            sb.append('7');
+            stringBuilder.append('7');
             numberToSum = sum -> sum == 7;
         }
 
-        return sb.append("\nPossible number combos: ")
+        return stringBuilder.append("\nPossible number combos: ")
                 .append(possibleCombinations(numberToSum))
                 .toString();
     }
