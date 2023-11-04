@@ -13,7 +13,7 @@ import java.util.WeakHashMap;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @SuppressWarnings("ConstantConditions")
-public class LanguageCSVReader {
+public final class LanguageCSVReader {
     private static final Map<Integer, List<String>> INDEX_CACHE_MAP =
             new WeakHashMap<>(LanguageColumn.values().length << 1);
     public static List<String> getLanguageContent(@NotNull LanguageColumn languageColumn)
