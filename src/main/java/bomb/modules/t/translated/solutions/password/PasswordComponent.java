@@ -13,8 +13,10 @@ import javafx.scene.layout.Pane;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.PASSWORD_ROW;
+import static bomb.modules.t.translated.solutions.password.Password.EMPTY_RESULTS;
 import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 import static bomb.tools.string.StringFormat.BULLET_POINT;
 
@@ -42,15 +44,16 @@ public final class PasswordComponent extends Pane implements Resettable, Transla
     private void submitInfo() {
         String[] columnInfo = retrieveColumnLetters();
         try {
-            String commaReplacement = '\n' + BULLET_POINT;
-            String results = Password.getPasswords(columnInfo)
-                    .toString()
-                    .replaceAll("[\\[\\]()]", "")
-                    .replaceAll(", ", commaReplacement);
+            var passwords = Password.getPasswords(columnInfo);
 
-            String finalOutput = (results.isEmpty() ? "" : BULLET_POINT) + results;
-
-            outputArea.setText(finalOutput);
+            if (passwords.getFirst().equals(EMPTY_RESULTS)) {
+                outputArea.setText(passwords.getFirst());
+            } else {
+                var finalOutput = passwords.stream()
+                        .map(password -> BULLET_POINT + password)
+                        .collect(Collectors.joining("\n"));
+                outputArea.setText(finalOutput);
+            }
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(illegal.getMessage());
         }
