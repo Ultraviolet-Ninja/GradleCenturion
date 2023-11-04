@@ -1,9 +1,10 @@
 package bomb.modules.t.translated.solutions.password;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class Password {
+public final class Password {
     private static String[] passwords;
 
     static {
@@ -16,17 +17,17 @@ public class Password {
 
     public static List<String> getPasswords(String[] letterSets) throws IllegalArgumentException {
         if (passwords == null) throw new IllegalArgumentException("Please set a language to start");
-        if (areAllEmpty(letterSets)) return new ArrayList<>();
+        if (areAllEmpty(letterSets)) return Collections.emptyList();
 
-        List<String> outputPasswords = new ArrayList<>(List.of(passwords.clone()));
+        var outputPasswords = new ArrayList<>(List.of(passwords.clone()));
 
-        for (int i = 0; i < letterSets.length; i++) {
+        for (int i = 0; i < letterSets.length && !outputPasswords.isEmpty(); i++) {
             if (!letterSets[i].isEmpty())
                 filterByLetterSet(outputPasswords, letterSets[i], i);
         }
 
         if (outputPasswords.isEmpty())
-            outputPasswords.add("No passwords found");
+            return Collections.singletonList("No passwords found");
 
         return outputPasswords;
     }
