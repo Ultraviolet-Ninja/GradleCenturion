@@ -40,8 +40,6 @@ import bomb.modules.s.souvenir.Souvenir;
 import bomb.modules.s.square.button.SquareButton;
 import bomb.modules.s.switches.Switches;
 import bomb.modules.t.the.bulb.TheBulb;
-
-import bomb.modules.t.translated.TranslationCenter;
 import bomb.modules.t.translated.solutions.button.Button;
 import bomb.modules.t.two.bit.TwoBit;
 import bomb.modules.wz.word.search.WordSearch;
@@ -69,11 +67,11 @@ import static java.util.Arrays.stream;
  * as well as the MainController to add/subtract to the widgets.
  */
 @DisplayComponent(resource = "widget.fxml", buttonLinkerName = "Widget")
-public sealed class Widget permits Alphabet, Astrology, Battleship, Bitwise, BlindAlley, BooleanVenn, Caesar,
+public sealed class Widget permits Alphabet, Astrology, Battleship, Bitwise, BlindAlley, BooleanVenn, Button, Caesar,
         CheapCheckout, Chess, ChordQualities, ColorFlash, EmojiMath, FastMath, FizzBuzz, ForgetMeNot, Hexamaze,
         IceCream, Laundry, LEDEncryption, Logic, MicroController, MonslopeFight, Morsematics, Murder,
         Neutralization, NumberPad, RoundKeypads, Seashells, Semaphore, ShapeShift, SimonScreams, SimonStates, Souvenir,
-        SquareButton, Switches, TheBulb, Button, TranslationCenter, TwoBit, WordSearch, Zoo {
+        SquareButton, Switches, TheBulb, TwoBit, WordSearch, Zoo {
     protected static boolean isSouvenirActive, isForgetMeNotActive;
     protected static int numDoubleAs, numDBatteries, numHolders, numModules, numPortPlates, numStartingMinutes;
     protected static String serialCode = "", twoFactor = "";
