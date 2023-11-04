@@ -21,7 +21,7 @@ public final class NotePageController extends Stage {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("note.fxml"));
         loader.setController(this);
         setTitle("Extra Note");
-        getIcons().add(new Image(String.valueOf(Main.class.getResource("KTANE logo.png"))));
+        getIcons().add(new Image(Main.IMAGE_ICON_RESOURCE));
 
         Parent parent = FacadeFX.load(loader);
         setScene(new Scene(parent, WIDTH, HEIGHT));
