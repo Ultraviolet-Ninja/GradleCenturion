@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("ConstantConditions")
-public class MorseCode {
+public final class MorseCode {
     private static final String FILENAME = "morseCode.csv";
     private static final Map<String, String> MORSE_CIPHER_MAP;
     private static final Map<String, Double> FREQUENCY_MAP;
@@ -61,10 +61,10 @@ public class MorseCode {
         if (FREQUENCY_MAP.isEmpty())
             throw new IllegalStateException("Internal frequency map is empty");
 
-        StringBuilder sb = new StringBuilder();
+        var stringBuilder = new StringBuilder();
         for (String morseCodePhrase : text.split(" ")) {
             String letterSet = MORSE_CIPHER_MAP.get(morseCodePhrase);
-            calculateNextCorrectLetter(sb, letterSet);
+            calculateNextCorrectLetter(stringBuilder, letterSet);
         }
 
         return null;
