@@ -46,7 +46,9 @@ public final class PasswordComponent extends Pane implements Resettable, Transla
         try {
             var passwords = Password.getPasswords(columnInfo);
 
-            if (passwords.getFirst().equals(EMPTY_RESULTS)) {
+            if (passwords.isEmpty()) {
+                FacadeFX.clearText(outputArea);
+            } else if (passwords.getFirst().equals(EMPTY_RESULTS)) {
                 outputArea.setText(passwords.getFirst());
             } else {
                 var finalOutput = passwords.stream()
