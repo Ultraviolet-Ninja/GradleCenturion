@@ -28,7 +28,7 @@ import static javafx.scene.input.KeyCode.W;
 import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
 public final class Main extends Application {
-    public static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE logo.png"));
+    public static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE-logo.png"));
 
     @Override
     public void start(Stage primaryStage) throws Exception {
