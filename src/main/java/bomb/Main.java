@@ -24,6 +24,7 @@ import static javafx.scene.input.KeyCode.DIGIT9;
 import static javafx.scene.input.KeyCode.DOWN;
 import static javafx.scene.input.KeyCode.E;
 import static javafx.scene.input.KeyCode.UP;
+import static javafx.scene.input.KeyCode.W;
 import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
 public final class Main extends Application {
@@ -39,6 +40,7 @@ public final class Main extends Application {
         setSceneKeyboardEvents(scene, controller);
         setSceneArrowEvents(scene, controller);
         setupSearchBarFocus(scene, controller);
+        setupCloseWindow(primaryStage);
 
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(scene);
@@ -66,8 +68,8 @@ public final class Main extends Application {
     }
 
     private static void setSceneArrowEvents(Scene scene, ManualController controller) {
-        KeyCodeCombination upArrow = new KeyCodeCombination(UP);
-        KeyCodeCombination downArrow = new KeyCodeCombination(DOWN);
+        var upArrow = new KeyCodeCombination(UP);
+        var downArrow = new KeyCodeCombination(DOWN);
 
         scene.addEventFilter(
                 KeyEvent.KEY_PRESSED,
@@ -87,13 +89,24 @@ public final class Main extends Application {
     }
 
     private static void setupSearchBarFocus(Scene scene, ManualController controller) {
-        KeyCodeCombination searchCombination = new KeyCodeCombination(E, CONTROL_DOWN);
+        var searchCombination = new KeyCodeCombination(E, CONTROL_DOWN);
 
         scene.addEventFilter(
                 KeyEvent.KEY_PRESSED,
                 event -> {
                     if (searchCombination.match(event))
                         controller.focusOnSearchBar();
+                }
+        );
+    }
+
+    private static void setupCloseWindow(Stage stage) {
+        var closeCombination = new KeyCodeCombination(W, CONTROL_DOWN);
+        stage.addEventFilter(
+                KeyEvent.KEY_PRESSED,
+                e -> {
+                    if (closeCombination.match(e))
+                        stage.close();
                 }
         );
     }
