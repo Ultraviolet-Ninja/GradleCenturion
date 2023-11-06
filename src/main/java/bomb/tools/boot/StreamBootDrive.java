@@ -21,8 +21,9 @@ public sealed abstract class StreamBootDrive implements FxmlBootDrive
 
         return new LinkedHashMap<>(displayClassStream
                 .map(cls -> FxmlBootDrive.mapClassToRegion(cls, resetObserver))
-                .collect(toMap(Pair::getValue0, Pair::getValue1)));
+                .collect(toMap(Pair::getValue0, Pair::getValue1))
+        );
     }
 
-    abstract Stream<Class<?>> supplyStream();
+    protected abstract Stream<Class<?>> supplyStream();
 }

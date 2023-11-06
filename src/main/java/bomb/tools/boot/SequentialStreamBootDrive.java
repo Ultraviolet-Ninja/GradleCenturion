@@ -6,7 +6,7 @@ public final class SequentialStreamBootDrive extends StreamBootDrive {
     SequentialStreamBootDrive(){}
 
     @Override
-    Stream<Class<?>> supplyStream() {
+    protected Stream<Class<?>> supplyStream() {
         return FxmlBootDrive.getAnnotatedClasses().stream();
     }
 }

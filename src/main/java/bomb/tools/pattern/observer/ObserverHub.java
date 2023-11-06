@@ -50,7 +50,7 @@ public final class ObserverHub {
         }
     }
 
-    public static void ensureMapIsPopulated() {
+    public static void ensureMapIsFullyPopulated() {
         if (ObserverIndex.values().length != OBSERVER_MAP.size()) {
             LOG.warn("Observers not fully populated: {}", OBSERVER_MAP);
         }

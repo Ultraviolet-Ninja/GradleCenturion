@@ -1,5 +1,6 @@
 package bomb;
 
+import bomb.tools.boot.AsyncBootDrive;
 import bomb.tools.boot.FxmlBootDrive;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
@@ -84,10 +85,10 @@ public final class ManualController {
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
 
         long start = System.nanoTime();
-        regionMap = setupRegionMap().get();
+        regionMap = setupRegionMap();
         long stop = System.nanoTime();
         LOG.info("Boot Time: {}", convertTime(stop - start));
-        ObserverHub.ensureMapIsPopulated();
+//        ObserverHub.ensureMapIsFullyPopulated();
     }
 
     private static String convertTime(long nanos) {
@@ -97,18 +98,26 @@ public final class ManualController {
         return String.format("%01d.%03d sec", seconds, millis);
     }
 
-    private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
+    private Map<Toggle, Region> setupRegionMap() throws ExecutionException, InterruptedException {
         var resetObserver = new ResetObserver();
         ObserverHub.addObserver(RESET, resetObserver);
 
         //Change the drive to test a new way to load the fxml files
         var drive = System.getProperty("os.name").toLowerCase().contains("linux") ?
-                FxmlBootDrive.createSequentialStreamDrive() : //Boot drive for Linux
-                FxmlBootDrive.createParallelStreamDrive();    //Boot drive for Windows and Mac
-        var fxmlMapFuture = supplyAsync(() -> drive.createFXMLMap(resetObserver));
+                //Boot drive for Linux
+                FxmlBootDrive.createSequentialStreamDrive() :
+                //Boot drive for Windows and Mac
+                FxmlBootDrive.createParallelStreamDrive();
         var radioButtonNameFuture = createButtonNameFuture(options.getToggles());
 
-        return radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::joinOnStringKeys);
+        if (drive instanceof AsyncBootDrive) {
+            var regionFutures = drive.createFXMLMapAsync(resetObserver);
+            return AsyncBootDrive.linkRegionWhenDone(regionFutures, radioButtonNameFuture, EMPTY_VIEW);
+        } else {
+            var fxmlMapFuture = supplyAsync(() -> drive.createFXMLMap(resetObserver));
+            var resultingFuture =  radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::joinOnStringKeys);
+            return resultingFuture.get();
+        }
     }
 
     private static CompletableFuture<SequencedMap<String, Toggle>> createButtonNameFuture(List<Toggle> radioButtonList) {
