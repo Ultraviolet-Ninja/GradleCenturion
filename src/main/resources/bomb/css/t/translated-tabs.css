@@ -91,3 +91,8 @@
 #password-text-area .content {
     -fx-background-color: #001942;
 }
+
+#image-hover {
+    -jfx-selected-color: white;
+    -jfx-unselected-color: #0065de;
+}

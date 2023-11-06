@@ -13,12 +13,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
+
+import java.util.List;
 
 import static bomb.tools.pattern.facade.FacadeFX.BUTTON_NAME_FROM_EVENT;
 
 public final class TranslatedModuleController implements Resettable {
+    private static final String HOVERED_IMAGE_ID = "image-hover";
+    private static final String STANDARD_BUTTON_ID = "standard-radio-button";
+
     @FXML
     private ButtonComponent buttonUI;
 
@@ -40,10 +45,33 @@ public final class TranslatedModuleController implements Resettable {
     @FXML
     private ToggleGroup flagGroup;
 
+    @FXML
+    private ImageView brazilianView, czechView, danishView, dutchView, americanView,
+            esperantoView, italianView, estonianView, norwegianView, finnishView,
+            polishView, frenchView, germanView, spanishView, swedishView;
+
     public void initialize() {
-        for (Toggle toggle : flagGroup.getToggles()) {
-            RadioButton source = (RadioButton) toggle;
-            source.setOnAction(createButtonAction());
+        var buttons = flagGroup.getToggles()
+                .stream()
+                .map(t -> (RadioButton)t)
+                .toList();
+
+        for (var button : buttons) {
+            button.setOnAction(createButtonAction());
+        }
+        connectImageViewClickToButton(buttons);
+    }
+
+    private void connectImageViewClickToButton(List<RadioButton> buttons) {
+        int counter = 0;
+        var views = new ImageView[]{brazilianView, czechView, danishView, dutchView, americanView,
+                esperantoView, italianView, estonianView, norwegianView, finnishView,
+                polishView, frenchView, germanView, spanishView, swedishView};
+        for (var button : buttons) {
+            var view = views[counter++];
+            view.setOnMouseClicked(e -> button.fire());
+            view.setOnMouseEntered(e -> button.setId(HOVERED_IMAGE_ID));
+            view.setOnMouseExited(e -> button.setId(STANDARD_BUTTON_ID));
         }
     }
 
