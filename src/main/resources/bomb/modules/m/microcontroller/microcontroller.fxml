@@ -13,7 +13,7 @@
 
 <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/m/microcontroller.css"
-          xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+          xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1"
           fx:controller="bomb.modules.m.microcontroller.MicroControllerController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="585.0" minWidth="10.0" prefWidth="388.0"/>
