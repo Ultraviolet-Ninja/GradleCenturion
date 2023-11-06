@@ -15,13 +15,13 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - Gradle 8.4
 ### Plugins
 - JavaFX
-- Breadmoirai GitHub Release
+- [Breadmoirai GitHub Release](https://github.com/BreadMoirai/github-release-gradle-plugin)
 ### Dependencies
-- MaterialFX ver. `11.12.0`
-- JFoenix ver. `9.0.4`
-- JavaTuple ver. `1.2`
-- JGraphT ver. `1.5.2`
-- OpenCSV ver. `5.8`
+- [MaterialFX](https://github.com/palexdev/MaterialFX) ver. `11.12.0`
+- [JFoenix](https://github.com/sshahine/JFoenix) ver. `9.0.4`
+- [JavaTuple](https://github.com/javatuples/javatuples) ver. `1.2`
+- [JGraphT](https://github.com/jgrapht/jgrapht/tree/master) ver. `1.5.2`
+- [OpenCSV](https://github.com/cygri/opencsv/tree/master) ver. `5.8`
 ### Other Technologies
 - Circle CI with TestNG and Pitest
 - CodeMR Free Trial
