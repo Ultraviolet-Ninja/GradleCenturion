@@ -1,4 +1,4 @@
-# What I've learned
+# What I've learned in this project
 ## JavaFX Custom Components
 - Understanding how to create CC's with this [video](https://www.youtube.com/watch?v=1yuaJQJ1FXg) as a guide.
 - Experimenting with CC's to figure out how to correctly turn them into jar files that are compatible with SceneBuilder.
