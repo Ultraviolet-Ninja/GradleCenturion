@@ -54,11 +54,9 @@ public final class TranslatedModuleController implements Resettable {
         var buttons = flagGroup.getToggles()
                 .stream()
                 .map(t -> (RadioButton)t)
+                .peek(button -> button.setOnAction(createButtonAction()))
                 .toList();
 
-        for (var button : buttons) {
-            button.setOnAction(createButtonAction());
-        }
         connectImageViewClickToButton(buttons);
     }
 
