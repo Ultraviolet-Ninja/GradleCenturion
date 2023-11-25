@@ -5,6 +5,8 @@ import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
@@ -20,8 +22,11 @@ import static bomb.modules.t.the.bulb.BulbModel.Light.ON;
 import static bomb.modules.t.the.bulb.BulbModel.Opacity.OPAQUE;
 import static bomb.modules.t.the.bulb.BulbModel.Opacity.TRANSLUCENT;
 import static bomb.modules.t.the.bulb.BulbModel.Position.SCREWED;
+import static bomb.tools.pattern.facade.FacadeFX.buildAlert;
+import static bomb.tools.string.StringFormat.ARROW;
 
 public final class TheBulbController implements Resettable {
+    private static final String ERROR_TEXT = "Operation canceled.\nCannot continue";
     @FXML
     private ToggleGroup colorGroup, opacityGroup, luminosityGroup;
 
@@ -52,7 +57,11 @@ public final class TheBulbController implements Resettable {
         input.setOpacity(retrieveOpacity());
         input.setPosition(SCREWED);
 
-        outputToTextArea(TheBulb.solve(input));
+        outputToTextArea(TheBulb.solve(
+                input,
+                TheBulbController::checkIfLightIsOff,
+                TheBulbController::checkFinalLightIsOn
+        ));
     }
 
     private BulbModel.Color retrieveColor() {
@@ -80,6 +89,42 @@ public final class TheBulbController implements Resettable {
     private void outputToTextArea(List<String> results) {
         String outputText = String.join("\n", results);
         bulbResults.setText(outputText);
+    }
+
+    private static boolean checkIfLightIsOff(List<String> runningInstructions) {
+        var alert = constructAlert(runningInstructions, "Did the Bulb turn off when you pressed I?");
+
+        ButtonType no = new ButtonType("No"),
+                yes = new ButtonType("Yes");
+
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(yes, no);
+
+        return alert.showAndWait()
+                .map(buttonType -> buttonType == yes)
+                .orElseThrow(() -> new IllegalStateException(ERROR_TEXT));
+    }
+
+    private static boolean checkFinalLightIsOn(List<String> allInstructions) {
+        var alert = constructAlert(allInstructions, "Is the final bulb now on or off?");
+
+        ButtonType on = new ButtonType("On"),
+                off = new ButtonType("Off");
+
+        alert.getButtonTypes().clear();
+        alert.getButtonTypes().addAll(on, off);
+
+        return alert.showAndWait()
+                .map(type -> type == on)
+                .orElseThrow(() -> new IllegalStateException(ERROR_TEXT));
+    }
+
+    private static Alert constructAlert(List<String> instructions, String contextQuestion) {
+        var formattedInstructions = String.join(ARROW, instructions);
+        return buildAlert(
+                Alert.AlertType.CONFIRMATION, contextQuestion,
+                formattedInstructions, "Light Confirmation"
+        );
     }
 
     @Override

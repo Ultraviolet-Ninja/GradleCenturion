@@ -159,6 +159,11 @@ public final class FacadeFX {
 
     public static void setAlert(Alert.AlertType type, String context, String header, String title) {
         LOG.debug("Context: {}", context);
+        var alert = buildAlert(type, context, header, title);
+        alert.showAndWait();
+    }
+
+    public static Alert buildAlert(Alert.AlertType type, String context, String header, String title) {
         var alert = new Alert(type, context);
         alert.setHeaderText(header);
         alert.setTitle(title);
@@ -169,8 +174,7 @@ public final class FacadeFX {
 
         var icon = new Image(IMAGE_ICON_RESOURCE);
         stage.getIcons().add(icon);
-
-        alert.showAndWait();
+        return alert;
     }
 
     private static String determineTitle(Alert.AlertType type) {
