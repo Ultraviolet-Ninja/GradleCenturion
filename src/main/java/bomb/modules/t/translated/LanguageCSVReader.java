@@ -49,8 +49,10 @@ public final class LanguageCSVReader {
         var moduleLabelInfo = extractFromFileAsync(MODULE_LABEL_FILE, columnIndex);
         var frequencyInfo = extractFrequencyInfoAsync(columnIndex);
 
-        return TranslationResults.fromFutures(extraInfo, onFirstInfo, passwordInfo,
+        var results = TranslationResults.fromFutures(extraInfo, onFirstInfo, passwordInfo,
                 buttonLabelInfo, moduleLabelInfo, frequencyInfo);
+        INDEX_CACHE_MAP.put(languageColumn, results);
+        return results;
     }
 
     private static CompletableFuture<Optional<String[]>> extractFromFileAsync(String file, int columnIndex) {

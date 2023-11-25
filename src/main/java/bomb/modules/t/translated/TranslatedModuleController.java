@@ -79,14 +79,20 @@ public final class TranslatedModuleController implements Resettable {
             try {
                 var currentLanguageColumn = LanguageColumn.valueOf(buttonText.toUpperCase());
                 var languageContent = LanguageCSVReader.getLanguageContent(currentLanguageColumn);
-                buttonUI.setContent(languageContent);
-                passwordUI.setContent(languageContent);
-                ventGasUI.setContent(languageContent);
+                loadLanguageContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
             } catch (IllegalArgumentException | IllegalStateException e) {
                 FacadeFX.setAlert(e.getMessage());
+                translatedModuleTab.setDisable(true);
             }
         };
+    }
+
+    private void loadLanguageContent(TranslationResults languageContent) {
+        var frontEndComponents = new TranslationComponent[]{buttonUI, passwordUI, ventGasUI};
+        for (var component : frontEndComponents) {
+            component.setContent(languageContent);
+        }
     }
 
     @Override
