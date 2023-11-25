@@ -2,16 +2,13 @@ package bomb.modules.t.translated.solutions.gas;
 
 import bomb.abstractions.Resettable;
 import bomb.modules.t.translated.TranslationComponent;
+import bomb.modules.t.translated.TranslationResults;
 import bomb.tools.pattern.facade.MaterialFacade;
 import io.github.palexdev.materialfx.controls.MFXLabel;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.util.List;
-
-import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.NO_ROW;
-import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.YES_ROW;
 import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 
 public final class VentGasComponent extends Pane implements Resettable, TranslationComponent {
@@ -32,8 +29,17 @@ public final class VentGasComponent extends Pane implements Resettable, Translat
     }
 
     @Override
-    public void setContent(List<String> languageContent) {
-        yesLabel.setText(languageContent.get(YES_ROW.getRowIndex()));
-        noLabel.setText(languageContent.get(NO_ROW.getRowIndex()));
+    public void setContent(TranslationResults results) {
+        yesLabel.setText(
+                results.hasResponseYes() ?
+                        results.ventGasResponseYes() :
+                        ""
+        );
+
+        noLabel.setText(
+                results.hasResponseNo() ?
+                        results.ventGasResponseNo() :
+                        ""
+        );
     }
 }

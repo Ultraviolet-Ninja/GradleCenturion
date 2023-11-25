@@ -2,6 +2,7 @@ package bomb.modules.t.translated.solutions.password;
 
 import bomb.abstractions.Resettable;
 import bomb.modules.t.translated.TranslationComponent;
+import bomb.modules.t.translated.TranslationResults;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.factory.TextFormatterFactory;
 import com.jfoenix.controls.JFXTextArea;
@@ -12,10 +13,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.PASSWORD_ROW;
 import static bomb.modules.t.translated.solutions.password.Password.EMPTY_RESULTS;
 import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 import static bomb.tools.string.StringFormat.BULLET_POINT;
@@ -75,9 +74,8 @@ public final class PasswordComponent extends Pane implements Resettable, Transla
     }
 
     @Override
-    public void setContent(List<String> languageContent) {
-        String[] passwords = languageContent.get(PASSWORD_ROW.getRowIndex()).split("\\|");
-        Password.setPossiblePasswords(passwords);
+    public void setContent(TranslationResults results) {
+        Password.setPossiblePasswords(results.getParsedPasswords());
     }
 
     private MFXTextField[] getTextFields() {

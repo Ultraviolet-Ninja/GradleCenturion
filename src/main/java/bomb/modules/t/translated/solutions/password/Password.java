@@ -8,10 +8,6 @@ public final class Password {
     static final String EMPTY_RESULTS = "No passwords found";
     private static String[] passwords;
 
-    static {
-        passwords = null;
-    }
-
     public static void setPossiblePasswords(String[] input) {
         passwords = input;
     }

@@ -2,6 +2,7 @@ package bomb.modules.t.translated.solutions.button;
 
 import bomb.abstractions.Resettable;
 import bomb.modules.t.translated.TranslationComponent;
+import bomb.modules.t.translated.TranslationResults;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -12,15 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 
-import java.util.List;
-
-import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.BUTTON_LABEL_ROW;
 import static bomb.modules.t.translated.solutions.button.Button.COLOR_INDEX;
 import static bomb.modules.t.translated.solutions.button.Button.LABEL_INDEX;
 import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 
 public final class ButtonComponent extends Pane implements Resettable, TranslationComponent {
     private final ButtonProperty[] properties;
+    private JFXRadioButton[] buttonGroup;
 
     @FXML
     private ToggleGroup colorGroup, labelGroup;
@@ -56,6 +55,8 @@ public final class ButtonComponent extends Pane implements Resettable, Translati
         for (var labelButton : labelButtons) {
             labelButton.setOnAction(createButtonAction(labels[counter++], LABEL_INDEX));
         }
+        buttonGroup = new JFXRadioButton[]{redButton, blueButton, yellowButton, whiteButton,
+                holdButton, pressButton, detonateButton, abortButton};
     }
 
     private EventHandler<ActionEvent> createButtonAction(ButtonProperty property, int index) {
@@ -74,15 +75,14 @@ public final class ButtonComponent extends Pane implements Resettable, Translati
     }
 
     @Override
-    public void setContent(List<String> languageContent) {
-        //Given in the order of Red Blue Yellow White Hold Press Detonate Abort
-        var buttonLabels = languageContent.get(BUTTON_LABEL_ROW.getRowIndex())
-                .split("\\|");
-        var buttons = new JFXRadioButton[]{redButton, blueButton, yellowButton, whiteButton,
-                holdButton, pressButton, detonateButton, abortButton};
-        int counter = 0;
-        for (var buttonLabel : buttonLabels) {
-            buttons[counter++].setText(buttonLabel);
+    public void setContent(TranslationResults results) {
+        var translatedLabels = results.buttonLabels();
+        if (translatedLabels != null) {
+            int counter = 0;
+            //Given in the order of Red Blue Yellow White Hold Press Detonate Abort
+            for (var buttonLabel : translatedLabels) {
+                buttonGroup[counter++].setText(buttonLabel);
+            }
         }
     }
 }
