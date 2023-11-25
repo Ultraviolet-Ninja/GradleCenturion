@@ -94,28 +94,28 @@ public final class TheBulbController implements Resettable {
     private static boolean checkIfLightIsOff(List<String> runningInstructions) {
         var alert = constructAlert(runningInstructions, "Did the Bulb turn off when you pressed I?");
 
-        ButtonType no = new ButtonType("No"),
-                yes = new ButtonType("Yes");
+        ButtonType noButton = new ButtonType("No"),
+                yesButton = new ButtonType("Yes");
 
         alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(yes, no);
+        alert.getButtonTypes().addAll(yesButton, noButton);
 
         return alert.showAndWait()
-                .map(buttonType -> buttonType == yes)
+                .map(buttonType -> buttonType == yesButton)
                 .orElseThrow(() -> new IllegalStateException(ERROR_TEXT));
     }
 
     private static boolean checkFinalLightIsOn(List<String> allInstructions) {
         var alert = constructAlert(allInstructions, "Is the final bulb now on or off?");
 
-        ButtonType on = new ButtonType("On"),
-                off = new ButtonType("Off");
+        ButtonType onButton = new ButtonType("On"),
+                offButton = new ButtonType("Off");
 
         alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(on, off);
+        alert.getButtonTypes().addAll(onButton, offButton);
 
         return alert.showAndWait()
-                .map(type -> type == on)
+                .map(type -> type == onButton)
                 .orElseThrow(() -> new IllegalStateException(ERROR_TEXT));
     }
 
