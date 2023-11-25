@@ -29,8 +29,8 @@ public final class MorseCode {
     }
 
     private static Map<String, String> loadMorseCode() throws CsvException, IOException {
-        try(var in = LanguageCSVReader.class.getResourceAsStream(FILENAME);
-            var csvReader = new CSVReader(new InputStreamReader(in, StandardCharsets.UTF_8))) {
+        try(var inputStream = LanguageCSVReader.class.getResourceAsStream(FILENAME);
+            var csvReader = new CSVReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
             return csvReader.readAll()
                     .stream()
                     .collect(Collectors.toUnmodifiableMap(
