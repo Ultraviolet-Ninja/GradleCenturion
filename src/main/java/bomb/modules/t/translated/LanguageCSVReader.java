@@ -70,7 +70,7 @@ public final class LanguageCSVReader {
     }
 
     private static <T> Optional<T> extractInfoAtColumnIndex(String file,
-                                                            Function<Stream<String[]>, T> infoParser) {
+                                                            Function<Stream<String[]>, T> streamFinalizer) {
         var inputStream = LanguageCSVReader.class.getResourceAsStream(file);
         if (inputStream == null) {
             LOG.warn("{} gave a null InputStream", file);
@@ -81,7 +81,7 @@ public final class LanguageCSVReader {
             var stream = csvReader.readAll()
                     .stream()
                     .skip(1);
-            return Optional.of(infoParser.apply(stream));
+            return Optional.of(streamFinalizer.apply(stream));
         } catch (IOException | CsvException e) {
             LOG.warn("Read Error: ", e);
             return Optional.empty();
