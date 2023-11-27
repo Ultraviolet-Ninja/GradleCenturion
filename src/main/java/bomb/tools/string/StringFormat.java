@@ -30,14 +30,16 @@ public final class StringFormat {
                     .map(String::toUpperCase)
                     .collect(joining("_"));
 
-    public static @NotNull String createOrdinalNumber(int number) {
+    public static @NotNull String createOrdinalNumber(int number) throws IllegalArgumentException {
         if (number < 0)
             throw new IllegalArgumentException("Number cannot be negative");
         int mod = number % 100;
 
-        if (mod == 1) return number + "st";
-        if (mod == 2) return number + "nd";
-        if (mod == 3) return number + "rd";
-        return number + "th";
+        return switch (mod) {
+            case 1 -> number + "st";
+            case 2 -> number + "nd";
+            case 3 -> number + "rd";
+            default ->  number + "th";
+        };
     }
 }
