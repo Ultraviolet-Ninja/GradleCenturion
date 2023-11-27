@@ -15,7 +15,8 @@ public final class MathUtils {
         if(num % 2 == 0 || num % 3 == 0)
             return num <= 3 && num > 1;
 
-        for (long i = 5; i * i <= num; i += 6) {
+        long stop = (long) Math.sqrt(num);
+        for (long i = 5; i <= stop; i += 6) {
             if (num % i == 0 || num % (i + 2) == 0)
                 return false;
         }
