@@ -21,7 +21,7 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - JFoenix ver. `9.0.4`
 - JavaTuple ver. `1.2`
 - JGraphT ver. `1.5.2`
-- OpenCSV ver. `5.8`
+- OpenCSV ver. `5.9`
 ### Other Technologies
 - Circle CI with TestNG and Pitest
 - CodeMR Free Trial
