@@ -21,7 +21,8 @@ This is a huge project for one man to tackle, but I've [learned a lot](Learned.m
 - [JFoenix](https://github.com/sshahine/JFoenix) ver. `9.0.4`
 - [JavaTuple](https://github.com/javatuples/javatuples) ver. `1.2`
 - [JGraphT](https://github.com/jgrapht/jgrapht/tree/master) ver. `1.5.2`
-- [OpenCSV](https://github.com/cygri/opencsv/tree/master) ver. `5.8`
+- [OpenCSV](https://github.com/cygri/opencsv/tree/master) ver. `5.9`
+
 ### Other Technologies
 - Circle CI with TestNG and Pitest
 - CodeMR Free Trial
