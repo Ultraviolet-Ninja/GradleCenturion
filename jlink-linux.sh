@@ -1,4 +1,5 @@
 #!/bin/bash
+
 jlink \
 --module-path src/main/java \
 --output base-layer \
