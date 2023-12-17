@@ -9,7 +9,6 @@ import org.jetbrains.annotations.Range;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.function.IntPredicate;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -40,12 +39,14 @@ public final class SquareButton extends Widget {
         if (buttonColor == BLUE && numDoubleAs > numDBatteries)
             return HOLD.toString();
 
-        boolean isBlueOrYellow = buttonColor == BLUE || buttonColor == YELLOW;
+        if (buttonColor == BLUE || buttonColor == YELLOW) {
+            if (matchesGreatestSerialCodeNumber(titleCaseText)) {
+                return TAP.toString();
+            } else if (COLOR_WORDS.contains(titleCaseText)) {
+                return HOLD.toString();
+            }
+        }
 
-        if (isBlueOrYellow && matchesGreatestSerialCodeNumber(titleCaseText))
-            return TAP.toString();
-        if (isBlueOrYellow && COLOR_WORDS.contains(titleCaseText))
-            return HOLD.toString();
         if (titleCaseText.isEmpty())
             return TAP + " when the two seconds digits on the timer match";
 
@@ -53,7 +54,6 @@ public final class SquareButton extends Widget {
                 (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()) ?
                 TAP.toString() :
                 HOLD.toString();
-
     }
 
     private static void validateButtonColor(int buttonColor) throws IllegalArgumentException {
@@ -123,7 +123,7 @@ public final class SquareButton extends Widget {
                 .flatMap(i -> IntStream.range(0, 10).map(j -> i + j))
                 .filter(numberToSum)
                 .mapToObj(String::valueOf)
-                .collect(Collectors.joining(", "));
+                .collect(joining(", "));
     }
 
     private static String generatePrimeSeconds() {
