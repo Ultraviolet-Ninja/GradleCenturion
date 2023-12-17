@@ -144,8 +144,8 @@ public final class TheBulb extends Widget {
     }
 
     private static void stepSix(BulbModel bulbModel, List<String> outputList) {
-        String firstButtonPress = outputList.get(0);
-        String lastButtonPress = outputList.get(outputList.size() - 2);
+        var firstButtonPress = outputList.getFirst();
+        var lastButtonPress = outputList.get(outputList.size() - 2);
 
         outputList.add(isLightOffAtStepOne ? firstButtonPress : lastButtonPress);
         screwBulb(bulbModel, outputList);
