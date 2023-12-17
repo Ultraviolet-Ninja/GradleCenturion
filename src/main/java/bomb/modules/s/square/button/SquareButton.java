@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.function.IntPredicate;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
@@ -36,37 +35,25 @@ public final class SquareButton extends Widget {
         validateButtonColor(buttonColor);
         var titleCaseText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
-//        if (buttonColor == BLUE && numDoubleAs > numDBatteries)//2
-//            return HOLD.toString();
-//
-//        if (buttonColor <= YELLOW) {//3
-//            if (matchesGreatestSerialCodeNumber(titleCaseText)) {//4
-//                return TAP.toString();
-//            } else if (COLOR_WORDS.contains(titleCaseText)) {//5
-//                return HOLD.toString();
-//            }
-//        }
+        if (buttonColor == BLUE && numDoubleAs > numDBatteries)
+            return HOLD.toString();
 
-        switch (buttonColor) {
-            case BLUE:
-                if (numDoubleAs > numDBatteries) {
-                    return HOLD.toString();
-                }
-            case YELLOW:
-                if (matchesGreatestSerialCodeNumber(titleCaseText)) {
-                    return TAP.toString();
-                } else if (COLOR_WORDS.contains(titleCaseText)) {
-                    return HOLD.toString();
-                }
+        if (buttonColor <= YELLOW) {
+            if (matchesGreatestSerialCodeNumber(titleCaseText)) {
+                return TAP.toString();
+            } else if (COLOR_WORDS.contains(titleCaseText)) {
+                return HOLD.toString();
+            }
         }
 
         if (titleCaseText.isEmpty())//6
             return TAP + " when the two seconds digits on the timer match";
 
-        return (buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT)) ||//8
-                (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()) ?//10
-                TAP.toString() :
-                HOLD.toString();
+        if ((buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT)) ||
+                (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()))
+            return TAP.toString();
+
+        return HOLD.toString();
     }
 
     private static void validateButtonColor(int buttonColor) throws IllegalArgumentException {
