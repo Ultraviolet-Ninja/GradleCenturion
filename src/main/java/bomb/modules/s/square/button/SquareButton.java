@@ -39,7 +39,7 @@ public final class SquareButton extends Widget {
         if (buttonColor == BLUE && numDoubleAs > numDBatteries)
             return HOLD.toString();
 
-        if (buttonColor == BLUE || buttonColor == YELLOW) {
+        if (buttonColor <= YELLOW) {
             if (matchesGreatestSerialCodeNumber(titleCaseText)) {
                 return TAP.toString();
             } else if (COLOR_WORDS.contains(titleCaseText)) {
