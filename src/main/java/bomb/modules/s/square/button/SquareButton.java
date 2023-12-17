@@ -2,6 +2,7 @@ package bomb.modules.s.square.button;
 
 import bomb.Widget;
 import bomb.annotation.DisplayComponent;
+import bomb.enumerations.ButtonResult;
 import bomb.tools.number.MathUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
@@ -35,22 +36,15 @@ public final class SquareButton extends Widget {
         validateButtonColor(buttonColor);
         var titleCaseText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
-        if (buttonColor == BLUE && numDoubleAs > numDBatteries)
-            return HOLD.toString();
-
-        if (buttonColor <= YELLOW) {
-            if (matchesGreatestSerialCodeNumber(titleCaseText)) {
-                return TAP.toString();
-            } else if (COLOR_WORDS.contains(titleCaseText)) {
-                return HOLD.toString();
-            }
-        }
+        var results = handleBlueYellowRules(buttonColor, titleCaseText);
+        if (results != null)
+            return results.toString();
 
         if (titleCaseText.isEmpty())//6
             return TAP + " when the two seconds digits on the timer match";
 
-        if ((buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT)) ||
-                (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()))
+        if (buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT) ||
+                countIndicators(UNLIT) >= 2 && hasVowelInSerialCode())
             return TAP.toString();
 
         return HOLD.toString();
@@ -59,6 +53,20 @@ public final class SquareButton extends Widget {
     private static void validateButtonColor(int buttonColor) throws IllegalArgumentException {
         if (buttonColor < BLUE || buttonColor > WHITE)
             throw new IllegalArgumentException("Invalid button color");
+    }
+
+    private static ButtonResult handleBlueYellowRules(int buttonColor, String titleCaseText) {
+        if (buttonColor == BLUE && numDoubleAs > numDBatteries)
+            return HOLD;
+
+        if (buttonColor <= YELLOW) {
+            if (matchesGreatestSerialCodeNumber(titleCaseText)) {
+                return TAP;
+            } else if (COLOR_WORDS.contains(titleCaseText)) {
+                return HOLD;
+            }
+        }
+        return null;
     }
 
     private static boolean matchesGreatestSerialCodeNumber(String buttonText) {
