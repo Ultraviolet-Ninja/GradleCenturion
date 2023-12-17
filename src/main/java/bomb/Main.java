@@ -32,9 +32,9 @@ public final class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("manual.fxml"));
+        var loader = new FXMLLoader(Main.class.getResource("manual.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
+        var scene = new Scene(root);
         ManualController controller = loader.getController();
 
         setSceneKeyboardEvents(scene, controller);
@@ -55,7 +55,7 @@ public final class Main extends Application {
                         .toList();
 
         int count = 0;
-        for (KeyCodeCombination combo : digitList) {
+        for (var combo : digitList) {
             int index = count++;
             scene.addEventFilter(
                     KeyEvent.KEY_PRESSED,
