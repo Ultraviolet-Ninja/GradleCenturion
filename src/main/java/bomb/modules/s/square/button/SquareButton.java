@@ -4,13 +4,14 @@ import bomb.Widget;
 import bomb.annotation.DisplayComponent;
 import bomb.tools.number.MathUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Range;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.function.IntPredicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static bomb.Widget.IndicatorFilter.LIT;
 import static bomb.Widget.IndicatorFilter.UNLIT;
@@ -24,37 +25,35 @@ import static java.util.stream.Collectors.joining;
 @DisplayComponent(resource = "square_button.fxml", buttonLinkerName = "Square Button")
 public final class SquareButton extends Widget {
     //Button colors
-    public static final int BLUE, YELLOW, DARK_GRAY, WHITE;
+    public static final int BLUE = 0, YELLOW = 1, DARK_GRAY = 2, WHITE = 3;
     //Held button light colors
-    public static final int ORANGE, GREEN, CYAN;
+    public static final int ORANGE = 0, GREEN = 1, CYAN = 2;
 
-    private static final Set<String> COLOR_WORDS;
+    private static final Set<String> COLOR_WORDS = Set.of("Purple", "Indigo", "Maroon", "Jade");
 
-    static {
-        BLUE  = ORANGE = 0;
-        YELLOW = GREEN = 1;
-        DARK_GRAY = CYAN = 2;
-        WHITE = 3;
-
-        COLOR_WORDS = Set.of("Purple", "Indigo", "Maroon", "Jade");
-    }
-
-    public static @NotNull String solve(int buttonColor, @NotNull String buttonText) throws IllegalArgumentException {
+    public static @NotNull String solve(@Range(from = BLUE, to = WHITE) int buttonColor,
+                                        @NotNull String buttonText) throws IllegalArgumentException {
         checkSerialCode();
         validateButtonColor(buttonColor);
-        buttonText = FIRST_LETTER_CAPITAL.apply(buttonText);
+        var titleCaseText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
-        if (buttonColor == BLUE && numDoubleAs > numDBatteries) return HOLD.toString();
-        if ((buttonColor == BLUE || buttonColor == YELLOW) && matchesGreatestSerialCodeNumber(buttonText))
+        if (buttonColor == BLUE && numDoubleAs > numDBatteries)
+            return HOLD.toString();
+
+        boolean isBlueOrYellow = buttonColor == BLUE || buttonColor == YELLOW;
+
+        if (isBlueOrYellow && matchesGreatestSerialCodeNumber(titleCaseText))
             return TAP.toString();
-        if ((buttonColor == BLUE || buttonColor == YELLOW) && COLOR_WORDS.contains(buttonText)) return HOLD.toString();
-        if (buttonText.isEmpty()) return TAP + " when the two seconds digits on the timer match";
-        if (
-                (buttonColor != DARK_GRAY && buttonText.length() > countIndicators(LIT)) ||
-                        (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode())
-        ) return TAP.toString();
+        if (isBlueOrYellow && COLOR_WORDS.contains(titleCaseText))
+            return HOLD.toString();
+        if (titleCaseText.isEmpty())
+            return TAP + " when the two seconds digits on the timer match";
 
-        return HOLD.toString();
+        return (buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT)) ||
+                (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()) ?
+                TAP.toString() :
+                HOLD.toString();
+
     }
 
     private static void validateButtonColor(int buttonColor) throws IllegalArgumentException {
@@ -63,13 +62,17 @@ public final class SquareButton extends Widget {
     }
 
     private static boolean matchesGreatestSerialCodeNumber(String buttonText) {
-        return Arrays.stream(filter(serialCode, NUMBER_PATTERN).split(""))
-                .mapToInt(Integer::parseInt)
-                .max()
-                .orElse(0) == buttonText.length();
+        return Stream.of(filter(serialCode, NUMBER_PATTERN))
+                .map(filteredText -> filteredText.split(""))
+                .flatMap(Arrays::stream)
+                .map(Integer::parseInt)
+                .max(Integer::compareTo)
+                .map(maxNumber -> maxNumber == buttonText.length())
+                .orElse(false);
     }
 
-    public static @NotNull String solveForHeldButton(boolean isFlashing, int lightColor)
+    @SuppressWarnings("ConstantValue")
+    public static @NotNull String solveForHeldButton(boolean isFlashing, @Range(from = ORANGE, to = CYAN) int lightColor)
             throws IllegalArgumentException {
         if (lightColor < ORANGE || lightColor > CYAN)
             throw new IllegalArgumentException("Invalid light color");
@@ -92,18 +95,22 @@ public final class SquareButton extends Widget {
     }
 
     private static String handleSolidLight(int lightColor) {
-        StringBuilder stringBuilder = new StringBuilder("Release when the two seconds digits add up to ");
+        var stringBuilder = new StringBuilder("Release when the two seconds digits add up to ");
         IntPredicate numberToSum;
 
-        if (lightColor == ORANGE) {
-            stringBuilder.append("3 or 13");
-            numberToSum = sum -> sum == 3 || sum == 13;
-        } else if (lightColor == GREEN) {
-            stringBuilder.append('5');
-            numberToSum = sum -> sum == 5;
-        } else {
-            stringBuilder.append('7');
-            numberToSum = sum -> sum == 7;
+        switch (lightColor) {
+            case ORANGE -> {
+                stringBuilder.append("3 or 13");
+                numberToSum = sum -> sum == 3 || sum == 13;
+            }
+            case GREEN -> {
+                stringBuilder.append('5');
+                numberToSum = sum -> sum == 5;
+            }
+            default -> {
+                stringBuilder.append('7');
+                numberToSum = sum -> sum == 7;
+            }
         }
 
         return stringBuilder.append("\nPossible number combos: ")
@@ -112,31 +119,30 @@ public final class SquareButton extends Widget {
     }
 
     private static String possibleCombinations(IntPredicate numberToSum) {
-        List<String> possibilities = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 10; j++) {
-                int sum = i + j;
-                if (numberToSum.test(sum))
-                    possibilities.add(String.valueOf(sum));
-            }
-        }
-        return String.join(", ", possibilities);
+        return IntStream.range(0, 6)
+                .flatMap(i -> IntStream.range(0, 10).map(j -> i + j))
+                .filter(numberToSum)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining(", "));
     }
 
     private static String generatePrimeSeconds() {
-        return IntStream.rangeClosed(0, 60)
+        return IntStream.range(2, 60)
                 .filter(MathUtils::isPrime)
                 .mapToObj(String::valueOf)
                 .collect(joining(", "));
     }
 
     private static String generateMultiplesOfSeven() {
-        if (numStartingMinutes == 0) return "Number of starting minutes not set.\n" +
-                "Cannot discern valid multiples of 7";
+        if (numStartingMinutes == 0) {
+            return """
+                    Number of starting minutes not set.
+                    Cannot discern valid multiples of 7""";
+        }
 
         return "Possible combos: " + IntStream.rangeClosed(1, numStartingMinutes * 60)
                 .filter(second -> second % 7 == 0)
-                .mapToObj(second -> (second/60) + ":" + (second%60))
+                .mapToObj(second -> (second/60) + ":" + String.format("%02d", second % 60))
                 .collect(joining(", "));
     }
 }
