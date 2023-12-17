@@ -35,11 +35,11 @@ public final class StringFormat {
             throw new IllegalArgumentException("Number cannot be negative");
         int mod = number % 100;
 
-        return switch (mod) {
-            case 1 -> number + "st";
-            case 2 -> number + "nd";
-            case 3 -> number + "rd";
-            default ->  number + "th";
+        return number + switch (mod) {
+            case 1 -> "st";
+            case 2 -> "nd";
+            case 3 -> "rd";
+            default -> "th";
         };
     }
 }
