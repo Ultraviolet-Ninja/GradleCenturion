@@ -36,22 +36,35 @@ public final class SquareButton extends Widget {
         validateButtonColor(buttonColor);
         var titleCaseText = FIRST_LETTER_CAPITAL.apply(buttonText);
 
-        if (buttonColor == BLUE && numDoubleAs > numDBatteries)
-            return HOLD.toString();
+//        if (buttonColor == BLUE && numDoubleAs > numDBatteries)//2
+//            return HOLD.toString();
+//
+//        if (buttonColor <= YELLOW) {//3
+//            if (matchesGreatestSerialCodeNumber(titleCaseText)) {//4
+//                return TAP.toString();
+//            } else if (COLOR_WORDS.contains(titleCaseText)) {//5
+//                return HOLD.toString();
+//            }
+//        }
 
-        if (buttonColor <= YELLOW) {
-            if (matchesGreatestSerialCodeNumber(titleCaseText)) {
-                return TAP.toString();
-            } else if (COLOR_WORDS.contains(titleCaseText)) {
-                return HOLD.toString();
-            }
+        switch (buttonColor) {
+            case BLUE:
+                if (numDoubleAs > numDBatteries) {
+                    return HOLD.toString();
+                }
+            case YELLOW:
+                if (matchesGreatestSerialCodeNumber(titleCaseText)) {
+                    return TAP.toString();
+                } else if (COLOR_WORDS.contains(titleCaseText)) {
+                    return HOLD.toString();
+                }
         }
 
-        if (titleCaseText.isEmpty())
+        if (titleCaseText.isEmpty())//6
             return TAP + " when the two seconds digits on the timer match";
 
-        return (buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT)) ||
-                (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()) ?
+        return (buttonColor != DARK_GRAY && titleCaseText.length() > countIndicators(LIT)) ||//8
+                (countIndicators(UNLIT) >= 2 && hasVowelInSerialCode()) ?//10
                 TAP.toString() :
                 HOLD.toString();
     }
@@ -62,9 +75,8 @@ public final class SquareButton extends Widget {
     }
 
     private static boolean matchesGreatestSerialCodeNumber(String buttonText) {
-        return Stream.of(filter(serialCode, NUMBER_PATTERN))
-                .map(filteredText -> filteredText.split(""))
-                .flatMap(Arrays::stream)
+        var numbersInCode = filter(serialCode, NUMBER_PATTERN).split("");
+        return Arrays.stream(numbersInCode)
                 .map(Integer::parseInt)
                 .max(Integer::compareTo)
                 .map(maxNumber -> maxNumber == buttonText.length())
