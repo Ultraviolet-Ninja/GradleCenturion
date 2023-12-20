@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
@@ -28,7 +30,7 @@ import static javafx.scene.input.KeyCode.W;
 import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
 public final class Main extends Application {
-    public static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE-logo.png"));
+    private static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE-logo.png"));
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -44,7 +46,7 @@ public final class Main extends Application {
 
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image(IMAGE_ICON_RESOURCE));
+        primaryStage.getIcons().add(getGameIcon());
         primaryStage.show();
     }
 
@@ -113,5 +115,10 @@ public final class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Contract(" -> new")
+    public static @NotNull Image getGameIcon() {
+        return new Image(IMAGE_ICON_RESOURCE);
     }
 }

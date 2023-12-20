@@ -5,7 +5,6 @@ import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.List;
@@ -21,7 +20,7 @@ public final class NotePageController extends Stage {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("note.fxml"));
         loader.setController(this);
         setTitle("Extra Note");
-        getIcons().add(new Image(Main.IMAGE_ICON_RESOURCE));
+        getIcons().add(Main.getGameIcon());
 
         Parent parent = FacadeFX.load(loader);
         setScene(new Scene(parent, WIDTH, HEIGHT));

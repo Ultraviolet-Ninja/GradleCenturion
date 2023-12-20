@@ -1,5 +1,6 @@
 package bomb.tools.pattern.facade;
 
+import bomb.Main;
 import javafx.animation.ParallelTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
@@ -14,7 +15,6 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -24,8 +24,6 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.function.Function;
-
-import static bomb.Main.IMAGE_ICON_RESOURCE;
 
 public final class FacadeFX {
     private static final Logger LOG = LoggerFactory.getLogger(FacadeFX.class);
@@ -172,8 +170,7 @@ public final class FacadeFX {
                 .getScene()
                 .getWindow();
 
-        var icon = new Image(IMAGE_ICON_RESOURCE);
-        stage.getIcons().add(icon);
+        stage.getIcons().add(Main.getGameIcon());
         return alert;
     }
 
