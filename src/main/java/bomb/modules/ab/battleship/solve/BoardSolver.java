@@ -5,7 +5,6 @@ import bomb.modules.ab.battleship.Tile;
 import bomb.tools.Coordinates;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
@@ -30,7 +29,7 @@ public final class BoardSolver {
         }
 
         Deque<Ocean> oceanGuesses = new ArrayDeque<>();
-        List<Ocean> permutationList = new ArrayList<>();
+        Stream.Builder<Ocean> permutations = Stream.builder();
 
         nextSpotOptional.map(nextSpot -> generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters))
                 .ifPresent(oceanGuesses::addAll);
@@ -43,11 +42,11 @@ public final class BoardSolver {
                 nextSpotOptional.map(nextSpot -> generateNewGuesses(nextSpot, guess, rowCounters, columnCounters))
                         .ifPresent(oceanGuesses::addAll);
             } else {
-                permutationList.add(guess);
+                permutations.add(guess);
             }
         }
 
-        return permutationList.stream()
+        return permutations.build()
                 .filter(permutation -> isCompleteBoard(permutation, rowCounters, columnCounters))
                 .collect(Collectors.toSet());
     }
@@ -112,7 +111,7 @@ public final class BoardSolver {
     }
 
     private static boolean areShipsDiagonallyTouching(Ocean ocean, int x, int y) {
-        return Arrays.stream(new int[][]{{-1,-1}, {-1,1}, {1,-1}, {1,1}})
+        return Arrays.stream(new int[][]{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}})
                 .peek(pair -> {
                     pair[0] += x;
                     pair[1] += y;
