@@ -6,9 +6,9 @@
 ![Project Version](https://img.shields.io/badge/version-0.24.0-blueviolet)
 
 ## Intro
-This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages.<br>
+This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages. See below for pictures or this [parody video](https://www.youtube.com/watch?v=krRPQQz524I).<br>
 
-This is a huge project for one man to tackle, but I've [learned a lot](Learned.md) from the challenges I've faced.
+This is a **huge** project for one man to tackle, but I've [learned a lot](Learned.md) from the challenges I've faced and this project marks points of my Software Engineering learning journey.
 
 ## Technologies
 - Java 21
@@ -37,7 +37,7 @@ See the running list of modules [here](Progress.md)
   - *Only supports Windows currently*
 
 ## Inspiration
-After my first manual turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*".
+After my [first manual](https://github.com/Ultraviolet-Ninja/KTANE_Java_Bomb_Manual) turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*", like Tony Stark in Iron Man 3, except he was getting his Arc Reactor removed and I'm just a developer.
 I started creating this project working on the auto-solver for the vanilla game, which was, by comparison, much easier. 
 
 ### Example Bomb
@@ -56,4 +56,4 @@ Number of Battery Holders, Two-Factor Authentication, and the Serial Code.
 
 ![WidgetTwo](markdown/Widget2.jpg)
 **One port plate** with a **PS/2 port**, another **D battery in one holder** and a serial code **"PN4XC5"**.<br>
-Overall, this edgework would be given as "1 PS2 port in 1 plate, a lit November SA, 2 in 2 (2 batteries in 2 holders), and serial is Papa November 4 X-ray Charlie 5" (Using the Nato Phonetic Alphabet)
+Overall, this edgework would be given as "1 PS2 port in 1 plate, a lit November SA, 2 in 2 (2 batteries in 2 holders), and serial is Papa November 4 X-ray Charlie 5" (_Using the Nato Phonetic Alphabet_)
