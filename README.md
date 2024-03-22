@@ -37,7 +37,7 @@ See the running list of modules [here](Progress.md)
   - *Only supports Windows currently*
 
 ## Inspiration
-After my [first manual](https://github.com/Ultraviolet-Ninja/KTANE_Java_Bomb_Manual) turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*", like Tony Stark, except he was getting his Arc Reactor removed.
+After my [first manual](https://github.com/Ultraviolet-Ninja/KTANE_Java_Bomb_Manual) turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*", like Tony Stark in Iron Man 3, except he was getting his Arc Reactor removed and I'm just a developer.
 I started creating this project working on the auto-solver for the vanilla game, which was, by comparison, much easier. 
 
 ### Example Bomb
