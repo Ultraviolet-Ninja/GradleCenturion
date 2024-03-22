@@ -8,6 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;
 
@@ -24,25 +26,27 @@ import static javafx.scene.input.KeyCode.DIGIT9;
 import static javafx.scene.input.KeyCode.DOWN;
 import static javafx.scene.input.KeyCode.E;
 import static javafx.scene.input.KeyCode.UP;
+import static javafx.scene.input.KeyCode.W;
 import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
 public final class Main extends Application {
-    public static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE logo.png"));
+    private static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE-logo.png"));
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("manual.fxml"));
+        var loader = new FXMLLoader(Main.class.getResource("manual.fxml"));
         Parent root = loader.load();
-        Scene scene = new Scene(root);
+        var scene = new Scene(root);
         ManualController controller = loader.getController();
 
         setSceneKeyboardEvents(scene, controller);
         setSceneArrowEvents(scene, controller);
         setupSearchBarFocus(scene, controller);
+        setupCloseWindow(primaryStage);
 
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image(IMAGE_ICON_RESOURCE));
+        primaryStage.getIcons().add(getGameIcon());
         primaryStage.show();
     }
 
@@ -53,7 +57,7 @@ public final class Main extends Application {
                         .toList();
 
         int count = 0;
-        for (KeyCodeCombination combo : digitList) {
+        for (var combo : digitList) {
             int index = count++;
             scene.addEventFilter(
                     KeyEvent.KEY_PRESSED,
@@ -66,8 +70,8 @@ public final class Main extends Application {
     }
 
     private static void setSceneArrowEvents(Scene scene, ManualController controller) {
-        KeyCodeCombination upArrow = new KeyCodeCombination(UP);
-        KeyCodeCombination downArrow = new KeyCodeCombination(DOWN);
+        var upArrow = new KeyCodeCombination(UP);
+        var downArrow = new KeyCodeCombination(DOWN);
 
         scene.addEventFilter(
                 KeyEvent.KEY_PRESSED,
@@ -87,7 +91,7 @@ public final class Main extends Application {
     }
 
     private static void setupSearchBarFocus(Scene scene, ManualController controller) {
-        KeyCodeCombination searchCombination = new KeyCodeCombination(E, CONTROL_DOWN);
+        var searchCombination = new KeyCodeCombination(E, CONTROL_DOWN);
 
         scene.addEventFilter(
                 KeyEvent.KEY_PRESSED,
@@ -98,7 +102,23 @@ public final class Main extends Application {
         );
     }
 
+    private static void setupCloseWindow(Stage stage) {
+        var closeCombination = new KeyCodeCombination(W, CONTROL_DOWN);
+        stage.addEventFilter(
+                KeyEvent.KEY_PRESSED,
+                e -> {
+                    if (closeCombination.match(e))
+                        stage.close();
+                }
+        );
+    }
+
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Contract(" -> new")
+    public static @NotNull Image getGameIcon() {
+        return new Image(IMAGE_ICON_RESOURCE);
     }
 }

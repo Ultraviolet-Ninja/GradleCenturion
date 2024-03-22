@@ -6,7 +6,7 @@ public final class ParallelStreamBootDrive extends StreamBootDrive {
     ParallelStreamBootDrive(){}
 
     @Override
-    Stream<Class<?>> supplyStream() {
+    protected Stream<Class<?>> supplyStream() {
         return FxmlBootDrive.getAnnotatedClasses().parallelStream();
     }
 }

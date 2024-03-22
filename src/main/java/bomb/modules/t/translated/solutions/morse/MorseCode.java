@@ -4,39 +4,40 @@ import bomb.modules.t.translated.LanguageCSVReader;
 import bomb.tools.filter.Regex;
 import bomb.tools.filter.RegexFilter;
 import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
+import com.opencsv.exceptions.CsvException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("ConstantConditions")
-public class MorseCode {
+public final class MorseCode {
     private static final String FILENAME = "morseCode.csv";
     private static final Map<String, String> MORSE_CIPHER_MAP;
     private static final Map<String, Double> FREQUENCY_MAP;
 
     static {
-        MORSE_CIPHER_MAP = new HashMap<>();
-        FREQUENCY_MAP = new HashMap<>();
         try {
-            loadMorseCode();
-        } catch (CsvValidationException | IOException e) {
+            MORSE_CIPHER_MAP = loadMorseCode();
+        } catch (CsvException | IOException e) {
             throw new IllegalStateException(e);
         }
+        FREQUENCY_MAP = new HashMap<>();
     }
 
-    private static void loadMorseCode() throws CsvValidationException, IOException {
-        InputStream in = LanguageCSVReader.class.getResourceAsStream(FILENAME);
-        CSVReader csvReader = new CSVReader(new InputStreamReader(in, StandardCharsets.UTF_8));
-        String[] dataRow;
-        while ((dataRow = csvReader.readNext()) != null) {
-            MORSE_CIPHER_MAP.put(dataRow[0], dataRow[1]);
+    private static Map<String, String> loadMorseCode() throws CsvException, IOException {
+        try(var inputStream = LanguageCSVReader.class.getResourceAsStream(FILENAME);
+            var csvReader = new CSVReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            return csvReader.readAll()
+                    .stream()
+                    .collect(Collectors.toUnmodifiableMap(
+                            row -> row[0],
+                            row -> row[1]
+                    ));
         }
-        csvReader.close();
     }
 
     public static void setFrequencyMap(String frequencies) {
@@ -61,10 +62,10 @@ public class MorseCode {
         if (FREQUENCY_MAP.isEmpty())
             throw new IllegalStateException("Internal frequency map is empty");
 
-        StringBuilder sb = new StringBuilder();
+        var stringBuilder = new StringBuilder();
         for (String morseCodePhrase : text.split(" ")) {
             String letterSet = MORSE_CIPHER_MAP.get(morseCodePhrase);
-            calculateNextCorrectLetter(sb, letterSet);
+            calculateNextCorrectLetter(stringBuilder, letterSet);
         }
 
         return null;

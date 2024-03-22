@@ -98,9 +98,9 @@ public final class ForgetMeNot extends Widget {
     }
 
     private static int smallestOddDigitInSerialCode() {
-        Regex singleNumberRegex = new Regex("\\d", serialCode);
-        return singleNumberRegex.stream()
-                .mapToInt(Integer::parseInt)
+        return serialCode.chars()
+                .filter(Character::isDigit)
+                .map(Character::getNumericValue)
                 .filter(num -> num % 2 == 1)
                 .min()
                 .orElse(9);

@@ -52,7 +52,6 @@
 }
 
 .mfx-label {
-    -fx-font-size: 22;
     -fx-text-fill: white;
     -mfx-line-stroke-width: 0;
     -mfx-text-fill: white;
@@ -69,4 +68,31 @@
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
     -mfx-line-stroke-width: 0;
+}
+
+#solution-box {
+    -fx-border-color: rgba(32, 11, 76, 0.58);
+    -fx-border-width: 3;
+    -fx-border-radius: 15;
+}
+
+#password-text-area {
+        -jfx-focus-color: transparent;
+        -jfx-unfocus-color: transparent;
+        -fx-background-color: black;
+        -fx-border-color: rgb(0, 70, 164);
+        -fx-border-width: 5;
+        -fx-border-radius: 2;
+        -fx-font-size: 20;
+        -fx-padding: 0 0 0 2;
+        -fx-prompt-text-fill: white;
+}
+
+#password-text-area .content {
+    -fx-background-color: #001942;
+}
+
+#image-hover {
+    -jfx-selected-color: white;
+    -jfx-unselected-color: #0065de;
 }

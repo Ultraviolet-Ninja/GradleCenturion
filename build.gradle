@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.23.1'
+version '0.24.0'
 
 sourceCompatibility = 21
 targetCompatibility = 21
@@ -157,7 +157,7 @@ jlink {
     addExtraDependencies("javafx")
 
     def opSys = org.gradle.internal.os.OperatingSystem.current()
-    String iconBaseFilename = "${buildDirectory}/resources/main/bomb/KTANE logo"
+    String iconBaseFilename = "${buildDirectory}/resources/main/bomb/KTANE-logo"
 
     if (opSys.windows) {
         launcher {

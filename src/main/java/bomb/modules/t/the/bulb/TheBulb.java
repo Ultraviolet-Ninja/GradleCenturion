@@ -5,13 +5,11 @@ import bomb.annotation.DisplayComponent;
 import bomb.enumerations.Indicator;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.tools.filter.Regex;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.function.Predicate;
 
 import static bomb.enumerations.Indicator.CAR;
 import static bomb.enumerations.Indicator.CLR;
@@ -36,10 +34,14 @@ public final class TheBulb extends Widget {
     private static boolean isLightOffAtStepOne;
     private static Indicator rememberedIndicator = null;
 
-    public static @NotNull List<String> solve(@NotNull BulbModel bulbModel) {
+    public static @NotNull List<String> solve(@NotNull BulbModel bulbModel,
+                                              @NotNull Predicate<List<String>> checkIfLightIsOff,
+                                              @NotNull Predicate<List<String>> confirmLightIsOn) {
         validateBulb(bulbModel);
+        requireNonNullPredicate(checkIfLightIsOff);
+        requireNonNullPredicate(confirmLightIsOn);
         List<String> outputList = new ArrayList<>();
-        stepOne(bulbModel, outputList);
+        stepOne(bulbModel, outputList, checkIfLightIsOff, confirmLightIsOn);
 
         if (isSouvenirActive)
             sendInfoToSouvenir(outputList);
@@ -48,10 +50,12 @@ public final class TheBulb extends Widget {
         return outputList;
     }
 
-    private static void stepOne(BulbModel bulbModel, List<String> outputList) {
+    private static void stepOne(BulbModel bulbModel, List<String> outputList,
+                                Predicate<List<String>> checkIfLightTurnsOff,
+                                Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getLight() == BulbModel.Light.OFF) {
             unscrewBulb(bulbModel, outputList);
-            stepFour(bulbModel, outputList);
+            stepFour(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
@@ -59,19 +63,21 @@ public final class TheBulb extends Widget {
             outputList.add(PRESS_I);
 
             if (bulbModel.getColor() == BulbModel.Color.WHITE)
-                checkIfLightTurnsOff(bulbModel, outputList);
+                checkIfLightTurnsOff(bulbModel, outputList, checkIfLightTurnsOff);
 
-            stepTwo(bulbModel, outputList);
+            stepTwo(bulbModel, outputList, checkIfLightTurnsOff, confirmLightIsOn);
             return;
         }
 
         outputList.add(PRESS_O);
-        stepThree(bulbModel, outputList);
+        stepThree(bulbModel, outputList, checkIfLightTurnsOff, confirmLightIsOn);
     }
 
-    private static void stepTwo(BulbModel bulbModel, List<String> outputList) {
+    private static void stepTwo(BulbModel bulbModel, List<String> outputList,
+                                Predicate<List<String>> checkIfLightTurnsOff,
+                                Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getColor() == BulbModel.Color.RED) {
-            checkIfLightTurnsOff(bulbModel, outputList);
+            checkIfLightTurnsOff(bulbModel, outputList, checkIfLightTurnsOff);
             outputList.add(PRESS_I);
             unscrewBulb(bulbModel, outputList);
             stepFive(bulbModel, outputList);
@@ -86,20 +92,22 @@ public final class TheBulb extends Widget {
         }
 
         unscrewBulb(bulbModel, outputList);
-        stepSeven(bulbModel, outputList);
+        stepSeven(bulbModel, outputList, confirmLightIsOn);
     }
 
-    private static void stepThree(BulbModel bulbModel, List<String> outputList) {
+    private static void stepThree(BulbModel bulbModel, List<String> outputList,
+                                  Predicate<List<String>> checkIfLightTurnsOff,
+                                  Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             outputList.add(PRESS_I);
-            checkIfLightTurnsOff(bulbModel, outputList);
+            checkIfLightTurnsOff(bulbModel, outputList, checkIfLightTurnsOff);
             unscrewBulb(bulbModel, outputList);
             stepSix(bulbModel, outputList);
             return;
         }
 
         if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
-            checkIfLightTurnsOff(bulbModel, outputList);
+            checkIfLightTurnsOff(bulbModel, outputList, checkIfLightTurnsOff);
             outputList.add(PRESS_O);
             unscrewBulb(bulbModel, outputList);
             stepFive(bulbModel, outputList);
@@ -107,18 +115,19 @@ public final class TheBulb extends Widget {
         }
 
         unscrewBulb(bulbModel, outputList);
-        stepEight(bulbModel, outputList);
+        stepEight(bulbModel, outputList, confirmLightIsOn);
     }
 
-    private static void stepFour(BulbModel bulbModel, List<String> outputList) {
+    private static void stepFour(BulbModel bulbModel, List<String> outputList,
+                                 Predicate<List<String>> confirmLightIsOn) {
         if (hasFollowingIndicators(CAR, IND, MSA, SND)) {
             outputList.add(PRESS_I);
-            stepNine(bulbModel, outputList);
+            stepNine(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
         outputList.add(PRESS_O);
-        stepTen(bulbModel, outputList);
+        stepTen(bulbModel, outputList, confirmLightIsOn);
     }
 
     private static void stepFive(BulbModel bulbModel, List<String> outputList) {
@@ -135,14 +144,15 @@ public final class TheBulb extends Widget {
     }
 
     private static void stepSix(BulbModel bulbModel, List<String> outputList) {
-        String firstButtonPress = outputList.get(0);
-        String lastButtonPress = outputList.get(outputList.size() - 2);
+        var firstButtonPress = outputList.getFirst();
+        var lastButtonPress = outputList.get(outputList.size() - 2);
 
         outputList.add(isLightOffAtStepOne ? firstButtonPress : lastButtonPress);
         screwBulb(bulbModel, outputList);
     }
 
-    private static void stepSeven(BulbModel bulbModel, List<String> outputList) {
+    private static void stepSeven(BulbModel bulbModel, List<String> outputList,
+                                  Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             rememberedIndicator = SIG;
             outputList.add(PRESS_I);
@@ -153,7 +163,7 @@ public final class TheBulb extends Widget {
         if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
             outputList.add(PRESS_I);
             screwBulb(bulbModel, outputList);
-            stepTwelve(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
@@ -166,10 +176,11 @@ public final class TheBulb extends Widget {
 
         outputList.add(PRESS_O);
         screwBulb(bulbModel, outputList);
-        stepThirteen(bulbModel, outputList);
+        stepThirteen(bulbModel, outputList, confirmLightIsOn);
     }
 
-    private static void stepEight(BulbModel bulbModel, List<String> outputList) {
+    private static void stepEight(BulbModel bulbModel, List<String> outputList,
+                                  Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getColor() == BulbModel.Color.WHITE) {
             rememberedIndicator = FRQ;
             outputList.add(PRESS_I);
@@ -180,7 +191,7 @@ public final class TheBulb extends Widget {
         if (bulbModel.getColor() == BulbModel.Color.RED) {
             outputList.add(PRESS_I);
             screwBulb(bulbModel, outputList);
-            stepThirteen(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
@@ -193,10 +204,11 @@ public final class TheBulb extends Widget {
 
         outputList.add(PRESS_O);
         screwBulb(bulbModel, outputList);
-        stepTwelve(bulbModel, outputList);
+        stepTwelve(bulbModel, outputList, confirmLightIsOn);
     }
 
-    private static void stepNine(BulbModel bulbModel, List<String> outputList) {
+    private static void stepNine(BulbModel bulbModel, List<String> outputList,
+                                 Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getColor() == BulbModel.Color.BLUE) {
             outputList.add(PRESS_I);
             stepFourteen(bulbModel, outputList);
@@ -206,7 +218,7 @@ public final class TheBulb extends Widget {
         if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             outputList.add(PRESS_I);
             screwBulb(bulbModel, outputList);
-            stepTwelve(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
@@ -219,23 +231,24 @@ public final class TheBulb extends Widget {
         if (bulbModel.getColor() == BulbModel.Color.WHITE) {
             outputList.add(PRESS_O);
             screwBulb(bulbModel, outputList);
-            stepThirteen(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
         if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
             screwBulb(bulbModel, outputList);
             outputList.add(PRESS_I);
-            stepTwelve(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
         screwBulb(bulbModel, outputList);
         outputList.add(PRESS_O);
-        stepThirteen(bulbModel, outputList);
+        stepThirteen(bulbModel, outputList, confirmLightIsOn);
     }
 
-    private static void stepTen(BulbModel bulbModel, List<String> outputList) {
+    private static void stepTen(BulbModel bulbModel, List<String> outputList,
+                                Predicate<List<String>> confirmLightIsOn) {
         if (bulbModel.getColor() == BulbModel.Color.PURPLE) {
             outputList.add(PRESS_I);
             stepFourteen(bulbModel, outputList);
@@ -245,7 +258,7 @@ public final class TheBulb extends Widget {
         if (bulbModel.getColor() == BulbModel.Color.RED) {
             outputList.add(PRESS_I);
             screwBulb(bulbModel, outputList);
-            stepThirteen(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
@@ -258,20 +271,20 @@ public final class TheBulb extends Widget {
         if (bulbModel.getColor() == BulbModel.Color.YELLOW) {
             outputList.add(PRESS_O);
             screwBulb(bulbModel, outputList);
-            stepTwelve(bulbModel, outputList);
+            stepTwelve(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
         if (bulbModel.getColor() == BulbModel.Color.GREEN) {
             screwBulb(bulbModel, outputList);
             outputList.add(PRESS_I);
-            stepThirteen(bulbModel, outputList);
+            stepThirteen(bulbModel, outputList, confirmLightIsOn);
             return;
         }
 
         screwBulb(bulbModel, outputList);
         outputList.add(PRESS_O);
-        stepTwelve(bulbModel, outputList);
+        stepTwelve(bulbModel, outputList, confirmLightIsOn);
     }
 
     private static void stepEleven(BulbModel bulbModel, List<String> outputList) {
@@ -280,13 +293,15 @@ public final class TheBulb extends Widget {
         screwBulb(bulbModel, outputList);
     }
 
-    private static void stepTwelve(BulbModel bulbModel, List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn(bulbModel, outputList);
+    private static void stepTwelve(BulbModel bulbModel, List<String> outputList,
+                                   Predicate<List<String>> confirmLightIsOn) {
+        boolean isLightOn = confirmFinalLightIsOn(bulbModel, outputList, confirmLightIsOn);
         outputList.add(isLightOn ? PRESS_I : PRESS_O);
     }
 
-    private static void stepThirteen(BulbModel bulbModel, List<String> outputList) {
-        boolean isLightOn = confirmLightIsOn(bulbModel, outputList);
+    private static void stepThirteen(BulbModel bulbModel, List<String> outputList,
+                                     Predicate<List<String>> confirmLightIsOn) {
+        boolean isLightOn = confirmFinalLightIsOn(bulbModel, outputList, confirmLightIsOn);
         outputList.add(isLightOn ? PRESS_O : PRESS_I);
     }
 
@@ -307,47 +322,16 @@ public final class TheBulb extends Widget {
         Souvenir.addRelic("The Bulb button presses", outputText);
     }
 
-    private static void checkIfLightTurnsOff(BulbModel bulbModel, List<String> outputList) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Light Confirmation");
-        alert.setContentText("Did the Bulb turn off when you pressed I?");
-        String currentInstructions = outputList.toString()
-                .replaceAll("[\\[\\]]", "")
-                .replace(", ", " -> ");
-        alert.setHeaderText(currentInstructions);
-
-        ButtonType no = new ButtonType("No"),
-                yes = new ButtonType("Yes");
-
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(yes, no);
-        Optional<ButtonType> options = alert.showAndWait();
-
-        options.ifPresent(buttonType -> isLightOffAtStepOne = buttonType == yes);
+    private static void checkIfLightTurnsOff(BulbModel bulbModel, List<String> outputList,
+                                             Predicate<List<String>> checkIfLightTurnsOff) {
+        isLightOffAtStepOne = checkIfLightTurnsOff.test(outputList);
 
         bulbModel.setLight(isLightOffAtStepOne ? BulbModel.Light.OFF : BulbModel.Light.ON);
     }
 
-    private static boolean confirmLightIsOn(BulbModel bulbModel, List<String> outputList) throws IllegalStateException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Light Confirmation");
-        alert.setContentText("Is the bulb now on or off?");
-        String currentInstructions = outputList.toString()
-                .replaceAll("[\\[\\]]", "")
-                .replace(", ", " -> ");
-        alert.setHeaderText(currentInstructions);
-
-        ButtonType on = new ButtonType("On"),
-                off = new ButtonType("Off");
-
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(on, off);
-        Optional<ButtonType> options = alert.showAndWait();
-
-        if (options.isEmpty())
-            throw new IllegalStateException("Unexpected state");
-
-        boolean isLightOn = options.get() == on;
+    private static boolean confirmFinalLightIsOn(BulbModel bulbModel, List<String> outputList,
+                                                 Predicate<List<String>> confirmLightIsOn) throws IllegalStateException {
+        boolean isLightOn = confirmLightIsOn.test(outputList);
         bulbModel.setLight(isLightOn ? BulbModel.Light.ON : BulbModel.Light.OFF);
         return isLightOn;
     }
@@ -371,5 +355,11 @@ public final class TheBulb extends Widget {
             throw new IllegalArgumentException("Bulb must have a color");
         if (bulbModel.getOpacity() == null)
             throw new IllegalArgumentException("Bulb must be Opaque or Translucent");
+    }
+
+    private static void requireNonNullPredicate(Predicate<List<String>> predicate) {
+        if (predicate == null) {
+           throw new IllegalArgumentException("Cannot have null function");
+        }
     }
 }

@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 /**
  * OnFirst class refers to the Who's on First module.
  */
+@Deprecated
 public final class OnFirst extends TranslationCenter {
 
     /**

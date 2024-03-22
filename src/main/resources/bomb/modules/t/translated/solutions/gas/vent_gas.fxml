@@ -4,13 +4,24 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0" type="Pane" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
-    <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="200.0">
-        <MFXLabel fx:id="yesLabel" />
+<?import javafx.scene.text.Font?>
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="300.0"
+         type="Pane" xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1">
+    <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+          prefHeight="150.0" prefWidth="300.0">
+        <MFXLabel fx:id="yesLabel">
+         <font>
+            <Font size="20.0" />
+         </font>
+        </MFXLabel>
         <MFXLabel fx:id="noLabel">
             <VBox.margin>
                 <Insets top="23.0" />
             </VBox.margin>
+            <font>
+                <Font size="20.0" />
+            </font>
         </MFXLabel>
     </VBox>
 </fx:root>

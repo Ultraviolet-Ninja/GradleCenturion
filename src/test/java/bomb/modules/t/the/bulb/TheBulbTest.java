@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static bomb.ConditionSetter.EMPTY_SETTER;
 import static bomb.enumerations.Indicator.BOB;
@@ -37,6 +38,8 @@ import static bomb.modules.t.the.bulb.TheBulb.UNSCREW;
 import static org.testng.Assert.assertEquals;
 
 public class TheBulbTest {
+    private static final Predicate<List<String>> SET_FALSE = list -> false;
+    private static final Predicate<List<String>> SET_TRUE = list -> true;
     @BeforeMethod
     public void setUp() {
         Widget.resetProperties();
@@ -45,21 +48,27 @@ public class TheBulbTest {
     @DataProvider
     public Object[][] exceptionTestProvider() {
         return new Object[][] {
-                {UNSCREWED, null, null, null}, {SCREWED, null, null, null},
-                {SCREWED, ON, null, null}, {SCREWED, ON, PURPLE, null}
+                {UNSCREWED, null, null, null, SET_FALSE, SET_FALSE},
+                {SCREWED, null, null, null, SET_FALSE, SET_FALSE},
+                {SCREWED, ON, null, null, SET_FALSE, SET_FALSE},
+                {SCREWED, ON, PURPLE, null, SET_FALSE, SET_FALSE},
+                {SCREWED, ON, PURPLE, OPAQUE, null, SET_FALSE},
+                {SCREWED, ON, PURPLE, OPAQUE, SET_FALSE, null}
         };
     }
 
     @Test(dataProvider = "exceptionTestProvider", expectedExceptions = IllegalArgumentException.class)
     public void exceptionTest(BulbModel.Position position, BulbModel.Light inputLight,
-                              BulbModel.Color inputColor, BulbModel.Opacity inputOpacity) {
+                              BulbModel.Color inputColor, BulbModel.Opacity inputOpacity,
+                              Predicate<List<String>> checkIfLightTurnsOff,
+                              Predicate<List<String>> confirmLightIsOn) {
         BulbModel testBulbModel = new BulbModel();
         testBulbModel.setPosition(position);
         testBulbModel.setOpacity(inputOpacity);
         testBulbModel.setLight(inputLight);
         testBulbModel.setColor(inputColor);
 
-        TheBulb.solve(testBulbModel);
+        TheBulb.solve(testBulbModel, checkIfLightTurnsOff, confirmLightIsOn);
     }
 
     @DataProvider
@@ -80,16 +89,26 @@ public class TheBulbTest {
         };
 
         return new Object[][]{
-                {trainingVideoConditions, ON, GREEN, TRANSLUCENT, new String[]{PRESS_I, UNSCREW, PRESS_I, PRESS_O, SCREW}},
-                {secondTrainingVideoConditions, OFF, BLUE, OPAQUE, new String[]{UNSCREW, PRESS_O, PRESS_O, PRESS_O, SCREW}},
-                {thirdTrainingVideoConditions, ON, BLUE, TRANSLUCENT, new String[]{PRESS_I, UNSCREW, PRESS_O, PRESS_O, SCREW}}
+                {
+                    trainingVideoConditions, ON, GREEN, TRANSLUCENT,
+                        new String[]{PRESS_I, UNSCREW, PRESS_I, PRESS_O, SCREW}, SET_FALSE, SET_FALSE
+                },
+                {
+                    secondTrainingVideoConditions, OFF, BLUE, OPAQUE,
+                        new String[]{UNSCREW, PRESS_O, PRESS_O, PRESS_O, SCREW}, SET_FALSE, SET_FALSE
+                },
+                {
+                    thirdTrainingVideoConditions, ON, BLUE, TRANSLUCENT,
+                        new String[]{PRESS_I, UNSCREW, PRESS_O, PRESS_O, SCREW}, SET_FALSE, SET_FALSE
+                }
         };
     }
 
     @Test(dataProvider = "trainingVideoTestProvider")
     public void trainingVideoTest(ConditionSetter bombConditions, BulbModel.Light inputLight,
                                   BulbModel.Color inputColor, BulbModel.Opacity inputOpacity,
-                                  String[] expectedResults) {
+                                  String[] expectedResults, Predicate<List<String>> checkIfLightTurnsOff,
+                                  Predicate<List<String>> confirmLightIsOn) {
         bombConditions.setCondition();
 
         BulbModel testBulbModel = new BulbModel();
@@ -100,7 +119,7 @@ public class TheBulbTest {
 
         List<String> convertedResults = Arrays.asList(expectedResults);
 
-        assertEquals(TheBulb.solve(testBulbModel), convertedResults);
+        assertEquals(TheBulb.solve(testBulbModel, checkIfLightTurnsOff, confirmLightIsOn), convertedResults);
     }
 
     @DataProvider
@@ -111,23 +130,23 @@ public class TheBulbTest {
         return new Object[][]{
                 {
                     testConditions, ON, YELLOW, OPAQUE,
-                        new String[]{PRESS_O, UNSCREW, PRESS_O, PRESS_I, SCREW}
+                        new String[]{PRESS_O, UNSCREW, PRESS_O, PRESS_I, SCREW}, SET_FALSE, SET_FALSE
                 },
                 {
                     testConditions, ON, WHITE, OPAQUE,
-                        new String[]{PRESS_O, UNSCREW, PRESS_I, PRESS_O, SCREW}
+                        new String[]{PRESS_O, UNSCREW, PRESS_I, PRESS_O, SCREW}, SET_FALSE, SET_FALSE
                 },
                 {
                     secondTestConditions, OFF, YELLOW, TRANSLUCENT,
-                        new String[]{UNSCREW, PRESS_I, PRESS_O, PRESS_I, SCREW}
+                        new String[]{UNSCREW, PRESS_I, PRESS_O, PRESS_I, SCREW}, SET_FALSE, SET_FALSE
                 },
                 {
                     secondTestConditions, OFF, BLUE, OPAQUE,
-                        new String[]{UNSCREW, PRESS_I, PRESS_I, PRESS_I, SCREW}
+                        new String[]{UNSCREW, PRESS_I, PRESS_I, PRESS_I, SCREW}, SET_FALSE, SET_FALSE
                 },
                 {
                     EMPTY_SETTER, OFF, PURPLE, TRANSLUCENT,
-                        new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}
+                        new String[]{UNSCREW, PRESS_O, PRESS_I, PRESS_O, SCREW}, SET_FALSE, SET_FALSE
                 }
         };
     }
@@ -135,7 +154,8 @@ public class TheBulbTest {
     @Test(dataProvider = "writtenTestProvider")
     public void writtenTest(ConditionSetter bombConditions, BulbModel.Light inputLight,
                             BulbModel.Color inputColor, BulbModel.Opacity inputOpacity,
-                            String[] expectedResults) {
+                            String[] expectedResults, Predicate<List<String>> checkIfLightTurnsOff,
+                            Predicate<List<String>> confirmLightIsOn) {
         bombConditions.setCondition();
 
         BulbModel testBulbModel = new BulbModel();
@@ -146,7 +166,7 @@ public class TheBulbTest {
 
         List<String> convertedResults = Arrays.asList(expectedResults);
 
-        assertEquals(TheBulb.solve(testBulbModel), convertedResults);
+        assertEquals(TheBulb.solve(testBulbModel, checkIfLightTurnsOff, confirmLightIsOn), convertedResults);
     }
 
     @AfterClass

@@ -1,10 +1,12 @@
 package bomb.modules.ab.battleship;
 
+import bomb.tools.Coordinates;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.IntFunction;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;
@@ -69,15 +71,15 @@ public final class Ocean {
         return result;
     }
 
-    public int[] findNextUnknownTile() {
+    public Optional<Coordinates> findNextUnknownTile() {
         for (int i = 0; i < BOARD_LENGTH; i++) {
             for (int j = 0; j < BOARD_LENGTH; j++) {
                 if (gameBoard[i][j] == UNKNOWN) {
-                    return new int[]{i, j};
+                    return Optional.of(new Coordinates(i, j));
                 }
             }
         }
-        return null;
+        return Optional.empty();
     }
 
     public int[] countShipSpacesByColumn() {
@@ -188,10 +190,10 @@ public final class Ocean {
     }
 
     public Ocean copy() {
-        Tile[][] clonedBoard = new Tile[BOARD_LENGTH][BOARD_LENGTH];
+        var clonedBoard = new Tile[BOARD_LENGTH][BOARD_LENGTH];
 
         int rowCounter = 0;
-        for (Tile[] row : gameBoard) {
+        for (var row : gameBoard) {
             System.arraycopy(row, 0, clonedBoard[rowCounter++], 0, BOARD_LENGTH);
         }
 
