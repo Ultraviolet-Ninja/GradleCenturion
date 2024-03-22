@@ -2,6 +2,7 @@ package bomb.modules.ab.battleship.solve;
 
 import bomb.modules.ab.battleship.Ocean;
 import bomb.modules.ab.battleship.Tile;
+import bomb.tools.Coordinates;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -20,24 +21,27 @@ import static bomb.modules.ab.battleship.Tile.SHIP;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 
 public final class BoardSolver {
-    @SuppressWarnings("DataFlowIssue")
     public static Set<Ocean> solve(Ocean ocean, int[] rowCounters, int[] columnCounters) {
         refineSearchSpace(ocean, rowCounters, columnCounters);
 
-        int[] nextSpot = ocean.findNextUnknownTile();
-        if (nextSpot == null) {
+        var nextSpotOptional = ocean.findNextUnknownTile();
+        if (nextSpotOptional.isEmpty()) {
             return Collections.singleton(ocean);
         }
 
-        Deque<Ocean> oceanGuesses = new ArrayDeque<>(generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters));
+        Deque<Ocean> oceanGuesses = new ArrayDeque<>();
         List<Ocean> permutationList = new ArrayList<>();
 
-        while (!oceanGuesses.isEmpty()) {
-            Ocean guess = oceanGuesses.poll();
-            if (guess.hasUnknownTile()) {
-                nextSpot = guess.findNextUnknownTile();
+        nextSpotOptional.map(nextSpot -> generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters))
+                .ifPresent(oceanGuesses::addAll);
 
-                oceanGuesses.addAll(generateNewGuesses(nextSpot, guess, rowCounters, columnCounters));
+        while (!oceanGuesses.isEmpty()) {
+            var guess = oceanGuesses.poll();
+            if (guess.hasUnknownTile()) {
+                nextSpotOptional = guess.findNextUnknownTile();
+
+                nextSpotOptional.map(nextSpot -> generateNewGuesses(nextSpot, guess, rowCounters, columnCounters))
+                        .ifPresent(oceanGuesses::addAll);
             } else {
                 permutationList.add(guess);
             }
@@ -48,12 +52,12 @@ public final class BoardSolver {
                 .collect(Collectors.toSet());
     }
 
-    private static List<Ocean> generateNewGuesses(int[] coordinates, Ocean ocean, int[] rowCounters, int[] columnCounters) {
+    private static List<Ocean> generateNewGuesses(Coordinates coordinates, Ocean ocean, int[] rowCounters, int[] columnCounters) {
         Ocean waterCopy = ocean.copy();
         Ocean shipCopy = ocean.copy();
 
-        waterCopy.setTileState(coordinates[0], coordinates[1], CLEAR);
-        shipCopy.setTileState(coordinates[0], coordinates[1], SHIP);
+        waterCopy.setTileState(coordinates.x(), coordinates.y(), CLEAR);
+        shipCopy.setTileState(coordinates.x(), coordinates.y(), SHIP);
 
         return Stream.of(waterCopy, shipCopy)
                 .filter(permutation -> !isInvalidBoardConfig(permutation, rowCounters, columnCounters))
