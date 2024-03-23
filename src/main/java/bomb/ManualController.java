@@ -5,6 +5,7 @@ import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
 import bomb.tools.pattern.observer.ResetObserver;
 import bomb.tools.pattern.observer.SouvenirToggleObserver;
+import bomb.tools.pattern.observer.TurnTheKeysStrictModeObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,6 +36,7 @@ import static bomb.tools.pattern.factory.TextFormatterFactory.createSearchBarFor
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.FORGET_ME_NOT_TOGGLE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.RESET;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_TOGGLE;
+import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.STRICT_MODE;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.toMap;
@@ -87,6 +89,8 @@ public final class ManualController {
         );
         ObserverHub.addObserver(FORGET_ME_NOT_TOGGLE, new ForgetMeNotToggleObserver(forgetMeNot));
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
+        ObserverHub.addObserver(STRICT_MODE, new TurnTheKeysStrictModeObserver(
+                searchBar, radioButtonHouse.getChildren(), allRadioButtons));
 
         long start = System.nanoTime();
         regionMap = setupRegionMap().get();
@@ -138,7 +142,7 @@ public final class ManualController {
 
     @FXML
     private void switchPaneByButtonPress() {
-        Toggle selected = options.getSelectedToggle();
+        var selected = options.getSelectedToggle();
         ObserverHub.scanButtonName(GET_TOGGLE_NAME.apply(selected));
         paneSwitch(regionMap.get(selected));
     }
@@ -150,14 +154,14 @@ public final class ManualController {
 
     @FXML
     private void search() {
-        String searchTerm = searchBar.getText().toLowerCase();
+        var searchTerm = searchBar.getText().trim().toLowerCase();
         radioButtonHouse.getChildren().clear();
         if (searchTerm.isEmpty()) {
             radioButtonHouse.getChildren().addAll(allRadioButtons);
             return;
         }
 
-        String pattern = "[a-z3 ]*" + searchTerm + "[a-z3 ]*";
+        var pattern = "[a-z3 ]*" + searchTerm + "[a-z3 ]*";
         radioButtonHouse.getChildren().addAll(
                 allRadioButtons.stream()
                         .filter(radioButton -> GET_TOGGLE_NAME.apply(radioButton)
@@ -175,10 +179,10 @@ public final class ManualController {
         int size = allRadioButtons.size();
         if (size != observableRadioList.size()) return;
 
-        RadioButton selected = (RadioButton) options.getSelectedToggle();
-        if (selected == null) return;
+        var selectedButton = (RadioButton) options.getSelectedToggle();
+        if (selectedButton == null) return;
 
-        int index = negativeSafeModulo(allRadioButtons.indexOf(selected) - 1, size);
+        int index = negativeSafeModulo(allRadioButtons.indexOf(selectedButton) - 1, size);
         switchPaneByIndex(index);
     }
 
@@ -186,10 +190,10 @@ public final class ManualController {
         int size = allRadioButtons.size();
         if (size != observableRadioList.size()) return;
 
-        RadioButton selected = (RadioButton) options.getSelectedToggle();
-        if (selected == null) return;
+        var selectedButton = (RadioButton) options.getSelectedToggle();
+        if (selectedButton == null) return;
 
-        int index = allRadioButtons.indexOf(selected) + 1;
+        int index = allRadioButtons.indexOf(selectedButton) + 1;
         index %= size;
         switchPaneByIndex(index);
     }
