@@ -15,7 +15,7 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PAN
 
 public final class ObserverHub {
     public enum ObserverIndex {
-        FORGET_ME_NOT_TOGGLE, SOUVENIR_TOGGLE, BLIND_ALLEY_PANE, SOUVENIR_PANE, RESET
+        FORGET_ME_NOT_TOGGLE, SOUVENIR_TOGGLE, BLIND_ALLEY_PANE, SOUVENIR_PANE, RESET, STRICT_MODE
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(ObserverHub.class);
