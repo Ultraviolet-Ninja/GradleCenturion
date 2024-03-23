@@ -12,7 +12,7 @@ This is a **huge** project for one man to tackle, but I've [learned a lot](Learn
 
 ## Technologies
 - Java 21
-- Gradle 8.4
+- Gradle 8.6
 ### Plugins
 - JavaFX
 - Breadmoirai GitHub Release
