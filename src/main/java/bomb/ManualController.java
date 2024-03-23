@@ -154,7 +154,7 @@ public final class ManualController {
 
     @FXML
     private void search() {
-        var searchTerm = searchBar.getText().toLowerCase();
+        var searchTerm = searchBar.getText().trim().toLowerCase();
         radioButtonHouse.getChildren().clear();
         if (searchTerm.isEmpty()) {
             radioButtonHouse.getChildren().addAll(allRadioButtons);

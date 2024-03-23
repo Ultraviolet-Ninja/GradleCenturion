@@ -39,7 +39,20 @@ public final class TurnTheKeysStrictModeObserver implements Observer {
                     POST_KEY_MODULE_NAMES.contains(GET_TOGGLE_NAME.apply((RadioButton) node)));
         } else {
             radioButtonList.clear();
-            radioButtonList.addAll(allRadioButtons);
+            var searchTerm = searchBar.getText().trim().toLowerCase();
+            if (searchTerm.isBlank()) {
+                radioButtonList.addAll(allRadioButtons);
+                return;
+            }
+
+            var pattern = "[a-z3 ]*" + searchTerm + "[a-z3 ]*";
+            radioButtonList.addAll(
+                    allRadioButtons.stream()
+                            .filter(radioButton -> GET_TOGGLE_NAME.apply(radioButton)
+                                    .toLowerCase()
+                                    .matches(pattern)
+                            ).toList()
+            );
         }
 
         strictModeToggle = !strictModeToggle;
