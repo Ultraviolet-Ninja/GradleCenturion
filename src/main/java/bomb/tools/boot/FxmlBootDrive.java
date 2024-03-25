@@ -31,7 +31,7 @@ import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PAN
 import static java.util.Arrays.asList;
 
 /**
- * FxmlBootDrive uses the Adapter Pattern to perform the part of the boot sequence with the highest bottleneck in performance.
+ * FxmlBootDrive uses the Strategy Pattern to perform the part of the boot sequence with the highest bottleneck in performance.
  * The purpose for this set of classes is to have a way to quickly switch between methodologies for booting the program
  * under different operating systems scenarios. As the number of FXML files for the project increases,
  * maintaining a short boot time for this program will more become critical.
@@ -45,22 +45,33 @@ import static java.util.Arrays.asList;
  * it's not reliable. I.e. some runs will boot with no problem, and other runs will abruptly pause while loading FXML files.
  * Reason is unknown, but more testing is required on other machines.
  */
-public sealed interface FxmlBootDrive permits StandardFxmlBootDrive, VirtualThreadFxmlBootDrive {
+public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive, VirtualThreadFxmlBootDrive {
     String WIDGET_FILE = extractAssociatedFile(Widget.class);
     String SOUVENIR_FILE = extractAssociatedFile(Souvenir.class);
     String BLIND_ALLEY_FILE = extractAssociatedFile(BlindAlley.class);
 
     Logger LOG = LoggerFactory.getLogger(FxmlBootDrive.class);
+
     SequencedMap<String, Region> createFXMLMap(ResetObserver resetObserver);
 
     @Contract(" -> new")
-    static @NotNull FxmlBootDrive createStandardDrive() {
-        return new StandardFxmlBootDrive();
+    static @NotNull FxmlBootDrive createParallelStreamDrive() {
+        return new ParallelStreamBootDrive();
     }
 
     @Contract(" -> new")
     static @NotNull FxmlBootDrive createVirtualDrive() {
         return new VirtualThreadFxmlBootDrive();
+    }
+
+    @Contract(" -> new")
+    static @NotNull FxmlBootDrive createSequentialStreamDrive() {
+        return new SequentialStreamBootDrive();
+    }
+
+    @Contract(value = " -> new", pure = true)
+    static @NotNull FxmlBootDrive createForkJoinDrive() {
+        return new ForkJoinBootDrive();
     }
 
     static @NotNull List<Class<?>> getAnnotatedClasses() {

@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static bomb.tools.pattern.factory.TextFormatterFactory.createOneLetterFormatter;
-import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public final class AlphabetController implements Resettable {
     private final Map<MFXTextField, MFXTextField> stateMap;
@@ -68,7 +67,7 @@ public final class AlphabetController implements Resettable {
             thirdOutput.setText(String.valueOf(results.charAt(2)));
             forthOutput.setText(String.valueOf(results.charAt(3)));
         } catch (IllegalArgumentException arg) {
-            FacadeFX.setAlert(ERROR, arg.getMessage());
+            FacadeFX.setAlert(arg.getMessage());
         }
     }
 

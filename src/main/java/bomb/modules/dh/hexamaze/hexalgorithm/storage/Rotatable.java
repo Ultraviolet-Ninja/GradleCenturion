@@ -1,5 +1,5 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
-public interface Rotatable {
+public sealed interface Rotatable permits Grid, HexNode, HexagonalPlane {
     void rotate();
 }

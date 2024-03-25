@@ -134,7 +134,7 @@ public final class ForgetMeNot extends Widget {
         for (int i = 0; i < FINAL_CODE.size(); i++) {
             sb.append(FINAL_CODE.get(i));
             if (i % 3 == 2)
-                sb.append("-");
+                sb.append('-');
         }
         return sb.toString();
     }

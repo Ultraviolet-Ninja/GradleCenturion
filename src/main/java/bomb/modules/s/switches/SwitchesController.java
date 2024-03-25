@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.controls.MFXToggleButton;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
 import java.util.List;
 import java.util.function.IntUnaryOperator;
@@ -44,7 +43,7 @@ public final class SwitchesController implements Resettable {
             List<String> outputList = Switches.produceMoveList(startingState, desiredState);
             sendToOutputField(outputList);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
             reset();
         }
     }

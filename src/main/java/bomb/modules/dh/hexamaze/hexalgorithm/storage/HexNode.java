@@ -1,60 +1,91 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
+import bomb.abstractions.Resettable;
 import bomb.abstractions.State;
+import javafx.scene.paint.Color;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumSet;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 
 import static bomb.tools.number.MathUtils.HASHING_NUMBER;
+import static java.util.Arrays.stream;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toCollection;
+import static java.util.stream.Collectors.toUnmodifiableMap;
 
-public final class HexNode implements Rotatable {
+public final class HexNode implements Resettable, Rotatable {
+    @NotNull
     private EnumSet<HexWall> walls;
+    @NotNull
     private HexShape hexShape;
-    private int color;
+    @NotNull
+    private PlayerColor playerColor;
 
-    public HexNode(HexShape hexShape, @NotNull EnumSet<HexWall> constructs) {
+    public HexNode(@NotNull HexShape hexShape, @NotNull EnumSet<HexWall> constructs) {
         requireNonNull(constructs);
+        requireNonNull(hexShape);
         walls = constructs;
         this.hexShape = hexShape;
-        color = -1;
+        playerColor = PlayerColor.NO_PLAYER;
     }
 
     public HexNode(@NotNull HexNode toCopy) {
         walls = EnumSet.copyOf(toCopy.walls);
         hexShape = toCopy.hexShape;
-        color = -1;
+        playerColor = PlayerColor.NO_PLAYER;
+    }
+
+    public HexNode() {
+        walls = EnumSet.noneOf(HexWall.class);
+        hexShape = HexShape.EMPTY;
+        playerColor = PlayerColor.NO_PLAYER;
     }
 
     public boolean isPathBlocked(HexWall testWall) {
         return walls.contains(testWall);
     }
 
-    public EnumSet<HexWall> getWalls() {
+    public @NotNull EnumSet<HexWall> getWalls() {
         return walls;
     }
 
-    public HexShape getHexShape() {
+    public @NotNull HexShape getHexShape() {
         return hexShape;
     }
 
-    public void setHexShape(HexShape hexShape) {
+    public void setHexShape(@NotNull HexShape hexShape) {
+        requireNonNull(hexShape, "Hex Shape cannot be null");
         this.hexShape = hexShape;
     }
 
-    public int getColor() {
-        return color;
+    public @NotNull PlayerColor getPlayerColor() {
+        return playerColor;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setPlayerColor(@NotNull PlayerColor color) throws IllegalArgumentException {
+        requireNonNull(color, "Player color cannot be null");
+        this.playerColor = color;
     }
 
-    public void clearColor() {
-        color = -1;
+    public void clearPlayerColor() {
+        playerColor = PlayerColor.NO_PLAYER;
+    }
+
+    @Override
+    public void reset() {
+        clearPlayerColor();
+        walls.clear();
+        hexShape = HexShape.EMPTY;
+    }
+
+    @Contract(" -> new")
+    public @NotNull HexNode copy() {
+        return new HexNode(hexShape, EnumSet.copyOf(walls));
     }
 
     @Override
@@ -66,23 +97,28 @@ public final class HexNode implements Rotatable {
 
     @Override
     public int hashCode() {
-        return HASHING_NUMBER * (hexShape != null ? hexShape.hashCode() : 1) +
+        return HASHING_NUMBER * hexShape.hashCode() +
                 walls.hashCode();
     }
 
     @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder(
-                hexShape != null ? hexShape.toString() : "No Shape"
-        );
-        stringBuilder.append('-');
-        if (walls == null) return stringBuilder.append("No walls").toString();
-        stringBuilder.append(
-                walls.stream()
-                .map(Objects::toString)
-                .collect(joining(" "))
-        );
-        return stringBuilder.toString();
+    public @NotNull String toString() {
+        var stringBuilder = new StringBuilder().append(hexShape)
+                .append('-');
+        if (walls.isEmpty()) {
+            stringBuilder.append("No walls");
+        } else {
+            stringBuilder.append(
+                    walls.stream()
+                            .map(Objects::toString)
+                            .collect(joining(" "))
+            );
+        }
+
+        return stringBuilder.append('-')
+                .append("Color:")
+                .append(playerColor)
+                .toString();
     }
 
     @Override
@@ -93,11 +129,11 @@ public final class HexNode implements Rotatable {
                     .collect(toCollection(() -> EnumSet.noneOf(HexWall.class)));
         }
 
-        if (hexShape != null) hexShape = hexShape.toNextState();
+        hexShape = hexShape.toNextState();
     }
 
     public enum HexShape implements State<HexShape> {
-        CIRCLE, HEXAGON, LEFT_TRIANGLE {
+        EMPTY, CIRCLE, HEXAGON, LEFT_TRIANGLE {
             @Override
             public HexShape toNextState() {
                 return RIGHT_TRIANGLE;
@@ -156,6 +192,29 @@ public final class HexNode implements Rotatable {
             public HexWall toNextState() {
                 return BOTTOM;
             }
+        }
+    }
+
+    public enum PlayerColor {
+        NO_PLAYER(Color.web("c6c6c6")),
+        RED(Color.RED), YELLOW(Color.YELLOW), GREEN(Color.GREEN),
+        CYAN(Color.CYAN), BLUE(Color.BLUE), PINK(Color.PINK);
+
+        private final Color paintColor;
+
+        public static final Map<Color, PlayerColor> PLAYER_COLOR_MAPPER;
+
+        static {
+            PLAYER_COLOR_MAPPER = stream(values())
+                    .collect(toUnmodifiableMap(pc -> pc.paintColor, Function.identity()));
+        }
+
+        public Color getPaintColor() {
+            return paintColor;
+        }
+
+        PlayerColor(Color paintColor) {
+            this.paintColor = paintColor;
         }
     }
 }

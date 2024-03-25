@@ -6,7 +6,6 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,6 +16,7 @@ import java.util.List;
 
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.EMPTY;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
@@ -42,7 +42,7 @@ public final class MazeFactory {
         }
     }
 
-    public static @Nullable HexShape decodeShape(@NotNull String code) {
+    public static @NotNull HexShape decodeShape(@NotNull String code) {
         return switch(code) {
             case "c" -> CIRCLE;
             case "h" -> HEXAGON;
@@ -50,7 +50,7 @@ public final class MazeFactory {
             case "rt" -> RIGHT_TRIANGLE;
             case "ut" -> UP_TRIANGLE;
             case "dt" -> DOWN_TRIANGLE;
-            default -> null;
+            default -> EMPTY;
         };
     }
 

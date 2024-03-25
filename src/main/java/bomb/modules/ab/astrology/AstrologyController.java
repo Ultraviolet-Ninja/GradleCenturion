@@ -5,7 +5,6 @@ import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
 
 import java.util.Arrays;
@@ -82,7 +81,7 @@ public final class AstrologyController implements Resettable {
         try {
             omenTextField.setText(Astrology.calculate(astrologySymbolBuffer));
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

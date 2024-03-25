@@ -11,7 +11,7 @@ public class HexNodeEqTest {
     public void equalsContract() {
         EqualsVerifier.forClass(HexNode.class)
                 .withNonnullFields("walls", "hexShape")
-                .withIgnoredFields("color")
+                .withIgnoredFields("playerColor")
                 .suppress(STRICT_INHERITANCE, NONFINAL_FIELDS)
                 .verify();
     }

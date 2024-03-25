@@ -21,8 +21,6 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class ExitCheckerTest {
-    private static final int RED_PEG_VALUE = 0;
-
     private Grid grid;
 
     @BeforeMethod
@@ -81,7 +79,7 @@ public class ExitCheckerTest {
         for (BufferedQueue<HexNode> column : gridQueues) {
             for (HexNode node : column) {
                 if (locations.contains(locationCounter++))
-                    node.setColor(RED_PEG_VALUE);
+                    node.setPlayerColor(HexNode.PlayerColor.RED);
             }
         }
     }

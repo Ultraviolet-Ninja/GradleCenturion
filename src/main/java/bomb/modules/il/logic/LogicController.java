@@ -117,7 +117,7 @@ public final class LogicController implements Resettable {
             firstSetResultField.setId(firstSetResult + "-label");
             secondSetResultField.setId(secondSetResult + "-label");
         } catch (IllegalArgumentException e) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
+            FacadeFX.setAlert(e.getMessage());
         }
     }
 

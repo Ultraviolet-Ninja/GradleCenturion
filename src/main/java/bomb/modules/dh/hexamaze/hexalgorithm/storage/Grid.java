@@ -1,20 +1,23 @@
 package bomb.modules.dh.hexamaze.hexalgorithm.storage;
 
+import bomb.tools.Coordinates;
 import bomb.tools.data.structures.ring.ArrayRing;
-import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
-import static javafx.scene.paint.Color.BLUE;
-import static javafx.scene.paint.Color.CYAN;
-import static javafx.scene.paint.Color.GREEN;
-import static javafx.scene.paint.Color.PINK;
-import static javafx.scene.paint.Color.RED;
-import static javafx.scene.paint.Color.YELLOW;
+import java.util.Optional;
+
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.BLUE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.CYAN;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.GREEN;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.NO_PLAYER;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.PINK;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.RED;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.YELLOW;
 
 public final class Grid extends AbstractHexagon implements Rotatable {
     public static final int GRID_SIDE_LENGTH = 4;
 
-    private final ArrayRing<Color> colorRing;
+    private final ArrayRing<HexNode.PlayerColor> colorRing;
 
     public Grid() {
         super(new HexagonalPlane(GRID_SIDE_LENGTH));
@@ -40,7 +43,35 @@ public final class Grid extends AbstractHexagon implements Rotatable {
         colorRing.rotateCounterClockwise();
     }
 
-    public ArrayRing<Color> getColorRing() {
+    public ArrayRing<HexNode.PlayerColor> getColorRing() {
         return colorRing;
+    }
+
+    public int countPlayerPegs() {
+        int counter = 0;
+        for (var column : hexagon) {
+            for (var node : column) {
+                if (node.getPlayerColor() != NO_PLAYER) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
+    }
+
+    public Optional<Coordinates> getStartingLocation() {
+        int x = 0;
+        for (var column : hexagon) {
+            int y = 0;
+            for (var node : column) {
+                if (node.getPlayerColor() != NO_PLAYER) {
+                    return Optional.of(new Coordinates(x, y));
+                }
+                y++;
+            }
+            x++;
+        }
+
+        return Optional.empty();
     }
 }

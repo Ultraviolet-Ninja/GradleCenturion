@@ -8,7 +8,6 @@ import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public final class ChessController implements Resettable {
             String result = Chess.solve(positionList);
             outputTextField.setText(result);
         } catch (IllegalArgumentException | IllegalStateException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

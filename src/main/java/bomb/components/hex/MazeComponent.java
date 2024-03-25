@@ -13,19 +13,20 @@ import javafx.scene.paint.Color;
 import java.util.List;
 import java.util.function.Consumer;
 
-import static bomb.modules.dh.hexamaze.Hexamaze.PEG_COLOR;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.CIRCLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.DOWN_TRIANGLE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.EMPTY;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.HEXAGON;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.LEFT_TRIANGLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.RIGHT_TRIANGLE;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexShape.UP_TRIANGLE;
-import static javafx.scene.paint.Color.BLUE;
-import static javafx.scene.paint.Color.CYAN;
-import static javafx.scene.paint.Color.GREEN;
-import static javafx.scene.paint.Color.PINK;
-import static javafx.scene.paint.Color.RED;
-import static javafx.scene.paint.Color.YELLOW;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.BLUE;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.CYAN;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.GREEN;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.NO_PLAYER;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.PINK;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.RED;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.YELLOW;
 
 public final class MazeComponent extends Pane implements Resettable {
     private String shapeSelection, colorSelection;
@@ -61,7 +62,7 @@ public final class MazeComponent extends Pane implements Resettable {
             HexTile tile = (HexTile) event.getSource();
             if (shapeSelection.equals("Peg")) {
                 tile.setPegFill(pickColor(colorSelection));
-                if (playerLocation != null)
+                if (playerLocation != tile && playerLocation != null)
                     playerLocation.clearPeg();
                 playerLocation = tile;
                 return;
@@ -72,13 +73,13 @@ public final class MazeComponent extends Pane implements Resettable {
 
     private Color pickColor(String strColor) {
         return switch (strColor) {
-            case "Red" -> RED;
-            case "Yellow" -> YELLOW;
-            case "Green" -> GREEN;
-            case "Cyan" -> CYAN;
-            case "Blue" -> BLUE;
-            case "Pink" -> PINK;
-            default -> PEG_COLOR;
+            case "Red" -> RED.getPaintColor();
+            case "Yellow" -> YELLOW.getPaintColor();
+            case "Green" -> GREEN.getPaintColor();
+            case "Cyan" -> CYAN.getPaintColor();
+            case "Blue" -> BLUE.getPaintColor();
+            case "Pink" -> PINK.getPaintColor();
+            default -> NO_PLAYER.getPaintColor();
         };
     }
 
@@ -90,7 +91,7 @@ public final class MazeComponent extends Pane implements Resettable {
             case "Left Triangle" -> LEFT_TRIANGLE;
             case "Right Triangle" -> RIGHT_TRIANGLE;
             case "Up Triangle" -> UP_TRIANGLE;
-            default -> null;
+            default -> EMPTY;
         };
     }
 

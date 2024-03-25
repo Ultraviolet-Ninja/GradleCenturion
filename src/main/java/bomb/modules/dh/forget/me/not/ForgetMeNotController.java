@@ -41,7 +41,7 @@ public final class ForgetMeNotController implements Resettable {
                 if (resetButton.isDisable()) FacadeFX.enable(resetButton);
                 setButtonPrivileges();
             } catch (IllegalArgumentException illegal) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+                FacadeFX.setAlert(illegal.getMessage());
             } catch (IllegalStateException illegal) {
                 FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage(), "Serial Code", "");
             }
