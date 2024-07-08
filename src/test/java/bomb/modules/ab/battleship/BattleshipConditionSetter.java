@@ -36,7 +36,7 @@ public final class BattleshipConditionSetter {
 
     /**
      * This <a href="https://www.youtube.com/watch?v=KbPP-dY9b_U&t=1186s">video</a>
-     * had a pretty ambiguous configuration of Battleship
+     * had a seemingly ambiguous configuration of Battleship
      */
     static void setTrueCenturionSolvedSettings() {
         Widget.setSerialCode("WF3RN3");
