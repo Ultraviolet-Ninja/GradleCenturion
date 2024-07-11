@@ -12,6 +12,7 @@ import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
 import bomb.tools.pattern.observer.ObserverHub;
 import bomb.tools.pattern.observer.ResetObserver;
 import bomb.tools.pattern.observer.SouvenirPaneObserver;
+import bomb.tools.settings.GameSettings;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Region;
 import org.javatuples.Pair;
@@ -75,12 +76,12 @@ public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive
     }
 
     static @NotNull List<Class<?>> getAnnotatedClasses() {
-        var annotatedClasses = new ArrayList<>(List.of(Widget.class, NoteController.class));
+        var annotatedClasses = new ArrayList<>(List.of(Widget.class, NoteController.class, GameSettings.class));
         var queue = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
 
         Class<?> temp;
         while ((temp = queue.poll()) != null) {
-            Class<?>[] subclasses = temp.getPermittedSubclasses();
+            var subclasses = temp.getPermittedSubclasses();
             if (subclasses != null) {
                 queue.addAll(asList(subclasses));
             }
