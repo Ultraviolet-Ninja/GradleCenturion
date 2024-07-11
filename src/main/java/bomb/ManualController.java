@@ -1,13 +1,14 @@
 package bomb;
 
+import bomb.tools.boot.AsyncBootDrive;
 import bomb.tools.boot.FxmlBootDrive;
+import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.ForgetMeNotToggleObserver;
 import bomb.tools.pattern.observer.ObserverHub;
 import bomb.tools.pattern.observer.ResetObserver;
 import bomb.tools.pattern.observer.SouvenirToggleObserver;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -19,7 +20,6 @@ import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -66,11 +66,7 @@ public final class ManualController {
 
     static {
         var emptyViewLocation = ManualController.class.getResource("empty_view.fxml");
-        try {
-            EMPTY_VIEW = FXMLLoader.load(emptyViewLocation);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        EMPTY_VIEW = FacadeFX.load(emptyViewLocation);
     }
 
     public ManualController() {
@@ -89,10 +85,10 @@ public final class ManualController {
         ObserverHub.addObserver(SOUVENIR_TOGGLE, new SouvenirToggleObserver(souvenir));
 
         long start = System.nanoTime();
-        regionMap = setupRegionMap().get();
+        regionMap = setupRegionMap();
         long stop = System.nanoTime();
         LOG.info("Boot Time: {}", convertTime(stop - start));
-        ObserverHub.ensureMapIsPopulated();
+        ObserverHub.ensureMapIsFullyPopulated();
     }
 
     private static String convertTime(long nanos) {
@@ -102,16 +98,26 @@ public final class ManualController {
         return String.format("%01d.%03d sec", seconds, millis);
     }
 
-    private CompletableFuture<Map<Toggle, Region>> setupRegionMap() {
+    private Map<Toggle, Region> setupRegionMap() throws ExecutionException, InterruptedException {
         var resetObserver = new ResetObserver();
         ObserverHub.addObserver(RESET, resetObserver);
 
         //Change the drive to test a new way to load the fxml files
-        var drive = FxmlBootDrive.createParallelStreamDrive();
-        var fxmlMapFuture = supplyAsync(() -> drive.createFXMLMap(resetObserver));
+        var drive = System.getProperty("os.name").toLowerCase().contains("linux") ?
+                //Boot drive for Linux
+                FxmlBootDrive.createSequentialStreamDrive() :
+                //Boot drive for Windows and Mac
+                FxmlBootDrive.createParallelStreamDrive();
         var radioButtonNameFuture = createButtonNameFuture(options.getToggles());
 
-        return radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::joinOnStringKeys);
+        if (drive instanceof AsyncBootDrive) {
+            var regionFutures = drive.createFXMLMapAsync(resetObserver);
+            return AsyncBootDrive.linkRegionWhenDone(regionFutures, radioButtonNameFuture, EMPTY_VIEW);
+        } else {
+            var fxmlMapFuture = supplyAsync(() -> drive.createFXMLMap(resetObserver));
+            var resultingFuture =  radioButtonNameFuture.thenCombine(fxmlMapFuture, ManualController::joinOnStringKeys);
+            return resultingFuture.get();
+        }
     }
 
     private static CompletableFuture<SequencedMap<String, Toggle>> createButtonNameFuture(List<Toggle> radioButtonList) {

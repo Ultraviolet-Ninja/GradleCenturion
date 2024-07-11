@@ -1,7 +1,8 @@
 package bomb.modules.t.translated.solutions.button;
 
 import bomb.abstractions.Resettable;
-import bomb.modules.t.translated.solutions.TranslationComponent;
+import bomb.modules.t.translated.TranslationComponent;
+import bomb.modules.t.translated.TranslationResults;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXRadioButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -12,15 +13,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
-import java.util.List;
-
-import static bomb.modules.t.translated.LanguageCSVReader.LanguageRow.BUTTON_LABEL_ROW;
 import static bomb.modules.t.translated.solutions.button.Button.COLOR_INDEX;
 import static bomb.modules.t.translated.solutions.button.Button.LABEL_INDEX;
+import static bomb.tools.pattern.facade.FacadeFX.loadComponent;
 
-public class ButtonComponent extends Pane implements Resettable, TranslationComponent {
+public final class ButtonComponent extends Pane implements Resettable, TranslationComponent {
     private final ButtonProperty[] properties;
+    private JFXRadioButton[] buttonGroup;
 
     @FXML
     private ToggleGroup colorGroup, labelGroup;
@@ -35,25 +34,29 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
     public ButtonComponent() {
         super();
         properties = new ButtonProperty[2];
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("button.fxml"));
+        var loader = new FXMLLoader(getClass().getResource("button.fxml"));
         loader.setRoot(this);
         loader.setController(this);
-        try {
-            loader.load();
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        loadComponent("The Button", loader);
     }
 
     public void initialize() {
-        redButton.setOnAction(createButtonAction(ButtonProperty.RED, COLOR_INDEX));
-        yellowButton.setOnAction(createButtonAction(ButtonProperty.YELLOW, COLOR_INDEX));
-        blueButton.setOnAction(createButtonAction(ButtonProperty.BLUE, COLOR_INDEX));
-        whiteButton.setOnAction(createButtonAction(ButtonProperty.WHITE, COLOR_INDEX));
-        detonateButton.setOnAction(createButtonAction(ButtonProperty.DETONATE, LABEL_INDEX));
-        abortButton.setOnAction(createButtonAction(ButtonProperty.ABORT, LABEL_INDEX));
-        pressButton.setOnAction(createButtonAction(ButtonProperty.PRESS, LABEL_INDEX));
-        holdButton.setOnAction(createButtonAction(ButtonProperty.HOLD, LABEL_INDEX));
+        var colorButtons = new JFXRadioButton[]{redButton, yellowButton, blueButton, whiteButton};
+        var labelButtons = new JFXRadioButton[]{detonateButton, abortButton, pressButton, holdButton};
+
+        int counter = 0;
+        var colors = ButtonProperty.getColors();
+        for (var colorButton : colorButtons) {
+            colorButton.setOnAction(createButtonAction(colors[counter++], COLOR_INDEX));
+        }
+
+        counter = 0;
+        var labels = ButtonProperty.getLabels();
+        for (var labelButton : labelButtons) {
+            labelButton.setOnAction(createButtonAction(labels[counter++], LABEL_INDEX));
+        }
+        buttonGroup = new JFXRadioButton[]{redButton, blueButton, yellowButton, whiteButton,
+                holdButton, pressButton, detonateButton, abortButton};
     }
 
     private EventHandler<ActionEvent> createButtonAction(ButtonProperty property, int index) {
@@ -72,15 +75,14 @@ public class ButtonComponent extends Pane implements Resettable, TranslationComp
     }
 
     @Override
-    public void setContent(List<String> languageContent) {
-        String[] buttonLabels = languageContent.get(BUTTON_LABEL_ROW.getRowIndex()).split("\\|");
-        redButton.setText(buttonLabels[0]);
-        blueButton.setText(buttonLabels[1]);
-        yellowButton.setText(buttonLabels[2]);
-        whiteButton.setText(buttonLabels[3]);
-        holdButton.setText(buttonLabels[4]);
-        pressButton.setText(buttonLabels[5]);
-        detonateButton.setText(buttonLabels[6]);
-        abortButton.setText(buttonLabels[7]);
+    public void setContent(TranslationResults results) {
+        var translatedLabels = results.buttonLabels();
+        if (translatedLabels != null) {
+            int counter = 0;
+            //Given in the order of Red Blue Yellow White Hold Press Detonate Abort
+            for (var buttonLabel : translatedLabels) {
+                buttonGroup[counter++].setText(buttonLabel);
+            }
+        }
     }
 }

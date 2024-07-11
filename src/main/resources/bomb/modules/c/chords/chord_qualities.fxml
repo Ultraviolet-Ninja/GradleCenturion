@@ -8,7 +8,7 @@
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../../css/c/chord_qualities.css"
-            xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/17.0.8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="bomb.modules.c.chords.ChordController">
     <center>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">

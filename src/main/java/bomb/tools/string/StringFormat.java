@@ -13,7 +13,7 @@ public final class StringFormat {
             INDEX_ONE_LOWERCASE_LETTER = '`',
             CONVERT_CHAR_NUMBER_AT_ONE = '1';
 
-    public static final String BULLET_POINT = "\\u2022 ", ARROW = " -> ",
+    public static final String BULLET_POINT = "• ", ARROW = " -> ",
             YES = "Yes", NO = "No";
 
     public static final UnaryOperator<String> FIRST_LETTER_CAPITAL = sample -> sample.length() > 1 ?
@@ -30,14 +30,16 @@ public final class StringFormat {
                     .map(String::toUpperCase)
                     .collect(joining("_"));
 
-    public static @NotNull String createOrdinalNumber(int number) {
+    public static @NotNull String createOrdinalNumber(int number) throws IllegalArgumentException {
         if (number < 0)
             throw new IllegalArgumentException("Number cannot be negative");
         int mod = number % 100;
 
-        if (mod == 1) return number + "st";
-        if (mod == 2) return number + "nd";
-        if (mod == 3) return number + "rd";
-        return number + "th";
+        return number + switch (mod) {
+            case 1 -> "st";
+            case 2 -> "nd";
+            case 3 -> "rd";
+            default -> "th";
+        };
     }
 }

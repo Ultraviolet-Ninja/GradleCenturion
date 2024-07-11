@@ -12,15 +12,16 @@ import bomb.tools.data.structures.dictionary.EstonianDict;
 import bomb.tools.data.structures.dictionary.FinnishDict;
 import bomb.tools.data.structures.dictionary.GermanDict;
 
-import java.util.HashMap;
+import java.util.Map;
 
+@Deprecated
 public sealed class TranslationCenter extends Widget permits Button, Morse, OnFirst, Passwords, VentGas {
     public static String[] moduleNames, buttonNames;
 
     protected static String[] passwords;
     protected static String yes, no, fancy;
-    protected static HashMap<String, Double> frequencies;
-    protected static HashMap<String, String> stepTwo;
+    protected static Map<String, Double> frequencies;
+    protected static Map<String, String> stepTwo;
 
     private static Dictionary current;
 

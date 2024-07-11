@@ -23,6 +23,9 @@ public class BattleshipValidationTest {
             BattleshipConditionSetter::setVideoEdgeworkVersionOne;
     private static final ConditionSetter SECOND_BOMB_CONDITIONS =
             BattleshipConditionSetter::setVideoEdgeworkVersionTwo;
+    private static final ConditionSetter TRUE_CENTURION_SOLVED_CONDITIONS =
+            BattleshipConditionSetter::setTrueCenturionSolvedSettings;
+    
     @BeforeMethod
     public void setUp() {
         Widget.resetProperties();
@@ -33,7 +36,7 @@ public class BattleshipValidationTest {
     public Object[][] videoTestCalculateValidRadarPositionsTestProvider() {
         return new Object[][] {
                 {
-                    FIRST_BOMB_CONDITIONS,
+                        FIRST_BOMB_CONDITIONS,
                         new Tile[][]{
                         {RADAR,   UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
                         {UNKNOWN, RADAR,   UNKNOWN, UNKNOWN, UNKNOWN},
@@ -51,6 +54,16 @@ public class BattleshipValidationTest {
                                 {UNKNOWN, UNKNOWN, UNKNOWN, RADAR,   UNKNOWN},
                                 {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN}},
                         new TreeSet<>(Arrays.asList("d1", "b3", "d4", "e1"))
+                },
+                {
+                        TRUE_CENTURION_SOLVED_CONDITIONS,
+                        new Tile[][]{
+                                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
+                                {RADAR,   UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
+                                {RADAR,   UNKNOWN, RADAR,   UNKNOWN, UNKNOWN},
+                                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN},
+                                {UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN, UNKNOWN}},
+                        new TreeSet<>(Arrays.asList("a2", "a3", "c3"))
                 }
         };
     }
@@ -195,6 +208,18 @@ public class BattleshipValidationTest {
                                 {SHIP,  SHIP,  SHIP,  CLEAR, CLEAR},
                                 {CLEAR, CLEAR, CLEAR, CLEAR, SHIP },
                                 {CLEAR, SHIP,  CLEAR, CLEAR, SHIP },
+                                {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
+                                {CLEAR, SHIP,  SHIP,  SHIP,  CLEAR}
+                        }
+                },
+                {
+                        TRUE_CENTURION_SOLVED_CONDITIONS,
+                        new Tile[]{SHIP, SHIP, SHIP}, new int[]{2, 1, 3, 0, 3},
+                        new int[]{2, 1, 2, 2, 2}, new int[]{0, 1, 2, 2},
+                        new Tile[][]{
+                                {CLEAR, CLEAR, CLEAR, SHIP,  SHIP },
+                                {SHIP,  CLEAR, CLEAR, CLEAR, CLEAR},
+                                {SHIP,  CLEAR, SHIP,  CLEAR, SHIP },
                                 {CLEAR, CLEAR, CLEAR, CLEAR, CLEAR},
                                 {CLEAR, SHIP,  SHIP,  SHIP,  CLEAR}
                         }

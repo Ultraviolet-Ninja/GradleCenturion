@@ -16,7 +16,7 @@ import static bomb.modules.t.translated.solutions.button.ButtonProperty.WHITE;
  * Button class deals with a button module
  */
 public final class Button extends Widget {
-    public static final byte COLOR_INDEX = 0, LABEL_INDEX = 1;
+    public static final int COLOR_INDEX = 0, LABEL_INDEX = 1;
 
     /**
      * Sorts through the conditions of the current bomb and tells either to hold or tap the button
@@ -32,13 +32,13 @@ public final class Button extends Widget {
             shouldTapButton = getAllBatteries() > 1;
         else if (properties[COLOR_INDEX] == RED && properties[LABEL_INDEX] == ButtonProperty.HOLD)
             shouldTapButton = true;
-        else if ((properties[COLOR_INDEX] == BLUE && properties[LABEL_INDEX] == ABORT) ||
-                (properties[COLOR_INDEX] == WHITE && hasLitIndicator(CAR)))
+        else if (properties[COLOR_INDEX] == BLUE && properties[LABEL_INDEX] == ABORT ||
+                properties[COLOR_INDEX] == WHITE && hasLitIndicator(CAR))
             shouldTapButton = false;
         else
             shouldTapButton = getAllBatteries() > 2 && hasLitIndicator(FRK);
 
-        return "" + (shouldTapButton ? TAP : HOLD);
+        return String.valueOf(shouldTapButton ? TAP : HOLD);
     }
 
     private static void validateAllInput(ButtonProperty[] properties) throws IllegalArgumentException {
@@ -51,14 +51,14 @@ public final class Button extends Widget {
     }
 
     private static void validateColor(ButtonProperty colorInstance) throws IllegalArgumentException {
-        switch (colorInstance) {
-            case DETONATE, ABORT, HOLD, PRESS -> throw new IllegalArgumentException("Invalid color");
+        if (colorInstance.ordinal() > WHITE.ordinal()) {
+            throw new IllegalArgumentException("Cannot use a label as a color");
         }
     }
 
     private static void validateLabel(ButtonProperty labelInstance) throws IllegalArgumentException {
-        switch (labelInstance) {
-            case RED, YELLOW, BLUE, WHITE -> throw new IllegalArgumentException("Invalid Label");
+        if (labelInstance.ordinal() <= WHITE.ordinal()) {
+            throw new IllegalArgumentException("Cannot use a color as a label");
         }
     }
 }

@@ -2,9 +2,9 @@ package bomb.modules.ab.battleship.solve;
 
 import bomb.modules.ab.battleship.Ocean;
 import bomb.modules.ab.battleship.Tile;
+import bomb.tools.Coordinates;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Deque;
@@ -20,40 +20,43 @@ import static bomb.modules.ab.battleship.Tile.SHIP;
 import static bomb.modules.ab.battleship.Tile.UNKNOWN;
 
 public final class BoardSolver {
-    @SuppressWarnings("DataFlowIssue")
     public static Set<Ocean> solve(Ocean ocean, int[] rowCounters, int[] columnCounters) {
         refineSearchSpace(ocean, rowCounters, columnCounters);
 
-        int[] nextSpot = ocean.findNextUnknownTile();
-        if (nextSpot == null) {
+        var nextSpotOptional = ocean.findNextUnknownTile();
+        if (nextSpotOptional.isEmpty()) {
             return Collections.singleton(ocean);
         }
 
-        Deque<Ocean> oceanGuesses = new ArrayDeque<>(generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters));
-        List<Ocean> permutationList = new ArrayList<>();
+        Deque<Ocean> oceanGuesses = new ArrayDeque<>();
+        Stream.Builder<Ocean> permutations = Stream.builder();
+
+        nextSpotOptional.map(nextSpot -> generateNewGuesses(nextSpot, ocean, rowCounters, columnCounters))
+                .ifPresent(oceanGuesses::addAll);
 
         while (!oceanGuesses.isEmpty()) {
-            Ocean guess = oceanGuesses.poll();
+            var guess = oceanGuesses.poll();
             if (guess.hasUnknownTile()) {
-                nextSpot = guess.findNextUnknownTile();
+                nextSpotOptional = guess.findNextUnknownTile();
 
-                oceanGuesses.addAll(generateNewGuesses(nextSpot, guess, rowCounters, columnCounters));
+                nextSpotOptional.map(nextSpot -> generateNewGuesses(nextSpot, guess, rowCounters, columnCounters))
+                        .ifPresent(oceanGuesses::addAll);
             } else {
-                permutationList.add(guess);
+                permutations.add(guess);
             }
         }
 
-        return permutationList.stream()
+        return permutations.build()
                 .filter(permutation -> isCompleteBoard(permutation, rowCounters, columnCounters))
                 .collect(Collectors.toSet());
     }
 
-    private static List<Ocean> generateNewGuesses(int[] coordinates, Ocean ocean, int[] rowCounters, int[] columnCounters) {
+    private static List<Ocean> generateNewGuesses(Coordinates coordinates, Ocean ocean, int[] rowCounters, int[] columnCounters) {
         Ocean waterCopy = ocean.copy();
         Ocean shipCopy = ocean.copy();
 
-        waterCopy.setTileState(coordinates[0], coordinates[1], CLEAR);
-        shipCopy.setTileState(coordinates[0], coordinates[1], SHIP);
+        waterCopy.setTileState(coordinates.x(), coordinates.y(), CLEAR);
+        shipCopy.setTileState(coordinates.x(), coordinates.y(), SHIP);
 
         return Stream.of(waterCopy, shipCopy)
                 .filter(permutation -> !isInvalidBoardConfig(permutation, rowCounters, columnCounters))
@@ -108,7 +111,7 @@ public final class BoardSolver {
     }
 
     private static boolean areShipsDiagonallyTouching(Ocean ocean, int x, int y) {
-        return Arrays.stream(new int[][]{{-1,-1}, {-1,1}, {1,-1}, {1,1}})
+        return Arrays.stream(new int[][]{{-1, -1}, {-1, 1}, {1, -1}, {1, 1}})
                 .peek(pair -> {
                     pair[0] += x;
                     pair[1] += y;

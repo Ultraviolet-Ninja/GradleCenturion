@@ -13,6 +13,7 @@ import java.util.Collections;
 /**
  * Password class refers to the Password module
  */
+@Deprecated
 public final class Passwords extends TranslationCenter {
 
     /**

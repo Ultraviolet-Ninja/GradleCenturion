@@ -3,7 +3,7 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b4b8571475d543a2afc720f5f96ae2cf)](https://www.codacy.com/gh/Ultraviolet-Ninja/GradleCenturion/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ultraviolet-Ninja/GradleCenturion&amp;utm_campaign=Badge_Grade)
-![Project Version](https://img.shields.io/badge/version-0.23.1-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.24.0-blueviolet)
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which is a combination of many community-made puzzles and some from the base game set in different languages. See below for pictures or this [parody video](https://www.youtube.com/watch?v=krRPQQz524I).<br>
@@ -15,13 +15,14 @@ This is a **huge** project for one man to tackle, but I've [learned a lot](Learn
 - Gradle 8.6
 ### Plugins
 - JavaFX
-- Breadmoirai GitHub Release
+- [Breadmoirai GitHub Release](https://github.com/BreadMoirai/github-release-gradle-plugin)
 ### Dependencies
-- MaterialFX ver. `11.12.0`
-- JFoenix ver. `9.0.4`
-- JavaTuple ver. `1.2`
-- JGraphT ver. `1.5.2`
-- OpenCSV ver. `5.9`
+- [MaterialFX](https://github.com/palexdev/MaterialFX) ver. `11.12.0`
+- [JFoenix](https://github.com/sshahine/JFoenix) ver. `9.0.4`
+- [JavaTuple](https://github.com/javatuples/javatuples) ver. `1.2`
+- [JGraphT](https://github.com/jgrapht/jgrapht/tree/master) ver. `1.5.2`
+- [OpenCSV](https://github.com/cygri/opencsv/tree/master) ver. `5.9`
+
 ### Other Technologies
 - Circle CI with TestNG and Pitest
 - CodeMR Free Trial
@@ -36,7 +37,7 @@ See the running list of modules [here](Progress.md)
   - *Only supports Windows currently*
 
 ## Inspiration
-After my [first manual](https://github.com/Ultraviolet-Ninja/KTANE_Java_Bomb_Manual) turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*", like Tony Stark, except he was getting his Arc Reactor removed.
+After my [first manual](https://github.com/Ultraviolet-Ninja/KTANE_Java_Bomb_Manual) turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*", like Tony Stark in Iron Man 3, except he was getting his Arc Reactor removed and I'm just a developer.
 I started creating this project working on the auto-solver for the vanilla game, which was, by comparison, much easier. 
 
 ### Example Bomb

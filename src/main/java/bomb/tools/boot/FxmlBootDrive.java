@@ -6,6 +6,7 @@ import bomb.modules.ab.blind.alley.BlindAlley;
 import bomb.modules.ab.blind.alley.BlindAlleyController;
 import bomb.modules.s.souvenir.Souvenir;
 import bomb.modules.s.souvenir.SouvenirController;
+import bomb.modules.t.translated.TranslationComponent;
 import bomb.tools.note.NoteController;
 import bomb.tools.pattern.facade.FacadeFX;
 import bomb.tools.pattern.observer.BlindAlleyPaneObserver;
@@ -20,11 +21,12 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SequencedMap;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.BiFunction;
 
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.BLIND_ALLEY_PANE;
 import static bomb.tools.pattern.observer.ObserverHub.ObserverIndex.SOUVENIR_PANE;
@@ -45,14 +47,22 @@ import static java.util.Arrays.asList;
  * it's not reliable. I.e. some runs will boot with no problem, and other runs will abruptly pause while loading FXML files.
  * Reason is unknown, but more testing is required on other machines.
  */
-public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive, VirtualThreadFxmlBootDrive {
+public sealed interface FxmlBootDrive permits AsyncBootDrive, ForkJoinBootDrive, StreamBootDrive,
+        VirtualThreadFxmlBootDrive {
     String WIDGET_FILE = extractAssociatedFile(Widget.class);
     String SOUVENIR_FILE = extractAssociatedFile(Souvenir.class);
     String BLIND_ALLEY_FILE = extractAssociatedFile(BlindAlley.class);
+    List<Class<?>> INITIAL_BOOT_CLASSES = List.of(
+            Widget.class, NoteController.class, TranslationComponent.class
+    );
 
     Logger LOG = LoggerFactory.getLogger(FxmlBootDrive.class);
 
     SequencedMap<String, Region> createFXMLMap(ResetObserver resetObserver);
+
+    default SequencedMap<String, CompletableFuture<Region>> createFXMLMapAsync(ResetObserver resetObserver) {
+        throw new UnsupportedOperationException();
+    }
 
     @Contract(" -> new")
     static @NotNull FxmlBootDrive createParallelStreamDrive() {
@@ -74,8 +84,13 @@ public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive
         return new ForkJoinBootDrive();
     }
 
+    @Contract(value = " -> new", pure = true)
+    static @NotNull FxmlBootDrive createAsyncBootDrive() {
+        return new AsyncBootDrive();
+    }
+
     static @NotNull List<Class<?>> getAnnotatedClasses() {
-        var annotatedClasses = new ArrayList<>(List.of(Widget.class, NoteController.class));
+        var annotatedClasses = new ArrayList<>(INITIAL_BOOT_CLASSES);
         var queue = new ArrayDeque<>(asList(Widget.class.getPermittedSubclasses()));
 
         Class<?> temp;
@@ -93,17 +108,28 @@ public sealed interface FxmlBootDrive permits ForkJoinBootDrive, StreamBootDrive
     }
 
     static @NotNull Pair<String, Region> mapClassToRegion(@NotNull Class<?> clazz, ResetObserver resetObserver) {
+        return mapClassToType(clazz, resetObserver, FxmlBootDrive::loadSingleRegion);
+    }
+
+    static @NotNull <T> Pair<String, T> mapClassToType(@NotNull Class<?> clazz, ResetObserver resetObserver,
+                                                       BiFunction<FXMLLoader, ResetObserver, T> regionFunction)
+            throws IllegalArgumentException, IllegalStateException {
         DisplayComponent annotation = clazz.getAnnotation(DisplayComponent.class);
-        URL resource = clazz.getResource(annotation.resource());
-        String buttonLinkerName = annotation.buttonLinkerName();
+        var resource = clazz.getResource(annotation.resource());
+        var buttonLinkerName = annotation.buttonLinkerName();
+
+        if (resource == null) {
+            LOG.error("{} has a null resource. Make sure the FXML file is in the same package", buttonLinkerName);
+            throw new IllegalStateException();
+        }
 
         return new Pair<>(
                 buttonLinkerName,
-                loadSingleRegion(new FXMLLoader(resource), resetObserver)
+                regionFunction.apply(new FXMLLoader(resource), resetObserver)
         );
     }
 
-    private static Region loadSingleRegion(FXMLLoader loader, ResetObserver resetObserver)
+    static Region loadSingleRegion(FXMLLoader loader, ResetObserver resetObserver)
             throws IllegalArgumentException {
         Region output = FacadeFX.load(loader);
         String location = loader.getLocation().toString();
