@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.opencsv:opencsv:5.9'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.jgrapht:jgrapht-ext:1.5.2'
-    implementation 'org.jetbrains:annotations:24.1.0'
+    implementation 'org.jetbrains:annotations:25.0.0'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
     implementation 'ch.qos.logback:logback-classic:1.5.8'
 
