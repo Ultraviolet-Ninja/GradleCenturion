@@ -35,7 +35,12 @@ See the running list of modules [here](Progress.md)
 - The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains an OS-specific executable file with a runtime environment for the program to run in
   - *Only supports Windows currently*
 
+## Contributing to the Project
+
+See the [Contribution Document](Contribution Guidelines for the Gradle Centurion Project.md) for details.
+
 ## Inspiration
+
 After my [first manual](https://github.com/Ultraviolet-Ninja/KTANE_Java_Bomb_Manual) turning out to be successful in solving the main-game bombs, I thought "*Why stop there?*", like Tony Stark, except he was getting his Arc Reactor removed.
 I started creating this project working on the auto-solver for the vanilla game, which was, by comparison, much easier. 
 

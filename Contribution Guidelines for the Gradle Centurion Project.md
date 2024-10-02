@@ -1,6 +1,6 @@
 # Contribution Guidelines for the Gradle Centurion Project
 
-Welcome to the Centurion Puzzle Solver project! This JavaFX application aims to provide solutions for the various puzzles found in the Centurion bomb mod of *Keep Talking and Nobody Explodes*. I welcome contributions from developers of all skill levels to help enhance and expand this project!
+Welcome to the Gradle Centurion project! This JavaFX application aims to provide solutions for the various puzzles found in the Centurion bomb mod of *Keep Talking and Nobody Explodes*. I welcome contributions from developers of all skill levels to help enhance and expand this project!
 
 
 
@@ -8,7 +8,7 @@ Welcome to the Centurion Puzzle Solver project! This JavaFX application aims to 
 
 To contribute, follow these steps:
 
-1. **Parse the README**: If you've never heard of the game, this would be an excellent place to understand what the project is about and 
+1. **Parse the README**: If you've never heard of the game, this would be an excellent place to understand what the game is and what the project is about 
 
 2. **Fork the Repository**: Click on the "Fork" button at the top right of this repository to create a copy on your GitHub account.
 
@@ -18,7 +18,7 @@ To contribute, follow these steps:
    git clone https://github.com/your-username/GradleCenturion.git
    ```
 
-4. **Set Up the Development Environment**: Ensure you have Java 21 set up on your machine, then gradle should be able to handle the rest of the dependencies when loading up the project. 
+4. **Set Up the Development Environment**: Ensure you have Java 21 set up on your machine, then Gradle should be able to handle the rest of the dependencies when loading up the project. 
 
 5. **Explore the Codebase**: Take a look at the existing puzzles implemented in the project to understand the structure and coding style. The codebase is set up with basic outlines for `.fxml` files and it will be up to the programmer to work on the associated controller and puzzle classes.
 
@@ -26,7 +26,7 @@ To contribute, follow these steps:
 
 ## Contribution Areas
 
-I'm looking for contributors to help tackle some of the **unhandled puzzles**, to **fix one of the few UI issues** I'm having with the project or to help **create executables for Linux systems**. Unhandled puzzles can be seen in the `Progress.md` file at the base-level of the project repository. To claim that you'll be tackling a certain puzzle, please create an issue on the given page so that we can discuss further instructions.
+I'm looking for contributors to help tackle some of the **unhandled puzzles**, to **fix one of the few UI issues** I'm having with the project or to help **create executables for Linux systems**. Unhandled puzzles can be seen in the [Progress file](Progress.md) file at the base-level of the project repository. To claim that you'll be tackling a certain puzzle, please create an issue on the given page so that we can discuss further instructions.
 
 
 
