@@ -28,7 +28,6 @@ other IDEs are fine, but we'd have to discuss IDE specific issues if/when they o
 structure and coding style. The codebase is set up with basic outlines for `.fxml` files and it will be up to the
 programmer to work on the associated controller and puzzle classes.
 
-
 ## Areas of Contribution
 
 I'm looking for contributors to help tackle some of the **unhandled puzzles** or to **fix one of the few UI issues**
@@ -36,7 +35,6 @@ I'm having with the project. Unhandled puzzles can be seen in the [Progress file
 project repository. To claim that you'll be tackling a certain puzzle, please add a comment to the
 [discussion board](https://github.com/Ultraviolet-Ninja/GradleCenturion/issues/131). After approval, create an issue
 on the given page so that we can discuss further instructions.
-
 
 ### Unhandled Puzzles
 
@@ -57,12 +55,10 @@ difficulty. This would probably be a good place to start for finding interesting
 Puzzle solutions should have tests associated with them. Unit testing will be an important part of making sure that
 your solutions are correct and tested against wrong user input.
 
-
 ### UI Issues
 
 There are a few known UI issues that occur in the project. If you're interested in looking into fixing those,
 I can explain more about the problem that occurs.
-
 
 ## Creating a Pull Request
 
@@ -92,8 +88,6 @@ I can explain more about the problem that occurs.
 5. **Open a Pull Request**: Go to the original repository and click on "Pull Requests" to open a new pull request.
 Provide a summary of your changes and make sure that you are merging to the `dev` branch.
 
-
-
 ## Code Style
 
 Please glance at existing puzzle solutions to get a feel for the coding style of the project. This project is run
@@ -102,7 +96,6 @@ be an important part of this project's development process.
 
 Java files for a new puzzle solution should live under the `bomb.modules.[ALPHABETIC_LABEL].[PUZZLE_NAME]` package.
 Sub-package organization at that point is left to your discretion.
-
 
 ## Questions and Support
 
