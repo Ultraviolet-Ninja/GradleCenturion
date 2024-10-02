@@ -45,7 +45,7 @@ environment for the program to run in
 
 ## Contributing to the Project
 
-See the [Contribution Document](Contribution%20Guidelines%20for%20the%20Gradle%20Centurion%20Project.md) for details.
+See the [Contribution Document](CONTRIBUTING.md) for details.
 
 ## Inspiration
 
