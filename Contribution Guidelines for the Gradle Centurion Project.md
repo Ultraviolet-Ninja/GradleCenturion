@@ -4,7 +4,6 @@ Welcome to the Gradle Centurion project! This JavaFX application aims to provide
 found in the Centurion bomb mod of *Keep Talking and Nobody Explodes*. I welcome contributions from developers of all
 skill levels to help enhance and expand this project!
 
-
 ## Getting Started
 
 To contribute, follow these steps:
