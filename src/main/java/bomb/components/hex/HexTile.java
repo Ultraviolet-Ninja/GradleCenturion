@@ -14,10 +14,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.EnumSet;
-
-import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
-import static bomb.modules.dh.hexamaze.Hexamaze.PEG_COLOR;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.NO_PLAYER;
+import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.PLAYER_COLOR_MAPPER;
 
 public final class HexTile extends Pane implements Resettable {
     public static final Color DEFAULT_BACKGROUND_COLOR = new Color(0.0195, 0.0195, 0.0195, 1.0);
@@ -33,7 +31,7 @@ public final class HexTile extends Pane implements Resettable {
 
     public HexTile() {
         super();
-        internalNode = new HexNode(null, EnumSet.noneOf(HexNode.HexWall.class));
+        internalNode = new HexNode();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("panel.fxml"));
         loader.setRoot(this);
         loader.setController(this);
@@ -57,7 +55,7 @@ public final class HexTile extends Pane implements Resettable {
     private void scanShape() {
         FacadeFX.setNodesInvisible(circle, hexagon, upTriangle, downTriangle, leftTriangle, rightTriangle);
         HexNode.HexShape shape = internalNode.getHexShape();
-        if (shape == null)
+        if (shape == HexShape.EMPTY)
             return;
 
         switch (shape) {
@@ -72,8 +70,8 @@ public final class HexTile extends Pane implements Resettable {
 
     private void scanWalls() {
         FacadeFX.setNodesInvisible(northWest, north, northEast, southEast, south, southWest);
-        EnumSet<HexWall> walls = internalNode.getWalls();
-        if (walls == null || walls.isEmpty())
+        var walls = internalNode.getWalls();
+        if (walls.isEmpty())
             return;
 
         for (HexWall wall : walls) {
@@ -94,8 +92,8 @@ public final class HexTile extends Pane implements Resettable {
     }
 
     public void clearPeg() {
-        peg.setFill(PEG_COLOR);
-        internalNode.clearColor();
+        peg.setFill(NO_PLAYER.getPaintColor());
+        internalNode.clearPlayerColor();
     }
 
     public void setShape(HexShape shape) {
@@ -113,14 +111,14 @@ public final class HexTile extends Pane implements Resettable {
 
     @Override
     public void reset() {
-        internalNode = new HexNode(null, EnumSet.noneOf(HexWall.class));
+        internalNode.reset();
         scanShape();
         scanWalls();
-        peg.setFill(PEG_COLOR);
+        peg.setFill(NO_PLAYER.getPaintColor());
         hexagonalFill.setFill(DEFAULT_BACKGROUND_COLOR);
     }
 
     private void setInternalNodeColor(Color color) {
-        internalNode.setColor(COLOR_MAP.get(color));
+        internalNode.setPlayerColor(PLAYER_COLOR_MAPPER.get(color));
     }
 }

@@ -4,7 +4,6 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.HexWall;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.queue.BufferedQueue;
 import org.jetbrains.annotations.NotNull;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
@@ -32,11 +31,13 @@ public final class MazeRunner {
      * @param grid The grid with all shape and wall information
      * @param possibleExits The list of coordinates for all possible exits
      * @return The coordinate list of the shortest path from the player location to the best possible exit
-     * @throws IllegalArgumentException If there is no possible exit, which ideally shouldn't happen
+     * @throws IllegalStateException If there is no possible exit, which theoretically shouldn't happen
      */
     public static @NotNull List<Coordinates> runMaze(@NotNull Grid grid, @NotNull List<Coordinates> possibleExits)
-            throws IllegalArgumentException {
-        Coordinates startingLocation = findStartingLocation(grid);
+            throws IllegalStateException {
+        var startingLocation = grid.getStartingLocation()
+                .orElseThrow(() -> new IllegalArgumentException("Failed to find start position"));
+
         Graph<Coordinates, DefaultEdge> mappedGraph = convertGridToGraph(grid);
         DijkstraShortestPath<Coordinates, DefaultEdge> dijkstraAlgorithm =
                 new DijkstraShortestPath<>(mappedGraph);
@@ -45,7 +46,7 @@ public final class MazeRunner {
                 .map(exit -> dijkstraAlgorithm.getPath(startingLocation, exit))
                 .map(GraphPath::getVertexList)
                 .min(Comparator.comparingInt(List::size))
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new IllegalStateException("No exits were found for the given configuration and possible exits."));
     }
 
     private static Graph<Coordinates, DefaultEdge> convertGridToGraph(Grid grid) {
@@ -63,11 +64,14 @@ public final class MazeRunner {
     }
 
     private static void mapAdjacentNodes(Grid grid, Graph<Coordinates, DefaultEdge> graph, Coordinates location) {
-        boolean notHalfWay = location.x() < grid.getHexagon().getSideLength() - 1;
+        boolean isOnHexagonLeftSide = location.x() < grid.getHexagon().getSideLength() - 1;
+
         mapSingleNode(grid, graph, TOP_RIGHT, location,
-                location.add(notHalfWay ? MOVE_RIGHT : RIGHT_SIDE_MOVE_TOP_RIGHT));
-        mapSingleNode(grid, graph, BOTTOM_RIGHT, location, location.add(notHalfWay ?
+                location.add(isOnHexagonLeftSide ? MOVE_RIGHT : RIGHT_SIDE_MOVE_TOP_RIGHT));
+
+        mapSingleNode(grid, graph, BOTTOM_RIGHT, location, location.add(isOnHexagonLeftSide ?
                 LEFT_SIDE_MOVE_DOWN_RIGHT : MOVE_RIGHT));
+
         mapSingleNode(grid, graph, BOTTOM, location, location.add(MOVE_DOWN));
     }
 
@@ -81,20 +85,6 @@ public final class MazeRunner {
         graph.addVertex(from);
         graph.addVertex(to);
         graph.addEdge(from, to);
-    }
-
-    private static Coordinates findStartingLocation(Grid grid) {
-        BufferedQueue<BufferedQueue<HexNode>> gridQueues = grid.getHexagon().getBufferedQueues();
-        int size = gridQueues.size();
-        for (int x = 0; x < size; x++) {
-            BufferedQueue<HexNode> column = gridQueues.get(x);
-            for (int y = 0; y < column.size(); y++) {
-                HexNode currentNode = column.get(y);
-                if (currentNode.getColor() != -1)
-                    return new Coordinates(x, y);
-            }
-        }
-        throw new RuntimeException("Failed to find start position");
     }
 
     static {

@@ -15,7 +15,6 @@ import bomb.tools.pattern.factory.TextFormatterFactory;
 import io.github.palexdev.materialfx.controls.MFXButton;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -70,7 +69,7 @@ public final class MicroControllerController implements Resettable {
             chipBackground.getChildren().clear();
             chipBackground.getChildren().add(currentChip);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

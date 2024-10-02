@@ -28,7 +28,7 @@ public final class TwoBitController implements Resettable {
         } catch (IllegalArgumentException illegal) {
             FacadeFX.setAlert(Alert.AlertType.WARNING, "You need to set the Serial Code");
         } catch (StringIndexOutOfBoundsException incomplete) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "The Serial Code is incomplete");
+            FacadeFX.setAlert("The Serial Code is incomplete");
         }
     }
 
@@ -38,7 +38,7 @@ public final class TwoBitController implements Resettable {
             nextCodeOutputField.setText(TwoBit.nextCode(numberCodeField.getText()));
             FacadeFX.clearText(numberCodeField);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "That wasn't two bits");
+            FacadeFX.setAlert("That wasn't two bits");
         }
     }
 

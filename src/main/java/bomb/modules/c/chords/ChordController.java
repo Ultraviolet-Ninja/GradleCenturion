@@ -5,7 +5,6 @@ import bomb.components.chord.NoteCircleComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
 import java.util.Set;
 import java.util.function.Consumer;
@@ -29,7 +28,7 @@ public final class ChordController implements Resettable {
                 try {
                     outputField.setText(ChordQualities.solve(output.trim()));
                 } catch (IllegalArgumentException illegal) {
-                    FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+                    FacadeFX.setAlert(illegal.getMessage());
                     FacadeFX.clearText(outputField);
                 }
             }

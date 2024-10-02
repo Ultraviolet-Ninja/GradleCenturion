@@ -7,23 +7,18 @@ import bomb.modules.dh.hexamaze.hexalgorithm.storage.Grid;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode;
 import bomb.modules.dh.hexamaze.hexalgorithm.storage.HexagonalPlane;
 import bomb.tools.Coordinates;
-import bomb.tools.data.structures.queue.BufferedQueue;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.paint.Color;
 import org.javatuples.Quartet;
 
 import java.util.List;
-import java.util.Map;
 
 import static bomb.components.hex.HexTile.DEFAULT_BACKGROUND_COLOR;
-import static bomb.modules.dh.hexamaze.Hexamaze.COLOR_MAP;
 import static bomb.tools.pattern.facade.FacadeFX.GET_TOGGLE_NAME;
-import static javafx.scene.paint.Color.RED;
 
 public final class HexamazeController implements Resettable {
     @FXML
@@ -42,13 +37,13 @@ public final class HexamazeController implements Resettable {
     private void setShape() {
         String shape = GET_TOGGLE_NAME.apply(hexGroup.getSelectedToggle());
         mazeComponent.setShapeSelection(shape);
-        boolean disable = !shape.equals("Peg");
-        redButton.setDisable(disable);
-        yellowButton.setDisable(disable);
-        greenButton.setDisable(disable);
-        cyanButton.setDisable(disable);
-        blueButton.setDisable(disable);
-        pinkButton.setDisable(disable);
+        boolean disableColorButton = !shape.equals("Peg");
+        redButton.setDisable(disableColorButton);
+        yellowButton.setDisable(disableColorButton);
+        greenButton.setDisable(disableColorButton);
+        cyanButton.setDisable(disableColorButton);
+        blueButton.setDisable(disableColorButton);
+        pinkButton.setDisable(disableColorButton);
     }
 
     @FXML
@@ -59,13 +54,23 @@ public final class HexamazeController implements Resettable {
 
     @FXML
     private void solveMaze() {
-        try {
-            List<HexTile> hexTileList = mazeComponent.createTileList();
-            List<HexNode> nodeList = hexTileList.stream()
-                    .map(HexTile::getInternalNode)
-                    .toList();
+        List<HexTile> hexTileList = mazeComponent.createTileList();
+        List<HexNode> nodeList = hexTileList.stream()
+                .map(HexTile::getInternalNode)
+                .toList();
+        boolean allNodesEmptyShape = nodeList.stream()
+                .allMatch(node -> node.getHexShape() == HexNode.HexShape.EMPTY);
 
-            Quartet<Grid, String, Integer, List<Coordinates>> exitInfo = Hexamaze.solve(nodeList);
+        if (allNodesEmptyShape) {
+            FacadeFX.setAlert(Alert.AlertType.INFORMATION, "No maze exists where there are no shapes");
+        } else {
+            displayToFrontend(hexTileList, nodeList);
+        }
+    }
+
+    private void displayToFrontend(List<HexTile> hexTileList, List<HexNode> nodeList) {
+        try {
+            Quartet<Grid, String, HexNode.PlayerColor, List<Coordinates>> exitInfo = Hexamaze.solve(nodeList);
             setHexTileWalls(hexTileList, exitInfo.getValue0());
             String exitDirectionText = exitInfo.getValue1();
 
@@ -78,8 +83,8 @@ public final class HexamazeController implements Resettable {
 
                 fillHexTiles(hexTileList, exitInfo.getValue3(), exitInfo.getValue2());
             }
-        } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+        } catch (IllegalArgumentException | IllegalStateException illegal) {
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 
@@ -92,23 +97,18 @@ public final class HexamazeController implements Resettable {
         }
     }
 
-    private static void fillHexTiles(List<HexTile> tileList, List<Coordinates> coordinatesList, int colorValue) {
-        Color color = RED;
-
-        for (Map.Entry<Color, Integer> entry : COLOR_MAP.entrySet()) {
-            if (entry.getValue() == colorValue)
-                color = entry.getKey();
-        }
+    private static void fillHexTiles(List<HexTile> tileList, List<Coordinates> coordinatesList,
+                                     HexNode.PlayerColor playerColor) {
+        var color = playerColor.getPaintColor();
 
         for (HexTile hexTile : tileList)
             hexTile.setBackgroundFill(DEFAULT_BACKGROUND_COLOR);
 
-        BufferedQueue<BufferedQueue<HexTile>> tileQueues = HexagonalPlane.convertFromList(tileList);
+        var tileQueues = HexagonalPlane.convertFromList(tileList);
 
-        Color finalColor = color;
         coordinatesList.stream()
                 .map(c -> tileQueues.get(c.x()).get(c.y()))
-                .forEach(tile -> tile.setBackgroundFill(finalColor));
+                .forEach(tile -> tile.setBackgroundFill(color));
     }
 
     @Override

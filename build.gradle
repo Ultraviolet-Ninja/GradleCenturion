@@ -2,11 +2,11 @@ plugins {
     id 'java'
     id 'jacoco'
     id 'application'
-    id 'org.beryx.jlink' version '3.0.0'
+    id 'org.beryx.jlink' version '3.0.1'
     id 'info.solidsoft.pitest' version '1.15.0'
     id 'org.openjfx.javafxplugin' version '0.1.0'
-    id 'org.javamodularity.moduleplugin' version '1.8.12'
-    id 'com.github.breadmoirai.github-release' version '2.4.1'
+    id 'org.javamodularity.moduleplugin' version '1.8.15'
+    id 'com.github.breadmoirai.github-release' version '2.5.2'
 }
 
 group 'jasmine.jragon'
@@ -40,12 +40,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.opencsv:opencsv:5.8'
+    implementation 'com.opencsv:opencsv:5.9'
     implementation 'org.javatuples:javatuples:1.2'
     implementation 'org.jgrapht:jgrapht-ext:1.5.2'
-    implementation 'org.jetbrains:annotations:24.0.1'
+    implementation 'org.jetbrains:annotations:25.0.0'
     //implementation 'io.github.fvarrui:javpackager:1.5.1'
-    implementation 'ch.qos.logback:logback-classic:1.4.8'
+    implementation 'ch.qos.logback:logback-classic:1.5.8'
 
     implementation('com.jfoenix:jfoenix:9.0.4') {
         exclude group: "org.javafx"
@@ -54,9 +54,9 @@ dependencies {
         exclude group: "org.javafx"
     }
 
-    testImplementation 'org.testng:testng:7.8.0'
+    testImplementation 'org.testng:testng:7.10.2'
     testImplementation 'org.pitest:pitest-testng-plugin:1.0.0'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.15.2'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.17'
 }
 
 def firstInstance = project.hasProperty('thread0')

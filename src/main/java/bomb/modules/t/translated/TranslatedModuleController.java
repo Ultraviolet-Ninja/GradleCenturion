@@ -11,7 +11,6 @@ import bomb.tools.pattern.facade.FacadeFX;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.Toggle;
@@ -59,7 +58,7 @@ public final class TranslatedModuleController implements Resettable {
                 ventGasUI.setContent(languageContent);
                 if (translatedModuleTab.isDisabled()) translatedModuleTab.setDisable(false);
             } catch (IllegalArgumentException | IllegalStateException e) {
-                FacadeFX.setAlert(Alert.AlertType.ERROR, e.getMessage());
+                FacadeFX.setAlert(e.getMessage());
             }
         };
     }

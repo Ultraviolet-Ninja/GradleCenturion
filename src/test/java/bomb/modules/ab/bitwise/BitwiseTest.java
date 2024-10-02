@@ -27,7 +27,7 @@ public class BitwiseTest {
     private static final String MIN_AND = "00000001", MIN_OR = "00000011", MIN_XOR = "00000010",
             MIN_NOT = "11111100", MAX_AND = "11111110", MAX_OR = "11111111", MAX_XOR = "00000001",
             MAX_NOT = "00000000",
-            LAST_DIGIT_EVEN = "ask412", LAST_DIGIT_ODD = "wo24l5";
+            SERIAL_CODE_LAST_DIGIT_EVEN = "ask412", SERIAL_CODE_LAST_DIGIT_ODD = "wo24l5";
 
     @BeforeMethod
     public void setUp() {
@@ -89,13 +89,13 @@ public class BitwiseTest {
     }
 
     private static void setEssentialTrueConditions() {
-        Widget.setSerialCode(LAST_DIGIT_ODD);
+        Widget.setSerialCode(SERIAL_CODE_LAST_DIGIT_ODD);
         Widget.setStartTime(DEFAULT_START_TIME);
         Widget.setNumModules(6);
     }
 
     private static void setEssentialFalseConditions() {
-        Widget.setSerialCode(LAST_DIGIT_EVEN);
+        Widget.setSerialCode(SERIAL_CODE_LAST_DIGIT_EVEN);
         Widget.setStartTime(DEFAULT_START_TIME);
         Widget.setNumModules(1);
     }

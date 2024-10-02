@@ -3,7 +3,6 @@ package bomb.modules.np.neutralization;
 import bomb.abstractions.Resettable;
 import bomb.tools.pattern.facade.FacadeFX;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -55,7 +54,7 @@ public final class NeutralizationController implements Resettable {
             dropCount.setText(answers[2]);
             setFilter(answers[3]);
         } catch (IllegalArgumentException illegal) {
-            FacadeFX.setAlert(Alert.AlertType.ERROR, illegal.getMessage());
+            FacadeFX.setAlert(illegal.getMessage());
         }
     }
 

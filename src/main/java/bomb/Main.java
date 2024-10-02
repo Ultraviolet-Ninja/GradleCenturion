@@ -27,6 +27,8 @@ import static javafx.scene.input.KeyCode.UP;
 import static javafx.scene.input.KeyCombination.CONTROL_DOWN;
 
 public final class Main extends Application {
+    public static final String IMAGE_ICON_RESOURCE = String.valueOf(Main.class.getResource("KTANE logo.png"));
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("manual.fxml"));
@@ -40,7 +42,7 @@ public final class Main extends Application {
 
         primaryStage.setTitle("Centurion Bomb Manual");
         primaryStage.setScene(scene);
-        primaryStage.getIcons().add(new Image(String.valueOf(Main.class.getResource("KTANE logo.png"))));
+        primaryStage.getIcons().add(new Image(IMAGE_ICON_RESOURCE));
         primaryStage.show();
     }
 

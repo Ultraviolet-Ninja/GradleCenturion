@@ -5,7 +5,6 @@ import bomb.annotation.DisplayComponent;
 import bomb.tools.pattern.facade.FacadeFX;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public final class NoteController implements Resettable {
         if (extraNotes.size() != SIZE_LIMIT)
             extraNotes.add(new NotePageController(extraNotes));
         else
-            FacadeFX.setAlert(Alert.AlertType.ERROR, "Max Capacity reached");
+            FacadeFX.setAlert("Max Capacity reached");
     }
 
     @Override
