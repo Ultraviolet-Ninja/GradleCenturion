@@ -44,7 +44,6 @@ computer can solve the puzzle. This involves developing the algorithm that will 
 what a 'manual expert' needs to fill in, the controller that acts as the middleware between the two and the test code
 that validates the algorithm to be correct in different scenarios.
 
-
 #### How to choose a puzzle to solve
 
 The `manuals/Centurion Puzzle Difficulty.xlsx` file contains all the puzzles and their relative 'manual expert'
