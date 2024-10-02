@@ -25,7 +25,7 @@ able to handle the rest of the dependencies when loading up the project. This pr
 other IDEs are fine, but we'd have to discuss IDE specific issues if/when they occur.
 
 5. **Explore the Codebase**: Take a look at the existing puzzles implemented in the project to understand the
-structure and coding style. The codebase is set up with basic outlines for `.fxml` files and it will be up to the
+structure and coding style. The codebase is set up with basic outlines for `.fxml` files, and it will be up to the
 programmer to work on the associated controller and puzzle classes.
 
 ## Areas of Contribution
