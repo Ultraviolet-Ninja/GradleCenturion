@@ -10,7 +10,7 @@ plugins {
 }
 
 group 'jasmine.jragon'
-version '0.23.1'
+version '0.23.2'
 
 sourceCompatibility = 21
 targetCompatibility = 21
