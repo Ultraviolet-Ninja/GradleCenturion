@@ -56,7 +56,7 @@ dependencies {
 
     testImplementation 'org.testng:testng:7.10.2'
     testImplementation 'org.pitest:pitest-testng-plugin:1.0.0'
-    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.17'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.17.1'
 }
 
 def firstInstance = project.hasProperty('thread0')
