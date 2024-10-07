@@ -39,12 +39,19 @@ and this project marks points of my Software Engineering learning journey.
 See the running list of modules [here](Progress.md)
 
 ## How to run the program
-*Disclaimer*: This is referring to program versions `0.22.2` onward
-- The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable, a Windows batch file and all the
-necessary jar files to run the program
+*Disclaimer*: This is referring to program versions `0.22.2` and onward
+- The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable `gradlew` file,
+a Windows batch file equivalent and all the necessary `.jar` files to run the program
 - The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains an OS-specific executable file with a runtime 
 environment for the program to run in
-  - *Only supports Windows currently*
+  - ***Only supports Windows currently***
+
+### Starting up the Project via Source Code
+To get started with the source code, make sure to download the version of Java needed for the project and download the code.
+Using the Linux command line, use `chmod +x gradlew` then `gradlew run` to boot up the project.
+- For Windows, it'll just be `gradlew.bat run`
+
+This should kickstart the dependency download and build process. Now, you're ready to start developing!
 
 ## Contributing to the Project
 
