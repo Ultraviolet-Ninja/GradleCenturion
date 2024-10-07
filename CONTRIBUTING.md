@@ -30,9 +30,10 @@ programmer to work on the associated controller and puzzle classes.
 
 ## Areas of Contribution
 
-I'm looking for contributors to help tackle some of the **unhandled puzzles** or to **fix one of the few UI issues**
+I'm looking for contributors to help tackle some of the **unhandled puzzles** or to **fix the one UI issue**
 I'm having with the project. Unhandled puzzles can be seen in the [Progress file](Progress.md) at the base-level of the
-project repository. To claim that you'll be tackling a certain puzzle, please add a comment to the
+project repository. The ways that someone can contribute is through creating a function solution to the puzzle and/or make the UI for gathering the important puzzle info from the manual expert (See the next section for more details).
+To claim that you'll be tackling a certain puzzle, please add a comment to the
 [discussion board](https://github.com/Ultraviolet-Ninja/GradleCenturion/discussions/134). After approval, create an issue
 on the given page so that we can discuss further instructions.
 
@@ -47,7 +48,7 @@ that validates the algorithm to be correct in different scenarios.
 #### How to choose a puzzle to solve
 
 The `manuals/Centurion Puzzle Difficulty.xlsx` file contains all the puzzles and their relative 'manual expert'
-difficulty. This would probably be a good place to start for finding interesting problems.
+difficulty. This would probably be a good place to start for finding interesting problems that are not being worked on.
 
 #### Testing Puzzle Solutions
 
