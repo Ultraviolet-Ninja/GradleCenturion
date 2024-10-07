@@ -32,7 +32,8 @@ programmer to work on the associated controller and puzzle classes.
 
 I'm looking for contributors to help tackle some of the **unhandled puzzles** or to **fix the one UI issue**
 I'm having with the project. Unhandled puzzles can be seen in the [Progress file](Progress.md) at the base-level of the
-project repository. The ways that someone can contribute is through creating a function solution to the puzzle and/or make the UI for gathering the important puzzle info from the manual expert (See the next section for more details).
+project repository. The ways that someone can contribute is through creating a function solution to the puzzle and/or
+make the UI for gathering the important puzzle info from the manual expert (See the next section for more details).
 To claim that you'll be tackling a certain puzzle, please add a comment to the
 [discussion board](https://github.com/Ultraviolet-Ninja/GradleCenturion/discussions/134). After approval, create an issue
 on the given page so that we can discuss further instructions.
