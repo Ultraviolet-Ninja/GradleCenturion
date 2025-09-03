@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up JDK 21
         uses: oracle-actions/setup-java@v1
@@ -54,7 +54,7 @@ jobs:
     needs: windows-pipeline
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up JDK 21
         uses: oracle-actions/setup-java@v1
@@ -82,7 +82,7 @@ jobs:
     needs: linux-pipeline
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up JDK 21
         uses: oracle-actions/setup-java@v1
