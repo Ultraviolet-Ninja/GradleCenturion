@@ -3,7 +3,10 @@
 
 [![CircleCI](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main.svg?style=shield)](https://circleci.com/gh/Ultraviolet-Ninja/GradleCenturion/tree/main)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b4b8571475d543a2afc720f5f96ae2cf)](https://www.codacy.com/gh/Ultraviolet-Ninja/GradleCenturion/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Ultraviolet-Ninja/GradleCenturion&amp;utm_campaign=Badge_Grade)
-![Project Version](https://img.shields.io/badge/version-0.23.2-blueviolet)
+![Project Version](https://img.shields.io/badge/version-0.23.3-blueviolet)
+<a href="https://openjdk.java.net/projects/jdk/21/">
+  <img src="https://badgen.net/badge/Java%20Version/21/5382a1"/>
+</a>
 
 ## Intro
 This project is designed to solve all puzzles found on the Centurion Bomb from Keep Talking and Nobody Explodes, which
@@ -36,12 +39,19 @@ and this project marks points of my Software Engineering learning journey.
 See the running list of modules [here](Progress.md)
 
 ## How to run the program
-*Disclaimer*: This is referring to program versions `0.22.2` onward
-- The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable, a Windows batch file and all the
-necessary jar files to run the program
+*Disclaimer*: This is referring to program versions `0.22.2` and onward
+- The `source code` option of the [Release Page](https://github.com/Ultraviolet-Ninja/GradleCenturion/releases) contains an executable `gradlew` file,
+a Windows batch file equivalent and all the necessary `.jar` files to run the program
 - The `Gradle-Centurion-[VERSION]-[OPERATING SYSTEM]` contains an OS-specific executable file with a runtime 
 environment for the program to run in
-  - *Only supports Windows currently*
+  - ***Only supports Windows currently***
+
+### Starting up the Project via Source Code
+To get started with the source code, make sure to download the version of Java needed for the project and download the code.
+Using the Linux command line, use `chmod +x gradlew` then `gradlew run` to boot up the project.
+- For Windows, it'll just be `gradlew.bat run`
+
+This should kickstart the dependency download and build process. Now, you're ready to start developing!
 
 ## Contributing to the Project
 
