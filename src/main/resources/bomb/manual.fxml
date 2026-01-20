@@ -47,6 +47,12 @@
                         <Insets left="3.0"/>
                     </VBox.margin>
                 </JFXRadioButton>
+                <JFXRadioButton id="puzzle-radio-button" onAction="#switchPaneByButtonPress" prefHeight="25.0" prefWidth="122.0"
+                                text="Settings" toggleGroup="$options">
+                    <VBox.margin>
+                        <Insets left="3.0"/>
+                    </VBox.margin>
+                </JFXRadioButton>
                 <JFXRadioButton id="puzzle-radio-button" fx:id="forgetMeNot" disable="true" layoutX="10.0"
                                 layoutY="10.0" onAction="#switchPaneByButtonPress" prefHeight="28.0" prefWidth="164.0"
                                 text="Forget Me Not" toggleGroup="$options">

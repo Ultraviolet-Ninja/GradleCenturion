@@ -1,6 +1,7 @@
 package bomb.modules.dh.hexamaze;
 
 import bomb.Widget;
+import bomb.abstractions.marker.PostLeftKey;
 import bomb.annotation.DisplayComponent;
 import bomb.modules.dh.hexamaze.hexalgorithm.maze_finding.MazeSearch;
 import bomb.modules.dh.hexamaze.hexalgorithm.pathfinding.ExitChecker;
@@ -21,7 +22,7 @@ import java.util.Optional;
 import static bomb.modules.dh.hexamaze.hexalgorithm.storage.HexNode.PlayerColor.NO_PLAYER;
 
 @DisplayComponent(resource = "hexamaze.fxml", buttonLinkerName = "Hexamaze")
-public final class Hexamaze extends Widget {
+public final class Hexamaze extends Widget implements PostLeftKey {
     public static @NotNull Quartet<
             @NotNull Grid,
             @Nullable String,
